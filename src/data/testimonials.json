@@ -1,0 +1,29 @@
+[
+  {
+    "id": "testi-001",
+    "name": "Budi S.",
+    "rating": 5,
+    "text": "Kasur bersih banget, wangi. Diantar tepat waktu. Recommended!",
+    "date": "2026-01-01",
+    "location": "Sleman",
+    "verified": true
+  },
+  {
+    "id": "testi-002",
+    "name": "Dewi R.",
+    "rating": 5,
+    "text": "Sewa buat acara keluarga, pelayanan ramah. Pasti repeat order.",
+    "date": "2025-12-28",
+    "location": "Kota Jogja",
+    "verified": true
+  },
+  {
+    "id": "testi-003",
+    "name": "Andi P.",
+    "rating": 4,
+    "text": "Harga terjangkau, kasur nyaman. Next time sewa lagi.",
+    "date": "2025-12-25",
+    "location": "Bantul",
+    "verified": true
+  }
+]

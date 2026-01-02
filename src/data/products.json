@@ -1,0 +1,35 @@
+[
+  {
+    "id": "single",
+    "name": "Kasur Single",
+    "shortName": "Single",
+    "description": "Kasur single nyaman untuk 1 orang",
+    "pricePerDay": 25000,
+    "dimensions": "90 x 200 cm",
+    "capacity": "1 orang",
+    "image": "/images/kasur-single.webp",
+    "available": true
+  },
+  {
+    "id": "double",
+    "name": "Kasur Double",
+    "shortName": "Double",
+    "description": "Kasur double luas untuk 2 orang",
+    "pricePerDay": 40000,
+    "dimensions": "160 x 200 cm",
+    "capacity": "2 orang",
+    "image": "/images/kasur-double.webp",
+    "available": true
+  },
+  {
+    "id": "extra-bed",
+    "name": "Extra Bed",
+    "shortName": "Extra Bed",
+    "description": "Kasur lipat portable untuk tamu tambahan",
+    "pricePerDay": 20000,
+    "dimensions": "80 x 190 cm",
+    "capacity": "1 orang",
+    "image": "/images/extra-bed.webp",
+    "available": true
+  }
+]

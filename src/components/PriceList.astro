@@ -1,0 +1,49 @@
+---
+import PriceCard from "./PriceCard.astro";
+import products from "@/data/products.json";
+import type { MattressType } from "@/types";
+
+const mattresses = products as MattressType[];
+---
+
+<section class="price-list section" id="harga">
+  <div class="container">
+    <h2 class="section-title">Pilihan Kasur Sewa</h2>
+    <p class="section-subtitle">Semua kasur bersih, wangi, dan siap pakai</p>
+
+    <div class="price-grid">
+      {mattresses.map((product) => <PriceCard product={product} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .price-list {
+    background: var(--color-surface);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: calc(-1 * var(--space-6));
+    margin-bottom: var(--space-8);
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .price-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .price-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

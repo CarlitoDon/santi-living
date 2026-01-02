@@ -1,0 +1,33 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import Hero from "@/components/Hero.astro";
+import PriceList from "@/components/PriceList.astro";
+import Calculator from "@/components/Calculator.astro";
+import HowToRent from "@/components/HowToRent.astro";
+import ServiceArea from "@/components/ServiceArea.astro";
+import Testimonials from "@/components/Testimonials.astro";
+import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+---
+
+<MainLayout>
+  <!-- Hero Section with primary CTA -->
+  <Hero />
+
+  <!-- Price List - Jenis Kasur + Harga -->
+  <PriceList />
+
+  <!-- Calculator - Interactive pricing -->
+  <Calculator />
+
+  <!-- How to Rent - 3 steps -->
+  <HowToRent />
+
+  <!-- Service Area - Jogja coverage -->
+  <ServiceArea />
+
+  <!-- Testimonials - Trust signals -->
+  <Testimonials />
+
+  <!-- Sticky WhatsApp CTA for mobile -->
+  <StickyWhatsApp />
+</MainLayout>

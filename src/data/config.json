@@ -1,0 +1,14 @@
+{
+  "businessName": "Santi Living",
+  "tagline": "Sewa Kasur Jogja, Antar Jemput",
+  "whatsappNumber": "6281234567890",
+  "whatsappDisplay": "0812-3456-7890",
+  "city": "Yogyakarta",
+  "minDuration": 1,
+  "maxDuration": 30,
+  "minQuantity": 1,
+  "maxQuantity": 10,
+  "minBookingDays": 0,
+  "operatingHours": "08:00 - 21:00",
+  "cutoffHour": 15
+}

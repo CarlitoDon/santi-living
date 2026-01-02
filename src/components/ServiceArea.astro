@@ -1,0 +1,133 @@
+---
+import areas from "@/data/areas.json";
+import type { ServiceArea } from "@/types";
+
+const serviceAreas = areas as ServiceArea[];
+---
+
+<section class="service-area section" id="area-layanan">
+  <div class="container">
+    <h2 class="section-title">Area Layanan</h2>
+    <p class="section-subtitle">Melayani seluruh Yogyakarta dan sekitarnya</p>
+
+    <div class="areas-grid">
+      {
+        serviceAreas.map((area) => (
+          <div class="area-card">
+            <div class="area-header">
+              <h3 class="area-name">{area.name}</h3>
+              {area.deliveryNote && (
+                <span
+                  class={`area-badge ${area.deliveryNote.includes("Gratis") ? "area-badge-free" : ""}`}
+                >
+                  {area.deliveryNote}
+                </span>
+              )}
+            </div>
+            <div class="area-districts">
+              {area.districts.map((district) => (
+                <span class="area-district">{district}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="area-note">
+      Area lain? <a href="#calculator" class="area-link">Hubungi kami</a> untuk informasi
+      ongkir.
+    </p>
+  </div>
+</section>
+
+<style>
+  .service-area {
+    background: var(--color-surface);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: calc(-1 * var(--space-6));
+    margin-bottom: var(--space-8);
+  }
+
+  .areas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .area-card {
+    background: var(--color-surface-elevated);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .area-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .area-name {
+    font-size: var(--font-size-lg);
+    margin: 0;
+  }
+
+  .area-badge {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .area-badge-free {
+    background: var(--color-secondary-light);
+    color: var(--color-secondary-hover);
+  }
+
+  .area-districts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .area-district {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .area-district:not(:last-child)::after {
+    content: "•";
+    margin-left: var(--space-2);
+    color: var(--color-border);
+  }
+
+  .area-note {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .area-link {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .area-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .areas-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

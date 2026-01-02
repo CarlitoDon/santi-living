@@ -1,0 +1,53 @@
+[
+  {
+    "id": "kota-jogja",
+    "name": "Kota Yogyakarta",
+    "districts": [
+      "Gondokusuman",
+      "Danurejan",
+      "Gedongtengen",
+      "Jetis",
+      "Tegalrejo",
+      "Umbulharjo",
+      "Kotagede",
+      "Mergangsan",
+      "Wirobrajan",
+      "Mantrijeron",
+      "Kraton",
+      "Ngampilan",
+      "Pakualaman",
+      "Gondomanan"
+    ],
+    "deliveryNote": "Gratis ongkir"
+  },
+  {
+    "id": "sleman",
+    "name": "Sleman",
+    "districts": [
+      "Depok",
+      "Mlati",
+      "Ngaglik",
+      "Godean",
+      "Gamping",
+      "Berbah",
+      "Kalasan",
+      "Prambanan",
+      "Ngemplak",
+      "Seyegan"
+    ],
+    "deliveryNote": "Gratis ongkir"
+  },
+  {
+    "id": "bantul",
+    "name": "Bantul",
+    "districts": [
+      "Kasihan",
+      "Sewon",
+      "Banguntapan",
+      "Pandak",
+      "Bantul",
+      "Jetis"
+    ],
+    "deliveryNote": "Ongkir Rp 10.000"
+  }
+]

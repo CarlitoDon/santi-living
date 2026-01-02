@@ -1,0 +1,20 @@
+{
+  "name": "santi-living",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Website sewa kasur Jogja - Santi Living",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.16.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

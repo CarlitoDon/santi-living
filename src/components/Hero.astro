@@ -1,0 +1,144 @@
+---
+import config from "@/data/config.json";
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Sewa Kasur Jogja
+        <span class="hero-subtitle">Antar Jemput Same Day</span>
+      </h1>
+
+      <p class="hero-description">
+        Kasur bersih, wangi, siap pakai. Cocok untuk tamu, acara, atau kebutuhan
+        darurat.
+      </p>
+
+      <div class="hero-features">
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Bisa antar hari ini</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Gratis jemput</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Kasur bersih & wangi</span>
+        </div>
+      </div>
+
+      <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
+        Cek Harga & Pesan
+      </a>
+
+      <p class="hero-contact">
+        Atau hubungi langsung:
+        <a href={`https://wa.me/${config.whatsappNumber}`} class="hero-phone">
+          {config.whatsappDisplay}
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-light) 0%,
+      var(--color-background) 100%
+    );
+    padding: var(--space-12) 0 var(--space-16);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-3xl);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    display: block;
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-top: var(--space-2);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+  }
+
+  .hero-feature-icon {
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .hero-cta {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-contact {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: 0;
+  }
+
+  .hero-phone {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .hero-phone:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-2xl);
+    }
+
+    .hero-features {
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--space-6);
+    }
+  }
+</style>
