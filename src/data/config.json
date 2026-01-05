@@ -10,5 +10,6 @@
   "maxQuantity": 10,
   "minBookingDays": 0,
   "operatingHours": "08:00 - 21:00",
-  "cutoffHour": 15
+  "cutoffHour": 15,
+  "packagePricePerUnit": 10000
 }

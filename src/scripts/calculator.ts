@@ -16,6 +16,7 @@ let state: CalculatorState = {
   items: [],
   startDate: null,
   duration: 1,
+  isPackage: true,
   endDate: null,
   totalQuantity: 0,
   subtotal: 0,
@@ -53,6 +54,7 @@ export function initCalculator(): void {
     whatsappButton: document.getElementById("whatsappButton"),
     whatsappFallback: document.getElementById("whatsappFallback"),
     copyNumber: document.getElementById("copyNumber"),
+    packageToggle: document.getElementById("packageToggle"),
   };
 
   // Set minimum date to today
@@ -126,6 +128,33 @@ function bindEvents(): void {
   if (locationButton) {
     locationButton.addEventListener("click", handleLocationClick);
   }
+
+  // Package toggle
+  const toggleButtons = document.querySelectorAll(".toggle-option");
+  toggleButtons.forEach((button) => {
+    button.addEventListener("click", handlePackageToggle);
+  });
+}
+
+/**
+ * Handle package toggle
+ */
+function handlePackageToggle(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const value = button.dataset.value;
+
+  // Update state
+  state.isPackage = value === "package";
+
+  // Update UI
+  const toggleButtons = document.querySelectorAll(".toggle-option");
+  toggleButtons.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+  button.classList.add("active");
+
+  // Recalculate
+  updateCalculation();
 }
 
 /**
@@ -278,7 +307,15 @@ function updateCalculation(): void {
     (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
     0
   );
-  state.total = state.subtotal;
+
+  // Add package price if selected
+  if (state.isPackage) {
+    const packageSurcharge =
+      state.totalQuantity * config.packagePricePerUnit * state.duration;
+    state.total = state.subtotal + packageSurcharge;
+  } else {
+    state.total = state.subtotal;
+  }
 
   // Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate();
@@ -466,6 +503,7 @@ function handleWhatsAppClick(): void {
     name: customerName,
     address: customerAddress,
     notes: customerNotes,
+    isPackage: state.isPackage,
   };
 
   const waUrl = composeWhatsAppUrl(bookingData);

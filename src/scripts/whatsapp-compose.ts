@@ -15,6 +15,7 @@ interface BookingData {
   name: string;
   address: string;
   notes?: string;
+  isPackage?: boolean;
 }
 
 /**
@@ -40,7 +41,11 @@ function formatCurrency(amount: number): string {
  * Compose WhatsApp message with multi-item cart
  */
 export function composeWhatsAppMessage(booking: BookingData): string {
-  let message = `Halo, saya mau sewa:\\n\\n`;
+  const packageLabel = booking.isPackage
+    ? "Paket (Kasur + Bantal + Selimut)"
+    : "Kasur Saja";
+
+  let message = `Halo, saya mau sewa *${packageLabel}*:\\n\\n`;
 
   // List all mattress items
   message += `Kasur:\\n`;

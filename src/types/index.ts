@@ -76,6 +76,7 @@ export interface CalculatorState {
   items: CartItem[];
   startDate: string | null;
   duration: number;
+  isPackage: boolean;
 
   // Calculated
   endDate: string | null;

@@ -12,6 +12,24 @@ const mattresses = products as MattressType[];
 
     <div class="calculator-wrapper">
       <form class="calculator-form" id="calculatorForm">
+        <!-- Package Toggle -->
+        <div class="form-group">
+          <label class="form-label">Pilihan Sewa</label>
+          <div class="package-toggle" id="packageToggle">
+            <button
+              type="button"
+              class="toggle-option active"
+              data-value="package"
+            >
+              <span class="toggle-label">Paket</span>
+              <span class="toggle-desc">Kasur + Bantal + Selimut</span>
+            </button>
+            <button type="button" class="toggle-option" data-value="mattress">
+              <span class="toggle-label">Kasur Saja</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Mattress Type Selection with Quantity Steppers -->
         <div class="form-group">
           <label class="form-label">Pilih Kasur</label>
@@ -249,6 +267,50 @@ const mattresses = products as MattressType[];
     background: var(--color-surface);
     padding: var(--space-6);
     border-radius: var(--radius-lg);
+  }
+
+  /* Package Toggle */
+  .package-toggle {
+    display: flex;
+    gap: var(--space-2);
+    background: var(--color-background);
+    padding: var(--space-1);
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--color-border);
+  }
+
+  .toggle-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-height: var(--touch-target-min);
+  }
+
+  .toggle-option:hover {
+    background: var(--color-border-light);
+  }
+
+  .toggle-option.active {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+
+  .toggle-label {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+  }
+
+  .toggle-desc {
+    font-size: var(--font-size-xs);
+    opacity: 0.8;
   }
 
   .form-row {
