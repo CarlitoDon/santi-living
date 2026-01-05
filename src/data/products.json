@@ -7,7 +7,7 @@
     "pricePerDay": 25000,
     "dimensions": "90 x 200 cm",
     "capacity": "1 orang",
-    "image": "/images/kasur-default.jpg",
+    "image": "/images/kasur-std.webp",
     "available": true
   },
   {
@@ -18,7 +18,7 @@
     "pricePerDay": 35000,
     "dimensions": "120 x 200 cm",
     "capacity": "1-2 orang",
-    "image": "/images/kasur-default.jpg",
+    "image": "/images/kasur-std.webp",
     "available": true
   },
   {
@@ -29,7 +29,7 @@
     "pricePerDay": 45000,
     "dimensions": "160 x 200 cm",
     "capacity": "2 orang",
-    "image": "/images/kasur-default.jpg",
+    "image": "/images/kasur-std.webp",
     "available": true
   },
   {
@@ -40,7 +40,7 @@
     "pricePerDay": 55000,
     "dimensions": "200 x 200 cm",
     "capacity": "2-3 orang",
-    "image": "/images/kasur-default.jpg",
+    "image": "/images/kasur-std.webp",
     "available": true
   }
 ]
