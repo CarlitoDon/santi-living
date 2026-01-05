@@ -333,6 +333,15 @@ input[type="tel"] {
   -webkit-appearance: none;
 }
 
+/* Date input fix for iOS */
+input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
