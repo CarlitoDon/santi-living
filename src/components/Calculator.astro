@@ -76,71 +76,78 @@ const mattresses = products as MattressType[];
           />
           <span class="form-error" id="durationError"></span>
         </div>
+
+        <!-- Start Date -->
+        <div class="form-group">
+          <label class="form-label" for="startDate">Tanggal Mulai</label>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            class="form-input"
+          />
+          <span class="form-error" id="startDateError"></span>
+        </div>
+
+        <!-- Customer Info -->
+        <div class="form-group">
+          <label class="form-label" for="customerName">Nama</label>
+          <input
+            type="text"
+            id="customerName"
+            name="customerName"
+            class="form-input"
+            placeholder="Nama lengkap"
+          />
+          <span class="form-error" id="customerNameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="customerWhatsapp">No. WhatsApp</label>
+          <input
+            type="tel"
+            id="customerWhatsapp"
+            name="customerWhatsapp"
+            class="form-input"
+            placeholder="08xxxxxxxxxx"
+            inputmode="tel"
+          />
+          <span class="form-error" id="customerWhatsappError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="customerAddress"
+            >Alamat Pengantaran</label
+          >
+          <textarea
+            id="customerAddress"
+            name="customerAddress"
+            class="form-textarea"
+            placeholder="Alamat lengkap untuk pengantaran kasur"
+            rows="3"></textarea>
+          <button
+            type="button"
+            class="btn-location"
+            id="locationButton"
+            title="Gunakan lokasi GPS saya"
+          >
+            📍 Gunakan Lokasi Sekarang
+          </button>
+          <span class="form-error" id="customerAddressError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="customerNotes"
+            >Catatan (opsional)</label
+          >
+          <textarea
+            id="customerNotes"
+            name="customerNotes"
+            class="form-textarea"
+            placeholder="Permintaan khusus, jam antar, dll"
+            rows="2"></textarea>
+        </div>
       </form>
-
-      <!-- Start Date -->
-      <div class="form-group">
-        <label class="form-label" for="startDate">Tanggal Mulai</label>
-        <input type="date" id="startDate" name="startDate" class="form-input" />
-        <span class="form-error" id="startDateError"></span>
-      </div>
-
-      <!-- Customer Info -->
-      <div class="form-group">
-        <label class="form-label" for="customerName">Nama</label>
-        <input
-          type="text"
-          id="customerName"
-          name="customerName"
-          class="form-input"
-          placeholder="Nama lengkap"
-        />
-        <span class="form-error" id="customerNameError"></span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="customerWhatsapp">No. WhatsApp</label>
-        <input
-          type="tel"
-          id="customerWhatsapp"
-          name="customerWhatsapp"
-          class="form-input"
-          placeholder="08xxxxxxxxxx"
-          inputmode="tel"
-        />
-        <span class="form-error" id="customerWhatsappError"></span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="customerAddress"
-          >Alamat Pengantaran</label
-        >
-        <textarea
-          id="customerAddress"
-          name="customerAddress"
-          class="form-textarea"
-          placeholder="Alamat lengkap untuk pengantaran kasur"
-          rows="3"></textarea>
-        <button
-          type="button"
-          class="btn-location"
-          id="locationButton"
-          title="Gunakan lokasi GPS saya"
-        >
-          📍 Gunakan Lokasi Sekarang
-        </button>
-        <span class="form-error" id="customerAddressError"></span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="customerNotes">Catatan (opsional)</label>
-        <textarea
-          id="customerNotes"
-          name="customerNotes"
-          class="form-textarea"
-          placeholder="Permintaan khusus, jam antar, dll"
-          rows="2"></textarea>
-      </div>
     </div>
 
     <!-- Result Panel -->
