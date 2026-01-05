@@ -1,5 +1,7 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
+import Header from "@/components/Header.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import Hero from "@/components/Hero.astro";
 import PriceList from "@/components/PriceList.astro";
 import Calculator from "@/components/Calculator.astro";
@@ -10,23 +12,28 @@ import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 ---
 
 <MainLayout>
-  <!-- Hero Section with primary CTA -->
-  <Hero />
+  <Header />
+  <Sidebar />
 
-  <!-- Price List - Jenis Kasur + Harga -->
-  <PriceList />
+  <main style="padding-top: 70px;">
+    <!-- Hero Section with primary CTA -->
+    <Hero />
 
-  <!-- Calculator - Interactive pricing -->
-  <Calculator />
+    <!-- Price List - Jenis Kasur + Harga -->
+    <PriceList />
 
-  <!-- How to Rent - 3 steps -->
-  <HowToRent />
+    <!-- Calculator - Interactive pricing -->
+    <Calculator />
 
-  <!-- Service Area - Jogja coverage -->
-  <ServiceArea />
+    <!-- How to Rent - 3 steps -->
+    <HowToRent />
 
-  <!-- Testimonials - Trust signals -->
-  <Testimonials />
+    <!-- Service Area - Jogja coverage -->
+    <ServiceArea />
+
+    <!-- Testimonials - Trust signals -->
+    <Testimonials />
+  </main>
 
   <!-- Sticky WhatsApp CTA for mobile -->
   <StickyWhatsApp />

@@ -93,7 +93,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T030 [P] [US2] Add placeholder product images to src/assets/images/ (800x600px WebP format, to be replaced with real photos)
+- [x] T030 [P] [US2] Add placeholder product images to src/assets/images/ (800x600px WebP format, to be replaced with real photos)
 - [x] T031 [US2] Update PriceCard to display product images
 - [x] T032 [P] [US2] Create ServiceArea component in src/components/ServiceArea.astro with Jogja districts
 - [x] T033 [P] [US2] Create TestimonialCard component (integrated in Testimonials.astro)
