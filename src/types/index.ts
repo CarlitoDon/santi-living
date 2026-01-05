@@ -59,18 +59,27 @@ export interface BusinessConfig {
 }
 
 /**
+ * Cart item (mattress type with quantity)
+ */
+export interface CartItem {
+  type: string;
+  name: string;
+  quantity: number;
+  pricePerDay: number;
+}
+
+/**
  * Calculator state
  */
 export interface CalculatorState {
   // Input
-  mattressType: string | null;
-  quantity: number;
+  items: CartItem[];
   startDate: string | null;
   duration: number;
 
   // Calculated
   endDate: string | null;
-  pricePerDay: number;
+  totalQuantity: number;
   subtotal: number;
   total: number;
   deliveryEstimate: string;

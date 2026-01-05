@@ -12,202 +12,202 @@ const mattresses = products as MattressType[];
 
     <div class="calculator-wrapper">
       <form class="calculator-form" id="calculatorForm">
-        <!-- Mattress Type Selection -->
+        <!-- Mattress Type Selection with Quantity Steppers -->
         <div class="form-group">
-          <label class="form-label">Jenis Kasur</label>
-          <div class="mattress-options" id="mattressOptions">
+          <label class="form-label">Pilih Kasur</label>
+          <div class="mattress-cart" id="mattressCart">
             {
               mattresses.map((m) => (
-                <label class="mattress-option">
-                  <input
-                    type="radio"
-                    name="mattressType"
-                    value={m.id}
-                    data-price={m.pricePerDay}
-                    data-name={m.shortName}
-                  />
-                  <span class="mattress-option-content">
-                    <span class="mattress-option-name">{m.shortName}</span>
-                    <span class="mattress-option-price">
+                <div class="cart-item">
+                  <div class="cart-item-info">
+                    <span class="cart-item-name">{m.shortName}</span>
+                    <span class="cart-item-dimensions">{m.dimensions}</span>
+                    <span class="cart-item-price">
                       Rp {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
                       /hari
                     </span>
-                  </span>
-                </label>
+                  </div>
+                  <div class="cart-item-controls">
+                    <button
+                      type="button"
+                      class="btn-stepper btn-minus"
+                      data-type={m.id}
+                      aria-label={`Kurangi ${m.shortName}`}
+                    >
+                      −
+                    </button>
+                    <span class="cart-item-qty" data-type={m.id}>
+                      0
+                    </span>
+                    <button
+                      type="button"
+                      class="btn-stepper btn-plus"
+                      data-type={m.id}
+                      data-name={m.shortName}
+                      data-price={m.pricePerDay}
+                      aria-label={`Tambah ${m.shortName}`}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
               ))
             }
+          </div>
+          <div class="cart-total">
+            <span class="cart-total-label">Total Kasur:</span>
+            <span class="cart-total-value" id="cartTotalQty">0 unit</span>
           </div>
           <span class="form-error" id="mattressError"></span>
         </div>
 
-        <!-- Quantity -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="quantity">Jumlah</label>
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              class="form-input"
-              min="1"
-              max="10"
-              value="1"
-              inputmode="numeric"
-            />
-            <span class="form-error" id="quantityError"></span>
-          </div>
-
-          <!-- Duration -->
-          <div class="form-group">
-            <label class="form-label" for="duration">Lama Sewa (hari)</label>
-            <input
-              type="number"
-              id="duration"
-              name="duration"
-              class="form-input"
-              min="1"
-              max="30"
-              value="1"
-              inputmode="numeric"
-            />
-            <span class="form-error" id="durationError"></span>
-          </div>
-        </div>
-
-        <!-- Start Date -->
+        <!-- Duration -->
         <div class="form-group">
-          <label class="form-label" for="startDate">Tanggal Mulai</label>
+          <label class="form-label" for="duration">Lama Sewa (hari)</label>
           <input
-            type="date"
-            id="startDate"
-            name="startDate"
+            type="number"
+            id="duration"
+            name="duration"
             class="form-input"
+            min="1"
+            max="30"
+            value="1"
+            inputmode="numeric"
           />
-          <span class="form-error" id="startDateError"></span>
-        </div>
-
-        <!-- Customer Info -->
-        <div class="form-group">
-          <label class="form-label" for="customerName">Nama</label>
-          <input
-            type="text"
-            id="customerName"
-            name="customerName"
-            class="form-input"
-            placeholder="Nama lengkap"
-          />
-          <span class="form-error" id="customerNameError"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="customerWhatsapp">No. WhatsApp</label>
-          <input
-            type="tel"
-            id="customerWhatsapp"
-            name="customerWhatsapp"
-            class="form-input"
-            placeholder="08xxxxxxxxxx"
-            inputmode="tel"
-          />
-          <span class="form-error" id="customerWhatsappError"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="customerAddress"
-            >Alamat Pengantaran</label
-          >
-          <textarea
-            id="customerAddress"
-            name="customerAddress"
-            class="form-textarea"
-            placeholder="Alamat lengkap untuk pengantaran kasur"
-            rows="3"></textarea>
-          <span class="form-error" id="customerAddressError"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="customerNotes"
-            >Catatan (opsional)</label
-          >
-          <textarea
-            id="customerNotes"
-            name="customerNotes"
-            class="form-textarea"
-            placeholder="Permintaan khusus, jam antar, dll"
-            rows="2"></textarea>
+          <span class="form-error" id="durationError"></span>
         </div>
       </form>
 
-      <!-- Result Panel -->
-      <div class="calculator-result">
-        <div class="result-summary">
-          <h3 class="result-title">Ringkasan</h3>
+      <!-- Start Date -->
+      <div class="form-group">
+        <label class="form-label" for="startDate">Tanggal Mulai</label>
+        <input type="date" id="startDate" name="startDate" class="form-input" />
+        <span class="form-error" id="startDateError"></span>
+      </div>
 
-          <div class="result-item" id="resultMattress">
-            <span class="result-label">Kasur</span>
-            <span class="result-value">-</span>
-          </div>
+      <!-- Customer Info -->
+      <div class="form-group">
+        <label class="form-label" for="customerName">Nama</label>
+        <input
+          type="text"
+          id="customerName"
+          name="customerName"
+          class="form-input"
+          placeholder="Nama lengkap"
+        />
+        <span class="form-error" id="customerNameError"></span>
+      </div>
 
-          <div class="result-item" id="resultQuantity">
-            <span class="result-label">Jumlah</span>
-            <span class="result-value">1 unit</span>
-          </div>
+      <div class="form-group">
+        <label class="form-label" for="customerWhatsapp">No. WhatsApp</label>
+        <input
+          type="tel"
+          id="customerWhatsapp"
+          name="customerWhatsapp"
+          class="form-input"
+          placeholder="08xxxxxxxxxx"
+          inputmode="tel"
+        />
+        <span class="form-error" id="customerWhatsappError"></span>
+      </div>
 
-          <div class="result-item" id="resultDuration">
-            <span class="result-label">Durasi</span>
-            <span class="result-value">1 hari</span>
-          </div>
-
-          <div class="result-item" id="resultDates">
-            <span class="result-label">Tanggal</span>
-            <span class="result-value">-</span>
-          </div>
-
-          <div class="result-divider"></div>
-
-          <div class="result-item result-total" id="resultTotal">
-            <span class="result-label">Total</span>
-            <span class="result-value">Rp 0</span>
-          </div>
-
-          <div class="result-delivery" id="resultDelivery">
-            <span class="delivery-icon">🚚</span>
-            <span class="delivery-text"
-              >Pilih tanggal untuk estimasi pengantaran</span
-            >
-          </div>
-        </div>
-
+      <div class="form-group">
+        <label class="form-label" for="customerAddress"
+          >Alamat Pengantaran</label
+        >
+        <textarea
+          id="customerAddress"
+          name="customerAddress"
+          class="form-textarea"
+          placeholder="Alamat lengkap untuk pengantaran kasur"
+          rows="3"></textarea>
         <button
           type="button"
-          class="btn btn-whatsapp btn-lg"
-          id="whatsappButton"
-          disabled
+          class="btn-location"
+          id="locationButton"
+          title="Gunakan lokasi GPS saya"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
-            ></path>
-          </svg>
-          Pesan via WhatsApp
+          📍 Gunakan Lokasi Sekarang
         </button>
-
-        <p
-          class="whatsapp-fallback"
-          id="whatsappFallback"
-          style="display: none;"
-        >
-          Atau hubungi langsung:
-          <button
-            type="button"
-            class="copy-number"
-            id="copyNumber"
-            data-number={config.whatsappDisplay}
-          >
-            {config.whatsappDisplay} (klik untuk copy)
-          </button>
-        </p>
+        <span class="form-error" id="customerAddressError"></span>
       </div>
+
+      <div class="form-group">
+        <label class="form-label" for="customerNotes">Catatan (opsional)</label>
+        <textarea
+          id="customerNotes"
+          name="customerNotes"
+          class="form-textarea"
+          placeholder="Permintaan khusus, jam antar, dll"
+          rows="2"></textarea>
+      </div>
+    </div>
+
+    <!-- Result Panel -->
+    <div class="calculator-result">
+      <div class="result-summary">
+        <h3 class="result-title">Ringkasan</h3>
+
+        <div class="result-item" id="resultMattress">
+          <span class="result-label">Kasur</span>
+          <span class="result-value">-</span>
+        </div>
+
+        <div class="result-item" id="resultQuantity">
+          <span class="result-label">Jumlah</span>
+          <span class="result-value">1 unit</span>
+        </div>
+
+        <div class="result-item" id="resultDuration">
+          <span class="result-label">Durasi</span>
+          <span class="result-value">1 hari</span>
+        </div>
+
+        <div class="result-item" id="resultDates">
+          <span class="result-label">Tanggal</span>
+          <span class="result-value">-</span>
+        </div>
+
+        <div class="result-divider"></div>
+
+        <div class="result-item result-total" id="resultTotal">
+          <span class="result-label">Total</span>
+          <span class="result-value">Rp 0</span>
+        </div>
+
+        <div class="result-delivery" id="resultDelivery">
+          <span class="delivery-icon">🚚</span>
+          <span class="delivery-text"
+            >Pilih tanggal untuk estimasi pengantaran</span
+          >
+        </div>
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-whatsapp btn-lg"
+        id="whatsappButton"
+        disabled
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+          ></path>
+        </svg>
+        Pesan via WhatsApp
+      </button>
+
+      <p class="whatsapp-fallback" id="whatsappFallback" style="display: none;">
+        Atau hubungi langsung:
+        <button
+          type="button"
+          class="copy-number"
+          id="copyNumber"
+          data-number={config.whatsappDisplay}
+        >
+          {config.whatsappDisplay} (klik untuk copy)
+        </button>
+      </p>
     </div>
   </div>
 </section>
@@ -241,22 +241,14 @@ const mattresses = products as MattressType[];
     gap: var(--space-4);
   }
 
-  /* Mattress Options */
-  .mattress-options {
-    display: grid;
+  /* Mattress Cart */
+  .mattress-cart {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-3);
   }
 
-  .mattress-option {
-    display: block;
-    cursor: pointer;
-  }
-
-  .mattress-option input {
-    display: none;
-  }
-
-  .mattress-option-content {
+  .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -264,22 +256,84 @@ const mattresses = products as MattressType[];
     background: var(--color-background);
     border: 2px solid var(--color-border);
     border-radius: var(--radius-md);
-    transition: all var(--transition-fast);
-    min-height: var(--touch-target-min);
   }
 
-  .mattress-option input:checked + .mattress-option-content {
-    border-color: var(--color-primary);
+  .cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .cart-item-name {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+  }
+
+  .cart-item-dimensions {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+  }
+
+  .cart-item-price {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .btn-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target-min);
+    height: var(--touch-target-min);
     background: var(--color-primary-light);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
   }
 
-  .mattress-option-name {
+  .btn-stepper:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+
+  .btn-stepper:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .cart-item-qty {
+    min-width: 32px;
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-lg);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    margin-top: var(--space-2);
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
   }
 
-  .mattress-option-price {
+  .cart-total-label {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
+  }
+
+  .cart-total-value {
+    color: var(--color-primary);
   }
 
   /* Result Panel */
@@ -378,6 +432,32 @@ const mattresses = products as MattressType[];
 
   .copy-number:hover {
     text-decoration: underline;
+  }
+
+  /* Location Button */
+  .btn-location {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-location:hover {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+  }
+
+  .btn-location:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   @media (min-width: 768px) {

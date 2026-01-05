@@ -1,15 +1,16 @@
 // ==========================================================================
-// WhatsApp Compose - Santi Living
+// WhatsApp Compose - Santi Living (Multi-Item Cart)
 // ==========================================================================
 
 import config from "@/data/config.json";
+import type { CartItem } from "@/types";
 
 interface BookingData {
-  mattressType: string;
-  quantity: number;
+  items: CartItem[];
   startDate: string;
   endDate: string;
   duration: number;
+  totalQuantity: number;
   total: number;
   name: string;
   address: string;
@@ -36,24 +37,33 @@ function formatCurrency(amount: number): string {
 }
 
 /**
- * Compose WhatsApp message
+ * Compose WhatsApp message with multi-item cart
  */
 export function composeWhatsAppMessage(booking: BookingData): string {
-  let message = `Halo, saya mau sewa:\n\n`;
-  message += `- Kasur: ${booking.mattressType}\n`;
-  message += `- Jumlah: ${booking.quantity} unit\n`;
-  message += `- Tanggal: ${formatDate(booking.startDate)} - ${formatDate(
+  let message = `Halo, saya mau sewa:\\n\\n`;
+
+  // List all mattress items
+  message += `Kasur:\\n`;
+  booking.items.forEach((item) => {
+    const subtotal = item.quantity * item.pricePerDay * booking.duration;
+    message += `• ${item.quantity}x ${item.name} @ Rp ${formatCurrency(
+      item.pricePerDay
+    )}/hari\\n`;
+  });
+
+  message += `\\nTotal: ${booking.totalQuantity} unit\\n`;
+  message += `Tanggal: ${formatDate(booking.startDate)} - ${formatDate(
     booking.endDate
-  )} (${booking.duration} hari)\n`;
-  message += `- Total: Rp ${formatCurrency(booking.total)}\n\n`;
-  message += `- Nama: ${booking.name}\n`;
-  message += `- Alamat: ${booking.address}\n`;
+  )} (${booking.duration} hari)\\n`;
+  message += `Total Biaya: Rp ${formatCurrency(booking.total)}\\n\\n`;
+  message += `- Nama: ${booking.name}\\n`;
+  message += `- Alamat: ${booking.address}\\n`;
 
   if (booking.notes && booking.notes.trim()) {
-    message += `- Catatan: ${booking.notes}\n`;
+    message += `- Catatan: ${booking.notes}\\n`;
   }
 
-  message += `\nMohon konfirmasi ketersediaan. Terima kasih!`;
+  message += `\\nMohon konfirmasi ketersediaan. Terima kasih!`;
 
   return message;
 }

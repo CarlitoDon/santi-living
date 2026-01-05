@@ -1,23 +1,23 @@
 // ==========================================================================
-// Calculator Logic - Santi Living
+// Calculator Logic - Santi Living (Multi-Item Cart)
 // ==========================================================================
 
 import config from "@/data/config.json";
 import products from "@/data/products.json";
-import type { CalculatorState, MattressType } from "@/types";
+import type { CalculatorState, MattressType, CartItem } from "@/types";
 import { composeWhatsAppUrl } from "./whatsapp-compose";
-import { validateForm, type FormErrors } from "./form-validation";
+import { validateForm } from "./form-validation";
+import { getAddressFromCurrentLocation } from "./geolocation";
 
 const mattresses = products as MattressType[];
 
 // State
 let state: CalculatorState = {
-  mattressType: null,
-  quantity: 1,
+  items: [],
   startDate: null,
   duration: 1,
   endDate: null,
-  pricePerDay: 0,
+  totalQuantity: 0,
   subtotal: 0,
   total: 0,
   deliveryEstimate: "",
@@ -35,13 +35,15 @@ export function initCalculator(): void {
   // Cache DOM elements
   elements = {
     form: document.getElementById("calculatorForm"),
-    quantity: document.getElementById("quantity"),
+    mattressCart: document.getElementById("mattressCart"),
+    cartTotalQty: document.getElementById("cartTotalQty"),
     duration: document.getElementById("duration"),
     startDate: document.getElementById("startDate"),
     customerName: document.getElementById("customerName"),
     customerWhatsapp: document.getElementById("customerWhatsapp"),
     customerAddress: document.getElementById("customerAddress"),
     customerNotes: document.getElementById("customerNotes"),
+    locationButton: document.getElementById("locationButton"),
     resultMattress: document.getElementById("resultMattress"),
     resultQuantity: document.getElementById("resultQuantity"),
     resultDuration: document.getElementById("resultDuration"),
@@ -73,20 +75,17 @@ export function initCalculator(): void {
  * Bind event listeners
  */
 function bindEvents(): void {
-  // Mattress type selection
-  const mattressInputs = document.querySelectorAll(
-    'input[name="mattressType"]'
-  );
-  mattressInputs.forEach((input) => {
-    input.addEventListener("change", handleMattressChange);
+  // Stepper buttons (+ and -)
+  const plusButtons = document.querySelectorAll(".btn-plus");
+  const minusButtons = document.querySelectorAll(".btn-minus");
+
+  plusButtons.forEach((button) => {
+    button.addEventListener("click", handleIncrement);
   });
 
-  // Quantity
-  const quantityInput = elements.quantity as HTMLInputElement;
-  if (quantityInput) {
-    quantityInput.addEventListener("input", handleQuantityChange);
-    quantityInput.addEventListener("blur", validateQuantity);
-  }
+  minusButtons.forEach((button) => {
+    button.addEventListener("click", handleDecrement);
+  });
 
   // Duration
   const durationInput = elements.duration as HTMLInputElement;
@@ -121,47 +120,82 @@ function bindEvents(): void {
   if (copyButton) {
     copyButton.addEventListener("click", handleCopyNumber);
   }
+
+  // Location button
+  const locationButton = elements.locationButton as HTMLButtonElement;
+  if (locationButton) {
+    locationButton.addEventListener("click", handleLocationClick);
+  }
 }
 
 /**
- * Handle mattress type change
+ * Handle increment (+) button
  */
-function handleMattressChange(event: Event): void {
-  const target = event.target as HTMLInputElement;
-  state.mattressType = target.value;
-  state.pricePerDay = parseInt(target.dataset.price || "0", 10);
-  clearError("mattress");
-  updateCalculation();
-}
+function handleIncrement(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const type = button.dataset.type || "";
+  const name = button.dataset.name || "";
+  const price = parseInt(button.dataset.price || "0", 10);
 
-/**
- * Handle quantity change
- */
-function handleQuantityChange(event: Event): void {
-  const target = event.target as HTMLInputElement;
-  state.quantity = parseInt(target.value, 10) || 1;
-  updateCalculation();
-}
-
-/**
- * Validate quantity
- */
-function validateQuantity(): void {
-  const { minQuantity, maxQuantity } = config;
-
-  if (state.quantity < minQuantity) {
-    state.quantity = minQuantity;
-    (elements.quantity as HTMLInputElement).value = String(minQuantity);
-    showError("quantity", `Minimal ${minQuantity} unit`);
-  } else if (state.quantity > maxQuantity) {
-    state.quantity = maxQuantity;
-    (elements.quantity as HTMLInputElement).value = String(maxQuantity);
-    showError("quantity", `Maksimal ${maxQuantity} unit`);
-  } else {
-    clearError("quantity");
+  // Check if total quantity would exceed max
+  if (state.totalQuantity >= config.maxQuantity) {
+    showError("mattress", `Maksimal ${config.maxQuantity} unit total`);
+    return;
   }
 
+  // Find existing item or create new
+  const existingItem = state.items.find((item) => item.type === type);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    state.items.push({
+      type,
+      name,
+      quantity: 1,
+      pricePerDay: price,
+    });
+  }
+
+  clearError("mattress");
+  updateQuantityDisplay(type);
   updateCalculation();
+}
+
+/**
+ * Handle decrement (-) button
+ */
+function handleDecrement(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const type = button.dataset.type || "";
+
+  const existingItem = state.items.find((item) => item.type === type);
+
+  if (existingItem && existingItem.quantity > 0) {
+    existingItem.quantity -= 1;
+
+    // Remove item if quantity reaches 0
+    if (existingItem.quantity === 0) {
+      state.items = state.items.filter((item) => item.type !== type);
+    }
+
+    updateQuantityDisplay(type);
+    updateCalculation();
+  }
+}
+
+/**
+ * Update quantity display for a specific mattress type
+ */
+function updateQuantityDisplay(type: string): void {
+  const qtyEl = document.querySelector(
+    `.cart-item-qty[data-type="${type}"]`
+  ) as HTMLElement;
+
+  if (qtyEl) {
+    const item = state.items.find((i) => i.type === type);
+    qtyEl.textContent = item ? String(item.quantity) : "0";
+  }
 }
 
 /**
@@ -233,16 +267,51 @@ function updateCalculation(): void {
     state.endDate = end.toISOString().split("T")[0];
   }
 
+  // Calculate total quantity
+  state.totalQuantity = state.items.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
   // Calculate totals
-  state.subtotal = state.pricePerDay * state.quantity * state.duration;
+  state.subtotal = state.items.reduce(
+    (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
+    0
+  );
   state.total = state.subtotal;
 
   // Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate();
 
   // Update UI
+  updateTotalQuantityDisplay();
   updateResultPanel();
   updateValidation();
+  updateStepperButtons();
+}
+
+/**
+ * Update total quantity display
+ */
+function updateTotalQuantityDisplay(): void {
+  const el = elements.cartTotalQty as HTMLElement;
+  if (el) {
+    el.textContent = `${state.totalQuantity} unit`;
+  }
+}
+
+/**
+ * Update stepper button states
+ */
+function updateStepperButtons(): void {
+  const plusButtons = document.querySelectorAll(
+    ".btn-plus"
+  ) as NodeListOf<HTMLButtonElement>;
+  const atMax = state.totalQuantity >= config.maxQuantity;
+
+  plusButtons.forEach((button) => {
+    button.disabled = atMax;
+  });
 }
 
 /**
@@ -280,17 +349,22 @@ function calculateDeliveryEstimate(): string {
  * Update result panel
  */
 function updateResultPanel(): void {
-  // Mattress
+  // Mattress list
   const mattressEl = elements.resultMattress?.querySelector(".result-value");
   if (mattressEl) {
-    const mattress = mattresses.find((m) => m.id === state.mattressType);
-    mattressEl.textContent = mattress ? mattress.shortName : "-";
+    if (state.items.length === 0) {
+      mattressEl.textContent = "-";
+    } else if (state.items.length === 1) {
+      mattressEl.textContent = state.items[0].name;
+    } else {
+      mattressEl.textContent = `${state.items.length} jenis`;
+    }
   }
 
   // Quantity
   const quantityEl = elements.resultQuantity?.querySelector(".result-value");
   if (quantityEl) {
-    quantityEl.textContent = `${state.quantity} unit`;
+    quantityEl.textContent = `${state.totalQuantity} unit`;
   }
 
   // Duration
@@ -353,9 +427,8 @@ function updateValidation(): void {
 
   // Check all required fields
   state.isValid =
-    state.mattressType !== null &&
-    state.quantity >= config.minQuantity &&
-    state.quantity <= config.maxQuantity &&
+    state.totalQuantity > 0 &&
+    state.totalQuantity <= config.maxQuantity &&
     state.duration >= config.minDuration &&
     state.duration <= config.maxDuration &&
     state.startDate !== null &&
@@ -383,14 +456,12 @@ function handleWhatsAppClick(): void {
   const customerNotes =
     (elements.customerNotes as HTMLTextAreaElement)?.value || "";
 
-  const mattress = mattresses.find((m) => m.id === state.mattressType);
-
   const bookingData = {
-    mattressType: mattress?.shortName || "",
-    quantity: state.quantity,
+    items: state.items,
     startDate: state.startDate || "",
     endDate: state.endDate || "",
     duration: state.duration,
+    totalQuantity: state.totalQuantity,
     total: state.total,
     name: customerName,
     address: customerAddress,
@@ -399,26 +470,48 @@ function handleWhatsAppClick(): void {
 
   const waUrl = composeWhatsAppUrl(bookingData);
 
-  // Try to open WhatsApp
-  const newWindow = window.open(waUrl, "_blank");
-
-  // Show fallback if popup blocked or failed
-  if (
-    !newWindow ||
-    newWindow.closed ||
-    typeof newWindow.closed === "undefined"
-  ) {
-    showWhatsAppFallback();
-  }
+  // Use direct navigation for better mobile support
+  window.location.href = waUrl;
 }
 
 /**
- * Show WhatsApp fallback (copy number)
+ * Handle location button click
  */
-function showWhatsAppFallback(): void {
-  const fallback = elements.whatsappFallback as HTMLElement;
-  if (fallback) {
-    fallback.style.display = "block";
+async function handleLocationClick(): Promise<void> {
+  const button = elements.locationButton as HTMLButtonElement;
+  const addressField = elements.customerAddress as HTMLTextAreaElement;
+
+  if (!button || !addressField) return;
+
+  // Disable button and show loading
+  button.disabled = true;
+  const originalText = button.textContent;
+  button.textContent = "📍 Mengambil lokasi...";
+
+  try {
+    const address = await getAddressFromCurrentLocation();
+
+    // Fill address field
+    addressField.value = address;
+
+    // Trigger validation
+    handleFormFieldChange();
+
+    // Show success
+    button.textContent = "✓ Lokasi terisi";
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.disabled = false;
+    }, 2000);
+  } catch (error) {
+    // Show error message
+    const errorMessage =
+      error instanceof Error ? error.message : "Gagal mendapatkan lokasi";
+    showError("customerAddress", errorMessage);
+
+    // Reset button
+    button.textContent = originalText;
+    button.disabled = false;
   }
 }
 
