@@ -1,0 +1,161 @@
+---
+
+---
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Menu</span>
+    <button class="close-btn" id="closeSidebar" aria-label="Close Menu"
+      >&times;</button
+    >
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="/">Beranda</a></li>
+    <li><a href="/#calculator">Hitung Biaya</a></li>
+    <li><a href="/about">Tentang Kami</a></li>
+    <li><a href="/#service-area">Area Layanan</a></li>
+    <li>
+      <a
+        href="https://wa.me/6289519119092"
+        class="nav-whatsapp"
+        target="_blank"
+      >
+        Hubungi WhatsApp
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+  function openSidebar() {
+    sidebar?.classList.add("active");
+    sidebarOverlay?.classList.add("active");
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeSidebarFn() {
+    sidebar?.classList.remove("active");
+    sidebarOverlay?.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+  }
+
+  menuToggle?.addEventListener("click", openSidebar);
+  closeSidebar?.addEventListener("click", closeSidebarFn);
+  sidebarOverlay?.addEventListener("click", closeSidebarFn);
+
+  // Close sidebar when clicking a link
+  const links = document.querySelectorAll(".nav-links a");
+  links.forEach((link) => {
+    link.addEventListener("click", closeSidebarFn);
+  });
+</script>
+
+<style>
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1002;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .sidebar-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+  }
+
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links li {
+    margin-bottom: var(--space-4);
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    transition: color 0.2s;
+    display: block;
+    padding: var(--space-2) 0;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-whatsapp {
+    margin-top: var(--space-4);
+    background: var(--color-primary);
+    color: white !important;
+    text-align: center;
+    padding: var(--space-3) !important;
+    border-radius: var(--radius-md);
+  }
+
+  :global(.no-scroll) {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+</style>
