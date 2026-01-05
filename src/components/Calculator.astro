@@ -227,6 +227,15 @@ const mattresses = products as MattressType[];
     gap: var(--space-8);
     max-width: 900px;
     margin: 0 auto;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  /* Ensure all form-groups respect container width */
+  .calculator-wrapper > .form-group {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .calculator-form {
