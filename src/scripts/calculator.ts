@@ -554,6 +554,7 @@ function updateResultPanel(): void {
   }
 
   // Delivery estimate
+  const deliveryEl = elements.resultDelivery?.querySelector(".delivery-text");
   if (deliveryEl) {
     deliveryEl.textContent = state.deliveryEstimate;
   }
