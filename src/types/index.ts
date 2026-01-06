@@ -11,9 +11,12 @@ export interface MattressType {
   shortName: string;
   description: string;
   pricePerDay: number;
+  packagePricePerDay: number;
   dimensions: string;
   capacity: string;
   image: string;
+  includes: string[];
+  packageIncludes: string[];
   available: boolean;
 }
 
@@ -66,6 +69,7 @@ export interface CartItem {
   name: string;
   quantity: number;
   pricePerDay: number;
+  packagePricePerDay: number;
 }
 
 /**

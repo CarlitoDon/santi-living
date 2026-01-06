@@ -165,6 +165,7 @@ function handleIncrement(event: Event): void {
   const type = button.dataset.type || "";
   const name = button.dataset.name || "";
   const price = parseInt(button.dataset.price || "0", 10);
+  const packagePrice = parseInt(button.dataset.packagePrice || "0", 10);
 
   // Check if total quantity would exceed max
   if (state.totalQuantity >= config.maxQuantity) {
@@ -183,6 +184,7 @@ function handleIncrement(event: Event): void {
       name,
       quantity: 1,
       pricePerDay: price,
+      packagePricePerDay: packagePrice,
     });
   }
 
@@ -302,20 +304,22 @@ function updateCalculation(): void {
     0
   );
 
-  // Calculate totals
-  state.subtotal = state.items.reduce(
-    (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
-    0
-  );
-
-  // Add package price if selected
+  // Calculate totals based on package selection
   if (state.isPackage) {
-    const packageSurcharge =
-      state.totalQuantity * config.packagePricePerUnit * state.duration;
-    state.total = state.subtotal + packageSurcharge;
+    // Use package price for each item
+    state.total = state.items.reduce(
+      (sum, item) =>
+        sum + item.quantity * item.packagePricePerDay * state.duration,
+      0
+    );
   } else {
-    state.total = state.subtotal;
+    // Use standard price for each item
+    state.total = state.items.reduce(
+      (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
+      0
+    );
   }
+  state.subtotal = state.total;
 
   // Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate();

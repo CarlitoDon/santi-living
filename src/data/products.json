@@ -1,46 +1,137 @@
 [
   {
-    "id": "single",
-    "name": "Kasur Single",
-    "shortName": "Single",
-    "description": "Kasur single nyaman untuk 1 orang",
-    "pricePerDay": 25000,
+    "id": "single-standard",
+    "name": "Single Standard",
+    "shortName": "Single Standard",
+    "description": "Bed set 90x200x20 untuk 1 orang",
+    "pricePerDay": 40000,
+    "packagePricePerDay": 50000,
     "dimensions": "90 x 200 cm",
     "capacity": "1 orang",
     "image": "/images/kasur-single.webp",
+    "includes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal"
+    ],
+    "packageIncludes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal",
+      "selimut"
+    ],
+    "available": true
+  },
+  {
+    "id": "single-super",
+    "name": "Single Super",
+    "shortName": "Single Super",
+    "description": "Bed set 100x200x20 untuk 1 orang",
+    "pricePerDay": 50000,
+    "packagePricePerDay": 60000,
+    "dimensions": "100 x 200 cm",
+    "capacity": "1 orang",
+    "image": "/images/kasur-single.webp",
+    "includes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal"
+    ],
+    "packageIncludes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal",
+      "selimut"
+    ],
     "available": true
   },
   {
     "id": "double",
-    "name": "Kasur Double",
+    "name": "Double",
     "shortName": "Double",
-    "description": "Kasur double untuk 1-2 orang",
-    "pricePerDay": 35000,
+    "description": "Bed set 120x200x20 untuk 1-2 orang",
+    "pricePerDay": 60000,
+    "packagePricePerDay": 70000,
     "dimensions": "120 x 200 cm",
     "capacity": "1-2 orang",
     "image": "/images/kasur-double.webp",
+    "includes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal"
+    ],
+    "packageIncludes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal",
+      "sarung bantal",
+      "selimut"
+    ],
     "available": true
   },
   {
     "id": "queen",
-    "name": "Kasur Queen",
+    "name": "Queen",
     "shortName": "Queen",
-    "description": "Kasur queen luas untuk 2 orang",
-    "pricePerDay": 45000,
+    "description": "Bed set 160x200x20 untuk 2 orang",
+    "pricePerDay": 70000,
+    "packagePricePerDay": 80000,
     "dimensions": "160 x 200 cm",
     "capacity": "2 orang",
     "image": "/images/kasur-queen.webp",
+    "includes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal 2x",
+      "sarung bantal 2x"
+    ],
+    "packageIncludes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal 2x",
+      "sarung bantal 2x",
+      "selimut"
+    ],
     "available": true
   },
   {
     "id": "king",
-    "name": "Kasur King",
+    "name": "King",
     "shortName": "King",
-    "description": "Kasur king super luas untuk 2-3 orang",
-    "pricePerDay": 55000,
+    "description": "Bed set 180x200x20 untuk 2-3 orang",
+    "pricePerDay": 80000,
+    "packagePricePerDay": 90000,
     "dimensions": "180 x 200 cm",
     "capacity": "2-3 orang",
     "image": "/images/kasur-king.jpg",
+    "includes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal 2x",
+      "sarung bantal 2x"
+    ],
+    "packageIncludes": [
+      "kasur busa",
+      "pelapis busa",
+      "sprei",
+      "bantal 2x",
+      "sarung bantal 2x",
+      "selimut"
+    ],
     "available": true
   }
 ]
