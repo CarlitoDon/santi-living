@@ -45,30 +45,30 @@ export function composeWhatsAppMessage(booking: BookingData): string {
     ? "Paket (Kasur + Bantal + Selimut)"
     : "Kasur Saja";
 
-  let message = `Halo, saya mau sewa *${packageLabel}*:\\n\\n`;
+  let message = `Halo, saya mau sewa *${packageLabel}*:\n\n`;
 
   // List all mattress items
-  message += `Kasur:\\n`;
+  message += `Kasur:\n`;
   booking.items.forEach((item) => {
     const subtotal = item.quantity * item.pricePerDay * booking.duration;
     message += `• ${item.quantity}x ${item.name} @ Rp ${formatCurrency(
       item.pricePerDay
-    )}/hari\\n`;
+    )}/hari\n`;
   });
 
-  message += `\\nTotal: ${booking.totalQuantity} unit\\n`;
+  message += `\nTotal: ${booking.totalQuantity} unit\n`;
   message += `Tanggal: ${formatDate(booking.startDate)} - ${formatDate(
     booking.endDate
-  )} (${booking.duration} hari)\\n`;
-  message += `Total Biaya: Rp ${formatCurrency(booking.total)}\\n\\n`;
-  message += `- Nama: ${booking.name}\\n`;
-  message += `- Alamat: ${booking.address}\\n`;
+  )} (${booking.duration} hari)\n`;
+  message += `Total Biaya: Rp ${formatCurrency(booking.total)}\n\n`;
+  message += `- Nama: ${booking.name}\n`;
+  message += `- Alamat: ${booking.address}\n`;
 
   if (booking.notes && booking.notes.trim()) {
-    message += `- Catatan: ${booking.notes}\\n`;
+    message += `- Catatan: ${booking.notes}\n`;
   }
 
-  message += `\\nMohon konfirmasi ketersediaan. Terima kasih!`;
+  message += `\nMohon konfirmasi ketersediaan. Terima kasih!`;
 
   return message;
 }
