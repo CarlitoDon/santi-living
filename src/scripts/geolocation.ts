@@ -115,20 +115,40 @@ export async function reverseGeocode(
  */
 function formatAddress(address: any): FormattedAddress {
   // Extract components from Nominatim Indonesia structure
+  // Based on actual API response structure:
+  // - road: street name (often empty in rural areas)
+  // - hamlet/neighbourhood: sub-village area
+  // - village: desa/kelurahan name
+  // - city/city_district: kelurahan (urban areas)
+  // - municipality: kecamatan
+  // - county: kabupaten/kota
+  // - state: provinsi
+
   const road = address.road || "";
+
+  // Kelurahan: can be in city, village, hamlet, neighbourhood
   const kelurahan =
-    address.hamlet || address.neighbourhood || address.suburb || "";
-  const kecamatan = address.village || address.city_district || "";
-  const kota =
-    address.county ||
     address.city ||
-    address.town ||
-    address.municipality ||
+    address.village ||
+    address.hamlet ||
+    address.neighbourhood ||
+    address.suburb ||
     "";
+
+  // Kecamatan: can be in municipality, city_district
+  const kecamatan = address.municipality || address.city_district || "";
+
+  // Kabupaten/Kota: county
+  const kota = address.county || address.town || "";
+
+  // Provinsi: state
   const provinsi = address.state || "DI Yogyakarta";
+
+  // Kode Pos
   const postcode = address.postcode || "";
 
   // Build street-level address
+  // Use road if available, otherwise use kelurahan name as the area
   const street = road || kelurahan || "Area tidak diketahui";
 
   // Build full address
