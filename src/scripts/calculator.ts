@@ -7,7 +7,7 @@ import products from "@/data/products.json";
 import type { CalculatorState, MattressType, CartItem } from "@/types";
 import { composeWhatsAppUrl } from "./whatsapp-compose";
 import { validateForm } from "./form-validation";
-import { getAddressFromCurrentLocation } from "./geolocation";
+import { getCurrentLocation, reverseGeocode } from "./geolocation";
 
 const mattresses = products as MattressType[];
 
@@ -42,7 +42,14 @@ export function initCalculator(): void {
     startDate: document.getElementById("startDate"),
     customerName: document.getElementById("customerName"),
     customerWhatsapp: document.getElementById("customerWhatsapp"),
-    customerAddress: document.getElementById("customerAddress"),
+    addressStreet: document.getElementById("addressStreet"),
+    addressKelurahan: document.getElementById("addressKelurahan"),
+    addressKecamatan: document.getElementById("addressKecamatan"),
+    addressKota: document.getElementById("addressKota"),
+    addressProvinsi: document.getElementById("addressProvinsi"),
+    addressZip: document.getElementById("addressZip"),
+    addressLat: document.getElementById("addressLat"),
+    addressLng: document.getElementById("addressLng"),
     customerNotes: document.getElementById("customerNotes"),
     locationButton: document.getElementById("locationButton"),
     resultMattress: document.getElementById("resultMattress"),
@@ -103,7 +110,14 @@ function bindEvents(): void {
   }
 
   // Customer fields
-  ["customerName", "customerWhatsapp", "customerAddress"].forEach((fieldId) => {
+  [
+    "customerName",
+    "customerWhatsapp",
+    "addressStreet",
+    "addressKelurahan",
+    "addressKecamatan",
+    "addressKota",
+  ].forEach((fieldId) => {
     const field = elements[fieldId] as HTMLInputElement | HTMLTextAreaElement;
     if (field) {
       field.addEventListener("input", handleFormFieldChange);
@@ -454,19 +468,20 @@ function updateValidation(): void {
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
   const customerWhatsapp =
     (elements.customerWhatsapp as HTMLInputElement)?.value || "";
-  const customerAddress =
-    (elements.customerAddress as HTMLTextAreaElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
 
   const formData = {
     name: customerName,
     whatsapp: customerWhatsapp,
-    address: customerAddress,
+    address: addressStreet,
     notes: "",
   };
 
   const formErrors = validateForm(formData);
 
-  // Check all required fields
+  // Check all required fields (min: name, whatsapp, street, kota)
   state.isValid =
     state.totalQuantity > 0 &&
     state.totalQuantity <= config.maxQuantity &&
@@ -475,7 +490,8 @@ function updateValidation(): void {
     state.startDate !== null &&
     customerName.trim() !== "" &&
     customerWhatsapp.trim() !== "" &&
-    customerAddress.trim() !== "" &&
+    addressStreet.trim() !== "" &&
+    addressKota.trim() !== "" &&
     Object.keys(formErrors).length === 0;
 
   // Update button state
@@ -492,10 +508,30 @@ function handleWhatsAppClick(): void {
   if (!state.isValid) return;
 
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
-  const customerAddress =
-    (elements.customerAddress as HTMLTextAreaElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKelurahan =
+    (elements.addressKelurahan as HTMLInputElement)?.value || "";
+  const addressKecamatan =
+    (elements.addressKecamatan as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
+  const addressProvinsi =
+    (elements.addressProvinsi as HTMLInputElement)?.value || "";
+  const addressZip = (elements.addressZip as HTMLInputElement)?.value || "";
+  const addressLat = (elements.addressLat as HTMLInputElement)?.value || "";
+  const addressLng = (elements.addressLng as HTMLInputElement)?.value || "";
   const customerNotes =
     (elements.customerNotes as HTMLTextAreaElement)?.value || "";
+
+  // Compose full address
+  let fullAddress = addressStreet;
+  if (addressKelurahan) fullAddress += `, ${addressKelurahan}`;
+  if (addressKecamatan) fullAddress += `, ${addressKecamatan}`;
+  if (addressKota) fullAddress += `, ${addressKota}`;
+  if (addressProvinsi) fullAddress += `, ${addressProvinsi}`;
+  if (addressZip) fullAddress += ` ${addressZip}`;
+  if (addressLat && addressLng)
+    fullAddress += ` (${addressLat}, ${addressLng})`;
 
   const bookingData = {
     items: state.items,
@@ -505,7 +541,7 @@ function handleWhatsAppClick(): void {
     totalQuantity: state.totalQuantity,
     total: state.total,
     name: customerName,
-    address: customerAddress,
+    address: fullAddress,
     notes: customerNotes,
     isPackage: state.isPackage,
   };
@@ -521,9 +557,12 @@ function handleWhatsAppClick(): void {
  */
 async function handleLocationClick(): Promise<void> {
   const button = elements.locationButton as HTMLButtonElement;
-  const addressField = elements.customerAddress as HTMLTextAreaElement;
+  const streetField = elements.addressStreet as HTMLInputElement;
+  const kotaField = elements.addressKota as HTMLInputElement;
+  const latField = elements.addressLat as HTMLInputElement;
+  const lngField = elements.addressLng as HTMLInputElement;
 
-  if (!button || !addressField) return;
+  if (!button || !streetField) return;
 
   // Disable button and show loading
   button.disabled = true;
@@ -531,10 +570,19 @@ async function handleLocationClick(): Promise<void> {
   button.textContent = "📍 Mengambil lokasi...";
 
   try {
-    const address = await getAddressFromCurrentLocation();
+    // Get coordinates first
+    const coords = await getCurrentLocation();
 
-    // Fill address field
-    addressField.value = address;
+    // Fill coordinate fields
+    if (latField) latField.value = coords.latitude.toFixed(6);
+    if (lngField) lngField.value = coords.longitude.toFixed(6);
+
+    // Get address from coordinates
+    const address = await reverseGeocode(coords);
+
+    // Fill address fields
+    streetField.value = address.street;
+    if (kotaField && address.city) kotaField.value = address.city;
 
     // Trigger validation
     handleFormFieldChange();
@@ -549,7 +597,7 @@ async function handleLocationClick(): Promise<void> {
     // Show error message
     const errorMessage =
       error instanceof Error ? error.message : "Gagal mendapatkan lokasi";
-    showError("customerAddress", errorMessage);
+    showError("addressStreet", errorMessage);
 
     // Reset button
     button.textContent = originalText;
