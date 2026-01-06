@@ -19,7 +19,7 @@
       "pricePerDay": 60000,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/kasur-single.webp",
+      "image": "/images/100x200-single.webp",
       "includes": ["kasur busa", "sprei", "bantal", "selimut"]
     },
     {
@@ -76,7 +76,7 @@
       "pricePerDay": 50000,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/kasur-single.webp",
+      "image": "/images/100x200-single.webp",
       "includes": ["kasur busa", "sprei"]
     },
     {
