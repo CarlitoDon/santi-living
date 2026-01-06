@@ -33,19 +33,19 @@ const { mattressPackages } = products;
 
   .price-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
   }
 
   @media (min-width: 640px) {
     .price-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
     .price-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>

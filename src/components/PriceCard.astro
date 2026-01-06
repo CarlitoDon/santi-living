@@ -56,7 +56,7 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
   }
 
   .price-card-image {
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     overflow: hidden;
     background: var(--color-surface);
   }
@@ -68,27 +68,28 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
   }
 
   .price-card-body {
-    padding: var(--space-5);
+    padding: var(--space-3);
   }
 
   .price-card-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
   .price-card-description {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
+    display: none;
   }
 
   .price-card-details {
     display: flex;
-    gap: var(--space-3);
-    font-size: var(--font-size-xs);
+    gap: var(--space-2);
+    font-size: 0.65rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
   }
 
   .price-card-price {
@@ -98,13 +99,13 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
   }
 
   .price-card-amount {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
   }
 
   .price-card-period {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-muted);
   }
 </style>
