@@ -143,14 +143,24 @@ const mattresses = products as MattressType[];
             class="form-input"
             placeholder="Nama jalan, nomor rumah, RT/RW"
           />
-          <button
-            type="button"
-            class="btn-location"
-            id="locationButton"
-            title="Gunakan lokasi GPS saya"
-          >
-            📍 Gunakan Lokasi Sekarang
-          </button>
+          <div class="address-buttons">
+            <button
+              type="button"
+              class="btn-location"
+              id="locationButton"
+              title="Gunakan lokasi GPS saya"
+            >
+              📍 Gunakan Lokasi Sekarang
+            </button>
+            <button
+              type="button"
+              class="btn-map-open"
+              id="mapPickerButton"
+              title="Pilih lokasi di peta"
+            >
+              🗺️ Pilih di Peta
+            </button>
+          </div>
           <span class="form-error" id="addressStreetError"></span>
         </div>
 
@@ -596,6 +606,13 @@ const mattresses = products as MattressType[];
   #whatsappButton:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  .address-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
   }
 
   .whatsapp-fallback {

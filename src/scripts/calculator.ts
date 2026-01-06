@@ -8,6 +8,7 @@ import type { CalculatorState, MattressType, CartItem } from "@/types";
 import { composeWhatsAppUrl } from "./whatsapp-compose";
 import { validateForm } from "./form-validation";
 import { getCurrentLocation, reverseGeocode } from "./geolocation";
+import { openMapPicker } from "./map-picker";
 
 const mattresses = products as MattressType[];
 
@@ -62,6 +63,7 @@ export function initCalculator(): void {
     whatsappFallback: document.getElementById("whatsappFallback"),
     copyNumber: document.getElementById("copyNumber"),
     packageToggle: document.getElementById("packageToggle"),
+    mapPickerButton: document.getElementById("mapPickerButton"),
   };
 
   // Set minimum date to today
@@ -148,6 +150,12 @@ function bindEvents(): void {
   toggleButtons.forEach((button) => {
     button.addEventListener("click", handlePackageToggle);
   });
+
+  // Map picker button
+  const mapPickerButton = elements.mapPickerButton as HTMLButtonElement;
+  if (mapPickerButton) {
+    mapPickerButton.addEventListener("click", handleMapPickerClick);
+  }
 }
 
 /**
@@ -169,6 +177,37 @@ function handlePackageToggle(event: Event): void {
 
   // Recalculate
   updateCalculation();
+}
+
+/**
+ * Handle map picker button click
+ */
+function handleMapPickerClick(): void {
+  openMapPicker({
+    onConfirm: (coords, address) => {
+      // Fill all address fields
+      const streetField = elements.addressStreet as HTMLInputElement;
+      const kelurahanField = elements.addressKelurahan as HTMLInputElement;
+      const kecamatanField = elements.addressKecamatan as HTMLInputElement;
+      const kotaField = elements.addressKota as HTMLInputElement;
+      const provinsiField = elements.addressProvinsi as HTMLInputElement;
+      const zipField = elements.addressZip as HTMLInputElement;
+      const latField = elements.addressLat as HTMLInputElement;
+      const lngField = elements.addressLng as HTMLInputElement;
+
+      if (streetField) streetField.value = address.street;
+      if (kelurahanField) kelurahanField.value = address.kelurahan;
+      if (kecamatanField) kecamatanField.value = address.kecamatan;
+      if (kotaField) kotaField.value = address.kota;
+      if (provinsiField) provinsiField.value = address.provinsi;
+      if (zipField) zipField.value = address.postcode;
+      if (latField) latField.value = coords.lat.toFixed(6);
+      if (lngField) lngField.value = coords.lng.toFixed(6);
+
+      // Trigger validation
+      handleFormFieldChange();
+    },
+  });
 }
 
 /**
