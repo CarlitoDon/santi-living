@@ -4,7 +4,7 @@
 
 import config from "@/data/config.json";
 import products from "@/data/products.json";
-import type { CalculatorState, MattressType, CartItem } from "@/types";
+import type { CalculatorState, ProductItem, CartItem } from "@/types";
 import { composeWhatsAppUrl } from "./whatsapp-compose";
 import { validateForm } from "./form-validation";
 import {
@@ -14,14 +14,23 @@ import {
 } from "./geolocation";
 import { openMapPicker } from "./map-picker";
 
-const mattresses = products as MattressType[];
+// Helper to find product by ID across all categories
+const findProductById = (id: string): ProductItem | undefined => {
+  const allItems = [
+    ...products.mattressPackages,
+    ...products.mattressOnly,
+    ...products.accessories,
+  ];
+  // @ts-ignore
+  return allItems.find((p) => p.id === id);
+};
 
 // State
 let state: CalculatorState = {
   items: [],
   startDate: null,
   duration: 1,
-  isPackage: true,
+  paymentMethod: "qris",
   endDate: null,
   totalQuantity: 0,
   subtotal: 0,
@@ -151,38 +160,77 @@ function bindEvents(): void {
     locationButton.addEventListener("click", handleLocationClick);
   }
 
-  // Package toggle
-  const toggleButtons = document.querySelectorAll(".toggle-option");
-  toggleButtons.forEach((button) => {
-    button.addEventListener("click", handlePackageToggle);
-  });
-
   // Map picker button
   const mapPickerButton = elements.mapPickerButton as HTMLButtonElement;
   if (mapPickerButton) {
     mapPickerButton.addEventListener("click", handleMapPickerClick);
   }
+
+  // Payment method toggle
+  const paymentToggleButtons = document.querySelectorAll(".payment-option");
+  paymentToggleButtons.forEach((button) => {
+    button.addEventListener("click", handlePaymentMethodToggle);
+  });
+
+  // Accordion headers
+  const accordionHeaders = document.querySelectorAll(".accordion-header");
+  accordionHeaders.forEach((header) => {
+    header.addEventListener("click", handleAccordionClick);
+  });
 }
 
 /**
- * Handle package toggle
+ * Handle accordion header click
  */
-function handlePackageToggle(event: Event): void {
+function handleAccordionClick(event: Event): void {
+  const header = event.currentTarget as HTMLElement;
+  const item = header.parentElement;
+
+  if (item) {
+    const content = item.querySelector(".accordion-content") as HTMLElement;
+    const icon = item.querySelector(".accordion-icon") as HTMLElement;
+    const isCurrentlyActive = item.classList.contains("active");
+
+    // Logic: Toggle current item. If it was active, deactivate (close). If inactive, activate (open).
+    // Note: The user requirement implies a toggle behavior.
+
+    if (isCurrentlyActive) {
+      item.classList.remove("active");
+      if (content) content.style.display = "none";
+      if (icon) icon.textContent = "+";
+    } else {
+      // Optional: Close other accordions for "one-at-a-time" behavior,
+      // but let's stick to independent toggles unless forced.
+      // Wait, "gimana kalau 3 kategori ini dibuat toggle aja? yang defaultnya terbuka paket, 2 lainnya tertutup."
+      // Usually "toggle aja" implies independent or linked.
+      // I will implement "exclusive" behavior (accordion style) where opening one might be expected,
+      // BUT independent is safer for UX if they want to see multiple.
+      // However, usually accordions close others to save space.
+      // Let's implement independent toggling for now as it's more flexible for comparison.
+
+      item.classList.add("active");
+      if (content) content.style.display = "block";
+      if (icon) icon.textContent = "−";
+    }
+  }
+}
+
+/**
+ * Handle payment method toggle
+ */
+function handlePaymentMethodToggle(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const value = button.dataset.value;
+  const value = button.dataset.value as "qris" | "transfer";
 
   // Update state
-  state.isPackage = value === "package";
+  state.paymentMethod = value;
 
   // Update UI
-  const toggleButtons = document.querySelectorAll(".toggle-option");
-  toggleButtons.forEach((btn) => {
+  const paymentButtons = document.querySelectorAll(".payment-option");
+  paymentButtons.forEach((btn) => {
     btn.classList.remove("active");
   });
   button.classList.add("active");
-
-  // Recalculate
-  updateCalculation();
 }
 
 /**
@@ -224,36 +272,61 @@ function handleMapPickerClick(): void {
 /**
  * Handle increment (+) button
  */
+/**
+ * Handle increment (+) button
+ */
 function handleIncrement(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const type = button.dataset.type || "";
+  const id = button.dataset.id || "";
   const name = button.dataset.name || "";
+  const category = button.dataset.category as
+    | "package"
+    | "mattress"
+    | "accessory";
   const price = parseInt(button.dataset.price || "0", 10);
-  const packagePrice = parseInt(button.dataset.packagePrice || "0", 10);
 
-  // Check if total quantity would exceed max
-  if (state.totalQuantity >= config.maxQuantity) {
-    showError("mattress", `Maksimal ${config.maxQuantity} unit total`);
-    return;
+  // Check if total quantity (mattresses only) would exceed max
+  if (category !== "accessory") {
+    const currentMattressQty = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((sum, i) => sum + i.quantity, 0);
+
+    if (currentMattressQty >= config.maxQuantity) {
+      showError("mattressCart", `Maksimal ${config.maxQuantity} unit kasur`);
+      return;
+    }
+  } else {
+    // Basic validation: Cannot order accessories without mattress
+    const currentMattressQty = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((sum, i) => sum + i.quantity, 0);
+
+    if (currentMattressQty === 0) {
+      showError(
+        "mattressCart",
+        "Pilih minimal 1 kasur sebelum menambah aksesoris"
+      );
+      return;
+    }
   }
 
   // Find existing item or create new
-  const existingItem = state.items.find((item) => item.type === type);
+  const existingItem = state.items.find((item) => item.id === id);
 
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
     state.items.push({
-      type,
+      id,
       name,
+      category,
       quantity: 1,
       pricePerDay: price,
-      packagePricePerDay: packagePrice,
     });
   }
 
-  clearError("mattress");
-  updateQuantityDisplay(type);
+  clearError("mattressCart");
+  updateQuantityDisplay(id);
   updateCalculation();
 }
 
@@ -262,33 +335,43 @@ function handleIncrement(event: Event): void {
  */
 function handleDecrement(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const type = button.dataset.type || "";
+  const id = button.dataset.id || "";
 
-  const existingItem = state.items.find((item) => item.type === type);
+  const existingItem = state.items.find((item) => item.id === id);
 
   if (existingItem && existingItem.quantity > 0) {
     existingItem.quantity -= 1;
 
     // Remove item if quantity reaches 0
     if (existingItem.quantity === 0) {
-      state.items = state.items.filter((item) => item.type !== type);
+      state.items = state.items.filter((item) => item.id !== id);
     }
 
-    updateQuantityDisplay(type);
+    // Creating accessories cleanup logic if 0 mattresses
+    const mattressCount = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((s, i) => s + i.quantity, 0);
+
+    if (mattressCount === 0) {
+      // Automatically remove accessories if no mattress left (optional)
+      // For now, let's just leave them but validation will fail on submit
+    }
+
+    updateQuantityDisplay(id);
     updateCalculation();
   }
 }
 
 /**
- * Update quantity display for a specific mattress type
+ * Update quantity display for a specific item
  */
-function updateQuantityDisplay(type: string): void {
+function updateQuantityDisplay(id: string): void {
   const qtyEl = document.querySelector(
-    `.cart-item-qty[data-type="${type}"]`
+    `.cart-item-qty[data-id="${id}"]`
   ) as HTMLElement;
 
   if (qtyEl) {
-    const item = state.items.find((i) => i.type === type);
+    const item = state.items.find((i) => i.id === id);
     qtyEl.textContent = item ? String(item.quantity) : "0";
   }
 }
@@ -410,27 +493,18 @@ function updateCalculation(): void {
     state.endDate = end.toISOString().split("T")[0];
   }
 
-  // Calculate total quantity
+  // Calculate total quantity (All items)
   state.totalQuantity = state.items.reduce(
     (sum, item) => sum + item.quantity,
     0
   );
 
-  // Calculate totals based on package selection
-  if (state.isPackage) {
-    // Use package price for each item
-    state.total = state.items.reduce(
-      (sum, item) =>
-        sum + item.quantity * item.packagePricePerDay * state.duration,
-      0
-    );
-  } else {
-    // Use standard price for each item
-    state.total = state.items.reduce(
-      (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
-      0
-    );
-  }
+  // Calculate total price: simply sum (quantity * price * duration) for all items
+  state.total = state.items.reduce(
+    (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
+    0
+  );
+
   state.subtotal = state.total;
   state.total = state.subtotal + (state.deliveryFee || 0);
 
@@ -754,6 +828,7 @@ async function handleWhatsAppClick(): Promise<void> {
     deliveryAddress: fullAddress,
     items: state.items.map((item) => ({
       name: item.name,
+      category: item.category,
       quantity: item.quantity,
       pricePerDay: item.pricePerDay,
     })),
@@ -761,7 +836,7 @@ async function handleWhatsAppClick(): Promise<void> {
     orderDate: state.startDate || "",
     duration: state.duration,
     deliveryFee: state.deliveryFee || 0,
-    isPackage: state.isPackage,
+    paymentMethod: state.paymentMethod,
     notes: customerNotes,
   };
 

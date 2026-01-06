@@ -3,6 +3,7 @@ import { z } from "zod";
 // Order Item Schema
 const OrderItemSchema = z.object({
   name: z.string().min(1),
+  category: z.enum(["package", "mattress", "accessory"]),
   quantity: z.number().int().positive(),
   pricePerDay: z.number().nonnegative(),
 });
@@ -17,7 +18,7 @@ export const OrderPayloadSchema = z.object({
   orderDate: z.string(), // ISO date string
   duration: z.number().int().positive(),
   deliveryFee: z.number().nonnegative(),
-  isPackage: z.boolean(),
+  paymentMethod: z.enum(["qris", "transfer"]),
   notes: z.string().optional(),
 });
 

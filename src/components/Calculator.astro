@@ -1,9 +1,11 @@
 ---
 import products from "@/data/products.json";
 import config from "@/data/config.json";
-import type { MattressType } from "@/types";
+import type { ProductItem } from "@/types";
 
-const mattresses = products as MattressType[];
+// This is just for type checking in the template if needed,
+// though we access products.mattressPackages directly now.
+const allProducts = products;
 ---
 
 <section class="calculator section" id="calculator">
@@ -16,77 +18,170 @@ const mattresses = products as MattressType[];
         <div class="form-section">
           <div class="form-section-header">
             <span class="form-section-number">1</span>
-            <span class="form-section-title">Pilihan Kasur</span>
+            <span class="form-section-title">Pilihan Item</span>
           </div>
 
-          <!-- Package Toggle -->
-          <div class="form-group">
-            <label class="form-label">Pilihan Sewa</label>
-            <div class="package-toggle" id="packageToggle">
-              <button
-                type="button"
-                class="toggle-option active"
-                data-value="package"
+          <!-- 1. Paket Kasur -->
+          <div class="accordion-item active">
+            <button type="button" class="accordion-header">
+              <span class="accordion-title"
+                >Paket Kasur (Kasur + Bantal + Selimut)</span
               >
-                <span class="toggle-label">Paket</span>
-                <span class="toggle-desc">Kasur + Bantal + Selimut</span>
-              </button>
-              <button type="button" class="toggle-option" data-value="mattress">
-                <span class="toggle-label">Kasur Saja</span>
-              </button>
+              <span class="accordion-icon">−</span>
+            </button>
+            <div class="accordion-content" style="display: block;">
+              <div class="mattress-cart">
+                {
+                  products.mattressPackages.map((m) => (
+                    <div class="cart-item">
+                      <div class="cart-item-info">
+                        <span class="cart-item-name">{m.shortName}</span>
+                        <span class="cart-item-dimensions">{m.dimensions}</span>
+                        <span class="cart-item-price">
+                          Rp{" "}
+                          {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
+                          /hari
+                        </span>
+                      </div>
+                      <div class="cart-item-controls">
+                        <button
+                          type="button"
+                          class="btn-stepper btn-minus"
+                          data-id={m.id}
+                          data-category="package"
+                        >
+                          −
+                        </button>
+                        <span class="cart-item-qty" data-id={m.id}>
+                          0
+                        </span>
+                        <button
+                          type="button"
+                          class="btn-stepper btn-plus"
+                          data-id={m.id}
+                          data-name={m.shortName}
+                          data-category="package"
+                          data-price={m.pricePerDay}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
 
-          <!-- Mattress Type Selection with Quantity Steppers -->
-          <div class="form-group">
-            <label class="form-label">Pilih Kasur</label>
-            <div class="mattress-cart" id="mattressCart">
-              {
-                mattresses.map((m) => (
-                  <div class="cart-item">
-                    <div class="cart-item-info">
-                      <span class="cart-item-name">{m.shortName}</span>
-                      <span class="cart-item-dimensions">{m.dimensions}</span>
-                      <span class="cart-item-price">
-                        Rp{" "}
-                        {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
-                        /hari
-                      </span>
+          <!-- 2. Kasur Saja -->
+          <div class="accordion-item">
+            <button type="button" class="accordion-header">
+              <span class="accordion-title">Kasur Saja</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content" style="display: none;">
+              <div class="mattress-cart">
+                {
+                  products.mattressOnly.map((m) => (
+                    <div class="cart-item">
+                      <div class="cart-item-info">
+                        <span class="cart-item-name">{m.shortName}</span>
+                        <span class="cart-item-dimensions">{m.dimensions}</span>
+                        <span class="cart-item-price">
+                          Rp{" "}
+                          {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
+                          /hari
+                        </span>
+                      </div>
+                      <div class="cart-item-controls">
+                        <button
+                          type="button"
+                          class="btn-stepper btn-minus"
+                          data-id={m.id}
+                          data-category="mattress"
+                        >
+                          −
+                        </button>
+                        <span class="cart-item-qty" data-id={m.id}>
+                          0
+                        </span>
+                        <button
+                          type="button"
+                          class="btn-stepper btn-plus"
+                          data-id={m.id}
+                          data-name={m.shortName}
+                          data-category="mattress"
+                          data-price={m.pricePerDay}
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                    <div class="cart-item-controls">
-                      <button
-                        type="button"
-                        class="btn-stepper btn-minus"
-                        data-type={m.id}
-                        aria-label={`Kurangi ${m.shortName}`}
-                      >
-                        −
-                      </button>
-                      <span class="cart-item-qty" data-type={m.id}>
-                        0
-                      </span>
-                      <button
-                        type="button"
-                        class="btn-stepper btn-plus"
-                        data-type={m.id}
-                        data-name={m.shortName}
-                        data-price={m.pricePerDay}
-                        data-package-price={m.packagePricePerDay}
-                        aria-label={`Tambah ${m.shortName}`}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                ))
-              }
+                  ))
+                }
+              </div>
             </div>
-            <div class="cart-total">
-              <span class="cart-total-label">Total Kasur:</span>
-              <span class="cart-total-value" id="cartTotalQty">0 unit</span>
-            </div>
-            <span class="form-error" id="mattressError"></span>
           </div>
+
+          <!-- 3. Aksesoris -->
+          <div class="accordion-item">
+            <button type="button" class="accordion-header">
+              <span class="accordion-title">Ekstra Aksesoris</span>
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content" style="display: none;">
+              <div class="mattress-cart">
+                {
+                  products.accessories.map((item) => (
+                    <div class="cart-item">
+                      <div class="cart-item-info">
+                        <span class="cart-item-name">{item.name}</span>
+                        <span class="cart-item-dimensions">
+                          {item.description}
+                        </span>
+                        <span class="cart-item-price">
+                          Rp{" "}
+                          {new Intl.NumberFormat("id-ID").format(
+                            item.pricePerDay
+                          )}
+                          /hari
+                        </span>
+                      </div>
+                      <div class="cart-item-controls">
+                        <button
+                          type="button"
+                          class="btn-stepper btn-minus"
+                          data-id={item.id}
+                          data-category="accessory"
+                        >
+                          −
+                        </button>
+                        <span class="cart-item-qty" data-id={item.id}>
+                          0
+                        </span>
+                        <button
+                          type="button"
+                          class="btn-stepper btn-plus"
+                          data-id={item.id}
+                          data-name={item.name}
+                          data-category="accessory"
+                          data-price={item.pricePerDay}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-total">
+            <span class="cart-total-label">Total Item:</span>
+            <span class="cart-total-value" id="cartTotalQty">0 unit</span>
+          </div>
+          <span class="form-error" id="mattressError"></span>
         </div>
 
         <!-- Section 2: Jadwal Sewa -->
@@ -300,6 +395,37 @@ const mattresses = products as MattressType[];
               rows="2"></textarea>
           </div>
         </div>
+
+        <!-- Section 5: Metode Pembayaran -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <span class="form-section-number">5</span>
+            <span class="form-section-title">Metode Pembayaran</span>
+          </div>
+
+          <div class="form-group">
+            <div class="payment-toggle" id="paymentMethodToggle">
+              <button
+                type="button"
+                class="payment-option active"
+                data-value="qris"
+              >
+                <span class="payment-icon">📱</span>
+                <span class="payment-label">QRIS</span>
+                <span class="payment-desc">Scan & Bayar</span>
+              </button>
+              <button
+                type="button"
+                class="payment-option"
+                data-value="transfer"
+              >
+                <span class="payment-icon">🏦</span>
+                <span class="payment-label">Transfer Bank</span>
+                <span class="payment-desc">BCA / Mandiri</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
 
@@ -388,8 +514,8 @@ const mattresses = products as MattressType[];
 
   .calculator-wrapper {
     display: grid;
-    gap: var(--space-8);
-    max-width: 900px;
+    gap: var(--space-8); /* Restored from 6 */
+    max-width: 900px; /* Kept same */
     margin: 0 auto;
     overflow: hidden;
     min-width: 0;
@@ -404,13 +530,13 @@ const mattresses = products as MattressType[];
 
   .calculator-form {
     background: var(--color-surface);
-    padding: var(--space-6);
+    padding: var(--space-6); /* Restored from 5 */
     border-radius: var(--radius-lg);
   }
 
   /* Form Sections */
   .form-section {
-    padding: var(--space-4) 0;
+    padding: var(--space-4) 0; /* Restored from 3 */
     border-bottom: 1px solid var(--color-border);
   }
 
@@ -426,84 +552,158 @@ const mattresses = products as MattressType[];
   .form-section-header {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-4);
+    gap: var(--space-2); /* Kept small horizontal gap */
+    margin-bottom: var(--space-4); /* Restored from 3 */
   }
 
   .form-section-number {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background: var(--color-primary);
     color: var(--color-text-inverse);
     border-radius: 50%;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semibold);
     flex-shrink: 0;
   }
 
   .form-section-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text);
   }
 
-  /* Package Toggle */
-  .package-toggle {
+  /* Accordion */
+  .accordion-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4); /* Restored from 3 */
+    overflow: hidden;
+  }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3); /* Reduced from 4 */
+    background: var(--color-background);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color var(--transition-fast);
+  }
+
+  .accordion-header:hover {
+    background-color: var(--color-surface);
+  }
+
+  .accordion-item.active .accordion-header {
+    background-color: var(--color-surface-elevated);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .accordion-title {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm); /* Explicitly set smaller */
+    color: var(--color-text);
+  }
+
+  /* Specific colors for categories */
+  .accordion-item:nth-of-type(1) .accordion-title {
+    color: var(--color-primary);
+  }
+
+  .accordion-item:nth-of-type(2) .accordion-title {
+    color: var(--color-text-secondary);
+  }
+
+  .accordion-item:nth-of-type(3) .accordion-title {
+    color: var(--color-accent);
+  }
+
+  .accordion-icon {
+    font-size: var(--font-size-lg); /* Reduced from xl */
+    color: var(--color-text-muted);
+    line-height: 1;
+  }
+
+  .accordion-content {
+    background: var(--color-surface);
+    padding: var(--space-3); /* Reduced from 4 */
+    border-top: 1px solid var(--color-border);
+  }
+
+  /* Override mattress-cart margin inside accordion */
+  .accordion-content .mattress-cart {
+    gap: var(--space-2); /* Reduced from 3 */
+  }
+
+  /* Payment Method Toggle */
+  .payment-toggle {
     display: flex;
     gap: var(--space-2);
     background: var(--color-background);
     padding: var(--space-1);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md); /* Reduced from lg */
     border: 2px solid var(--color-border);
   }
 
-  .toggle-option {
+  .payment-option {
     flex: 1;
     display: flex;
+    flex-direction: row; /* Horizontal layout for compactness? logic check: USER asked for smaller, horizontal usually saves vertical space but icons might need column. Keep column but reduce padding */
     flex-direction: column;
     align-items: center;
-    gap: var(--space-1);
-    padding: var(--space-3) var(--space-4);
+    gap: 2px; /* Reduced from space-1 */
+    padding: var(--space-2); /* Reduced from space-3 space-4 */
     background: transparent;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm); /* Reduced from md */
     cursor: pointer;
     transition: all var(--transition-fast);
-    min-height: var(--touch-target-min);
+    min-height: 48px; /* Reduced touch target visual */
   }
 
-  .toggle-option:hover {
+  .payment-option:hover {
     background: var(--color-border-light);
   }
 
-  .toggle-option.active {
+  .payment-option.active {
     background: var(--color-primary);
     color: var(--color-text-inverse);
   }
 
-  .toggle-label {
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-base);
+  .payment-icon {
+    font-size: var(--font-size-lg); /* Reduced from xl */
   }
 
-  .toggle-desc {
+  .payment-label {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm); /* Reduced from base */
+  }
+
+  .payment-desc {
     font-size: var(--font-size-xs);
     opacity: 0.8;
+    display: none; /* Hide desc on very compact view? Or just small. Let's keep but very small or maybe hide to really declutter. */
+    /* Let's keep it visible but maybe smaller. Actually display:none might be too aggressive. */
+    margin-top: -2px;
   }
 
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3); /* Reduced from 4 */
   }
 
   .form-row-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-4);
+    gap: var(--space-3); /* Reduced from 4 */
   }
 
   .form-row-2 .form-group {
@@ -524,28 +724,28 @@ const mattresses = products as MattressType[];
   .mattress-cart {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
+    gap: var(--space-2); /* Reduced from 3 */
   }
 
   .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-4);
+    padding: var(--space-2) var(--space-3); /* Significantly reduced from space-4 */
     background: var(--color-background);
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border); /* Thinner border 2px -> 1px */
     border-radius: var(--radius-md);
   }
 
   .cart-item-info {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
+    gap: 0; /* Reduced from space-1 */
   }
 
   .cart-item-name {
     font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm); /* Reduced from base */
   }
 
   .cart-item-dimensions {
@@ -555,29 +755,31 @@ const mattresses = products as MattressType[];
 
   .cart-item-price {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs); /* Reduced from sm */
+    margin-top: 2px;
   }
 
   .cart-item-controls {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2); /* Reduced from 3 */
   }
 
   .btn-stepper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: var(--touch-target-min);
-    height: var(--touch-target-min);
+    width: 28px; /* Reduced from touch-target-min (which was 44, way too big for steppers inside cart) */
+    height: 28px;
     background: var(--color-primary-light);
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius-md);
-    font-size: var(--font-size-xl);
+    border: 1px solid var(--color-primary); /* Thinner border */
+    border-radius: var(--radius-sm); /* Reduced radius */
+    font-size: var(--font-size-lg); /* Reduced from xl */
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
     cursor: pointer;
     transition: all var(--transition-fast);
+    padding: 0;
   }
 
   .btn-stepper:hover {
@@ -591,20 +793,21 @@ const mattresses = products as MattressType[];
   }
 
   .cart-item-qty {
-    min-width: 32px;
+    min-width: 24px; /* Reduced from 32 */
     text-align: center;
     font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base); /* Reduced from lg */
   }
 
   .cart-total {
     display: flex;
     justify-content: space-between;
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-2) var(--space-3); /* Reduced from 3 4 */
     margin-top: var(--space-2);
     background: var(--color-primary-light);
     border-radius: var(--radius-md);
     font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm); /* Added font size */
   }
 
   .cart-total-label {
@@ -618,7 +821,7 @@ const mattresses = products as MattressType[];
   /* Result Panel */
   .calculator-result {
     background: var(--color-surface-elevated);
-    padding: var(--space-6);
+    padding: var(--space-5); /* Reduced from 6 */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     position: sticky;
@@ -626,18 +829,19 @@ const mattresses = products as MattressType[];
   }
 
   .result-summary {
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4); /* Reduced from 6 */
   }
 
   .result-title {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--space-4);
+    font-size: var(--font-size-base); /* Reduced from lg */
+    margin-bottom: var(--space-3); /* Reduced from 4 */
   }
 
   .result-item {
     display: flex;
     justify-content: space-between;
-    padding: var(--space-2) 0;
+    padding: var(--space-1) 0; /* Reduced from 2 */
+    font-size: var(--font-size-sm); /* Added base size */
   }
 
   .result-label {

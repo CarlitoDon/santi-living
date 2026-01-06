@@ -1,9 +1,7 @@
 ---
 import PriceCard from "./PriceCard.astro";
 import products from "@/data/products.json";
-import type { MattressType } from "@/types";
-
-const mattresses = products as MattressType[];
+const { mattressPackages } = products;
 ---
 
 <section class="price-list section" id="harga">
@@ -12,7 +10,11 @@ const mattresses = products as MattressType[];
     <p class="section-subtitle">Semua kasur bersih, wangi, dan siap pakai</p>
 
     <div class="price-grid">
-      {mattresses.map((product) => <PriceCard product={product} />)}
+      {
+        products.mattressPackages.map((product) => (
+          <PriceCard product={product} />
+        ))
+      }
     </div>
   </div>
 </section>

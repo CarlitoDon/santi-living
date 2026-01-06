@@ -6,6 +6,7 @@ export interface OrderPayload {
   deliveryAddress: string;
   items: Array<{
     name: string;
+    category: "package" | "mattress" | "accessory";
     quantity: number;
     pricePerDay: number;
   }>;
@@ -13,7 +14,7 @@ export interface OrderPayload {
   orderDate: string;
   duration: number;
   deliveryFee: number;
-  isPackage: boolean;
+  paymentMethod: "qris" | "transfer";
   notes?: string;
 }
 

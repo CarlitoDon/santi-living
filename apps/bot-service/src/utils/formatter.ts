@@ -1,4 +1,4 @@
-import { OrderPayload } from "../types/order";
+import type { OrderPayload } from "../types/order";
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -10,26 +10,57 @@ const formatCurrency = (val: number) => {
 };
 
 export const formatOrderMessage = (data: OrderPayload): string => {
-  const packageLabel = data.isPackage
-    ? "Paket (Kasur + Bantal + Selimut)"
-    : "Kasur Saja";
-
   let message = `Halo Kak *${data.customerName}*! 👋\n`;
   message += `Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*.\n\n`;
-  message += `Pesanan Anda untuk *${packageLabel}* telah kami terima dengan rincian berikut:\n\n`;
+  message += `Pesanan Anda telah kami terima dengan rincian berikut:\n\n`;
 
-  // List items
-  message += `*Daftar Barang:*\n`;
-  data.items.forEach((item) => {
-    message += `• ${item.quantity}x ${item.name} @ ${formatCurrency(
-      item.pricePerDay
-    )}/hari\n`;
-  });
+  // Helper to filter items
+  const packages = data.items.filter((i) => i.category === "package");
+  const mattressOnly = data.items.filter((i) => i.category === "mattress");
+  const accessories = data.items.filter((i) => i.category === "accessory");
 
-  const totalQuantity = data.items.reduce((sum, i) => sum + i.quantity, 0);
+  // 1. Paket Kasur
+  if (packages.length > 0) {
+    message += `*Paket Kasur (Kasur + Bantal + Selimut):*\n`;
+    packages.forEach((item) => {
+      message += `• ${item.quantity}x ${item.name} @ ${formatCurrency(
+        item.pricePerDay
+      )}/hari\n`;
+    });
+    message += `\n`;
+  }
 
-  message += `\n*Detail Sewa:*\n`;
-  message += `- Total Kasur: ${totalQuantity} unit\n`;
+  // 2. Kasur Saja
+  if (mattressOnly.length > 0) {
+    message += `*Kasur Saja:*\n`;
+    mattressOnly.forEach((item) => {
+      message += `• ${item.quantity}x ${item.name} @ ${formatCurrency(
+        item.pricePerDay
+      )}/hari\n`;
+    });
+    message += `\n`;
+  }
+
+  // 3. Aksesoris
+  if (accessories.length > 0) {
+    message += `*Aksesoris Tambahan:*\n`;
+    accessories.forEach((item) => {
+      message += `• ${item.quantity}x ${item.name} @ ${formatCurrency(
+        item.pricePerDay
+      )}/hari\n`;
+    });
+    message += `\n`;
+  }
+
+  // Calculate total units (mattresses only)
+  const totalQuantity = data.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((sum, i) => sum + i.quantity, 0);
+
+  message += `*Detail Sewa:*\n`;
+  if (totalQuantity > 0) {
+    message += `- Total Kasur: ${totalQuantity} unit\n`;
+  }
   message += `- Tanggal Mulai: ${data.orderDate}\n`;
   message += `- Durasi: ${data.duration} hari\n`;
   message += `- Biaya Sewa: ${formatCurrency(

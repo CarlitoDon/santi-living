@@ -1,137 +1,134 @@
-[
-  {
-    "id": "single-standard",
-    "name": "Single Standard",
-    "shortName": "Single Standard",
-    "description": "Bed set 90x200x20 untuk 1 orang",
-    "pricePerDay": 40000,
-    "packagePricePerDay": 50000,
-    "dimensions": "90 x 200 cm",
-    "capacity": "1 orang",
-    "image": "/images/kasur-single.webp",
-    "includes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal"
-    ],
-    "packageIncludes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal",
-      "selimut"
-    ],
-    "available": true
-  },
-  {
-    "id": "single-super",
-    "name": "Single Super",
-    "shortName": "Single Super",
-    "description": "Bed set 100x200x20 untuk 1 orang",
-    "pricePerDay": 50000,
-    "packagePricePerDay": 60000,
-    "dimensions": "100 x 200 cm",
-    "capacity": "1 orang",
-    "image": "/images/kasur-single.webp",
-    "includes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal"
-    ],
-    "packageIncludes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal",
-      "selimut"
-    ],
-    "available": true
-  },
-  {
-    "id": "double",
-    "name": "Double",
-    "shortName": "Double",
-    "description": "Bed set 120x200x20 untuk 1-2 orang",
-    "pricePerDay": 60000,
-    "packagePricePerDay": 70000,
-    "dimensions": "120 x 200 cm",
-    "capacity": "1-2 orang",
-    "image": "/images/kasur-double.webp",
-    "includes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal"
-    ],
-    "packageIncludes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal",
-      "sarung bantal",
-      "selimut"
-    ],
-    "available": true
-  },
-  {
-    "id": "queen",
-    "name": "Queen",
-    "shortName": "Queen",
-    "description": "Bed set 160x200x20 untuk 2 orang",
-    "pricePerDay": 70000,
-    "packagePricePerDay": 80000,
-    "dimensions": "160 x 200 cm",
-    "capacity": "2 orang",
-    "image": "/images/kasur-queen.webp",
-    "includes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal 2x",
-      "sarung bantal 2x"
-    ],
-    "packageIncludes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal 2x",
-      "sarung bantal 2x",
-      "selimut"
-    ],
-    "available": true
-  },
-  {
-    "id": "king",
-    "name": "King",
-    "shortName": "King",
-    "description": "Bed set 180x200x20 untuk 2-3 orang",
-    "pricePerDay": 80000,
-    "packagePricePerDay": 90000,
-    "dimensions": "180 x 200 cm",
-    "capacity": "2-3 orang",
-    "image": "/images/kasur-king.jpg",
-    "includes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal 2x",
-      "sarung bantal 2x"
-    ],
-    "packageIncludes": [
-      "kasur busa",
-      "pelapis busa",
-      "sprei",
-      "bantal 2x",
-      "sarung bantal 2x",
-      "selimut"
-    ],
-    "available": true
-  }
-]
+{
+  "mattressPackages": [
+    {
+      "id": "package-single-standard",
+      "name": "Single Standard (Paket)",
+      "shortName": "Single Std (Pkt)",
+      "description": "Bed set 90x200x20 + Bantal + Selimut",
+      "pricePerDay": 50000,
+      "dimensions": "90 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/kasur-single.webp",
+      "includes": ["kasur busa", "sprei", "bantal", "selimut"]
+    },
+    {
+      "id": "package-single-super",
+      "name": "Single Super (Paket)",
+      "shortName": "Single Spr (Pkt)",
+      "description": "Bed set 100x200x20 + Bantal + Selimut",
+      "pricePerDay": 60000,
+      "dimensions": "100 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/kasur-single.webp",
+      "includes": ["kasur busa", "sprei", "bantal", "selimut"]
+    },
+    {
+      "id": "package-double",
+      "name": "Double (Paket)",
+      "shortName": "Double (Pkt)",
+      "description": "Bed set 120x200x20 + Bantal + Selimut",
+      "pricePerDay": 70000,
+      "dimensions": "120 x 200 cm",
+      "capacity": "1-2 orang",
+      "image": "/images/kasur-double.webp",
+      "includes": ["kasur busa", "sprei", "bantal", "selimut"]
+    },
+    {
+      "id": "package-queen",
+      "name": "Queen (Paket)",
+      "shortName": "Queen (Pkt)",
+      "description": "Bed set 160x200x20 + 2 Bantal + Selimut",
+      "pricePerDay": 80000,
+      "dimensions": "160 x 200 cm",
+      "capacity": "2 orang",
+      "image": "/images/kasur-queen.webp",
+      "includes": ["kasur busa", "sprei", "2 bantal", "selimut"]
+    },
+    {
+      "id": "package-king",
+      "name": "King (Paket)",
+      "shortName": "King (Pkt)",
+      "description": "Bed set 180x200x20 + 2 Bantal + Selimut",
+      "pricePerDay": 90000,
+      "dimensions": "180 x 200 cm",
+      "capacity": "2-3 orang",
+      "image": "/images/kasur-king.jpg",
+      "includes": ["kasur busa", "sprei", "2 bantal", "selimut"]
+    }
+  ],
+  "mattressOnly": [
+    {
+      "id": "mattress-single-standard",
+      "name": "Single Standard (Kasur)",
+      "shortName": "Single Std",
+      "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
+      "pricePerDay": 40000,
+      "dimensions": "90 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/kasur-single.webp",
+      "includes": ["kasur busa", "sprei"]
+    },
+    {
+      "id": "mattress-single-super",
+      "name": "Single Super (Kasur)",
+      "shortName": "Single Spr",
+      "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
+      "pricePerDay": 50000,
+      "dimensions": "100 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/kasur-single.webp",
+      "includes": ["kasur busa", "sprei"]
+    },
+    {
+      "id": "mattress-double",
+      "name": "Double (Kasur)",
+      "shortName": "Double",
+      "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
+      "pricePerDay": 60000,
+      "dimensions": "120 x 200 cm",
+      "capacity": "1-2 orang",
+      "image": "/images/kasur-double.webp",
+      "includes": ["kasur busa", "sprei"]
+    },
+    {
+      "id": "mattress-queen",
+      "name": "Queen (Kasur)",
+      "shortName": "Queen",
+      "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
+      "pricePerDay": 70000,
+      "dimensions": "160 x 200 cm",
+      "capacity": "2 orang",
+      "image": "/images/kasur-queen.webp",
+      "includes": ["kasur busa", "sprei"]
+    },
+    {
+      "id": "mattress-king",
+      "name": "King (Kasur)",
+      "shortName": "King",
+      "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
+      "pricePerDay": 80000,
+      "dimensions": "180 x 200 cm",
+      "capacity": "2-3 orang",
+      "image": "/images/kasur-king.jpg",
+      "includes": ["kasur busa", "sprei"]
+    }
+  ],
+  "accessories": [
+    {
+      "id": "acc-pillow",
+      "name": "Extra Bantal",
+      "shortName": "Bantal",
+      "description": "Bantal tidur standar + sarung",
+      "pricePerDay": 5000,
+      "image": "/images/bantal.webp"
+    },
+    {
+      "id": "acc-blanket",
+      "name": "Extra Selimut",
+      "shortName": "Selimut",
+      "description": "Selimut tidur standar",
+      "pricePerDay": 10000,
+      "image": "/images/selimut.webp"
+    }
+  ]
+}

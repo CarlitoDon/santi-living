@@ -3,73 +3,29 @@
 // ==========================================================================
 
 /**
- * Mattress type available for rent
+ * Product Item (from JSON)
  */
-export interface MattressType {
+export interface ProductItem {
   id: string;
   name: string;
   shortName: string;
   description: string;
   pricePerDay: number;
-  packagePricePerDay: number;
-  dimensions: string;
-  capacity: string;
+  dimensions?: string;
+  capacity?: string;
   image: string;
-  includes: string[];
-  packageIncludes: string[];
-  available: boolean;
+  includes?: string[];
 }
 
 /**
- * Service area with districts
- */
-export interface ServiceArea {
-  id: string;
-  name: string;
-  districts: string[];
-  deliveryNote?: string;
-}
-
-/**
- * Customer testimonial
- */
-export interface Testimonial {
-  id: string;
-  name: string;
-  rating: number;
-  text: string;
-  date: string;
-  location?: string;
-  verified: boolean;
-}
-
-/**
- * Business configuration
- */
-export interface BusinessConfig {
-  businessName: string;
-  tagline: string;
-  whatsappNumber: string;
-  whatsappDisplay: string;
-  city: string;
-  minDuration: number;
-  maxDuration: number;
-  minQuantity: number;
-  maxQuantity: number;
-  minBookingDays: number;
-  operatingHours: string;
-  cutoffHour: number;
-}
-
-/**
- * Cart item (mattress type with quantity)
+ * Cart item
  */
 export interface CartItem {
-  type: string;
+  id: string;
   name: string;
+  category: "package" | "mattress" | "accessory";
   quantity: number;
   pricePerDay: number;
-  packagePricePerDay: number;
 }
 
 /**
@@ -80,7 +36,7 @@ export interface CalculatorState {
   items: CartItem[];
   startDate: string | null;
   duration: number;
-  isPackage: boolean;
+  paymentMethod: "qris" | "transfer";
 
   // Calculated
   endDate: string | null;
@@ -133,4 +89,14 @@ export interface BookingRequest {
   // Tracking
   source: string;
   status: "new" | "contacted" | "confirmed" | "completed";
+}
+
+/**
+ * Service Area (from JSON)
+ */
+export interface ServiceArea {
+  id: string;
+  name: string;
+  districts: string[];
+  deliveryNote?: string;
 }

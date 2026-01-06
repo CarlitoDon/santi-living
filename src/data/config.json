@@ -11,7 +11,6 @@
   "minBookingDays": 0,
   "operatingHours": "08:00 - 21:00",
   "cutoffHour": 15,
-  "packagePricePerUnit": 10000,
   "storeLocation": {
     "lat": -7.76777,
     "lng": 110.293886,
