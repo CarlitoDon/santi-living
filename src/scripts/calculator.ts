@@ -7,7 +7,11 @@ import products from "@/data/products.json";
 import type { CalculatorState, MattressType, CartItem } from "@/types";
 import { composeWhatsAppUrl } from "./whatsapp-compose";
 import { validateForm } from "./form-validation";
-import { getCurrentLocation, reverseGeocode } from "./geolocation";
+import {
+  getCurrentLocation,
+  reverseGeocode,
+  calculateDistance,
+} from "./geolocation";
 import { openMapPicker } from "./map-picker";
 
 const mattresses = products as MattressType[];
@@ -23,6 +27,8 @@ let state: CalculatorState = {
   subtotal: 0,
   total: 0,
   deliveryEstimate: "",
+  deliveryFee: 0,
+  distance: 0,
   isValid: false,
   errors: {},
 };
@@ -206,6 +212,11 @@ function handleMapPickerClick(): void {
 
       // Trigger validation
       handleFormFieldChange();
+
+      // Update delivery fee
+      if (coords.lat && coords.lng) {
+        updateDeliveryFee(coords.lat, coords.lng);
+      }
     },
   });
 }
@@ -342,6 +353,54 @@ function handleFormFieldChange(): void {
 /**
  * Update calculation
  */
+/**
+ * Calculate delivery fee based on distance
+ */
+function updateDeliveryFee(lat: number, lng: number): void {
+  if (!config.storeLocation) return;
+
+  const distance = calculateDistance(
+    config.storeLocation.lat,
+    config.storeLocation.lng,
+    lat,
+    lng
+  );
+
+  state.distance = distance;
+
+  // Calculate fee based on zones
+  let fee = 0;
+  const zones = config.deliveryZones || [];
+
+  // Find matching zone
+  const zone = zones.find((z) => distance <= z.maxDistance);
+
+  if (zone) {
+    fee = zone.price;
+  } else {
+    // Exceeds max zone - calculate per km
+    const lastZone = zones[zones.length - 1];
+    const extraDist = distance - lastZone.maxDistance;
+    const baseFee = lastZone.price;
+    const extraFee = Math.ceil(extraDist) * (config.deliveryPricePerKm || 0);
+    fee = baseFee + extraFee;
+
+    // Ensure minimum price if set
+    if (config.minDeliveryPrice && fee < config.minDeliveryPrice) {
+      fee = config.minDeliveryPrice;
+    }
+  }
+
+  // Round to nearest 1000
+  fee = Math.ceil(fee / 1000) * 1000;
+
+  state.deliveryFee = fee;
+  updateCalculation();
+}
+
+/**
+ * Update calculation
+ */
 function updateCalculation(): void {
   // Calculate end date
   if (state.startDate) {
@@ -373,6 +432,7 @@ function updateCalculation(): void {
     );
   }
   state.subtotal = state.total;
+  state.total = state.subtotal + (state.deliveryFee || 0);
 
   // Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate();
@@ -494,9 +554,32 @@ function updateResultPanel(): void {
   }
 
   // Delivery estimate
-  const deliveryEl = elements.resultDelivery?.querySelector(".delivery-text");
   if (deliveryEl) {
     deliveryEl.textContent = state.deliveryEstimate;
+  }
+
+  // Delivery Fee & Distance
+  const deliveryFeeEl = document.getElementById("resultDeliveryFee");
+  const deliveryDistanceEl = document.getElementById("deliveryDistance");
+
+  if (deliveryFeeEl) {
+    const valEl = deliveryFeeEl.querySelector(".result-value");
+    if (valEl) {
+      if (state.distance > 0) {
+        valEl.textContent = new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          maximumFractionDigits: 0,
+        }).format(state.deliveryFee);
+        deliveryFeeEl.classList.remove("hidden");
+      } else {
+        valEl.textContent = "-";
+      }
+    }
+  }
+  if (deliveryDistanceEl) {
+    deliveryDistanceEl.textContent =
+      state.distance > 0 ? `(${state.distance.toFixed(1)} km)` : "";
   }
 }
 
@@ -729,6 +812,9 @@ async function handleLocationClick(): Promise<void> {
 
     // Trigger validation
     handleFormFieldChange();
+
+    // Calculate delivery fee
+    updateDeliveryFee(coords.latitude, coords.longitude);
 
     // Show success
     button.textContent = "✓ Lokasi terisi";

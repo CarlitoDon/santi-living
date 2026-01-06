@@ -91,6 +91,8 @@ export interface CalculatorState {
 
   // Validation
   isValid: boolean;
+  deliveryFee: number;
+  distance: number;
   errors: Record<string, string>;
 }
 
