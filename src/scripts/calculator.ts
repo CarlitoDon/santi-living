@@ -763,8 +763,8 @@ function handleWhatsAppClick(): void {
 
   const waUrl = composeWhatsAppUrl(bookingData);
 
-  // Use direct navigation for better mobile support
-  window.location.href = waUrl;
+  // Open in new tab
+  window.open(waUrl, "_blank");
 }
 
 /**
