@@ -292,7 +292,10 @@ function handleIncrement(event: Event): void {
       .reduce((sum, i) => sum + i.quantity, 0);
 
     if (currentMattressQty >= config.maxQuantity) {
-      showError("mattressCart", `Maksimal ${config.maxQuantity} unit kasur`);
+      showError(
+        "mattressCart",
+        `Maksimal ${config.maxQuantity} unit kasur (per jenis maupun total). Hubungi CS untuk pemesanan partai besar.`
+      );
       return;
     }
   } else {
@@ -535,10 +538,21 @@ function updateStepperButtons(): void {
   const plusButtons = document.querySelectorAll(
     ".btn-plus"
   ) as NodeListOf<HTMLButtonElement>;
-  const atMax = state.totalQuantity >= config.maxQuantity;
+
+  const currentMattressQty = state.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((sum, i) => sum + i.quantity, 0);
+
+  const atMaxMattress = currentMattressQty >= config.maxQuantity;
 
   plusButtons.forEach((button) => {
-    button.disabled = atMax;
+    const category = button.dataset.category;
+    if (category !== "accessory") {
+      button.disabled = atMaxMattress;
+    } else {
+      // Accessories only disabled if no mattress at all
+      button.disabled = currentMattressQty === 0;
+    }
   });
 }
 

@@ -7,7 +7,7 @@
   "minDuration": 1,
   "maxDuration": 30,
   "minQuantity": 1,
-  "maxQuantity": 10,
+  "maxQuantity": 50,
   "minBookingDays": 0,
   "operatingHours": "08:00 - 21:00",
   "cutoffHour": 15,
