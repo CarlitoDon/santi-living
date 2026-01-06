@@ -533,20 +533,17 @@ function updateValidation(): void {
     addressKota.trim() !== "" &&
     Object.keys(formErrors).length === 0;
 
-  // Update button state
-  const button = elements.whatsappButton as HTMLButtonElement;
-  if (button) {
-    button.disabled = !state.isValid;
-  }
+  // Button is always enabled - validation happens on click
 }
 
 /**
- * Handle WhatsApp click
+ * Handle WhatsApp click - validate and scroll to first error if invalid
  */
 function handleWhatsAppClick(): void {
-  if (!state.isValid) return;
-
+  // Get all field values
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
+  const customerWhatsapp =
+    (elements.customerWhatsapp as HTMLInputElement)?.value || "";
   const addressStreet =
     (elements.addressStreet as HTMLInputElement)?.value || "";
   const addressKelurahan =
@@ -562,7 +559,102 @@ function handleWhatsAppClick(): void {
   const customerNotes =
     (elements.customerNotes as HTMLTextAreaElement)?.value || "";
 
-  // Compose full address
+  // Collect validation errors with field IDs for scrolling
+  const validationErrors: { fieldId: string; message: string }[] = [];
+
+  // Check quantity
+  if (state.totalQuantity === 0) {
+    validationErrors.push({
+      fieldId: "mattressCart",
+      message: "Pilih minimal 1 kasur",
+    });
+  }
+
+  // Check start date
+  if (!state.startDate) {
+    validationErrors.push({
+      fieldId: "startDate",
+      message: "Tanggal mulai wajib diisi",
+    });
+  }
+
+  // Check customer name
+  if (!customerName.trim()) {
+    validationErrors.push({
+      fieldId: "customerName",
+      message: "Nama wajib diisi",
+    });
+  }
+
+  // Check WhatsApp
+  if (!customerWhatsapp.trim()) {
+    validationErrors.push({
+      fieldId: "customerWhatsapp",
+      message: "No. WhatsApp wajib diisi",
+    });
+  } else {
+    // Validate WhatsApp format
+    const cleaned = customerWhatsapp.replace(/[\s-]/g, "");
+    const patterns = [/^08\d{8,11}$/, /^\+628\d{8,11}$/, /^628\d{8,11}$/];
+    if (!patterns.some((p) => p.test(cleaned))) {
+      validationErrors.push({
+        fieldId: "customerWhatsapp",
+        message: "Format nomor tidak valid (contoh: 08123456789)",
+      });
+    }
+  }
+
+  // Check address street
+  if (!addressStreet.trim()) {
+    validationErrors.push({
+      fieldId: "addressStreet",
+      message: "Alamat jalan wajib diisi",
+    });
+  }
+
+  // Check kota
+  if (!addressKota.trim()) {
+    validationErrors.push({
+      fieldId: "addressKota",
+      message: "Kabupaten/Kota wajib diisi",
+    });
+  }
+
+  // If there are errors, show them and scroll to first
+  if (validationErrors.length > 0) {
+    // Clear previous errors
+    document
+      .querySelectorAll(".form-error")
+      .forEach((el) => (el.textContent = ""));
+    document
+      .querySelectorAll(".form-input, .form-textarea")
+      .forEach((el) => el.classList.remove("error"));
+
+    // Show all errors
+    validationErrors.forEach((err) => {
+      showError(err.fieldId, err.message);
+    });
+
+    // Scroll to first error field
+    const firstErrorField = document.getElementById(
+      validationErrors[0].fieldId
+    );
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Focus the field after scrolling
+      setTimeout(() => {
+        if (
+          firstErrorField instanceof HTMLInputElement ||
+          firstErrorField instanceof HTMLTextAreaElement
+        ) {
+          firstErrorField.focus();
+        }
+      }, 500);
+    }
+    return;
+  }
+
+  // All valid - compose address and send to WhatsApp
   let fullAddress = addressStreet;
   if (addressKelurahan) fullAddress += `, ${addressKelurahan}`;
   if (addressKecamatan) fullAddress += `, ${addressKecamatan}`;
