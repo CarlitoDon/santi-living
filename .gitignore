@@ -28,3 +28,5 @@ Thumbs.db
 .cache/
 *.tsbuildinfo
 .vercel
+apps/bot-service/.wwebjs_auth/
+apps/bot-service/.wwebjs_cache/

@@ -623,7 +623,7 @@ function updateValidation(): void {
 /**
  * Handle WhatsApp click - validate and scroll to first error if invalid
  */
-function handleWhatsAppClick(): void {
+async function handleWhatsAppClick(): Promise<void> {
   // Get all field values
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
   const customerWhatsapp =
@@ -749,22 +749,65 @@ function handleWhatsAppClick(): void {
     fullAddress += ` (${addressLat}, ${addressLng})`;
 
   const bookingData = {
-    items: state.items,
-    startDate: state.startDate || "",
-    endDate: state.endDate || "",
+    customerName: customerName,
+    customerWhatsapp: customerWhatsapp,
+    deliveryAddress: fullAddress,
+    items: state.items.map((item) => ({
+      name: item.name,
+      quantity: item.quantity,
+      pricePerDay: item.pricePerDay,
+    })),
+    totalPrice: state.total,
+    orderDate: state.startDate || "",
     duration: state.duration,
-    totalQuantity: state.totalQuantity,
-    total: state.total,
-    name: customerName,
-    address: fullAddress,
-    notes: customerNotes,
+    deliveryFee: state.deliveryFee || 0,
     isPackage: state.isPackage,
+    notes: customerNotes,
   };
 
-  const waUrl = composeWhatsAppUrl(bookingData);
+  // Change button state to loading
+  const waButton = elements.whatsappButton as HTMLButtonElement;
+  const originalBtnText = waButton.innerHTML;
+  waButton.disabled = true;
+  waButton.innerHTML = `<span class="loading-spinner"></span> Memproses...`;
 
-  // Open in new tab
-  window.open(waUrl, "_blank");
+  try {
+    const { sendOrderToBot } = await import("../services/api");
+    await sendOrderToBot(bookingData);
+
+    // Show Success State
+    waButton.innerHTML = `✓ Berhasil Terkirim`;
+    waButton.classList.add("success-btn");
+
+    // Optional: Scroll to top of result panel to show success message
+    if (elements.resultPanel) {
+      elements.resultPanel.innerHTML = `
+        <div class="success-message-ui anim-fade-in">
+          <div class="success-icon">✅</div>
+          <h3>Pesanan Berhasil Terkirim!</h3>
+          <p>Terima kasih <strong>${customerName}</strong>, pesanan Anda telah kami terima.</p>
+          <p>Admin akan segera menghubungi Anda melalui WhatsApp ke nomor <strong>${customerWhatsapp}</strong> untuk konfirmasi pengiriman.</p>
+          <div class="success-actions">
+            <button onclick="window.location.reload()" class="btn btn-primary">Buat Pesanan Baru</button>
+          </div>
+        </div>
+      `;
+      elements.resultPanel.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  } catch (error: any) {
+    console.error("Failed to send order:", error);
+    waButton.disabled = false;
+    waButton.innerHTML = originalBtnText;
+
+    // Show error message
+    showError(
+      "customerWhatsapp",
+      error.message || "Gagal mengirim pesanan. Silakan coba lagi."
+    );
+  }
 }
 
 /**

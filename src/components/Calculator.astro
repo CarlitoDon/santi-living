@@ -755,4 +755,76 @@ const mattresses = products as MattressType[];
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  /* Success Message UI */
+  .success-message-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .success-icon {
+    font-size: 64px;
+    margin-bottom: var(--space-4);
+  }
+
+  .success-message-ui h3 {
+    color: var(--color-success);
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-xl);
+  }
+
+  .success-message-ui p {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .success-actions {
+    margin-top: var(--space-6);
+  }
+
+  /* Loading Spinner */
+  .loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    vertical-align: middle;
+    margin-right: var(--space-2);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .anim-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .success-btn {
+    background: var(--color-success) !important;
+    border-color: var(--color-success) !important;
+  }
 </style>

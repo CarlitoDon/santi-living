@@ -23,5 +23,9 @@
     { "maxDistance": 15, "price": 25000 }
   ],
   "deliveryPricePerKm": 1500,
-  "minDeliveryPrice": 30000
+  "minDeliveryPrice": 30000,
+  "botApi": {
+    "baseUrl": "http://localhost:3000",
+    "apiKey": "santi_secret_auth_token_2026"
+  }
 }
