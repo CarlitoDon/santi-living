@@ -15,8 +15,11 @@ export interface Coordinates {
  */
 export interface FormattedAddress {
   street: string;
-  suburb: string;
-  city: string;
+  kelurahan: string;
+  kecamatan: string;
+  kota: string;
+  provinsi: string;
+  postcode: string;
   fullAddress: string;
 }
 
@@ -111,35 +114,40 @@ export async function reverseGeocode(
  * @returns Formatted address for Indonesia
  */
 function formatAddress(address: any): FormattedAddress {
-  // Extract components (Nominatim structure)
+  // Extract components from Nominatim Indonesia structure
   const road = address.road || "";
-  const suburb =
-    address.suburb || address.neighbourhood || address.village || "";
-  const city =
+  const kelurahan =
+    address.hamlet || address.neighbourhood || address.suburb || "";
+  const kecamatan = address.village || address.city_district || "";
+  const kota =
+    address.county ||
     address.city ||
     address.town ||
     address.municipality ||
-    address.county ||
-    "Yogyakarta";
+    "";
+  const provinsi = address.state || "DI Yogyakarta";
+  const postcode = address.postcode || "";
 
   // Build street-level address
-  const street = road || suburb || "Area tidak diketahui";
+  const street = road || kelurahan || "Area tidak diketahui";
 
   // Build full address
   const parts = [street];
-  if (suburb && suburb !== street) {
-    parts.push(suburb);
-  }
-  if (city) {
-    parts.push(city);
-  }
+  if (kelurahan && kelurahan !== street) parts.push(kelurahan);
+  if (kecamatan) parts.push(kecamatan);
+  if (kota) parts.push(kota);
+  if (provinsi) parts.push(provinsi);
+  if (postcode) parts.push(postcode);
 
   const fullAddress = parts.join(", ");
 
   return {
     street,
-    suburb,
-    city,
+    kelurahan,
+    kecamatan,
+    kota,
+    provinsi,
+    postcode,
     fullAddress,
   };
 }

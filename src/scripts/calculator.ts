@@ -580,9 +580,21 @@ async function handleLocationClick(): Promise<void> {
     // Get address from coordinates
     const address = await reverseGeocode(coords);
 
-    // Fill address fields
+    // Fill all address fields
     streetField.value = address.street;
-    if (kotaField && address.city) kotaField.value = address.city;
+    const kelurahanField = elements.addressKelurahan as HTMLInputElement;
+    const kecamatanField = elements.addressKecamatan as HTMLInputElement;
+    const provinsiField = elements.addressProvinsi as HTMLInputElement;
+    const zipField = elements.addressZip as HTMLInputElement;
+
+    if (kelurahanField && address.kelurahan)
+      kelurahanField.value = address.kelurahan;
+    if (kecamatanField && address.kecamatan)
+      kecamatanField.value = address.kecamatan;
+    if (kotaField && address.kota) kotaField.value = address.kota;
+    if (provinsiField && address.provinsi)
+      provinsiField.value = address.provinsi;
+    if (zipField && address.postcode) zipField.value = address.postcode;
 
     // Trigger validation
     handleFormFieldChange();
