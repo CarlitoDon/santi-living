@@ -172,6 +172,12 @@ function bindEvents(): void {
     button.addEventListener("click", handlePaymentMethodToggle);
   });
 
+  // Show more buttons
+  const showMoreButtons = document.querySelectorAll(".btn-show-more");
+  showMoreButtons.forEach((button) => {
+    button.addEventListener("click", handleShowMoreClick);
+  });
+
   // Accordion headers
   const accordionHeaders = document.querySelectorAll(".accordion-header");
   accordionHeaders.forEach((header) => {
@@ -231,6 +237,33 @@ function handlePaymentMethodToggle(event: Event): void {
     btn.classList.remove("active");
   });
   button.classList.add("active");
+}
+
+/**
+ * Handle "Show More" items click
+ */
+function handleShowMoreClick(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const target = button.dataset.target;
+  const accordion = button.closest(".accordion-item");
+
+  if (accordion) {
+    const largeItems = accordion.querySelectorAll(".is-large-size");
+    const isVisible = button.classList.contains("active");
+
+    largeItems.forEach((item) => {
+      if (isVisible) {
+        item.classList.remove("is-visible");
+      } else {
+        item.classList.add("is-visible");
+      }
+    });
+
+    button.classList.toggle("active");
+    button.textContent = isVisible
+      ? "Lihat Ukuran Lainnya"
+      : "Sembunyikan Ukuran Lain";
+  }
 }
 
 /**
@@ -376,6 +409,16 @@ function updateQuantityDisplay(id: string): void {
   if (qtyEl) {
     const item = state.items.find((i) => i.id === id);
     qtyEl.textContent = item ? String(item.quantity) : "0";
+
+    // Update selected state class on parent
+    const cartItem = qtyEl.closest(".cart-item");
+    if (cartItem) {
+      if (item && item.quantity > 0) {
+        cartItem.classList.add("is-selected");
+      } else {
+        cartItem.classList.remove("is-selected");
+      }
+    }
   }
 }
 
