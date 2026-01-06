@@ -19,7 +19,8 @@ export interface OrderPayload {
 }
 
 export async function sendOrderToBot(payload: OrderPayload) {
-  const { baseUrl, apiKey } = config.botApi;
+  const baseUrl = import.meta.env.PUBLIC_BOT_API_URL || config.botApi.baseUrl;
+  const apiKey = import.meta.env.PUBLIC_BOT_API_KEY || config.botApi.apiKey;
 
   const response = await fetch(`${baseUrl}/send-order`, {
     method: "POST",
@@ -41,7 +42,7 @@ export async function sendOrderToBot(payload: OrderPayload) {
 }
 
 export async function getBotStatus() {
-  const { baseUrl } = config.botApi;
+  const baseUrl = import.meta.env.PUBLIC_BOT_API_URL || config.botApi.baseUrl;
   const response = await fetch(`${baseUrl}/status`);
   if (!response.ok) throw new Error("Gagal mengambil status bot");
   return await response.json();

@@ -17,6 +17,10 @@ const startTime = new Date();
 
 // Health check endpoint
 // Health check endpoint
+app.get("/", (req, res) => {
+  res.status(200).send("Bot is running!");
+});
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "ok",
