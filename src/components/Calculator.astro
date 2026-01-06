@@ -12,255 +12,293 @@ const mattresses = products as MattressType[];
 
     <div class="calculator-wrapper">
       <form class="calculator-form" id="calculatorForm">
-        <!-- Package Toggle -->
-        <div class="form-group">
-          <label class="form-label">Pilihan Sewa</label>
-          <div class="package-toggle" id="packageToggle">
-            <button
-              type="button"
-              class="toggle-option active"
-              data-value="package"
-            >
-              <span class="toggle-label">Paket</span>
-              <span class="toggle-desc">Kasur + Bantal + Selimut</span>
-            </button>
-            <button type="button" class="toggle-option" data-value="mattress">
-              <span class="toggle-label">Kasur Saja</span>
-            </button>
+        <!-- Section 1: Pilihan Produk -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <span class="form-section-number">1</span>
+            <span class="form-section-title">Pilihan Kasur</span>
           </div>
-        </div>
 
-        <!-- Mattress Type Selection with Quantity Steppers -->
-        <div class="form-group">
-          <label class="form-label">Pilih Kasur</label>
-          <div class="mattress-cart" id="mattressCart">
-            {
-              mattresses.map((m) => (
-                <div class="cart-item">
-                  <div class="cart-item-info">
-                    <span class="cart-item-name">{m.shortName}</span>
-                    <span class="cart-item-dimensions">{m.dimensions}</span>
-                    <span class="cart-item-price">
-                      Rp {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
-                      /hari
-                    </span>
+          <!-- Package Toggle -->
+          <div class="form-group">
+            <label class="form-label">Pilihan Sewa</label>
+            <div class="package-toggle" id="packageToggle">
+              <button
+                type="button"
+                class="toggle-option active"
+                data-value="package"
+              >
+                <span class="toggle-label">Paket</span>
+                <span class="toggle-desc">Kasur + Bantal + Selimut</span>
+              </button>
+              <button type="button" class="toggle-option" data-value="mattress">
+                <span class="toggle-label">Kasur Saja</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mattress Type Selection with Quantity Steppers -->
+          <div class="form-group">
+            <label class="form-label">Pilih Kasur</label>
+            <div class="mattress-cart" id="mattressCart">
+              {
+                mattresses.map((m) => (
+                  <div class="cart-item">
+                    <div class="cart-item-info">
+                      <span class="cart-item-name">{m.shortName}</span>
+                      <span class="cart-item-dimensions">{m.dimensions}</span>
+                      <span class="cart-item-price">
+                        Rp{" "}
+                        {new Intl.NumberFormat("id-ID").format(m.pricePerDay)}
+                        /hari
+                      </span>
+                    </div>
+                    <div class="cart-item-controls">
+                      <button
+                        type="button"
+                        class="btn-stepper btn-minus"
+                        data-type={m.id}
+                        aria-label={`Kurangi ${m.shortName}`}
+                      >
+                        −
+                      </button>
+                      <span class="cart-item-qty" data-type={m.id}>
+                        0
+                      </span>
+                      <button
+                        type="button"
+                        class="btn-stepper btn-plus"
+                        data-type={m.id}
+                        data-name={m.shortName}
+                        data-price={m.pricePerDay}
+                        data-package-price={m.packagePricePerDay}
+                        aria-label={`Tambah ${m.shortName}`}
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-                  <div class="cart-item-controls">
-                    <button
-                      type="button"
-                      class="btn-stepper btn-minus"
-                      data-type={m.id}
-                      aria-label={`Kurangi ${m.shortName}`}
-                    >
-                      −
-                    </button>
-                    <span class="cart-item-qty" data-type={m.id}>
-                      0
-                    </span>
-                    <button
-                      type="button"
-                      class="btn-stepper btn-plus"
-                      data-type={m.id}
-                      data-name={m.shortName}
-                      data-price={m.pricePerDay}
-                      data-package-price={m.packagePricePerDay}
-                      aria-label={`Tambah ${m.shortName}`}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))
-            }
+                ))
+              }
+            </div>
+            <div class="cart-total">
+              <span class="cart-total-label">Total Kasur:</span>
+              <span class="cart-total-value" id="cartTotalQty">0 unit</span>
+            </div>
+            <span class="form-error" id="mattressError"></span>
           </div>
-          <div class="cart-total">
-            <span class="cart-total-label">Total Kasur:</span>
-            <span class="cart-total-value" id="cartTotalQty">0 unit</span>
+        </div>
+
+        <!-- Section 2: Jadwal Sewa -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <span class="form-section-number">2</span>
+            <span class="form-section-title">Jadwal Sewa</span>
           </div>
-          <span class="form-error" id="mattressError"></span>
-        </div>
 
-        <!-- Duration -->
-        <div class="form-group">
-          <label class="form-label" for="duration">Lama Sewa (hari)</label>
-          <input
-            type="number"
-            id="duration"
-            name="duration"
-            class="form-input"
-            min="1"
-            max="30"
-            value="1"
-            inputmode="numeric"
-          />
-          <span class="form-error" id="durationError"></span>
-        </div>
-
-        <!-- Start Date -->
-        <div class="form-group">
-          <label class="form-label" for="startDate">Tanggal Mulai</label>
-          <input
-            type="date"
-            id="startDate"
-            name="startDate"
-            class="form-input"
-          />
-          <span class="form-error" id="startDateError"></span>
-        </div>
-
-        <!-- Customer Info -->
-        <div class="form-group">
-          <label class="form-label" for="customerName">Nama</label>
-          <input
-            type="text"
-            id="customerName"
-            name="customerName"
-            class="form-input"
-            placeholder="Nama lengkap"
-          />
-          <span class="form-error" id="customerNameError"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="customerWhatsapp">No. WhatsApp</label>
-          <input
-            type="tel"
-            id="customerWhatsapp"
-            name="customerWhatsapp"
-            class="form-input"
-            placeholder="08xxxxxxxxxx"
-            inputmode="tel"
-          />
-          <span class="form-error" id="customerWhatsappError"></span>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="addressStreet">Alamat Jalan</label>
-          <input
-            type="text"
-            id="addressStreet"
-            name="addressStreet"
-            class="form-input"
-            placeholder="Nama jalan, nomor rumah, RT/RW"
-          />
-          <div class="address-buttons">
-            <button
-              type="button"
-              class="btn-location"
-              id="locationButton"
-              title="Gunakan lokasi GPS saya"
-            >
-              📍 Gunakan Lokasi Sekarang
-            </button>
-            <button
-              type="button"
-              class="btn-map-open"
-              id="mapPickerButton"
-              title="Pilih lokasi di peta"
-            >
-              🗺️ Pilih di Peta
-            </button>
-          </div>
-          <span class="form-error" id="addressStreetError"></span>
-        </div>
-
-        <div class="form-row-2">
+          <!-- Duration -->
           <div class="form-group">
-            <label class="form-label" for="addressKelurahan"
-              >Kelurahan/Desa</label
+            <label class="form-label" for="duration">Lama Sewa (hari)</label>
+            <input
+              type="number"
+              id="duration"
+              name="duration"
+              class="form-input"
+              min="1"
+              max="30"
+              value="1"
+              inputmode="numeric"
+            />
+            <span class="form-error" id="durationError"></span>
+          </div>
+
+          <!-- Start Date -->
+          <div class="form-group">
+            <label class="form-label" for="startDate">Tanggal Mulai</label>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              class="form-input"
+            />
+            <span class="form-error" id="startDateError"></span>
+          </div>
+        </div>
+
+        <!-- Section 3: Data Pemesan -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <span class="form-section-number">3</span>
+            <span class="form-section-title">Data Pemesan</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="customerName">Nama</label>
+            <input
+              type="text"
+              id="customerName"
+              name="customerName"
+              class="form-input"
+              placeholder="Nama lengkap"
+            />
+            <span class="form-error" id="customerNameError"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="customerWhatsapp">No. WhatsApp</label
             >
             <input
-              type="text"
-              id="addressKelurahan"
-              name="addressKelurahan"
+              type="tel"
+              id="customerWhatsapp"
+              name="customerWhatsapp"
               class="form-input"
-              placeholder="Kelurahan"
+              placeholder="08xxxxxxxxxx"
+              inputmode="tel"
             />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="addressKecamatan">Kecamatan</label>
-            <input
-              type="text"
-              id="addressKecamatan"
-              name="addressKecamatan"
-              class="form-input"
-              placeholder="Kecamatan"
-            />
+            <span class="form-error" id="customerWhatsappError"></span>
           </div>
         </div>
 
-        <div class="form-row-2">
+        <!-- Section 4: Alamat Pengantaran -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <span class="form-section-number">4</span>
+            <span class="form-section-title">Alamat Pengantaran</span>
+          </div>
+
           <div class="form-group">
-            <label class="form-label" for="addressKota">Kabupaten/Kota</label>
+            <label class="form-label" for="addressStreet">Alamat Jalan</label>
             <input
               type="text"
-              id="addressKota"
-              name="addressKota"
+              id="addressStreet"
+              name="addressStreet"
               class="form-input"
-              placeholder="Sleman, Bantul, dll"
+              placeholder="Nama jalan, nomor rumah, RT/RW"
             />
+            <div class="address-buttons">
+              <button
+                type="button"
+                class="btn-location"
+                id="locationButton"
+                title="Gunakan lokasi GPS saya"
+              >
+                📍 Gunakan Lokasi Sekarang
+              </button>
+              <button
+                type="button"
+                class="btn-map-open"
+                id="mapPickerButton"
+                title="Pilih lokasi di peta"
+              >
+                🗺️ Pilih di Peta
+              </button>
+            </div>
+            <span class="form-error" id="addressStreetError"></span>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="addressProvinsi">Provinsi</label>
-            <input
-              type="text"
-              id="addressProvinsi"
-              name="addressProvinsi"
-              class="form-input"
-              value="DI Yogyakarta"
-              placeholder="Provinsi"
-            />
-          </div>
-        </div>
 
-        <div class="form-group form-group-small">
-          <label class="form-label" for="addressZip">Kode Pos</label>
-          <input
-            type="text"
-            id="addressZip"
-            name="addressZip"
-            class="form-input"
-            placeholder="55xxx"
-            inputmode="numeric"
-            maxlength="5"
-          />
-        </div>
-
-        <div class="form-row-2">
-          <div class="form-group">
-            <label class="form-label" for="addressLat">Latitude</label>
-            <input
-              type="text"
-              id="addressLat"
-              name="addressLat"
-              class="form-input form-input-readonly"
-              placeholder="Otomatis dari GPS"
-              readonly
-            />
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="addressKelurahan"
+                >Kelurahan/Desa</label
+              >
+              <input
+                type="text"
+                id="addressKelurahan"
+                name="addressKelurahan"
+                class="form-input"
+                placeholder="Kelurahan"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="addressKecamatan">Kecamatan</label>
+              <input
+                type="text"
+                id="addressKecamatan"
+                name="addressKecamatan"
+                class="form-input"
+                placeholder="Kecamatan"
+              />
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="addressLng">Longitude</label>
-            <input
-              type="text"
-              id="addressLng"
-              name="addressLng"
-              class="form-input form-input-readonly"
-              placeholder="Otomatis dari GPS"
-              readonly
-            />
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label class="form-label" for="customerNotes"
-            >Catatan (opsional)</label
-          >
-          <textarea
-            id="customerNotes"
-            name="customerNotes"
-            class="form-textarea"
-            placeholder="Permintaan khusus, jam antar, dll"
-            rows="2"></textarea>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="addressKota">Kabupaten/Kota</label>
+              <input
+                type="text"
+                id="addressKota"
+                name="addressKota"
+                class="form-input"
+                placeholder="Sleman, Bantul, dll"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="addressProvinsi">Provinsi</label>
+              <input
+                type="text"
+                id="addressProvinsi"
+                name="addressProvinsi"
+                class="form-input"
+                value="DI Yogyakarta"
+                placeholder="Provinsi"
+              />
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="addressZip">Kode Pos</label>
+              <input
+                type="text"
+                id="addressZip"
+                name="addressZip"
+                class="form-input"
+                placeholder="55xxx"
+                inputmode="numeric"
+                maxlength="5"
+              />
+            </div>
+            <div class="form-group">
+              <!-- Spacer for alignment -->
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="addressLat">Latitude</label>
+              <input
+                type="text"
+                id="addressLat"
+                name="addressLat"
+                class="form-input form-input-readonly"
+                placeholder="Otomatis dari GPS"
+                readonly
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="addressLng">Longitude</label>
+              <input
+                type="text"
+                id="addressLng"
+                name="addressLng"
+                class="form-input form-input-readonly"
+                placeholder="Otomatis dari GPS"
+                readonly
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="customerNotes"
+              >Catatan (opsional)</label
+            >
+            <textarea
+              id="customerNotes"
+              name="customerNotes"
+              class="form-textarea"
+              placeholder="Permintaan khusus, jam antar, dll"
+              rows="2"></textarea>
+          </div>
         </div>
       </form>
     </div>
@@ -364,6 +402,48 @@ const mattresses = products as MattressType[];
     background: var(--color-surface);
     padding: var(--space-6);
     border-radius: var(--radius-lg);
+  }
+
+  /* Form Sections */
+  .form-section {
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .form-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .form-section:first-of-type {
+    padding-top: 0;
+  }
+
+  .form-section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+
+  .form-section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+    border-radius: 50%;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    flex-shrink: 0;
+  }
+
+  .form-section-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
   }
 
   /* Package Toggle */
