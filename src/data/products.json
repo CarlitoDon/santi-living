@@ -120,7 +120,7 @@
       "shortName": "Bantal",
       "description": "Bantal tidur standar + sarung",
       "pricePerDay": 5000,
-      "image": "/images/bantal.webp"
+      "image": "/images/bantal-extra.webp"
     },
     {
       "id": "acc-blanket",
