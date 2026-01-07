@@ -48,12 +48,27 @@ import config from "@/data/config.json";
               </div>
             </div>
           </div>
-          <div class="about-image-wrapper">
-            <img
-              src="/images/stok-kasur.png"
-              alt="Stok Kasur Santi Mebel Jogja"
-              class="about-image"
-            />
+          <div class="about-carousel" id="aboutCarousel">
+            <div class="carousel-track">
+              <div class="carousel-slide active">
+                <img
+                  src="/images/stok-kasur.png"
+                  alt="Stok Kasur Santi Mebel Jogja"
+                  class="about-image"
+                />
+              </div>
+              <div class="carousel-slide">
+                <img
+                  src="/images/gudang.webp"
+                  alt="Gudang Santi Mebel Jogja"
+                  class="about-image"
+                />
+              </div>
+            </div>
+            <div class="carousel-dots">
+              <button class="carousel-dot active" data-slide="0"></button>
+              <button class="carousel-dot" data-slide="1"></button>
+            </div>
             <div class="image-caption">
               Stok kasur kami selalu ready dan terjaga kebersihannya.
             </div>
@@ -141,19 +156,61 @@ import config from "@/data/config.json";
     letter-spacing: 1px;
   }
 
-  .about-image-wrapper {
+  .about-carousel {
     position: relative;
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-lg);
   }
 
+  .carousel-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
   .about-image {
     width: 100%;
-    height: auto;
-    display: block;
-    aspect-ratio: 1/1;
+    height: 100%;
     object-fit: cover;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: var(--space-10);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: var(--space-2);
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .carousel-dot.active {
+    background: white;
   }
 
   .image-caption {
@@ -166,6 +223,7 @@ import config from "@/data/config.json";
     padding: var(--space-3);
     font-size: var(--font-size-sm);
     text-align: center;
+    z-index: 10;
   }
 
   .features-grid {
@@ -203,3 +261,32 @@ import config from "@/data/config.json";
     }
   }
 </style>
+
+<script>
+  const slides = document.querySelectorAll(".carousel-slide");
+  const dots = document.querySelectorAll(".carousel-dot");
+  let currentSlide = 0;
+
+  function goToSlide(index: number) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+    currentSlide = index;
+  }
+
+  function nextSlide() {
+    const next = (currentSlide + 1) % slides.length;
+    goToSlide(next);
+  }
+
+  // Auto slide every 3 seconds
+  setInterval(nextSlide, 3000);
+
+  // Click on dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => goToSlide(index));
+  });
+</script>
