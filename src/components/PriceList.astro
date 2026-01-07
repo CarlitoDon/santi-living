@@ -6,15 +6,40 @@ const { mattressPackages } = products;
 
 <section class="price-list section" id="harga">
   <div class="container">
-    <h2 class="section-title">Pilihan Kasur Sewa</h2>
-    <p class="section-subtitle">Semua kasur bersih, wangi, dan siap pakai</p>
+    <div class="category-section">
+      <h2 class="section-title">Paket Kasur Lengkap</h2>
+      <p class="section-subtitle">
+        Sudah termasuk Kasur + Sprei + Bantal + Selimut
+      </p>
+      <div class="price-grid">
+        {
+          products.mattressPackages.map((product) => (
+            <PriceCard product={product} />
+          ))
+        }
+      </div>
+    </div>
 
-    <div class="price-grid">
-      {
-        products.mattressPackages.map((product) => (
-          <PriceCard product={product} />
-        ))
-      }
+    <div class="category-section">
+      <h2 class="section-title">Kasur Saja</h2>
+      <p class="section-subtitle">Hanya kasur (Tanpa sprei/bantal/selimut)</p>
+      <div class="price-grid">
+        {
+          products.mattressOnly.map((product) => (
+            <PriceCard product={product} />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="category-section">
+      <h2 class="section-title">Ekstra Tambahan Satuan</h2>
+      <p class="section-subtitle">
+        Pilihan tambahan untuk melengkapi kenyamanan Anda
+      </p>
+      <div class="price-grid">
+        {products.accessories.map((product) => <PriceCard product={product} />)}
+      </div>
     </div>
   </div>
 </section>
@@ -24,11 +49,19 @@ const { mattressPackages } = products;
     background: var(--color-surface);
   }
 
+  .category-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .category-section:last-child {
+    margin-bottom: 0;
+  }
+
   .section-subtitle {
     text-align: center;
     color: var(--color-text-secondary);
     margin-top: calc(-1 * var(--space-6));
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
   }
 
   .price-grid {

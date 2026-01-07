@@ -28,8 +28,16 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
     <p class="price-card-description">{product.description}</p>
 
     <div class="price-card-details">
-      <span class="price-card-dimension">{product.dimensions}</span>
-      <span class="price-card-capacity">{product.capacity}</span>
+      {
+        product.dimensions && (
+          <span class="price-card-dimension">{product.dimensions}</span>
+        )
+      }
+      {
+        product.capacity && (
+          <span class="price-card-capacity">{product.capacity}</span>
+        )
+      }
     </div>
 
     <div class="price-card-price">
@@ -81,7 +89,6 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
     font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
     margin-bottom: var(--space-2);
-    display: none;
   }
 
   .price-card-details {
