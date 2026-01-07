@@ -183,6 +183,66 @@ function bindEvents(): void {
   accordionHeaders.forEach((header) => {
     header.addEventListener("click", handleAccordionClick);
   });
+
+  // Product modal triggers
+  const modalTriggers = document.querySelectorAll("[data-modal-trigger]");
+  modalTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", handleModalOpen);
+  });
+
+  // Product modal close handlers
+  const modalClose = document.getElementById("productModalClose");
+  const modalOverlay = document.querySelector(".product-modal-overlay");
+  modalClose?.addEventListener("click", closeProductModal);
+  modalOverlay?.addEventListener("click", closeProductModal);
+}
+
+/**
+ * Open product detail modal
+ */
+function handleModalOpen(event: Event): void {
+  const trigger = event.currentTarget as HTMLImageElement;
+  const modal = document.getElementById("productModal");
+  const modalImage = document.getElementById(
+    "productModalImage"
+  ) as HTMLImageElement;
+  const modalTitle = document.getElementById("productModalTitle");
+  const modalDesc = document.getElementById("productModalDescription");
+  const modalDims = document.getElementById("productModalDimensions");
+  const modalCap = document.getElementById("productModalCapacity");
+  const modalPrice = document.getElementById("productModalPrice");
+
+  if (modal && modalImage && modalTitle && modalDesc && modalPrice) {
+    modalImage.src = trigger.src;
+    modalTitle.textContent = trigger.dataset.name || "";
+    modalDesc.textContent = trigger.dataset.description || "";
+
+    if (modalDims) {
+      modalDims.textContent = trigger.dataset.dimensions || "";
+    }
+    if (modalCap) {
+      modalCap.textContent = trigger.dataset.capacity || "";
+    }
+
+    const price = parseInt(trigger.dataset.price || "0");
+    modalPrice.textContent = `Rp ${new Intl.NumberFormat("id-ID").format(
+      price
+    )}/hari`;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+/**
+ * Close product detail modal
+ */
+function closeProductModal(): void {
+  const modal = document.getElementById("productModal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 }
 
 /**
