@@ -43,6 +43,12 @@ const isLarge = (dimensions?: string) => {
                       class={`cart-item ${isLarge(m.dimensions) ? "is-large-size" : ""}`}
                       data-id={m.id}
                     >
+                      <img
+                        class="cart-item-thumb"
+                        src={m.image}
+                        alt={m.shortName}
+                        loading="lazy"
+                      />
                       <div class="cart-item-info">
                         <span class="cart-item-name">{m.shortName}</span>
                         <span class="cart-item-dimensions">{m.dimensions}</span>
@@ -99,6 +105,12 @@ const isLarge = (dimensions?: string) => {
                       class={`cart-item ${isLarge(m.dimensions) ? "is-large-size" : ""}`}
                       data-id={m.id}
                     >
+                      <img
+                        class="cart-item-thumb"
+                        src={m.image}
+                        alt={m.shortName}
+                        loading="lazy"
+                      />
                       <div class="cart-item-info">
                         <span class="cart-item-name">{m.shortName}</span>
                         <span class="cart-item-dimensions">{m.dimensions}</span>
@@ -156,6 +168,12 @@ const isLarge = (dimensions?: string) => {
                 {
                   products.accessories.map((item) => (
                     <div class="cart-item" data-id={item.id}>
+                      <img
+                        class="cart-item-thumb"
+                        src={item.image}
+                        alt={item.name}
+                        loading="lazy"
+                      />
                       <div class="cart-item-info">
                         <span class="cart-item-name">{item.name}</span>
                         <span class="cart-item-dimensions">
@@ -803,10 +821,19 @@ const isLarge = (dimensions?: string) => {
           border-style: solid;
         }
 
+        .cart-item-thumb {
+          width: 48px;
+          height: 48px;
+          border-radius: var(--radius-sm);
+          object-fit: cover;
+          flex-shrink: 0;
+        }
+
         .cart-item-info {
           display: flex;
           flex-direction: column;
           gap: 0; /* Reduced from space-1 */
+          flex: 1;
         }
 
         .cart-item-name {
