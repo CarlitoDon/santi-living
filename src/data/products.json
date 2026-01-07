@@ -3,7 +3,7 @@
     {
       "id": "package-single-standard",
       "name": "Single Standard (Paket)",
-      "shortName": "Single Std (Pkt)",
+      "shortName": "Single Standard (Pkt)",
       "description": "Bed set 90x200x20 + Bantal + Selimut",
       "pricePerDay": 50000,
       "dimensions": "90 x 200 cm",
@@ -14,7 +14,7 @@
     {
       "id": "package-single-super",
       "name": "Single Super (Paket)",
-      "shortName": "Single Spr (Pkt)",
+      "shortName": "Single Super (Pkt)",
       "description": "Bed set 100x200x20 + Bantal + Selimut",
       "pricePerDay": 60000,
       "dimensions": "100 x 200 cm",
@@ -60,7 +60,7 @@
     {
       "id": "mattress-single-standard",
       "name": "Single Standard (Kasur)",
-      "shortName": "Single Std",
+      "shortName": "Single Standard",
       "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
       "pricePerDay": 40000,
       "dimensions": "90 x 200 cm",
@@ -71,7 +71,7 @@
     {
       "id": "mattress-single-super",
       "name": "Single Super (Kasur)",
-      "shortName": "Single Spr",
+      "shortName": "Single Super",
       "description": "Hanya kasur + sprei (Tanpa bantal/selimut)",
       "pricePerDay": 50000,
       "dimensions": "100 x 200 cm",
