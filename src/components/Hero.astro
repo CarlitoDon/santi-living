@@ -6,33 +6,25 @@ import config from "@/data/config.json";
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title">
-        Sewa Kasur Jogja
-        <span class="hero-subtitle">Antar Jemput Same Day</span>
+        Sewa Kasur Nyaman & Higienis di Jogja
+        <span class="hero-subtitle"
+          >Solusi cepat untuk kebutuhan tidur harian, mingguan, hingga bulanan.</span
+        >
       </h1>
 
       <p class="hero-description">
-        Kasur bersih, wangi, siap pakai. Cocok untuk tamu, acara, atau kebutuhan
-        darurat.
+        Kasur bersih, terawat, dan siap pakai. Antar–jemput tepat waktu. Cocok
+        untuk kos, kontrakan, tamu, acara, atau kebutuhan sementara.
       </p>
 
-      <div class="hero-features">
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✓</span>
-          <span>Bisa antar hari ini</span>
-        </div>
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✓</span>
-          <span>Gratis jemput</span>
-        </div>
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✓</span>
-          <span>Kasur bersih & wangi</span>
-        </div>
+      <div class="hero-cta-group">
+        <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
+          Pesan Sekarang
+        </a>
+        <a href="#calculator" class="btn btn-outline btn-lg hero-cta-secondary">
+          Cek Ketersediaan Kasur
+        </a>
       </div>
-
-      <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
-        Cek Harga & Pesan
-      </a>
 
       <p class="hero-contact">
         Atau hubungi langsung:
@@ -59,7 +51,7 @@ import config from "@/data/config.json";
 
   .hero-content {
     text-align: center;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
   }
 
@@ -72,9 +64,9 @@ import config from "@/data/config.json";
 
   .hero-subtitle {
     display: block;
-    color: var(--color-primary);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
     margin-top: var(--space-2);
   }
 
@@ -84,31 +76,29 @@ import config from "@/data/config.json";
     margin-bottom: var(--space-6);
   }
 
-  .hero-features {
+  .hero-cta-group {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
-    margin-bottom: var(--space-8);
-  }
-
-  .hero-feature {
-    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    font-size: var(--font-size-base);
-    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
   }
 
-  .hero-feature-icon {
-    color: var(--color-success);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .hero-cta {
+  .hero-cta,
+  .hero-cta-secondary {
     width: 100%;
-    max-width: 300px;
-    margin-bottom: var(--space-4);
+    max-width: 280px;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--color-primary);
+    color: white;
   }
 
   .hero-contact {
@@ -132,13 +122,12 @@ import config from "@/data/config.json";
     }
 
     .hero-subtitle {
-      font-size: var(--font-size-2xl);
+      font-size: var(--font-size-lg);
     }
 
-    .hero-features {
+    .hero-cta-group {
       flex-direction: row;
       justify-content: center;
-      gap: var(--space-6);
     }
   }
 </style>

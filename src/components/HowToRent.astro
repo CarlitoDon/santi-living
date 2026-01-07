@@ -1,30 +1,42 @@
 ---
-// HowToRent - 3 steps to rent
+// HowToRent - 5 steps to rent
 const steps = [
   {
     number: "1",
-    icon: "🛏️",
-    title: "Pilih Kasur",
-    description: "Pilih jenis kasur dan hitung biaya sewa dengan kalkulator",
+    icon: "💬",
+    title: "Hubungi Kami",
+    description: "Via WhatsApp atau form pemesanan",
   },
   {
     number: "2",
-    icon: "💬",
-    title: "Konfirmasi via WA",
-    description: "Klik tombol WhatsApp, pesan otomatis terisi. Tinggal kirim!",
+    icon: "📋",
+    title: "Pilih Ukuran & Durasi",
+    description: "Tentukan kasur dan lama sewa",
   },
   {
     number: "3",
+    icon: "📍",
+    title: "Konfirmasi Alamat",
+    description: "Tentukan lokasi dan jadwal",
+  },
+  {
+    number: "4",
     icon: "🚚",
-    title: "Kasur Diantar",
-    description: "Kasur bersih diantar ke alamat. Jemput saat selesai.",
+    title: "Kasur Kami Antar",
+    description: "Kasur bersih diantar ke alamat",
+  },
+  {
+    number: "5",
+    icon: "😴",
+    title: "Tidur Nyaman",
+    description: "Tanpa ribet. Pengembalian? Kami yang jemput.",
   },
 ];
 ---
 
 <section class="how-to-rent section" id="cara-sewa">
   <div class="container">
-    <h2 class="section-title">Cara Sewa</h2>
+    <h2 class="section-title">Cara sewa kasur sangat sederhana</h2>
 
     <div class="steps-grid">
       {
@@ -106,6 +118,12 @@ const steps = [
   @media (min-width: 768px) {
     .steps-grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .steps-grid {
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 </style>

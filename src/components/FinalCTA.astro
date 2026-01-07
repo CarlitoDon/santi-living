@@ -1,0 +1,64 @@
+---
+import config from "@/data/config.json";
+---
+
+<section class="final-cta section" id="final-cta">
+  <div class="container">
+    <div class="final-cta-content">
+      <h2 class="final-cta-title">Butuh kasur sekarang?</h2>
+      <p class="final-cta-description">Jangan tunda kenyamanan tidur Anda.</p>
+
+      <a href="#calculator" class="btn btn-primary btn-lg final-cta-btn">
+        Pesan Sewa Kasur Sekarang
+      </a>
+
+      <p class="final-cta-note">Respon cepat • Area Jogja</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-dark, #1a4ea0) 100%
+    );
+    padding: var(--space-12) 0;
+  }
+
+  .final-cta-content {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .final-cta-title {
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--space-3);
+  }
+
+  .final-cta-description {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-6);
+  }
+
+  .final-cta-btn {
+    background: white;
+    color: var(--color-primary);
+    display: inline-block;
+    margin-bottom: var(--space-4);
+  }
+
+  .final-cta-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .final-cta-note {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+</style>

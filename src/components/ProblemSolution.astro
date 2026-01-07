@@ -1,0 +1,84 @@
+---
+
+---
+
+<section class="problem-solution section" id="problem-solution">
+  <div class="container">
+    <div class="problem-solution-grid">
+      <div class="problem-card">
+        <h3 class="problem-title">😩 Capek tidur tidak nyaman?</h3>
+        <ul class="problem-list">
+          <li>Beli kasur mahal untuk kebutuhan sementara tidak masuk akal</li>
+          <li>Kasur bekas tidak jelas kebersihannya</li>
+          <li>Pinjam sana-sini merepotkan</li>
+        </ul>
+      </div>
+
+      <div class="solution-card">
+        <h3 class="solution-title">✨ Kami hadir sebagai solusi</h3>
+        <p class="solution-description">
+          Kami menyediakan layanan <strong
+            >sewa kasur profesional di Jogja</strong
+          > dengan standar kebersihan tinggi, proses cepat, dan harga transparan.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem-solution {
+    background: var(--color-surface);
+  }
+
+  .problem-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .problem-card,
+  .solution-card {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+
+  .problem-card {
+    background: var(--color-error-light);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+
+  .solution-card {
+    background: var(--color-secondary-light);
+    border: 1px solid rgba(37, 211, 102, 0.2);
+  }
+
+  .problem-title,
+  .solution-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-3);
+  }
+
+  .problem-list {
+    list-style: disc;
+    padding-left: var(--space-5);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .problem-list li {
+    margin-bottom: var(--space-2);
+  }
+
+  .solution-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .problem-solution-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

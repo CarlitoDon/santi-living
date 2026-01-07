@@ -1,0 +1,83 @@
+---
+const audiences = [
+  { icon: "🏠", label: "Anak kos & kontrakan" },
+  { icon: "💑", label: "Pasutri baru" },
+  { icon: "👨‍👩‍👧‍👦", label: "Tamu keluarga" },
+  { icon: "🎉", label: "Event / acara" },
+  { icon: "👷", label: "Karyawan proyek" },
+  { icon: "🏡", label: "Rumah singgah / homestay" },
+];
+---
+
+<section class="target-audience section" id="target-audience">
+  <div class="container">
+    <h2 class="section-title">Cocok untuk:</h2>
+
+    <div class="audience-grid">
+      {
+        audiences.map((item) => (
+          <div class="audience-item">
+            <span class="audience-icon">{item.icon}</span>
+            <span class="audience-label">{item.label}</span>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="audience-note">
+      Jika kebutuhan Anda <strong>sementara</strong>, menyewa jauh lebih efisien
+      daripada membeli.
+    </p>
+  </div>
+</section>
+
+<style>
+  .target-audience {
+    background: var(--color-surface);
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .audience-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .audience-icon {
+    font-size: 1.25rem;
+  }
+
+  .audience-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+  }
+
+  .audience-note {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .audience-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .audience-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+</style>
