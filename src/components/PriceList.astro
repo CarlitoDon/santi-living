@@ -1,5 +1,6 @@
 ---
 import PriceCard from "./PriceCard.astro";
+import ProductModal from "./ProductModal.astro";
 import products from "@/data/products.json";
 const { mattressPackages } = products;
 ---
@@ -42,7 +43,13 @@ const { mattressPackages } = products;
       </div>
     </div>
   </div>
+  <ProductModal />
 </section>
+
+<script>
+  import { initProductModal } from "@/scripts/product-modal";
+  initProductModal();
+</script>
 
 <style>
   .price-list {

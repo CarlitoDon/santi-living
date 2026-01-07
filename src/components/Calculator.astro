@@ -1,6 +1,7 @@
 ---
 import products from "@/data/products.json";
 import config from "@/data/config.json";
+import ProductModal from "./ProductModal.astro";
 import type { ProductItem } from "@/types";
 
 // This is just for type checking in the template if needed,
@@ -564,730 +565,600 @@ const isLarge = (dimensions?: string) => {
           </button>
         </p>
       </div>
-
-      <!-- Product Detail Modal -->
-      <div class="product-modal" id="productModal">
-        <div class="product-modal-overlay"></div>
-        <div class="product-modal-content">
-          <button
-            type="button"
-            class="product-modal-close"
-            id="productModalClose">&times;</button
-          >
-          <img
-            class="product-modal-image"
-            id="productModalImage"
-            src=""
-            alt=""
-          />
-          <div class="product-modal-body">
-            <h3 class="product-modal-title" id="productModalTitle"></h3>
-            <p class="product-modal-description" id="productModalDescription">
-            </p>
-            <div class="product-modal-details">
-              <span class="product-modal-dimensions" id="productModalDimensions"
-              ></span>
-              <span class="product-modal-capacity" id="productModalCapacity"
-              ></span>
-            </div>
-            <div class="product-modal-price" id="productModalPrice"></div>
-          </div>
-        </div>
-      </div>
-
-      <script>
-        import { initCalculator } from "@/scripts/calculator";
-        initCalculator();
-      </script>
-
-      <style>
-        .calculator {
-          background: linear-gradient(
-            to bottom,
-            var(--color-primary-light) 0%,
-            var(--color-background) 15%,
-            var(--color-background) 100%
-          );
-          padding-top: var(--space-8);
-        }
-
-        .calculator-wrapper {
-          display: grid;
-          gap: var(--space-8); /* Restored from 6 */
-          max-width: 900px; /* Kept same */
-          margin: 0 auto;
-          overflow: hidden;
-          min-width: 0;
-        }
-
-        /* Ensure all form-groups respect container width */
-        .calculator-wrapper > .form-group {
-          max-width: 100%;
-          min-width: 0;
-          overflow: hidden;
-        }
-
-        .calculator-form {
-          background: var(--color-surface);
-          padding: var(--space-6); /* Restored from 5 */
-          border-radius: var(--radius-lg);
-        }
-
-        /* Form Sections */
-        .form-section {
-          padding: var(--space-4) 0; /* Restored from 3 */
-          border-bottom: 1px solid var(--color-border);
-        }
-
-        .form-section:last-of-type {
-          border-bottom: none;
-          padding-bottom: 0;
-        }
-
-        .form-section:first-of-type {
-          padding-top: 0;
-        }
-
-        .form-section-header {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2); /* Kept small horizontal gap */
-          margin-bottom: var(--space-4); /* Restored from 3 */
-        }
-
-        .form-section-number {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 24px;
-          height: 24px;
-          background: var(--color-primary);
-          color: var(--color-text-inverse);
-          border-radius: 50%;
-          font-size: var(--font-size-xs);
-          font-weight: var(--font-weight-semibold);
-          flex-shrink: 0;
-        }
-
-        .form-section-title {
-          font-size: var(--font-size-base);
-          font-weight: var(--font-weight-semibold);
-          color: var(--color-text);
-        }
-
-        /* Accordion */
-        .accordion-item {
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          margin-bottom: var(--space-4); /* Restored from 3 */
-          overflow: hidden;
-        }
-
-        .accordion-header {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: var(--space-3); /* Reduced from 4 */
-          background: var(--color-background);
-          border: none;
-          cursor: pointer;
-          text-align: left;
-          transition: background-color var(--transition-fast);
-        }
-
-        .accordion-header:hover {
-          background-color: var(--color-surface);
-        }
-
-        .accordion-item.active .accordion-header {
-          background-color: var(--color-surface-elevated);
-          border-bottom: 1px solid var(--color-border);
-        }
-
-        .accordion-title {
-          font-weight: var(--font-weight-semibold);
-          font-size: var(--font-size-sm); /* Explicitly set smaller */
-          color: var(--color-text);
-        }
-
-        /* Specific colors for categories */
-        .accordion-item:nth-of-type(1) .accordion-title {
-          color: var(--color-primary);
-        }
-
-        .accordion-item:nth-of-type(2) .accordion-title {
-          color: var(--color-text-secondary);
-        }
-
-        .accordion-item:nth-of-type(3) .accordion-title {
-          color: var(--color-accent);
-        }
-
-        .accordion-icon {
-          font-size: var(--font-size-lg); /* Reduced from xl */
-          color: var(--color-text-muted);
-          line-height: 1;
-        }
-
-        .accordion-content {
-          background: var(--color-surface);
-          padding: var(--space-3); /* Reduced from 4 */
-          border-top: 1px solid var(--color-border);
-        }
-
-        /* Override mattress-cart margin inside accordion */
-        .accordion-content .mattress-cart {
-          gap: var(--space-2); /* Reduced from 3 */
-        }
-
-        /* Payment Method Toggle */
-        .payment-toggle {
-          display: flex;
-          gap: var(--space-2);
-          background: var(--color-background);
-          padding: var(--space-1);
-          border-radius: var(--radius-md); /* Reduced from lg */
-          border: 2px solid var(--color-border);
-        }
-
-        .payment-option {
-          flex: 1;
-          display: flex;
-          flex-direction: row; /* Horizontal layout for compactness? logic check: USER asked for smaller, horizontal usually saves vertical space but icons might need column. Keep column but reduce padding */
-          flex-direction: column;
-          align-items: center;
-          gap: 2px; /* Reduced from space-1 */
-          padding: var(--space-2); /* Reduced from space-3 space-4 */
-          background: transparent;
-          border: none;
-          border-radius: var(--radius-sm); /* Reduced from md */
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          min-height: 48px; /* Reduced touch target visual */
-        }
-
-        .payment-option:hover {
-          background: var(--color-border-light);
-        }
-
-        .payment-option.active {
-          background: var(--color-primary);
-          color: var(--color-text-inverse);
-        }
-
-        .payment-icon {
-          font-size: var(--font-size-lg); /* Reduced from xl */
-        }
-
-        .payment-label {
-          font-weight: var(--font-weight-semibold);
-          font-size: var(--font-size-sm); /* Reduced from base */
-        }
-
-        .payment-desc {
-          font-size: var(--font-size-xs);
-          opacity: 0.8;
-          display: none; /* Hide desc on very compact view? Or just small. Let's keep but very small or maybe hide to really declutter. */
-          /* Let's keep it visible but maybe smaller. Actually display:none might be too aggressive. */
-          margin-top: -2px;
-        }
-
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--space-3); /* Reduced from 4 */
-        }
-
-        .form-row-2 {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: var(--space-3); /* Reduced from 4 */
-        }
-
-        .form-row-2 .form-group {
-          margin-bottom: 0;
-        }
-
-        .form-group-small {
-          max-width: 150px;
-        }
-
-        .form-input-readonly {
-          background: var(--color-surface);
-          color: var(--color-text-muted);
-          cursor: not-allowed;
-        }
-
-        /* Mattress Cart */
-        .mattress-cart {
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-2); /* Reduced from 3 */
-        }
-
-        .cart-item {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: var(--space-3);
-          padding: var(--space-2) var(--space-3); /* Significantly reduced from space-4 */
-          background: var(--color-background);
-          border: 1px solid var(--color-border); /* Thinner border 2px -> 1px */
-          border-radius: var(--radius-md);
-          transition: all var(--transition-fast);
-        }
-
-        .cart-item.is-selected {
-          background-color: var(--color-secondary-light);
-          border-color: var(--color-secondary);
-        }
-
-        .cart-item.is-large-size {
-          display: none;
-        }
-
-        .cart-item.is-large-size.is-visible {
-          display: flex;
-        }
-
-        .btn-show-more {
-          width: 100%;
-          padding: var(--space-2);
-          margin-top: var(--space-2);
-          background: var(--color-surface);
-          border: 1px dashed var(--color-border);
-          border-radius: var(--radius-md);
-          color: var(--color-primary);
-          font-size: var(--font-size-xs);
-          font-weight: var(--font-weight-medium);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-        }
-
-        .btn-show-more:hover {
-          background: var(--color-primary-light);
-          border-style: solid;
-        }
-
-        .btn-show-more.active {
-          background: var(--color-primary-light);
-          color: var(--color-text-secondary);
-          border-style: solid;
-        }
-
-        .cart-item-thumb {
-          width: 48px;
-          height: 48px;
-          border-radius: var(--radius-sm);
-          object-fit: cover;
-          flex-shrink: 0;
-          cursor: pointer;
-          transition: transform var(--transition-fast);
-        }
-
-        .cart-item-thumb:hover {
-          transform: scale(1.1);
-        }
-
-        .cart-item-info {
-          display: flex;
-          flex-direction: column;
-          gap: 0; /* Reduced from space-1 */
-          flex: 1;
-        }
-
-        .cart-item-name {
-          font-weight: var(--font-weight-semibold);
-          font-size: var(--font-size-sm); /* Reduced from base */
-        }
-
-        .cart-item-dimensions {
-          color: var(--color-text-muted);
-          font-size: var(--font-size-xs);
-        }
-
-        .cart-item-price {
-          color: var(--color-text-secondary);
-          font-size: var(--font-size-xs); /* Reduced from sm */
-          margin-top: 2px;
-        }
-
-        .cart-item-controls {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2); /* Reduced from 3 */
-        }
-
-        .btn-stepper {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 28px; /* Reduced from touch-target-min (which was 44, way too big for steppers inside cart) */
-          height: 28px;
-          background: var(--color-primary-light);
-          border: 1px solid var(--color-primary); /* Thinner border */
-          border-radius: var(--radius-sm); /* Reduced radius */
-          font-size: var(--font-size-lg); /* Reduced from xl */
-          font-weight: var(--font-weight-bold);
-          color: var(--color-primary);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          padding: 0;
-        }
-
-        .btn-stepper:hover {
-          background: var(--color-primary);
-          color: var(--color-text-inverse);
-        }
-
-        .btn-stepper:disabled {
-          opacity: 0.3;
-          cursor: not-allowed;
-        }
-
-        .cart-item-qty {
-          min-width: 24px; /* Reduced from 32 */
-          text-align: center;
-          font-weight: var(--font-weight-semibold);
-          font-size: var(--font-size-base); /* Reduced from lg */
-        }
-
-        .cart-total {
-          display: flex;
-          justify-content: space-between;
-          padding: var(--space-2) var(--space-3); /* Reduced from 3 4 */
-          margin-top: var(--space-2);
-          background: var(--color-primary-light);
-          border-radius: var(--radius-md);
-          font-weight: var(--font-weight-semibold);
-          font-size: var(--font-size-sm); /* Added font size */
-        }
-
-        .cart-total-label {
-          color: var(--color-text-secondary);
-        }
-
-        .cart-total-value {
-          color: var(--color-primary);
-        }
-
-        /* Result Panel */
-        .calculator-result {
-          background: var(--color-surface-elevated);
-          padding: var(--space-5); /* Reduced from 6 */
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-lg);
-          position: sticky;
-          top: var(--space-4);
-        }
-
-        .result-summary {
-          margin-bottom: var(--space-4); /* Reduced from 6 */
-        }
-
-        .result-title {
-          font-size: var(--font-size-base); /* Reduced from lg */
-          margin-bottom: var(--space-3); /* Reduced from 4 */
-        }
-
-        .result-item {
-          display: flex;
-          justify-content: space-between;
-          padding: var(--space-1) 0; /* Reduced from 2 */
-          font-size: var(--font-size-sm); /* Added base size */
-        }
-
-        .result-label {
-          color: var(--color-text-secondary);
-        }
-
-        .result-value {
-          font-weight: var(--font-weight-medium);
-        }
-
-        .result-divider {
-          height: 1px;
-          background: var(--color-border);
-          margin: var(--space-4) 0;
-        }
-
-        .result-total {
-          font-size: var(--font-size-lg);
-        }
-
-        .result-total .result-value {
-          color: var(--color-primary);
-          font-weight: var(--font-weight-bold);
-          font-size: var(--font-size-xl);
-        }
-
-        .result-delivery {
-          display: flex;
-          align-items: center;
-          gap: var(--space-2);
-          padding: var(--space-3);
-          background: var(--color-secondary-light);
-          border-radius: var(--radius-md);
-          margin-top: var(--space-4);
-          font-size: var(--font-size-sm);
-        }
-
-        .delivery-icon {
-          font-size: var(--font-size-lg);
-        }
-
-        .delivery-text {
-          color: var(--color-text-secondary);
-        }
-
-        #whatsappButton {
-          width: 100%;
-        }
-
-        #whatsappButton:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-
-        .address-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: var(--space-2);
-          margin-top: var(--space-2);
-        }
-
-        .whatsapp-fallback {
-          text-align: center;
-          font-size: var(--font-size-sm);
-          color: var(--color-text-muted);
-          margin-top: var(--space-4);
-          margin-bottom: 0;
-        }
-
-        .copy-number {
-          color: var(--color-primary);
-          font-weight: var(--font-weight-medium);
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-        }
-
-        .copy-number:hover {
-          text-decoration: underline;
-        }
-
-        /* Location Button */
-        .btn-location {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--space-2);
-          margin-top: var(--space-2);
-          padding: var(--space-2) var(--space-3);
-          font-size: var(--font-size-sm);
-          color: var(--color-primary);
-          background: var(--color-primary-light);
-          border: 1px solid var(--color-primary);
-          border-radius: var(--radius-md);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-        }
-
-        .btn-location:hover {
-          background: var(--color-primary);
-          color: var(--color-text-inverse);
-        }
-
-        .btn-location:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-
-        @media (min-width: 768px) {
-          .calculator-wrapper {
-            max-width: 600px;
-          }
-
-          .mattress-options {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        /* Success Message UI */
-        .success-message-ui {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: var(--space-8) var(--space-4);
-          background: var(--color-surface);
-          border-radius: var(--radius-lg);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .success-icon {
-          font-size: 64px;
-          margin-bottom: var(--space-4);
-        }
-
-        .success-message-ui h3 {
-          color: var(--color-success);
-          margin-bottom: var(--space-4);
-          font-size: var(--font-size-xl);
-        }
-
-        .success-message-ui p {
-          margin-bottom: var(--space-3);
-          color: var(--color-text-secondary);
-          line-height: 1.6;
-        }
-
-        .success-actions {
-          margin-top: var(--space-6);
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          border: 3px solid rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          border-top-color: #fff;
-          animation: spin 1s ease-in-out infinite;
-          vertical-align: middle;
-          margin-right: var(--space-2);
-        }
-
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        .anim-fade-in {
-          animation: fadeIn 0.5s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .success-btn {
-          background: var(--color-success) !important;
-          border-color: var(--color-success) !important;
-        }
-
-        /* Product Detail Modal */
-        .product-modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          z-index: 9999;
-          display: none;
-        }
-
-        .product-modal.active {
-          display: block;
-        }
-
-        .product-modal-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.7);
-          animation: fadeIn 0.2s ease;
-        }
-
-        .product-modal-content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 90%;
-          max-width: 400px;
-          max-height: 85vh;
-          background: var(--color-surface-elevated);
-          border-radius: var(--radius-xl);
-          overflow: hidden;
-          animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translate(-50%, -45%);
-          }
-          to {
-            opacity: 1;
-            transform: translate(-50%, -50%);
-          }
-        }
-
-        .product-modal-close {
-          position: absolute;
-          top: var(--space-3);
-          right: var(--space-3);
-          width: 32px;
-          height: 32px;
-          background: rgba(0, 0, 0, 0.5);
-          color: white;
-          border: none;
-          border-radius: var(--radius-full);
-          font-size: 1.5rem;
-          line-height: 1;
-          cursor: pointer;
-          z-index: 10;
-        }
-
-        .product-modal-image {
-          width: 100%;
-          aspect-ratio: 4/3;
-          object-fit: cover;
-        }
-
-        .product-modal-body {
-          padding: var(--space-4);
-        }
-
-        .product-modal-title {
-          font-size: var(--font-size-lg);
-          font-weight: var(--font-weight-bold);
-          margin-bottom: var(--space-2);
-        }
-
-        .product-modal-description {
-          font-size: var(--font-size-sm);
-          color: var(--color-text-secondary);
-          margin-bottom: var(--space-3);
-        }
-
-        .product-modal-details {
-          display: flex;
-          gap: var(--space-3);
-          font-size: var(--font-size-xs);
-          color: var(--color-text-muted);
-          margin-bottom: var(--space-3);
-        }
-
-        .product-modal-price {
-          font-size: var(--font-size-xl);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-primary);
-        }
-      </style>
     </div>
+
+    <ProductModal />
+
+    <script>
+      import { initCalculator } from "@/scripts/calculator";
+      initCalculator();
+    </script>
+
+    <style>
+      .calculator {
+        background: linear-gradient(
+          to bottom,
+          var(--color-primary-light) 0%,
+          var(--color-background) 15%,
+          var(--color-background) 100%
+        );
+        padding-top: var(--space-8);
+      }
+
+      .calculator-wrapper {
+        display: grid;
+        gap: var(--space-8); /* Restored from 6 */
+        max-width: 900px; /* Kept same */
+        margin: 0 auto;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      /* Ensure all form-groups respect container width */
+      .calculator-wrapper > .form-group {
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
+      }
+
+      .calculator-form {
+        background: var(--color-surface);
+        padding: var(--space-6); /* Restored from 5 */
+        border-radius: var(--radius-lg);
+      }
+
+      /* Form Sections */
+      .form-section {
+        padding: var(--space-4) 0; /* Restored from 3 */
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .form-section:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .form-section:first-of-type {
+        padding-top: 0;
+      }
+
+      .form-section-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2); /* Kept small horizontal gap */
+        margin-bottom: var(--space-4); /* Restored from 3 */
+      }
+
+      .form-section-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+        border-radius: 50%;
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-semibold);
+        flex-shrink: 0;
+      }
+
+      .form-section-title {
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text);
+      }
+
+      /* Accordion */
+      .accordion-item {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-4); /* Restored from 3 */
+        overflow: hidden;
+      }
+
+      .accordion-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-3); /* Reduced from 4 */
+        background: var(--color-background);
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        transition: background-color var(--transition-fast);
+      }
+
+      .accordion-header:hover {
+        background-color: var(--color-surface);
+      }
+
+      .accordion-item.active .accordion-header {
+        background-color: var(--color-surface-elevated);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .accordion-title {
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-sm); /* Explicitly set smaller */
+        color: var(--color-text);
+      }
+
+      /* Specific colors for categories */
+      .accordion-item:nth-of-type(1) .accordion-title {
+        color: var(--color-primary);
+      }
+
+      .accordion-item:nth-of-type(2) .accordion-title {
+        color: var(--color-text-secondary);
+      }
+
+      .accordion-item:nth-of-type(3) .accordion-title {
+        color: var(--color-accent);
+      }
+
+      .accordion-icon {
+        font-size: var(--font-size-lg); /* Reduced from xl */
+        color: var(--color-text-muted);
+        line-height: 1;
+      }
+
+      .accordion-content {
+        background: var(--color-surface);
+        padding: var(--space-3); /* Reduced from 4 */
+        border-top: 1px solid var(--color-border);
+      }
+
+      /* Override mattress-cart margin inside accordion */
+      .accordion-content .mattress-cart {
+        gap: var(--space-2); /* Reduced from 3 */
+      }
+
+      /* Payment Method Toggle */
+      .payment-toggle {
+        display: flex;
+        gap: var(--space-2);
+        background: var(--color-background);
+        padding: var(--space-1);
+        border-radius: var(--radius-md); /* Reduced from lg */
+        border: 2px solid var(--color-border);
+      }
+
+      .payment-option {
+        flex: 1;
+        display: flex;
+        flex-direction: row; /* Horizontal layout for compactness? logic check: USER asked for smaller, horizontal usually saves vertical space but icons might need column. Keep column but reduce padding */
+        flex-direction: column;
+        align-items: center;
+        gap: 2px; /* Reduced from space-1 */
+        padding: var(--space-2); /* Reduced from space-3 space-4 */
+        background: transparent;
+        border: none;
+        border-radius: var(--radius-sm); /* Reduced from md */
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        min-height: 48px; /* Reduced touch target visual */
+      }
+
+      .payment-option:hover {
+        background: var(--color-border-light);
+      }
+
+      .payment-option.active {
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+      }
+
+      .payment-icon {
+        font-size: var(--font-size-lg); /* Reduced from xl */
+      }
+
+      .payment-label {
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-sm); /* Reduced from base */
+      }
+
+      .payment-desc {
+        font-size: var(--font-size-xs);
+        opacity: 0.8;
+        display: none; /* Hide desc on very compact view? Or just small. Let's keep but very small or maybe hide to really declutter. */
+        /* Let's keep it visible but maybe smaller. Actually display:none might be too aggressive. */
+        margin-top: -2px;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3); /* Reduced from 4 */
+      }
+
+      .form-row-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-3); /* Reduced from 4 */
+      }
+
+      .form-row-2 .form-group {
+        margin-bottom: 0;
+      }
+
+      .form-group-small {
+        max-width: 150px;
+      }
+
+      .form-input-readonly {
+        background: var(--color-surface);
+        color: var(--color-text-muted);
+        cursor: not-allowed;
+      }
+
+      /* Mattress Cart */
+      .mattress-cart {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2); /* Reduced from 3 */
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--space-3);
+        padding: var(--space-2) var(--space-3); /* Significantly reduced from space-4 */
+        background: var(--color-background);
+        border: 1px solid var(--color-border); /* Thinner border 2px -> 1px */
+        border-radius: var(--radius-md);
+        transition: all var(--transition-fast);
+      }
+
+      .cart-item.is-selected {
+        background-color: var(--color-secondary-light);
+        border-color: var(--color-secondary);
+      }
+
+      .cart-item.is-large-size {
+        display: none;
+      }
+
+      .cart-item.is-large-size.is-visible {
+        display: flex;
+      }
+
+      .btn-show-more {
+        width: 100%;
+        padding: var(--space-2);
+        margin-top: var(--space-2);
+        background: var(--color-surface);
+        border: 1px dashed var(--color-border);
+        border-radius: var(--radius-md);
+        color: var(--color-primary);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-medium);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+
+      .btn-show-more:hover {
+        background: var(--color-primary-light);
+        border-style: solid;
+      }
+
+      .btn-show-more.active {
+        background: var(--color-primary-light);
+        color: var(--color-text-secondary);
+        border-style: solid;
+      }
+
+      .cart-item-thumb {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-sm);
+        object-fit: cover;
+        flex-shrink: 0;
+        cursor: pointer;
+        transition: transform var(--transition-fast);
+      }
+
+      .cart-item-thumb:hover {
+        transform: scale(1.1);
+      }
+
+      .cart-item-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0; /* Reduced from space-1 */
+        flex: 1;
+      }
+
+      .cart-item-name {
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-sm); /* Reduced from base */
+      }
+
+      .cart-item-dimensions {
+        color: var(--color-text-muted);
+        font-size: var(--font-size-xs);
+      }
+
+      .cart-item-price {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-xs); /* Reduced from sm */
+        margin-top: 2px;
+      }
+
+      .cart-item-controls {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2); /* Reduced from 3 */
+      }
+
+      .btn-stepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px; /* Reduced from touch-target-min (which was 44, way too big for steppers inside cart) */
+        height: 28px;
+        background: var(--color-primary-light);
+        border: 1px solid var(--color-primary); /* Thinner border */
+        border-radius: var(--radius-sm); /* Reduced radius */
+        font-size: var(--font-size-lg); /* Reduced from xl */
+        font-weight: var(--font-weight-bold);
+        color: var(--color-primary);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        padding: 0;
+      }
+
+      .btn-stepper:hover {
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+      }
+
+      .btn-stepper:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .cart-item-qty {
+        min-width: 24px; /* Reduced from 32 */
+        text-align: center;
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-base); /* Reduced from lg */
+      }
+
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-2) var(--space-3); /* Reduced from 3 4 */
+        margin-top: var(--space-2);
+        background: var(--color-primary-light);
+        border-radius: var(--radius-md);
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-sm); /* Added font size */
+      }
+
+      .cart-total-label {
+        color: var(--color-text-secondary);
+      }
+
+      .cart-total-value {
+        color: var(--color-primary);
+      }
+
+      /* Result Panel */
+      .calculator-result {
+        background: var(--color-surface-elevated);
+        padding: var(--space-5); /* Reduced from 6 */
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        position: sticky;
+        top: var(--space-4);
+      }
+
+      .result-summary {
+        margin-bottom: var(--space-4); /* Reduced from 6 */
+      }
+
+      .result-title {
+        font-size: var(--font-size-base); /* Reduced from lg */
+        margin-bottom: var(--space-3); /* Reduced from 4 */
+      }
+
+      .result-item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-1) 0; /* Reduced from 2 */
+        font-size: var(--font-size-sm); /* Added base size */
+      }
+
+      .result-label {
+        color: var(--color-text-secondary);
+      }
+
+      .result-value {
+        font-weight: var(--font-weight-medium);
+      }
+
+      .result-divider {
+        height: 1px;
+        background: var(--color-border);
+        margin: var(--space-4) 0;
+      }
+
+      .result-total {
+        font-size: var(--font-size-lg);
+      }
+
+      .result-total .result-value {
+        color: var(--color-primary);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-xl);
+      }
+
+      .result-delivery {
+        display: flex;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-3);
+        background: var(--color-secondary-light);
+        border-radius: var(--radius-md);
+        margin-top: var(--space-4);
+        font-size: var(--font-size-sm);
+      }
+
+      .delivery-icon {
+        font-size: var(--font-size-lg);
+      }
+
+      .delivery-text {
+        color: var(--color-text-secondary);
+      }
+
+      #whatsappButton {
+        width: 100%;
+      }
+
+      #whatsappButton:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .address-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-top: var(--space-2);
+      }
+
+      .whatsapp-fallback {
+        text-align: center;
+        font-size: var(--font-size-sm);
+        color: var(--color-text-muted);
+        margin-top: var(--space-4);
+        margin-bottom: 0;
+      }
+
+      .copy-number {
+        color: var(--color-primary);
+        font-weight: var(--font-weight-medium);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .copy-number:hover {
+        text-decoration: underline;
+      }
+
+      /* Location Button */
+      .btn-location {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: var(--space-2);
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--font-size-sm);
+        color: var(--color-primary);
+        background: var(--color-primary-light);
+        border: 1px solid var(--color-primary);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: all var(--transition-fast);
+      }
+
+      .btn-location:hover {
+        background: var(--color-primary);
+        color: var(--color-text-inverse);
+      }
+
+      .btn-location:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      @media (min-width: 768px) {
+        .calculator-wrapper {
+          max-width: 600px;
+        }
+
+        .mattress-options {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Success Message UI */
+      .success-message-ui {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-8) var(--space-4);
+        background: var(--color-surface);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .success-icon {
+        font-size: 64px;
+        margin-bottom: var(--space-4);
+      }
+
+      .success-message-ui h3 {
+        color: var(--color-success);
+        margin-bottom: var(--space-4);
+        font-size: var(--font-size-xl);
+      }
+
+      .success-message-ui p {
+        margin-bottom: var(--space-3);
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+      }
+
+      .success-actions {
+        margin-top: var(--space-6);
+      }
+
+      /* Loading Spinner */
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        vertical-align: middle;
+        margin-right: var(--space-2);
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .anim-fade-in {
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .success-btn {
+        background: var(--color-success) !important;
+        border-color: var(--color-success) !important;
+      }
+    </style>
   </div>
 </section>

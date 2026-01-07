@@ -12,7 +12,16 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
 );
 ---
 
-<div class="price-card">
+<div
+  class="price-card"
+  data-modal-trigger
+  data-name={product.name}
+  data-description={product.description}
+  data-dimensions={product.dimensions || ""}
+  data-capacity={product.capacity || ""}
+  data-price={product.pricePerDay}
+  data-image={product.image}
+>
   <div class="price-card-image">
     <img
       src={product.image}
@@ -56,6 +65,7 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
     transition:
       transform var(--transition-normal),
       box-shadow var(--transition-normal);
+    cursor: pointer;
   }
 
   .price-card:hover {
