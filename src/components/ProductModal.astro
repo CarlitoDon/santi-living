@@ -19,6 +19,29 @@
       </div>
       <div class="product-modal-price" id="productModalPrice"></div>
     </div>
+
+    <div class="product-modal-footer">
+      <div id="modalStepper" class="modal-stepper" style="display: none;">
+        <span class="stepper-label">Jumlah:</span>
+        <div class="stepper-controls">
+          <button type="button" class="btn-stepper btn-minus" id="modalBtnMinus"
+            >−</button
+          >
+          <span class="stepper-qty" id="modalQtyDisplay">0</span>
+          <button type="button" class="btn-stepper btn-plus" id="modalBtnPlus"
+            >+</button
+          >
+        </div>
+      </div>
+      <a
+        href="/#calculator"
+        id="modalCtaLink"
+        class="btn btn-primary btn-lg modal-cta"
+        style="display: none;"
+      >
+        Sewa Kasur Ini
+      </a>
+    </div>
   </div>
 </div>
 
@@ -131,5 +154,51 @@
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
+  }
+
+  /* Modal Footer Enhancements */
+  .product-modal-footer {
+    padding: var(--space-4);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-stepper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .stepper-label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+
+  .stepper-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: var(--color-background);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+  }
+
+  .stepper-qty {
+    min-width: 2rem;
+    text-align: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+  }
+
+  .modal-cta {
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
   }
 </style>

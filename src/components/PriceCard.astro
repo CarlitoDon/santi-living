@@ -15,6 +15,7 @@ const formattedPrice = new Intl.NumberFormat("id-ID").format(
 <div
   class="price-card"
   data-modal-trigger
+  data-id={product.id}
   data-name={product.name}
   data-description={product.description}
   data-dimensions={product.dimensions || ""}

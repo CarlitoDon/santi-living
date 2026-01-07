@@ -4,6 +4,8 @@
 
 export function initProductModal() {
   const modal = document.getElementById("productModal");
+  if (!modal) return;
+
   const modalImage = document.getElementById(
     "productModalImage"
   ) as HTMLImageElement;
@@ -14,12 +16,34 @@ export function initProductModal() {
   const modalDetailsGroup = document.getElementById("productModalDetailsGroup");
   const modalPrice = document.getElementById("productModalPrice");
 
+  // Footer Elements
+  const modalStepper = document.getElementById("modalStepper");
+  const modalQtyDisplay = document.getElementById("modalQtyDisplay");
+  const modalBtnMinus = document.getElementById("modalBtnMinus");
+  const modalBtnPlus = document.getElementById("modalBtnPlus");
+  const modalCtaLink = document.getElementById(
+    "modalCtaLink"
+  ) as HTMLAnchorElement;
+
   const modalClose = document.getElementById("productModalClose");
   const modalOverlay = document.querySelector(".product-modal-overlay");
 
-  if (!modal) return;
+  let activeProductId: string | null = null;
+  const isProdukPage = window.location.pathname.includes("/produk");
+
+  function updateModalQty() {
+    if (!activeProductId || !modalQtyDisplay) return;
+    const calcQtyEl = document.querySelector(
+      `.cart-item-qty[data-id="${activeProductId}"]`
+    );
+    if (calcQtyEl) {
+      modalQtyDisplay.textContent = calcQtyEl.textContent;
+    }
+  }
 
   function openModal(trigger: HTMLElement) {
+    activeProductId = trigger.dataset.id || null;
+
     if (modalImage && modalTitle && modalDesc && modalPrice) {
       modalImage.src = (trigger as any).src || trigger.dataset.image || "";
       modalTitle.textContent = trigger.dataset.name || "";
@@ -49,6 +73,21 @@ export function initProductModal() {
         price
       )}/hari`;
 
+      // Context-aware Footer
+      if (isProdukPage) {
+        if (modalStepper) modalStepper.style.display = "none";
+        if (modalCtaLink) {
+          modalCtaLink.style.display = "block";
+          modalCtaLink.href = `/#calculator?id=${activeProductId}`;
+        }
+      } else {
+        if (modalCtaLink) modalCtaLink.style.display = "none";
+        if (modalStepper) {
+          modalStepper.style.display = "flex";
+          updateModalQty();
+        }
+      }
+
       modal.classList.add("active");
       document.body.style.overflow = "hidden";
     }
@@ -57,7 +96,31 @@ export function initProductModal() {
   function closeModal() {
     modal.classList.remove("active");
     document.body.style.overflow = "";
+    activeProductId = null;
   }
+
+  // Stepper Proxy Logic
+  modalBtnPlus?.addEventListener("click", () => {
+    if (!activeProductId) return;
+    const calcPlus = document.querySelector(
+      `.btn-plus[data-id="${activeProductId}"]`
+    ) as HTMLButtonElement;
+    if (calcPlus) {
+      calcPlus.click();
+      updateModalQty();
+    }
+  });
+
+  modalBtnMinus?.addEventListener("click", () => {
+    if (!activeProductId) return;
+    const calcMinus = document.querySelector(
+      `.btn-minus[data-id="${activeProductId}"]`
+    ) as HTMLButtonElement;
+    if (calcMinus) {
+      calcMinus.click();
+      updateModalQty();
+    }
+  });
 
   // Global trigger listener
   document.addEventListener("click", (e) => {
