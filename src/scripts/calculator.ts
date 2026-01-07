@@ -653,8 +653,8 @@ function updateStepperButtons(): void {
     if (category !== "accessory") {
       button.disabled = atMaxMattress;
     } else {
-      // Accessories only disabled if no mattress at all
-      button.disabled = currentMattressQty === 0;
+      // Accessories always enabled
+      button.disabled = false;
     }
   });
 }
