@@ -554,7 +554,13 @@ const isLarge = (dimensions?: string) => {
 
       <style>
         .calculator {
-          background: var(--color-background);
+          background: linear-gradient(
+            to bottom,
+            var(--color-primary-light) 0%,
+            var(--color-background) 15%,
+            var(--color-background) 100%
+          );
+          padding-top: var(--space-8);
         }
 
         .calculator-wrapper {
