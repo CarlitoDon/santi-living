@@ -94,7 +94,9 @@ export function initProductModal() {
   }
 
   function closeModal() {
-    modal.classList.remove("active");
+    if (modal) {
+      modal.classList.remove("active");
+    }
     document.body.style.overflow = "";
     activeProductId = null;
   }

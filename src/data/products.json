@@ -8,7 +8,7 @@
       "pricePerDay": 30000,
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/paket-single-std.webp",
+      "image": "/images/paket-90.webp",
       "includes": ["kasur busa", "sprei", "bantal", "selimut"]
     },
     {
@@ -19,7 +19,7 @@
       "pricePerDay": 35000,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/100x200-single.webp",
+      "image": "/images/paket-100.webp",
       "includes": ["kasur busa", "sprei", "bantal", "selimut"]
     },
     {
@@ -30,7 +30,7 @@
       "pricePerDay": 40000,
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
-      "image": "/images/kasur-double.webp",
+      "image": "/images/paket-120.webp",
       "includes": ["kasur busa", "sprei", "bantal", "selimut"]
     },
     {
@@ -41,7 +41,7 @@
       "pricePerDay": 50000,
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
-      "image": "/images/kasur-queen.webp",
+      "image": "/images/paket-160.webp",
       "includes": ["kasur busa", "sprei", "2 bantal", "selimut"]
     },
     {
@@ -52,7 +52,7 @@
       "pricePerDay": 60000,
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
-      "image": "/images/kasur-king.jpg",
+      "image": "/images/paket-180.webp",
       "includes": ["kasur busa", "sprei", "2 bantal", "selimut"]
     }
   ],
@@ -65,7 +65,7 @@
       "pricePerDay": 20000,
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/kasur-single.webp",
+      "image": "/images/saja-90.webp",
       "includes": ["kasur busa"]
     },
     {
@@ -76,7 +76,7 @@
       "pricePerDay": 25000,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
-      "image": "/images/100x200-single.webp",
+      "image": "/images/saja-100.webp",
       "includes": ["kasur busa"]
     },
     {
@@ -87,7 +87,7 @@
       "pricePerDay": 30000,
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
-      "image": "/images/kasur-double.webp",
+      "image": "/images/saja-120.webp",
       "includes": ["kasur busa"]
     },
     {
@@ -98,7 +98,7 @@
       "pricePerDay": 40000,
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
-      "image": "/images/kasur-queen.webp",
+      "image": "/images/saja-160.webp",
       "includes": ["kasur busa"]
     },
     {
@@ -109,7 +109,7 @@
       "pricePerDay": 50000,
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
-      "image": "/images/kasur-king.jpg",
+      "image": "/images/saja-180.webp",
       "includes": ["kasur busa"]
     }
   ],
@@ -120,7 +120,7 @@
       "shortName": "Bantal",
       "description": "Bantal tidur standar + sarung",
       "pricePerDay": 5000,
-      "image": "/images/bantal-extra.webp"
+      "image": "/images/ekstra-bantal.webp"
     },
     {
       "id": "acc-sprei",
@@ -128,7 +128,7 @@
       "shortName": "Sprei",
       "description": "Sprei kasur standar",
       "pricePerDay": 5000,
-      "image": "/images/sprei.webp"
+      "image": "/images/ekstra-sprei.webp"
     },
     {
       "id": "acc-blanket",
@@ -136,7 +136,7 @@
       "shortName": "Selimut",
       "description": "Selimut tidur standar",
       "pricePerDay": 5000,
-      "image": "/images/selimut-extra.webp"
+      "image": "/images/ekstra-selimut.webp"
     },
     {
       "id": "acc-bolster",
@@ -144,7 +144,7 @@
       "shortName": "Guling",
       "description": "Guling tidur standar + sarung",
       "pricePerDay": 5000,
-      "image": "/images/guling.webp"
+      "image": "/images/ekstra-guling.webp"
     }
   ]
 }
