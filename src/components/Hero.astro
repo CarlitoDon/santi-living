@@ -16,14 +16,25 @@ import config from "@/data/config.json";
 
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title">Sewa Kasur Nyaman & Higienis di Jogja</h1>
+      <h1 class="hero-title">Sewa Kasur Nyaman & Higienis</h1>
       <p class="hero-tagline">
         Solusi cepat untuk kebutuhan tidur harian, mingguan, hingga bulanan.
       </p>
 
-      <p class="hero-description">
-        Kasur bersih, terawat, dan siap pakai. Antar–jemput tepat waktu.
-      </p>
+      <div class="hero-features">
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Bisa antar hari ini</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Gratis jemput</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✓</span>
+          <span>Kasur bersih & wangi</span>
+        </div>
+      </div>
 
       <div class="hero-cta-group">
         <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
@@ -127,10 +138,25 @@ import config from "@/data/config.json";
     margin-bottom: var(--space-4);
   }
 
-  .hero-description {
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.8);
+  .hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
     margin-bottom: var(--space-6);
+  }
+
+  .hero-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-feature-icon {
+    color: #4ade80;
+    font-weight: var(--font-weight-bold);
   }
 
   .hero-cta-group {
