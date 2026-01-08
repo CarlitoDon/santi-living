@@ -78,7 +78,7 @@ export function initProductModal() {
         if (modalStepper) modalStepper.style.display = "none";
         if (modalCtaLink) {
           modalCtaLink.style.display = "block";
-          modalCtaLink.href = `/?id=${activeProductId}#calculator`;
+          modalCtaLink.href = `/sewa-kasur/?id=${activeProductId}#calculator`;
         }
       } else {
         if (modalCtaLink) modalCtaLink.style.display = "none";

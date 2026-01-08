@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Frontend: Dev",
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "presentation": {
+        "group": "frontend",
+        "panel": "dedicated"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Frontend: Build",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Bot Service: Dev",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/bot-service"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "backend",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Start All",
+      "dependsOn": ["Frontend: Dev", "Bot Service: Dev"],
+      "problemMatcher": []
+    },
+    {
+      "label": "TSC: Watch",
+      "type": "shell",
+      "command": "./node_modules/.bin/tsc",
+      "args": ["--watch", "--noEmit"],
+      "problemMatcher": "$tsc-watch",
+      "presentation": {
+        "group": "build",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}
