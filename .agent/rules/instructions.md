@@ -1,3 +1,7 @@
+---
+trigger: model_decision
+---
+
 # AI Agent Instructions for Santi Living
 
 ## Architecture Overview

@@ -58,10 +58,17 @@ import config from "@/data/config.json";
 <style>
   .hero {
     position: relative;
-    min-height: 70vh;
+    min-height: 65vh;
     display: flex;
     align-items: center;
     overflow: hidden;
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: 60vh;
+      padding-top: var(--space-4);
+    }
   }
 
   .hero-carousel {
@@ -121,7 +128,13 @@ import config from "@/data/config.json";
     text-align: center;
     max-width: 650px;
     margin: 0 auto;
-    padding: var(--space-10) var(--space-4);
+    padding: var(--space-8) var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      padding: var(--space-16) var(--space-4);
+    }
   }
 
   .hero-title {
@@ -142,7 +155,7 @@ import config from "@/data/config.json";
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    margin-bottom: var(--space-16);
+    margin-bottom: var(--space-8);
   }
 
   .hero-feature {
