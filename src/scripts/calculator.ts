@@ -99,6 +99,9 @@ export function initCalculator(): void {
 
   // Initialize shared product modal
   initProductModal();
+
+  // Handle deep links from other pages
+  handleDeepLink();
 }
 
 /**
@@ -188,6 +191,67 @@ function bindEvents(): void {
     header.addEventListener("click", handleAccordionClick);
   });
 }
+
+/**
+ * Handle deep links from other pages
+ */
+function handleDeepLink(): void {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+  const hash = window.location.hash;
+
+  if (hash === "#calculator") {
+    // Wait a bit for everything to be rendered
+    setTimeout(() => {
+      const calculatorSection = document.getElementById("calculator");
+      if (calculatorSection) {
+        calculatorSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      // If there's a specific product, highlight it
+      if (productId) {
+        const productEl = document.querySelector(
+          `.cart-item[data-id="${productId}"]`
+        );
+        if (productEl) {
+          // Open accordion if product is inside one
+          const item = productEl.closest(".accordion-item");
+          if (item && !item.classList.contains("active")) {
+            const header = item.querySelector(
+              ".accordion-header"
+            ) as HTMLElement;
+            header?.click();
+          }
+
+          // Show large items if product is a large one
+          if (productEl.classList.contains("is-large-size")) {
+            const accordion = productEl.closest(".accordion-item");
+            const showMoreBtn = accordion?.querySelector(
+              ".btn-show-more"
+            ) as HTMLElement;
+            if (showMoreBtn && !showMoreBtn.classList.contains("active")) {
+              showMoreBtn.click();
+            }
+          }
+
+          // Scroll to product and highlight
+          setTimeout(() => {
+            productEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            productEl.classList.add("highlight-pulse");
+            setTimeout(
+              () => productEl.classList.remove("highlight-pulse"),
+              4000
+            );
+          }, 300);
+        }
+      }
+    }, 500);
+  }
+}
+
 /**
  * Handle accordion header click
  */
