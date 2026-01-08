@@ -58,16 +58,17 @@ import config from "@/data/config.json";
 <style>
   .hero {
     position: relative;
-    min-height: 65vh;
+    min-height: auto;
     display: flex;
     align-items: center;
     overflow: hidden;
+    padding: var(--space-10) 0;
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 768px) {
     .hero {
-      min-height: 60vh;
-      padding-top: var(--space-4);
+      min-height: 65vh;
+      padding: 0;
     }
   }
 
