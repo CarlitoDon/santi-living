@@ -927,21 +927,8 @@ async function handleWhatsAppClick(): Promise<void> {
     });
 
     // Scroll to first error field
-    const firstErrorField = document.getElementById(
-      validationErrors[0].fieldId
-    );
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-      // Focus the field after scrolling
-      setTimeout(() => {
-        if (
-          firstErrorField instanceof HTMLInputElement ||
-          firstErrorField instanceof HTMLTextAreaElement
-        ) {
-          firstErrorField.focus();
-        }
-      }, 500);
-    }
+    // Scroll to first error field with offset for sticky header
+    scrollToError(validationErrors[0].fieldId);
     return;
   }
 
@@ -1142,4 +1129,32 @@ function clearError(field: string): void {
   if (inputEl) {
     inputEl.classList.remove("error");
   }
+}
+
+/**
+ * Scroll to error field with offset for sticky header
+ */
+/**
+ * Scroll to error field with offset for sticky header
+ */
+function scrollToError(elementId: string): void {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+
+  // Use native scrollIntoView - CSS scroll-margin-top handles the offset
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  // Focus the field after scrolling
+  setTimeout(() => {
+    if (
+      element instanceof HTMLInputElement ||
+      element instanceof HTMLTextAreaElement
+    ) {
+      // Use preventScroll to avoid browser jumping back
+      element.focus({ preventScroll: true });
+    }
+  }, 800); // Wait for scroll to finish
 }

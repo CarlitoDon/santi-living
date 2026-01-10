@@ -62,13 +62,13 @@
   --space-2: 0.35rem; /* reduced */
   --space-3: 0.6rem; /* reduced */
   --space-4: 0.85rem; /* reduced */
-  --space-5: 1rem;    /* reduced */
+  --space-5: 1rem; /* reduced */
   --space-6: 1.25rem; /* reduced */
   --space-8: 1.75rem; /* reduced */
-  --space-10: 2.25rem; 
-  --space-12: 2.75rem; 
-  --space-16: 3.5rem; 
-  --space-20: 4.5rem; 
+  --space-10: 2.25rem;
+  --space-12: 2.75rem;
+  --space-16: 3.5rem;
+  --space-20: 4.5rem;
 
   /* Touch Targets (min 44px per constitution) */
   /* Keeping min target but reducing visual bulk */
@@ -77,7 +77,7 @@
   /* Border Radius */
   --radius-sm: 0.2rem;
   --radius-md: 0.375rem;
-  --radius-lg: 0.5rem; 
+  --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
 
@@ -236,7 +236,7 @@ p:last-child {
   justify-content: center;
   gap: var(--space-2);
   min-height: 40px; /* Reduced from touch-target-min (44) valid click area usually handled by padding, but let's stick closer to constitution min 44 if strict? USER: "bisa nggak sih semua gui nya diperkecil?". Constitution says "Touch targets HARUS minimal 44x44px". We can keep 44px height but reduce visual weight (padding/font). Let's do 42px or keep 44px but reduce padding significantly. */
-  min-height: 42px; 
+  min-height: 42px;
   padding: var(--space-2) var(--space-4); /* Reduced padding */
   font-size: var(--font-size-sm); /* Smaller text */
   font-weight: var(--font-weight-semibold);
@@ -328,6 +328,14 @@ p:last-child {
 .form-textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+/* Scroll margin for sticky header */
+.form-input,
+.form-select,
+.form-textarea,
+.form-section {
+  scroll-margin-top: 120px;
 }
 
 /* Keyboard types for mobile */

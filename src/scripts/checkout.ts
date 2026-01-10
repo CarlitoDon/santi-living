@@ -442,22 +442,22 @@ Saya *${
     order.customerName
   }* ingin konfirmasi pembayaran untuk pesanan sewa kasur:
 
-📦 *Detail Pesanan:*
+*Detail Pesanan:*
 ${order.items
   .map((item: any) => `- ${item.name} (${item.quantity}x)`)
   .join("\n")}
 
-⏱ Durasi: ${order.duration} hari
-📅 Mulai: ${order.orderDate}
-💰 Total: Rp ${new Intl.NumberFormat("id-ID").format(order.totalPrice)}
-💳 Metode: ${method}
+Durasi: ${order.duration} hari
+Mulai: ${order.orderDate}
+Total: Rp ${new Intl.NumberFormat("id-ID").format(order.totalPrice)}
+Metode: ${method}
 
-📍 Alamat: ${order.deliveryAddress}
+Alamat: ${order.deliveryAddress}
 
 *Berikut bukti pembayaran saya:*
 [Kirim foto bukti transfer/screenshot pembayaran]
 
-Terima kasih! 🙏`;
+Terima kasih!`;
 
   const encodedMessage = encodeURIComponent(message);
   const waUrl = `https://wa.me/${config.whatsappNumber}?text=${encodedMessage}`;
