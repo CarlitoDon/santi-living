@@ -4,6 +4,16 @@ export interface OrderPayload {
   customerName: string;
   customerWhatsapp: string;
   deliveryAddress: string;
+  addressFields?: {
+    street?: string;
+    kelurahan?: string;
+    kecamatan?: string;
+    kota?: string;
+    provinsi?: string;
+    zip?: string;
+    lat?: string;
+    lng?: string;
+  };
   items: Array<{
     name: string;
     category: "package" | "mattress" | "accessory";

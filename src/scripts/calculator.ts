@@ -14,6 +14,7 @@ import {
 } from "./geolocation";
 import { openMapPicker } from "./map-picker";
 import { initProductModal } from "./product-modal";
+import { saveOrder } from "./checkout-session";
 
 // Helper to find product by ID across all categories
 const findProductById = (id: string): ProductItem | undefined => {
@@ -31,7 +32,7 @@ let state: CalculatorState = {
   items: [],
   startDate: null,
   duration: 1,
-  paymentMethod: "qris",
+  paymentMethod: "qris", // Kept for API compatibility, but not user-selectable
   endDate: null,
   totalQuantity: 0,
   subtotal: 0,
@@ -102,6 +103,14 @@ export function initCalculator(): void {
 
   // Handle deep links from other pages
   handleDeepLink();
+
+  // Listen for custom event to recalculate delivery fee (used by cart prefill)
+  document.addEventListener("recalculate-delivery-fee", (event: Event) => {
+    const customEvent = event as CustomEvent<{ lat: number; lng: number }>;
+    if (customEvent.detail?.lat && customEvent.detail?.lng) {
+      updateDeliveryFee(customEvent.detail.lat, customEvent.detail.lng);
+    }
+  });
 }
 
 /**
@@ -950,6 +959,16 @@ async function handleWhatsAppClick(): Promise<void> {
     customerName: customerName,
     customerWhatsapp: customerWhatsapp,
     deliveryAddress: fullAddress,
+    addressFields: {
+      street: addressStreet,
+      kelurahan: addressKelurahan,
+      kecamatan: addressKecamatan,
+      kota: addressKota,
+      provinsi: addressProvinsi,
+      zip: addressZip,
+      lat: addressLat,
+      lng: addressLng,
+    },
     items: state.items.map((item) => ({
       name: item.name,
       category: item.category,
@@ -971,40 +990,40 @@ async function handleWhatsAppClick(): Promise<void> {
   waButton.innerHTML = `<span class="loading-spinner"></span> Memproses...`;
 
   try {
-    const { sendOrderToBot } = await import("../services/api");
-    await sendOrderToBot(bookingData);
+    // Save order to sessionStorage FIRST (before API call)
+    // This ensures checkout page works even if bot API fails
+    saveOrder(bookingData);
 
-    // Show Success State
-    waButton.innerHTML = `✓ Berhasil Terkirim`;
+    // Try to send to bot API (non-blocking - don't prevent checkout if this fails)
+    try {
+      const { sendOrderToBot } = await import("../services/api");
+      await sendOrderToBot(bookingData);
+      console.log("Order sent to bot successfully");
+    } catch (botError: any) {
+      // Log error but don't block the user flow
+      console.warn(
+        "Bot notification failed (checkout will still proceed):",
+        botError.message
+      );
+    }
+
+    // Update button to show success briefly
+    waButton.innerHTML = `✓ Melanjutkan ke Checkout`;
     waButton.classList.add("success-btn");
 
-    // Optional: Scroll to top of result panel to show success message
-    if (elements.resultPanel) {
-      elements.resultPanel.innerHTML = `
-        <div class="success-message-ui anim-fade-in">
-          <div class="success-icon">✅</div>
-          <h3>Pesanan Berhasil Terkirim!</h3>
-          <p>Terima kasih <strong>${customerName}</strong>, pesanan Anda telah kami terima.</p>
-          <p>Admin akan segera menghubungi Anda melalui WhatsApp ke nomor <strong>${customerWhatsapp}</strong> untuk konfirmasi pengiriman.</p>
-          <div class="success-actions">
-            <button onclick="window.location.reload()" class="btn btn-primary">Buat Pesanan Baru</button>
-          </div>
-        </div>
-      `;
-      elements.resultPanel.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
+    // Redirect to checkout page after short delay
+    setTimeout(() => {
+      window.location.href = "/sewa-kasur/checkout";
+    }, 500);
   } catch (error: any) {
-    console.error("Failed to send order:", error);
+    console.error("Failed to process order:", error);
     waButton.disabled = false;
     waButton.innerHTML = originalBtnText;
 
     // Show error message
     showError(
       "customerWhatsapp",
-      error.message || "Gagal mengirim pesanan. Silakan coba lagi."
+      error.message || "Gagal memproses pesanan. Silakan coba lagi."
     );
   }
 }

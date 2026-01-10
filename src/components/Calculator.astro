@@ -458,36 +458,7 @@ const isLarge = (dimensions?: string) => {
           </div>
         </div>
 
-        <!-- Section 5: Metode Pembayaran -->
-        <div class="form-section">
-          <div class="form-section-header">
-            <span class="form-section-number">5</span>
-            <span class="form-section-title">Metode Pembayaran</span>
-          </div>
-
-          <div class="form-group">
-            <div class="payment-toggle" id="paymentMethodToggle">
-              <button
-                type="button"
-                class="payment-option active"
-                data-value="qris"
-              >
-                <span class="payment-icon">📱</span>
-                <span class="payment-label">QRIS</span>
-                <span class="payment-desc">Scan & Bayar</span>
-              </button>
-              <button
-                type="button"
-                class="payment-option"
-                data-value="transfer"
-              >
-                <span class="payment-icon">🏦</span>
-                <span class="payment-label">Transfer Bank</span>
-                <span class="payment-desc">BCA / Mandiri</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <!-- Payment method removed - now handled on checkout page -->
       </form>
 
       <!-- Result Panel -->
@@ -586,6 +557,7 @@ const isLarge = (dimensions?: string) => {
           var(--color-background) 100%
         );
         padding-top: var(--space-8);
+        border-radius: 24px 24px 0 0;
       }
 
       .calculator-wrapper {

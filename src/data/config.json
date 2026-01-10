@@ -26,5 +26,17 @@
   "botApi": {
     "baseUrl": "http://localhost:3000",
     "apiKey": "santi_secret_auth_token_2026"
+  },
+  "payment": {
+    "bca": {
+      "bank": "BCA",
+      "accountName": "Muthia Rahma Syamila",
+      "accountNumber": "0374668427"
+    },
+    "qris": {
+      "merchantName": "SANTI LIVING",
+      "nmid": "ID1026471796650",
+      "imagePath": "/images/qris-santi-living.jpg"
+    }
   }
 }

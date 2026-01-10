@@ -1,0 +1,144 @@
+---
+interface Props {
+  value: string;
+  label?: string;
+  class?: string;
+}
+
+const { value, label = "Copy", class: className = "" } = Astro.props;
+---
+
+<button
+  class={`copy-button ${className}`}
+  data-copy-value={value}
+  type="button"
+>
+  <span class="copy-icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+    </svg>
+  </span>
+  <span class="copy-check hidden">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  </span>
+  <span class="copy-label">{label}</span>
+</button>
+
+<style>
+  .copy-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-primary, #2563eb);
+    background: var(--color-primary-light, #eff6ff);
+    border: 1px solid var(--color-primary, #2563eb);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .copy-button:hover {
+    background: var(--color-primary, #2563eb);
+    color: white;
+  }
+
+  .copy-button:active {
+    transform: scale(0.98);
+  }
+
+  .copy-button.copied {
+    background: var(--color-success, #22c55e);
+    border-color: var(--color-success, #22c55e);
+    color: white;
+  }
+
+  .copy-icon,
+  .copy-check {
+    display: flex;
+    align-items: center;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .copy-button.copied .copy-icon {
+    display: none;
+  }
+
+  .copy-button.copied .copy-check {
+    display: flex;
+  }
+</style>
+
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>(".copy-button")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const value = button.dataset.copyValue;
+        if (!value) return;
+
+        try {
+          await navigator.clipboard.writeText(value);
+
+          // Visual feedback
+          button.classList.add("copied");
+          const labelEl = button.querySelector(".copy-label");
+          const originalLabel = labelEl?.textContent || "Copy";
+          if (labelEl) labelEl.textContent = "Copied!";
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            button.classList.remove("copied");
+            if (labelEl) labelEl.textContent = originalLabel;
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+          // Fallback for older browsers
+          const textarea = document.createElement("textarea");
+          textarea.value = value;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            document.execCommand("copy");
+            button.classList.add("copied");
+            setTimeout(() => button.classList.remove("copied"), 2000);
+          } catch {
+            console.error("Fallback copy failed");
+          }
+          document.body.removeChild(textarea);
+        }
+      });
+    });
+</script>
