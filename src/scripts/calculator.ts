@@ -549,9 +549,41 @@ function handleDateChange(event: Event): void {
 }
 
 /**
- * Handle form field change
+ * Handle form field change - clear errors when fields are filled correctly
  */
 function handleFormFieldChange(): void {
+  // Clear errors for fields that now have valid values
+  const customerName = (elements.customerName as HTMLInputElement)?.value || "";
+  const customerWhatsapp =
+    (elements.customerWhatsapp as HTMLInputElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
+
+  // Clear name error if field is filled
+  if (customerName.trim()) {
+    clearError("customerName");
+  }
+
+  // Clear WhatsApp error if field is filled with valid format
+  if (customerWhatsapp.trim()) {
+    const cleaned = customerWhatsapp.replace(/[\s-]/g, "");
+    const patterns = [/^08\d{8,11}$/, /^\+628\d{8,11}$/, /^628\d{8,11}$/];
+    if (patterns.some((p) => p.test(cleaned))) {
+      clearError("customerWhatsapp");
+    }
+  }
+
+  // Clear address street error if field is filled
+  if (addressStreet.trim()) {
+    clearError("addressStreet");
+  }
+
+  // Clear kota error if field is filled
+  if (addressKota.trim()) {
+    clearError("addressKota");
+  }
+
   updateValidation();
 }
 
