@@ -61,6 +61,15 @@ import Calculator from "@/components/Calculator.astro";
         startDate.dispatchEvent(new Event("change", { bubbles: true }));
       }
 
+      // Prefill notes
+      const customerNotes = document.getElementById(
+        "customerNotes"
+      ) as HTMLTextAreaElement;
+      if (customerNotes && order.notes) {
+        customerNotes.value = order.notes;
+        customerNotes.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
       // Prefill address using addressFields (if available) or fallback to parsing
       const addressFields = order.addressFields;
       if (addressFields) {

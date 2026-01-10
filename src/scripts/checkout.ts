@@ -145,6 +145,16 @@ function renderSummary(order: any): void {
     endDate
   )}</span>
         </div>
+        ${
+          order.notes
+            ? `
+          <div class="summary-row notes-row">
+            <span class="summary-label">Catatan</span>
+            <span class="summary-value">${order.notes}</span>
+          </div>
+        `
+            : ""
+        }
       </div>
 
       <div class="summary-divider"></div>
