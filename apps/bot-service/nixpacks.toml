@@ -1,0 +1,20 @@
+# Nixpacks configuration for Puppeteer Support
+# This installs Chrome/Chromium and necessary shared libraries
+
+[phases.setup]
+nixPkgs = [
+    "nodejs_18",            # Ensure specific Node version if needed
+    "npm",
+    "chromium",             # Installs Chromium browser
+    "nss",                  # Security/SSL libraries
+    "freetype",             # Font rendering
+    "harfbuzz",             # Text shaping
+    "ca-certificates",      # SSL root certs
+    "ttf-freefont"          # Fonts to prevent squares in screenshots
+]
+
+[phases.build]
+cmds = ["npm install && npm run build"]
+
+[start]
+cmd = "npm run start"
