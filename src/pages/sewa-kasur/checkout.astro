@@ -87,7 +87,9 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
 <style is:global>
   .checkout-page {
     min-height: 100vh;
+    min-height: 100dvh; /* Mobile browser verification */
     padding: var(--space-6) 0;
+    overscroll-behavior-y: contain; /* Prevent parent scroll chaining */
     background: var(--color-background);
   }
 
@@ -183,7 +185,7 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
 
     /* Add bottom padding to main content to avoid overlap */
     .checkout-step.active {
-      padding-bottom: 140px;
+      padding-bottom: 200px; /* Increased from 140px for safety */
     }
   }
 
@@ -299,7 +301,7 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
     }
 
     #checkoutStep2 {
-      padding-bottom: 80px;
+      padding-bottom: 120px; /* Increased from 80px */
     }
   }
 
