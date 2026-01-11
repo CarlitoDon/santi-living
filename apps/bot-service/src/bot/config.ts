@@ -26,11 +26,34 @@ export const createClient = (): Client => {
     console.log("Using LocalAuth");
   }
 
+  // Debugging Environment
+  console.log("--- DEBUG PUPPETEER CONFIG ---");
+  console.log(
+    "ENV PUPPETEER_EXECUTABLE_PATH:",
+    process.env.PUPPETEER_EXECUTABLE_PATH
+  );
+
+  let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+
+  // Try to find chromium dynamically if not set
+  if (!executablePath) {
+    try {
+      const { execSync } = require("child_process");
+      const whichChromium = execSync("which chromium").toString().trim();
+      if (whichChromium) {
+        console.log("Found chromium at:", whichChromium);
+        executablePath = whichChromium;
+      }
+    } catch (e) {
+      console.log("Could not find chromium in PATH");
+    }
+  }
+
   return new Client({
     authStrategy,
     puppeteer: {
       headless: true,
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+      executablePath: executablePath || undefined,
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
