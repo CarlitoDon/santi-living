@@ -7,6 +7,7 @@ builder = "nixpacks"
 [[services]]
 name = "bot-service"
 root = "apps/bot-service"
+watchPaths = ["apps/bot-service/**"]
 buildCommand = "npm install && npm run build"
 startCommand = "npm run start"
 
@@ -15,6 +16,7 @@ startCommand = "npm run start"
 [[services]]
 name = "santi-living-web"
 root = "."
+watchPaths = ["src/**", "public/**", "package.json", "astro.config.mjs"]
 buildCommand = "npm install && npm run build"
 startCommand = "npm run preview -- --host --port $PORT"
 # Note: Astro preview is for testing, but in Railway 'npm run preview' is often used for Node-based serving.
