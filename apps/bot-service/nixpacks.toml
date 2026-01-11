@@ -3,15 +3,36 @@
 
 [phases.setup]
 nixPkgs = [
-    "nodejs_18",            # Ensure specific Node version if needed
+    "nodejs_18",
     "npm",
-    "chromium",             # Installs Chromium browser
-    "nss",                  # Security/SSL libraries
-    "freetype",             # Font rendering
-    "harfbuzz",             # Text shaping
-    "ca-certificates",      # SSL root certs
-    "ttf-freefont"          # Fonts to prevent squares in screenshots
+    "chromium",
+    "glib",
+    "nss",
+    "nspr",
+    "atk",
+    "cups",
+    "dbus",
+    "libdrm",
+    "gtk3",
+    "pango",
+    "cairo",
+    "at-spi2-atk",
+    "at-spi2-core",
+    "alsa-lib",
+    "mesa",
+    "libxkbcommon",
+    "xorg.libX11",
+    "xorg.libXcomposite",
+    "xorg.libXdamage",
+    "xorg.libXext",
+    "xorg.libXfixes",
+    "xorg.libXrandr",
+    "xorg.libxcb"
 ]
+
+[variables]
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium"
 
 [phases.build]
 cmds = ["npm install && npm run build"]
