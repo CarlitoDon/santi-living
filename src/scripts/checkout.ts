@@ -436,7 +436,8 @@ function confirmPayment(): void {
   const method = state.selectedMethod === "bca" ? "Transfer BCA" : "QRIS";
 
   // Compose WhatsApp message for payment proof
-  const message = `Halo Santi Living! 👋
+  const message = `Halo Santi Living!
+
 
 Saya *${
     order.customerName
