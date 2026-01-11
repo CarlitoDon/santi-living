@@ -101,9 +101,9 @@ export const formatOrderMessage = (data: OrderPayload): string => {
     message += `Ongkir: Gratis (Free)\n`;
   }
 
-  message += `━━━━━━━━━━━━━━━━━━\n`;
+  message += `━━━━━━━━━━━━━\n`;
   message += `*TOTAL BAYAR: ${formatCurrency(data.totalPrice)}*\n`;
-  message += `━━━━━━━━━━━━━━━━━━\n\n`;
+  message += `━━━━━━━━━━━━━\n\n`;
 
   message += `*Detail Pengiriman:*\n`;
   message += `- Nama: ${data.customerName}\n`;
