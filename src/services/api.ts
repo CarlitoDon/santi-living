@@ -1,6 +1,7 @@
 import config from "@/data/config.json";
 
 export interface OrderPayload {
+  orderId: string;
   customerName: string;
   customerWhatsapp: string;
   deliveryAddress: string;
@@ -22,10 +23,13 @@ export interface OrderPayload {
   }>;
   totalPrice: number;
   orderDate: string;
+  endDate: string;
   duration: number;
   deliveryFee: number;
   paymentMethod: "qris" | "transfer";
   notes?: string;
+  volumeDiscountAmount?: number;
+  volumeDiscountLabel?: string;
 }
 
 export async function sendOrderToBot(payload: OrderPayload) {

@@ -45,6 +45,13 @@ export interface CalculatorState {
   total: number;
   deliveryEstimate: string;
 
+  // Discounts
+  volumeDiscountAmount: number;
+  volumeDiscountLabel: string;
+  volumeDiscountPercent: number;
+  nextTierUnitsNeeded: number;
+  nextTierDiscountPercent: number;
+
   // Validation
   isValid: boolean;
   deliveryFee: number;

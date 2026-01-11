@@ -10,8 +10,17 @@ const formatCurrency = (val: number) => {
 };
 
 export const formatOrderMessage = (data: OrderPayload): string => {
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString("id-ID", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
   let message = `Halo Kak *${data.customerName}*! 👋\n`;
-  message += `Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*.\n\n`;
+  message += `Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*.\n`;
+  message += `Order ID: *${data.orderId || "-"}*\n\n`;
   message += `Pesanan Anda telah kami terima dengan rincian berikut:\n\n`;
 
   // Helper to filter items
@@ -61,23 +70,49 @@ export const formatOrderMessage = (data: OrderPayload): string => {
   if (totalQuantity > 0) {
     message += `- Total Kasur: ${totalQuantity} unit\n`;
   }
-  message += `- Tanggal Mulai: ${data.orderDate}\n`;
-  message += `- Durasi: ${data.duration} hari\n`;
-  message += `- Biaya Sewa: ${formatCurrency(
-    data.totalPrice - data.deliveryFee
-  )}\n`;
 
-  if (data.deliveryFee > 0) {
-    message += `- Ongkir: ${formatCurrency(data.deliveryFee)}\n`;
+  if (data.endDate) {
+    message += `- Periode: ${formatDate(data.orderDate)} s/d ${formatDate(
+      data.endDate
+    )}\n`;
   } else {
-    message += `- Ongkir: Gratis (Free)\n`;
+    message += `- Tanggal Mulai: ${formatDate(data.orderDate)}\n`;
   }
 
-  message += `- *Total Pembayaran: ${formatCurrency(data.totalPrice)}*\n\n`;
+  message += `- Durasi: ${data.duration} hari\n`;
+  // Calculate financials
+  const discount = data.volumeDiscountAmount || 0;
+  // Subtotal (Gross) = Total - Delivery + Discount
+  const subtotal = data.totalPrice - data.deliveryFee + discount;
+
+  message += `━━━━━━━━━━━━━━━━━━\n`;
+  message += `*Rincian Biaya:*\n`;
+  message += `Subtotal (${data.duration} hari): ${formatCurrency(subtotal)}\n`;
+
+  if (discount > 0) {
+    message += `Diskon (${
+      data.volumeDiscountLabel || "Hemat"
+    }): -${formatCurrency(discount)}\n`;
+  }
+
+  if (data.deliveryFee > 0) {
+    message += `Ongkir: ${formatCurrency(data.deliveryFee)}\n`;
+  } else {
+    message += `Ongkir: Gratis (Free)\n`;
+  }
+
+  message += `━━━━━━━━━━━━━━━━━━\n`;
+  message += `*TOTAL BAYAR: ${formatCurrency(data.totalPrice)}*\n`;
+  message += `━━━━━━━━━━━━━━━━━━\n\n`;
 
   message += `*Detail Pengiriman:*\n`;
   message += `- Nama: ${data.customerName}\n`;
   message += `- Alamat: ${data.deliveryAddress}\n`;
+
+  if (data.addressFields?.lat && data.addressFields?.lng) {
+    message += `- Google Maps: https://www.google.com/maps?q=${data.addressFields.lat},${data.addressFields.lng}\n`;
+    message += `\n_Mohon cek titik lokasi di atas. Jika kurang tepat, silakan kirim *Share Location* (kanan bawah 📎 > Location) agar pengiriman lebih akurat._\n`;
+  }
 
   if (data.notes && data.notes.trim()) {
     message += `- Catatan: ${data.notes}\n`;

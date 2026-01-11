@@ -46,51 +46,8 @@ export const sendOrder = async (req: Request, res: Response) => {
   const message = formatOrderMessage(payload);
 
   try {
-    const { MessageMedia } = await import("whatsapp-web.js");
-    const { generateQrisDynamic, generateQrisImageBase64 } = await import(
-      "../utils/qris"
-    );
-
-    // 5. Generate QRIS Dynamic (only if payment method is QRIS)
-    const staticPayload = process.env.QRIS_STATIC_PAYLOAD || "";
-    let media: any = null;
-    let finalMessage = message;
-
-    if (payload.paymentMethod === "qris" && staticPayload) {
-      try {
-        const qrisPayload = await generateQrisDynamic(
-          staticPayload,
-          payload.totalPrice
-        );
-        const qrisBase64 = await generateQrisImageBase64(qrisPayload);
-        media = new MessageMedia(
-          "image/png",
-          qrisBase64,
-          "qris-pembayaran.png"
-        );
-        finalMessage +=
-          "\n\n📱 *Silakan scan QR Code di atas untuk pembayaran.*";
-      } catch (err) {
-        console.error("Failed to generate QRIS:", err);
-      }
-    } else if (payload.paymentMethod === "transfer") {
-      // Add bank transfer details
-      finalMessage += "\n\n🏦 *Pembayaran via Transfer Bank:*";
-      finalMessage += "\n• BCA: 1234567890 a.n. Santi Mebel";
-      finalMessage += "\n• Mandiri: 0987654321 a.n. Santi Mebel";
-      finalMessage +=
-        "\n\n_Mohon konfirmasi setelah transfer dengan mengirim bukti pembayaran._";
-    }
-
-    // 6. Send Message (Media or Text)
-    let response: any;
-    if (media) {
-      response = await client.sendMessage(targetNumber, media, {
-        caption: finalMessage,
-      });
-    } else {
-      response = await client.sendMessage(targetNumber, finalMessage);
-    }
+    // 5. Send Message (Text Only - Payment Details handled on Checkout Page)
+    const response = await client.sendMessage(targetNumber, message);
 
     // Log success
     console.log(

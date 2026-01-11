@@ -9,6 +9,11 @@
   "minQuantity": 1,
   "maxQuantity": 50,
   "minBookingDays": 0,
+  "volumeDiscounts": [
+    { "minQty": 1, "maxQty": 2, "discount": 0, "label": "" },
+    { "minQty": 3, "maxQty": 5, "discount": 0.1, "label": "Hemat 10%" },
+    { "minQty": 6, "maxQty": 999, "discount": 0.15, "label": "Hemat 15%" }
+  ],
   "operatingHours": "08:00 - 21:00",
   "cutoffHour": 15,
   "storeLocation": {

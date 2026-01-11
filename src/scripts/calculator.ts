@@ -5,7 +5,6 @@
 import config from "@/data/config.json";
 import products from "@/data/products.json";
 import type { CalculatorState, ProductItem, CartItem } from "@/types";
-import { composeWhatsAppUrl } from "./whatsapp-compose";
 import { validateForm } from "./form-validation";
 import {
   getCurrentLocation,
@@ -40,6 +39,11 @@ let state: CalculatorState = {
   deliveryEstimate: "",
   deliveryFee: 0,
   distance: 0,
+  volumeDiscountAmount: 0,
+  volumeDiscountLabel: "",
+  volumeDiscountPercent: 0,
+  nextTierUnitsNeeded: 0,
+  nextTierDiscountPercent: 0,
   isValid: false,
   errors: {},
 };
@@ -653,14 +657,54 @@ function updateCalculation(): void {
     0
   );
 
-  // Calculate total price: simply sum (quantity * price * duration) for all items
-  state.total = state.items.reduce(
-    (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
-    0
-  );
+  // Calculate mattress quantity (for volume discount - exclude accessories)
+  const mattressQty = state.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((sum, i) => sum + i.quantity, 0);
 
-  state.subtotal = state.total;
-  state.total = state.subtotal + (state.deliveryFee || 0);
+  // Find applicable volume discount tier
+  const volumeDiscounts = (config as any).volumeDiscounts || [];
+  const volumeTier = volumeDiscounts.find(
+    (t: any) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+  );
+  const volumeDiscount = volumeTier?.discount || 0;
+
+  // Calculate subtotals by category
+  const mattressSubtotal = state.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((sum, i) => sum + i.quantity * i.pricePerDay * state.duration, 0);
+
+  const accessorySubtotal = state.items
+    .filter((i) => i.category === "accessory")
+    .reduce((sum, i) => sum + i.quantity * i.pricePerDay * state.duration, 0);
+
+  // Calculate discount amount (only on mattresses, not accessories)
+  const discountAmount = Math.round(mattressSubtotal * volumeDiscount);
+
+  // Update state with discount info
+  state.volumeDiscountAmount = discountAmount;
+  state.volumeDiscountLabel = volumeTier?.label || "";
+  state.volumeDiscountPercent = volumeDiscount * 100;
+
+  // Calculate next tier upsell prompt (e.g., "Tambah 2 unit lagi untuk diskon 15%")
+  const currentTierIndex = volumeDiscounts.findIndex(
+    (t: any) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+  );
+  const nextTier = volumeDiscounts[currentTierIndex + 1];
+
+  if (nextTier && mattressQty > 0) {
+    const unitsNeeded = nextTier.minQty - mattressQty;
+    const nextDiscountPercent = Math.round(nextTier.discount * 100);
+    state.nextTierUnitsNeeded = unitsNeeded;
+    state.nextTierDiscountPercent = nextDiscountPercent;
+  } else {
+    state.nextTierUnitsNeeded = 0;
+    state.nextTierDiscountPercent = 0;
+  }
+
+  // Calculate totals
+  state.subtotal = mattressSubtotal + accessorySubtotal;
+  state.total = state.subtotal - discountAmount + (state.deliveryFee || 0);
 
   // Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate();
@@ -821,6 +865,40 @@ function updateResultPanel(): void {
     deliveryDistanceEl.textContent =
       state.distance > 0 ? `(${state.distance.toFixed(1)} km)` : "";
   }
+
+  // Volume Discount Display
+  const volumeDiscountEl = document.getElementById("resultVolumeDiscount");
+  if (volumeDiscountEl) {
+    const valEl = volumeDiscountEl.querySelector(".result-value");
+    const labelEl = document.getElementById("volumeDiscountLabel");
+
+    if (state.volumeDiscountAmount > 0) {
+      if (valEl) {
+        valEl.textContent = `-Rp ${new Intl.NumberFormat("id-ID").format(
+          state.volumeDiscountAmount
+        )}`;
+      }
+      if (labelEl) {
+        labelEl.textContent = state.volumeDiscountLabel
+          ? `(${state.volumeDiscountLabel})`
+          : "";
+      }
+      volumeDiscountEl.style.display = "flex";
+    } else {
+      volumeDiscountEl.style.display = "none";
+    }
+  }
+
+  // Next Tier Upsell Prompt
+  const upsellPromptEl = document.getElementById("upsellPrompt");
+  if (upsellPromptEl) {
+    if (state.nextTierUnitsNeeded > 0 && state.nextTierDiscountPercent > 0) {
+      upsellPromptEl.innerHTML = `💡 Tambah <strong>${state.nextTierUnitsNeeded} unit</strong> lagi untuk diskon <strong>${state.nextTierDiscountPercent}%</strong>!`;
+      upsellPromptEl.style.display = "block";
+    } else {
+      upsellPromptEl.style.display = "none";
+    }
+  }
 }
 
 /**
@@ -974,7 +1052,11 @@ async function handleWhatsAppClick(): Promise<void> {
   if (addressLat && addressLng)
     fullAddress += ` (${addressLat}, ${addressLng})`;
 
+  // Generate order ID
+  const orderId = `SL-${Date.now().toString(36).toUpperCase()}`;
+
   const bookingData = {
+    orderId: orderId,
     customerName: customerName,
     customerWhatsapp: customerWhatsapp,
     deliveryAddress: fullAddress,
@@ -996,10 +1078,13 @@ async function handleWhatsAppClick(): Promise<void> {
     })),
     totalPrice: state.total,
     orderDate: state.startDate || "",
+    endDate: state.endDate || "",
     duration: state.duration,
     deliveryFee: state.deliveryFee || 0,
     paymentMethod: state.paymentMethod,
     notes: customerNotes,
+    volumeDiscountAmount: state.volumeDiscountAmount,
+    volumeDiscountLabel: state.volumeDiscountLabel,
   };
 
   // Change button state to loading
