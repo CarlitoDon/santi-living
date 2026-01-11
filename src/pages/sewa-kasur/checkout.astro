@@ -67,22 +67,25 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
           </div>
         </div>
 
-        <button
-          type="button"
-          class="btn btn-whatsapp btn-lg btn-confirm"
-          id="btnConfirmPayment"
-        >
-          ✓ Saya Sudah Bayar
-        </button>
+        <!-- Sticky Confirm Button Container -->
+        <div class="checkout-confirm-sticky">
+          <button
+            type="button"
+            class="btn btn-whatsapp btn-lg btn-confirm"
+            id="btnConfirmPayment"
+          >
+            ✓ Saya Sudah Bayar
+          </button>
+        </div>
       </div>
     </div>
   </main>
-
-  <script>
-    import { initCheckout } from "@/scripts/checkout";
-    initCheckout();
-  </script>
 </MainLayout>
+
+<script>
+  import { initCheckout } from "@/scripts/checkout";
+  initCheckout();
+</script>
 
 <style is:global>
   .checkout-page {
@@ -159,6 +162,7 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
       box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
       padding: var(--space-4) var(--space-5);
+      padding-bottom: 60px; /* Push buttons up */
     }
 
     .checkout-payment-selection .section-title {
@@ -287,21 +291,30 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
   }
 
   /* Make confirm button sticky on mobile */
+  /* Make confirm button sticky on mobile */
   @media (max-width: 767px) {
-    #checkoutStep2 .btn-confirm {
+    .checkout-confirm-sticky {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      max-width: none;
-      margin: 0;
-      border-radius: 0;
       z-index: 50;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
       box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+      padding: var(--space-4) var(--space-5);
+      padding-bottom: 60px; /* Push buttons up */
+      border-top: 1px solid var(--color-border);
+    }
+
+    #checkoutStep2 .btn-confirm {
+      margin: 0;
+      max-width: none;
+      width: 100%;
     }
 
     #checkoutStep2 {
-      padding-bottom: 120px; /* Increased from 80px */
+      padding-bottom: 140px; /* Space for the new sticky container */
     }
   }
 
