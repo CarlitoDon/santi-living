@@ -41,6 +41,7 @@ export interface OrderPayload {
     category: string;
     quantity: number;
     pricePerDay: number;
+    includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
   }>;
   totalPrice: number;
   orderDate: string;

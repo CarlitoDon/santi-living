@@ -1,4 +1,39 @@
-interface WaNotifyPayload {
+// Full order payload for detailed WA message (uses bot-service formatter)
+export interface OrderNotifyPayload {
+  orderId: string;
+  customerName: string;
+  customerWhatsapp: string;
+  deliveryAddress: string;
+  addressFields?: {
+    street?: string;
+    kelurahan?: string;
+    kecamatan?: string;
+    kota?: string;
+    provinsi?: string;
+    zip?: string;
+    lat?: string;
+    lng?: string;
+  };
+  items: Array<{
+    name: string;
+    category: "package" | "mattress" | "accessory";
+    quantity: number;
+    pricePerDay: number;
+  }>;
+  totalPrice: number;
+  orderDate: string;
+  endDate: string;
+  duration: number;
+  deliveryFee: number;
+  paymentMethod: "qris" | "transfer";
+  notes?: string;
+  volumeDiscountAmount?: number;
+  volumeDiscountLabel?: string;
+  orderUrl?: string;
+}
+
+// Simple payload for admin-triggered notifications
+interface SimpleNotifyPayload {
   customerWhatsapp: string;
   orderNumber: string;
   orderUrl: string;
@@ -13,31 +48,22 @@ const getBotApiKey = () => {
   return process.env.BOT_SERVICE_API_KEY || "";
 };
 
-export async function sendOrderConfirmation(payload: WaNotifyPayload) {
+/**
+ * Send full order confirmation via bot-service /send-order
+ * Uses the detailed template with all order info
+ */
+export async function sendOrderConfirmation(payload: OrderNotifyPayload) {
   const baseUrl = getBotServiceUrl();
   const apiKey = getBotApiKey();
 
-  const message = `Halo ${payload.customerName}! 👋
-
-Pesanan sewa kasur Anda telah kami terima dengan nomor: *${payload.orderNumber}*
-
-Anda dapat melihat status pesanan di:
-${payload.orderUrl}
-
-Tim kami akan segera menghubungi Anda untuk konfirmasi.
-
-Terima kasih telah memilih Santi Living! 🙏`;
-
-  const response = await fetch(`${baseUrl}/send-message`, {
+  // Use /send-order endpoint which has the full detailed template
+  const response = await fetch(`${baseUrl}/send-order`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
     },
-    body: JSON.stringify({
-      phone: payload.customerWhatsapp,
-      message,
-    }),
+    body: JSON.stringify(payload),
   });
 
   if (!response.ok) {
@@ -48,21 +74,24 @@ Terima kasih telah memilih Santi Living! 🙏`;
   return response.json();
 }
 
-// For admin-triggered notifications with order link
-export async function sendOrderLinkToCustomer(payload: WaNotifyPayload) {
+/**
+ * Send order link notification (for admin-triggered re-sends)
+ * Uses simple template with just the link
+ */
+export async function sendOrderLinkToCustomer(payload: SimpleNotifyPayload) {
   const baseUrl = getBotServiceUrl();
   const apiKey = getBotApiKey();
 
-  const message = `Halo ${payload.customerName}! 👋
+  const message = `Halo Kak *${payload.customerName}*! 👋
 
-Ini link untuk melihat status pesanan Anda:
+Ini link untuk melihat status pesanan Kakak:
 ${payload.orderUrl}
 
-Pesanan: *${payload.orderNumber}*
+Nomor Pesanan: *${payload.orderNumber}*
 
-Anda bisa akses halaman ini kapan saja untuk melihat status pengiriman dan pembayaran.
+Kakak bisa akses halaman ini kapan saja untuk melihat status pengiriman dan pembayaran.
 
-Terima kasih! 🙏`;
+Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*! 🙏`;
 
   const response = await fetch(`${baseUrl}/send-message`, {
     method: "POST",

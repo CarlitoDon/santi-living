@@ -16,10 +16,12 @@ export interface OrderPayload {
     lng?: string;
   };
   items: Array<{
+    id: string; // Product ID (e.g., "package-single-standard")
     name: string;
     category: "package" | "mattress" | "accessory";
     quantity: number;
     pricePerDay: number;
+    includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
   }>;
   totalPrice: number;
   orderDate: string;
@@ -34,10 +36,12 @@ export interface OrderPayload {
 }
 
 export async function sendOrderToBot(payload: OrderPayload) {
-  const baseUrl = import.meta.env.PUBLIC_BOT_API_URL || config.botApi.baseUrl;
+  // Direct to ERP Sync Service (bypassing Bot Service for orders)
+  const baseUrl =
+    import.meta.env.PUBLIC_ERP_SYNC_URL || "http://localhost:3002";
   const apiKey = import.meta.env.PUBLIC_BOT_API_KEY || config.botApi.apiKey;
 
-  const response = await fetch(`${baseUrl}/send-order`, {
+  const response = await fetch(`${baseUrl}/api/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

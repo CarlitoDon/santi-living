@@ -432,12 +432,17 @@ function handleIncrement(event: Event): void {
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
+    // Lookup product data to get includes (bundle components)
+    const productData = findProductById(id);
+    const includes = productData?.includes;
+
     state.items.push({
       id,
       name,
       category,
       quantity: 1,
       pricePerDay: price,
+      includes, // Bundle components for packages
     });
   }
 
@@ -1076,6 +1081,7 @@ async function handleWhatsAppClick(): Promise<void> {
       category: item.category,
       quantity: item.quantity,
       pricePerDay: item.pricePerDay,
+      includes: item.includes, // Bundle components for auto-creation
     })),
     totalPrice: state.total,
     orderDate: state.startDate || "",
@@ -1117,18 +1123,8 @@ async function handleWhatsAppClick(): Promise<void> {
       console.warn("ERP sync failed (non-blocking):", message);
     }
 
-    // Step 2: Send to bot with orderUrl (if available)
-    try {
-      const { sendOrderToBot } = await import("../services/api");
-      await sendOrderToBot({
-        ...bookingData,
-        orderUrl, // Include order tracking link in WA message
-      });
-      console.log("Order sent to bot successfully");
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.warn("Bot notification failed:", message);
-    }
+    // Note: WhatsApp notification is now handled by ERP Sync Service
+    // No need to call sendOrderToBot separately
 
     // Update button to show success briefly
     waButton.innerHTML = `✓ Melanjutkan ke Checkout`;

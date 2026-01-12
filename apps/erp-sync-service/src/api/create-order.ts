@@ -1,10 +1,7 @@
 import type { Request, Response } from "express";
 import { CreateOrderSchema } from "../types/order";
-import {
-  createRentalOrder,
-  findOrCreatePartner,
-  lookupBundleByExternalId,
-} from "../services/erp-client";
+import { createRentalOrder, findOrCreatePartner } from "../services/erp-client";
+import { sendOrderConfirmation } from "../services/wa-notifier";
 
 // Default company ID for Santi Living (maps to Demo Rental in dev)
 const SANTI_LIVING_COMPANY_ID =
@@ -41,30 +38,34 @@ export const createOrder = async (req: Request, res: Response) => {
       longitude: addressFields.lng ? parseFloat(addressFields.lng) : undefined,
     });
 
-    // 3. Map items to rental items/bundles
-    // For packages, lookup bundle by externalId. For single items, use rentalItemId.
-    const rentalItems = await Promise.all(
-      input.items.map(async (item) => {
-        // Check if this is a package/paket - lookup bundle
-        if (item.category === "package") {
-          const bundle = await lookupBundleByExternalId(
-            SANTI_LIVING_COMPANY_ID,
-            item.id
-          );
-          if (bundle) {
-            return {
-              rentalBundleId: bundle.id,
-              quantity: item.quantity,
-            };
-          }
-        }
-        // Fallback to using name as rentalItemId (backward compatibility)
+    // 3. Map items to rental items/bundles with metadata for auto-creation
+    const rentalItems = input.items.map((item) => {
+      console.log(
+        `[DEBUG] Processing item: id=${item.id}, category=${item.category}, includes=${item.includes?.join(", ")}`
+      );
+
+      // Include metadata for auto-creation in sync-erp
+      const baseItem = {
+        quantity: item.quantity,
+        name: item.name,
+        pricePerDay: item.pricePerDay,
+        category: item.category,
+        components: item.includes, // Pass bundle components for auto-creation
+      };
+
+      // Package items use rentalBundleId, others use rentalItemId
+      if (item.category === "package") {
         return {
-          rentalItemId: item.id || item.name,
-          quantity: item.quantity,
+          ...baseItem,
+          rentalBundleId: item.id,
         };
-      })
-    );
+      } else {
+        return {
+          ...baseItem,
+          rentalItemId: item.id,
+        };
+      }
+    });
 
     // 4. Create rental order in sync-erp with ALL separate fields
     const order = await createRentalOrder({
@@ -92,10 +93,53 @@ export const createOrder = async (req: Request, res: Response) => {
     });
 
     // 5. Generate public URL for customer
-    const baseUrl = process.env.PUBLIC_BASE_URL || "https://santi-living.com";
+    // In dev: use localhost:4321 (Astro), in prod: use santiliving.com
+    const isDev = process.env.NODE_ENV !== "production";
+    const baseUrl =
+      process.env.PUBLIC_BASE_URL ||
+      (isDev ? "http://localhost:4321" : "https://santiliving.com");
     const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
 
-    // 6. Return response with token and URL
+    // 6. Send WhatsApp Notification with FULL order details (uses detailed template)
+    try {
+      await sendOrderConfirmation({
+        orderId: order.orderNumber,
+        customerName: input.customerName,
+        customerWhatsapp: input.customerWhatsapp,
+        deliveryAddress: input.deliveryAddress,
+        addressFields: {
+          street: addressFields.street,
+          kelurahan: addressFields.kelurahan,
+          kecamatan: addressFields.kecamatan,
+          kota: addressFields.kota,
+          provinsi: addressFields.provinsi,
+          zip: addressFields.zip,
+          lat: addressFields.lat,
+          lng: addressFields.lng,
+        },
+        items: input.items.map((item) => ({
+          name: item.name,
+          category: item.category,
+          quantity: item.quantity,
+          pricePerDay: item.pricePerDay,
+        })),
+        totalPrice: input.totalPrice,
+        orderDate: input.orderDate,
+        endDate: input.endDate,
+        duration: input.duration,
+        deliveryFee: input.deliveryFee,
+        paymentMethod: input.paymentMethod,
+        notes: input.notes,
+        volumeDiscountAmount: input.volumeDiscountAmount,
+        volumeDiscountLabel: input.volumeDiscountLabel,
+        orderUrl,
+      });
+      console.log(`[WA Notify] Sent confirmation to ${input.customerWhatsapp}`);
+    } catch (err) {
+      console.error("[WA Notify] Failed to send order confirmation:", err);
+    }
+
+    // 7. Return response with token and URL
     return res.status(201).json({
       id: order.id,
       orderNumber: order.orderNumber,

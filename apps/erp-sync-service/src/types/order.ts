@@ -25,6 +25,7 @@ export const CreateOrderSchema = z.object({
         category: z.enum(["package", "mattress", "accessory"]),
         quantity: z.number().int().positive(),
         pricePerDay: z.number().positive(),
+        includes: z.array(z.string()).optional(), // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
       })
     )
     .min(1),

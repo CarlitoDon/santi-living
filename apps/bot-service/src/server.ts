@@ -59,9 +59,11 @@ import { getStatus } from "./api/status";
 app.get("/status", getStatus);
 
 import { sendOrder } from "./api/send-order";
+import { sendMessage } from "./api/send-message";
 import { authenticateApiKey } from "./middleware/auth";
 
 app.post("/send-order", authenticateApiKey, sendOrder);
+app.post("/send-message", authenticateApiKey, sendMessage);
 
 // Start server function (to be called from index.ts)
 export const startServer = () => {

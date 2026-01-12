@@ -9,7 +9,17 @@ export function createServer() {
   const app = express();
 
   // Middleware
-  app.use(cors());
+  const allowedOrigins = (
+    process.env.CORS_ORIGINS || "http://localhost:4321,http://localhost:3000"
+  ).split(",");
+
+  app.use(
+    cors({
+      origin: allowedOrigins,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+    })
+  );
   app.use(express.json());
 
   // Health check (public)

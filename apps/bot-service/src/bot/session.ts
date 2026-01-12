@@ -1,5 +1,7 @@
+import { Client } from "whatsapp-web.js";
+
 export class BotSession {
-  private client: any;
+  private client: Client | null = null;
   private static instance: BotSession;
   private qrCode: string | null = null;
   private status: "INITIALIZING" | "QR_PENDING" | "READY" | "DISCONNECTED" =
@@ -10,8 +12,8 @@ export class BotSession {
   }
 
   public initialize(
-    createClientFn: () => any,
-    attachHandlersFn: (client: any) => void
+    createClientFn: () => Client,
+    attachHandlersFn: (client: Client) => void
   ) {
     if (this.client) return;
 
@@ -52,7 +54,7 @@ export class BotSession {
     return this.client;
   }
 
-  public setClient(client: any) {
+  public setClient(client: Client) {
     this.client = client;
   }
 }

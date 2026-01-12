@@ -1,8 +1,13 @@
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://santiliving.com',
+  output: 'server', // SSR mode - needed for dynamic routes like /pesanan/[token]
+  adapter: node({
+    mode: 'standalone'
+  }),
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto'

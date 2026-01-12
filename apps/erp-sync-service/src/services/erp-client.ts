@@ -9,7 +9,18 @@ const getBaseUrl = () => {
   return process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
 };
 
-export interface CreateOrderInput {
+export interface BaseAddressFields {
+  street?: string | null;
+  kelurahan?: string | null;
+  kecamatan?: string | null;
+  kota?: string | null;
+  provinsi?: string | null;
+  zip?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+}
+
+export interface CreateOrderInput extends BaseAddressFields {
   companyId: string;
   partnerId: string;
   rentalStartDate: Date;
@@ -18,39 +29,28 @@ export interface CreateOrderInput {
     rentalItemId?: string; // For single items
     rentalBundleId?: string; // For package bundles
     quantity: number;
+    // Metadata for auto-creation
+    name?: string;
+    pricePerDay?: number;
+    category?: "package" | "mattress" | "accessory";
+    components?: string[]; // Bundle component labels: ["kasur busa", "sprei", "bantal", "selimut"]
   }>;
   notes?: string;
 
   // Santi Living integration fields (all separate)
   deliveryFee?: number;
   deliveryAddress?: string;
-  street?: string;
-  kelurahan?: string;
-  kecamatan?: string;
-  kota?: string;
-  provinsi?: string;
-  zip?: string;
-  latitude?: number;
-  longitude?: number;
   paymentMethod?: string;
   discountAmount?: number;
   discountLabel?: string;
 }
 
-export interface CreatePartnerInput {
+export interface CreatePartnerInput extends BaseAddressFields {
   companyId: string;
   name: string;
   phone: string;
   email?: string;
   address?: string;
-  street?: string;
-  kelurahan?: string;
-  kecamatan?: string;
-  kota?: string;
-  provinsi?: string;
-  zip?: string;
-  latitude?: number;
-  longitude?: number;
 }
 
 export interface OrderResponse {
@@ -67,15 +67,7 @@ export interface PartnerResponse {
   phone: string;
 }
 
-export interface BundleResponse {
-  id: string;
-  externalId: string;
-  name: string;
-  shortName: string | null;
-  dailyRate: string | number;
-}
-
-export interface OrderByTokenResponse {
+export interface OrderByTokenResponse extends BaseAddressFields {
   orderNumber: string;
   status: string;
   rentalStartDate: string;
@@ -87,6 +79,7 @@ export interface OrderByTokenResponse {
   // Santi Living fields (all separate)
   deliveryFee: number | null;
   deliveryAddress: string | null;
+  // Address fields inherited from BaseAddressFields (allowing null)
   street: string | null;
   kelurahan: string | null;
   kecamatan: string | null;
@@ -95,6 +88,7 @@ export interface OrderByTokenResponse {
   zip: string | null;
   latitude: number | null;
   longitude: number | null;
+
   paymentMethod: string | null;
   discountAmount: number | null;
   discountLabel: string | null;
@@ -104,13 +98,7 @@ export interface OrderByTokenResponse {
     name: string;
     phone: string;
     address?: string;
-    street?: string;
-    kelurahan?: string;
-    kecamatan?: string;
-    kota?: string;
-    provinsi?: string;
-    zip?: string;
-  };
+  } & BaseAddressFields;
   items: Array<{
     name: string;
     quantity: number;
@@ -219,23 +207,4 @@ export async function findOrCreatePartner(
   input: CreatePartnerInput
 ): Promise<PartnerResponse> {
   return trpcMutate<PartnerResponse>("publicRental.findOrCreatePartner", input);
-}
-
-/**
- * Lookup bundle by santi-living externalId (e.g., "package-single-standard")
- * Returns null if not found (caller should fall back to item-based logic)
- */
-export async function lookupBundleByExternalId(
-  companyId: string,
-  externalId: string
-): Promise<BundleResponse | null> {
-  try {
-    return await trpcQuery<BundleResponse>("rentalBundle.findByExternalId", {
-      companyId,
-      externalId,
-    });
-  } catch {
-    // Bundle not found - return null to fall back
-    return null;
-  }
 }

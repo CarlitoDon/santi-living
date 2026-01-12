@@ -26,6 +26,7 @@ export interface CartItem {
   category: "package" | "mattress" | "accessory";
   quantity: number;
   pricePerDay: number;
+  includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
 }
 
 /**
