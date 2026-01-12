@@ -1,10 +1,14 @@
 import type { Request, Response } from "express";
 import { CreateOrderSchema } from "../types/order";
-import { createRentalOrder, findOrCreatePartner } from "../services/erp-client";
+import {
+  createRentalOrder,
+  findOrCreatePartner,
+  lookupBundleByExternalId,
+} from "../services/erp-client";
 
-// Default company ID for Santi Living
+// Default company ID for Santi Living (maps to Demo Rental in dev)
 const SANTI_LIVING_COMPANY_ID =
-  process.env.SANTI_LIVING_COMPANY_ID || "santi-living-company-id";
+  process.env.SANTI_LIVING_COMPANY_ID || "demo-company-rental";
 
 export const createOrder = async (req: Request, res: Response) => {
   // 1. Validate input
@@ -37,12 +41,30 @@ export const createOrder = async (req: Request, res: Response) => {
       longitude: addressFields.lng ? parseFloat(addressFields.lng) : undefined,
     });
 
-    // 3. Map items to rental items
-    // TODO: Create proper product mapping between santi-living and sync-erp
-    const rentalItems = input.items.map((item) => ({
-      rentalItemId: item.name, // Placeholder - needs mapping logic
-      quantity: item.quantity,
-    }));
+    // 3. Map items to rental items/bundles
+    // For packages, lookup bundle by externalId. For single items, use rentalItemId.
+    const rentalItems = await Promise.all(
+      input.items.map(async (item) => {
+        // Check if this is a package/paket - lookup bundle
+        if (item.category === "package") {
+          const bundle = await lookupBundleByExternalId(
+            SANTI_LIVING_COMPANY_ID,
+            item.id
+          );
+          if (bundle) {
+            return {
+              rentalBundleId: bundle.id,
+              quantity: item.quantity,
+            };
+          }
+        }
+        // Fallback to using name as rentalItemId (backward compatibility)
+        return {
+          rentalItemId: item.id || item.name,
+          quantity: item.quantity,
+        };
+      })
+    );
 
     // 4. Create rental order in sync-erp with ALL separate fields
     const order = await createRentalOrder({

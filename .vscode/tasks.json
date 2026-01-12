@@ -2,7 +2,33 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Frontend: Dev",
+      "label": "TypeScript: Watch",
+      "type": "shell",
+      "command": "./node_modules/.bin/tsc",
+      "args": ["--watch", "--noEmit"],
+      "problemMatcher": "$tsc-watch",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "group": "build",
+        "panel": "dedicated"
+      },
+      "isBackground": true
+    },
+    {
+      "label": "Dev: Start All",
+      "dependsOn": ["Dev: Astro", "Dev: Bot Service", "Dev: ERP Sync Service"],
+      "dependsOrder": "parallel",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Dev: Astro",
       "type": "npm",
       "script": "dev",
       "problemMatcher": [],
@@ -10,20 +36,10 @@
         "group": "frontend",
         "panel": "dedicated"
       },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "isBackground": true
     },
     {
-      "label": "Frontend: Build",
-      "type": "npm",
-      "script": "build",
-      "problemMatcher": [],
-      "group": "build"
-    },
-    {
-      "label": "Bot Service: Dev",
+      "label": "Dev: Bot Service",
       "type": "shell",
       "command": "npm run dev",
       "options": {
@@ -33,23 +49,29 @@
       "presentation": {
         "group": "backend",
         "panel": "dedicated"
-      }
+      },
+      "isBackground": true
     },
     {
-      "label": "Start All",
-      "dependsOn": ["Frontend: Dev", "Bot Service: Dev"],
-      "problemMatcher": []
-    },
-    {
-      "label": "TSC: Watch",
+      "label": "Dev: ERP Sync Service",
       "type": "shell",
-      "command": "./node_modules/.bin/tsc",
-      "args": ["--watch", "--noEmit"],
-      "problemMatcher": "$tsc-watch",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/erp-sync-service"
+      },
+      "problemMatcher": [],
       "presentation": {
-        "group": "build",
+        "group": "backend",
         "panel": "dedicated"
-      }
+      },
+      "isBackground": true
+    },
+    {
+      "label": "Frontend: Build",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": [],
+      "group": "build"
     }
   ]
 }

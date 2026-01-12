@@ -36,6 +36,7 @@ export const OrderPayloadSchema = z.object({
   notes: z.string().optional(),
   volumeDiscountAmount: z.number().optional(),
   volumeDiscountLabel: z.string().optional(),
+  orderUrl: z.string().url().optional(), // Order tracking page URL
 });
 
 export type OrderPayload = z.infer<typeof OrderPayloadSchema>;

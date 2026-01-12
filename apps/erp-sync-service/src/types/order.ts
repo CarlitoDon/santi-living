@@ -20,6 +20,7 @@ export const CreateOrderSchema = z.object({
   items: z
     .array(
       z.object({
+        id: z.string(), // santi-living product ID (e.g., "package-single-standard")
         name: z.string(),
         category: z.enum(["package", "mattress", "accessory"]),
         quantity: z.number().int().positive(),
@@ -28,8 +29,8 @@ export const CreateOrderSchema = z.object({
     )
     .min(1),
   totalPrice: z.number().positive(),
-  orderDate: z.string().datetime(),
-  endDate: z.string().datetime(),
+  orderDate: z.string().min(1), // Accept any date string, will parse in handler
+  endDate: z.string().min(1), // Accept any date string, will parse in handler
   duration: z.number().int().positive(),
   deliveryFee: z.number().nonnegative(),
   paymentMethod: z.enum(["qris", "transfer"]),

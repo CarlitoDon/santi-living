@@ -118,6 +118,14 @@ export const formatOrderMessage = (data: OrderPayload): string => {
     message += `- Catatan: ${data.notes}\n`;
   }
 
+  // Add order tracking link if available
+  if (data.orderUrl) {
+    message += `\n━━━━━━━━━━━━━━\n`;
+    message += `*Link Status Pesanan:*\n`;
+    message += `${data.orderUrl}\n`;
+    message += `\n_Klik link di atas untuk melihat status pesanan Kakak._\n`;
+  }
+
   message += `\nAdmin kami akan segera menghubungi Kakak kembali untuk konfirmasi pengiriman. Terima kasih! 🙏`;
 
   return message;

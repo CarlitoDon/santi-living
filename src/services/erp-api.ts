@@ -13,11 +13,11 @@ const getErpApiUrl = () => {
     typeof window !== "undefined" &&
     window.location.hostname === "localhost"
   ) {
-    return "http://localhost:3001";
+    return "http://localhost:3002"; // erp-sync-service port
   }
-  return (
-    (import.meta as any).env?.PUBLIC_ERP_SYNC_URL || "http://localhost:3001"
-  );
+  const ERP_SYNC_URL =
+    (import.meta as any).env?.PUBLIC_ERP_SYNC_URL || "http://localhost:3002";
+  return ERP_SYNC_URL;
 };
 
 export interface OrderPayload {
@@ -36,6 +36,7 @@ export interface OrderPayload {
     lng?: string;
   };
   items: Array<{
+    id: string; // Product ID for bundle lookup (e.g., "package-single-standard")
     name: string;
     category: string;
     quantity: number;

@@ -30,6 +30,7 @@ export interface OrderPayload {
   notes?: string;
   volumeDiscountAmount?: number;
   volumeDiscountLabel?: string;
+  orderUrl?: string; // Link to order tracking page
 }
 
 export async function sendOrderToBot(payload: OrderPayload) {

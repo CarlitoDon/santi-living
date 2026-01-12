@@ -1071,6 +1071,7 @@ async function handleWhatsAppClick(): Promise<void> {
       lng: addressLng,
     },
     items: state.items.map((item) => ({
+      id: item.id, // Product ID for bundle lookup
       name: item.name,
       category: item.category,
       quantity: item.quantity,
@@ -1098,35 +1099,36 @@ async function handleWhatsAppClick(): Promise<void> {
     // This ensures checkout page works even if bot API fails
     saveOrder(bookingData);
 
-    // Call both services in parallel:
-    // 1. bot-service - sends WhatsApp notification (existing flow)
-    // 2. erp-sync-service - creates order in sync-erp database (new)
+    // Step 1: Call ERP first to get order tracking URL
+    let orderUrl: string | undefined;
+    try {
+      const { createOrderInERP } = await import("../services/erp-api");
+      const erpResponse = await createOrderInERP(bookingData);
+      console.log("Order created in ERP:", erpResponse.orderNumber);
+      orderUrl = erpResponse.orderUrl;
 
-    // Bot service call (fire & forget - don't block checkout)
-    const botPromise = import("../services/api")
-      .then(({ sendOrderToBot }) => sendOrderToBot(bookingData))
-      .then(() => console.log("Order sent to bot successfully"))
-      .catch((err: Error) =>
-        console.warn("Bot notification failed:", err.message)
-      );
+      // Store for thank-you page
+      if (orderUrl) {
+        sessionStorage.setItem("erpOrderUrl", orderUrl);
+        sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      console.warn("ERP sync failed (non-blocking):", message);
+    }
 
-    // ERP service call (fire & forget - don't block checkout)
-    const erpPromise = import("../services/erp-api")
-      .then(({ createOrderInERP }) => createOrderInERP(bookingData))
-      .then((response) => {
-        console.log("Order created in ERP:", response.orderNumber);
-        // Store order URL for potential use in thank-you page
-        if (response.orderUrl) {
-          sessionStorage.setItem("erpOrderUrl", response.orderUrl);
-          sessionStorage.setItem("erpOrderNumber", response.orderNumber);
-        }
-      })
-      .catch((err: Error) =>
-        console.warn("ERP sync failed (non-blocking):", err.message)
-      );
-
-    // Wait for both but don't block if they fail
-    await Promise.allSettled([botPromise, erpPromise]);
+    // Step 2: Send to bot with orderUrl (if available)
+    try {
+      const { sendOrderToBot } = await import("../services/api");
+      await sendOrderToBot({
+        ...bookingData,
+        orderUrl, // Include order tracking link in WA message
+      });
+      console.log("Order sent to bot successfully");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      console.warn("Bot notification failed:", message);
+    }
 
     // Update button to show success briefly
     waButton.innerHTML = `✓ Melanjutkan ke Checkout`;

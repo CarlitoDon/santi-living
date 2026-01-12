@@ -6,7 +6,7 @@
  */
 
 const getBaseUrl = () => {
-  return process.env.SYNC_ERP_API_URL || "http://localhost:4000/trpc";
+  return process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
 };
 
 export interface CreateOrderInput {
@@ -14,7 +14,11 @@ export interface CreateOrderInput {
   partnerId: string;
   rentalStartDate: Date;
   rentalEndDate: Date;
-  items: Array<{ rentalItemId: string; quantity: number }>;
+  items: Array<{
+    rentalItemId?: string; // For single items
+    rentalBundleId?: string; // For package bundles
+    quantity: number;
+  }>;
   notes?: string;
 
   // Santi Living integration fields (all separate)
@@ -61,6 +65,14 @@ export interface PartnerResponse {
   id: string;
   name: string;
   phone: string;
+}
+
+export interface BundleResponse {
+  id: string;
+  externalId: string;
+  name: string;
+  shortName: string | null;
+  dailyRate: string | number;
 }
 
 export interface OrderByTokenResponse {
@@ -110,8 +122,9 @@ export interface OrderByTokenResponse {
 // Helper for tRPC batch calls
 async function trpcQuery<T>(procedure: string, input: unknown): Promise<T> {
   const baseUrl = getBaseUrl();
+  // tRPC v11+ batch format: {"0": {"json": input}}
   const url = `${baseUrl}/${procedure}?batch=1&input=${encodeURIComponent(
-    JSON.stringify({ 0: input })
+    JSON.stringify({ 0: { json: input } })
   )}`;
 
   const response = await fetch(url, {
@@ -121,13 +134,39 @@ async function trpcQuery<T>(procedure: string, input: unknown): Promise<T> {
     },
   });
 
-  if (!response.ok) {
-    const errorData = (await response.json()) as { message?: string };
-    throw new Error(errorData.message || "tRPC query failed");
+  const data = (await response.json()) as TrpcErrorResponse[];
+
+  // Check for tRPC error in response
+  if (data[0]?.error) {
+    const errorMsg =
+      data[0].error.json?.message ||
+      data[0].error.json?.data?.code ||
+      "tRPC query failed";
+    throw new Error(errorMsg);
   }
 
-  const data = (await response.json()) as Array<{ result: { data: T } }>;
-  return data[0].result.data;
+  if (!response.ok) {
+    throw new Error("tRPC request failed with status " + response.status);
+  }
+
+  // tRPC v11+ wraps result in {json: ...}
+  const result = (data[0] as { result: { data: { json: T } } }).result.data;
+  return result.json ?? (result as unknown as T);
+}
+
+interface TrpcErrorResponse {
+  error?: {
+    json?: {
+      message?: string;
+      code?: number;
+      data?: {
+        code?: string;
+      };
+    };
+  };
+  result?: {
+    data: unknown;
+  };
 }
 
 async function trpcMutate<T>(procedure: string, input: unknown): Promise<T> {
@@ -139,16 +178,28 @@ async function trpcMutate<T>(procedure: string, input: unknown): Promise<T> {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ 0: input }),
+    // tRPC batch format: {"0": {"json": input}}
+    body: JSON.stringify({ 0: { json: input } }),
   });
 
-  if (!response.ok) {
-    const errorData = (await response.json()) as { message?: string };
-    throw new Error(errorData.message || "tRPC mutation failed");
+  const data = (await response.json()) as TrpcErrorResponse[];
+
+  // Check for tRPC error in response
+  if (data[0]?.error) {
+    const errorMsg =
+      data[0].error.json?.message ||
+      data[0].error.json?.data?.code ||
+      "tRPC mutation failed";
+    throw new Error(errorMsg);
   }
 
-  const data = (await response.json()) as Array<{ result: { data: T } }>;
-  return data[0].result.data;
+  if (!response.ok) {
+    throw new Error("tRPC request failed with status " + response.status);
+  }
+
+  // tRPC v11+ wraps result in {json: ...}
+  const result = (data[0] as { result: { data: { json: T } } }).result.data;
+  return result.json ?? (result as unknown as T);
 }
 
 // Typed wrapper functions for rental operations
@@ -168,4 +219,23 @@ export async function findOrCreatePartner(
   input: CreatePartnerInput
 ): Promise<PartnerResponse> {
   return trpcMutate<PartnerResponse>("publicRental.findOrCreatePartner", input);
+}
+
+/**
+ * Lookup bundle by santi-living externalId (e.g., "package-single-standard")
+ * Returns null if not found (caller should fall back to item-based logic)
+ */
+export async function lookupBundleByExternalId(
+  companyId: string,
+  externalId: string
+): Promise<BundleResponse | null> {
+  try {
+    return await trpcQuery<BundleResponse>("rentalBundle.findByExternalId", {
+      companyId,
+      externalId,
+    });
+  } catch {
+    // Bundle not found - return null to fall back
+    return null;
+  }
 }
