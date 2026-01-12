@@ -1098,18 +1098,35 @@ async function handleWhatsAppClick(): Promise<void> {
     // This ensures checkout page works even if bot API fails
     saveOrder(bookingData);
 
-    // Try to send to bot API (non-blocking - don't prevent checkout if this fails)
-    try {
-      const { sendOrderToBot } = await import("../services/api");
-      await sendOrderToBot(bookingData);
-      console.log("Order sent to bot successfully");
-    } catch (botError: any) {
-      // Log error but don't block the user flow
-      console.warn(
-        "Bot notification failed (checkout will still proceed):",
-        botError.message
+    // Call both services in parallel:
+    // 1. bot-service - sends WhatsApp notification (existing flow)
+    // 2. erp-sync-service - creates order in sync-erp database (new)
+
+    // Bot service call (fire & forget - don't block checkout)
+    const botPromise = import("../services/api")
+      .then(({ sendOrderToBot }) => sendOrderToBot(bookingData))
+      .then(() => console.log("Order sent to bot successfully"))
+      .catch((err: Error) =>
+        console.warn("Bot notification failed:", err.message)
       );
-    }
+
+    // ERP service call (fire & forget - don't block checkout)
+    const erpPromise = import("../services/erp-api")
+      .then(({ createOrderInERP }) => createOrderInERP(bookingData))
+      .then((response) => {
+        console.log("Order created in ERP:", response.orderNumber);
+        // Store order URL for potential use in thank-you page
+        if (response.orderUrl) {
+          sessionStorage.setItem("erpOrderUrl", response.orderUrl);
+          sessionStorage.setItem("erpOrderNumber", response.orderNumber);
+        }
+      })
+      .catch((err: Error) =>
+        console.warn("ERP sync failed (non-blocking):", err.message)
+      );
+
+    // Wait for both but don't block if they fail
+    await Promise.allSettled([botPromise, erpPromise]);
 
     // Update button to show success briefly
     waButton.innerHTML = `✓ Melanjutkan ke Checkout`;
