@@ -26,18 +26,49 @@ if (token) {
   }
 }
 
-// Status badge colors
+// Status badge colors for order status
 const statusColors: Record<string, { bg: string; text: string; label: string }> = {
-  DRAFT: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Konfirmasi" },
-  PENDING: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Konfirmasi" },
+  DRAFT: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
+  PENDING: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
   CONFIRMED: { bg: "#DBEAFE", text: "#1E40AF", label: "Dikonfirmasi" },
   ACTIVE: { bg: "#D1FAE5", text: "#065F46", label: "Aktif (Sedang Disewa)" },
   COMPLETED: { bg: "#E5E7EB", text: "#374151", label: "Selesai" },
   CANCELLED: { bg: "#FEE2E2", text: "#991B1B", label: "Dibatalkan" },
 };
 
+// Payment status colors
+const paymentStatusColors: Record<string, { bg: string; text: string; label: string }> = {
+  PENDING: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
+  AWAITING_CONFIRM: { bg: "#DBEAFE", text: "#1E40AF", label: "Pembayaran Diverifikasi" },
+  CONFIRMED: { bg: "#D1FAE5", text: "#065F46", label: "Pembayaran Diterima" },
+  FAILED: { bg: "#FEE2E2", text: "#991B1B", label: "Pembayaran Gagal" },
+};
+
 const status = order?.status || "PENDING";
-const statusInfo = statusColors[status] || statusColors.PENDING;
+const paymentStatus = order?.rentalPaymentStatus || "PENDING";
+
+// Combined status logic for customer display
+const getDisplayStatus = () => {
+  if (status === "CANCELLED") return statusColors.CANCELLED;
+  if (status === "COMPLETED") return statusColors.COMPLETED;
+  if (status === "ACTIVE") return statusColors.ACTIVE;
+  if (status === "CONFIRMED") return statusColors.CONFIRMED;
+  
+  // For DRAFT orders, show payment status
+  if (paymentStatus === "AWAITING_CONFIRM") {
+    return { bg: "#DBEAFE", text: "#1E40AF", label: "Pembayaran Diverifikasi" };
+  }
+  if (paymentStatus === "CONFIRMED") {
+    return { bg: "#D1FAE5", text: "#065F46", label: "Menunggu Konfirmasi Admin" };
+  }
+  if (paymentStatus === "FAILED") {
+    return { bg: "#FEE2E2", text: "#991B1B", label: "Pembayaran Gagal" };
+  }
+  
+  return statusColors.DRAFT;
+};
+
+const statusInfo = getDisplayStatus();
 
 // Format helpers
 const formatCurrency = (amount: number) => 
@@ -75,6 +106,11 @@ const formatDate = (dateStr: string) =>
             <div class={`step ${["DRAFT", "PENDING", "CONFIRMED", "ACTIVE", "COMPLETED"].includes(status) ? "active" : ""}`}>
               <div class="step-icon">📝</div>
               <span>Pesanan Dibuat</span>
+            </div>
+            <div class="step-line"></div>
+            <div class={`step ${paymentStatus === "AWAITING_CONFIRM" || paymentStatus === "CONFIRMED" || status === "CONFIRMED" || status === "ACTIVE" || status === "COMPLETED" ? "active" : ""}`}>
+              <div class="step-icon">💳</div>
+              <span>Pembayaran</span>
             </div>
             <div class="step-line"></div>
             <div class={`step ${["CONFIRMED", "ACTIVE", "COMPLETED"].includes(status) ? "active" : ""}`}>
@@ -153,7 +189,7 @@ const formatDate = (dateStr: string) =>
           </div>
 
           <!-- Payment Instructions -->
-          {status === "DRAFT" || status === "PENDING" ? (
+          {(status === "DRAFT" || status === "PENDING") && paymentStatus === "PENDING" ? (
             <div class="section payment-section">
               <h3>💳 Instruksi Pembayaran</h3>
               {order.paymentMethod === "qris" ? (
@@ -172,6 +208,52 @@ const formatDate = (dateStr: string) =>
                   </div>
                 </div>
               )}
+              
+              <!-- Confirm Payment Button -->
+              <div class="payment-confirm">
+                <p class="payment-note">Setelah melakukan pembayaran, klik tombol di bawah untuk konfirmasi:</p>
+                <button 
+                  id="confirm-payment-btn" 
+                  class="btn btn-primary btn-confirm-payment"
+                  data-token={token}
+                  data-payment-method={order.paymentMethod || "transfer"}
+                >
+                  ✅ Saya Sudah Bayar
+                </button>
+              </div>
+            </div>
+          ) : paymentStatus === "AWAITING_CONFIRM" ? (
+            <div class="section payment-section">
+              <h3>⏳ Pembayaran Sedang Diverifikasi</h3>
+              <div class="payment-status-info">
+                <div class="status-icon">🔄</div>
+                <p>Pembayaran Anda sedang diverifikasi oleh tim kami.</p>
+                <p class="status-note">Proses verifikasi biasanya memakan waktu 1-24 jam kerja.</p>
+                {order.paymentClaimedAt && (
+                  <p class="status-time">Dikonfirmasi pada: {formatDate(order.paymentClaimedAt)}</p>
+                )}
+              </div>
+            </div>
+          ) : paymentStatus === "CONFIRMED" && status === "DRAFT" ? (
+            <div class="section payment-section">
+              <h3>✅ Pembayaran Diterima</h3>
+              <div class="payment-status-info success">
+                <div class="status-icon">✅</div>
+                <p>Pembayaran Anda telah diterima!</p>
+                <p class="status-note">Pesanan Anda akan segera diproses dan dikonfirmasi.</p>
+              </div>
+            </div>
+          ) : paymentStatus === "FAILED" ? (
+            <div class="section payment-section">
+              <h3>❌ Pembayaran Gagal</h3>
+              <div class="payment-status-info error">
+                <div class="status-icon">❌</div>
+                <p>Pembayaran tidak dapat diverifikasi.</p>
+                {order.paymentFailReason && (
+                  <p class="status-note">Alasan: {order.paymentFailReason}</p>
+                )}
+                <p class="status-note">Silakan hubungi kami untuk bantuan lebih lanjut.</p>
+              </div>
             </div>
           ) : null}
 
@@ -410,6 +492,70 @@ const formatDate = (dateStr: string) =>
     text-decoration: none;
     font-weight: var(--font-weight-medium);
     margin-top: var(--space-4);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-confirm-payment {
+    width: 100%;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--font-size-md);
+  }
+
+  .payment-confirm {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .payment-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .payment-status-info {
+    text-align: center;
+    padding: var(--space-6);
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+  }
+
+  .payment-status-info .status-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .payment-status-info p {
+    margin: var(--space-2) 0;
+  }
+
+  .payment-status-info .status-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .payment-status-info .status-time {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-3);
+  }
+
+  .payment-status-info.success {
+    background: #D1FAE5;
+  }
+
+  .payment-status-info.error {
+    background: #FEE2E2;
   }
 
   .spinner {
@@ -424,3 +570,48 @@ const formatDate = (dateStr: string) =>
 
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const confirmBtn = document.getElementById('confirm-payment-btn') as HTMLButtonElement | null;
+    if (!confirmBtn) return;
+
+    confirmBtn.addEventListener('click', async () => {
+      const token = confirmBtn.getAttribute('data-token');
+      const paymentMethod = confirmBtn.getAttribute('data-payment-method') || 'transfer';
+
+      if (!token) {
+        alert('Token tidak ditemukan');
+        return;
+      }
+
+      // Confirm with user
+      const confirmed = confirm('Apakah Anda yakin sudah melakukan pembayaran?');
+      if (!confirmed) return;
+
+      // Disable button and show loading
+      confirmBtn.disabled = true;
+      const originalText = confirmBtn.textContent;
+      confirmBtn.textContent = '⏳ Memproses...';
+
+      try {
+        // Dynamic import to avoid SSR issues if any
+        const { confirmPayment } = await import("@/services/erp-api");
+        
+        const result = await confirmPayment(token, paymentMethod as "qris" | "transfer");
+
+        if (result.success) {
+           // Reload logic
+           window.location.reload(); 
+        } else {
+           throw new Error("Respon tidak sesuai");
+        }
+      } catch (error) {
+        console.error('Error confirming payment:', error);
+        alert(`❌ ${error instanceof Error ? error.message : 'Terjadi kesalahan'}`);
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = originalText;
+      }
+    });
+  });
+</script>
