@@ -1,4 +1,13 @@
 import { z } from "zod";
+import {
+  RentalPaymentStatus,
+  OrderStatus as OrderStatusEnum,
+  type OrderStatusType,
+} from "../services/erp-client";
+
+// Re-export for convenience
+export { RentalPaymentStatus, OrderStatusEnum };
+export type { OrderStatusType };
 
 // Order payload from santi-living frontend
 export const CreateOrderSchema = z.object({
@@ -47,21 +56,15 @@ export interface OrderResponse {
   id: string;
   orderNumber: string;
   publicToken: string;
-  status: string;
+  status: OrderStatusType;
   createdAt: string;
   orderUrl?: string;
 }
 
 // Order status for customer view (all separate fields)
-export interface OrderStatus {
+export interface CustomerOrderStatus {
   orderNumber: string;
-  status:
-    | "DRAFT"
-    | "PENDING"
-    | "CONFIRMED"
-    | "ACTIVE"
-    | "COMPLETED"
-    | "CANCELLED";
+  status: OrderStatusType;
   customerName: string;
   items: Array<{
     name: string;

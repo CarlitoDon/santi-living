@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { getOrderByToken } from "../services/erp-client";
-import type { OrderStatus } from "../types/order";
+import type { CustomerOrderStatus } from "../types/order";
 
 export const getOrder = async (req: Request, res: Response) => {
   const token = req.params.token as string;
@@ -23,9 +23,9 @@ export const getOrder = async (req: Request, res: Response) => {
     }
 
     // Map to public-safe response with all separate address fields
-    const response: OrderStatus = {
+    const response: CustomerOrderStatus = {
       orderNumber: order.orderNumber,
-      status: order.status as OrderStatus["status"],
+      status: order.status,
       customerName: order.partner.name,
       items: order.items.map((item) => ({
         name: item.name,

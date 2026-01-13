@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { CreateOrderSchema } from "../types/order";
 import { createRentalOrder, findOrCreatePartner } from "../services/erp-client";
-import { sendOrderConfirmation } from "../services/wa-notifier";
+import { sendOrderConfirmation, notifyAdminNewOrder } from "../services/wa-notifier";
 
 // Default company ID for Santi Living (maps to Demo Rental in dev)
 const SANTI_LIVING_COMPANY_ID =
@@ -137,6 +137,25 @@ export const createOrder = async (req: Request, res: Response) => {
       console.log(`[WA Notify] Sent confirmation to ${input.customerWhatsapp}`);
     } catch (err) {
       console.error("[WA Notify] Failed to send order confirmation:", err);
+    }
+
+    // 6b. Send WhatsApp Notification to ADMIN about new order
+    const adminWhatsapp = process.env.ADMIN_WHATSAPP;
+    if (adminWhatsapp) {
+      try {
+        await notifyAdminNewOrder({
+          adminWhatsapp,
+          orderNumber: order.orderNumber,
+          customerName: input.customerName,
+          customerPhone: input.customerWhatsapp,
+          totalAmount: input.totalPrice,
+          orderUrl,
+          erpOrderId: order.id,
+        });
+        console.log(`[WA Notify] Sent admin notification to ${adminWhatsapp}`);
+      } catch (err) {
+        console.error("[WA Notify] Failed to send admin notification:", err);
+      }
     }
 
     // 7. Return response with token and URL
