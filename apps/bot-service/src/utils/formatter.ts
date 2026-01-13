@@ -85,7 +85,7 @@ export const formatOrderMessage = (data: OrderPayload): string => {
   // Subtotal (Gross) = Total - Delivery + Discount
   const subtotal = data.totalPrice - data.deliveryFee + discount;
 
-  message += `━━━━━━━━━━━━━━\n`;
+  message += `━━━━━━━━━━━━━\n`;
   message += `*Rincian Biaya:*\n`;
   message += `Subtotal (${data.duration} hari): ${formatCurrency(subtotal)}\n`;
 
