@@ -4,6 +4,9 @@ import { authMiddleware } from "./middleware/auth";
 import { createOrder } from "./api/create-order";
 import { getOrder } from "./api/get-order";
 import { notifyCustomer } from "./api/notify-customer";
+import { confirmPayment } from "./api/confirm-payment";
+import { notifyPaymentStatus } from "./api/notify-payment-status";
+import { notifyAdmin } from "./api/notify-admin";
 
 export function createServer() {
   const app = express();
@@ -37,6 +40,19 @@ export function createServer() {
 
   // Notify customer - called by admin
   app.post("/api/orders/:token/notify", authMiddleware, notifyCustomer);
+
+  // Confirm payment - called by frontend
+  app.post("/api/orders/:token/confirm", authMiddleware, confirmPayment);
+
+  // Notify payment status - called by sync-erp webhook
+  app.post(
+    "/api/orders/:token/notify-payment",
+    authMiddleware,
+    notifyPaymentStatus
+  );
+
+  // Notify admin - called by sync-erp webhook
+  app.post("/api/orders/:token/notify-admin", authMiddleware, notifyAdmin);
 
   return app;
 }

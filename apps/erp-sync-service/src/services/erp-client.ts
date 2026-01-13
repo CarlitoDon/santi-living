@@ -67,9 +67,43 @@ export interface PartnerResponse {
   phone: string;
 }
 
-export interface OrderByTokenResponse extends BaseAddressFields {
+export interface ConfirmPaymentInput {
+  token: string;
+  paymentMethod: "qris" | "transfer";
+  reference?: string;
+}
+
+export interface ConfirmPaymentResponse {
+  success: boolean;
   orderNumber: string;
-  status: string;
+  rentalPaymentStatus: string;
+  paymentClaimedAt: Date;
+}
+
+// Rental Payment Status enum (mirrors sync-erp RentalPaymentStatus)
+export const RentalPaymentStatus = {
+  PENDING: "PENDING",
+  AWAITING_CONFIRM: "AWAITING_CONFIRM",
+  CONFIRMED: "CONFIRMED",
+  FAILED: "FAILED",
+} as const;
+export type RentalPaymentStatus =
+  (typeof RentalPaymentStatus)[keyof typeof RentalPaymentStatus];
+
+// Order Status enum (mirrors sync-erp RentalOrderStatus)
+export const OrderStatus = {
+  DRAFT: "DRAFT",
+  CONFIRMED: "CONFIRMED",
+  ACTIVE: "ACTIVE",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED",
+} as const;
+export type OrderStatusType = (typeof OrderStatus)[keyof typeof OrderStatus];
+
+export interface OrderByTokenResponse extends BaseAddressFields {
+  id: string;
+  orderNumber: string;
+  status: OrderStatusType;
   rentalStartDate: string;
   rentalEndDate: string;
   subtotal: number;
@@ -93,6 +127,14 @@ export interface OrderByTokenResponse extends BaseAddressFields {
   discountAmount: number | null;
   discountLabel: string | null;
   orderSource: string | null;
+
+  // Payment status fields
+  rentalPaymentStatus: RentalPaymentStatus;
+  paymentClaimedAt: string | null;
+  paymentConfirmedAt: string | null;
+  paymentReference: string | null;
+  paymentFailedAt: string | null;
+  paymentFailReason: string | null;
 
   partner: {
     name: string;
@@ -207,4 +249,13 @@ export async function findOrCreatePartner(
   input: CreatePartnerInput
 ): Promise<PartnerResponse> {
   return trpcMutate<PartnerResponse>("publicRental.findOrCreatePartner", input);
+}
+
+export async function confirmPayment(
+  input: ConfirmPaymentInput
+): Promise<ConfirmPaymentResponse> {
+  return trpcMutate<ConfirmPaymentResponse>(
+    "publicRental.confirmPayment",
+    input
+  );
 }

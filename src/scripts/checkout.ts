@@ -9,6 +9,7 @@ import {
   getPaymentMethod,
   clearOrder,
 } from "./checkout-session";
+import { submitOrder } from "@/services/api";
 import config from "@/data/config.json";
 
 // Types
@@ -426,46 +427,54 @@ function goToStep2(): void {
 }
 
 /**
- * Confirm payment - redirect to thank you + open WhatsApp
+ * Confirm payment - call API and redirect
  */
-function confirmPayment(): void {
+async function confirmPayment(): Promise<void> {
   const session = getOrder();
   if (!session) return;
 
-  const { order } = session;
-  const method = state.selectedMethod === "bca" ? "Transfer BCA" : "QRIS";
+  const btn = elements.btnConfirmPayment as HTMLButtonElement;
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Memproses...";
+  }
 
-  // Compose WhatsApp message for payment proof
-  const message = `Halo Santi Living!
+  try {
+    const { order } = session;
+    // Map to schema enum: frontend uses 'bca'/'qris'
+    const method = state.selectedMethod === "bca" ? "transfer" : "qris";
 
+    // Ensure payment method is set in payload
+    // Note: order is typed as OrderPayload which uses "transfer"|"qris",
+    // but calculator might have set it differently. Ensure correctness.
+    const payload = {
+      ...order,
+      paymentMethod: method as "transfer" | "qris",
+    };
 
-Saya *${
-    order.customerName
-  }* ingin konfirmasi pembayaran untuk pesanan sewa kasur:
+    console.log("Submitting order:", payload);
+    const response = await submitOrder(payload);
 
-*Detail Pesanan:*
-${order.items
-  .map((item: any) => `- ${item.name} (${item.quantity}x)`)
-  .join("\n")}
+    // Success
+    clearOrder();
 
-Durasi: ${order.duration} hari
-Mulai: ${order.orderDate}
-Total: Rp ${new Intl.NumberFormat("id-ID").format(order.totalPrice)}
-Metode: ${method}
+    // Redirect to order page
+    if (response.orderUrl) {
+      window.location.href = response.orderUrl;
+    } else {
+      // Fallback
+      window.location.href = "/sewa-kasur/thank-you";
+    }
+  } catch (error) {
+    console.error("Order submission failed:", error);
+    alert(
+      "Gagal memproses pesanan: " +
+        (error instanceof Error ? error.message : "Unknown error")
+    );
 
-Alamat: ${order.deliveryAddress}
-
-*Berikut bukti pembayaran saya:*
-[Kirim foto bukti transfer/screenshot pembayaran]
-
-Terima kasih!`;
-
-  const encodedMessage = encodeURIComponent(message);
-  const waUrl = `https://wa.me/${config.whatsappNumber}?text=${encodedMessage}`;
-
-  // Open WhatsApp in new tab
-  window.open(waUrl, "_blank");
-
-  // Redirect to thank you page
-  window.location.href = "/sewa-kasur/thank-you";
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = "✓ Saya Sudah Bayar";
+    }
+  }
 }

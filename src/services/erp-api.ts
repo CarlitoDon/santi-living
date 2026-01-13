@@ -74,8 +74,11 @@ export async function createOrderInERP(
   payload: OrderPayload
 ): Promise<ErpOrderResponse> {
   const baseUrl = getErpApiUrl();
+  // Read API key from env - PUBLIC_ prefix for client-side access in Astro
   const apiKey =
-    (import.meta as any).env?.PUBLIC_ERP_API_KEY || "erp_sync_secret_2026";
+    (import.meta as any).env?.PUBLIC_ERP_API_KEY ||
+    (import.meta as any).env?.ERP_SYNC_API_KEY ||
+    "santi_rental_secret_2026";
 
   const response = await fetch(`${baseUrl}/api/orders`, {
     method: "POST",
@@ -120,6 +123,38 @@ export async function getOrderStatus(token: string) {
 
   if (!response.ok) {
     throw new Error("Order not found");
+  }
+
+  return response.json();
+}
+
+/**
+ * Confirm payment
+ * Called by checkout page when customer clicks "Saya Sudah Bayar"
+ */
+export async function confirmPayment(
+  token: string,
+  paymentMethod: "qris" | "transfer",
+  reference?: string
+) {
+  // Use local internal proxy
+  const response = await fetch("/api/confirm-payment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+      paymentMethod,
+      reference,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(
+      error.message || error.details || "Gagal konfirmasi pembayaran"
+    );
   }
 
   return response.json();
