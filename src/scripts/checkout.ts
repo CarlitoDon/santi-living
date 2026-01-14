@@ -338,23 +338,14 @@ function renderPaymentDetails(method: PaymentMethod): void {
         </div>
 
         <div class="payment-details">
-          <div class="qris-image-container" style="padding: 3rem 1rem; background: var(--color-background);">
-            <div style="font-size: 4rem; margin-bottom: 1rem;">📱</div>
-            <p class="merchant-name" style="font-size: 1.1rem;">Lanjut ke halaman berikutnya untuk pembayaran otomatis</p>
-          </div>
-
-          <div class="detail-row with-copy amount-row">
-            <div class="detail-info">
-              <span class="detail-label">Total Pembayaran</span>
-              <span class="detail-value amount">Rp ${formatCurrency(
-                amount
-              )}</span>
-            </div>
+          <!-- Snap Container -->
+          <div id="snap-container" style="min-height: 400px; width: 100%;">
+            <!-- Will be populated by Snap.js -->
           </div>
         </div>
 
         <div class="payment-note info">
-          <p>💡 Setelah klik tombol di bawah, Anda akan diarahkan ke halaman konfirmasi untuk memunculkan QRIS (Midtrans).</p>
+          <p>💡 Scan QRIS di atas untuk membayar otomatis.</p>
         </div>
       </div>
     `;
@@ -362,8 +353,11 @@ function renderPaymentDetails(method: PaymentMethod): void {
     // Update confirm button text for QRIS
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
-      btnConfirm.innerHTML = "Lanjut Pembayaran →";
+      btnConfirm.innerHTML = "Cek Status Pembayaran →";
     }
+
+    // Trigger embedded flow
+    initSnapEmbedded();
   }
 
   // Bind copy buttons (only for BCA now, but keeping helper)
@@ -431,10 +425,112 @@ function goToStep2(): void {
 /**
  * Confirm payment - call API and redirect
  */
+declare global {
+  interface Window {
+    snap: any;
+  }
+}
+
+/**
+ * Initialize Embedded Snap Payment
+ */
+async function initSnapEmbedded() {
+  const container = document.getElementById("snap-container");
+  if (!container) return;
+
+  container.innerHTML =
+    '<div class="loading-spinner"></div><p style="text-align:center; margin-top:1rem;">Memuat QRIS...</p>';
+
+  try {
+    const session = getOrder();
+    if (!session) return;
+    const { order } = session;
+
+    // 1. Ensure Order Exists (Get public token)
+    let publicToken = sessionStorage.getItem("erpPublicToken");
+
+    if (!publicToken) {
+      // Create order if not exists (similar to legacy flow but background)
+      const payload = { ...order, paymentMethod: "qris" };
+      console.log("Creating background order for Snap...", payload);
+      const response = await submitOrder(payload);
+      // Save token/url for later
+      sessionStorage.setItem("erpPublicToken", response.token || "");
+      if (response.orderUrl)
+        sessionStorage.setItem("erpOrderUrl", response.orderUrl);
+      publicToken = response.token; // update local var
+    }
+
+    if (!publicToken) throw new Error("Gagal membuat pesanan.");
+
+    // 2. Get Snap Token
+    // We need to import the service dynamically or use fetch directly
+    // Using fetch directly to allow clean separate logic
+    // But better to use the api helper if possible.
+    // Let's rely on a helper we'll add or just fetch here
+    // Checking previous context, we have `createPaymentToken` API proxy at `/api/create-payment-token`?
+    // Wait, the previous steps added `createPaymentToken` procedure to TRPC but maybe not a direct API route for standard fetch from generic js?
+    // Let's use the trpc client or a plain fetch to the TRPC endpoint if we can.
+    // Actually, `santi-living/src/pages/api/create-payment-token.ts` exists!
+
+    const tokenRes = await fetch("/api/create-payment-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: publicToken }),
+    });
+
+    if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
+    const { token: snapToken } = await tokenRes.json();
+
+    // 3. Embed Snap
+    if (window.snap) {
+      // Clear loading
+      container.innerHTML = "";
+      window.snap.embed(snapToken, {
+        embedId: "snap-container",
+        onSuccess: function (result: any) {
+          console.log("Payment success", result);
+          // Redirect to order view
+          window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+        },
+        onPending: function (result: any) {
+          console.log("Payment pending", result);
+          window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+        },
+        onError: function (result: any) {
+          console.error("Payment error", result);
+          container.innerHTML =
+            '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
+        },
+      });
+    } else {
+      throw new Error("Midtrans script not loaded.");
+    }
+  } catch (err: any) {
+    console.error("Snap Init Failed:", err);
+    if (container) {
+      container.innerHTML = `<p style="color:red; text-align:center;">Gagal memuat pembayaran: ${err.message}</p>`;
+    }
+  }
+}
+
+/**
+ * Confirm payment - call API and redirect
+ */
 async function confirmPayment(): Promise<void> {
+  // If QRIS, checking status or just redirecting
+  if (state.selectedMethod === "qris") {
+    const publicToken = sessionStorage.getItem("erpPublicToken");
+    if (publicToken) {
+      window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+      return;
+    }
+  }
+
   const session = getOrder();
   if (!session) return;
 
+  // ... rest of manual confirmation logic for BCA ...
   const btn = elements.btnConfirmPayment as HTMLButtonElement;
   if (btn) {
     btn.disabled = true;
@@ -443,50 +539,24 @@ async function confirmPayment(): Promise<void> {
 
   try {
     const { order } = session;
-    // Map to schema enum: frontend uses 'bca'/'qris'
-    const method = state.selectedMethod === "bca" ? "transfer" : "qris";
-
-    // Try to get token from session (saved by calculator step)
+    const method = "transfer"; // Only BCA uses this flow now
     const publicToken = sessionStorage.getItem("erpPublicToken");
 
     let orderUrl = "";
 
     if (publicToken) {
-      console.log("Confirming existing order:", publicToken);
-
-      // ONLY perform manual confirmation for transfer method
-      // For QRIS, we just redirect to the order page where Midtrans Snap will be triggered
-      if (method !== "qris") {
-        // Dynamically import confirmPayment to avoid circular dependency/bundle bloat if unused
-        const { confirmPayment: apiConfirm } = await import(
-          "@/services/erp-api"
-        );
-
-        await apiConfirm(publicToken, method as "qris" | "transfer");
-      }
-
-      // If successful (or skipped for QRIS), we can redirect to the tracking page
+      const { confirmPayment: apiConfirm } = await import("@/services/erp-api");
+      await apiConfirm(publicToken, method);
       orderUrl =
         sessionStorage.getItem("erpOrderUrl") ||
         `/sewa-kasur/pesanan/${publicToken}`;
     } else {
-      // Fallback: Create new order if token missing (legacy/direct checkout flow)
-      // Ensure payment method is set in payload
-      const payload = {
-        ...order,
-        paymentMethod: method as "transfer" | "qris",
-      };
-
-      console.log("Submitting NEW order (fallback):", payload);
+      const payload = { ...order, paymentMethod: method };
       const response = await submitOrder(payload);
       orderUrl = response.orderUrl || "";
     }
 
-    // Success
     clearOrder();
-    // Clear the token too to prevent reuse issues? No, session clear should handle it.
-
-    // Redirect
     if (orderUrl) {
       window.location.href = orderUrl;
     } else {
@@ -495,16 +565,13 @@ async function confirmPayment(): Promise<void> {
   } catch (error) {
     console.error("Payment confirmation failed:", error);
     alert(
-      "Gagal memproses pesanan: " +
+      "Gagal memproses pembayaran: " +
         (error instanceof Error ? error.message : "Unknown error")
     );
 
     if (btn) {
       btn.disabled = false;
-      btn.textContent =
-        state.selectedMethod === "qris"
-          ? "Lanjut Pembayaran →"
-          : "✓ Saya Sudah Bayar";
+      btn.textContent = "✓ Saya Sudah Bayar";
     }
   }
 }

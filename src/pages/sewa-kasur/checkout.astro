@@ -12,6 +12,13 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
     <div class="container">
       <h1 class="checkout-title">Checkout</h1>
 
+      <!-- Midtrans Snap.js -->
+      <script
+        type="text/javascript"
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="Mid-client-5tayTUBOhdNGsXR4"
+      ></script>
+
       <!-- Step 1: Summary + Payment Method Selection -->
       <div id="checkoutStep1" class="checkout-step active">
         <div class="checkout-grid">
