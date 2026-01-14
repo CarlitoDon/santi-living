@@ -340,7 +340,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
       <div class="payment-method-card payment-qris" style="border:none; box-shadow:none; padding:0; background:transparent;">
         <div class="payment-details">
           <!-- Snap Container -->
-          <div id="snap-container" style="min-height: 800px; width: 100%; border-radius: 12px; overflow: hidden;">
+          <div id="snap-container" style="min-height: 1200px; width: 100%; border-radius: 12px; overflow: hidden;">
             <!-- Will be populated by Snap.js -->
           </div>
         </div>
