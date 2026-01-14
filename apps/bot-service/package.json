@@ -27,7 +27,7 @@
     "qrcode-terminal": "^0.12.0",
     "superjson": "^2.2.6",
     "unzipper": "^0.12.3",
-    "whatsapp-web.js": "^1.34.4",
+    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js#main",
     "zod": "^4.3.5"
   },
   "devDependencies": {
