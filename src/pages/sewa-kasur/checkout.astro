@@ -16,8 +16,7 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
       <script
         type="text/javascript"
         src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="Mid-client-5tayTUBOhdNGsXR4"
-      ></script>
+        data-client-key="Mid-client-5tayTUBOhdNGsXR4"></script>
 
       <!-- Step 1: Summary + Payment Method Selection -->
       <div id="checkoutStep1" class="checkout-step active">
@@ -757,5 +756,19 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
+  }
+
+  /* Full Bleed Snap Container for Mobile */
+  .snap-full-bleed {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .snap-full-bleed {
+      width: 100vw !important;
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+      border-radius: 0 !important;
+    }
   }
 </style>
