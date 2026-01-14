@@ -4,7 +4,8 @@ import type { AppRouter } from "../types/bot-router";
 
 // Helper to get Bot Service URL
 const getBotServiceUrl = () => {
-  return process.env.BOT_SERVICE_URL || "http://localhost:3000";
+  const url = process.env.BOT_SERVICE_URL || "http://localhost:3000";
+  return url.replace(/\/$/, "");
 };
 
 // Helper to get API Key for Bot Service
