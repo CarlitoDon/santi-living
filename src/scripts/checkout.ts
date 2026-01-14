@@ -333,47 +333,49 @@ function renderPaymentDetails(method: PaymentMethod): void {
     container.innerHTML = `
       <div class="payment-method-card payment-qris">
         <div class="payment-header">
-          <span class="payment-icon">📱</span>
-          <h4 class="payment-title">QRIS</h4>
+          <span class="payment-icon">⚡</span>
+          <h4 class="payment-title">QRIS (GoPay/ShopeePay/Lainnya)</h4>
         </div>
 
         <div class="payment-details">
-          <div class="qris-image-container">
-            <img src="${payment.qris.imagePath}" alt="QRIS ${
-      payment.qris.merchantName
-    }" class="qris-image" />
-            <p class="merchant-name">${payment.qris.merchantName}</p>
+          <div class="qris-image-container" style="padding: 3rem 1rem; background: var(--color-background);">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">📱</div>
+            <p class="merchant-name" style="font-size: 1.1rem;">Lanjut ke halaman berikutnya untuk pembayaran otomatis</p>
           </div>
 
           <div class="detail-row with-copy amount-row">
             <div class="detail-info">
-              <span class="detail-label">Jumlah Bayar</span>
+              <span class="detail-label">Total Pembayaran</span>
               <span class="detail-value amount">Rp ${formatCurrency(
                 amount
               )}</span>
             </div>
-            <button type="button" class="copy-button" data-copy-value="${amount}">
-              <span class="copy-icon">📋</span> Copy
-            </button>
           </div>
-
-          <a href="${
-            payment.qris.imagePath
-          }" download="QRIS-SantiLiving.jpg" class="btn-download-qris">
-            📥 Download QRIS
-          </a>
         </div>
 
         <div class="payment-note info">
-          <p>💡 Scan QRIS dengan aplikasi e-wallet atau mobile banking Anda.</p>
-          <p>⚠️ QRIS ini adalah QRIS statis. Pastikan input nominal sesuai total di atas.</p>
+          <p>💡 Setelah klik tombol di bawah, Anda akan diarahkan ke halaman konfirmasi untuk memunculkan QRIS (Midtrans).</p>
         </div>
       </div>
     `;
+
+    // Update confirm button text for QRIS
+    const btnConfirm = elements.btnConfirmPayment;
+    if (btnConfirm) {
+      btnConfirm.innerHTML = "Lanjut Pembayaran →";
+    }
   }
 
-  // Bind copy buttons
+  // Bind copy buttons (only for BCA now, but keeping helper)
   bindCopyButtons();
+
+  // Reset button text if BCA selected
+  if (method === "bca") {
+    const btnConfirm = elements.btnConfirmPayment;
+    if (btnConfirm) {
+      btnConfirm.innerHTML = "✓ Saya Sudah Bayar";
+    }
+  }
 }
 
 /**
@@ -451,18 +453,19 @@ async function confirmPayment(): Promise<void> {
 
     if (publicToken) {
       console.log("Confirming existing order:", publicToken);
-      // Dynamically import confirmPayment to avoid circular dependency/bundle bloat if unused
-      const { confirmPayment: apiConfirm } = await import("@/services/erp-api");
 
-      const result = await apiConfirm(
-        publicToken,
-        method as "qris" | "transfer"
-      );
+      // ONLY perform manual confirmation for transfer method
+      // For QRIS, we just redirect to the order page where Midtrans Snap will be triggered
+      if (method !== "qris") {
+        // Dynamically import confirmPayment to avoid circular dependency/bundle bloat if unused
+        const { confirmPayment: apiConfirm } = await import(
+          "@/services/erp-api"
+        );
 
-      // If successful, we can redirect to the tracking page
-      // The tracking page URL logic needs to be constructed if not returned by confirmPayment
-      // But typically we can just reload or go to thank-you.
-      // Ideally we use the stored erpOrderUrl
+        await apiConfirm(publicToken, method as "qris" | "transfer");
+      }
+
+      // If successful (or skipped for QRIS), we can redirect to the tracking page
       orderUrl =
         sessionStorage.getItem("erpOrderUrl") ||
         `/sewa-kasur/pesanan/${publicToken}`;
@@ -492,13 +495,16 @@ async function confirmPayment(): Promise<void> {
   } catch (error) {
     console.error("Payment confirmation failed:", error);
     alert(
-      "Gagal memproses pembayaran: " +
+      "Gagal memproses pesanan: " +
         (error instanceof Error ? error.message : "Unknown error")
     );
 
     if (btn) {
       btn.disabled = false;
-      btn.textContent = "✓ Saya Sudah Bayar";
+      btn.textContent =
+        state.selectedMethod === "qris"
+          ? "Lanjut Pembayaran →"
+          : "✓ Saya Sudah Bayar";
     }
   }
 }
