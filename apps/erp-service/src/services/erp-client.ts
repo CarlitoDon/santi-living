@@ -6,7 +6,12 @@
  */
 
 const getBaseUrl = () => {
-  return process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
+  let url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
+  // Fix inconsistent env var paths: ensure it ends with /api/trpc
+  if (url.endsWith("/trpc") && !url.endsWith("/api/trpc")) {
+    url = url.replace(/\/trpc$/, "/api/trpc");
+  }
+  return url;
 };
 
 export interface BaseAddressFields {
