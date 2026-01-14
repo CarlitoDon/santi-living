@@ -1,13 +1,11 @@
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://santiliving.com',
   output: 'server', // SSR mode - needed for dynamic routes like /pesanan/[token]
-  adapter: node({
-    mode: 'standalone'
-  }),
+  adapter: vercel(),
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto'
