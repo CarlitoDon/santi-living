@@ -55,6 +55,7 @@ let elements: Record<string, HTMLElement | null> = {};
  * Initialize calculator
  */
 export function initCalculator(): void {
+  console.log("Calculator Logic Loaded - Fix Applied (Blocking Validation)");
   // Cache DOM elements
   elements = {
     form: document.getElementById("calculatorForm"),
@@ -1107,20 +1108,16 @@ async function handleWhatsAppClick(): Promise<void> {
 
     // Step 1: Call ERP first to get order tracking URL
     let orderUrl: string | undefined;
-    try {
-      const { createOrderInERP } = await import("../services/erp-api");
-      const erpResponse = await createOrderInERP(bookingData);
-      console.log("Order created in ERP:", erpResponse.orderNumber);
-      orderUrl = erpResponse.orderUrl;
+    const { createOrderInERP } = await import("../services/erp-api");
+    const erpResponse = await createOrderInERP(bookingData);
+    console.log("Order created in ERP:", erpResponse.orderNumber);
+    orderUrl = erpResponse.orderUrl;
 
-      // Store for thank-you page
-      if (orderUrl) {
-        sessionStorage.setItem("erpOrderUrl", orderUrl);
-        sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
-      }
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.warn("ERP sync failed (non-blocking):", message);
+    // Store for thank-you page and checkout confirmation
+    if (orderUrl) {
+      sessionStorage.setItem("erpOrderUrl", orderUrl);
+      sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
+      sessionStorage.setItem("erpPublicToken", erpResponse.publicToken);
     }
 
     // Note: WhatsApp notification is now handled by ERP Sync Service
@@ -1131,6 +1128,7 @@ async function handleWhatsAppClick(): Promise<void> {
     waButton.classList.add("success-btn");
 
     // Redirect to checkout page after short delay
+    // Redirect to checkout page after short delay
     setTimeout(() => {
       window.location.href = "/sewa-kasur/checkout";
     }, 500);
@@ -1140,10 +1138,55 @@ async function handleWhatsAppClick(): Promise<void> {
     waButton.innerHTML = originalBtnText;
 
     // Show error message
-    showError(
-      "customerWhatsapp",
-      error.message || "Gagal memproses pesanan. Silakan coba lagi."
-    );
+    // Check for specific WhatsApp validation errors or general validation
+    const errorMessage = (error.message || "").toLowerCase();
+
+    // Check for specific field errors
+    if (
+      errorMessage.includes("invalid_phone") ||
+      errorMessage.includes("whatsapp") ||
+      errorMessage.includes("nomor")
+    ) {
+      showError(
+        "customerWhatsapp",
+        "Nomor WhatsApp tidak terdaftar atau tidak aktif. Harap cek kembali."
+      );
+      scrollToError("customerWhatsapp");
+    } else if (errorMessage.includes("name") || errorMessage.includes("nama")) {
+      showError("customerName", error.message);
+      scrollToError("customerName");
+    } else if (
+      errorMessage.includes("address") ||
+      errorMessage.includes("alamat")
+    ) {
+      showError("addressStreet", error.message);
+      scrollToError("addressStreet");
+    } else if (
+      errorMessage.includes("mattress") ||
+      errorMessage.includes("kasur") ||
+      errorMessage.includes("quantity") ||
+      errorMessage.includes("jumlah") ||
+      errorMessage.includes("pilih")
+    ) {
+      showError(
+        "mattressCart",
+        error.message || "Pilih jumlah kasur dengan benar."
+      );
+      scrollToError("mattressCart");
+    } else {
+      // Generic error - do NOT show on mattress section as it's confusing
+      // Show as a global alert or on the submit button area
+      console.error("Generic Booking Error:", error);
+      alert(
+        `Mohon maaf, terjadi kesalahan: ${
+          error.message || "Gagal memproses pesanan"
+        }. Silakan coba lagi.`
+      );
+
+      // Optional: Visual feedback on button
+      waButton.classList.add("error-btn");
+      setTimeout(() => waButton.classList.remove("error-btn"), 2000);
+    }
   }
 }
 
