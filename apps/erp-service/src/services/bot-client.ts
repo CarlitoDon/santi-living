@@ -1,6 +1,6 @@
 import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
-import type { AppRouter } from "../../../bot-service/dist/trpc";
+import type { AppRouter } from "../types/bot-router";
 
 // Helper to get Bot Service URL
 const getBotServiceUrl = () => {
