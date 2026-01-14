@@ -44,8 +44,10 @@ export const botRouter = router({
       const message = formatOrderMessage(input);
 
       try {
-        // 4. Send Message
-        const response = await client.sendMessage(targetNumber, message);
+        // 4. Send Message - disable sendSeen to avoid markedUnread error
+        const response = await client.sendMessage(targetNumber, message, {
+          sendSeen: false,
+        });
 
         // Log success
         console.log(
@@ -122,7 +124,9 @@ export const botRouter = router({
       const targetNumber = formatPhoneNumber(input.phone);
 
       try {
-        const response = await client.sendMessage(targetNumber, input.message);
+        const response = await client.sendMessage(targetNumber, input.message, {
+          sendSeen: false,
+        });
         console.log(`Message sent to ${targetNumber}`);
 
         return {
