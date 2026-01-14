@@ -9,15 +9,17 @@ import type { AppRouter } from "../../apps/erp-service/src/trpc";
 
 // Get service URL from environment
 const getServiceUrl = () => {
+  let url = "http://localhost:3002";
+
   // Server-side: use import.meta.env
   if (typeof window === "undefined") {
-    return (
+    url =
       (import.meta as unknown as { env: Record<string, string> }).env
-        .ERP_SYNC_SERVICE_URL || "http://localhost:3002"
-    );
+        .ERP_SYNC_SERVICE_URL || "http://localhost:3002";
   }
-  // Client-side: use public env
-  return "http://localhost:3002";
+
+  // Remove trailing slash if present
+  return url.replace(/\/$/, "");
 };
 
 // Get API key from environment
