@@ -10,11 +10,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
     "baseUrl": ".",
+    "declaration": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@sync-erp/shared/trpc": ["node_modules/@sync-erp/shared/dist/trpc"]
     }
   },
   "include": ["src/**/*"],
