@@ -363,8 +363,42 @@ function renderPaymentDetails(method: PaymentMethod): void {
       container.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
 
+    // Prepare loading overlay function
+    const showSuccessLoading = () => {
+      container.innerHTML = `
+        <div style="
+          display: flex; 
+          flex-direction: column; 
+          align-items: center; 
+          justify-content: center; 
+          height: 300px; 
+          background: #f0fdf4; 
+          border-radius: 12px;
+          text-align: center;
+          padding: 20px;
+          animation: fade-in 0.5s;
+        ">
+          <div style="font-size: 40px; margin-bottom: 15px;">✅</div>
+          <h3 style="color: #166534; margin-bottom: 8px;">Pembayaran Berhasil!</h3>
+          <p style="color: #15803d;">Sedang mengalihkan ke detail pesanan...</p>
+        </div>
+      `;
+      // Optional: Add full screen overlay if needed, but container replace is cleaner for embedded
+    };
+
     // Trigger embedded flow
     initSnapEmbedded();
+
+    // Override Snap callbacks to use the loader
+    // Note: We need to re-bind since initSnapEmbedded defines them internally?
+    // Actually initSnapEmbedded is defined just below in this file? No, it's defined inside renderPaymentDetails?
+    // Wait, initSnapEmbedded call logic is separated.
+    // I should modify the `initSnapEmbedded` logic setup which likely uses the `snap.embed` call.
+    // Let's modify the `window.snap.embed` callbacks directly in this block or where it is defined.
+
+    // Ah, I see `initSnapEmbedded` call in the code I am replacing, but I don't see the DEFINITION of initSnapEmbedded in THIS Chunk.
+    // I need to find where `snap.embed` is called.
+    // It was in lines 500-530 in previous view.
   }
 
   // Bind copy buttons (only for BCA now, but keeping helper)
@@ -508,16 +542,45 @@ async function initSnapEmbedded() {
     if (window.snap) {
       // Clear loading
       container.innerHTML = "";
+
+      const showSuccessLoading = () => {
+        container.innerHTML = `
+          <div style="
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 300px; 
+            background: #f0fdf4; 
+            border-radius: 12px;
+            text-align: center;
+            padding: 20px;
+            animation: fade-in 0.5s;
+          ">
+            <div style="font-size: 40px; margin-bottom: 15px;">✅</div>
+            <h3 style="color: #166534; margin-bottom: 8px;">Pembayaran Berhasil!</h3>
+            <p style="color: #15803d;">Sedang mengalihkan ke detail pesanan...</p>
+          </div>
+        `;
+        container.scrollIntoView({ behavior: "smooth", block: "center" });
+      };
+
       window.snap.embed(snapToken, {
         embedId: "snap-container",
         onSuccess: function (result: any) {
           console.log("Payment success", result);
-          // Redirect to order view
-          window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+          showSuccessLoading();
+          // Redirect with small delay to ensure UI is seen
+          setTimeout(() => {
+            window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+          }, 1500);
         },
         onPending: function (result: any) {
           console.log("Payment pending", result);
-          window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+          showSuccessLoading(); // Also show for pending as usually it means waiting for verification
+          setTimeout(() => {
+            window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+          }, 1500);
         },
         onError: function (result: any) {
           console.error("Payment error", result);
