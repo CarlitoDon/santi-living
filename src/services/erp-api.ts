@@ -13,10 +13,10 @@ const getErpApiUrl = () => {
     typeof window !== "undefined" &&
     window.location.hostname === "localhost"
   ) {
-    return "http://localhost:3002"; // erp-sync-service port
+    return "http://localhost:3001"; // sync-erp API port
   }
   const ERP_SYNC_URL =
-    (import.meta as any).env?.PUBLIC_ERP_SYNC_URL || "http://localhost:3002";
+    (import.meta as any).env?.PUBLIC_ERP_SYNC_URL || "http://localhost:3001";
   return ERP_SYNC_URL;
 };
 
@@ -73,18 +73,11 @@ export interface ErpOrderResponse {
 export async function createOrderInERP(
   payload: OrderPayload
 ): Promise<ErpOrderResponse> {
-  const baseUrl = getErpApiUrl();
-  // Read API key from env - PUBLIC_ prefix for client-side access in Astro
-  const apiKey =
-    (import.meta as any).env?.PUBLIC_ERP_API_KEY ||
-    (import.meta as any).env?.ERP_SYNC_API_KEY ||
-    "santi_rental_secret_2026";
-
-  const response = await fetch(`${baseUrl}/api/orders`, {
+  // Use internal proxy to handle TRPC conversion (avoids CORS)
+  const response = await fetch("/api/submit-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
       customerName: payload.customerName,
@@ -106,7 +99,9 @@ export async function createOrderInERP(
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(error.message || "Failed to create order in ERP");
+    throw new Error(
+      error.message || error.details || "Failed to create order in ERP"
+    );
   }
 
   return response.json();

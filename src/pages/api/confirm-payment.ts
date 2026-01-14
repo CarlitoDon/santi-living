@@ -1,65 +1,61 @@
 import type { APIRoute } from "astro";
+import { createErpSyncClient } from "../../lib/trpc-client";
 
+/**
+ * Confirm Payment API
+ *
+ * Forwards payment confirmation to erp-sync-service via TRPC.
+ */
 export const POST: APIRoute = async ({ request }) => {
-  const apiKey = import.meta.env.ERP_SYNC_API_KEY;
-  const serviceUrl =
-    import.meta.env.ERP_SYNC_SERVICE_URL || "http://localhost:3002";
-
-  if (!apiKey) {
-    return new Response(
-      JSON.stringify({
-        error: "Server configuration error",
-        message: "API Key not configured",
-      }),
-      { status: 500 }
-    );
-  }
-
   try {
     const body = await request.json();
     const { token, paymentMethod, reference } = body;
 
+    console.log(
+      `[confirm-payment] Confirming payment for token: ${token}, method: ${paymentMethod}`
+    );
+
     if (!token || !paymentMethod) {
       return new Response(
-        JSON.stringify({ error: "Token and Payment Method are required" }),
+        JSON.stringify({
+          success: false,
+          error: "Token and Payment Method are required",
+        }),
         { status: 400 }
       );
     }
 
-    // Forward to ERP Sync Service
-    const response = await fetch(`${serviceUrl}/api/orders/${token}/confirm`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({ paymentMethod, reference }),
+    const client = createErpSyncClient();
+
+    const result = await client.order.confirmPayment.mutate({
+      token,
+      paymentMethod,
+      reference,
     });
 
-    const data = await response.json();
+    console.log("[confirm-payment] Success:", result);
 
-    if (!response.ok) {
-      return new Response(
-        JSON.stringify({
-          error: "Failed to confirm payment",
-          details: data.message || data.error || "Unknown error",
-        }),
-        { status: response.status }
-      );
-    }
-
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error: unknown) {
-    console.error("Proxy error:", error);
     return new Response(
       JSON.stringify({
-        error: "Internal Server Error",
-        message: error instanceof Error ? error.message : "Unknown error",
+        success: true,
+        ...result,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+  } catch (error: unknown) {
+    console.error("[confirm-payment] Error:", error);
+
+    const message =
+      error instanceof Error ? error.message : "Failed to confirm payment";
+
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: "Payment confirmation failed",
+        message,
       }),
       { status: 500 }
     );

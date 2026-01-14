@@ -1,59 +1,51 @@
 import type { APIRoute } from "astro";
+import { createErpSyncClient } from "../../lib/trpc-client";
 
+/**
+ * Submit Order API
+ *
+ * Forwards order creation to erp-sync-service via TRPC.
+ */
 export const POST: APIRoute = async ({ request }) => {
-  const apiKey = import.meta.env.ERP_SYNC_API_KEY;
-  const serviceUrl =
-    import.meta.env.ERP_SYNC_SERVICE_URL || "http://localhost:3002";
-
-  if (!apiKey) {
-    console.error("Missing ERP_SYNC_API_KEY");
-    return new Response(
-      JSON.stringify({
-        error: "Server configuration error",
-        message: "API Key not configured",
-      }),
-      { status: 500 }
-    );
-  }
-
   try {
     const body = await request.json();
+    console.log("[submit-order] Creating order for:", body.customerName);
 
-    // Forward to ERP Sync Service
-    const response = await fetch(`${serviceUrl}/api/orders`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(body),
+    const client = createErpSyncClient();
+
+    const result = await client.order.create.mutate({
+      customerName: body.customerName,
+      customerWhatsapp: body.customerWhatsapp,
+      deliveryAddress: body.deliveryAddress,
+      addressFields: body.addressFields,
+      items: body.items,
+      totalPrice: body.totalPrice,
+      orderDate: body.orderDate,
+      endDate: body.endDate,
+      duration: body.duration,
+      deliveryFee: body.deliveryFee,
+      paymentMethod: body.paymentMethod,
+      notes: body.notes,
+      volumeDiscountAmount: body.volumeDiscountAmount,
+      volumeDiscountLabel: body.volumeDiscountLabel,
     });
 
-    const data = await response.json();
+    console.log("[submit-order] Order created:", result.orderNumber);
 
-    if (!response.ok) {
-      console.error("ERP Sync failed:", data);
-      return new Response(
-        JSON.stringify({
-          error: "Failed to submit order",
-          details: data.message || data.error || "Unknown error",
-        }),
-        { status: response.status }
-      );
-    }
-
-    return new Response(JSON.stringify(data), {
+    return new Response(JSON.stringify(result), {
       status: 201,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
     });
   } catch (error: unknown) {
-    console.error("Proxy error:", error);
+    console.error("[submit-order] Error:", error);
+
+    const message =
+      error instanceof Error ? error.message : "Failed to create order";
+
     return new Response(
       JSON.stringify({
-        error: "Internal Server Error",
-        message: error instanceof Error ? error.message : "Unknown error",
+        error: "Order creation failed",
+        message,
       }),
       { status: 500 }
     );
