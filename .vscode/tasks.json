@@ -19,18 +19,22 @@
     },
     {
       "label": "Dev: Start All",
-      "dependsOn": ["Dev: Astro", "Dev: Bot Service", "Dev: ERP Sync Service"],
-      "dependsOrder": "parallel",
+      "type": "npm",
+      "script": "dev",
       "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "presentation": {
+        "group": "dev",
+        "panel": "dedicated"
       }
     },
     {
       "label": "Dev: Astro",
       "type": "npm",
-      "script": "dev",
+      "script": "dev:frontend",
       "problemMatcher": [],
       "presentation": {
         "group": "frontend",

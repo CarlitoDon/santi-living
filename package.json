@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "description": "Website sewa kasur Jogja - Santi Living",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:bot\" \"npm:dev:sync\"",
+    "dev:frontend": "astro dev",
+    "dev:bot": "npm run dev --prefix apps/bot-service",
+    "dev:sync": "npm run dev --prefix apps/erp-sync-service",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -22,6 +25,7 @@
   "devDependencies": {
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.0.0",
+    "concurrently": "^9.2.1",
     "typescript": "^5.6.0"
   }
 }
