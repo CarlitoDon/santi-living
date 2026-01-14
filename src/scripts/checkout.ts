@@ -331,29 +331,26 @@ function renderPaymentDetails(method: PaymentMethod): void {
     `;
   } else {
     container.innerHTML = `
-      <div class="payment-method-card payment-qris">
-        <div class="payment-header">
-          <span class="payment-icon">⚡</span>
-          <h4 class="payment-title">QRIS (GoPay/ShopeePay/Lainnya)</h4>
-        </div>
-
+      <div class="payment-method-card payment-qris" style="border:none; box-shadow:none; padding:0; background:transparent;">
         <div class="payment-details">
+           <div style="text-align:center; margin-bottom:1rem; color: #666;">
+              <small>Scan QR Code di bawah untuk membayar otomatis</small>
+           </div>
           <!-- Snap Container -->
-          <div id="snap-container" style="min-height: 400px; width: 100%;">
+          <div id="snap-container" style="min-height: 400px; width: 100%; border-radius: 12px; overflow: hidden;">
             <!-- Will be populated by Snap.js -->
           </div>
-        </div>
-
-        <div class="payment-note info">
-          <p>💡 Scan QRIS di atas untuk membayar otomatis.</p>
         </div>
       </div>
     `;
 
-    // Update confirm button text for QRIS
+    // Update confirm button text type - make it secondary/ghost
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
-      btnConfirm.innerHTML = "Cek Status Pembayaran →";
+      btnConfirm.innerHTML = "🔄 Cek Status Pembayaran (Manual)";
+      btnConfirm.style.background = "#f3f4f6";
+      btnConfirm.style.color = "#4b5563";
+      btnConfirm.style.border = "1px solid #d1d5db";
     }
 
     // Trigger embedded flow
