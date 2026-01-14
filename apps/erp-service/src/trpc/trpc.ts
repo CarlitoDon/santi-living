@@ -25,7 +25,7 @@ export const publicProcedure = t.procedure;
 // Auth middleware - validates API key
 const isAuthed = t.middleware(({ ctx, next }) => {
   const authHeader = ctx.req.headers.authorization;
-  const apiKey = process.env.API_KEY || "santi_rental_secret_2026";
+  const apiKey = process.env.API_KEY || "santi_secret_auth_token_2026";
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new TRPCError({
