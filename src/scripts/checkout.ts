@@ -451,7 +451,7 @@ async function initSnapEmbedded() {
 
     if (!publicToken) {
       // Create order if not exists (similar to legacy flow but background)
-      const payload = { ...order, paymentMethod: "qris" };
+      const payload = { ...order, paymentMethod: "qris" as const };
       console.log("Creating background order for Snap...", payload);
       const response = await submitOrder(payload);
       // Save token/url for later
@@ -551,7 +551,10 @@ async function confirmPayment(): Promise<void> {
         sessionStorage.getItem("erpOrderUrl") ||
         `/sewa-kasur/pesanan/${publicToken}`;
     } else {
-      const payload = { ...order, paymentMethod: method };
+      const payload = {
+        ...order,
+        paymentMethod: method as "transfer" | "qris",
+      };
       const response = await submitOrder(payload);
       orderUrl = response.orderUrl || "";
     }
