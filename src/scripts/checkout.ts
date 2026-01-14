@@ -441,8 +441,12 @@ async function initSnapEmbedded() {
   const container = document.getElementById("snap-container");
   if (!container) return;
 
-  container.innerHTML =
-    '<div class="loading-spinner"></div><p style="text-align:center; margin-top:1rem;">Memuat QRIS...</p>';
+  container.innerHTML = `
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px;">
+      <div class="loading-spinner" style="margin-bottom: 1rem;"></div>
+      <p style="color: #666; font-size: 0.9rem;">Menghubungkan ke Midtrans...</p>
+    </div>
+  `;
 
   try {
     const session = getOrder();
