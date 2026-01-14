@@ -267,6 +267,7 @@ function selectPaymentMethod(method: PaymentMethod): void {
  * Render payment details based on selected method
  */
 function renderPaymentDetails(method: PaymentMethod): void {
+  const container = elements.paymentDetailsContainer;
   if (!container) return;
 
   // Toggle mini summary visibility: Hide for QRIS as Snap UI has its own summary
