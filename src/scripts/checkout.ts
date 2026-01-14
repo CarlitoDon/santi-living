@@ -339,24 +339,18 @@ function renderPaymentDetails(method: PaymentMethod): void {
     container.innerHTML = `
       <div class="payment-method-card payment-qris" style="border:none; box-shadow:none; padding:0; background:transparent;">
         <div class="payment-details">
-           <div style="text-align:center; margin-bottom:1rem; color: #666;">
-              <small>Scan QR Code di bawah untuk membayar otomatis</small>
-           </div>
           <!-- Snap Container -->
-          <div id="snap-container" style="min-height: 400px; width: 100%; border-radius: 12px; overflow: hidden;">
+          <div id="snap-container" style="min-height: 600px; width: 100%; border-radius: 12px; overflow: hidden;">
             <!-- Will be populated by Snap.js -->
           </div>
         </div>
       </div>
     `;
 
-    // Update confirm button text type - make it secondary/ghost
+    // Hide confirm button for QRIS (Snap handle it inside)
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
-      btnConfirm.innerHTML = "🔄 Cek Status Pembayaran (Manual)";
-      btnConfirm.style.background = "#f3f4f6";
-      btnConfirm.style.color = "#4b5563";
-      btnConfirm.style.border = "1px solid #d1d5db";
+      btnConfirm.style.display = "none";
     }
 
     // Trigger embedded flow
@@ -368,9 +362,16 @@ function renderPaymentDetails(method: PaymentMethod): void {
 
   // Reset button text if BCA selected
   if (method === "bca") {
+  // Reset button text if BCA selected
+  if (method === "bca") {
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
       btnConfirm.innerHTML = "✓ Saya Sudah Bayar";
+      // Reset styles overridden by QRIS view
+      btnConfirm.style.display = 'block'; 
+      btnConfirm.style.background = '';
+      btnConfirm.style.color = '';
+      btnConfirm.style.border = '';
     }
   }
 }
