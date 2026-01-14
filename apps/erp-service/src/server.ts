@@ -3,6 +3,7 @@ import cors from "cors";
 import * as trpcExpress from "@trpc/server/adapters/express";
 import { appRouter } from "./trpc";
 import type { Context } from "./trpc/trpc";
+import { midtransWebhook } from "./webhooks/midtrans";
 
 export function createServer() {
   const app = express();
@@ -25,6 +26,9 @@ export function createServer() {
   app.get("/health", (req, res) => {
     res.json({ status: "ok", service: "erp-service" });
   });
+
+  // Webhooks
+  app.post("/api/webhooks/midtrans", midtransWebhook);
 
   // TRPC Endpoints
   app.use(

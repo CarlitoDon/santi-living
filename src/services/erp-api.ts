@@ -154,3 +154,23 @@ export async function confirmPayment(
 
   return response.json();
 }
+
+/**
+ * Create Payment Token (Midtrans)
+ */
+export async function createPaymentToken(token: string) {
+  const response = await fetch("/api/create-payment-token", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(
+      error.message || error.details || "Gagal membuat token pembayaran"
+    );
+  }
+
+  return response.json();
+}

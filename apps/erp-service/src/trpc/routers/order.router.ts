@@ -14,6 +14,7 @@ import {
   confirmPayment as confirmPaymentErp,
   deleteRentalOrder,
 } from "../../services/erp-client";
+import { createSnapToken } from "../../services/midtrans-client";
 import {
   sendOrderConfirmation,
   notifyAdminNewOrder,
@@ -221,5 +222,53 @@ export const orderRouter = router({
         paymentMethod: input.paymentMethod,
         reference: input.reference,
       });
+    }),
+
+  /**
+   * Create Midtrans Snap Token for payment
+   */
+  createPaymentToken: protectedProcedure
+    .input(z.object({ token: z.string().uuid() }))
+    .mutation(async ({ input }) => {
+      // 1. Get order details first
+      const order = await getOrderByToken(input.token);
+
+      if (!order) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Order not found",
+        });
+      }
+
+      // 2. Generate unique order ID for Midtrans (handling retries)
+      // Append timestamp to ensure uniqueness if user retries/regenerates QR
+      const uniqueOrderId = `${order.orderNumber}-${Math.floor(
+        Date.now() / 1000
+      )}`;
+
+      // 3. Create Snap Token
+      const token = await createSnapToken({
+        transaction_details: {
+          order_id: uniqueOrderId,
+          gross_amount: Math.round(order.totalAmount), // Ensure integer
+        },
+        customer_details: {
+          first_name: order.partner.name.split(" ")[0],
+          last_name: order.partner.name.split(" ").slice(1).join(" ") || "",
+          email: "customer@santiliving.com", // Fallback if not available
+          phone: order.partner.phone,
+        },
+        item_details: order.items.map((item) => ({
+          id: item.name.substring(0, 50),
+          price: Math.round(item.unitPrice),
+          quantity: item.quantity,
+          name: item.name.substring(0, 50),
+        })),
+      });
+
+      return {
+        token,
+        redirect_url: `https://app.sandbox.midtrans.com/snap/v2/vtweb/${token}`,
+      };
     }),
 });

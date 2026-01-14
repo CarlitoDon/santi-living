@@ -260,6 +260,19 @@ export async function confirmPayment(
   );
 }
 
+export async function confirmPaymentByOrderNumber(input: {
+  orderNumber: string;
+  paymentMethod: string;
+  transactionId?: string;
+  amount?: number;
+}): Promise<{ success: boolean; orderNumber: string; status: string }> {
+  return trpcMutate<{
+    success: boolean;
+    orderNumber: string;
+    status: string;
+  }>("publicRental.confirmPaymentByOrderNumber", input);
+}
+
 export async function deleteRentalOrder(
   id: string
 ): Promise<{ success: boolean }> {

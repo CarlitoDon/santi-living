@@ -94,6 +94,13 @@ const formatDate = (dateStr: string) =>
 ---
 
 <MainLayout title={order ? `Pesanan ${order.orderNumber}` : "Pesanan Tidak Ditemukan"}>
+  <!-- Midtrans Snap.js -->
+  <script 
+    type="text/javascript" 
+    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    data-client-key="Mid-client-5tayTUBOhdNGsXR4">
+  </script>
+
   <main class="order-page">
     <div class="container">
       {error ? (
@@ -209,9 +216,9 @@ const formatDate = (dateStr: string) =>
               <h3>💳 Instruksi Pembayaran</h3>
               {order.paymentMethod === "qris" ? (
                 <div class="payment-info">
-                  <p>Scan QRIS di bawah untuk pembayaran:</p>
+                  <p>Klik tombol di bawah untuk menampilkan QRIS:</p>
                   <div class="qris-placeholder">
-                    <span>QRIS akan dikirim via WhatsApp</span>
+                    <span>🔐 Pembayaran via Midtrans (GoPay/QRIS)</span>
                   </div>
                 </div>
               ) : (
@@ -226,14 +233,18 @@ const formatDate = (dateStr: string) =>
               
               <!-- Confirm Payment Button -->
               <div class="payment-confirm">
-                <p class="payment-note">Setelah melakukan pembayaran, klik tombol di bawah untuk konfirmasi:</p>
+                <p class="payment-note">
+                  {order.paymentMethod === "qris" 
+                    ? "Lanjutkan pembayaran aman:" 
+                    : "Setelah melakukan pembayaran, klik tombol di bawah untuk konfirmasi:"}
+                </p>
                 <button 
                   id="confirm-payment-btn" 
                   class="btn btn-primary btn-confirm-payment"
                   data-token={token}
                   data-payment-method={order.paymentMethod || "transfer"}
                 >
-                  ✅ Saya Sudah Bayar
+                  {order.paymentMethod === "qris" ? "⚡ Bayar Sekarang (QRIS)" : "✅ Saya Sudah Bayar"}
                 </button>
               </div>
             </div>
@@ -587,6 +598,13 @@ const formatDate = (dateStr: string) =>
 </style>
 
 <script>
+  // Declare Snap global
+  declare global {
+    interface Window {
+      snap: any;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const confirmBtn = document.getElementById('confirm-payment-btn') as HTMLButtonElement | null;
     if (!confirmBtn) return;
@@ -600,7 +618,62 @@ const formatDate = (dateStr: string) =>
         return;
       }
 
-      // Confirm with user
+      // Special flow for QRIS/Midtrans
+      if (paymentMethod === "qris") {
+        confirmBtn.disabled = true;
+        const originalText = confirmBtn.textContent;
+        confirmBtn.textContent = '⏳ Memuat QRIS...';
+
+        try {
+          // 1. Get Payment Token via API Proxy
+          // We use dynamic import for the service helper
+          const { createPaymentToken } = await import("@/services/erp-api");
+          const { token: snapToken } = await createPaymentToken(token);
+
+          // 2. Open Snap Popup
+          if (window.snap) {
+            window.snap.pay(snapToken, {
+              onSuccess: async function(result: any) {
+                // Payment success - Notify backend
+                try {
+                  const { confirmPayment } = await import("@/services/erp-api");
+                  await confirmPayment(token, "qris", result.order_id);
+                  alert("Pembayaran Berhasil!");
+                  window.location.reload();
+                } catch (e) {
+                  console.error("Failed to confirm payment status", e);
+                  window.location.reload(); // Reload anyway, webhook should handle it
+                }
+              },
+              onPending: function(result: any) {
+                alert("Menunggu pembayaran...");
+                window.location.reload();
+              },
+              onError: function(result: any) {
+                alert("Pembayaran gagal!");
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = originalText;
+              },
+              onClose: function() {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = originalText;
+              }
+            });
+          } else {
+            alert("Sistem pembayaran belum siap. Silakan refresh halaman.");
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = originalText;
+          }
+        } catch (error) {
+           console.error('Error initiating payment:', error);
+           alert(`❌ ${error instanceof Error ? error.message : 'Gagal memuat pembayaran'}`);
+           confirmBtn.disabled = false;
+           confirmBtn.textContent = originalText;
+        }
+        return;
+      }
+
+      // Original/Manual Transfer Flow
       const confirmed = confirm('Apakah Anda yakin sudah melakukan pembayaran?');
       if (!confirmed) return;
 
