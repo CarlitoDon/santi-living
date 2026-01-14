@@ -340,7 +340,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
       <div class="payment-method-card payment-qris" style="border:none; box-shadow:none; padding:0; background:transparent;">
         <div class="payment-details">
           <!-- Snap Container -->
-          <div id="snap-container" style="height: 85vh; width: 100%; border-radius: 12px; overflow: hidden;">
+          <div id="snap-container" style="height: max-content; width: 100%; border-radius: 12px; overflow: hidden;">
             <!-- Will be populated by Snap.js -->
           </div>
         </div>
@@ -348,7 +348,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
     `;
 
     // Hide confirm button for QRIS (Snap handle it inside)
-    const btnConfirm = elements.btnConfirmPayment;
+    const btnConfirm = elements.btnConfirmPayment;  
     if (btnConfirm) {
       btnConfirm.style.display = "none";
     }
