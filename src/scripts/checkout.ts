@@ -362,16 +362,14 @@ function renderPaymentDetails(method: PaymentMethod): void {
 
   // Reset button text if BCA selected
   if (method === "bca") {
-  // Reset button text if BCA selected
-  if (method === "bca") {
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
       btnConfirm.innerHTML = "✓ Saya Sudah Bayar";
       // Reset styles overridden by QRIS view
-      btnConfirm.style.display = 'block'; 
-      btnConfirm.style.background = '';
-      btnConfirm.style.color = '';
-      btnConfirm.style.border = '';
+      btnConfirm.style.display = "block";
+      btnConfirm.style.background = "";
+      btnConfirm.style.color = "";
+      btnConfirm.style.border = "";
     }
   }
 }
@@ -445,7 +443,7 @@ async function initSnapEmbedded() {
   container.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px;">
       <div class="loading-spinner" style="margin-bottom: 1rem;"></div>
-      <p style="color: #666; font-size: 0.9rem;">Menghubungkan ke Midtrans...</p>
+      <p style="color: #666; font-size: 0.9rem;">Menyiapkan QRIS...</p>
     </div>
   `;
 
