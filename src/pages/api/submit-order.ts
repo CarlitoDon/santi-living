@@ -37,17 +37,37 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error: unknown) {
-    console.error("[submit-order] Error:", error);
+    // Detailed error logging for debugging validation issues
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    console.error("[submit-order] FAILURE:", {
+      msg: errorMessage,
+      stack: errorStack,
+      raw: error,
+    });
 
     const message =
       error instanceof Error ? error.message : "Failed to create order";
+
+    // Determine status code based on error type
+    // If it's a known business validation error, return 400
+    let status = 500;
+    if (
+      message.includes("INVALID_PHONE") ||
+      message.includes("validation") ||
+      message.includes("Bad Request") ||
+      message.includes("ZodError")
+    ) {
+      status = 400;
+    }
 
     return new Response(
       JSON.stringify({
         error: "Order creation failed",
         message,
       }),
-      { status: 500 }
+      { status }
     );
   }
 };

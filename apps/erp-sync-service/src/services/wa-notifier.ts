@@ -1,4 +1,6 @@
 // Full order payload for detailed WA message (uses bot-service formatter)
+import { botClient } from "./bot-client";
+
 export interface OrderNotifyPayload {
   orderId: string;
   customerName: string;
@@ -25,7 +27,7 @@ export interface OrderNotifyPayload {
   endDate: string;
   duration: number;
   deliveryFee: number;
-  paymentMethod: "qris" | "transfer";
+  paymentMethod?: "qris" | "transfer";
   notes?: string;
   volumeDiscountAmount?: number;
   volumeDiscountLabel?: string;
@@ -39,14 +41,6 @@ interface SimpleNotifyPayload {
   orderUrl: string;
   customerName: string;
 }
-
-const getBotServiceUrl = () => {
-  return process.env.BOT_SERVICE_URL || "http://localhost:3000";
-};
-
-const getBotApiKey = () => {
-  return process.env.BOT_SERVICE_API_KEY || "";
-};
 
 /**
  * Retry helper with exponential backoff
@@ -66,6 +60,19 @@ async function withRetry<T>(
       return await fn();
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
+
+      // If error is related to invalid number (400 Bad Request), do not retry
+      if (
+        lastError.message.includes("Nomor WhatsApp") ||
+        lastError.message.includes("Invalid") ||
+        lastError.message.includes("400")
+      ) {
+        console.warn(
+          `[WA Notify] Aborting retry for invalid number: ${lastError.message}`
+        );
+        throw lastError;
+      }
+
       console.warn(
         `[WA Notify] Attempt ${attempt}/${maxRetries} failed: ${lastError.message}`
       );
@@ -89,25 +96,7 @@ async function withRetry<T>(
  */
 export async function sendOrderConfirmation(payload: OrderNotifyPayload) {
   return withRetry(async () => {
-    const baseUrl = getBotServiceUrl();
-    const apiKey = getBotApiKey();
-
-    // Use /send-order endpoint which has the full detailed template
-    const response = await fetch(`${baseUrl}/send-order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const errorData = (await response.json()) as { message?: string };
-      throw new Error(errorData.message || "Failed to send WA notification");
-    }
-
-    return response.json();
+    return await botClient.bot.sendOrder.mutate(payload);
   });
 }
 
@@ -135,24 +124,7 @@ Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*! 🙏`;
  */
 async function sendMessageWithRetry(phone: string, message: string) {
   return withRetry(async () => {
-    const baseUrl = getBotServiceUrl();
-    const apiKey = getBotApiKey();
-
-    const response = await fetch(`${baseUrl}/send-message`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({ phone, message }),
-    });
-
-    if (!response.ok) {
-      const errorData = (await response.json()) as { message?: string };
-      throw new Error(errorData.message || "Failed to send WA message");
-    }
-
-    return response.json();
+    return await botClient.bot.sendMessage.mutate({ phone, message });
   });
 }
 
@@ -168,7 +140,9 @@ export async function notifyPaymentConfirmed(payload: {
 }) {
   const message = `Halo Kak *${payload.customerName}*! 🎉
 
-Pembayaran untuk pesanan *${payload.orderNumber}* telah *DIKONFIRMASI*.${payload.paymentReference ? `\nReferensi: ${payload.paymentReference}` : ""}
+Pembayaran untuk pesanan *${payload.orderNumber}* telah *DIKONFIRMASI*.${
+    payload.paymentReference ? `\nReferensi: ${payload.paymentReference}` : ""
+  }
 
 ✅ Pesanan Kakak sudah dikonfirmasi dan akan segera kami proses.
 
@@ -192,7 +166,11 @@ export async function notifyPaymentRejected(payload: {
 }) {
   const message = `Halo Kak *${payload.customerName}*,
 
-Mohon maaf, pembayaran untuk pesanan *${payload.orderNumber}* belum dapat kami verifikasi.${payload.failReason ? `\n\nKeterangan: ${payload.failReason}` : ""}
+Mohon maaf, pembayaran untuk pesanan *${
+    payload.orderNumber
+  }* belum dapat kami verifikasi.${
+    payload.failReason ? `\n\nKeterangan: ${payload.failReason}` : ""
+  }
 
 Silakan lakukan pembayaran ulang atau hubungi admin kami untuk bantuan.
 

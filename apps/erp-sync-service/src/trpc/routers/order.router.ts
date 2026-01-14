@@ -5,12 +5,14 @@
  */
 import { z } from "zod";
 import { router, protectedProcedure, publicProcedure } from "../trpc";
+import { TRPCError } from "@trpc/server";
 import { CreateOrderSchema } from "../../types/order";
 import {
   createRentalOrder,
   findOrCreatePartner,
   getOrderByToken,
   confirmPayment as confirmPaymentErp,
+  deleteRentalOrder,
 } from "../../services/erp-client";
 import {
   sendOrderConfirmation,
@@ -98,40 +100,74 @@ export const orderRouter = router({
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
 
       // 5. Send WhatsApp notifications (async, non-blocking)
-      sendOrderConfirmation({
-        orderId: order.orderNumber,
-        customerName: input.customerName,
-        customerWhatsapp: input.customerWhatsapp,
-        deliveryAddress: input.deliveryAddress,
-        addressFields: {
-          street: addressFields.street,
-          kelurahan: addressFields.kelurahan,
-          kecamatan: addressFields.kecamatan,
-          kota: addressFields.kota,
-          provinsi: addressFields.provinsi,
-          zip: addressFields.zip,
-          lat: addressFields.lat,
-          lng: addressFields.lng,
-        },
-        items: input.items.map((item) => ({
-          name: item.name,
-          category: item.category,
-          quantity: item.quantity,
-          pricePerDay: item.pricePerDay,
-        })),
-        totalPrice: input.totalPrice,
-        orderDate: input.orderDate,
-        endDate: input.endDate,
-        duration: input.duration,
-        deliveryFee: input.deliveryFee,
-        paymentMethod: input.paymentMethod,
-        notes: input.notes,
-        volumeDiscountAmount: input.volumeDiscountAmount,
-        volumeDiscountLabel: input.volumeDiscountLabel,
-        orderUrl,
-      }).catch((err) =>
-        console.error("[WA Notify] Failed to send order confirmation:", err)
-      );
+      // 5. Send WhatsApp notifications (async, blocking for validation)
+      // We await this to ensure the number is valid. If it fails with "Invalid Number", we rollback.
+      try {
+        await sendOrderConfirmation({
+          orderId: order.orderNumber,
+          customerName: input.customerName,
+          customerWhatsapp: input.customerWhatsapp,
+          deliveryAddress: input.deliveryAddress,
+          addressFields: {
+            street: addressFields.street,
+            kelurahan: addressFields.kelurahan,
+            kecamatan: addressFields.kecamatan,
+            kota: addressFields.kota,
+            provinsi: addressFields.provinsi,
+            zip: addressFields.zip,
+            lat: addressFields.lat,
+            lng: addressFields.lng,
+          },
+          items: input.items.map((item) => ({
+            name: item.name,
+            category: item.category,
+            quantity: item.quantity,
+            pricePerDay: item.pricePerDay,
+          })),
+          totalPrice: input.totalPrice,
+          orderDate: input.orderDate,
+          endDate: input.endDate,
+          duration: input.duration,
+          deliveryFee: input.deliveryFee,
+          paymentMethod: input.paymentMethod,
+          notes: input.notes,
+          volumeDiscountAmount: input.volumeDiscountAmount,
+          volumeDiscountLabel: input.volumeDiscountLabel,
+          orderUrl,
+        });
+      } catch (err: any) {
+        console.error("[WA Notify] Failed to send order confirmation:", err);
+
+        const errorMessage = err.message || "";
+        // Check for invalid number (from Bot Service 400)
+        if (
+          errorMessage.includes("[INVALID_PHONE]") ||
+          errorMessage.includes("Invalid WhatsApp Number") || // Legacy fallback
+          errorMessage.includes("no lid")
+        ) {
+          try {
+            console.warn(
+              `[OrderRouter] Rolling back order ${order.orderNumber} due to invalid number`
+            );
+            await deleteRentalOrder(order.id);
+          } catch (deleteErr) {
+            console.error(
+              `[OrderRouter] Failed to rollback order ${order.orderNumber}:`,
+              deleteErr
+            );
+            // We still throw the original validation error so the user knows
+          }
+
+          // Throw specific TRPC error for frontend to catch
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message:
+              "[INVALID_PHONE] Nomor WhatsApp tidak terdaftar atau tidak aktif",
+          });
+        }
+
+        // For other errors (network, bot down), we just log and continue
+      }
 
       // Notify admin
       const adminWhatsapp = process.env.ADMIN_WHATSAPP;
