@@ -2,11 +2,11 @@
  * Type-Safe Sync-ERP Client
  *
  * TRPC client for type-safe communication with sync-erp publicRental API.
- * Uses types from @sync-erp/shared.
+ * Uses local types copied from sync-erp for Railway deployment compatibility.
  */
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import type { PublicRentalRouter } from "@sync-erp/shared/trpc";
+import type { PublicRentalRouter } from "../types/public-rental";
 
 const getBaseUrl = () => {
   return process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";

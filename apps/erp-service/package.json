@@ -11,7 +11,6 @@
     "sync-bundles": "ts-node src/scripts/sync-bundles.ts"
   },
   "dependencies": {
-    "@sync-erp/shared": "file:../../../sync-erp/packages/shared",
     "@trpc/client": "^11.5.0",
     "@trpc/server": "^11.8.1",
     "cors": "^2.8.5",
