@@ -259,3 +259,22 @@ export async function confirmPayment(
     input
   );
 }
+
+export async function deleteRentalOrder(
+  id: string
+): Promise<{ success: boolean }> {
+  console.log(`[ERP Client] Requesting delete for order ID: ${id}`);
+  try {
+    const result = await trpcMutate<{ success: boolean }>(
+      "publicRental.deleteOrder",
+      {
+        id,
+      }
+    );
+    console.log(`[ERP Client] Delete successful for order ID: ${id}`);
+    return result;
+  } catch (error) {
+    console.error(`[ERP Client] Delete FAILED for order ID: ${id}`, error);
+    throw error;
+  }
+}

@@ -56,6 +56,18 @@ app.get("/health", (req, res) => {
 });
 
 import { getStatus } from "./api/status";
+import * as trpcExpress from "@trpc/server/adapters/express";
+import { appRouter } from "./trpc";
+import { createContext } from "./trpc/trpc";
+
+app.use(
+  "/api/trpc",
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  })
+);
+
 app.get("/status", getStatus);
 
 import { sendOrder } from "./api/send-order";

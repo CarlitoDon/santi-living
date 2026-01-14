@@ -51,15 +51,29 @@ export const sendOrder = async (req: Request, res: Response) => {
 
     // Log success
     console.log(
-      `Order sent to ${targetNumber} (Payment: ${payload.paymentMethod})`
+      `Order sent to ${targetNumber} (Payment: ${
+        payload.paymentMethod || "pending"
+      })`
     );
-
     return res.status(200).json({
       success: true,
       messageId: response.id._serialized,
     });
   } catch (error: any) {
-    console.error("Failed to send message:", error);
+    console.error("[BotService] ERROR sending message:", error);
+
+    const msg = (error.message || "").toLowerCase();
+    if (
+      msg.includes("no lid") ||
+      msg.includes("invalid") ||
+      msg.includes("not registered")
+    ) {
+      return res.status(400).json({
+        error: "Invalid WhatsApp Number",
+        message: "Nomor WhatsApp tidak terdaftar atau tidak aktif",
+      });
+    }
+
     return res.status(500).json({
       error: "Delivery Failed",
       message: error.message || "Gagal mengirim pesan WhatsApp",

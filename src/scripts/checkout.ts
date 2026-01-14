@@ -444,31 +444,55 @@ async function confirmPayment(): Promise<void> {
     // Map to schema enum: frontend uses 'bca'/'qris'
     const method = state.selectedMethod === "bca" ? "transfer" : "qris";
 
-    // Ensure payment method is set in payload
-    // Note: order is typed as OrderPayload which uses "transfer"|"qris",
-    // but calculator might have set it differently. Ensure correctness.
-    const payload = {
-      ...order,
-      paymentMethod: method as "transfer" | "qris",
-    };
+    // Try to get token from session (saved by calculator step)
+    const publicToken = sessionStorage.getItem("erpPublicToken");
 
-    console.log("Submitting order:", payload);
-    const response = await submitOrder(payload);
+    let orderUrl = "";
+
+    if (publicToken) {
+      console.log("Confirming existing order:", publicToken);
+      // Dynamically import confirmPayment to avoid circular dependency/bundle bloat if unused
+      const { confirmPayment: apiConfirm } = await import("@/services/erp-api");
+
+      const result = await apiConfirm(
+        publicToken,
+        method as "qris" | "transfer"
+      );
+
+      // If successful, we can redirect to the tracking page
+      // The tracking page URL logic needs to be constructed if not returned by confirmPayment
+      // But typically we can just reload or go to thank-you.
+      // Ideally we use the stored erpOrderUrl
+      orderUrl =
+        sessionStorage.getItem("erpOrderUrl") ||
+        `/sewa-kasur/pesanan/${publicToken}`;
+    } else {
+      // Fallback: Create new order if token missing (legacy/direct checkout flow)
+      // Ensure payment method is set in payload
+      const payload = {
+        ...order,
+        paymentMethod: method as "transfer" | "qris",
+      };
+
+      console.log("Submitting NEW order (fallback):", payload);
+      const response = await submitOrder(payload);
+      orderUrl = response.orderUrl || "";
+    }
 
     // Success
     clearOrder();
+    // Clear the token too to prevent reuse issues? No, session clear should handle it.
 
-    // Redirect to order page
-    if (response.orderUrl) {
-      window.location.href = response.orderUrl;
+    // Redirect
+    if (orderUrl) {
+      window.location.href = orderUrl;
     } else {
-      // Fallback
       window.location.href = "/sewa-kasur/thank-you";
     }
   } catch (error) {
-    console.error("Order submission failed:", error);
+    console.error("Payment confirmation failed:", error);
     alert(
-      "Gagal memproses pesanan: " +
+      "Gagal memproses pembayaran: " +
         (error instanceof Error ? error.message : "Unknown error")
     );
 
