@@ -351,6 +351,11 @@ function renderPaymentDetails(method: PaymentMethod): void {
     const btnConfirm = elements.btnConfirmPayment;
     if (btnConfirm) {
       btnConfirm.style.display = "none";
+      // Also hide the sticky container to prevent empty box
+      const stickyContainer = document.querySelector(
+        ".checkout-confirm-sticky"
+      ) as HTMLElement;
+      if (stickyContainer) stickyContainer.style.display = "none";
     }
 
     // Scroll to container
@@ -375,6 +380,12 @@ function renderPaymentDetails(method: PaymentMethod): void {
       btnConfirm.style.background = "";
       btnConfirm.style.color = "";
       btnConfirm.style.border = "";
+
+      // Restore sticky container
+      const stickyContainer = document.querySelector(
+        ".checkout-confirm-sticky"
+      ) as HTMLElement;
+      if (stickyContainer) stickyContainer.style.display = "";
     }
   }
 }
