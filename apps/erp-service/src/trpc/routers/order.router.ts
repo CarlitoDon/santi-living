@@ -246,24 +246,47 @@ export const orderRouter = router({
         Date.now() / 1000
       )}`;
 
-      // 3. Create Snap Token
+      // 3. Prepare Item Details (Products + Delivery + Discount)
+      const itemDetails = order.items.map((item) => ({
+        id: item.name.substring(0, 50),
+        price: Math.round(item.unitPrice), // Assuming unitPrice is total price for that item (duration already applied or price is fixed)
+        quantity: item.quantity,
+        name: item.name.substring(0, 50),
+      }));
+
+      // Add Delivery Fee
+      if (order.deliveryFee && order.deliveryFee > 0) {
+        itemDetails.push({
+          id: "DELIVERY-FEE",
+          price: Math.round(order.deliveryFee),
+          quantity: 1,
+          name: "Biaya Pengiriman",
+        });
+      }
+
+      // Add Discount
+      if (order.discountAmount && order.discountAmount > 0) {
+        itemDetails.push({
+          id: "DISCOUNT",
+          price: -Math.round(order.discountAmount),
+          quantity: 1,
+          name: order.discountLabel || "Diskon", // Assuming discountLabel exists
+        });
+      }
+
+      // 4. Create Snap Token
       const token = await createSnapToken({
         transaction_details: {
           order_id: uniqueOrderId,
-          gross_amount: Math.round(order.totalAmount), // Ensure integer
+          gross_amount: Math.round(order.totalAmount),
         },
         customer_details: {
           first_name: order.partner.name.split(" ")[0],
           last_name: order.partner.name.split(" ").slice(1).join(" ") || "",
-          email: "customer@santiliving.com", // Fallback if not available
+          email: "customer@santiliving.com",
           phone: order.partner.phone,
         },
-        item_details: order.items.map((item) => ({
-          id: item.name.substring(0, 50),
-          price: Math.round(item.unitPrice),
-          quantity: item.quantity,
-          name: item.name.substring(0, 50),
-        })),
+        item_details: itemDetails,
       });
 
       return {
