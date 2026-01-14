@@ -4,7 +4,7 @@ import { createErpSyncClient } from "../../lib/trpc-client";
 /**
  * Submit Order API
  *
- * Forwards order creation to erp-sync-service via TRPC.
+ * Forwards order creation to erp-service via TRPC.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {

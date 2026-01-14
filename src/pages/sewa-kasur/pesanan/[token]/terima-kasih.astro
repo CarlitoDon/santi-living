@@ -22,7 +22,7 @@ if (token) {
       JSON.stringify({ "0": { json: { token } } })
     );
     const response = await fetch(
-      `${apiUrl}/api/trpc/publicRental.getByToken?batch=1&input=${input}`
+      `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`
     );
     if (response.ok) {
       const data = await response.json();

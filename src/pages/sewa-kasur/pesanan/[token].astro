@@ -8,7 +8,7 @@ export const prerender = false;
 // Get token from URL
 const { token } = Astro.params;
 
-// Fetch order from erp-sync-service (server-side)
+// Fetch order from erp-service (server-side)
 let order = null;
 let error = null;
 
@@ -19,7 +19,7 @@ if (token) {
     // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
     console.log(`[SSR] Fetching order token: ${token} from ${apiUrl}`);
     const input = encodeURIComponent(JSON.stringify({"0":{"json":{token}}}));
-    const fetchUrl = `${apiUrl}/api/trpc/publicRental.getByToken?batch=1&input=${input}`;
+    const fetchUrl = `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`;
     console.log(`[SSR] Fetch URL: ${fetchUrl}`);
     
     const response = await fetch(fetchUrl);
@@ -144,23 +144,9 @@ const formatDate = (dateStr: string) =>
             </div>
           </div>
 
-          <!-- Order Details -->
-          <div class="section">
-            <h3>📦 Detail Pesanan</h3>
-            <div class="items-list">
-              {order.items.map((item: any) => (
-                <div class="item-row">
-                  <span class="item-name">{item.name}</span>
-                  <span class="item-qty">{item.quantity}x</span>
-                  <span class="item-price">{formatCurrency(item.pricePerDay * item.quantity)}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <!-- Dates -->
           <div class="section">
-            <h3>📅 Periode Sewa</h3>
+            <h3>📅  Periode Sewa</h3>
             <div class="date-row">
               <span class="label">Mulai</span>
               <span class="value">{formatDate(order.rentalStartDate)}</span>
@@ -179,27 +165,41 @@ const formatDate = (dateStr: string) =>
             </div>
           )}
 
-          <!-- Total -->
-          <div class="section total-section">
-            <div class="total-row">
-              <span>Subtotal</span>
-              <span>{formatCurrency(order.subtotal)}</span>
+          <!-- Order Details + Total (grouped together) -->
+          <div class="section order-summary-section">
+            <h3>📦 Detail Pesanan</h3>
+            <div class="items-list">
+              {order.items.map((item: any) => (
+                <div class="item-row">
+                  <span class="item-name">{item.name}</span>
+                  <span class="item-qty">{item.quantity}x</span>
+                  <span class="item-price">{formatCurrency(item.subtotal || item.unitPrice * item.quantity)}</span>
+                </div>
+              ))}
             </div>
-            {order.discountAmount && order.discountAmount > 0 && (
-              <div class="total-row discount">
-                <span>Diskon {order.discountLabel || ""}</span>
-                <span>-{formatCurrency(order.discountAmount)}</span>
-              </div>
-            )}
-            {order.deliveryFee && order.deliveryFee > 0 && (
+            
+            <!-- Total (inside same section) -->
+            <div class="total-section">
               <div class="total-row">
-                <span>Biaya Antar</span>
-                <span>{formatCurrency(order.deliveryFee)}</span>
+                <span>Subtotal</span>
+                <span>{formatCurrency(order.subtotal)}</span>
               </div>
-            )}
-            <div class="total-row grand-total">
-              <span>Total</span>
-              <span>{formatCurrency(order.totalAmount)}</span>
+              {order.discountAmount && order.discountAmount > 0 && (
+                <div class="total-row discount">
+                  <span>Diskon {order.discountLabel || ""}</span>
+                  <span>-{formatCurrency(order.discountAmount)}</span>
+                </div>
+              )}
+              {order.deliveryFee && order.deliveryFee > 0 && (
+                <div class="total-row">
+                  <span>Biaya Antar</span>
+                  <span>{formatCurrency(order.deliveryFee)}</span>
+                </div>
+              )}
+              <div class="total-row grand-total">
+                <span>Total</span>
+                <span>{formatCurrency(order.totalAmount)}</span>
+              </div>
             </div>
           </div>
 
@@ -245,7 +245,7 @@ const formatDate = (dateStr: string) =>
                 <p>Pembayaran Anda sedang diverifikasi oleh tim kami.</p>
                 <p class="status-note">Proses verifikasi biasanya memakan waktu 1-24 jam kerja.</p>
                 {order.paymentClaimedAt && (
-                  <p class="status-time">Dikonfirmasi pada: {formatDate(order.paymentClaimedAt)}</p>
+                  <p class="status-time">Pembayaran dikirim pada: {formatDate(order.paymentClaimedAt)}</p>
                 )}
               </div>
             </div>

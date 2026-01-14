@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:bot\" \"npm:dev:sync\"",
     "dev:frontend": "astro dev",
     "dev:bot": "npm run dev --prefix apps/bot-service",
-    "dev:sync": "npm run dev --prefix apps/erp-sync-service",
+    "dev:sync": "npm run dev --prefix apps/erp-service",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

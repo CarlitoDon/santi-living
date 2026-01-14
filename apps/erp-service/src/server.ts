@@ -23,7 +23,7 @@ export function createServer() {
 
   // Health check (public)
   app.get("/health", (req, res) => {
-    res.json({ status: "ok", service: "erp-sync-service" });
+    res.json({ status: "ok", service: "erp-service" });
   });
 
   // TRPC Endpoints

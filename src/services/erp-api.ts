@@ -1,7 +1,7 @@
 /**
  * ERP API Service
  *
- * Client for erp-sync-service to create orders in sync-erp.
+ * Client for erp-service to create orders in sync-erp.
  * This runs in parallel with bot-service - if ERP fails, customer flow continues.
  */
 

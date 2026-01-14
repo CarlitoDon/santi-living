@@ -1,11 +1,11 @@
 /**
- * TRPC Client for erp-sync-service
+ * TRPC Client for erp-service
  *
- * Type-safe API client to communicate with erp-sync-service.
+ * Type-safe API client to communicate with erp-service.
  */
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import type { AppRouter } from "../../apps/erp-sync-service/src/trpc";
+import type { AppRouter } from "../../apps/erp-service/src/trpc";
 
 // Get service URL from environment
 const getServiceUrl = () => {

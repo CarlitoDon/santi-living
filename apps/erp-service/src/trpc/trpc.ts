@@ -1,7 +1,7 @@
 /**
  * TRPC Initialization
  *
- * Base setup for TRPC server in erp-sync-service.
+ * Base setup for TRPC server in erp-service.
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";

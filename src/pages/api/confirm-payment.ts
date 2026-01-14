@@ -4,7 +4,7 @@ import { createErpSyncClient } from "../../lib/trpc-client";
 /**
  * Confirm Payment API
  *
- * Forwards payment confirmation to erp-sync-service via TRPC.
+ * Forwards payment confirmation to erp-service via TRPC.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
