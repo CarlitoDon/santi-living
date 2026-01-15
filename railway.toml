@@ -9,14 +9,4 @@ watchPaths = ["apps/erp-service/**"]
 buildCommand = "npm install && npm run build"
 startCommand = "npm run start"
 
-# Service 2: Website (Frontend)
-# New service for the Astro static site.
-[[services]]
-name = "santi-living-web"
-root = "."
-watchPaths = ["src/**", "public/**", "package.json", "astro.config.mjs"]
-buildCommand = "npm install && npm run build"
-startCommand = "npm run preview -- --host --port $PORT"
-# Note: Astro preview is for testing, but in Railway 'npm run preview' is often used for Node-based serving.
-# Ideally, we'd use a static site CDN, but Railway services are containers.
-# 'astro preview' serves dist/ folder.
+
