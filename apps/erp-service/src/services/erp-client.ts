@@ -32,7 +32,9 @@ const getBaseUrl = () => {
 };
 
 const getApiKey = () => {
-  const key = process.env.SYNC_ERP_API_KEY || "";
+  // Use BOT_SECRET for communicating with sync-erp API (now validates via botProcedure)
+  const key = process.env.BOT_SECRET || process.env.SYNC_ERP_API_KEY || "";
+  // eslint-disable-next-line no-console
   console.log(
     `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`
   );
