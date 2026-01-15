@@ -11,6 +11,7 @@ import {
 } from "./checkout-session";
 import { submitOrder } from "@/services/api";
 import config from "@/data/config.json";
+import { formatCurrency, formatDate } from "@/lib/format";
 
 // Types
 type PaymentMethod = "bca" | "qris";
@@ -77,18 +78,6 @@ function renderSummary(order: any): void {
   const startDate = new Date(order.orderDate);
   const endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + order.duration - 1);
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString("id-ID", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    });
-  };
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("id-ID").format(amount);
-  };
 
   // Build items HTML
   const itemsHtml = order.items
@@ -196,10 +185,6 @@ function renderMiniSummary(order: any): void {
   const container = elements.summaryMiniContainer;
   if (!container) return;
 
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("id-ID").format(amount);
-  };
-
   const itemCount = order.items.reduce(
     (sum: number, item: any) => sum + item.quantity,
     0
@@ -280,8 +265,6 @@ function renderPaymentDetails(method: PaymentMethod): void {
   if (!session) return;
 
   const amount = session.order.totalPrice;
-  const formatCurrency = (value: number) =>
-    new Intl.NumberFormat("id-ID").format(value);
   const { payment } = config;
 
   if (method === "bca") {

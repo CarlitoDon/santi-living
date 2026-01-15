@@ -120,6 +120,7 @@ export const orderRouter = router({
             lng: addressFields.lng,
           },
           items: input.items.map((item) => ({
+            id: item.id,
             name: item.name,
             category: item.category,
             quantity: item.quantity,

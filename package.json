@@ -4,9 +4,8 @@
   "version": "1.0.0",
   "description": "Website sewa kasur Jogja - Santi Living",
   "scripts": {
-    "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:bot\" \"npm:dev:sync\"",
+    "dev": "concurrently --kill-others \"npm:dev:frontend\" \"npm:dev:sync\"",
     "dev:frontend": "astro dev",
-    "dev:bot": "npm run dev --prefix apps/bot-service",
     "dev:sync": "npm run dev --prefix apps/erp-service",
     "start": "astro dev",
     "build": "astro build",
@@ -14,11 +13,16 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@astrojs/vercel": "^9.0.3",
+    "@nanostores/react": "^1.0.0",
     "@trpc/client": "^11.8.1",
     "@vercel/speed-insights": "^1.3.1",
     "astro": "^5.16.6",
     "leaflet": "^1.9.4",
+    "nanostores": "^1.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "superjson": "^2.2.6",
     "zod": "^3.25.76"
   },

@@ -1,13 +1,16 @@
 import { z } from "zod";
 import {
+  RentalPaymentStatusConst,
+  OrderStatusConst,
+} from "../services/erp-client";
+import type {
   RentalPaymentStatus,
-  OrderStatus as OrderStatusEnum,
-  type OrderStatusType,
+  OrderStatusType,
 } from "../services/erp-client";
 
 // Re-export for convenience
-export { RentalPaymentStatus, OrderStatusEnum };
-export type { OrderStatusType };
+export { RentalPaymentStatusConst, OrderStatusConst };
+export type { RentalPaymentStatus, OrderStatusType };
 
 // Order payload from santi-living frontend
 export const CreateOrderSchema = z.object({

@@ -1,7 +1,7 @@
 ---
 import products from "@/data/products.json";
 import config from "@/data/config.json";
-import ProductModal from "./ProductModal.astro";
+import { ProductModal } from "@/components/react/ProductModal";
 import type { ProductItem } from "@/types";
 
 // This is just for type checking in the template if needed,
@@ -559,7 +559,7 @@ const isLarge = (dimensions?: string) => {
       </div>
     </div>
 
-    <ProductModal />
+    <ProductModal client:load />
 
     <script>
       import { initCalculator } from "@/scripts/calculator";

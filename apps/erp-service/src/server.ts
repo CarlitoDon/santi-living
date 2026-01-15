@@ -4,6 +4,10 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { appRouter } from "./trpc";
 import type { Context } from "./trpc/trpc";
 import { midtransWebhook } from "./webhooks/midtrans";
+import {
+  notifyAdminWebhook,
+  notifyPaymentStatusWebhook,
+} from "./webhooks/notify";
 
 export function createServer() {
   const app = express();
@@ -28,7 +32,11 @@ export function createServer() {
   });
 
   // Webhooks
+
+  // Webhooks
   app.post("/api/webhooks/midtrans", midtransWebhook);
+  app.post("/api/orders/:token/notify-admin", notifyAdminWebhook);
+  app.post("/api/orders/:token/notify-payment", notifyPaymentStatusWebhook);
 
   // TRPC Endpoints
   app.use(

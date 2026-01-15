@@ -12,8 +12,21 @@ import {
   calculateDistance,
 } from "./geolocation";
 import { openMapPicker } from "./map-picker";
-import { initProductModal } from "./product-modal";
+// import { initProductModal } from "./product-modal"; // Deprecated
 import { saveOrder } from "./checkout-session";
+import { openModal } from "@/store/modalStore";
+import { formatCurrency, formatDate } from "@/lib/format";
+import {
+  calculateDeliveryFee,
+  calculateVolumeDiscount,
+  calculateTotals,
+} from "@/lib/calculator-logic";
+import {
+  calculateRentalPrice,
+  calculateEndDate,
+  calculateDeliveryEstimate,
+  validateDuration as validateDurationDomain,
+} from "@/lib/domain/rental";
 
 // Helper to find product by ID across all categories
 const findProductById = (id: string): ProductItem | undefined => {
@@ -104,7 +117,22 @@ export function initCalculator(): void {
   updateCalculation();
 
   // Initialize shared product modal
-  initProductModal();
+  // initProductModal();
+
+  // Handle product modal triggers
+  document.querySelectorAll("[data-modal-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const id = target.dataset.id;
+      if (id) {
+        // Find product data
+        const product = findProductById(id);
+        if (product) {
+          openModal(product);
+        }
+      }
+    });
+  });
 
   // Handle deep links from other pages
   handleDeepLink();
@@ -521,16 +549,19 @@ function handleDurationChange(event: Event): void {
  * Validate duration
  */
 function validateDuration(): void {
-  const { minDuration, maxDuration } = config;
+  const result = validateDurationDomain(state.duration, {
+    minDuration: config.minDuration,
+    maxDuration: config.maxDuration,
+  });
 
-  if (state.duration < minDuration) {
-    state.duration = minDuration;
-    (elements.duration as HTMLInputElement).value = String(minDuration);
-    showError("duration", `Minimal ${minDuration} hari`);
-  } else if (state.duration > maxDuration) {
-    state.duration = maxDuration;
-    (elements.duration as HTMLInputElement).value = String(maxDuration);
-    showError("duration", `Maksimal ${maxDuration} hari`);
+  if (!result.isValid) {
+    if (result.adjustedValue) {
+      state.duration = result.adjustedValue;
+      (elements.duration as HTMLInputElement).value = String(
+        result.adjustedValue
+      );
+    }
+    showError("duration", result.message || "Durasi tidak valid");
   } else {
     clearError("duration");
   }
@@ -649,71 +680,51 @@ function updateDeliveryFee(lat: number, lng: number): void {
  * Update calculation
  */
 function updateCalculation(): void {
-  // Calculate end date
+  // 1. Calculate end date using pure function
   if (state.startDate) {
-    const start = new Date(state.startDate);
-    const end = new Date(start);
-    end.setDate(end.getDate() + state.duration);
-    state.endDate = end.toISOString().split("T")[0];
+    state.endDate = calculateEndDate(state.startDate, state.duration);
   }
 
-  // Calculate total quantity (All items)
-  state.totalQuantity = state.items.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  // 2. Calculate prices using pure function
+  state.totalQuantity = state.items.reduce((sum, i) => sum + i.quantity, 0);
 
-  // Calculate mattress quantity (for volume discount - exclude accessories)
   const mattressQty = state.items
     .filter((i) => i.category !== "accessory")
-    .reduce((sum, i) => sum + i.quantity, 0);
+    .reduce((s, i) => s + i.quantity, 0);
 
-  // Find applicable volume discount tier
-  const volumeDiscounts = (config as any).volumeDiscounts || [];
-  const volumeTier = volumeDiscounts.find(
-    (t: any) => mattressQty >= t.minQty && mattressQty <= t.maxQty
-  );
-  const volumeDiscount = volumeTier?.discount || 0;
-
-  // Calculate subtotals by category
-  const mattressSubtotal = state.items
-    .filter((i) => i.category !== "accessory")
-    .reduce((sum, i) => sum + i.quantity * i.pricePerDay * state.duration, 0);
-
-  const accessorySubtotal = state.items
-    .filter((i) => i.category === "accessory")
-    .reduce((sum, i) => sum + i.quantity * i.pricePerDay * state.duration, 0);
-
-  // Calculate discount amount (only on mattresses, not accessories)
-  const discountAmount = Math.round(mattressSubtotal * volumeDiscount);
+  const {
+    percent: volumeDiscountPercent,
+    label,
+    discount: volumeDiscountRate,
+    nextTierUnitsNeeded,
+    nextTierDiscountPercent,
+  } = calculateVolumeDiscount(mattressQty, config as any);
 
   // Update state with discount info
-  state.volumeDiscountAmount = discountAmount;
-  state.volumeDiscountLabel = volumeTier?.label || "";
-  state.volumeDiscountPercent = volumeDiscount * 100;
+  state.volumeDiscountAmount = 0; // Will be calc in calculateTotals
+  state.volumeDiscountLabel = label;
+  state.volumeDiscountPercent = volumeDiscountPercent;
 
-  // Calculate next tier upsell prompt (e.g., "Tambah 2 unit lagi untuk diskon 15%")
-  const currentTierIndex = volumeDiscounts.findIndex(
-    (t: any) => mattressQty >= t.minQty && mattressQty <= t.maxQty
-  );
-  const nextTier = volumeDiscounts[currentTierIndex + 1];
-
-  if (nextTier && mattressQty > 0) {
-    const unitsNeeded = nextTier.minQty - mattressQty;
-    const nextDiscountPercent = Math.round(nextTier.discount * 100);
-    state.nextTierUnitsNeeded = unitsNeeded;
-    state.nextTierDiscountPercent = nextDiscountPercent;
-  } else {
-    state.nextTierUnitsNeeded = 0;
-    state.nextTierDiscountPercent = 0;
-  }
+  state.nextTierUnitsNeeded = nextTierUnitsNeeded;
+  state.nextTierDiscountPercent = nextTierDiscountPercent;
 
   // Calculate totals
-  state.subtotal = mattressSubtotal + accessorySubtotal;
-  state.total = state.subtotal - discountAmount + (state.deliveryFee || 0);
+  const totals = calculateTotals(
+    state.items,
+    state.duration,
+    state.deliveryFee || 0,
+    volumeDiscountRate
+  );
 
-  // Calculate delivery estimate
-  state.deliveryEstimate = calculateDeliveryEstimate();
+  state.subtotal = totals.subtotal;
+  state.volumeDiscountAmount = totals.discountAmount;
+  state.total = totals.total;
+
+  // 3. Calculate delivery estimate
+  state.deliveryEstimate = calculateDeliveryEstimate(
+    state.startDate,
+    config.cutoffHour
+  );
 
   // Update UI
   updateTotalQuantityDisplay();
@@ -757,36 +768,7 @@ function updateStepperButtons(): void {
   });
 }
 
-/**
- * Calculate delivery estimate
- */
-function calculateDeliveryEstimate(): string {
-  if (!state.startDate) {
-    return "Pilih tanggal untuk estimasi pengantaran";
-  }
-
-  const now = new Date();
-  const startDate = new Date(state.startDate);
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const isToday = startDate.getTime() === today.getTime();
-
-  if (isToday) {
-    const currentHour = now.getHours();
-    if (currentHour < config.cutoffHour) {
-      return "Bisa antar hari ini! 🚚";
-    } else {
-      return "Antar besok pagi";
-    }
-  } else {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      day: "numeric",
-      month: "short",
-    };
-    const dateStr = startDate.toLocaleDateString("id-ID", options);
-    return `Antar ${dateStr}`;
-  }
-}
+// Helper removed - using pure function from domain/rental
 
 /**
  * Update result panel

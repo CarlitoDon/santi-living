@@ -17,6 +17,7 @@ export interface OrderNotifyPayload {
     lng?: string;
   };
   items: Array<{
+    id: string; // Required by bot schema
     name: string;
     category: "package" | "mattress" | "accessory";
     quantity: number;

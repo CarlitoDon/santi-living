@@ -1,268 +1,130 @@
 /**
  * ERP Client
  *
- * HTTP client to communicate with sync-erp publicRental API.
- * Since we don't share types between repos, we use plain fetch.
+ * TRPC Client to communicate with sync-erp publicRental API.
+ * Uses a local contract type to ensure internal type safety without strict cross-repo dependency.
  */
+
+import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
+import superjson from "superjson";
+import type {
+  SyncErpRouter,
+  CreateOrderInput,
+  OrderResponse,
+  OrderByTokenResponse,
+  CreatePartnerInput,
+  PartnerResponse,
+  ConfirmPaymentInput,
+  ConfirmPaymentResponse,
+  OrderStatusType,
+  RentalPaymentStatus,
+} from "../types/sync-erp";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const getBaseUrl = () => {
   let url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
-  // Fix inconsistent env var paths: ensure it ends with /api/trpc
   if (url.endsWith("/trpc") && !url.endsWith("/api/trpc")) {
     url = url.replace(/\/trpc$/, "/api/trpc");
   }
   return url;
 };
 
-export interface BaseAddressFields {
-  street?: string | null;
-  kelurahan?: string | null;
-  kecamatan?: string | null;
-  kota?: string | null;
-  provinsi?: string | null;
-  zip?: string | null;
-  latitude?: number | null;
-  longitude?: number | null;
-}
+const getApiKey = () => {
+  const key = process.env.SYNC_ERP_API_KEY || "";
+  console.log(
+    `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`
+  );
+  return key;
+};
 
-export interface CreateOrderInput extends BaseAddressFields {
-  companyId: string;
-  partnerId: string;
-  rentalStartDate: Date;
-  rentalEndDate: Date;
-  items: Array<{
-    rentalItemId?: string; // For single items
-    rentalBundleId?: string; // For package bundles
-    quantity: number;
-    // Metadata for auto-creation
-    name?: string;
-    pricePerDay?: number;
-    category?: "package" | "mattress" | "accessory";
-    components?: string[]; // Bundle component labels: ["kasur busa", "sprei", "bantal", "selimut"]
-  }>;
-  notes?: string;
+// Initialize TRPC Client
+// We cast to any for the creation to bypass strict Router constraints because we don't have the real server types
+// Then we cast to unknown first, then to our strict local shape.
+export const syncClient = createTRPCProxyClient<any>({
+  links: [
+    httpBatchLink({
+      url: getBaseUrl(),
+      headers() {
+        return {
+          Authorization: `Bearer ${getApiKey()}`,
+        };
+      },
+      transformer: superjson,
+    }),
+  ],
+}) as unknown as {
+  publicRental: {
+    getByToken: {
+      query: (input: { token: string }) => Promise<OrderByTokenResponse>;
+    };
+    createOrder: {
+      mutate: (input: CreateOrderInput) => Promise<OrderResponse>;
+    };
+    findOrCreatePartner: {
+      mutate: (input: CreatePartnerInput) => Promise<PartnerResponse>;
+    };
+    confirmPayment: {
+      mutate: (input: ConfirmPaymentInput) => Promise<ConfirmPaymentResponse>;
+    };
+    confirmPaymentByOrderNumber: {
+      mutate: (input: {
+        orderNumber: string;
+        paymentMethod: string;
+        transactionId?: string;
+        amount?: number;
+      }) => Promise<{
+        success: boolean;
+        orderNumber: string;
+        status: string;
+      }>;
+    };
+    deleteOrder: {
+      mutate: (input: { id: string }) => Promise<{ success: boolean }>;
+    };
+  };
+};
 
-  // Santi Living integration fields (all separate)
-  deliveryFee?: number;
-  deliveryAddress?: string;
-  paymentMethod?: string;
-  discountAmount?: number;
-  discountLabel?: string;
-}
-
-export interface CreatePartnerInput extends BaseAddressFields {
-  companyId: string;
-  name: string;
-  phone: string;
-  email?: string;
-  address?: string;
-}
-
-export interface OrderResponse {
-  id: string;
-  orderNumber: string;
-  publicToken: string;
-  status: string;
-  createdAt: string;
-}
-
-export interface PartnerResponse {
-  id: string;
-  name: string;
-  phone: string;
-}
-
-export interface ConfirmPaymentInput {
-  token: string;
-  paymentMethod: "qris" | "transfer";
-  reference?: string;
-}
-
-export interface ConfirmPaymentResponse {
-  success: boolean;
-  orderNumber: string;
-  rentalPaymentStatus: string;
-  paymentClaimedAt: Date;
-}
-
-// Rental Payment Status enum (mirrors sync-erp RentalPaymentStatus)
-export const RentalPaymentStatus = {
+// Re-export constants for runtime usage if needed by other files
+export const RentalPaymentStatusConst = {
   PENDING: "PENDING",
   AWAITING_CONFIRM: "AWAITING_CONFIRM",
   CONFIRMED: "CONFIRMED",
   FAILED: "FAILED",
 } as const;
-export type RentalPaymentStatus =
-  (typeof RentalPaymentStatus)[keyof typeof RentalPaymentStatus];
 
-// Order Status enum (mirrors sync-erp RentalOrderStatus)
-export const OrderStatus = {
+export const OrderStatusConst = {
   DRAFT: "DRAFT",
   CONFIRMED: "CONFIRMED",
   ACTIVE: "ACTIVE",
   COMPLETED: "COMPLETED",
   CANCELLED: "CANCELLED",
 } as const;
-export type OrderStatusType = (typeof OrderStatus)[keyof typeof OrderStatus];
 
-export interface OrderByTokenResponse extends BaseAddressFields {
-  id: string;
-  orderNumber: string;
-  status: OrderStatusType;
-  rentalStartDate: string;
-  rentalEndDate: string;
-  subtotal: number;
-  totalAmount: number;
-  depositAmount: number;
-
-  // Santi Living fields (all separate)
-  deliveryFee: number | null;
-  deliveryAddress: string | null;
-  // Address fields inherited from BaseAddressFields (allowing null)
-  street: string | null;
-  kelurahan: string | null;
-  kecamatan: string | null;
-  kota: string | null;
-  provinsi: string | null;
-  zip: string | null;
-  latitude: number | null;
-  longitude: number | null;
-
-  paymentMethod: string | null;
-  discountAmount: number | null;
-  discountLabel: string | null;
-  orderSource: string | null;
-
-  // Payment status fields
-  rentalPaymentStatus: RentalPaymentStatus;
-  paymentClaimedAt: string | null;
-  paymentConfirmedAt: string | null;
-  paymentReference: string | null;
-  paymentFailedAt: string | null;
-  paymentFailReason: string | null;
-
-  partner: {
-    name: string;
-    phone: string;
-    address?: string;
-  } & BaseAddressFields;
-  items: Array<{
-    name: string;
-    quantity: number;
-    unitPrice: number;
-    subtotal: number;
-  }>;
-}
-
-// Helper for tRPC batch calls
-async function trpcQuery<T>(procedure: string, input: unknown): Promise<T> {
-  const baseUrl = getBaseUrl();
-  // tRPC v11+ batch format: {"0": {"json": input}}
-  const url = `${baseUrl}/${procedure}?batch=1&input=${encodeURIComponent(
-    JSON.stringify({ 0: { json: input } })
-  )}`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const data = (await response.json()) as TrpcErrorResponse[];
-
-  // Check for tRPC error in response
-  if (data[0]?.error) {
-    const errorMsg =
-      data[0].error.json?.message ||
-      data[0].error.json?.data?.code ||
-      "tRPC query failed";
-    throw new Error(errorMsg);
-  }
-
-  if (!response.ok) {
-    throw new Error("tRPC request failed with status " + response.status);
-  }
-
-  // tRPC v11+ wraps result in {json: ...}
-  const result = (data[0] as { result: { data: { json: T } } }).result.data;
-  return result.json ?? (result as unknown as T);
-}
-
-interface TrpcErrorResponse {
-  error?: {
-    json?: {
-      message?: string;
-      code?: number;
-      data?: {
-        code?: string;
-      };
-    };
-  };
-  result?: {
-    data: unknown;
-  };
-}
-
-async function trpcMutate<T>(procedure: string, input: unknown): Promise<T> {
-  const baseUrl = getBaseUrl();
-  const url = `${baseUrl}/${procedure}?batch=1`;
-
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    // tRPC batch format: {"0": {"json": input}}
-    body: JSON.stringify({ 0: { json: input } }),
-  });
-
-  const data = (await response.json()) as TrpcErrorResponse[];
-
-  // Check for tRPC error in response
-  if (data[0]?.error) {
-    const errorMsg =
-      data[0].error.json?.message ||
-      data[0].error.json?.data?.code ||
-      "tRPC mutation failed";
-    throw new Error(errorMsg);
-  }
-
-  if (!response.ok) {
-    throw new Error("tRPC request failed with status " + response.status);
-  }
-
-  // tRPC v11+ wraps result in {json: ...}
-  const result = (data[0] as { result: { data: { json: T } } }).result.data;
-  return result.json ?? (result as unknown as T);
-}
-
-// Typed wrapper functions for rental operations
+// Wrapper functions (implementing using the Proxy Client)
 export async function createRentalOrder(
   input: CreateOrderInput
 ): Promise<OrderResponse> {
-  return trpcMutate<OrderResponse>("publicRental.createOrder", input);
+  return syncClient.publicRental.createOrder.mutate(input);
 }
 
 export async function getOrderByToken(
   token: string
 ): Promise<OrderByTokenResponse> {
-  return trpcQuery<OrderByTokenResponse>("publicRental.getByToken", { token });
+  return syncClient.publicRental.getByToken.query({ token });
 }
 
 export async function findOrCreatePartner(
   input: CreatePartnerInput
 ): Promise<PartnerResponse> {
-  return trpcMutate<PartnerResponse>("publicRental.findOrCreatePartner", input);
+  return syncClient.publicRental.findOrCreatePartner.mutate(input);
 }
 
 export async function confirmPayment(
   input: ConfirmPaymentInput
 ): Promise<ConfirmPaymentResponse> {
-  return trpcMutate<ConfirmPaymentResponse>(
-    "publicRental.confirmPayment",
-    input
-  );
+  return syncClient.publicRental.confirmPayment.mutate(input);
 }
 
 export async function confirmPaymentByOrderNumber(input: {
@@ -271,11 +133,7 @@ export async function confirmPaymentByOrderNumber(input: {
   transactionId?: string;
   amount?: number;
 }): Promise<{ success: boolean; orderNumber: string; status: string }> {
-  return trpcMutate<{
-    success: boolean;
-    orderNumber: string;
-    status: string;
-  }>("publicRental.confirmPaymentByOrderNumber", input);
+  return syncClient.publicRental.confirmPaymentByOrderNumber.mutate(input);
 }
 
 export async function deleteRentalOrder(
@@ -283,12 +141,7 @@ export async function deleteRentalOrder(
 ): Promise<{ success: boolean }> {
   console.log(`[ERP Client] Requesting delete for order ID: ${id}`);
   try {
-    const result = await trpcMutate<{ success: boolean }>(
-      "publicRental.deleteOrder",
-      {
-        id,
-      }
-    );
+    const result = await syncClient.publicRental.deleteOrder.mutate({ id });
     console.log(`[ERP Client] Delete successful for order ID: ${id}`);
     return result;
   } catch (error) {
@@ -296,3 +149,16 @@ export async function deleteRentalOrder(
     throw error;
   }
 }
+
+// Export Types for consumers (e.g. notify.ts)
+export type {
+  CreateOrderInput,
+  OrderResponse,
+  OrderByTokenResponse,
+  CreatePartnerInput,
+  PartnerResponse,
+  ConfirmPaymentInput,
+  ConfirmPaymentResponse,
+  OrderStatusType,
+  RentalPaymentStatus,
+};
