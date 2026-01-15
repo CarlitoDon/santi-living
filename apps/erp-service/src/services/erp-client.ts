@@ -24,16 +24,44 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const getBaseUrl = () => {
-  let url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
-  if (url.endsWith("/trpc") && !url.endsWith("/api/trpc")) {
-    url = url.replace(/\/trpc$/, "/api/trpc");
-  }
+  const url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
+  // eslint-disable-next-line no-console
+  console.log(
+    `[ERP Client] API URL: ${url}`
+  );
   return url;
 };
 
 const getApiKey = () => {
-  // Use BOT_SECRET for communicating with sync-erp API (now validates via botProcedure)
-  const key = process.env.BOT_SECRET || process.env.SYNC_ERP_API_KEY || "";
+  /**
+   * Authentication priority for sync-erp API:
+   * 1. BOT_SECRET (preferred - matches sync-erp API's botProcedure)
+   * 2. SYNC_ERP_API_KEY (legacy - still supported)
+   * 3. Empty (will fail in production)
+   */
+  const botSecret = process.env.BOT_SECRET;
+  const syncErpApiKey = process.env.SYNC_ERP_API_KEY;
+  const key = botSecret || syncErpApiKey || "";
+
+  if (!key) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `⚠️  [ERP Client] Auth secret NOT SET! ` +
+      `Set BOT_SECRET (recommended) or SYNC_ERP_API_KEY environment variable.`
+    );
+  } else if (botSecret) {
+    // eslint-disable-next-line no-console
+    console.log(
+      `✅ [ERP Client] Using BOT_SECRET for auth`
+    );
+  } else if (syncErpApiKey) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      `⚠️  [ERP Client] Using SYNC_ERP_API_KEY (legacy). ` +
+      `Consider migrating to BOT_SECRET.`
+    );
+  }
+
   // eslint-disable-next-line no-console
   console.log(
     `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`
