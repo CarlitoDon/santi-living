@@ -1,13 +1,11 @@
 [build]
 builder = "nixpacks"
 
-# Service 1: Bot Service (Backend)
-# Re-using the name "bot-service" to take over the existing service ID if possible,
-# turning it into the actual Backend.
+# Service 1: Santi ERP Service (Bridge/Backend)
 [[services]]
-name = "bot-service"
-root = "apps/bot-service"
-watchPaths = ["apps/bot-service/**"]
+name = "erp-service"
+root = "apps/erp-service"
+watchPaths = ["apps/erp-service/**"]
 buildCommand = "npm install && npm run build"
 startCommand = "npm run start"
 
