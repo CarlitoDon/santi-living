@@ -25,8 +25,9 @@ if (token) {
     const fetchUrl = `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`;
     console.log(`[SSR] Fetch URL: ${fetchUrl}`);
     
-    // Add API Key just in case (though it's public procedure)
-    const apiKey = import.meta.env.ERP_SYNC_API_KEY || "santi_secret_auth_token_2026";
+    // Add API Key for authentication with sync-erp
+    // BOT_SECRET is the shared secret for service-to-service auth
+    const apiKey = import.meta.env.BOT_SECRET || "dev_bot_secret_key_2026";
     
     const response = await fetch(fetchUrl, {
       headers: {
