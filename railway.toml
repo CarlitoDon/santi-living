@@ -6,7 +6,5 @@ builder = "nixpacks"
 name = "proxy"
 root = "apps/proxy"
 watchPaths = ["apps/proxy/**"]
-buildCommand = "npm install && npm run build"
-startCommand = "npm run start"
 
 
