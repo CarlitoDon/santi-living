@@ -1,5 +1,5 @@
 {
-  "name": "erp-service",
+  "name": "proxy",
   "version": "1.0.0",
   "description": "Bridge service between santi-living and sync-erp",
   "main": "dist/index.js",

@@ -22,13 +22,13 @@ export function createServer() {
       origin: allowedOrigins,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
-    })
+    }),
   );
   app.use(express.json());
 
   // Health check (public)
   app.get("/health", (req, res) => {
-    res.json({ status: "ok", service: "erp-service" });
+    res.json({ status: "ok", service: "proxy" });
   });
 
   // Webhooks
@@ -44,7 +44,7 @@ export function createServer() {
     trpcExpress.createExpressMiddleware({
       router: appRouter,
       createContext: ({ req, res }): Context => ({ req, res }),
-    })
+    }),
   );
 
   return app;

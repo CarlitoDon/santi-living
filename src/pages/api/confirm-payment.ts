@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { createErpSyncClient } from "../../lib/trpc-client";
+import { createProxyClient } from "../../lib/trpc-client";
 
 /**
  * Confirm Payment API
@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { token, paymentMethod, reference } = body;
 
     console.log(
-      `[confirm-payment] Confirming payment for token: ${token}, method: ${paymentMethod}`
+      `[confirm-payment] Confirming payment for token: ${token}, method: ${paymentMethod}`,
     );
 
     if (!token || !paymentMethod) {
@@ -21,11 +21,11 @@ export const POST: APIRoute = async ({ request }) => {
           success: false,
           error: "Token and Payment Method are required",
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const client = createErpSyncClient();
+    const client = createProxyClient();
 
     const result = await client.order.confirmPayment.mutate({
       token,
@@ -43,7 +43,7 @@ export const POST: APIRoute = async ({ request }) => {
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   } catch (error: unknown) {
     console.error("[confirm-payment] Error:", error);
@@ -57,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
         error: "Payment confirmation failed",
         message,
       }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 };

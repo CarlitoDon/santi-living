@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently --kill-others \"npm:dev:frontend\" \"npm:dev:sync\"",
     "dev:frontend": "astro dev",
-    "dev:sync": "npm run dev --prefix apps/erp-service",
+    "dev:sync": "npm run dev --prefix apps/proxy",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

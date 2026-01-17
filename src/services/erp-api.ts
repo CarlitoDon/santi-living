@@ -1,7 +1,7 @@
 /**
  * ERP API Service
  *
- * Client for erp-service to create orders in sync-erp.
+ * Client for proxy to create orders in sync-erp.
  * This runs in parallel with bot-service - if ERP fails, customer flow continues.
  */
 
@@ -13,11 +13,11 @@ const getErpApiUrl = () => {
     typeof window !== "undefined" &&
     window.location.hostname === "localhost"
   ) {
-    return "http://localhost:3001"; // sync-erp API port
+    return "http://localhost:3002"; // proxy service port
   }
-  const ERP_SYNC_URL =
-    (import.meta as any).env?.PUBLIC_ERP_SYNC_URL || "http://localhost:3001";
-  return ERP_SYNC_URL;
+  const PROXY_URL =
+    (import.meta as any).env?.PUBLIC_PROXY_URL || "http://localhost:3002";
+  return PROXY_URL;
 };
 
 export interface OrderPayload {
@@ -71,7 +71,7 @@ export interface ErpOrderResponse {
  * @throws Error if API call fails
  */
 export async function createOrderInERP(
-  payload: OrderPayload
+  payload: OrderPayload,
 ): Promise<ErpOrderResponse> {
   // Use internal proxy to handle TRPC conversion (avoids CORS)
   const response = await fetch("/api/submit-order", {
@@ -100,7 +100,7 @@ export async function createOrderInERP(
   if (!response.ok) {
     const error = await response.json();
     throw new Error(
-      error.message || error.details || "Failed to create order in ERP"
+      error.message || error.details || "Failed to create order in ERP",
     );
   }
 
@@ -130,7 +130,7 @@ export async function getOrderStatus(token: string) {
 export async function confirmPayment(
   token: string,
   paymentMethod: "qris" | "transfer",
-  reference?: string
+  reference?: string,
 ) {
   // Use local internal proxy
   const response = await fetch("/api/confirm-payment", {
@@ -148,7 +148,7 @@ export async function confirmPayment(
   if (!response.ok) {
     const error = await response.json();
     throw new Error(
-      error.message || error.details || "Gagal konfirmasi pembayaran"
+      error.message || error.details || "Gagal konfirmasi pembayaran",
     );
   }
 
@@ -168,7 +168,7 @@ export async function createPaymentToken(token: string) {
   if (!response.ok) {
     const error = await response.json();
     throw new Error(
-      error.message || error.details || "Gagal membuat token pembayaran"
+      error.message || error.details || "Gagal membuat token pembayaran",
     );
   }
 

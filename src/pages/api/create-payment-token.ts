@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { createErpSyncClient } from "../../lib/trpc-client";
+import { createProxyClient } from "../../lib/trpc-client";
 
 /**
  * Create Payment Token API
@@ -19,11 +19,11 @@ export const POST: APIRoute = async ({ request }) => {
           success: false,
           error: "Token is required",
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    const client = createErpSyncClient();
+    const client = createProxyClient();
 
     const result = await client.order.createPaymentToken.mutate({
       token,
@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   } catch (error: unknown) {
     console.error("[create-payment-token] Error:", error);
@@ -53,7 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
         error: "Failed to create payment token",
         message,
       }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 };

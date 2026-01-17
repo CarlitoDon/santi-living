@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { createErpSyncClient } from "../../lib/trpc-client";
+import { createProxyClient } from "../../lib/trpc-client";
 
 /**
  * Submit Order API
@@ -11,7 +11,7 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     console.log("[submit-order] Creating order for:", body.customerName);
 
-    const client = createErpSyncClient();
+    const client = createProxyClient();
 
     const result = await client.order.create.mutate({
       customerName: body.customerName,
@@ -67,7 +67,7 @@ export const POST: APIRoute = async ({ request }) => {
         error: "Order creation failed",
         message,
       }),
-      { status }
+      { status },
     );
   }
 };

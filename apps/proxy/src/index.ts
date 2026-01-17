@@ -12,14 +12,14 @@ process.on("unhandledRejection", (reason, promise) => {
   process.exit(1);
 });
 
-console.log("[erp-service] Starting up...");
+console.log("[proxy] Starting up...");
 
 const PORT = process.env.PORT || 3002;
 
 const app = createServer();
 
 const server = app.listen(PORT, () => {
-  console.log(`🚀 erp-service running on port ${PORT}`);
+  console.log(`🚀 proxy running on port ${PORT}`);
   console.log(`   Health: http://localhost:${PORT}/health`);
   console.log(`   API:    http://localhost:${PORT}/api/orders`);
 });
@@ -28,7 +28,7 @@ const server = app.listen(PORT, () => {
 const gracefulShutdown = (signal: string) => {
   console.log(`\n[${signal}] Shutting down gracefully...`);
   server.close(() => {
-    console.log("[erp-service] Server closed successfully.");
+    console.log("[proxy] Server closed successfully.");
     process.exit(0);
   });
   // Force exit after 5s if server doesn't close

@@ -3,9 +3,9 @@ builder = "nixpacks"
 
 # Service 1: Santi ERP Service (Bridge/Backend)
 [[services]]
-name = "erp-service"
-root = "apps/erp-service"
-watchPaths = ["apps/erp-service/**"]
+name = "proxy"
+root = "apps/proxy"
+watchPaths = ["apps/proxy/**"]
 buildCommand = "npm install && npm run build"
 startCommand = "npm run start"
 
