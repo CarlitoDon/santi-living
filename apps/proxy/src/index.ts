@@ -1,4 +1,18 @@
-import "dotenv/config";
+import path from "path";
+import dotenv from "dotenv";
+
+// Load environment-specific .env file
+const envFile =
+  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
+
+const envPath = path.resolve(process.cwd(), envFile);
+const result = dotenv.config({ path: envPath });
+
+if (result.error) {
+  console.warn(`[proxy] Warning: Failed to load ${envFile}`);
+} else {
+  console.log(`[proxy] Loaded environment from ${envFile}`);
+}
 import { createServer } from "./server";
 
 // Global error handlers (MUST be at top)
