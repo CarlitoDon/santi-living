@@ -5,6 +5,6 @@ builder = "nixpacks"
 [[services]]
 name = "proxy"
 root = "apps/proxy"
-watchPaths = ["apps/proxy/**"]
+watchPattern = ["apps/proxy/**"]
 
 
