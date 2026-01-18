@@ -22,7 +22,7 @@ if (token) {
     // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
     console.log(`[SSR] Fetching order token: ${token} from ${apiUrl}`);
     const input = encodeURIComponent(JSON.stringify({"0":{"json":{token}}}));
-    const fetchUrl = `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`;
+    const fetchUrl = `${apiUrl}/api/trpc/publicRental.getByToken?batch=1&input=${input}`;
     console.log(`[SSR] Fetch URL: ${fetchUrl}`);
     
     // Add API Key for authentication with sync-erp

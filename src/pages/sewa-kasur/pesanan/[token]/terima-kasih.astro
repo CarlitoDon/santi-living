@@ -19,10 +19,10 @@ if (token) {
       import.meta.env.ERP_SYNC_SERVICE_URL || "http://localhost:3001";
     // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
     const input = encodeURIComponent(
-      JSON.stringify({ "0": { json: { token } } })
+      JSON.stringify({ "0": { json: { token } } }),
     );
     const response = await fetch(
-      `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`
+      `${apiUrl}/api/trpc/publicRental.getByToken?batch=1&input=${input}`,
     );
     if (response.ok) {
       const data = await response.json();
