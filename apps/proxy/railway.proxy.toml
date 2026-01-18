@@ -5,6 +5,10 @@ builder = "nixpacks"
 [[services]]
 name = "proxy"
 root = "apps/proxy"
-watchPattern = ["apps/proxy/**"]
 
-
+[watch]
+paths = [
+  "apps/proxy/**",
+  "package.json",
+  "package-lock.json"
+]
