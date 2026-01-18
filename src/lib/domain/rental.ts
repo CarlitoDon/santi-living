@@ -34,10 +34,10 @@ export interface PriceResult {
 export function calculateRentalPrice(
   items: CartItem[],
   duration: number,
-  config: RentalConfig
+  config: RentalConfig,
 ): PriceResult {
   // 1. Calculate quantities
-  const totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
+  //   const totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
   const mattressQty = items
     .filter((i) => i.category !== "accessory")
     .reduce((sum, i) => sum + i.quantity, 0);
@@ -55,7 +55,7 @@ export function calculateRentalPrice(
 
   // 3. Find applicable volume discount
   const volumeTier = config.volumeDiscounts.find(
-    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty,
   );
   const discountPercent = volumeTier?.discount || 0;
   const discountAmount = Math.round(mattressSubtotal * discountPercent);
@@ -63,7 +63,7 @@ export function calculateRentalPrice(
   // 4. Calculate next tier upsell
   let nextTier;
   const currentTierIndex = config.volumeDiscounts.findIndex(
-    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty,
   );
   const nextTierConfig = config.volumeDiscounts[currentTierIndex + 1];
 
@@ -103,7 +103,7 @@ export function calculateEndDate(startDate: string, duration: number): string {
  */
 export function calculateDeliveryEstimate(
   startDate: string | null,
-  cutoffHour: number
+  cutoffHour: number,
 ): string {
   if (!startDate) {
     return "Pilih tanggal untuk estimasi pengantaran";
@@ -137,7 +137,7 @@ export function calculateDeliveryEstimate(
  */
 export function validateDuration(
   duration: number,
-  config: { minDuration: number; maxDuration: number }
+  config: { minDuration: number; maxDuration: number },
 ): { isValid: boolean; message?: string; adjustedValue?: number } {
   if (isNaN(duration) || duration < config.minDuration) {
     return {

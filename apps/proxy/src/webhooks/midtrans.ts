@@ -1,14 +1,14 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
 
-import midtransClient from "midtrans-client";
+// import midtransClient from "midtrans-client";
 
 // Initialize Snap API client (for helper verification if needed, but manual signature check is better)
-const apiClient = new midtransClient.Snap({
-  isProduction: process.env.MIDTRANS_IS_PRODUCTION === "true",
-  serverKey: process.env.MIDTRANS_SERVER_KEY || "",
-  clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
-});
+// const apiClient = new midtransClient.Snap({
+//   isProduction: process.env.MIDTRANS_IS_PRODUCTION === "true",
+//   serverKey: process.env.MIDTRANS_SERVER_KEY || "",
+//   clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
+// });
 
 export const midtransWebhook = async (req: Request, res: Response) => {
   try {
@@ -37,7 +37,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
     const fraudStatus = notification.fraud_status;
 
     console.log(
-      `[Midtrans Webhook] Processing ${orderId}: ${transactionStatus}`
+      `[Midtrans Webhook] Processing ${orderId}: ${transactionStatus}`,
     );
 
     // Extract real Order Number (remove timestamp if present from retries: RNT-123-16782392)
@@ -50,7 +50,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
     // Let's assume we need to implement `getOrderByNumber` or `updateOrderByNumber` in erp-client.
     // For now, let's parse the Order Number.
 
-    const parts = orderId.split("-");
+    // const [prefix] = orderId.split("-");
     // If format RNT-DATE-SEQ-TIMESTAMP, it's safer to rely on "order_id" as the key.
     // However, our internal OrderNumber is likely RNT-YYYYMMDD-SEQ.
     // So if appended with timestamp: RNT-YYYYMMDD-SEQ-TIMESTAMP
@@ -114,18 +114,18 @@ async function handleSuccess(midtransOrderId: string, notification: any) {
   let orderNumber = midtransOrderId;
   if (parts.length > 2) {
     // Remove the last part (timestamp)
-    const timestamp = parts.pop();
+    // const [orderId] = parts;
+    // const timestamp = parts.pop();
     orderNumber = parts.join("-");
   }
 
   console.log(
-    `[Midtrans Webhook] Confirming Order: ${orderNumber} (Midtrans ID: ${midtransOrderId})`
+    `[Midtrans Webhook] Confirming Order: ${orderNumber} (Midtrans ID: ${midtransOrderId})`,
   );
 
   try {
-    const { confirmPaymentByOrderNumber } = await import(
-      "../services/erp-client"
-    );
+    const { confirmPaymentByOrderNumber } =
+      await import("../services/erp-client");
     await confirmPaymentByOrderNumber({
       orderNumber,
       paymentMethod: notification.payment_type || "qris",
@@ -133,12 +133,12 @@ async function handleSuccess(midtransOrderId: string, notification: any) {
       amount: parseFloat(notification.gross_amount),
     });
     console.log(
-      `[Midtrans Webhook] Successfully confirmed order ${orderNumber}`
+      `[Midtrans Webhook] Successfully confirmed order ${orderNumber}`,
     );
   } catch (e) {
     console.error(
       `[Midtrans Webhook] Failed to confirm order ${orderNumber}`,
-      e
+      e,
     );
     throw e; // rethrow to ensure we return 500 if critical? OR return 200 but log error?
     // Midtrans retries on non-200. We should retry.

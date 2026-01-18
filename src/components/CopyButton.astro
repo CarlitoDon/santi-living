@@ -123,21 +123,12 @@ const { value, label = "Copy", class: className = "" } = Astro.props;
           }, 2000);
         } catch (err) {
           console.error("Failed to copy:", err);
-          // Fallback for older browsers
-          const textarea = document.createElement("textarea");
-          textarea.value = value;
-          textarea.style.position = "fixed";
-          textarea.style.opacity = "0";
-          document.body.appendChild(textarea);
-          textarea.select();
-          try {
-            document.execCommand("copy");
-            button.classList.add("copied");
-            setTimeout(() => button.classList.remove("copied"), 2000);
-          } catch {
-            console.error("Fallback copy failed");
+          const labelEl = button.querySelector(".copy-label");
+          if (labelEl) {
+            const original = labelEl.textContent;
+            labelEl.textContent = "Failed";
+            setTimeout(() => (labelEl.textContent = original), 2000);
           }
-          document.body.removeChild(textarea);
         }
       });
     });

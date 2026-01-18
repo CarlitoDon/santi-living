@@ -5,8 +5,6 @@
  * This runs in parallel with bot-service - if ERP fails, customer flow continues.
  */
 
-import config from "@/data/config.json";
-
 const getErpApiUrl = () => {
   // In development use localhost, in production use env var
   if (

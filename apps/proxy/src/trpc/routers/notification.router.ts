@@ -20,9 +20,13 @@ export const notificationRouter = router({
   notifyCustomer: protectedProcedure
     .input(
       z.object({
-        token: z.string().uuid(),
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
         message: z.string().optional(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
@@ -45,10 +49,14 @@ export const notificationRouter = router({
   notifyPaymentStatus: protectedProcedure
     .input(
       z.object({
-        token: z.string().uuid(),
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
         action: z.enum(["confirmed", "failed"]),
         reason: z.string().optional(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
@@ -81,9 +89,13 @@ export const notificationRouter = router({
   notifyAdmin: protectedProcedure
     .input(
       z.object({
-        token: z.string().uuid(),
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
         erpOrderId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       const adminWhatsapp = process.env.ADMIN_WHATSAPP;

@@ -2,11 +2,10 @@
 import products from "@/data/products.json";
 import config from "@/data/config.json";
 import { ProductModal } from "@/components/react/ProductModal";
-import type { ProductItem } from "@/types";
 
 // This is just for type checking in the template if needed,
 // though we access products.mattressPackages directly now.
-const allProducts = products;
+// const allProducts = products;
 
 const isLarge = (dimensions?: string) => {
   if (!dimensions) return false;
@@ -204,7 +203,7 @@ const isLarge = (dimensions?: string) => {
                         <span class="cart-item-price">
                           Rp{" "}
                           {new Intl.NumberFormat("id-ID").format(
-                            item.pricePerDay
+                            item.pricePerDay,
                           )}
                           /hari
                         </span>

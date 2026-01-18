@@ -10,9 +10,13 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "echo 'No lint configured'",
+    "typecheck": "astro check",
+    "test": "echo 'No test configured'"
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/react": "^4.4.2",
     "@astrojs/vercel": "^9.0.3",
     "@nanostores/react": "^1.0.0",
@@ -30,6 +34,6 @@
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.0.0",
     "concurrently": "^9.2.1",
-    "typescript": "^5.6.0"
+    "typescript": "^5.9.3"
   }
 }

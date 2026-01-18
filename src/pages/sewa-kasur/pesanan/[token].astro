@@ -63,14 +63,6 @@ const statusColors: Record<string, { bg: string; text: string; label: string }> 
   CANCELLED: { bg: "#FEE2E2", text: "#991B1B", label: "Dibatalkan" },
 };
 
-// Payment status colors
-const paymentStatusColors: Record<string, { bg: string; text: string; label: string }> = {
-  PENDING: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
-  AWAITING_CONFIRM: { bg: "#DBEAFE", text: "#1E40AF", label: "Pembayaran Diverifikasi" },
-  CONFIRMED: { bg: "#D1FAE5", text: "#065F46", label: "Pembayaran Diterima" },
-  FAILED: { bg: "#FEE2E2", text: "#991B1B", label: "Pembayaran Gagal" },
-};
-
 const status = order?.status || "PENDING";
 const paymentStatus = order?.rentalPaymentStatus || "PENDING";
 
@@ -109,8 +101,9 @@ const formatDate = (dateStr: string) =>
   <!-- Midtrans Snap.js -->
   <script 
     type="text/javascript" 
+    is:inline
     src="https://app.sandbox.midtrans.com/snap/snap.js"
-    data-client-key="Mid-client-5tayTUBOhdNGsXR4">
+    data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}>
   </script>
 
   <main class="order-page">
@@ -658,11 +651,11 @@ const formatDate = (dateStr: string) =>
                   window.location.reload(); // Reload anyway, webhook should handle it
                 }
               },
-              onPending: function(result: any) {
+              onPending: function(_result: any) {
                 alert("Menunggu pembayaran...");
                 window.location.reload();
               },
-              onError: function(result: any) {
+              onError: function(_result: any) {
                 alert("Pembayaran gagal!");
                 confirmBtn.disabled = false;
                 confirmBtn.textContent = originalText;

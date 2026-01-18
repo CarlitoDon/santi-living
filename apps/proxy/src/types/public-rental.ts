@@ -23,7 +23,10 @@ export const PublicRentalFindOrCreatePartnerInput = z.object({
   companyId: z.string().min(1),
   name: z.string().min(2),
   phone: z.string().min(10),
-  email: z.string().email().optional(),
+  email: z
+    .string()
+    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+    .optional(),
   address: z.string().optional(),
   street: z.string().optional(),
   kelurahan: z.string().optional(),
@@ -53,7 +56,7 @@ export const PublicRentalCreateOrderInput = z.object({
       })
       .refine((data) => !!data.rentalItemId || !!data.rentalBundleId, {
         message: "Either rentalItemId or rentalBundleId is required",
-      })
+      }),
   ),
   notes: z.string().optional(),
   deliveryFee: z.number().nonnegative().optional(),
@@ -72,11 +75,15 @@ export const PublicRentalCreateOrderInput = z.object({
 });
 
 export const PublicRentalGetByTokenInput = z.object({
-  token: z.string().uuid(),
+  token: z
+    .string()
+    .regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i),
 });
 
 export const PublicRentalConfirmPaymentInput = z.object({
-  token: z.string().uuid(),
+  token: z
+    .string()
+    .regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i),
   paymentMethod: z.enum(["qris", "transfer"]),
   reference: z.string().optional(),
 });

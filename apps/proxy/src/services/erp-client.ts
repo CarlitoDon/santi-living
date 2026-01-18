@@ -8,7 +8,6 @@
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
 import type {
-  SyncErpRouter,
   CreateOrderInput,
   OrderResponse,
   OrderByTokenResponse,
@@ -26,9 +25,7 @@ dotenv.config();
 const getBaseUrl = () => {
   const url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
   // eslint-disable-next-line no-console
-  console.log(
-    `[ERP Client] API URL: ${url}`
-  );
+  console.log(`[ERP Client] API URL: ${url}`);
   return url;
 };
 
@@ -47,24 +44,22 @@ const getApiKey = () => {
     // eslint-disable-next-line no-console
     console.warn(
       `⚠️  [ERP Client] Auth secret NOT SET! ` +
-      `Set BOT_SECRET (recommended) or SYNC_ERP_API_KEY environment variable.`
+        `Set BOT_SECRET (recommended) or SYNC_ERP_API_KEY environment variable.`,
     );
   } else if (botSecret) {
     // eslint-disable-next-line no-console
-    console.log(
-      `✅ [ERP Client] Using BOT_SECRET for auth`
-    );
+    console.log(`✅ [ERP Client] Using BOT_SECRET for auth`);
   } else if (syncErpApiKey) {
     // eslint-disable-next-line no-console
     console.warn(
       `⚠️  [ERP Client] Using SYNC_ERP_API_KEY (legacy). ` +
-      `Consider migrating to BOT_SECRET.`
+        `Consider migrating to BOT_SECRET.`,
     );
   }
 
   // eslint-disable-next-line no-console
   console.log(
-    `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`
+    `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`,
   );
   return key;
 };
@@ -134,25 +129,25 @@ export const OrderStatusConst = {
 
 // Wrapper functions (implementing using the Proxy Client)
 export async function createRentalOrder(
-  input: CreateOrderInput
+  input: CreateOrderInput,
 ): Promise<OrderResponse> {
   return syncClient.publicRental.createOrder.mutate(input);
 }
 
 export async function getOrderByToken(
-  token: string
+  token: string,
 ): Promise<OrderByTokenResponse> {
   return syncClient.publicRental.getByToken.query({ token });
 }
 
 export async function findOrCreatePartner(
-  input: CreatePartnerInput
+  input: CreatePartnerInput,
 ): Promise<PartnerResponse> {
   return syncClient.publicRental.findOrCreatePartner.mutate(input);
 }
 
 export async function confirmPayment(
-  input: ConfirmPaymentInput
+  input: ConfirmPaymentInput,
 ): Promise<ConfirmPaymentResponse> {
   return syncClient.publicRental.confirmPayment.mutate(input);
 }
@@ -167,7 +162,7 @@ export async function confirmPaymentByOrderNumber(input: {
 }
 
 export async function deleteRentalOrder(
-  id: string
+  id: string,
 ): Promise<{ success: boolean }> {
   console.log(`[ERP Client] Requesting delete for order ID: ${id}`);
   try {

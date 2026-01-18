@@ -149,13 +149,13 @@ export const orderRouter = router({
         ) {
           try {
             console.warn(
-              `[OrderRouter] Rolling back order ${order.orderNumber} due to invalid number`
+              `[OrderRouter] Rolling back order ${order.orderNumber} due to invalid number`,
             );
             await deleteRentalOrder(order.id);
           } catch (deleteErr) {
             console.error(
               `[OrderRouter] Failed to rollback order ${order.orderNumber}:`,
-              deleteErr
+              deleteErr,
             );
             // We still throw the original validation error so the user knows
           }
@@ -183,7 +183,7 @@ export const orderRouter = router({
           orderUrl,
           erpOrderId: order.id,
         }).catch((err) =>
-          console.error("[WA Notify] Failed to send admin notification:", err)
+          console.error("[WA Notify] Failed to send admin notification:", err),
         );
       }
 
@@ -201,7 +201,15 @@ export const orderRouter = router({
    * Get order by token - public endpoint for customer tracking
    */
   getByToken: publicProcedure
-    .input(z.object({ token: z.string().uuid() }))
+    .input(
+      z.object({
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+      }),
+    )
     .query(async ({ input }) => {
       return getOrderByToken(input.token);
     }),
@@ -212,10 +220,14 @@ export const orderRouter = router({
   confirmPayment: protectedProcedure
     .input(
       z.object({
-        token: z.string().uuid(),
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
         paymentMethod: z.enum(["qris", "transfer"]),
         reference: z.string().optional(),
-      })
+      }),
     )
     .mutation(async ({ input }) => {
       return confirmPaymentErp({
@@ -229,7 +241,15 @@ export const orderRouter = router({
    * Create Midtrans Snap Token for payment
    */
   createPaymentToken: protectedProcedure
-    .input(z.object({ token: z.string().uuid() }))
+    .input(
+      z.object({
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+      }),
+    )
     .mutation(async ({ input }) => {
       // 1. Get order details first
       const order = await getOrderByToken(input.token);
@@ -244,7 +264,7 @@ export const orderRouter = router({
       // 2. Generate unique order ID for Midtrans (handling retries)
       // Append timestamp to ensure uniqueness if user retries/regenerates QR
       const uniqueOrderId = `${order.orderNumber}-${Math.floor(
-        Date.now() / 1000
+        Date.now() / 1000,
       )}`;
 
       // 3. Prepare Item Details (Products + Delivery + Discount)

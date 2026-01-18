@@ -1,5 +1,4 @@
 ---
-import config from "@/data/config.json";
 import MenuToggle from "./MenuToggle.astro";
 ---
 
@@ -42,7 +41,7 @@ import MenuToggle from "./MenuToggle.astro";
           const diff = currentScrollY - lastScrollY;
           headerOffset = Math.min(
             Math.max(headerOffset + diff, 0),
-            headerHeight
+            headerHeight,
           );
         }
 

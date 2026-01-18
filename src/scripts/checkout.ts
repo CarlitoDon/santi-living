@@ -3,12 +3,7 @@
  * Handles multi-step checkout UI, payment method selection, and confirmation
  */
 
-import {
-  getOrder,
-  setPaymentMethod,
-  getPaymentMethod,
-  clearOrder,
-} from "./checkout-session";
+import { getOrder, setPaymentMethod, clearOrder } from "./checkout-session";
 import { submitOrder } from "@/services/api";
 import config from "@/data/config.json";
 import { formatCurrency, formatDate } from "@/lib/format";
@@ -89,10 +84,10 @@ function renderSummary(order: any): void {
           <span class="item-qty">${item.quantity}x</span>
         </div>
         <span class="item-price">Rp ${formatCurrency(
-          item.pricePerDay * item.quantity * order.duration
+          item.pricePerDay * item.quantity * order.duration,
         )}</span>
       </div>
-    `
+    `,
     )
     .join("");
 
@@ -132,8 +127,8 @@ function renderSummary(order: any): void {
         <div class="summary-row">
           <span class="summary-label">Tanggal</span>
           <span class="summary-value">${formatDate(startDate)} - ${formatDate(
-    endDate
-  )}</span>
+            endDate,
+          )}</span>
         </div>
         ${
           order.notes
@@ -157,13 +152,13 @@ function renderSummary(order: any): void {
         <div class="summary-row">
           <span class="summary-label">Ongkir</span>
           <span class="summary-value">Rp ${formatCurrency(
-            order.deliveryFee
+            order.deliveryFee,
           )}</span>
         </div>
         <div class="summary-row total">
           <span class="summary-label">Total</span>
           <span class="summary-value">Rp ${formatCurrency(
-            order.totalPrice
+            order.totalPrice,
           )}</span>
         </div>
       </div>
@@ -187,15 +182,15 @@ function renderMiniSummary(order: any): void {
 
   const itemCount = order.items.reduce(
     (sum: number, item: any) => sum + item.quantity,
-    0
+    0,
   );
 
   container.innerHTML = `
     <div class="mini-summary">
       <div class="mini-row">
         <span class="mini-label">${itemCount} item × ${
-    order.duration
-  } hari</span>
+          order.duration
+        } hari</span>
       </div>
       <div class="mini-row total">
         <span class="mini-label">Total Bayar</span>
@@ -304,7 +299,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
             <div class="detail-info">
               <span class="detail-label">Jumlah Transfer</span>
               <span class="detail-value amount">Rp ${formatCurrency(
-                amount
+                amount,
               )}</span>
             </div>
             <button type="button" class="copy-button" data-copy-value="${amount}">
@@ -336,7 +331,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
       btnConfirm.style.display = "none";
       // Also hide the sticky container to prevent empty box
       const stickyContainer = document.querySelector(
-        ".checkout-confirm-sticky"
+        ".checkout-confirm-sticky",
       ) as HTMLElement;
       if (stickyContainer) stickyContainer.style.display = "none";
     }
@@ -345,29 +340,6 @@ function renderPaymentDetails(method: PaymentMethod): void {
     setTimeout(() => {
       container.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
-
-    // Prepare loading overlay function
-    const showSuccessLoading = () => {
-      container.innerHTML = `
-        <div style="
-          display: flex; 
-          flex-direction: column; 
-          align-items: center; 
-          justify-content: center; 
-          height: 300px; 
-          background: #f0fdf4; 
-          border-radius: 12px;
-          text-align: center;
-          padding: 20px;
-          animation: fade-in 0.5s;
-        ">
-          <div style="font-size: 40px; margin-bottom: 15px;">✅</div>
-          <h3 style="color: #166534; margin-bottom: 8px;">Pembayaran Berhasil!</h3>
-          <p style="color: #15803d;">Sedang mengalihkan ke detail pesanan...</p>
-        </div>
-      `;
-      // Optional: Add full screen overlay if needed, but container replace is cleaner for embedded
-    };
 
     // Trigger embedded flow
     initSnapEmbedded();
@@ -400,7 +372,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
 
       // Restore sticky container
       const stickyContainer = document.querySelector(
-        ".checkout-confirm-sticky"
+        ".checkout-confirm-sticky",
       ) as HTMLElement;
       if (stickyContainer) stickyContainer.style.display = "";
     }
@@ -637,7 +609,7 @@ async function confirmPayment(): Promise<void> {
     console.error("Payment confirmation failed:", error);
     alert(
       "Gagal memproses pembayaran: " +
-        (error instanceof Error ? error.message : "Unknown error")
+        (error instanceof Error ? error.message : "Unknown error"),
     );
 
     if (btn) {

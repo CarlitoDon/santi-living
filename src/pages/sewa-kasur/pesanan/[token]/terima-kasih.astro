@@ -10,7 +10,7 @@ const { token } = Astro.params;
 
 // Fetch order to show details
 let order = null;
-let error = null;
+// let error = null;
 
 if (token) {
   try {
@@ -28,11 +28,9 @@ if (token) {
       const data = await response.json();
       // TRPC batch response: [{"result":{"data":{"json":{...}}}}]
       order = data?.[0]?.result?.data?.json || null;
-    } else {
-      error = "Pesanan tidak ditemukan";
     }
   } catch (e) {
-    error = "Gagal memuat data pesanan";
+    console.error("Failed to load order", e);
   }
 }
 

@@ -14,5 +14,6 @@
     },
     "strictNullChecks": true,
     "noImplicitAny": true
-  }
+  },
+  "exclude": ["node_modules", "dist", "apps/proxy/dist"]
 }

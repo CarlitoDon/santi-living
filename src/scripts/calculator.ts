@@ -4,7 +4,7 @@
 
 import config from "@/data/config.json";
 import products from "@/data/products.json";
-import type { CalculatorState, ProductItem, CartItem } from "@/types";
+import type { CalculatorState, ProductItem } from "@/types";
 import { validateForm } from "./form-validation";
 import {
   getCurrentLocation,
@@ -15,14 +15,11 @@ import { openMapPicker } from "./map-picker";
 // import { initProductModal } from "./product-modal"; // Deprecated
 import { saveOrder } from "./checkout-session";
 import { openModal } from "@/store/modalStore";
-import { formatCurrency, formatDate } from "@/lib/format";
 import {
-  calculateDeliveryFee,
   calculateVolumeDiscount,
   calculateTotals,
 } from "@/lib/calculator-logic";
 import {
-  calculateRentalPrice,
   calculateEndDate,
   calculateDeliveryEstimate,
   validateDuration as validateDurationDomain,
@@ -256,14 +253,14 @@ function handleDeepLink(): void {
       // If there's a specific product, highlight it
       if (productId) {
         const productEl = document.querySelector(
-          `.cart-item[data-id="${productId}"]`
+          `.cart-item[data-id="${productId}"]`,
         );
         if (productEl) {
           // Open accordion if product is inside one
           const item = productEl.closest(".accordion-item");
           if (item && !item.classList.contains("active")) {
             const header = item.querySelector(
-              ".accordion-header"
+              ".accordion-header",
             ) as HTMLElement;
             header?.click();
           }
@@ -272,7 +269,7 @@ function handleDeepLink(): void {
           if (productEl.classList.contains("is-large-size")) {
             const accordion = productEl.closest(".accordion-item");
             const showMoreBtn = accordion?.querySelector(
-              ".btn-show-more"
+              ".btn-show-more",
             ) as HTMLElement;
             if (showMoreBtn && !showMoreBtn.classList.contains("active")) {
               showMoreBtn.click();
@@ -285,7 +282,7 @@ function handleDeepLink(): void {
             productEl.classList.add("highlight-pulse");
             setTimeout(
               () => productEl.classList.remove("highlight-pulse"),
-              4000
+              4000,
             );
           }, 300);
         }
@@ -353,7 +350,6 @@ function handlePaymentMethodToggle(event: Event): void {
  */
 function handleShowMoreClick(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const target = button.dataset.target;
   const accordion = button.closest(".accordion-item");
 
   if (accordion) {
@@ -436,7 +432,7 @@ function handleIncrement(event: Event): void {
     if (currentMattressQty >= config.maxQuantity) {
       showError(
         "mattressCart",
-        `Maksimal ${config.maxQuantity} unit kasur (per jenis maupun total). Hubungi CS untuk pemesanan partai besar.`
+        `Maksimal ${config.maxQuantity} unit kasur (per jenis maupun total). Hubungi CS untuk pemesanan partai besar.`,
       );
       return;
     }
@@ -449,7 +445,7 @@ function handleIncrement(event: Event): void {
     if (currentMattressQty === 0) {
       showError(
         "mattressCart",
-        "Pilih minimal 1 kasur sebelum menambah aksesoris"
+        "Pilih minimal 1 kasur sebelum menambah aksesoris",
       );
       return;
     }
@@ -517,7 +513,7 @@ function handleDecrement(event: Event): void {
  */
 function updateQuantityDisplay(id: string): void {
   const qtyEl = document.querySelector(
-    `.cart-item-qty[data-id="${id}"]`
+    `.cart-item-qty[data-id="${id}"]`,
   ) as HTMLElement;
 
   if (qtyEl) {
@@ -558,7 +554,7 @@ function validateDuration(): void {
     if (result.adjustedValue) {
       state.duration = result.adjustedValue;
       (elements.duration as HTMLInputElement).value = String(
-        result.adjustedValue
+        result.adjustedValue,
       );
     }
     showError("duration", result.message || "Durasi tidak valid");
@@ -641,7 +637,7 @@ function updateDeliveryFee(lat: number, lng: number): void {
     config.storeLocation.lat,
     config.storeLocation.lng,
     lat,
-    lng
+    lng,
   );
 
   state.distance = distance;
@@ -713,7 +709,7 @@ function updateCalculation(): void {
     state.items,
     state.duration,
     state.deliveryFee || 0,
-    volumeDiscountRate
+    volumeDiscountRate,
   );
 
   state.subtotal = totals.subtotal;
@@ -723,7 +719,7 @@ function updateCalculation(): void {
   // 3. Calculate delivery estimate
   state.deliveryEstimate = calculateDeliveryEstimate(
     state.startDate,
-    config.cutoffHour
+    config.cutoffHour,
   );
 
   // Update UI
@@ -748,7 +744,7 @@ function updateTotalQuantityDisplay(): void {
  */
 function updateStepperButtons(): void {
   const plusButtons = document.querySelectorAll(
-    ".btn-plus"
+    ".btn-plus",
   ) as NodeListOf<HTMLButtonElement>;
 
   const currentMattressQty = state.items
@@ -810,7 +806,7 @@ function updateResultPanel(): void {
         });
       };
       datesEl.textContent = `${formatDate(state.startDate)} - ${formatDate(
-        state.endDate
+        state.endDate,
       )}`;
     } else {
       datesEl.textContent = "-";
@@ -863,7 +859,7 @@ function updateResultPanel(): void {
     if (state.volumeDiscountAmount > 0) {
       if (valEl) {
         valEl.textContent = `-Rp ${new Intl.NumberFormat("id-ID").format(
-          state.volumeDiscountAmount
+          state.volumeDiscountAmount,
         )}`;
       }
       if (labelEl) {
@@ -1131,7 +1127,7 @@ async function handleWhatsAppClick(): Promise<void> {
     ) {
       showError(
         "customerWhatsapp",
-        "Nomor WhatsApp tidak terdaftar atau tidak aktif. Harap cek kembali."
+        "Nomor WhatsApp tidak terdaftar atau tidak aktif. Harap cek kembali.",
       );
       scrollToError("customerWhatsapp");
     } else if (errorMessage.includes("name") || errorMessage.includes("nama")) {
@@ -1152,7 +1148,7 @@ async function handleWhatsAppClick(): Promise<void> {
     ) {
       showError(
         "mattressCart",
-        error.message || "Pilih jumlah kasur dengan benar."
+        error.message || "Pilih jumlah kasur dengan benar.",
       );
       scrollToError("mattressCart");
     } else {
@@ -1162,7 +1158,7 @@ async function handleWhatsAppClick(): Promise<void> {
       alert(
         `Mohon maaf, terjadi kesalahan: ${
           error.message || "Gagal memproses pesanan"
-        }. Silakan coba lagi.`
+        }. Silakan coba lagi.`,
       );
 
       // Optional: Visual feedback on button

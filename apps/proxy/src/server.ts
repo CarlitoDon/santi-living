@@ -27,7 +27,7 @@ export function createServer() {
   app.use(express.json());
 
   // Health check (public)
-  app.get("/health", (req, res) => {
+  app.get("/health", (_req, res) => {
     res.json({ status: "ok", service: "proxy" });
   });
 

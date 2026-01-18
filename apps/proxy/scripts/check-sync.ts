@@ -46,7 +46,6 @@ function main() {
   } catch (error) {
     console.error("❌ [Sync Check] Could not read sync-contract.json");
     process.exit(1);
-    return;
   }
 
   if (currentHash !== contract.publicRentalRouterHash) {

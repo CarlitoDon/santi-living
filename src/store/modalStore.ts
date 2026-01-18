@@ -1,11 +1,6 @@
 import { atom } from "nanostores";
 import type { ProductItem } from "@/types";
 
-interface ModalState {
-  isOpen: boolean;
-  product: ProductItem | null;
-}
-
 export const isModalOpen = atom(false);
 export const modalProduct = atom<ProductItem | null>(null);
 

@@ -17,7 +17,7 @@ export const notifyAdminWebhook = async (req: Request, res: Response) => {
     req.body;
 
   console.log(
-    `[Webhook] Received admin notification for order: ${orderNumber}`
+    `[Webhook] Received admin notification for order: ${orderNumber}`,
   );
 
   if (action !== "new_order") {
@@ -59,32 +59,23 @@ Detail customer: ${orderUrl}
 
         if (order) {
           console.log(
-            `[Webhook] Order fetched successfully: ${order.orderNumber}`
+            `[Webhook] Order fetched successfully: ${order.orderNumber}`,
           );
           console.log(
             "[Webhook] First item keys:",
-            Object.keys(order.items[0] || {})
+            Object.keys(order.items[0] || {}),
           );
           console.log(
             "[Webhook] First item raw:",
-            JSON.stringify(order.items[0])
+            JSON.stringify(order.items[0]),
           );
 
           const startDate = new Date(order.rentalStartDate);
           const endDate = new Date(order.rentalEndDate);
           const duration =
             Math.round(
-              (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+              (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24),
             ) || 1;
-
-          const inferCategory = (
-            name: string
-          ): "package" | "mattress" | "accessory" => {
-            const lower = name.toLowerCase();
-            if (lower.includes("paket")) return "package";
-            if (lower.includes("kasur")) return "mattress";
-            return "accessory";
-          };
 
           await botClient.bot.sendOrder.mutate({
             orderId: order.orderNumber,
@@ -123,7 +114,7 @@ Detail customer: ${orderUrl}
           });
           console.log("[Webhook] Bot sendOrder mutation success");
           console.log(
-            `[Webhook] Detailed notification sent to customer: ${customerPhone}`
+            `[Webhook] Detailed notification sent to customer: ${customerPhone}`,
           );
         } else {
           throw new Error("Order not found");
@@ -133,7 +124,7 @@ Detail customer: ${orderUrl}
           "[Webhook] Failed to notify customer details (Falling back to simple message). Error:",
           err.message,
           // Log detailed validation errors if available (TRPC errors often have data.zodError)
-          JSON.stringify(err?.shape || err?.data || {}, null, 2)
+          JSON.stringify(err?.shape || err?.data || {}, null, 2),
         );
 
         // Check for Invalid Number error and ROLLBACK
@@ -145,7 +136,7 @@ Detail customer: ${orderUrl}
           errorMsg.includes("tidak valid")
         ) {
           console.error(
-            `[Webhook] Invalid WhatsApp number detected for order ${token}. Rolling back...`
+            `[Webhook] Invalid WhatsApp number detected for order ${token}. Rolling back...`,
           );
           if (order && order.id) {
             try {
@@ -159,10 +150,10 @@ Detail customer: ${orderUrl}
             console.error("[Webhook] Cannot rollback: Order ID missing.");
           }
           // IMPORTANT: Return 400 so the caller knows validation failed
-          res.status(400).json({ 
-             success: false, 
-             error: "Invalid WhatsApp Number",
-             message: "Nomor WhatsApp tidak terdaftar"
+          res.status(400).json({
+            success: false,
+            error: "Invalid WhatsApp Number",
+            message: "Nomor WhatsApp tidak terdaftar",
           });
           return;
         } else {
@@ -183,12 +174,12 @@ Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*! 🙏`;
               message: customerMessage,
             });
             console.log(
-              `[Webhook] Simple notification sent to customer: ${customerPhone}`
+              `[Webhook] Simple notification sent to customer: ${customerPhone}`,
             );
           } catch (simpleErr) {
             console.error(
               "[Webhook] Failed to send simple fallback:",
-              simpleErr
+              simpleErr,
             );
           }
         }
@@ -204,10 +195,10 @@ Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*! 🙏`;
 
 export const notifyPaymentStatusWebhook = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   const token = req.params.token as string;
-  const { action, paymentReference, failReason } = req.body;
+  const { action } = req.body;
 
   // Implementation for payment status notification to customer
   // This can be expanded later

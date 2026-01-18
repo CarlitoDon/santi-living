@@ -2,9 +2,6 @@
 export const prerender = true;
 
 import MainLayout from "@/layouts/MainLayout.astro";
-import CheckoutSummary from "@/components/CheckoutSummary.astro";
-import PaymentMethodBCA from "@/components/PaymentMethodBCA.astro";
-import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
 ---
 
 <MainLayout title="Checkout - Sewa Kasur Jogja">
@@ -16,7 +13,8 @@ import PaymentMethodQRIS from "@/components/PaymentMethodQRIS.astro";
       <script
         type="text/javascript"
         src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="Mid-client-5tayTUBOhdNGsXR4"></script>
+        data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}
+        is:inline></script>
 
       <!-- Step 1: Summary + Payment Method Selection -->
       <div id="checkoutStep1" class="checkout-step active">

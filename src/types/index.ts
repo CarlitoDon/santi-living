@@ -108,3 +108,14 @@ export interface ServiceArea {
   districts: string[];
   deliveryNote?: string;
 }
+
+/**
+ * Testimonial (from JSON)
+ */
+export interface Testimonial {
+  name: string;
+  location: string;
+  rating: number;
+  text: string;
+  verified?: boolean;
+}

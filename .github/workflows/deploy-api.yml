@@ -1,0 +1,29 @@
+name: Deploy API Proxy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/proxy/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install and Build Proxy
+        working-directory: apps/proxy
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Railway
+        working-directory: apps/proxy
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
