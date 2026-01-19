@@ -16,6 +16,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
       - name: Install and Build Proxy
         working-directory: apps/proxy
         run: |
