@@ -15,7 +15,7 @@ const getServiceUrl = () => {
   if (typeof window === "undefined") {
     url =
       (import.meta as unknown as { env: Record<string, string> }).env
-        .PROXY_SERVICE_URL || "http://localhost:3002";
+        .SANTI_PROXY_URL || "http://localhost:3002";
   }
 
   // Remove trailing slash if present
@@ -27,7 +27,7 @@ const getApiKey = () => {
   if (typeof window === "undefined") {
     return (
       (import.meta as unknown as { env: Record<string, string> }).env
-        .PROXY_API_KEY || "santi_secret_auth_token_2026"
+        .PROXY_API_SECRET || "santi_secret_auth_token_2026"
     );
   }
   return "";
