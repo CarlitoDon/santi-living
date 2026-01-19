@@ -4,8 +4,21 @@ import react from '@astrojs/react';
 import { loadEnv } from 'vite';
 
 // Load environment based on mode
+// Priority: process.env (Vercel dashboard) > .env files
 const mode = process.env.NODE_ENV || 'development';
-const env = loadEnv(mode, process.cwd(), '');
+const fileEnv = loadEnv(mode, process.cwd(), '');
+
+// Merge: process.env takes priority over file env
+const env = {
+  SANTI_PROXY_URL: process.env.SANTI_PROXY_URL || fileEnv.SANTI_PROXY_URL,
+  PROXY_API_SECRET: process.env.PROXY_API_SECRET || fileEnv.PROXY_API_SECRET,
+  SYNC_ERP_API_URL: process.env.SYNC_ERP_API_URL || fileEnv.SYNC_ERP_API_URL,
+  SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
+  PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || fileEnv.PUBLIC_SITE_URL,
+};
+
+console.log('[Astro Config] NODE_ENV:', mode);
+console.log('[Astro Config] SANTI_PROXY_URL:', env.SANTI_PROXY_URL || 'NOT SET');
 
 // https://astro.build/config
 export default defineConfig({
