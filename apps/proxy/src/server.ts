@@ -14,7 +14,8 @@ export function createServer() {
 
   // Middleware
   const allowedOrigins = (
-    process.env.CORS_ORIGINS || "http://localhost:4321,http://localhost:3000"
+    process.env.CORS_ALLOWED_ORIGINS ||
+    "http://localhost:4321,http://localhost:3000"
   ).split(",");
 
   app.use(

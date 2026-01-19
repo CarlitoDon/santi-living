@@ -2,16 +2,17 @@ import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
 import type { AppRouter } from "../types/bot-router";
 
-// Helper to get Bot Service URL
 const getBotServiceUrl = () => {
-  const url = process.env.BOT_SERVICE_URL || "http://localhost:3000";
+  const url = process.env.SYNC_ERP_BOT_URL || "http://localhost:3000";
   return url.replace(/\/$/, "");
 };
 
-// Helper to get API Key for Bot Service
-// Ideally this matches the API_SECRET in bot-service
-const getApiKey = () => {
-  return process.env.BOT_SERVICE_API_KEY || process.env.API_SECRET || "";
+const getBotSecret = () => {
+  const secret = process.env.SYNC_ERP_BOT_SECRET || "";
+  if (!secret) {
+    console.warn(`⚠️  [Bot Client] SYNC_ERP_BOT_SECRET NOT SET!`);
+  }
+  return secret;
 };
 
 export const botClient: TRPCClient<AppRouter> = createTRPCClient<AppRouter>({
@@ -20,7 +21,7 @@ export const botClient: TRPCClient<AppRouter> = createTRPCClient<AppRouter>({
       url: `${getBotServiceUrl()}/api/trpc`,
       transformer: superjson,
       headers: () => ({
-        Authorization: `Bearer ${getApiKey()}`,
+        Authorization: `Bearer ${getBotSecret()}`,
       }),
     }),
   ],

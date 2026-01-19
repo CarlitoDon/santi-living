@@ -172,7 +172,7 @@ export const orderRouter = router({
       }
 
       // Notify admin
-      const adminWhatsapp = process.env.ADMIN_WHATSAPP;
+      const adminWhatsapp = process.env.ADMIN_WHATSAPP_NUMBER;
       if (adminWhatsapp) {
         notifyAdminNewOrder({
           adminWhatsapp,

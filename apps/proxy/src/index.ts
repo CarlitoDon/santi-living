@@ -3,7 +3,11 @@ import dotenv from "dotenv";
 
 // Load environment-specific .env file
 const envFile =
-  process.env.NODE_ENV === "production" ? ".env.production" : ".env";
+  process.env.NODE_ENV === "production"
+    ? ".env.production"
+    : process.env.NODE_ENV === "staging"
+      ? ".env.staging"
+      : ".env";
 
 const envPath = path.resolve(process.cwd(), envFile);
 const result = dotenv.config({ path: envPath });

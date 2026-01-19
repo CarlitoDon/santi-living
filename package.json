@@ -2,6 +2,10 @@
   "name": "santi-living",
   "type": "module",
   "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "description": "Website sewa kasur Jogja - Santi Living",
   "scripts": {
     "dev": "concurrently --kill-others \"npm:dev:frontend\" \"npm:dev:sync\"",

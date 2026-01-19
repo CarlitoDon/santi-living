@@ -2,7 +2,7 @@
  * ERP Client
  *
  * TRPC Client to communicate with sync-erp publicRental API.
- * Uses a local contract type to ensure internal type safety without strict cross-repo dependency.
+ * Uses standardized env variable: SYNC_ERP_API_SECRET
  */
 
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
@@ -18,62 +18,37 @@ import type {
   OrderStatusType,
   RentalPaymentStatus,
 } from "../types/sync-erp";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const getBaseUrl = () => {
   const url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
-  // eslint-disable-next-line no-console
   console.log(`[ERP Client] API URL: ${url}`);
   return url;
 };
 
-const getApiKey = () => {
-  /**
-   * Authentication priority for sync-erp API:
-   * 1. BOT_SECRET (preferred - matches sync-erp API's botProcedure)
-   * 2. SYNC_ERP_API_KEY (legacy - still supported)
-   * 3. Empty (will fail in production)
-   */
-  const botSecret = process.env.BOT_SECRET;
-  const syncErpApiKey = process.env.SYNC_ERP_API_KEY;
-  const key = botSecret || syncErpApiKey || "";
+const getApiSecret = () => {
+  const secret = process.env.SYNC_ERP_API_SECRET || "";
 
-  if (!key) {
-    // eslint-disable-next-line no-console
+  if (!secret) {
     console.warn(
-      `⚠️  [ERP Client] Auth secret NOT SET! ` +
-        `Set BOT_SECRET (recommended) or SYNC_ERP_API_KEY environment variable.`,
+      `⚠️  [ERP Client] SYNC_ERP_API_SECRET NOT SET! Authentication will fail.`,
     );
-  } else if (botSecret) {
-    // eslint-disable-next-line no-console
-    console.log(`✅ [ERP Client] Using BOT_SECRET for auth`);
-  } else if (syncErpApiKey) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `⚠️  [ERP Client] Using SYNC_ERP_API_KEY (legacy). ` +
-        `Consider migrating to BOT_SECRET.`,
+  } else {
+    console.log(
+      `[ERP Client] Using SYNC_ERP_API_SECRET: ${secret.substring(0, 11)}...`,
     );
   }
 
-  // eslint-disable-next-line no-console
-  console.log(
-    `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`,
-  );
-  return key;
+  return secret;
 };
 
 // Initialize TRPC Client
-// We cast to any for the creation to bypass strict Router constraints because we don't have the real server types
-// Then we cast to unknown first, then to our strict local shape.
 export const syncClient = createTRPCProxyClient<any>({
   links: [
     httpBatchLink({
       url: getBaseUrl(),
       headers() {
         return {
-          Authorization: `Bearer ${getApiKey()}`,
+          Authorization: `Bearer ${getApiSecret()}`,
         };
       },
       transformer: superjson,
@@ -111,7 +86,7 @@ export const syncClient = createTRPCProxyClient<any>({
   };
 };
 
-// Re-export constants for runtime usage if needed by other files
+// Re-export constants for runtime usage
 export const RentalPaymentStatusConst = {
   PENDING: "PENDING",
   AWAITING_CONFIRM: "AWAITING_CONFIRM",
@@ -127,7 +102,7 @@ export const OrderStatusConst = {
   CANCELLED: "CANCELLED",
 } as const;
 
-// Wrapper functions (implementing using the Proxy Client)
+// Wrapper functions
 export async function createRentalOrder(
   input: CreateOrderInput,
 ): Promise<OrderResponse> {
@@ -175,7 +150,7 @@ export async function deleteRentalOrder(
   }
 }
 
-// Export Types for consumers (e.g. notify.ts)
+// Export Types
 export type {
   CreateOrderInput,
   OrderResponse,

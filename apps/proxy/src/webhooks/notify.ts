@@ -28,7 +28,7 @@ export const notifyAdminWebhook = async (req: Request, res: Response) => {
   try {
     // Notify Admin via WhatsApp
     // TODO: Move admin phone number to env variable
-    const adminPhone = process.env.ADMIN_PHONE || "62895601968858";
+    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
     const orderUrl = `https://santi-living.com/admin/orders/${token}`;
 
     // Note: We don't have ERP Order ID here, so skipping that line for now
