@@ -10,6 +10,7 @@ dist/
 .env.*
 !.env.example
 !.env.production
+!.env.staging
 
 # Logs
 *.log
