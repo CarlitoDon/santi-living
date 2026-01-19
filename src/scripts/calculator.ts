@@ -1155,10 +1155,12 @@ async function handleWhatsAppClick(): Promise<void> {
       // Generic error - do NOT show on mattress section as it's confusing
       // Show as a global alert or on the submit button area
       console.error("Generic Booking Error:", error);
+      // DEBUG: Show env values for troubleshooting (REMOVE AFTER DEBUG)
+      const proxyUrl = (import.meta as any).env?.PUBLIC_PROXY_URL || "not set";
       alert(
         `Mohon maaf, terjadi kesalahan: ${
           error.message || "Gagal memproses pesanan"
-        }. Silakan coba lagi.`,
+        }. Silakan coba lagi.\n\n[DEBUG] PROXY_URL: ${proxyUrl}`,
       );
 
       // Optional: Visual feedback on button
