@@ -1,7 +1,8 @@
 /**
  * TRPC Initialization
  *
- * Base setup for TRPC server in erp-service.
+ * Base setup for TRPC server in santi-living proxy.
+ * Uses standardized env: PROXY_API_SECRET
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
@@ -25,7 +26,8 @@ export const publicProcedure = t.procedure;
 // Auth middleware - validates API key
 const isAuthed = t.middleware(({ ctx, next }) => {
   const authHeader = ctx.req.headers.authorization;
-  const apiKey = process.env.API_KEY || "santi_secret_auth_token_2026";
+  const apiSecret =
+    process.env.PROXY_API_SECRET || "santi_secret_auth_token_2026";
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     throw new TRPCError({
@@ -35,7 +37,7 @@ const isAuthed = t.middleware(({ ctx, next }) => {
   }
 
   const token = authHeader.substring(7);
-  if (token !== apiKey) {
+  if (token !== apiSecret) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message: "Invalid API key",

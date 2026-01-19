@@ -98,9 +98,12 @@ export const notificationRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      const adminWhatsapp = process.env.ADMIN_WHATSAPP;
+      const adminWhatsapp = process.env.ADMIN_WHATSAPP_NUMBER;
       if (!adminWhatsapp) {
-        return { success: false, message: "ADMIN_WHATSAPP not configured" };
+        return {
+          success: false,
+          message: "ADMIN_WHATSAPP_NUMBER not configured",
+        };
       }
 
       const order = await getOrderByToken(input.token);
