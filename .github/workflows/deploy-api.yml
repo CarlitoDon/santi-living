@@ -27,6 +27,6 @@ jobs:
 
       - name: Deploy to Railway
         working-directory: apps/proxy
-        run: railway up
+        run: railway up --service proxy
         env:
           RAILWAY_TOKEN: ${{ github.ref == 'refs/heads/dev' && secrets.RAILWAY_TOKEN_STAGING || secrets.RAILWAY_TOKEN }}
