@@ -18,9 +18,8 @@ import type {
   OrderStatusType,
   RentalPaymentStatus,
 } from "../types/sync-erp";
-import dotenv from "dotenv";
 
-dotenv.config();
+// Note: dotenv is already loaded by index.ts with the correct env file
 
 const getBaseUrl = () => {
   const url = process.env.SYNC_ERP_API_URL || "http://localhost:3001/api/trpc";
