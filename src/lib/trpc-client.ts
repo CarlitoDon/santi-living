@@ -2,32 +2,32 @@
  * TRPC Client for proxy
  *
  * Type-safe API client to communicate with proxy.
+ * Runtime env reading for Vercel SSR compatibility.
  */
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
 import type { AppRouter } from "../../apps/proxy/src/trpc";
 
-// Get service URL from environment
+// Get service URL from environment at RUNTIME (not build time)
 const getServiceUrl = () => {
-  let url = "http://localhost:3002";
-
-  // Server-side: use import.meta.env
+  // On server-side (Vercel Functions), read from process.env
   if (typeof window === "undefined") {
-    url =
-      (import.meta as unknown as { env: Record<string, string> }).env
-        .SANTI_PROXY_URL || "http://localhost:3002";
+    return (
+      process.env.SANTI_PROXY_URL ||
+      process.env.PUBLIC_PROXY_URL ||
+      "http://localhost:3002"
+    );
   }
-
-  // Remove trailing slash if present
-  return url.replace(/\/$/, "");
+  return "http://localhost:3002";
 };
 
-// Get API key from environment
+// Get API key from environment at RUNTIME
 const getApiKey = () => {
   if (typeof window === "undefined") {
     return (
-      (import.meta as unknown as { env: Record<string, string> }).env
-        .PROXY_API_SECRET || "santi_secret_auth_token_2026"
+      process.env.PROXY_API_SECRET ||
+      process.env.PROXY_API_KEY ||
+      "santi_secret_auth_token_2026"
     );
   }
   return "";
@@ -35,11 +35,20 @@ const getApiKey = () => {
 
 /**
  * Create a TRPC client instance
- * Note: This should be called on the server-side (API routes) only
+ * Note: This should be called on the server-side (API routes/SSR) only
  */
 export function createProxyClient() {
   const serviceUrl = getServiceUrl();
   const apiKey = getApiKey();
+
+  // Debug log for troubleshooting
+  if (typeof window === "undefined") {
+    console.log("[trpc-client] SANTI_PROXY_URL:", serviceUrl);
+    console.log(
+      "[trpc-client] PROXY_API_SECRET set:",
+      apiKey !== "santi_secret_auth_token_2026",
+    );
+  }
 
   return createTRPCClient<AppRouter>({
     links: [
@@ -54,5 +63,15 @@ export function createProxyClient() {
   });
 }
 
-// Export a singleton client for convenience
+// Create client lazily (at runtime, not module load time)
+let _proxyClient: ReturnType<typeof createProxyClient> | null = null;
+
+export const getProxyClient = () => {
+  if (!_proxyClient) {
+    _proxyClient = createProxyClient();
+  }
+  return _proxyClient;
+};
+
+// Backward compatibility export
 export const proxyClient = createProxyClient();
