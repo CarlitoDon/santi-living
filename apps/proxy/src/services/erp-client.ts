@@ -31,7 +31,7 @@ const getBaseUrl = () => {
 const getApiKey = () => {
   /**
    * Authentication priority for sync-erp API:
-   * 1. BOT_SECRET (preferred - matches sync-erp API's botProcedure)
+   * 1. BOT_SECRET (preferred - matches sync-erp API's apiKeyProcedure)
    * 2. SYNC_ERP_API_KEY (legacy - still supported)
    * 3. Empty (will fail in production)
    */
@@ -39,27 +39,24 @@ const getApiKey = () => {
   const syncErpApiKey = process.env.SYNC_ERP_API_KEY;
   const key = botSecret || syncErpApiKey || "";
 
+  // DEBUG: Log env vars for troubleshooting
+  console.log(
+    `[ERP Client DEBUG] BOT_SECRET: ${botSecret ? botSecret.substring(0, 11) + "..." : "NOT SET"}`,
+  );
+  console.log(
+    `[ERP Client DEBUG] SYNC_ERP_API_KEY: ${syncErpApiKey ? syncErpApiKey.substring(0, 11) + "..." : "NOT SET"}`,
+  );
+  console.log(
+    `[ERP Client DEBUG] Selected key prefix: ${key ? key.substring(0, 11) + "..." : "EMPTY"}`,
+  );
+
   if (!key) {
-    // eslint-disable-next-line no-console
     console.warn(
       `⚠️  [ERP Client] Auth secret NOT SET! ` +
         `Set BOT_SECRET (recommended) or SYNC_ERP_API_KEY environment variable.`,
     );
-  } else if (botSecret) {
-    // eslint-disable-next-line no-console
-    console.log(`✅ [ERP Client] Using BOT_SECRET for auth`);
-  } else if (syncErpApiKey) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      `⚠️  [ERP Client] Using SYNC_ERP_API_KEY (legacy). ` +
-        `Consider migrating to BOT_SECRET.`,
-    );
   }
 
-  // eslint-disable-next-line no-console
-  console.log(
-    `[ERP Client] API Key loaded: ${key ? "***" + key.slice(-4) : "EMPTY"}`,
-  );
   return key;
 };
 
