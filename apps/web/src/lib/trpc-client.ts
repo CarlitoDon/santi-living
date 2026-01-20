@@ -4,7 +4,7 @@
  * Type-safe API client to communicate with proxy.
  * Runtime env reading for Vercel SSR compatibility.
  */
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
+import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
 import type { AppRouter } from "@santi-living/proxy";
 
@@ -37,7 +37,7 @@ const getApiKey = () => {
  * Create a TRPC client instance
  * Note: This should be called on the server-side (API routes/SSR) only
  */
-export function createProxyClient() {
+export function createProxyClient(): TRPCClient<AppRouter> {
   const serviceUrl = getServiceUrl();
   const apiKey = getApiKey();
 
@@ -64,9 +64,9 @@ export function createProxyClient() {
 }
 
 // Create client lazily (at runtime, not module load time)
-let _proxyClient: ReturnType<typeof createProxyClient> | null = null;
+let _proxyClient: TRPCClient<AppRouter> | null = null;
 
-export const getProxyClient = () => {
+export const getProxyClient = (): TRPCClient<AppRouter> => {
   if (!_proxyClient) {
     _proxyClient = createProxyClient();
   }
@@ -74,4 +74,4 @@ export const getProxyClient = () => {
 };
 
 // Backward compatibility export
-export const proxyClient = createProxyClient();
+export const proxyClient: TRPCClient<AppRouter> = createProxyClient();
