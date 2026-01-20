@@ -14,38 +14,46 @@ let error = null;
 
 if (token) {
   try {
-    // Use sync-erp API (port 3001)
-    let apiUrl = import.meta.env.ERP_SYNC_SERVICE_URL || "http://localhost:3001";
-    // Sanitize: Remove trailing slash if present to avoid double slash issues
+    // Use Proxy Service
+    // Fallback to local if not set, but prefer the staging/prod URL
+    let apiUrl = import.meta.env.PUBLIC_PROXY_URL || import.meta.env.SANTI_PROXY_URL || process.env.SANTI_PROXY_URL || "http://localhost:3000";
+    // Sanitize: Remove trailing slash if present
     if (apiUrl.endsWith("/")) apiUrl = apiUrl.slice(0, -1);
 
     // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
-    console.log(`[SSR] Fetching order token: ${token} from ${apiUrl}`);
+    console.log(`[SSR] Fetching order token: ${token} from ${apiUrl} (Proxy)`);
+    
+    // Using Proxy's order.getByToken
     const input = encodeURIComponent(JSON.stringify({"0":{"json":{token}}}));
-    const fetchUrl = `${apiUrl}/api/trpc/publicRental.getByToken?batch=1&input=${input}`;
+    const fetchUrl = `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`;
     console.log(`[SSR] Fetch URL: ${fetchUrl}`);
     
-    // Add API Key for authentication with sync-erp
-    // BOT_SECRET is the shared secret for service-to-service auth
-    const apiKey = import.meta.env.BOT_SECRET || "dev_bot_secret_key_2026";
+    // Proxy "order.getByToken" is a publicProcedure, so no Auth required by default.
+    // But we can send the generic secret just in case context requires it.
+    // const apiKey = import.meta.env.PROXY_API_SECRET || "santi_secret_auth_token_2026";
     
     const response = await fetch(fetchUrl, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        // "Authorization": `Bearer ${apiKey}` 
       }
     });
+
     console.log(`[SSR] Response status: ${response.status}`);
     
     if (response.ok) {
       const data = await response.json();
-      console.log(`[SSR] Data received:`, JSON.stringify(data));
+      // console.log(`[SSR] Data received:`, JSON.stringify(data));
+      
+      // Proxy result format: { result: { data: { json: OrderData } } }
+      // The shape returned by order.getByToken matches the needed fields
       order = data?.[0]?.result?.data?.json || null;
+      
       if (!order) console.error("[SSR] Order is null in response data");
     } else {
       const text = await response.text();
       console.error(`[SSR] Fetch failed: ${text}`);
-      error = "Pesanan tidak ditemukan (Server Error)";
+      error = "Pesanan tidak ditemukan (Gagal memuat data)";
     }
   } catch (e) {
     console.error("[SSR] Exception:", e);
