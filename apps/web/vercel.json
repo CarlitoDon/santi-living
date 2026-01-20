@@ -1,6 +1,7 @@
 {
   "framework": "astro",
-  "buildCommand": "npm run build",
+  "installCommand": "cd ../.. && npm install",
+  "buildCommand": "cd ../.. && npx turbo run build --filter=@santi-living/web",
   "outputDirectory": "dist",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet . ':(exclude)apps/proxy'"
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ../../packages ../../turbo.json . ':(exclude)../proxy'"
 }
