@@ -1,5 +1,5 @@
 {
-  "publicRentalRouterHash": "3519730bd034d6e7419b827ded0017b6",
-  "checkedAt": "2026-01-15T12:00:00.000Z",
+  "publicRentalRouterHash": "ea68ef80f02be0cfb15c4510809d5db7",
+  "checkedAt": "2026-01-20T07:48:00.000Z",
   "description": "MD5 hash of sync-erp/apps/api/src/trpc/routers/public-rental.router.ts. Used by scripts/check-sync.ts to ensure type safety."
 }
