@@ -544,10 +544,11 @@ async function initSnapEmbedded() {
       // Clear loading
       container.innerHTML = "";
 
-      const showLoadingMessage = (
+      const showStatusMessage = (
         title: string,
         message: string,
         icon = "✅",
+        showButton = false,
       ) => {
         container.innerHTML = `
           <div style="
@@ -555,16 +556,28 @@ async function initSnapEmbedded() {
             flex-direction: column; 
             align-items: center; 
             justify-content: center; 
-            height: 300px; 
-            background: #f0fdf4; 
+            height: 350px; 
+            background: #f8fafc; 
             border-radius: 12px;
             text-align: center;
             padding: 20px;
             animation: fade-in 0.5s;
           ">
             <div style="font-size: 40px; margin-bottom: 15px;">${icon}</div>
-            <h3 style="color: #166534; margin-bottom: 8px;">${title}</h3>
-            <p style="color: #15803d;">${message}</p>
+            <h3 style="color: #0f172a; margin-bottom: 8px;">${title}</h3>
+            <p style="color: #64748b; margin-bottom: 20px;">${message}</p>
+            ${
+              showButton
+                ? `<a href="/sewa-kasur/pesanan/${publicToken}" class="btn-primary" style="
+                    text-decoration: none; 
+                    padding: 10px 20px; 
+                    background: #2563eb; 
+                    color: white; 
+                    border-radius: 8px;
+                    font-weight: 500;
+                  ">Lihat Pesanan</a>`
+                : ""
+            }
           </div>
         `;
         container.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -574,9 +587,10 @@ async function initSnapEmbedded() {
         embedId: "snap-container",
         onSuccess: function (_result: Record<string, unknown>) {
           // console.log("Payment success", result);
-          showLoadingMessage(
+          showStatusMessage(
             "Pembayaran Berhasil!",
             "Sedang mengalihkan ke detail pesanan...",
+            "✅",
           );
           setTimeout(() => {
             window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
@@ -585,14 +599,12 @@ async function initSnapEmbedded() {
         onPending: function (_result: Record<string, unknown>) {
           // console.log("Payment pending", result);
           // Pending means order created but not paid (e.g. closed popup or chose non-instant method)
-          showLoadingMessage(
+          showStatusMessage(
             "Menunggu Pembayaran",
-            "Sedang mengalihkan ke halaman pembayaran...",
+            "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
             "⏳",
+            true,
           );
-          setTimeout(() => {
-            window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
-          }, 1500);
         },
         onError: function (_result: Record<string, unknown>) {
           // console.error("Payment error", result);
@@ -601,14 +613,12 @@ async function initSnapEmbedded() {
         },
         onClose: function () {
           // Handle close event if supported in embed mode
-          showLoadingMessage(
-            "Menunggu Pembayaran",
-            "Mengalihkan ke detail pesanan...",
-            "⏳",
+          showStatusMessage(
+            "Pembayaran Belum Selesai",
+            "Anda menutup halaman pembayaran. Silakan cek detail pesanan untuk melanjutkan.",
+            "⚠️",
+            true,
           );
-          setTimeout(() => {
-            window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
-          }, 1000);
         },
       });
     } else {
