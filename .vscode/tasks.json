@@ -75,6 +75,10 @@
         "cwd": "${workspaceFolder}/apps/web"
       },
       "problemMatcher": "$tsc-watch",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "presentation": {
         "group": "build",
         "panel": "dedicated"
