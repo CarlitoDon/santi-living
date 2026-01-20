@@ -462,7 +462,18 @@ function goToStep2(): void {
  */
 declare global {
   interface Window {
-    snap: { embed: (token: string, options: SnapEmbedOptions) => void };
+    snap: {
+      pay: (
+        token: string,
+        options: {
+          onSuccess: (result: Record<string, unknown>) => void;
+          onPending: (result: Record<string, unknown>) => void;
+          onError: (result: Record<string, unknown>) => void;
+          onClose: () => void;
+        },
+      ) => void;
+      embed: (token: string, options: SnapEmbedOptions) => void;
+    };
   }
 }
 

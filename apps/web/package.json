@@ -30,6 +30,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@santi-living/proxy": "*",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^8.53.1",

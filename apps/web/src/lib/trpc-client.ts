@@ -6,7 +6,7 @@
  */
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import superjson from "superjson";
-import type { AppRouter } from "./apps/proxy/src/trpc";
+import type { AppRouter } from "@santi-living/proxy";
 
 // Get service URL from environment at RUNTIME (not build time)
 const getServiceUrl = () => {
