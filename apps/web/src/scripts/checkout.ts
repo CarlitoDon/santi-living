@@ -285,11 +285,6 @@ function renderPaymentDetails(method: PaymentMethod): void {
       method === "qris" ? "none" : "block";
   }
 
-  // Toggle Back button visibility: Hide for QRIS to prevent accidental exit
-  if (elements.btnBack) {
-    elements.btnBack.style.display = method === "qris" ? "none" : "block";
-  }
-
   const session = getOrder();
   if (!session) return;
 
@@ -376,7 +371,7 @@ function renderPaymentDetails(method: PaymentMethod): void {
     }, 100);
 
     // Trigger embedded flow
-    initSnapEmbedded();
+    initSnapPayment();
 
     // Override Snap callbacks to use the loader
     // Note: We need to re-bind since initSnapEmbedded defines them internally?
@@ -487,14 +482,17 @@ declare global {
 /**
  * Initialize Embedded Snap Payment
  */
-async function initSnapEmbedded() {
+/**
+ * Initialize Snap Payment (Popup)
+ */
+async function initSnapPayment() {
   const container = document.getElementById("snap-container");
   if (!container) return;
 
   container.innerHTML = `
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px;">
       <div class="loading-spinner" style="margin-bottom: 1rem;"></div>
-      <p style="color: #666; font-size: 0.9rem;">Menyiapkan QRIS...</p>
+      <p style="color: #666; font-size: 0.9rem;">Menyiapkan Pembayaran...</p>
     </div>
   `;
 
@@ -509,7 +507,6 @@ async function initSnapEmbedded() {
     if (!publicToken) {
       // Create order if not exists (similar to legacy flow but background)
       const payload = { ...order, paymentMethod: "qris" as const };
-      // console.log("Creating background order for Snap...", payload);
       const response = await submitOrder(payload);
       // Save token/url for later
       sessionStorage.setItem("erpPublicToken", response.token || "");
@@ -521,15 +518,6 @@ async function initSnapEmbedded() {
     if (!publicToken) throw new Error("Gagal membuat pesanan.");
 
     // 2. Get Snap Token
-    // We need to import the service dynamically or use fetch directly
-    // Using fetch directly to allow clean separate logic
-    // But better to use the api helper if possible.
-    // Let's rely on a helper we'll add or just fetch here
-    // Checking previous context, we have `createPaymentToken` API proxy at `/api/create-payment-token`?
-    // Wait, the previous steps added `createPaymentToken` procedure to TRPC but maybe not a direct API route for standard fetch from generic js?
-    // Let's use the trpc client or a plain fetch to the TRPC endpoint if we can.
-    // Actually, `santi-living/src/pages/api/create-payment-token.ts` exists!
-
     const tokenRes = await fetch("/api/create-payment-token", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -539,96 +527,114 @@ async function initSnapEmbedded() {
     if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
     const { token: snapToken } = await tokenRes.json();
 
-    // 3. Embed Snap
-    if (window.snap) {
-      // Force close any existing popup/embed to prevent "PopupInView" error
-      if (typeof window.snap.hide === "function") {
-        window.snap.hide();
+    // 3. Helper for Status Messages inside the Container (since Popup is separate)
+    // Clear loading
+    container.innerHTML = "";
+
+    const showStatusMessage = (
+      title: string,
+      message: string,
+      icon = "✅",
+      showButton = false,
+      isRetry = false,
+    ) => {
+      container.innerHTML = `
+        <div style="
+          display: flex; 
+          flex-direction: column; 
+          align-items: center; 
+          justify-content: center; 
+          height: 350px; 
+          background: #f8fafc; 
+          border-radius: 12px;
+          text-align: center;
+          padding: 20px;
+          animation: fade-in 0.5s;
+        ">
+          <div style="font-size: 40px; margin-bottom: 15px;">${icon}</div>
+          <h3 style="color: #0f172a; margin-bottom: 8px;">${title}</h3>
+          <p style="color: #64748b; margin-bottom: 20px;">${message}</p>
+          ${
+            showButton
+              ? `<a href="/sewa-kasur/pesanan/${publicToken}" class="btn-primary" style="
+                  text-decoration: none; 
+                  padding: 10px 20px; 
+                  background: #2563eb; 
+                  color: white; 
+                  border-radius: 8px;
+                  font-weight: 500;
+                  margin-right: ${isRetry ? "10px" : "0"};
+                ">Lihat Pesanan</a>`
+              : ""
+          }
+          ${
+            isRetry
+              ? `<button id="btn-retry-snap" style="
+                  padding: 10px 20px; 
+                  background: #065f46; 
+                  color: white; 
+                  border: none;
+                  border-radius: 8px;
+                  font-weight: 500;
+                  cursor: pointer;
+                ">Bayar Sekarng</button>`
+              : ""
+          }
+        </div>
+      `;
+      container.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      if (isRetry) {
+        document
+          .getElementById("btn-retry-snap")
+          ?.addEventListener("click", () => {
+            triggerSnap();
+          });
       }
+    };
 
-      // Clear loading
-      container.innerHTML = "";
+    const triggerSnap = () => {
+      if (window.snap) {
+        window.snap.pay(snapToken, {
+          onSuccess: function (_result: Record<string, unknown>) {
+            showStatusMessage(
+              "Pembayaran Berhasil!",
+              "Sedang mengalihkan ke detail pesanan...",
+              "✅",
+            );
+            setTimeout(() => {
+              window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+            }, 1500);
+          },
+          onPending: function (_result: Record<string, unknown>) {
+            showStatusMessage(
+              "Menunggu Pembayaran",
+              "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
+              "⏳",
+              true,
+            );
+          },
+          onError: function (_result: Record<string, unknown>) {
+            container.innerHTML =
+              '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
+          },
+          onClose: function () {
+            showStatusMessage(
+              "Pembayaran Belum Selesai",
+              "Anda menutup halaman pembayaran. Klik tombol di bawah untuk membayar.",
+              "⚠️",
+              true,
+              true, // isRetry
+            );
+          },
+        });
+      } else {
+        throw new Error("Midtrans script not loaded.");
+      }
+    };
 
-      const showStatusMessage = (
-        title: string,
-        message: string,
-        icon = "✅",
-        showButton = false,
-      ) => {
-        container.innerHTML = `
-          <div style="
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            height: 350px; 
-            background: #f8fafc; 
-            border-radius: 12px;
-            text-align: center;
-            padding: 20px;
-            animation: fade-in 0.5s;
-          ">
-            <div style="font-size: 40px; margin-bottom: 15px;">${icon}</div>
-            <h3 style="color: #0f172a; margin-bottom: 8px;">${title}</h3>
-            <p style="color: #64748b; margin-bottom: 20px;">${message}</p>
-            ${
-              showButton
-                ? `<a href="/sewa-kasur/pesanan/${publicToken}" class="btn-primary" style="
-                    text-decoration: none; 
-                    padding: 10px 20px; 
-                    background: #2563eb; 
-                    color: white; 
-                    border-radius: 8px;
-                    font-weight: 500;
-                  ">Lihat Pesanan</a>`
-                : ""
-            }
-          </div>
-        `;
-        container.scrollIntoView({ behavior: "smooth", block: "center" });
-      };
-
-      window.snap.embed(snapToken, {
-        embedId: "snap-container",
-        onSuccess: function (_result: Record<string, unknown>) {
-          // console.log("Payment success", result);
-          showStatusMessage(
-            "Pembayaran Berhasil!",
-            "Sedang mengalihkan ke detail pesanan...",
-            "✅",
-          );
-          setTimeout(() => {
-            window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
-          }, 1500);
-        },
-        onPending: function (_result: Record<string, unknown>) {
-          // console.log("Payment pending", result);
-          // Pending means order created but not paid (e.g. closed popup or chose non-instant method)
-          showStatusMessage(
-            "Menunggu Pembayaran",
-            "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
-            "⏳",
-            true,
-          );
-        },
-        onError: function (_result: Record<string, unknown>) {
-          // console.error("Payment error", result);
-          container.innerHTML =
-            '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
-        },
-        onClose: function () {
-          // Handle close event if supported in embed mode
-          showStatusMessage(
-            "Pembayaran Belum Selesai",
-            "Anda menutup halaman pembayaran. Silakan cek detail pesanan untuk melanjutkan.",
-            "⚠️",
-            true,
-          );
-        },
-      });
-    } else {
-      throw new Error("Midtrans script not loaded.");
-    }
+    // Initial Trigger
+    triggerSnap();
   } catch (err: unknown) {
     console.error("Snap Init Failed:", err);
     if (container) {
