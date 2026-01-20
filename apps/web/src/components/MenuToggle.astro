@@ -1,0 +1,41 @@
+---
+
+---
+
+<button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</button>
+
+<style>
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    display: block;
+    z-index: 1001;
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+</style>

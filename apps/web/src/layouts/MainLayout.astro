@@ -1,0 +1,130 @@
+---
+import SpeedInsights from "@vercel/speed-insights/astro";
+import "@/styles/global.css";
+import "@/styles/utilities.css";
+import config from "@/data/config.json";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Sewa Kasur Jogja - Antar Jemput Same Day | Santi Mebel",
+  description = "Sewa kasur bersih di Jogja. Antar jemput sama hari. Single, Double, Extra Bed. Harga mulai Rp 25.000/hari. Hubungi via WhatsApp sekarang!",
+  image = "/images/og-cover.jpg",
+} = Astro.props;
+
+const siteUrl = config.siteUrl;
+// Ensure image is absolute
+const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="sewa kasur jogja, rental kasur yogyakarta, sewa kasur bulanan, sewa kasur harian, kasur antar jemput jogja"
+    />
+    <meta name="author" content="Sewa Kasur Jogja by Santi Mebel" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, siteUrl).href} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Google Fonts - Inter & Noto Serif -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <!-- Structured Data - LocalBusiness -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        name: config.businessName,
+        description: description,
+        url: siteUrl,
+        telephone: `+${config.whatsappNumber}`,
+        image: ogImage,
+        sameAs: config.socialLinks,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: config.city,
+          addressRegion: "DI Yogyakarta",
+          addressCountry: "ID",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: -7.7956,
+          longitude: 110.3695,
+        },
+        areaServed: {
+          "@type": "City",
+          name: config.city,
+        },
+        priceRange: config.priceRange,
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "08:00",
+          closes: "21:00",
+        },
+      })}
+    />
+  </head>
+  <body>
+    <slot />
+    <SpeedInsights />
+  </body>
+</html>

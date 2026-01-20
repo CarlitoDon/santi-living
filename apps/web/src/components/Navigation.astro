@@ -1,0 +1,196 @@
+---
+
+---
+
+<nav class="navigation">
+  <button class="menu-toggle" id="menuToggle" aria-label="Open Menu">
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar" style="background-color: white;">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Menu</span>
+      <button class="close-btn" id="closeSidebar" aria-label="Close Menu"
+        >&times;</button
+      >
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="/sewa-kasur">Beranda</a></li>
+      <li><a href="/sewa-kasur/#calculator">Hitung Biaya</a></li>
+      <li><a href="/sewa-kasur/about">Tentang Kami</a></li>
+      <li><a href="/sewa-kasur/#service-area">Area Layanan</a></li>
+      <li>
+        <a
+          href="https://wa.me/6289519119092"
+          class="nav-whatsapp"
+          target="_blank">Hubungi WhatsApp</a
+        >
+      </li>
+    </ul>
+  </aside>
+</nav>
+
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const closeSidebar = document.getElementById("closeSidebar");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+  function toggleMenu() {
+    sidebar?.classList.toggle("active");
+    sidebarOverlay?.classList.toggle("active");
+    document.body.classList.toggle("no-scroll");
+  }
+
+  menuToggle?.addEventListener("click", toggleMenu);
+  closeSidebar?.addEventListener("click", toggleMenu);
+  sidebarOverlay?.addEventListener("click", toggleMenu);
+
+  // Close sidebar when clicking a link
+  const links = document.querySelectorAll(".nav-links a");
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      sidebar?.classList.remove("active");
+      sidebarOverlay?.classList.remove("active");
+      document.body.classList.remove("no-scroll");
+    });
+  });
+</script>
+
+<style>
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-2);
+    display: block;
+    z-index: 1001;
+  }
+
+  .navigation {
+    position: absolute;
+    left: 0;
+  }
+
+  .hamburger {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100%;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 1001;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+  }
+
+  .sidebar.active {
+    left: 0;
+  }
+
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-8);
+  }
+
+  .sidebar-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+  }
+
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-links li {
+    margin-bottom: var(--space-4);
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    transition: color 0.2s;
+    display: block;
+    padding: var(--space-2) 0;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-whatsapp {
+    margin-top: var(--space-4);
+    background: var(--color-primary);
+    color: white !important;
+    text-align: center;
+    padding: var(--space-3) !important;
+    border-radius: var(--radius-md);
+  }
+
+  :global(.no-scroll) {
+    overflow: hidden;
+  }
+</style>

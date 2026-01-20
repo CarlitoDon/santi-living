@@ -1,0 +1,252 @@
+---
+import config from "@/data/config.json";
+---
+
+<section class="hero">
+  <!-- Background Carousel -->
+  <div class="hero-carousel" id="heroCarousel">
+    <div class="hero-slide active">
+      <img src="/images/stok-kasur.png" alt="" class="hero-bg-image" />
+    </div>
+    <div class="hero-slide">
+      <img src="/images/gudang.webp" alt="" class="hero-bg-image" />
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Butuh Kasur Ekstra?<br />
+        Sewa Aja, Gampang!
+      </h1>
+      <p class="hero-tagline">
+        Antar Hari Ini di Jogja — Bersih, Murah, Tanpa Ribet
+      </p>
+
+      <div class="hero-features">
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✅</span>
+          <span>Bisa antar hari ini</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✅</span>
+          <span>Gratis jemput</span>
+        </div>
+        <div class="hero-feature">
+          <span class="hero-feature-icon">✅</span>
+          <span>Kasur bersih & wangi</span>
+        </div>
+      </div>
+
+      <div class="hero-cta-group">
+        <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
+          Sewa Sekarang
+        </a>
+      </div>
+
+      <p class="hero-contact">
+        Atau hubungi langsung:
+        <a href={`https://wa.me/${config.whatsappNumber}`} class="hero-phone">
+          {config.whatsappDisplay}
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: var(--space-8) 0 var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      min-height: 55vh;
+      padding: 0;
+    }
+  }
+
+  .hero-carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.8s ease,
+      visibility 0.8s;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.85) 0%,
+      rgba(30, 64, 175, 0.9) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero > .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      padding: var(--space-16) var(--space-4);
+    }
+  }
+
+  .hero-title {
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--space-2);
+    line-height: 1.2;
+  }
+
+  .hero-tagline {
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-12);
+  }
+
+  .hero-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-feature-icon {
+    color: #4ade80;
+    font-weight: var(--font-weight-bold);
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-cta,
+  .hero-cta-secondary {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-cta {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .hero-cta:hover {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+  }
+
+  .btn-outline:hover {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .hero-contact {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+  }
+
+  .hero-phone {
+    color: white;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .hero-phone:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero-tagline {
+      font-size: var(--font-size-lg);
+    }
+
+    .hero-cta-group {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const heroSlides = document.querySelectorAll(".hero-slide");
+  let currentHeroSlide = 0;
+
+  function nextHeroSlide() {
+    heroSlides[currentHeroSlide].classList.remove("active");
+    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+    heroSlides[currentHeroSlide].classList.add("active");
+  }
+
+  setInterval(nextHeroSlide, 10000);
+</script>
