@@ -9,14 +9,14 @@ interface DeliveryZone {
   price: number;
 }
 
-interface VolumeDiscountTier {
+export interface VolumeDiscountTier {
   minQty: number;
   maxQty: number;
   discount: number;
   label: string;
 }
 
-interface VolumeDiscountConfig {
+export interface VolumeDiscountConfig {
   volumeDiscounts?: VolumeDiscountTier[];
 }
 
@@ -32,7 +32,7 @@ interface DeliveryConfig {
  */
 export function calculateDeliveryFee(
   distance: number,
-  config: DeliveryConfig
+  config: DeliveryConfig,
 ): number {
   if (distance <= 0) return 0;
 
@@ -68,11 +68,11 @@ export function calculateDeliveryFee(
  */
 export function calculateVolumeDiscount(
   mattressQty: number,
-  config: VolumeDiscountConfig
+  config: VolumeDiscountConfig,
 ) {
   const volumeDiscounts = config.volumeDiscounts || [];
   const volumeTier = volumeDiscounts.find(
-    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty,
   );
 
   const discount = volumeTier?.discount || 0;
@@ -80,7 +80,7 @@ export function calculateVolumeDiscount(
 
   // Calculate next tier info
   const currentTierIndex = volumeDiscounts.findIndex(
-    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty
+    (t) => mattressQty >= t.minQty && mattressQty <= t.maxQty,
   );
   const nextTier = volumeDiscounts[currentTierIndex + 1];
 
@@ -108,7 +108,7 @@ export function calculateTotals(
   items: CartItem[],
   duration: number,
   deliveryFee: number,
-  volumeDiscountRate: number
+  volumeDiscountRate: number,
 ) {
   // Calculate subtotals by category
   const mattressSubtotal = items

@@ -18,6 +18,7 @@ import { openModal } from "@/store/modalStore";
 import {
   calculateVolumeDiscount,
   calculateTotals,
+  type VolumeDiscountConfig,
 } from "@/lib/calculator-logic";
 import {
   calculateEndDate,
@@ -694,7 +695,7 @@ function updateCalculation(): void {
     discount: volumeDiscountRate,
     nextTierUnitsNeeded,
     nextTierDiscountPercent,
-  } = calculateVolumeDiscount(mattressQty, config as any);
+  } = calculateVolumeDiscount(mattressQty, config as VolumeDiscountConfig);
 
   // Update state with discount info
   state.volumeDiscountAmount = 0; // Will be calc in calculateTotals
