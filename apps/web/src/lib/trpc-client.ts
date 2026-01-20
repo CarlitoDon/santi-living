@@ -43,11 +43,11 @@ export function createProxyClient(): TRPCClient<AppRouter> {
 
   // Debug log for troubleshooting
   if (typeof window === "undefined") {
-    console.log("[trpc-client] SANTI_PROXY_URL:", serviceUrl);
-    console.log(
-      "[trpc-client] PROXY_API_SECRET set:",
-      apiKey !== "santi_secret_auth_token_2026",
-    );
+    // console.log("[trpc-client] SANTI_PROXY_URL:", serviceUrl);
+    // console.log(
+    //   "[trpc-client] PROXY_API_SECRET set:",
+    //   apiKey !== "santi_secret_auth_token_2026",
+    // );
   }
 
   return createTRPCClient<AppRouter>({

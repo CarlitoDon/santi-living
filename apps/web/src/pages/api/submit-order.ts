@@ -9,7 +9,7 @@ import { createProxyClient } from "../../lib/trpc-client";
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    console.log("[submit-order] Creating order for:", body.customerName);
+    // console.log("[submit-order] Creating order for:", body.customerName);
 
     const client = createProxyClient();
 
@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
       volumeDiscountLabel: body.volumeDiscountLabel,
     });
 
-    console.log("[submit-order] Order created:", result.orderNumber);
+    // console.log("[submit-order] Order created:", result.orderNumber);
 
     return new Response(JSON.stringify(result), {
       status: 201,

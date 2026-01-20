@@ -11,9 +11,9 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { token, paymentMethod, reference } = body;
 
-    console.log(
-      `[confirm-payment] Confirming payment for token: ${token}, method: ${paymentMethod}`,
-    );
+    // console.log(
+    //   `[confirm-payment] Confirming payment for token: ${token}, method: ${paymentMethod}`,
+    // );
 
     if (!token || !paymentMethod) {
       return new Response(
@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
       reference,
     });
 
-    console.log("[confirm-payment] Success:", result);
+    // console.log("[confirm-payment] Success:", result);
 
     return new Response(
       JSON.stringify({

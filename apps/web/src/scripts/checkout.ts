@@ -502,7 +502,7 @@ async function initSnapEmbedded() {
     if (!publicToken) {
       // Create order if not exists (similar to legacy flow but background)
       const payload = { ...order, paymentMethod: "qris" as const };
-      console.log("Creating background order for Snap...", payload);
+      // console.log("Creating background order for Snap...", payload);
       const response = await submitOrder(payload);
       // Save token/url for later
       sessionStorage.setItem("erpPublicToken", response.token || "");
@@ -561,23 +561,23 @@ async function initSnapEmbedded() {
 
       window.snap.embed(snapToken, {
         embedId: "snap-container",
-        onSuccess: function (result: Record<string, unknown>) {
-          console.log("Payment success", result);
+        onSuccess: function (_result: Record<string, unknown>) {
+          // console.log("Payment success", result);
           showSuccessLoading();
           // Redirect with small delay to ensure UI is seen
           setTimeout(() => {
             window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
           }, 1500);
         },
-        onPending: function (result: Record<string, unknown>) {
-          console.log("Payment pending", result);
+        onPending: function (_result: Record<string, unknown>) {
+          // console.log("Payment pending", result);
           showSuccessLoading(); // Also show for pending as usually it means waiting for verification
           setTimeout(() => {
             window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
           }, 1500);
         },
-        onError: function (result: Record<string, unknown>) {
-          console.error("Payment error", result);
+        onError: function (_result: Record<string, unknown>) {
+          // console.error("Payment error", result);
           container.innerHTML =
             '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
         },

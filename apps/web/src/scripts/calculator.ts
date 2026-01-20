@@ -66,7 +66,7 @@ let elements: Record<string, HTMLElement | null> = {};
  * Initialize calculator
  */
 export function initCalculator(): void {
-  console.log("Calculator Logic Loaded - Fix Applied (Blocking Validation)");
+  // console.log("Calculator Logic Loaded - Fix Applied (Blocking Validation)");
   // Cache DOM elements
   elements = {
     form: document.getElementById("calculatorForm"),
@@ -1089,7 +1089,7 @@ async function handleWhatsAppClick(): Promise<void> {
     let orderUrl: string | undefined;
     const { createOrderInERP } = await import("../services/erp-api");
     const erpResponse = await createOrderInERP(bookingData);
-    console.log("Order created in ERP:", erpResponse.orderNumber);
+    // console.log("Order created in ERP:", erpResponse.orderNumber);
     orderUrl = erpResponse.orderUrl;
 
     // Store for thank-you page and checkout confirmation
@@ -1111,7 +1111,8 @@ async function handleWhatsAppClick(): Promise<void> {
     setTimeout(() => {
       window.location.href = "/sewa-kasur/checkout";
     }, 500);
-  } catch (error: any) {
+  } catch (err: unknown) {
+    const error = err as Error;
     console.error("Failed to process order:", error);
     waButton.disabled = false;
     waButton.innerHTML = originalBtnText;
@@ -1157,7 +1158,7 @@ async function handleWhatsAppClick(): Promise<void> {
       // Show as a global alert or on the submit button area
       console.error("Generic Booking Error:", error);
       // DEBUG: Show env values for troubleshooting (REMOVE AFTER DEBUG)
-      const proxyUrl = (import.meta as any).env?.PUBLIC_PROXY_URL || "not set";
+      const proxyUrl = import.meta.env?.PUBLIC_PROXY_URL || "not set";
       alert(
         `Mohon maaf, terjadi kesalahan: ${
           error.message || "Gagal memproses pesanan"

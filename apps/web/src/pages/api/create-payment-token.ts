@@ -11,7 +11,7 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { token } = body;
 
-    console.log(`[create-payment-token] Requesting token for order: ${token}`);
+    // console.log(`[create-payment-token] Requesting token for order: ${token}`);
 
     if (!token) {
       return new Response(
@@ -29,7 +29,7 @@ export const POST: APIRoute = async ({ request }) => {
       token,
     });
 
-    console.log("[create-payment-token] Success:", result);
+    // console.log("[create-payment-token] Success:", result);
 
     return new Response(
       JSON.stringify({
