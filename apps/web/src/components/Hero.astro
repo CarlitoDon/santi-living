@@ -1,15 +1,28 @@
 ---
+import { Image } from "astro:assets";
 import config from "@/data/config.json";
+import stokKasurImg from "@/assets/images/stok-kasur.png";
+import gudangImg from "@/assets/images/gudang.webp";
 ---
 
 <section class="hero">
   <!-- Background Carousel -->
   <div class="hero-carousel" id="heroCarousel">
     <div class="hero-slide active">
-      <img src="/images/stok-kasur.png" alt="" class="hero-bg-image" />
+      <Image
+        src={stokKasurImg}
+        alt="Stok kasur sewa Jogja"
+        class="hero-bg-image"
+        loading="eager"
+      />
     </div>
     <div class="hero-slide">
-      <img src="/images/gudang.webp" alt="" class="hero-bg-image" />
+      <Image
+        src={gudangImg}
+        alt="Gudang kasur Santi Living"
+        class="hero-bg-image"
+        loading="lazy"
+      />
     </div>
   </div>
   <div class="hero-overlay"></div>
