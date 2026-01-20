@@ -11,6 +11,8 @@
     "check-sync": "ts-node scripts/check-sync.ts",
     "predev": "npm run check-sync && (npx kill-port 3002 --silent || true)",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch",
     "sync-bundles": "ts-node src/scripts/sync-bundles.ts"
   },
   "dependencies": {

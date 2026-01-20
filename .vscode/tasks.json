@@ -67,13 +67,9 @@
       "group": "test"
     },
     {
-      "label": "TypeScript: Watch (Web)",
-      "type": "shell",
-      "command": "npx",
-      "args": ["astro", "check", "--watch"],
-      "options": {
-        "cwd": "${workspaceFolder}/apps/web"
-      },
+      "label": "TypeScript: Watch",
+      "type": "npm",
+      "script": "typecheck:watch",
       "problemMatcher": "$tsc-watch",
       "group": {
         "kind": "build",

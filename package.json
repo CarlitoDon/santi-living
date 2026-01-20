@@ -16,6 +16,7 @@
     "build:proxy": "turbo run build --filter=@santi-living/proxy",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
+    "typecheck:watch": "concurrently -n \"web,proxy\" -c \"blue,green\" \"cd apps/web && npx astro check --watch\" \"cd apps/proxy && npx tsc --noEmit --watch\"",
     "test": "turbo run test",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/dist packages/*/dist"
   },
