@@ -133,9 +133,9 @@ async function handleSuccess(
 
   let orderNumber = midtransOrderId;
   if (parts.length > 2) {
-    // Remove the last part (timestamp)
-    // const [orderId] = parts;
-    // const timestamp = parts.pop();
+    // Remove the last part (timestamp) added for uniqueness in order.router.ts
+    // Format: ORDER-NUM-TIMESTAMP
+    parts.pop();
     orderNumber = parts.join("-");
   }
 
