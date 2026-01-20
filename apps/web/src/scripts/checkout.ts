@@ -285,6 +285,11 @@ function renderPaymentDetails(method: PaymentMethod): void {
       method === "qris" ? "none" : "block";
   }
 
+  // Toggle Back button visibility: Hide for QRIS to prevent accidental exit
+  if (elements.btnBack) {
+    elements.btnBack.style.display = method === "qris" ? "none" : "block";
+  }
+
   const session = getOrder();
   if (!session) return;
 
