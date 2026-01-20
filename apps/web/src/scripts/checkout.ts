@@ -473,6 +473,7 @@ declare global {
         },
       ) => void;
       embed: (token: string, options: SnapEmbedOptions) => void;
+      hide?: () => void;
     };
   }
 }
@@ -534,6 +535,11 @@ async function initSnapEmbedded() {
 
     // 3. Embed Snap
     if (window.snap) {
+      // Force close any existing popup/embed to prevent "PopupInView" error
+      if (typeof window.snap.hide === "function") {
+        window.snap.hide();
+      }
+
       // Clear loading
       container.innerHTML = "";
 
