@@ -14,7 +14,9 @@ const env = {
   PROXY_API_SECRET: process.env.PROXY_API_SECRET || fileEnv.PROXY_API_SECRET,
   SYNC_ERP_API_URL: process.env.SYNC_ERP_API_URL || fileEnv.SYNC_ERP_API_URL,
   SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
+  SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
   PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || fileEnv.PUBLIC_SITE_URL,
+  MIDTRANS_CLIENT_KEY: process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || 'Mid-client-StayTUBOhdNGsXR4', // Fallback for dev
 };
 
 console.log('[Astro Config] NODE_ENV:', mode);
@@ -43,6 +45,9 @@ export default defineConfig({
       'process.env.SYNC_ERP_API_SECRET': JSON.stringify(env.SYNC_ERP_API_SECRET),
       'process.env.SANTI_PROXY_URL': JSON.stringify(env.SANTI_PROXY_URL),
       'process.env.PROXY_API_SECRET': JSON.stringify(env.PROXY_API_SECRET),
+      'process.env.PROXY_API_SECRET': JSON.stringify(env.PROXY_API_SECRET),
+      'process.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
+      'import.meta.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'process.env.NODE_ENV': JSON.stringify(mode),
     }
   },
