@@ -2,23 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "TypeScript: Watch",
-      "type": "shell",
-      "command": "./node_modules/.bin/tsc",
-      "args": ["--watch", "--noEmit"],
-      "problemMatcher": "$tsc-watch",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "group": "build",
-        "panel": "dedicated"
-      },
-      "isBackground": true
-    },
-    {
-      "label": "Dev: Start All",
+      "label": "Turbo: Dev All",
       "type": "npm",
       "script": "dev",
       "problemMatcher": [],
@@ -29,12 +13,13 @@
       "presentation": {
         "group": "dev",
         "panel": "dedicated"
-      }
+      },
+      "isBackground": true
     },
     {
-      "label": "Dev: Astro",
+      "label": "Turbo: Dev Web",
       "type": "npm",
-      "script": "dev:frontend",
+      "script": "dev:web",
       "problemMatcher": [],
       "presentation": {
         "group": "frontend",
@@ -43,12 +28,9 @@
       "isBackground": true
     },
     {
-      "label": "Dev: Bot Service",
-      "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/apps/bot-service"
-      },
+      "label": "Turbo: Dev Proxy",
+      "type": "npm",
+      "script": "dev:proxy",
       "problemMatcher": [],
       "presentation": {
         "group": "backend",
@@ -57,25 +39,47 @@
       "isBackground": true
     },
     {
-      "label": "Dev: ERP Sync Service",
-      "type": "shell",
-      "command": "npm run dev",
-      "options": {
-        "cwd": "${workspaceFolder}/apps/erp-sync-service"
-      },
-      "problemMatcher": [],
-      "presentation": {
-        "group": "backend",
-        "panel": "dedicated"
-      },
-      "isBackground": true
-    },
-    {
-      "label": "Frontend: Build",
+      "label": "Turbo: Build All",
       "type": "npm",
       "script": "build",
       "problemMatcher": [],
       "group": "build"
+    },
+    {
+      "label": "Turbo: Build Web",
+      "type": "npm",
+      "script": "build:web",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Turbo: Lint",
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-stylish"],
+      "group": "test"
+    },
+    {
+      "label": "Turbo: Typecheck",
+      "type": "npm",
+      "script": "typecheck",
+      "problemMatcher": ["$tsc"],
+      "group": "test"
+    },
+    {
+      "label": "TypeScript: Watch (Web)",
+      "type": "shell",
+      "command": "npx",
+      "args": ["astro", "check", "--watch"],
+      "options": {
+        "cwd": "${workspaceFolder}/apps/web"
+      },
+      "problemMatcher": "$tsc-watch",
+      "presentation": {
+        "group": "build",
+        "panel": "dedicated"
+      },
+      "isBackground": true
     }
   ]
 }
