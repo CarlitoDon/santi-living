@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://santiliving.com/sitemap.xml
+Sitemap: https://santiliving.com/sitemap-index.xml

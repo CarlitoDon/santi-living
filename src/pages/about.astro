@@ -4,6 +4,8 @@ import Header from "@/components/Header.astro";
 import Sidebar from "@/components/Sidebar.astro";
 import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 import config from "@/data/config.json";
+import { Image } from "astro:assets";
+import stokKasurImage from "@/assets/images/stok-kasur.png";
 ---
 
 <MainLayout
@@ -49,8 +51,8 @@ import config from "@/data/config.json";
             </div>
           </div>
           <div class="about-image-wrapper">
-            <img
-              src="/images/stok-kasur.png"
+            <Image
+              src={stokKasurImage}
               alt="Stok Kasur Santi Mebel Jogja"
               class="about-image"
             />

@@ -10,5 +10,11 @@
   "maxQuantity": 10,
   "minBookingDays": 0,
   "operatingHours": "08:00 - 21:00",
-  "cutoffHour": 15
+  "cutoffHour": 15,
+  "priceRange": "Rp 25.000 - Rp 50.000",
+  "siteUrl": "https://santiliving.com",
+  "socialLinks": [
+    "https://www.instagram.com/santi.mebel/",
+    "https://www.tiktok.com/@santi_mebel"
+  ]
 }

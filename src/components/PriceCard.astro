@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { MattressType } from "@/types";
 
 interface Props {
@@ -8,18 +9,27 @@ interface Props {
 const { product } = Astro.props;
 
 const formattedPrice = new Intl.NumberFormat("id-ID").format(
-  product.pricePerDay
+  product.pricePerDay,
 );
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}",
+);
+const imagePath = `/src/assets${product.image}`;
+
+if (!images[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`,
+  );
 ---
 
 <div class="price-card">
   <div class="price-card-image">
-    <img
-      src={product.image}
+    <Image
+      src={images[imagePath]()}
       alt={product.name}
-      loading="lazy"
-      width="800"
-      height="600"
+      width={800}
+      height={600}
     />
   </div>
 

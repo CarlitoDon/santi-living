@@ -1,6 +1,8 @@
 ---
 import config from "@/data/config.json";
 import MenuToggle from "./MenuToggle.astro";
+import { Image } from "astro:assets";
+import logoImage from "@/assets/images/logo-santi-mebel.png";
 ---
 
 <header class="site-header">
@@ -13,10 +15,12 @@ import MenuToggle from "./MenuToggle.astro";
             <span class="site-name">Santi Living</span>
             <span class="brand-line">
               <span class="by">by</span>
-              <img
-                src="/images/logo-santi-mebel.png"
+              <span class="by">by</span>
+              <Image
+                src={logoImage}
                 alt="Santi Mebel Jogja"
                 class="brand-logo"
+                loading="eager"
               />
             </span>
           </a>
@@ -42,7 +46,7 @@ import MenuToggle from "./MenuToggle.astro";
           const diff = currentScrollY - lastScrollY;
           headerOffset = Math.min(
             Math.max(headerOffset + diff, 0),
-            headerHeight
+            headerHeight,
           );
         }
 

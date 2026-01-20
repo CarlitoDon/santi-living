@@ -1,19 +1,23 @@
 ---
 import "@/styles/global.css";
 import "@/styles/utilities.css";
+import config from "@/data/config.json";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "Sewa Kasur Jogja - Antar Jemput Same Day | Santi Mebel",
   description = "Sewa kasur bersih di Jogja. Antar jemput sama hari. Single, Double, Extra Bed. Harga mulai Rp 25.000/hari. Hubungi via WhatsApp sekarang!",
+  image = "/images/og-cover.jpg",
 } = Astro.props;
 
-const siteUrl = "https://santiliving.com";
-const ogImage = `${siteUrl}/images/og-cover.jpg`;
+const siteUrl = config.siteUrl;
+// Ensure image is absolute
+const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
 ---
 
 <!doctype html>
@@ -36,6 +40,7 @@ const ogImage = `${siteUrl}/images/og-cover.jpg`;
     />
     <meta name="author" content="Sewa Kasur Jogja by Santi Mebel" />
     <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, siteUrl).href} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -69,13 +74,15 @@ const ogImage = `${siteUrl}/images/og-cover.jpg`;
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        name: "Sewa Kasur Jogja by Santi Mebel",
-        description: "Layanan sewa kasur Jogja dengan antar jemput same day",
+        name: config.businessName,
+        description: description,
         url: siteUrl,
-        telephone: "+6289519119092",
+        telephone: `+${config.whatsappNumber}`,
+        image: ogImage,
+        sameAs: config.socialLinks,
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Yogyakarta",
+          addressLocality: config.city,
           addressRegion: "DI Yogyakarta",
           addressCountry: "ID",
         },
@@ -86,9 +93,9 @@ const ogImage = `${siteUrl}/images/og-cover.jpg`;
         },
         areaServed: {
           "@type": "City",
-          name: "Yogyakarta",
+          name: config.city,
         },
-        priceRange: "Rp 20.000 - Rp 50.000",
+        priceRange: config.priceRange,
         openingHoursSpecification: {
           "@type": "OpeningHoursSpecification",
           dayOfWeek: [
