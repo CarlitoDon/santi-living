@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Santi Living WhatsApp Bot API
+  version: 1.0.0
+  description: API for the separate Node.js service handling WhatsApp automation.
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+security:
+  - BearerAuth: []
+
+paths:
+  /send-order:
+    post:
+      summary: Send order confirmation to customer via WhatsApp
+      operationId: sendOrderConfirmation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderPayload"
+      responses:
+        "200":
+          description: Message queued successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  messageId:
+                    type: string
+                    example: "true_6285123123@c.us_3EB0..."
+        "401":
+          description: Unauthorized (Invalid API Key)
+        "503":
+          description: Service Unavailable (Bot not ready/authenticated)
+
+  /status:
+    get:
+      summary: Check bot status (and get QR if needed)
+      operationId: getBotStatus
+      responses:
+        "200":
+          description: Current status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [INITIALIZING, QR_PENDING, READY, DISCONNECTED]
+                  qrCode:
+                    type: string
+                    description: QR code data string (if status is QR_PENDING)
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API-Key
+
+  schemas:
+    OrderPayload:
+      type: object
+      required:
+        - customerName
+        - customerWhatsapp
+        - deliveryAddress
+        - items
+        - totalPrice
+        - orderDate
+      properties:
+        customerName:
+          type: string
+        customerWhatsapp:
+          type: string
+        deliveryAddress:
+          type: string
+        totalPrice:
+          type: number
+        orderDate:
+          type: string
+          format: date
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              quantity: { type: number }

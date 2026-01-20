@@ -1,43 +1,18 @@
 ---
-import MainLayout from "@/layouts/MainLayout.astro";
-import Header from "@/components/Header.astro";
-import Sidebar from "@/components/Sidebar.astro";
-import Hero from "@/components/Hero.astro";
-import PriceList from "@/components/PriceList.astro";
-import Calculator from "@/components/Calculator.astro";
-import HowToRent from "@/components/HowToRent.astro";
-import ServiceArea from "@/components/ServiceArea.astro";
-import Testimonials from "@/components/Testimonials.astro";
-import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+export const prerender = true;
 ---
 
-<MainLayout
-  title="Sewa Kasur Jogja Tercepat & Canggih | Pesan 1 Menit Langsung Antar"
-  description="Layanan sewa kasur #1 di Jogja dengan sistem booking tercanggih & admin fast response. Kasur premium, bersih, & steril. Order sekarang, kami antar hitungan jam!"
->
-  <Header />
-  <Sidebar />
-
-  <main style="padding-top: 70px;">
-    <!-- Hero Section with primary CTA -->
-    <Hero />
-
-    <!-- Price List - Jenis Kasur + Harga -->
-    <PriceList />
-
-    <!-- Calculator - Interactive pricing -->
-    <Calculator />
-
-    <!-- How to Rent - 3 steps -->
-    <HowToRent />
-
-    <!-- Service Area - Jogja coverage -->
-    <ServiceArea />
-
-    <!-- Testimonials - Trust signals -->
-    <Testimonials />
-  </main>
-
-  <!-- Sticky WhatsApp CTA for mobile -->
-  <StickyWhatsApp />
-</MainLayout>
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;url=/sewa-kasur" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/sewa-kasur">/sewa-kasur</a>...</p>
+    <script>
+      window.location.href =
+        "/sewa-kasur" + window.location.search + window.location.hash;
+    </script>
+  </body>
+</html>

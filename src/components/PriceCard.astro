@@ -1,29 +1,38 @@
----
 import { Image } from "astro:assets";
-import type { MattressType } from "@/types";
+import type { ProductItem } from "@/types";
 
 interface Props {
-  product: MattressType;
+  product: ProductItem;
 }
 
 const { product } = Astro.props;
 
 const formattedPrice = new Intl.NumberFormat("id-ID").format(
-  product.pricePerDay,
+  product.pricePerDay
 );
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}",
+  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}"
 );
 const imagePath = `/src/assets${product.image}`;
 
 if (!images[imagePath])
   throw new Error(
-    `"${imagePath}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`,
+    `"${imagePath}" does not exist in glob: "src/assets/images/*.{jpeg,jpg,png,gif,webp}"`
   );
 ---
 
-<div class="price-card">
+<div
+  class="price-card"
+  data-modal-trigger
+  data-id={product.id}
+  data-name={product.name}
+  data-description={product.description}
+  data-dimensions={product.dimensions || ""}
+  data-capacity={product.capacity || ""}
+  data-price={product.pricePerDay}
+  data-image={product.image}
+>
   <div class="price-card-image">
     <Image
       src={images[imagePath]()}
@@ -38,8 +47,16 @@ if (!images[imagePath])
     <p class="price-card-description">{product.description}</p>
 
     <div class="price-card-details">
-      <span class="price-card-dimension">{product.dimensions}</span>
-      <span class="price-card-capacity">{product.capacity}</span>
+      {
+        product.dimensions && (
+          <span class="price-card-dimension">{product.dimensions}</span>
+        )
+      }
+      {
+        product.capacity && (
+          <span class="price-card-capacity">{product.capacity}</span>
+        )
+      }
     </div>
 
     <div class="price-card-price">
@@ -58,6 +75,7 @@ if (!images[imagePath])
     transition:
       transform var(--transition-normal),
       box-shadow var(--transition-normal);
+    cursor: pointer;
   }
 
   .price-card:hover {
@@ -66,7 +84,7 @@ if (!images[imagePath])
   }
 
   .price-card-image {
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     overflow: hidden;
     background: var(--color-surface);
   }
@@ -78,27 +96,27 @@ if (!images[imagePath])
   }
 
   .price-card-body {
-    padding: var(--space-5);
+    padding: var(--space-3);
   }
 
   .price-card-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
   .price-card-description {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .price-card-details {
     display: flex;
-    gap: var(--space-3);
-    font-size: var(--font-size-xs);
+    gap: var(--space-2);
+    font-size: 0.65rem;
     color: var(--color-text-muted);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
   }
 
   .price-card-price {
@@ -108,13 +126,13 @@ if (!images[imagePath])
   }
 
   .price-card-amount {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-base);
     font-weight: var(--font-weight-bold);
     color: var(--color-primary);
   }
 
   .price-card-period {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-muted);
   }
 </style>

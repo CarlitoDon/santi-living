@@ -4,23 +4,56 @@
 
 import config from "@/data/config.json";
 import products from "@/data/products.json";
-import type { CalculatorState, MattressType, CartItem } from "@/types";
-import { composeWhatsAppUrl } from "./whatsapp-compose";
+import type { CalculatorState, ProductItem } from "@/types";
 import { validateForm } from "./form-validation";
-import { getAddressFromCurrentLocation } from "./geolocation";
+import {
+  getCurrentLocation,
+  reverseGeocode,
+  calculateDistance,
+} from "./geolocation";
+import { openMapPicker } from "./map-picker";
+// import { initProductModal } from "./product-modal"; // Deprecated
+import { saveOrder } from "./checkout-session";
+import { openModal } from "@/store/modalStore";
+import {
+  calculateVolumeDiscount,
+  calculateTotals,
+} from "@/lib/calculator-logic";
+import {
+  calculateEndDate,
+  calculateDeliveryEstimate,
+  validateDuration as validateDurationDomain,
+} from "@/lib/domain/rental";
 
-const mattresses = products as MattressType[];
+// Helper to find product by ID across all categories
+const findProductById = (id: string): ProductItem | undefined => {
+  const allItems = [
+    ...products.mattressPackages,
+    ...products.mattressOnly,
+    ...products.accessories,
+  ];
+  // @ts-ignore
+  return allItems.find((p) => p.id === id);
+};
 
 // State
 let state: CalculatorState = {
   items: [],
   startDate: null,
   duration: 1,
+  paymentMethod: "qris", // Kept for API compatibility, but not user-selectable
   endDate: null,
   totalQuantity: 0,
   subtotal: 0,
   total: 0,
   deliveryEstimate: "",
+  deliveryFee: 0,
+  distance: 0,
+  volumeDiscountAmount: 0,
+  volumeDiscountLabel: "",
+  volumeDiscountPercent: 0,
+  nextTierUnitsNeeded: 0,
+  nextTierDiscountPercent: 0,
   isValid: false,
   errors: {},
 };
@@ -32,6 +65,7 @@ let elements: Record<string, HTMLElement | null> = {};
  * Initialize calculator
  */
 export function initCalculator(): void {
+  console.log("Calculator Logic Loaded - Fix Applied (Blocking Validation)");
   // Cache DOM elements
   elements = {
     form: document.getElementById("calculatorForm"),
@@ -41,7 +75,14 @@ export function initCalculator(): void {
     startDate: document.getElementById("startDate"),
     customerName: document.getElementById("customerName"),
     customerWhatsapp: document.getElementById("customerWhatsapp"),
-    customerAddress: document.getElementById("customerAddress"),
+    addressStreet: document.getElementById("addressStreet"),
+    addressKelurahan: document.getElementById("addressKelurahan"),
+    addressKecamatan: document.getElementById("addressKecamatan"),
+    addressKota: document.getElementById("addressKota"),
+    addressProvinsi: document.getElementById("addressProvinsi"),
+    addressZip: document.getElementById("addressZip"),
+    addressLat: document.getElementById("addressLat"),
+    addressLng: document.getElementById("addressLng"),
     customerNotes: document.getElementById("customerNotes"),
     locationButton: document.getElementById("locationButton"),
     resultMattress: document.getElementById("resultMattress"),
@@ -53,6 +94,8 @@ export function initCalculator(): void {
     whatsappButton: document.getElementById("whatsappButton"),
     whatsappFallback: document.getElementById("whatsappFallback"),
     copyNumber: document.getElementById("copyNumber"),
+    packageToggle: document.getElementById("packageToggle"),
+    mapPickerButton: document.getElementById("mapPickerButton"),
   };
 
   // Set minimum date to today
@@ -69,6 +112,35 @@ export function initCalculator(): void {
 
   // Initial calculation
   updateCalculation();
+
+  // Initialize shared product modal
+  // initProductModal();
+
+  // Handle product modal triggers
+  document.querySelectorAll("[data-modal-trigger]").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const id = target.dataset.id;
+      if (id) {
+        // Find product data
+        const product = findProductById(id);
+        if (product) {
+          openModal(product);
+        }
+      }
+    });
+  });
+
+  // Handle deep links from other pages
+  handleDeepLink();
+
+  // Listen for custom event to recalculate delivery fee (used by cart prefill)
+  document.addEventListener("recalculate-delivery-fee", (event: Event) => {
+    const customEvent = event as CustomEvent<{ lat: number; lng: number }>;
+    if (customEvent.detail?.lat && customEvent.detail?.lng) {
+      updateDeliveryFee(customEvent.detail.lat, customEvent.detail.lng);
+    }
+  });
 }
 
 /**
@@ -101,7 +173,14 @@ function bindEvents(): void {
   }
 
   // Customer fields
-  ["customerName", "customerWhatsapp", "customerAddress"].forEach((fieldId) => {
+  [
+    "customerName",
+    "customerWhatsapp",
+    "addressStreet",
+    "addressKelurahan",
+    "addressKecamatan",
+    "addressKota",
+  ].forEach((fieldId) => {
     const field = elements[fieldId] as HTMLInputElement | HTMLTextAreaElement;
     if (field) {
       field.addEventListener("input", handleFormFieldChange);
@@ -126,39 +205,274 @@ function bindEvents(): void {
   if (locationButton) {
     locationButton.addEventListener("click", handleLocationClick);
   }
+
+  // Map picker button
+  const mapPickerButton = elements.mapPickerButton as HTMLButtonElement;
+  if (mapPickerButton) {
+    mapPickerButton.addEventListener("click", handleMapPickerClick);
+  }
+
+  // Payment method toggle
+  const paymentToggleButtons = document.querySelectorAll(".payment-option");
+  paymentToggleButtons.forEach((button) => {
+    button.addEventListener("click", handlePaymentMethodToggle);
+  });
+
+  // Show more buttons
+  const showMoreButtons = document.querySelectorAll(".btn-show-more");
+  showMoreButtons.forEach((button) => {
+    button.addEventListener("click", handleShowMoreClick);
+  });
+
+  // Accordion headers
+  const accordionHeaders = document.querySelectorAll(".accordion-header");
+  accordionHeaders.forEach((header) => {
+    header.addEventListener("click", handleAccordionClick);
+  });
+}
+
+/**
+ * Handle deep links from other pages
+ */
+function handleDeepLink(): void {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+  const hash = window.location.hash;
+
+  if (hash === "#calculator") {
+    // Wait a bit for everything to be rendered
+    setTimeout(() => {
+      const calculatorSection = document.getElementById("calculator");
+      if (calculatorSection) {
+        calculatorSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      // If there's a specific product, highlight it
+      if (productId) {
+        const productEl = document.querySelector(
+          `.cart-item[data-id="${productId}"]`,
+        );
+        if (productEl) {
+          // Open accordion if product is inside one
+          const item = productEl.closest(".accordion-item");
+          if (item && !item.classList.contains("active")) {
+            const header = item.querySelector(
+              ".accordion-header",
+            ) as HTMLElement;
+            header?.click();
+          }
+
+          // Show large items if product is a large one
+          if (productEl.classList.contains("is-large-size")) {
+            const accordion = productEl.closest(".accordion-item");
+            const showMoreBtn = accordion?.querySelector(
+              ".btn-show-more",
+            ) as HTMLElement;
+            if (showMoreBtn && !showMoreBtn.classList.contains("active")) {
+              showMoreBtn.click();
+            }
+          }
+
+          // Scroll to product and highlight
+          setTimeout(() => {
+            productEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            productEl.classList.add("highlight-pulse");
+            setTimeout(
+              () => productEl.classList.remove("highlight-pulse"),
+              4000,
+            );
+          }, 300);
+        }
+      }
+    }, 500);
+  }
+}
+
+/**
+ * Handle accordion header click
+ */
+function handleAccordionClick(event: Event): void {
+  const header = event.currentTarget as HTMLElement;
+  const item = header.parentElement;
+
+  if (item) {
+    const content = item.querySelector(".accordion-content") as HTMLElement;
+    const icon = item.querySelector(".accordion-icon") as HTMLElement;
+    const isCurrentlyActive = item.classList.contains("active");
+
+    // Logic: Toggle current item. If it was active, deactivate (close). If inactive, activate (open).
+    // Note: The user requirement implies a toggle behavior.
+
+    if (isCurrentlyActive) {
+      item.classList.remove("active");
+      if (content) content.style.display = "none";
+      if (icon) icon.textContent = "+";
+    } else {
+      // Optional: Close other accordions for "one-at-a-time" behavior,
+      // but let's stick to independent toggles unless forced.
+      // Wait, "gimana kalau 3 kategori ini dibuat toggle aja? yang defaultnya terbuka paket, 2 lainnya tertutup."
+      // Usually "toggle aja" implies independent or linked.
+      // I will implement "exclusive" behavior (accordion style) where opening one might be expected,
+      // BUT independent is safer for UX if they want to see multiple.
+      // However, usually accordions close others to save space.
+      // Let's implement independent toggling for now as it's more flexible for comparison.
+
+      item.classList.add("active");
+      if (content) content.style.display = "block";
+      if (icon) icon.textContent = "−";
+    }
+  }
+}
+
+/**
+ * Handle payment method toggle
+ */
+function handlePaymentMethodToggle(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const value = button.dataset.value as "qris" | "transfer";
+
+  // Update state
+  state.paymentMethod = value;
+
+  // Update UI
+  const paymentButtons = document.querySelectorAll(".payment-option");
+  paymentButtons.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+  button.classList.add("active");
+}
+
+/**
+ * Handle "Show More" items click
+ */
+function handleShowMoreClick(event: Event): void {
+  const button = event.currentTarget as HTMLButtonElement;
+  const accordion = button.closest(".accordion-item");
+
+  if (accordion) {
+    const largeItems = accordion.querySelectorAll(".is-large-size");
+    const isVisible = button.classList.contains("active");
+
+    largeItems.forEach((item) => {
+      if (isVisible) {
+        item.classList.remove("is-visible");
+      } else {
+        item.classList.add("is-visible");
+      }
+    });
+
+    button.classList.toggle("active");
+    button.textContent = isVisible
+      ? "Lihat Ukuran Lainnya"
+      : "Sembunyikan Ukuran Lain";
+  }
+}
+
+/**
+ * Handle map picker button click
+ */
+function handleMapPickerClick(): void {
+  openMapPicker({
+    onConfirm: (coords, address) => {
+      // Fill all address fields
+      const streetField = elements.addressStreet as HTMLInputElement;
+      const kelurahanField = elements.addressKelurahan as HTMLInputElement;
+      const kecamatanField = elements.addressKecamatan as HTMLInputElement;
+      const kotaField = elements.addressKota as HTMLInputElement;
+      const provinsiField = elements.addressProvinsi as HTMLInputElement;
+      const zipField = elements.addressZip as HTMLInputElement;
+      const latField = elements.addressLat as HTMLInputElement;
+      const lngField = elements.addressLng as HTMLInputElement;
+
+      if (streetField) streetField.value = address.street;
+      if (kelurahanField) kelurahanField.value = address.kelurahan;
+      if (kecamatanField) kecamatanField.value = address.kecamatan;
+      if (kotaField) kotaField.value = address.kota;
+      if (provinsiField) provinsiField.value = address.provinsi;
+      if (zipField) zipField.value = address.postcode;
+      if (latField) latField.value = coords.lat.toFixed(6);
+      if (lngField) lngField.value = coords.lng.toFixed(6);
+
+      // Trigger validation
+      handleFormFieldChange();
+
+      // Update delivery fee
+      if (coords.lat && coords.lng) {
+        updateDeliveryFee(coords.lat, coords.lng);
+      }
+    },
+  });
 }
 
 /**
  * Handle increment (+) button
  */
+/**
+ * Handle increment (+) button
+ */
 function handleIncrement(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const type = button.dataset.type || "";
+  const id = button.dataset.id || "";
   const name = button.dataset.name || "";
+  const category = button.dataset.category as
+    | "package"
+    | "mattress"
+    | "accessory";
   const price = parseInt(button.dataset.price || "0", 10);
 
-  // Check if total quantity would exceed max
-  if (state.totalQuantity >= config.maxQuantity) {
-    showError("mattress", `Maksimal ${config.maxQuantity} unit total`);
-    return;
+  // Check if total quantity (mattresses only) would exceed max
+  if (category !== "accessory") {
+    const currentMattressQty = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((sum, i) => sum + i.quantity, 0);
+
+    if (currentMattressQty >= config.maxQuantity) {
+      showError(
+        "mattressCart",
+        `Maksimal ${config.maxQuantity} unit kasur (per jenis maupun total). Hubungi CS untuk pemesanan partai besar.`,
+      );
+      return;
+    }
+  } else {
+    // Basic validation: Cannot order accessories without mattress
+    const currentMattressQty = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((sum, i) => sum + i.quantity, 0);
+
+    if (currentMattressQty === 0) {
+      showError(
+        "mattressCart",
+        "Pilih minimal 1 kasur sebelum menambah aksesoris",
+      );
+      return;
+    }
   }
 
   // Find existing item or create new
-  const existingItem = state.items.find((item) => item.type === type);
+  const existingItem = state.items.find((item) => item.id === id);
 
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
+    // Lookup product data to get includes (bundle components)
+    const productData = findProductById(id);
+    const includes = productData?.includes;
+
     state.items.push({
-      type,
+      id,
       name,
+      category,
       quantity: 1,
       pricePerDay: price,
+      includes, // Bundle components for packages
     });
   }
 
-  clearError("mattress");
-  updateQuantityDisplay(type);
+  clearError("mattressCart");
+  updateQuantityDisplay(id);
   updateCalculation();
 }
 
@@ -167,34 +481,54 @@ function handleIncrement(event: Event): void {
  */
 function handleDecrement(event: Event): void {
   const button = event.currentTarget as HTMLButtonElement;
-  const type = button.dataset.type || "";
+  const id = button.dataset.id || "";
 
-  const existingItem = state.items.find((item) => item.type === type);
+  const existingItem = state.items.find((item) => item.id === id);
 
   if (existingItem && existingItem.quantity > 0) {
     existingItem.quantity -= 1;
 
     // Remove item if quantity reaches 0
     if (existingItem.quantity === 0) {
-      state.items = state.items.filter((item) => item.type !== type);
+      state.items = state.items.filter((item) => item.id !== id);
     }
 
-    updateQuantityDisplay(type);
+    // Creating accessories cleanup logic if 0 mattresses
+    const mattressCount = state.items
+      .filter((i) => i.category !== "accessory")
+      .reduce((s, i) => s + i.quantity, 0);
+
+    if (mattressCount === 0) {
+      // Automatically remove accessories if no mattress left (optional)
+      // For now, let's just leave them but validation will fail on submit
+    }
+
+    updateQuantityDisplay(id);
     updateCalculation();
   }
 }
 
 /**
- * Update quantity display for a specific mattress type
+ * Update quantity display for a specific item
  */
-function updateQuantityDisplay(type: string): void {
+function updateQuantityDisplay(id: string): void {
   const qtyEl = document.querySelector(
-    `.cart-item-qty[data-type="${type}"]`
+    `.cart-item-qty[data-id="${id}"]`,
   ) as HTMLElement;
 
   if (qtyEl) {
-    const item = state.items.find((i) => i.type === type);
+    const item = state.items.find((i) => i.id === id);
     qtyEl.textContent = item ? String(item.quantity) : "0";
+
+    // Update selected state class on parent
+    const cartItem = qtyEl.closest(".cart-item");
+    if (cartItem) {
+      if (item && item.quantity > 0) {
+        cartItem.classList.add("is-selected");
+      } else {
+        cartItem.classList.remove("is-selected");
+      }
+    }
   }
 }
 
@@ -211,16 +545,19 @@ function handleDurationChange(event: Event): void {
  * Validate duration
  */
 function validateDuration(): void {
-  const { minDuration, maxDuration } = config;
+  const result = validateDurationDomain(state.duration, {
+    minDuration: config.minDuration,
+    maxDuration: config.maxDuration,
+  });
 
-  if (state.duration < minDuration) {
-    state.duration = minDuration;
-    (elements.duration as HTMLInputElement).value = String(minDuration);
-    showError("duration", `Minimal ${minDuration} hari`);
-  } else if (state.duration > maxDuration) {
-    state.duration = maxDuration;
-    (elements.duration as HTMLInputElement).value = String(maxDuration);
-    showError("duration", `Maksimal ${maxDuration} hari`);
+  if (!result.isValid) {
+    if (result.adjustedValue) {
+      state.duration = result.adjustedValue;
+      (elements.duration as HTMLInputElement).value = String(
+        result.adjustedValue,
+      );
+    }
+    showError("duration", result.message || "Durasi tidak valid");
   } else {
     clearError("duration");
   }
@@ -249,39 +586,141 @@ function handleDateChange(event: Event): void {
 }
 
 /**
- * Handle form field change
+ * Handle form field change - clear errors when fields are filled correctly
  */
 function handleFormFieldChange(): void {
+  // Clear errors for fields that now have valid values
+  const customerName = (elements.customerName as HTMLInputElement)?.value || "";
+  const customerWhatsapp =
+    (elements.customerWhatsapp as HTMLInputElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
+
+  // Clear name error if field is filled
+  if (customerName.trim()) {
+    clearError("customerName");
+  }
+
+  // Clear WhatsApp error if field is filled with valid format
+  if (customerWhatsapp.trim()) {
+    const cleaned = customerWhatsapp.replace(/[\s-]/g, "");
+    const patterns = [/^08\d{8,11}$/, /^\+628\d{8,11}$/, /^628\d{8,11}$/];
+    if (patterns.some((p) => p.test(cleaned))) {
+      clearError("customerWhatsapp");
+    }
+  }
+
+  // Clear address street error if field is filled
+  if (addressStreet.trim()) {
+    clearError("addressStreet");
+  }
+
+  // Clear kota error if field is filled
+  if (addressKota.trim()) {
+    clearError("addressKota");
+  }
+
   updateValidation();
 }
 
 /**
  * Update calculation
  */
-function updateCalculation(): void {
-  // Calculate end date
-  if (state.startDate) {
-    const start = new Date(state.startDate);
-    const end = new Date(start);
-    end.setDate(end.getDate() + state.duration);
-    state.endDate = end.toISOString().split("T")[0];
+/**
+ * Calculate delivery fee based on distance
+ */
+function updateDeliveryFee(lat: number, lng: number): void {
+  if (!config.storeLocation) return;
+
+  const distance = calculateDistance(
+    config.storeLocation.lat,
+    config.storeLocation.lng,
+    lat,
+    lng,
+  );
+
+  state.distance = distance;
+
+  // Calculate fee based on zones
+  let fee = 0;
+  const zones = config.deliveryZones || [];
+
+  // Find matching zone
+  const zone = zones.find((z) => distance <= z.maxDistance);
+
+  if (zone) {
+    fee = zone.price;
+  } else {
+    // Exceeds max zone - calculate per km
+    const lastZone = zones[zones.length - 1];
+    const extraDist = distance - lastZone.maxDistance;
+    const baseFee = lastZone.price;
+    const extraFee = Math.ceil(extraDist) * (config.deliveryPricePerKm || 0);
+    fee = baseFee + extraFee;
+
+    // Ensure minimum price if set
+    if (config.minDeliveryPrice && fee < config.minDeliveryPrice) {
+      fee = config.minDeliveryPrice;
+    }
   }
 
-  // Calculate total quantity
-  state.totalQuantity = state.items.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  // Round to nearest 1000
+  fee = Math.ceil(fee / 1000) * 1000;
+
+  state.deliveryFee = fee;
+  updateCalculation();
+}
+
+/**
+ * Update calculation
+ */
+function updateCalculation(): void {
+  // 1. Calculate end date using pure function
+  if (state.startDate) {
+    state.endDate = calculateEndDate(state.startDate, state.duration);
+  }
+
+  // 2. Calculate prices using pure function
+  state.totalQuantity = state.items.reduce((sum, i) => sum + i.quantity, 0);
+
+  const mattressQty = state.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((s, i) => s + i.quantity, 0);
+
+  const {
+    percent: volumeDiscountPercent,
+    label,
+    discount: volumeDiscountRate,
+    nextTierUnitsNeeded,
+    nextTierDiscountPercent,
+  } = calculateVolumeDiscount(mattressQty, config as any);
+
+  // Update state with discount info
+  state.volumeDiscountAmount = 0; // Will be calc in calculateTotals
+  state.volumeDiscountLabel = label;
+  state.volumeDiscountPercent = volumeDiscountPercent;
+
+  state.nextTierUnitsNeeded = nextTierUnitsNeeded;
+  state.nextTierDiscountPercent = nextTierDiscountPercent;
 
   // Calculate totals
-  state.subtotal = state.items.reduce(
-    (sum, item) => sum + item.quantity * item.pricePerDay * state.duration,
-    0
+  const totals = calculateTotals(
+    state.items,
+    state.duration,
+    state.deliveryFee || 0,
+    volumeDiscountRate,
   );
-  state.total = state.subtotal;
 
-  // Calculate delivery estimate
-  state.deliveryEstimate = calculateDeliveryEstimate();
+  state.subtotal = totals.subtotal;
+  state.volumeDiscountAmount = totals.discountAmount;
+  state.total = totals.total;
+
+  // 3. Calculate delivery estimate
+  state.deliveryEstimate = calculateDeliveryEstimate(
+    state.startDate,
+    config.cutoffHour,
+  );
 
   // Update UI
   updateTotalQuantityDisplay();
@@ -305,45 +744,27 @@ function updateTotalQuantityDisplay(): void {
  */
 function updateStepperButtons(): void {
   const plusButtons = document.querySelectorAll(
-    ".btn-plus"
+    ".btn-plus",
   ) as NodeListOf<HTMLButtonElement>;
-  const atMax = state.totalQuantity >= config.maxQuantity;
+
+  const currentMattressQty = state.items
+    .filter((i) => i.category !== "accessory")
+    .reduce((sum, i) => sum + i.quantity, 0);
+
+  const atMaxMattress = currentMattressQty >= config.maxQuantity;
 
   plusButtons.forEach((button) => {
-    button.disabled = atMax;
+    const category = button.dataset.category;
+    if (category !== "accessory") {
+      button.disabled = atMaxMattress;
+    } else {
+      // Accessories always enabled
+      button.disabled = false;
+    }
   });
 }
 
-/**
- * Calculate delivery estimate
- */
-function calculateDeliveryEstimate(): string {
-  if (!state.startDate) {
-    return "Pilih tanggal untuk estimasi pengantaran";
-  }
-
-  const now = new Date();
-  const startDate = new Date(state.startDate);
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const isToday = startDate.getTime() === today.getTime();
-
-  if (isToday) {
-    const currentHour = now.getHours();
-    if (currentHour < config.cutoffHour) {
-      return "Bisa antar hari ini! 🚚";
-    } else {
-      return "Antar besok pagi";
-    }
-  } else {
-    const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      day: "numeric",
-      month: "short",
-    };
-    const dateStr = startDate.toLocaleDateString("id-ID", options);
-    return `Antar ${dateStr}`;
-  }
-}
+// Helper removed - using pure function from domain/rental
 
 /**
  * Update result panel
@@ -385,7 +806,7 @@ function updateResultPanel(): void {
         });
       };
       datesEl.textContent = `${formatDate(state.startDate)} - ${formatDate(
-        state.endDate
+        state.endDate,
       )}`;
     } else {
       datesEl.textContent = "-";
@@ -404,6 +825,64 @@ function updateResultPanel(): void {
   if (deliveryEl) {
     deliveryEl.textContent = state.deliveryEstimate;
   }
+
+  // Delivery Fee & Distance
+  const deliveryFeeEl = document.getElementById("resultDeliveryFee");
+  const deliveryDistanceEl = document.getElementById("deliveryDistance");
+
+  if (deliveryFeeEl) {
+    const valEl = deliveryFeeEl.querySelector(".result-value");
+    if (valEl) {
+      if (state.distance > 0) {
+        valEl.textContent = new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+          maximumFractionDigits: 0,
+        }).format(state.deliveryFee);
+        deliveryFeeEl.classList.remove("hidden");
+      } else {
+        valEl.textContent = "-";
+      }
+    }
+  }
+  if (deliveryDistanceEl) {
+    deliveryDistanceEl.textContent =
+      state.distance > 0 ? `(${state.distance.toFixed(1)} km)` : "";
+  }
+
+  // Volume Discount Display
+  const volumeDiscountEl = document.getElementById("resultVolumeDiscount");
+  if (volumeDiscountEl) {
+    const valEl = volumeDiscountEl.querySelector(".result-value");
+    const labelEl = document.getElementById("volumeDiscountLabel");
+
+    if (state.volumeDiscountAmount > 0) {
+      if (valEl) {
+        valEl.textContent = `-Rp ${new Intl.NumberFormat("id-ID").format(
+          state.volumeDiscountAmount,
+        )}`;
+      }
+      if (labelEl) {
+        labelEl.textContent = state.volumeDiscountLabel
+          ? `(${state.volumeDiscountLabel})`
+          : "";
+      }
+      volumeDiscountEl.style.display = "flex";
+    } else {
+      volumeDiscountEl.style.display = "none";
+    }
+  }
+
+  // Next Tier Upsell Prompt
+  const upsellPromptEl = document.getElementById("upsellPrompt");
+  if (upsellPromptEl) {
+    if (state.nextTierUnitsNeeded > 0 && state.nextTierDiscountPercent > 0) {
+      upsellPromptEl.innerHTML = `💡 Tambah <strong>${state.nextTierUnitsNeeded} unit</strong> lagi untuk diskon <strong>${state.nextTierDiscountPercent}%</strong>!`;
+      upsellPromptEl.style.display = "block";
+    } else {
+      upsellPromptEl.style.display = "none";
+    }
+  }
 }
 
 /**
@@ -413,19 +892,20 @@ function updateValidation(): void {
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
   const customerWhatsapp =
     (elements.customerWhatsapp as HTMLInputElement)?.value || "";
-  const customerAddress =
-    (elements.customerAddress as HTMLTextAreaElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
 
   const formData = {
     name: customerName,
     whatsapp: customerWhatsapp,
-    address: customerAddress,
+    address: addressStreet,
     notes: "",
   };
 
   const formErrors = validateForm(formData);
 
-  // Check all required fields
+  // Check all required fields (min: name, whatsapp, street, kota)
   state.isValid =
     state.totalQuantity > 0 &&
     state.totalQuantity <= config.maxQuantity &&
@@ -434,44 +914,260 @@ function updateValidation(): void {
     state.startDate !== null &&
     customerName.trim() !== "" &&
     customerWhatsapp.trim() !== "" &&
-    customerAddress.trim() !== "" &&
+    addressStreet.trim() !== "" &&
+    addressKota.trim() !== "" &&
     Object.keys(formErrors).length === 0;
 
-  // Update button state
-  const button = elements.whatsappButton as HTMLButtonElement;
-  if (button) {
-    button.disabled = !state.isValid;
-  }
+  // Button is always enabled - validation happens on click
 }
 
 /**
- * Handle WhatsApp click
+ * Handle WhatsApp click - validate and scroll to first error if invalid
  */
-function handleWhatsAppClick(): void {
-  if (!state.isValid) return;
-
+async function handleWhatsAppClick(): Promise<void> {
+  // Get all field values
   const customerName = (elements.customerName as HTMLInputElement)?.value || "";
-  const customerAddress =
-    (elements.customerAddress as HTMLTextAreaElement)?.value || "";
+  const customerWhatsapp =
+    (elements.customerWhatsapp as HTMLInputElement)?.value || "";
+  const addressStreet =
+    (elements.addressStreet as HTMLInputElement)?.value || "";
+  const addressKelurahan =
+    (elements.addressKelurahan as HTMLInputElement)?.value || "";
+  const addressKecamatan =
+    (elements.addressKecamatan as HTMLInputElement)?.value || "";
+  const addressKota = (elements.addressKota as HTMLInputElement)?.value || "";
+  const addressProvinsi =
+    (elements.addressProvinsi as HTMLInputElement)?.value || "";
+  const addressZip = (elements.addressZip as HTMLInputElement)?.value || "";
+  const addressLat = (elements.addressLat as HTMLInputElement)?.value || "";
+  const addressLng = (elements.addressLng as HTMLInputElement)?.value || "";
   const customerNotes =
     (elements.customerNotes as HTMLTextAreaElement)?.value || "";
 
+  // Collect validation errors with field IDs for scrolling
+  const validationErrors: { fieldId: string; message: string }[] = [];
+
+  // Check quantity
+  if (state.totalQuantity === 0) {
+    validationErrors.push({
+      fieldId: "mattressCart",
+      message: "Pilih minimal 1 kasur",
+    });
+  }
+
+  // Check start date
+  if (!state.startDate) {
+    validationErrors.push({
+      fieldId: "startDate",
+      message: "Tanggal mulai wajib diisi",
+    });
+  }
+
+  // Check customer name
+  if (!customerName.trim()) {
+    validationErrors.push({
+      fieldId: "customerName",
+      message: "Nama wajib diisi",
+    });
+  }
+
+  // Check WhatsApp
+  if (!customerWhatsapp.trim()) {
+    validationErrors.push({
+      fieldId: "customerWhatsapp",
+      message: "No. WhatsApp wajib diisi",
+    });
+  } else {
+    // Validate WhatsApp format
+    const cleaned = customerWhatsapp.replace(/[\s-]/g, "");
+    const patterns = [/^08\d{8,11}$/, /^\+628\d{8,11}$/, /^628\d{8,11}$/];
+    if (!patterns.some((p) => p.test(cleaned))) {
+      validationErrors.push({
+        fieldId: "customerWhatsapp",
+        message: "Format nomor tidak valid (contoh: 08123456789)",
+      });
+    }
+  }
+
+  // Check address street
+  if (!addressStreet.trim()) {
+    validationErrors.push({
+      fieldId: "addressStreet",
+      message: "Alamat jalan wajib diisi",
+    });
+  }
+
+  // Check kota
+  if (!addressKota.trim()) {
+    validationErrors.push({
+      fieldId: "addressKota",
+      message: "Kabupaten/Kota wajib diisi",
+    });
+  }
+
+  // If there are errors, show them and scroll to first
+  if (validationErrors.length > 0) {
+    // Clear previous errors
+    document
+      .querySelectorAll(".form-error")
+      .forEach((el) => (el.textContent = ""));
+    document
+      .querySelectorAll(".form-input, .form-textarea")
+      .forEach((el) => el.classList.remove("error"));
+
+    // Show all errors
+    validationErrors.forEach((err) => {
+      showError(err.fieldId, err.message);
+    });
+
+    // Scroll to first error field
+    // Scroll to first error field with offset for sticky header
+    scrollToError(validationErrors[0].fieldId);
+    return;
+  }
+
+  // All valid - compose address and send to WhatsApp
+  let fullAddress = addressStreet;
+  if (addressKelurahan) fullAddress += `, ${addressKelurahan}`;
+  if (addressKecamatan) fullAddress += `, ${addressKecamatan}`;
+  if (addressKota) fullAddress += `, ${addressKota}`;
+  if (addressProvinsi) fullAddress += `, ${addressProvinsi}`;
+  if (addressZip) fullAddress += ` ${addressZip}`;
+  if (addressLat && addressLng)
+    fullAddress += ` (${addressLat}, ${addressLng})`;
+
+  // Generate order ID
+  const orderId = `SL-${Date.now().toString(36).toUpperCase()}`;
+
   const bookingData = {
-    items: state.items,
-    startDate: state.startDate || "",
+    orderId: orderId,
+    customerName: customerName,
+    customerWhatsapp: customerWhatsapp,
+    deliveryAddress: fullAddress,
+    addressFields: {
+      street: addressStreet,
+      kelurahan: addressKelurahan,
+      kecamatan: addressKecamatan,
+      kota: addressKota,
+      provinsi: addressProvinsi,
+      zip: addressZip,
+      lat: addressLat,
+      lng: addressLng,
+    },
+    items: state.items.map((item) => ({
+      id: item.id, // Product ID for bundle lookup
+      name: item.name,
+      category: item.category,
+      quantity: item.quantity,
+      pricePerDay: item.pricePerDay,
+      includes: item.includes, // Bundle components for auto-creation
+    })),
+    totalPrice: state.total,
+    orderDate: state.startDate || "",
     endDate: state.endDate || "",
     duration: state.duration,
-    totalQuantity: state.totalQuantity,
-    total: state.total,
-    name: customerName,
-    address: customerAddress,
+    deliveryFee: state.deliveryFee || 0,
+    paymentMethod: state.paymentMethod,
     notes: customerNotes,
+    volumeDiscountAmount: state.volumeDiscountAmount,
+    volumeDiscountLabel: state.volumeDiscountLabel,
   };
 
-  const waUrl = composeWhatsAppUrl(bookingData);
+  // Change button state to loading
+  const waButton = elements.whatsappButton as HTMLButtonElement;
+  const originalBtnText = waButton.innerHTML;
+  waButton.disabled = true;
+  waButton.innerHTML = `<span class="loading-spinner"></span> Memproses...`;
 
-  // Use direct navigation for better mobile support
-  window.location.href = waUrl;
+  try {
+    // Save order to sessionStorage FIRST (before API call)
+    // This ensures checkout page works even if bot API fails
+    saveOrder(bookingData);
+
+    // Step 1: Call ERP first to get order tracking URL
+    let orderUrl: string | undefined;
+    const { createOrderInERP } = await import("../services/erp-api");
+    const erpResponse = await createOrderInERP(bookingData);
+    console.log("Order created in ERP:", erpResponse.orderNumber);
+    orderUrl = erpResponse.orderUrl;
+
+    // Store for thank-you page and checkout confirmation
+    if (orderUrl) {
+      sessionStorage.setItem("erpOrderUrl", orderUrl);
+      sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
+      sessionStorage.setItem("erpPublicToken", erpResponse.publicToken);
+    }
+
+    // Note: WhatsApp notification is now handled by ERP Sync Service
+    // No need to call sendOrderToBot separately
+
+    // Update button to show success briefly
+    waButton.innerHTML = `✓ Melanjutkan ke Checkout`;
+    waButton.classList.add("success-btn");
+
+    // Redirect to checkout page after short delay
+    // Redirect to checkout page after short delay
+    setTimeout(() => {
+      window.location.href = "/sewa-kasur/checkout";
+    }, 500);
+  } catch (error: any) {
+    console.error("Failed to process order:", error);
+    waButton.disabled = false;
+    waButton.innerHTML = originalBtnText;
+
+    // Show error message
+    // Check for specific WhatsApp validation errors or general validation
+    const errorMessage = (error.message || "").toLowerCase();
+
+    // Check for specific field errors
+    if (
+      errorMessage.includes("invalid_phone") ||
+      errorMessage.includes("whatsapp") ||
+      errorMessage.includes("nomor")
+    ) {
+      showError(
+        "customerWhatsapp",
+        "Nomor WhatsApp tidak terdaftar atau tidak aktif. Harap cek kembali.",
+      );
+      scrollToError("customerWhatsapp");
+    } else if (errorMessage.includes("name") || errorMessage.includes("nama")) {
+      showError("customerName", error.message);
+      scrollToError("customerName");
+    } else if (
+      errorMessage.includes("address") ||
+      errorMessage.includes("alamat")
+    ) {
+      showError("addressStreet", error.message);
+      scrollToError("addressStreet");
+    } else if (
+      errorMessage.includes("mattress") ||
+      errorMessage.includes("kasur") ||
+      errorMessage.includes("quantity") ||
+      errorMessage.includes("jumlah") ||
+      errorMessage.includes("pilih")
+    ) {
+      showError(
+        "mattressCart",
+        error.message || "Pilih jumlah kasur dengan benar.",
+      );
+      scrollToError("mattressCart");
+    } else {
+      // Generic error - do NOT show on mattress section as it's confusing
+      // Show as a global alert or on the submit button area
+      console.error("Generic Booking Error:", error);
+      // DEBUG: Show env values for troubleshooting (REMOVE AFTER DEBUG)
+      const proxyUrl = (import.meta as any).env?.PUBLIC_PROXY_URL || "not set";
+      alert(
+        `Mohon maaf, terjadi kesalahan: ${
+          error.message || "Gagal memproses pesanan"
+        }. Silakan coba lagi.\n\n[DEBUG] PROXY_URL: ${proxyUrl}`,
+      );
+
+      // Optional: Visual feedback on button
+      waButton.classList.add("error-btn");
+      setTimeout(() => waButton.classList.remove("error-btn"), 2000);
+    }
+  }
 }
 
 /**
@@ -479,9 +1175,12 @@ function handleWhatsAppClick(): void {
  */
 async function handleLocationClick(): Promise<void> {
   const button = elements.locationButton as HTMLButtonElement;
-  const addressField = elements.customerAddress as HTMLTextAreaElement;
+  const streetField = elements.addressStreet as HTMLInputElement;
+  const kotaField = elements.addressKota as HTMLInputElement;
+  const latField = elements.addressLat as HTMLInputElement;
+  const lngField = elements.addressLng as HTMLInputElement;
 
-  if (!button || !addressField) return;
+  if (!button || !streetField) return;
 
   // Disable button and show loading
   button.disabled = true;
@@ -489,13 +1188,37 @@ async function handleLocationClick(): Promise<void> {
   button.textContent = "📍 Mengambil lokasi...";
 
   try {
-    const address = await getAddressFromCurrentLocation();
+    // Get coordinates first
+    const coords = await getCurrentLocation();
 
-    // Fill address field
-    addressField.value = address;
+    // Fill coordinate fields
+    if (latField) latField.value = coords.latitude.toFixed(6);
+    if (lngField) lngField.value = coords.longitude.toFixed(6);
+
+    // Get address from coordinates
+    const address = await reverseGeocode(coords);
+
+    // Fill all address fields
+    streetField.value = address.street;
+    const kelurahanField = elements.addressKelurahan as HTMLInputElement;
+    const kecamatanField = elements.addressKecamatan as HTMLInputElement;
+    const provinsiField = elements.addressProvinsi as HTMLInputElement;
+    const zipField = elements.addressZip as HTMLInputElement;
+
+    if (kelurahanField && address.kelurahan)
+      kelurahanField.value = address.kelurahan;
+    if (kecamatanField && address.kecamatan)
+      kecamatanField.value = address.kecamatan;
+    if (kotaField && address.kota) kotaField.value = address.kota;
+    if (provinsiField && address.provinsi)
+      provinsiField.value = address.provinsi;
+    if (zipField && address.postcode) zipField.value = address.postcode;
 
     // Trigger validation
     handleFormFieldChange();
+
+    // Calculate delivery fee
+    updateDeliveryFee(coords.latitude, coords.longitude);
 
     // Show success
     button.textContent = "✓ Lokasi terisi";
@@ -507,7 +1230,7 @@ async function handleLocationClick(): Promise<void> {
     // Show error message
     const errorMessage =
       error instanceof Error ? error.message : "Gagal mendapatkan lokasi";
-    showError("customerAddress", errorMessage);
+    showError("addressStreet", errorMessage);
 
     // Reset button
     button.textContent = originalText;
@@ -561,4 +1284,32 @@ function clearError(field: string): void {
   if (inputEl) {
     inputEl.classList.remove("error");
   }
+}
+
+/**
+ * Scroll to error field with offset for sticky header
+ */
+/**
+ * Scroll to error field with offset for sticky header
+ */
+function scrollToError(elementId: string): void {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+
+  // Use native scrollIntoView - CSS scroll-margin-top handles the offset
+  element.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  // Focus the field after scrolling
+  setTimeout(() => {
+    if (
+      element instanceof HTMLInputElement ||
+      element instanceof HTMLTextAreaElement
+    ) {
+      // Use preventScroll to avoid browser jumping back
+      element.focus({ preventScroll: true });
+    }
+  }, 800); // Wait for scroll to finish
 }

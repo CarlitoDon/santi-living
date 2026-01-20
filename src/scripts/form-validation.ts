@@ -50,11 +50,9 @@ export function validateForm(data: BookingFormData): FormErrors {
     errors.whatsapp = "Format nomor tidak valid (contoh: 08123456789)";
   }
 
-  // Address validation
+  // Address validation (just check not empty, length validation removed since address is now split into fields)
   if (!data.address || data.address.trim() === "") {
     errors.address = "Alamat wajib diisi";
-  } else if (data.address.trim().length < 10) {
-    errors.address = "Alamat terlalu pendek, mohon lengkapi";
   }
 
   return errors;

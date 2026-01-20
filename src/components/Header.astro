@@ -1,5 +1,4 @@
 ---
-import config from "@/data/config.json";
 import MenuToggle from "./MenuToggle.astro";
 import { Image } from "astro:assets";
 import logoImage from "@/assets/images/logo-santi-mebel.png";
@@ -11,7 +10,7 @@ import logoImage from "@/assets/images/logo-santi-mebel.png";
       <MenuToggle />
       <div class="header-logo-group">
         <h1 class="site-title">
-          <a href="/" class="logo-link">
+          <a href="/sewa-kasur" class="logo-link">
             <span class="site-name">Santi Living</span>
             <span class="brand-line">
               <span class="by">by</span>
@@ -125,6 +124,7 @@ import logoImage from "@/assets/images/logo-santi-mebel.png";
     .brand-logo {
       height: 28px;
       width: auto;
+      border-radius: var(--radius-sm);
     }
 
     .site-tagline {

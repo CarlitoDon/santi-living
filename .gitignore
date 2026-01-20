@@ -9,6 +9,8 @@ dist/
 .env
 .env.*
 !.env.example
+!.env.production
+!.env.staging
 
 # Logs
 *.log
@@ -28,3 +30,5 @@ Thumbs.db
 .cache/
 *.tsbuildinfo
 .vercel
+apps/bot-service/.wwebjs_auth/
+apps/bot-service/.wwebjs_cache/

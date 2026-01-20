@@ -1,0 +1,14 @@
+[build]
+builder = "nixpacks"
+
+# Service 1: Santi ERP Service (Bridge/Backend)
+[[services]]
+name = "proxy"
+root = "apps/proxy"
+
+[watch]
+paths = [
+  "apps/proxy/**",
+  "package.json",
+  "package-lock.json"
+]

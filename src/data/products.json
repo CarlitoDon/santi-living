@@ -1,46 +1,168 @@
-[
-  {
-    "id": "single",
-    "name": "Kasur Single",
-    "shortName": "Single",
-    "description": "Kasur single nyaman untuk 1 orang",
-    "pricePerDay": 25000,
-    "dimensions": "90 x 200 cm",
-    "capacity": "1 orang",
-    "image": "/images/kasur-default.jpg",
-    "available": true
-  },
-  {
-    "id": "double",
-    "name": "Kasur Double",
-    "shortName": "Double",
-    "description": "Kasur double untuk 1-2 orang",
-    "pricePerDay": 35000,
-    "dimensions": "120 x 200 cm",
-    "capacity": "1-2 orang",
-    "image": "/images/kasur-default.jpg",
-    "available": true
-  },
-  {
-    "id": "queen",
-    "name": "Kasur Queen",
-    "shortName": "Queen",
-    "description": "Kasur queen luas untuk 2 orang",
-    "pricePerDay": 45000,
-    "dimensions": "160 x 200 cm",
-    "capacity": "2 orang",
-    "image": "/images/kasur-default.jpg",
-    "available": true
-  },
-  {
-    "id": "king",
-    "name": "Kasur King",
-    "shortName": "King",
-    "description": "Kasur king super luas untuk 2-3 orang",
-    "pricePerDay": 55000,
-    "dimensions": "200 x 200 cm",
-    "capacity": "2-3 orang",
-    "image": "/images/kasur-default.jpg",
-    "available": true
-  }
-]
+{
+  "mattressPackages": [
+    {
+      "id": "package-single-standard",
+      "name": "Single Standard (Paket)",
+      "shortName": "Single Standard (Pkt)",
+      "description": "Kasur + Sprei + Bantal + Selimut",
+      "pricePerDay": 30000,
+      "costPrice": 735256,
+      "dimensions": "90 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/paket-90.webp",
+      "includes": ["kasur busa 90x200", "sprei 90x200", "bantal", "selimut"]
+    },
+    {
+      "id": "package-single-super",
+      "name": "Single Super (Paket)",
+      "shortName": "Single Super (Pkt)",
+      "description": "Kasur + Sprei + Bantal + Selimut",
+      "pricePerDay": 35000,
+      "costPrice": 809566,
+      "dimensions": "100 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/paket-100.webp",
+      "includes": ["kasur busa 100x200", "sprei 100x200", "bantal", "selimut"]
+    },
+    {
+      "id": "package-double",
+      "name": "Double (Paket)",
+      "shortName": "Double (Pkt)",
+      "description": "Kasur + Sprei + Bantal + Selimut",
+      "pricePerDay": 40000,
+      "costPrice": 949741,
+      "dimensions": "120 x 200 cm",
+      "capacity": "1-2 orang",
+      "image": "/images/paket-120.webp",
+      "includes": ["kasur busa 120x200", "sprei 120x200", "bantal", "selimut"]
+    },
+    {
+      "id": "package-queen",
+      "name": "Queen (Paket)",
+      "shortName": "Queen (Pkt)",
+      "description": "Kasur + Sprei + 2 Bantal + Selimut",
+      "pricePerDay": 50000,
+      "costPrice": 1215294,
+      "dimensions": "160 x 200 cm",
+      "capacity": "2 orang",
+      "image": "/images/paket-160.webp",
+      "includes": ["kasur busa 160x200", "sprei 160x200", "2 bantal", "selimut"]
+    },
+    {
+      "id": "package-king",
+      "name": "King (Paket)",
+      "shortName": "King (Pkt)",
+      "description": "Kasur + Sprei + 2 Bantal + Selimut",
+      "pricePerDay": 60000,
+      "costPrice": 1340833,
+      "dimensions": "180 x 200 cm",
+      "capacity": "2-3 orang",
+      "image": "/images/paket-180.webp",
+      "includes": ["kasur busa 180x200", "sprei 180x200", "2 bantal", "selimut"]
+    }
+  ],
+  "mattressOnly": [
+    {
+      "id": "mattress-single-standard",
+      "name": "Single Standard (Kasur)",
+      "shortName": "Single Standard",
+      "description": "Hanya kasur (Tanpa sprei/bantal/selimut)",
+      "pricePerDay": 20000,
+      "costPrice": 735256,
+      "dimensions": "90 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/saja-90.webp",
+      "includes": ["kasur busa 90x200"]
+    },
+    {
+      "id": "mattress-single-super",
+      "name": "Single Super (Kasur)",
+      "shortName": "Single Super",
+      "description": "Hanya kasur (Tanpa sprei/bantal/selimut)",
+      "pricePerDay": 25000,
+      "costPrice": 809566,
+      "dimensions": "100 x 200 cm",
+      "capacity": "1 orang",
+      "image": "/images/saja-100-alt.webp",
+      "includes": ["kasur busa 100x200"]
+    },
+    {
+      "id": "mattress-double",
+      "name": "Double (Kasur)",
+      "shortName": "Double",
+      "description": "Hanya kasur (Tanpa sprei/bantal/selimut)",
+      "pricePerDay": 30000,
+      "costPrice": 949741,
+      "dimensions": "120 x 200 cm",
+      "capacity": "1-2 orang",
+      "image": "/images/saja-120.webp",
+      "includes": ["kasur busa 120x200"]
+    },
+    {
+      "id": "mattress-queen",
+      "name": "Queen (Kasur)",
+      "shortName": "Queen",
+      "description": "Hanya kasur (Tanpa sprei/bantal/selimut)",
+      "pricePerDay": 40000,
+      "costPrice": 1215294,
+      "dimensions": "160 x 200 cm",
+      "capacity": "2 orang",
+      "image": "/images/saja-160.webp",
+      "includes": ["kasur busa 160x200"]
+    },
+    {
+      "id": "mattress-king",
+      "name": "King (Kasur)",
+      "shortName": "King",
+      "description": "Hanya kasur (Tanpa sprei/bantal/selimut)",
+      "pricePerDay": 50000,
+      "costPrice": 1340833,
+      "dimensions": "180 x 200 cm",
+      "capacity": "2-3 orang",
+      "image": "/images/saja-180.webp",
+      "includes": ["kasur busa 180x200"]
+    }
+  ],
+  "accessories": [
+    {
+      "id": "acc-pillow",
+      "name": "Extra Bantal",
+      "shortName": "Bantal",
+      "description": "Bantal tidur standar + sarung",
+      "pricePerDay": 5000,
+      "costPrice": 25000,
+      "image": "/images/ekstra-bantal.webp",
+      "includes": ["bantal"]
+    },
+    {
+      "id": "acc-sprei",
+      "name": "Extra Sprei",
+      "shortName": "Sprei",
+      "description": "Sprei kasur standar (ukuran disesuaikan)",
+      "pricePerDay": 5000,
+      "costPrice": 50000,
+      "image": "/images/ekstra-sprei.webp",
+      "includes": ["sprei"]
+    },
+    {
+      "id": "acc-blanket",
+      "name": "Extra Selimut",
+      "shortName": "Selimut",
+      "description": "Selimut tidur standar",
+      "pricePerDay": 5000,
+      "costPrice": 75000,
+      "image": "/images/ekstra-selimut.webp",
+      "includes": ["selimut"]
+    },
+    {
+      "id": "acc-bolster",
+      "name": "Extra Guling",
+      "shortName": "Guling",
+      "description": "Guling tidur standar + sarung",
+      "pricePerDay": 5000,
+      "costPrice": 35000,
+      "image": "/images/ekstra-guling.webp",
+      "includes": ["guling"]
+    }
+  ]
+}

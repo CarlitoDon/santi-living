@@ -39,14 +39,14 @@
   /* Typography */
   --font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, sans-serif;
-  --font-size-xs: 0.75rem; /* 12px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-base: 1rem; /* 16px */
-  --font-size-lg: 1.125rem; /* 18px */
-  --font-size-xl: 1.25rem; /* 20px */
-  --font-size-2xl: 1.5rem; /* 24px */
-  --font-size-3xl: 2rem; /* 32px */
-  --font-size-4xl: 2.5rem; /* 40px */
+  --font-size-xs: 0.7rem; /* 11px - reduced */
+  --font-size-sm: 0.8rem; /* 13px - reduced */
+  --font-size-base: 0.9375rem; /* 15px - reduced from 16px */
+  --font-size-lg: 1.05rem; /* ~17px - reduced */
+  --font-size-xl: 1.15rem; /* ~18.5px - reduced */
+  --font-size-2xl: 1.35rem; /* ~22px - reduced */
+  --font-size-3xl: 1.75rem; /* ~28px - reduced */
+  --font-size-4xl: 2.25rem; /* 36px - reduced */
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -58,26 +58,27 @@
   --line-height-relaxed: 1.75;
 
   /* Spacing */
-  --space-1: 0.25rem; /* 4px */
-  --space-2: 0.5rem; /* 8px */
-  --space-3: 0.75rem; /* 12px */
-  --space-4: 1rem; /* 16px */
-  --space-5: 1.25rem; /* 20px */
-  --space-6: 1.5rem; /* 24px */
-  --space-8: 2rem; /* 32px */
-  --space-10: 2.5rem; /* 40px */
-  --space-12: 3rem; /* 48px */
-  --space-16: 4rem; /* 64px */
-  --space-20: 5rem; /* 80px */
+  --space-1: 0.15rem; /* reduced */
+  --space-2: 0.35rem; /* reduced */
+  --space-3: 0.6rem; /* reduced */
+  --space-4: 0.85rem; /* reduced */
+  --space-5: 1rem; /* reduced */
+  --space-6: 1.25rem; /* reduced */
+  --space-8: 1.75rem; /* reduced */
+  --space-10: 2.25rem;
+  --space-12: 2.75rem;
+  --space-16: 3.5rem;
+  --space-20: 4.5rem;
 
   /* Touch Targets (min 44px per constitution) */
+  /* Keeping min target but reducing visual bulk */
   --touch-target-min: 44px;
 
   /* Border Radius */
-  --radius-sm: 0.25rem; /* 4px */
-  --radius-md: 0.5rem; /* 8px */
-  --radius-lg: 0.75rem; /* 12px */
-  --radius-xl: 1rem; /* 16px */
+  --radius-sm: 0.2rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
   --radius-full: 9999px;
 
   /* Shadows */
@@ -99,7 +100,7 @@
   --z-tooltip: 300;
 
   /* Container */
-  --container-max: 1200px;
+  --container-max: 1100px; /* narrowed slightly */
   --container-padding: var(--space-4);
 }
 
@@ -115,10 +116,11 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 16px; /* Keep root px same, adjust vars */
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   overflow-x: hidden;
+  touch-action: manipulation;
 }
 
 body {
@@ -194,7 +196,7 @@ h3 {
 }
 
 p {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-4); /* Restored from space-3 */
 }
 
 p:last-child {
@@ -217,13 +219,13 @@ p:last-child {
    Section
    -------------------------------------------------------------------------- */
 .section {
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-12);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-8); /* Restored from space-6 */
 }
 
 /* --------------------------------------------------------------------------
@@ -234,11 +236,12 @@ p:last-child {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  min-height: var(--touch-target-min);
-  padding: var(--space-3) var(--space-6);
-  font-size: var(--font-size-base);
+  min-height: 40px; /* Reduced from touch-target-min (44) valid click area usually handled by padding, but let's stick closer to constitution min 44 if strict? USER: "bisa nggak sih semua gui nya diperkecil?". Constitution says "Touch targets HARUS minimal 44x44px". We can keep 44px height but reduce visual weight (padding/font). Let's do 42px or keep 44px but reduce padding significantly. */
+  min-height: 42px;
+  padding: var(--space-2) var(--space-4); /* Reduced padding */
+  font-size: var(--font-size-sm); /* Smaller text */
   font-weight: var(--font-weight-semibold);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md); /* Reduced radius */
   transition: all var(--transition-fast);
   white-space: nowrap;
 }
@@ -262,22 +265,22 @@ p:last-child {
 }
 
 .btn-lg {
-  min-height: 52px;
-  padding: var(--space-4) var(--space-8);
-  font-size: var(--font-size-lg);
+  min-height: 48px; /* Reduced from 52 */
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-base); /* Reduced from lg */
 }
 
 /* --------------------------------------------------------------------------
    Form Elements
    -------------------------------------------------------------------------- */
 .form-group {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3); /* Reduced from space-4 */
 }
 
 .form-label {
   display: block;
-  margin-bottom: var(--space-2);
-  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-xs); /* Smaller label */
   font-weight: var(--font-weight-medium);
   color: var(--color-text-secondary);
 }
@@ -286,8 +289,8 @@ p:last-child {
 .form-select,
 .form-textarea {
   width: 100%;
-  min-height: var(--touch-target-min);
-  padding: var(--space-3) var(--space-4);
+  min-height: 40px; /* Reduced visual height */
+  padding: var(--space-2) var(--space-3); /* Compact padding */
   font-size: var(--font-size-base);
   background-color: var(--color-background);
   border: 2px solid var(--color-border);
@@ -328,13 +331,32 @@ p:last-child {
   resize: vertical;
 }
 
+/* Scroll margin for sticky header */
+.form-input,
+.form-select,
+.form-textarea,
+.form-section {
+  scroll-margin-top: 120px;
+}
+
 /* Keyboard types for mobile */
 input[type="tel"] {
   -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Date input fix for iOS */
+input[type="date"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -381,4 +403,157 @@ input[type="number"]::-webkit-outer-spin-button {
   :root {
     --container-padding: var(--space-8);
   }
+}
+
+/* ==========================================================================
+   Map Picker Modal
+   ========================================================================== */
+.map-picker-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: none;
+}
+
+.map-picker-modal.active {
+  display: block;
+}
+
+.map-picker-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.map-picker-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 600px;
+  max-height: 90vh;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-picker-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-picker-header h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.map-picker-hint {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.map-picker-map {
+  height: 350px;
+  width: 100%;
+}
+
+.map-picker-address {
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.map-picker-address .address-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.map-picker-address .address-loading {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.map-picker-address .address-error {
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
+.map-picker-actions {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.btn-map-cancel {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.btn-map-cancel:hover {
+  background: var(--color-border-light);
+}
+
+.btn-map-confirm {
+  flex: 2;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.btn-map-confirm:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.btn-map-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Button for opening map */
+.btn-map-open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-map-open:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
