@@ -27,7 +27,7 @@ export default defineConfig({
   site: env.PUBLIC_SITE_URL || 'https://santiliving.com',
   output: 'server', // SSR mode - needed for dynamic routes like /pesanan/[token]
   adapter: vercel(),
-  integrations: [react()],
+  integrations: [react(), sitemap()],
   compressHTML: true,
 
   build: {
@@ -46,6 +46,4 @@ export default defineConfig({
       'process.env.NODE_ENV': JSON.stringify(mode),
     }
   },
-
-  integrations: [sitemap()]
 });
