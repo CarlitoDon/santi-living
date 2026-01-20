@@ -198,11 +198,99 @@ export const notifyPaymentStatusWebhook = async (
   res: Response,
 ) => {
   const token = req.params.token as string;
-  const { action } = req.body;
-
-  // Implementation for payment status notification to customer
-  // This can be expanded later
+  const { action, paymentMethod, paymentReference } = req.body;
 
   console.log(`[Webhook] Payment status update for ${token}: ${action}`);
-  res.json({ success: true, processed: false });
+
+  try {
+    // 1. Fetch Order Details
+    const order = await getOrderByToken(token);
+    if (!order) {
+      res.status(404).json({ message: "Order not found" });
+      return;
+    }
+
+    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
+    const customerPhone = order.partner.phone;
+    const orderUrl = `https://santi-living.com/admin/orders/${token}`; // Admin URL
+    const publicOrderUrl = `https://santi-living.com/sewa-kasur/pesanan/${token}`; // Customer URL
+
+    // 2. Handle "confirmed" (Payment verified/QRIS auto-success)
+    if (action === "confirmed") {
+      // --- Notify Admin ---
+      const adminMsg = `✅ *PEMBAYARAN DITERIMA*
+      
+Order: *${order.orderNumber}*
+Customer: ${order.partner.name}
+Total: ${formatCurrency(Number(order.totalAmount))}
+Method: ${paymentMethod || order.paymentMethod}
+Ref: ${paymentReference || "-"}
+
+Silakan proses pesanan ini:
+${orderUrl}`;
+
+      await botClient.bot.sendMessage.mutate({
+        phone: adminPhone,
+        message: adminMsg,
+      });
+
+      // --- Notify Customer ---
+      if (customerPhone) {
+        const customerMsg = `✅ *Pembayaran Berhasil!*
+
+Halo Kak ${order.partner.name}, terima kasih! Pembayaran untuk pesanan *${order.orderNumber}* telah kami terima.
+
+Pesanan Kakak sedang kami proses dan akan segera dikonfirmasi jadwal pengirimannya.
+
+Cek status pesanan:
+${publicOrderUrl}
+
+Terima kasih! 🙏`;
+
+        await botClient.bot.sendMessage.mutate({
+          phone: customerPhone,
+          message: customerMsg,
+        });
+      }
+    }
+    // 3. Handle "claimed" (Manual Transfer Confirmation)
+    else if (action === "claimed") {
+      // --- Notify Admin ---
+      const adminMsg = `💸 *KONFIRMASI PEMBAYARAN BARU*
+      
+Order: *${order.orderNumber}*
+Customer: ${order.partner.name}
+Total: ${formatCurrency(Number(order.totalAmount))}
+Method: Transfer Manual
+
+Segera cek mutasi & verifikasi:
+${orderUrl}`;
+
+      await botClient.bot.sendMessage.mutate({
+        phone: adminPhone,
+        message: adminMsg,
+      });
+
+      // --- Notify Customer (Optional: Acknowledge click) ---
+      if (customerPhone) {
+        const customerMsg = `⏳ *Konfirmasi Pembayaran Diterima*
+
+Halo Kak ${order.partner.name}, kami telah menerima konfirmasi pembayaran Kakak.
+Admin kami akan segera mengecek mutasi bank. Mohon tunggu sebentar ya! 😊
+
+Cek status:
+${publicOrderUrl}`;
+
+        await botClient.bot.sendMessage.mutate({
+          phone: customerPhone,
+          message: customerMsg,
+        });
+      }
+    }
+
+    res.json({ success: true, processed: true });
+  } catch (error) {
+    console.error("[Webhook] Failed to process payment notification:", error);
+    res.status(500).json({ message: "Internal Error" });
+  }
 };
