@@ -15,7 +15,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "echo 'No lint configured'",
+    "lint": "eslint src apps --ext .ts,.tsx,.astro",
     "typecheck": "astro check",
     "test": "echo 'No test configured'"
   },
@@ -37,7 +37,11 @@
   "devDependencies": {
     "@types/leaflet": "^1.9.21",
     "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
     "concurrently": "^9.2.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
     "typescript": "^5.9.3"
   }
 }

@@ -36,6 +36,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
     const transactionStatus = notification.transaction_status;
     const fraudStatus = notification.fraud_status;
 
+    // eslint-disable-next-line no-console
     console.log(
       `[Midtrans Webhook] Processing ${orderId}: ${transactionStatus}`,
     );
@@ -63,7 +64,12 @@ export const midtransWebhook = async (req: Request, res: Response) => {
 
     if (transactionStatus == "capture") {
       if (fraudStatus == "challenge") {
-        // TODO: Handle challenge
+        // Challenge: Payment needs manual review
+        console.warn(
+          `[Midtrans Webhook] Order ${orderId} flagged for review (fraud_status: challenge)`,
+        );
+        // Notify admin for manual review
+        await handleChallenge(orderId, notification);
       } else if (fraudStatus == "accept") {
         // Credit card success
         await handleSuccess(orderId, notification);
@@ -88,7 +94,21 @@ export const midtransWebhook = async (req: Request, res: Response) => {
   }
 };
 
-async function handleSuccess(midtransOrderId: string, notification: any) {
+interface MidtransNotification {
+  order_id: string;
+  status_code: string;
+  gross_amount: string;
+  signature_key: string;
+  transaction_status: string;
+  fraud_status?: string;
+  payment_type?: string;
+  transaction_id?: string;
+}
+
+async function handleSuccess(
+  midtransOrderId: string,
+  notification: MidtransNotification,
+) {
   // Extract base order number (remove suffix if any)
   // Format: RNT-XXXX-TIMESTAMP or just RNT-XXXX
   const parts = midtransOrderId.split("-");
@@ -119,6 +139,7 @@ async function handleSuccess(midtransOrderId: string, notification: any) {
     orderNumber = parts.join("-");
   }
 
+  // eslint-disable-next-line no-console
   console.log(
     `[Midtrans Webhook] Confirming Order: ${orderNumber} (Midtrans ID: ${midtransOrderId})`,
   );
@@ -132,6 +153,7 @@ async function handleSuccess(midtransOrderId: string, notification: any) {
       transactionId: notification.transaction_id,
       amount: parseFloat(notification.gross_amount),
     });
+    // eslint-disable-next-line no-console
     console.log(
       `[Midtrans Webhook] Successfully confirmed order ${orderNumber}`,
     );
@@ -146,6 +168,47 @@ async function handleSuccess(midtransOrderId: string, notification: any) {
 }
 
 async function handleFailure(midtransOrderId: string, reason: string) {
-  console.log(`[Midtrans Webhook] Order ${midtransOrderId} failed: ${reason}`);
+  console.warn(`[Midtrans Webhook] Order ${midtransOrderId} failed: ${reason}`);
   // Optional: Update status to FAILED or CANCELLED in DB
+}
+
+async function handleChallenge(
+  midtransOrderId: string,
+  notification: MidtransNotification,
+) {
+  console.warn(
+    `[Midtrans Webhook] FRAUD CHALLENGE for order ${midtransOrderId}`,
+  );
+
+  try {
+    // Notify admin via WhatsApp
+    const { botClient } = await import("../services/bot-client");
+    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
+
+    const message = `⚠️ *PERHATIAN: PEMBAYARAN PERLU REVIEW*
+
+Order ID: ${midtransOrderId}
+Status: ${notification.transaction_status}
+Fraud Status: ${notification.fraud_status}
+Payment Type: ${notification.payment_type}
+Amount: Rp ${Number(notification.gross_amount).toLocaleString("id-ID")}
+
+Silakan cek dashboard Midtrans untuk approve/deny transaksi ini.`;
+
+    await botClient.bot.sendMessage.mutate({
+      phone: adminPhone,
+      message,
+    });
+
+    // eslint-disable-next-line no-console
+    console.log(
+      `[Midtrans Webhook] Challenge notification sent to admin for order ${midtransOrderId}`,
+    );
+  } catch (e) {
+    console.error(
+      `[Midtrans Webhook] Failed to notify admin about challenge for ${midtransOrderId}`,
+      e,
+    );
+    // Don't throw - we still want to return 200 to Midtrans
+  }
 }
