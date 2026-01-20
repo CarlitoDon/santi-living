@@ -1,11 +1,38 @@
 ---
+import { getImage } from "astro:assets";
 import products from "@/data/products.json";
 import config from "@/data/config.json";
 import { ProductModal } from "@/components/react/ProductModal";
 
-// This is just for type checking in the template if needed,
-// though we access products.mattressPackages directly now.
-// const allProducts = products;
+// Import all product images
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/*.{jpeg,jpg,png,gif,webp}",
+);
+
+// Pre-resolve all product images to optimized URLs
+const allProducts = [
+  ...products.mattressPackages,
+  ...products.mattressOnly,
+  ...products.accessories,
+];
+
+const imageMap: Record<string, string> = {};
+for (const product of allProducts) {
+  const imagePath = `/src/assets${product.image}`;
+  if (images[imagePath]) {
+    const imageModule = await images[imagePath]();
+    const optimized = await getImage({
+      src: imageModule.default,
+      width: 200,
+      height: 200,
+    });
+    imageMap[product.id] = optimized.src;
+  }
+}
+
+const getProductImage = (id: string, fallbackImage: string) => {
+  return imageMap[id] || fallbackImage;
+};
 
 const isLarge = (dimensions?: string) => {
   if (!dimensions) return false;
@@ -45,7 +72,7 @@ const isLarge = (dimensions?: string) => {
                     >
                       <img
                         class="cart-item-thumb"
-                        src={m.image}
+                        src={getProductImage(m.id, m.image)}
                         alt={m.shortName}
                         loading="lazy"
                         data-modal-trigger
@@ -114,7 +141,7 @@ const isLarge = (dimensions?: string) => {
                     >
                       <img
                         class="cart-item-thumb"
-                        src={m.image}
+                        src={getProductImage(m.id, m.image)}
                         alt={m.shortName}
                         loading="lazy"
                         data-modal-trigger
@@ -184,7 +211,7 @@ const isLarge = (dimensions?: string) => {
                     <div class="cart-item" data-id={item.id}>
                       <img
                         class="cart-item-thumb"
-                        src={item.image}
+                        src={getProductImage(item.id, item.image)}
                         alt={item.name}
                         loading="lazy"
                         data-modal-trigger
