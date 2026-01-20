@@ -607,7 +607,10 @@ const formatDate = (dateStr: string) =>
   // Declare Snap global
   declare global {
     interface Window {
-      snap: { pay: (token: string, options: { onSuccess: (result: Record<string, unknown>) => void; onPending: (result: Record<string, unknown>) => void; onError: (result: Record<string, unknown>) => void; onClose: () => void }) => void };
+      snap: {
+        pay: (token: string, options: { onSuccess: (result: Record<string, unknown>) => void; onPending: (result: Record<string, unknown>) => void; onError: (result: Record<string, unknown>) => void; onClose: () => void }) => void;
+        embed: (token: string, options: { embedId: string; onSuccess?: (result: Record<string, unknown>) => void; onPending?: (result: Record<string, unknown>) => void; onError?: (result: Record<string, unknown>) => void; onClose?: () => void }) => void;
+      };
     }
   }
 
@@ -643,7 +646,7 @@ const formatDate = (dateStr: string) =>
                 // Payment success - Notify backend
                 try {
                   const { confirmPayment } = await import("@/services/erp-api");
-                  await confirmPayment(token, "qris", result.order_id);
+                  await confirmPayment(token, "qris", result.order_id as string | undefined);
                   alert("Pembayaran Berhasil!");
                   window.location.reload();
                 } catch (e) {
