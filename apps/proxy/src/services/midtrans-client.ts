@@ -56,8 +56,8 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
     },
     customer_details: input.customer_details,
     item_details: input.item_details,
-    // Enable only QRIS for dynamic QR code (no GoPay deeplink)
-    enabled_payments: ["qris"],
+    // Enable QRIS and GoPay (as fallback if QRIS is disabled on dashboard)
+    enabled_payments: ["qris", "gopay"],
     expiry: {
       unit: "minutes",
       duration: 15, // Short expiry for dynamic QR
