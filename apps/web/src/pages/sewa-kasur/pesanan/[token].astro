@@ -61,6 +61,12 @@ if (token) {
   }
 }
 
+// Only production uses production Midtrans; dev & staging use sandbox
+const isProduction = import.meta.env.MODE === "production";
+const snapUrl = isProduction
+  ? "https://app.midtrans.com/snap/snap.js"
+  : "https://app.sandbox.midtrans.com/snap/snap.js";
+
 // Status badge colors for order status
 const statusColors: Record<string, { bg: string; text: string; label: string }> = {
   DRAFT: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
@@ -110,7 +116,7 @@ const formatDate = (dateStr: string) =>
   <script 
     type="text/javascript" 
     is:inline
-    src="https://app.sandbox.midtrans.com/snap/snap.js"
+    src={snapUrl}
     data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}>
   </script>
 

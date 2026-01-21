@@ -34,10 +34,17 @@ interface CustomerDetails {
   phone: string;
 }
 
+interface ItemDetails {
+  id?: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 interface CreateSnapTokenInput {
   transaction_details: SnapTransactionDetails;
   customer_details: CustomerDetails;
-  item_details?: any[];
+  item_details?: ItemDetails[];
 }
 
 export const createSnapToken = async (input: CreateSnapTokenInput) => {
@@ -49,8 +56,8 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
     },
     customer_details: input.customer_details,
     item_details: input.item_details,
-    // Enable only QRIS and GoPay to force QR/Deeplink flow
-    enabled_payments: ["gopay", "qris"],
+    // Enable only QRIS for dynamic QR code (no GoPay deeplink)
+    enabled_payments: ["qris"],
     expiry: {
       unit: "minutes",
       duration: 15, // Short expiry for dynamic QR
