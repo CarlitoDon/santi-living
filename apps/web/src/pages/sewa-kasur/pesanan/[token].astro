@@ -376,8 +376,8 @@ const formatDate = (dateStr: string) =>
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: var(--space-4);
-    padding: var(--space-3);
+    margin-bottom: var(--space-6);
+    padding: var(--space-2);
     background: var(--color-background);
     border-radius: var(--radius-lg);
   }
@@ -396,14 +396,16 @@ const formatDate = (dateStr: string) =>
   .step-line { flex: 1; height: 2px; background: var(--color-border); margin: 0 var(--space-1); }
 
   .section {
-    margin-bottom: var(--space-4);
+    margin-bottom: 20px;
+    padding-top: 0 !important;
+    padding-bottom: var(--space-3) !important;
   }
 
   .section h3 {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
 
   .items-list {
@@ -490,7 +492,7 @@ const formatDate = (dateStr: string) =>
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    margin-top: var(--space-4);
+    margin-top: var(--space-3);
   }
 
   .btn-whatsapp {
@@ -498,7 +500,7 @@ const formatDate = (dateStr: string) =>
     align-items: center;
     justify-content: center;
     gap: var(--space-2);
-    background: var(--color-whatsapp);
+    background: #25D366;
     color: white;
     padding: var(--space-4);
     border-radius: var(--radius-lg);
@@ -507,7 +509,7 @@ const formatDate = (dateStr: string) =>
     transition: all 0.2s;
   }
 
-  .btn-whatsapp:hover { background: var(--color-whatsapp-dark); transform: translateY(-2px); }
+  .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
 
   .btn-secondary {
     display: block;
@@ -565,29 +567,30 @@ const formatDate = (dateStr: string) =>
 
   .payment-status-info {
     text-align: center;
-    padding: var(--space-6);
+    padding: 16px;
     background: var(--color-background);
     border-radius: var(--radius-md);
   }
 
   .payment-status-info .status-icon {
-    font-size: 3rem;
-    margin-bottom: var(--space-3);
+    font-size: 2.5rem;
+    margin-bottom: 4px;
   }
 
   .payment-status-info p {
-    margin: var(--space-2) 0;
+    margin: 2px 0;
+    font-size: var(--font-size-sm);
   }
 
   .payment-status-info .status-note {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-muted);
   }
 
   .payment-status-info .status-time {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: var(--color-text-muted);
-    margin-top: var(--space-3);
+    margin-top: 8px;
   }
 
   .payment-status-info.success {

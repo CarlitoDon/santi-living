@@ -24,6 +24,8 @@ console.log('[Astro Config] SANTI_PROXY_URL:', env.SANTI_PROXY_URL || 'NOT SET')
 
 import sitemap from '@astrojs/sitemap';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
   site: env.PUBLIC_SITE_URL || 'https://santiliving.com',
@@ -40,6 +42,7 @@ export default defineConfig({
     build: {
       cssMinify: true
     },
+
     define: {
       'process.env.SYNC_ERP_API_URL': JSON.stringify(env.SYNC_ERP_API_URL),
       'process.env.SYNC_ERP_API_SECRET': JSON.stringify(env.SYNC_ERP_API_SECRET),
@@ -49,6 +52,8 @@ export default defineConfig({
       'process.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'process.env.NODE_ENV': JSON.stringify(mode),
-    }
+    },
+
+    plugins: [tailwindcss()]
   },
 });

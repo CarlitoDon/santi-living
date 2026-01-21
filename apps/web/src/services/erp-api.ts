@@ -5,6 +5,10 @@
  * This runs in parallel with bot-service - if ERP fails, customer flow continues.
  */
 
+import type { OrderPayload, ErpOrderResponse } from "@/types/order";
+
+export type { OrderPayload, ErpOrderResponse };
+
 const getErpApiUrl = () => {
   // In development use localhost, in production use env var
   if (
@@ -18,49 +22,6 @@ const getErpApiUrl = () => {
       ?.PUBLIC_PROXY_URL || "http://localhost:3002";
   return PROXY_URL;
 };
-
-export interface OrderPayload {
-  orderId: string;
-  customerName: string;
-  customerWhatsapp: string;
-  deliveryAddress: string;
-  addressFields?: {
-    street?: string;
-    kelurahan?: string;
-    kecamatan?: string;
-    kota?: string;
-    provinsi?: string;
-    zip?: string;
-    lat?: string;
-    lng?: string;
-  };
-  items: Array<{
-    id: string; // Product ID for bundle lookup (e.g., "package-single-standard")
-    name: string;
-    category: string;
-    quantity: number;
-    pricePerDay: number;
-    includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
-  }>;
-  totalPrice: number;
-  orderDate: string;
-  endDate: string;
-  duration: number;
-  deliveryFee: number;
-  paymentMethod: string;
-  notes?: string;
-  volumeDiscountAmount?: number;
-  volumeDiscountLabel?: string;
-}
-
-export interface ErpOrderResponse {
-  id: string;
-  orderNumber: string;
-  publicToken: string;
-  status: string;
-  createdAt: string;
-  orderUrl: string;
-}
 
 /**
  * Send order to ERP sync service
@@ -86,7 +47,9 @@ export async function createOrderInERP(
       items: payload.items,
       totalPrice: payload.totalPrice,
       orderDate: new Date(payload.orderDate).toISOString(),
-      endDate: new Date(payload.endDate).toISOString(),
+      endDate: payload.endDate
+        ? new Date(payload.endDate).toISOString()
+        : undefined,
       duration: payload.duration,
       deliveryFee: payload.deliveryFee,
       paymentMethod: payload.paymentMethod,

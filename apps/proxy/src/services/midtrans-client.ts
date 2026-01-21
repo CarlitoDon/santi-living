@@ -3,10 +3,23 @@ import midtransClient from "midtrans-client";
 const isProduction = process.env.MIDTRANS_IS_PRODUCTION === "true";
 
 // Initialize Snap API client
+const serverKey = process.env.MIDTRANS_SERVER_KEY || "";
+const clientKey = process.env.MIDTRANS_CLIENT_KEY || "";
+
+if (!serverKey) {
+  console.error("❌ [Midtrans Client] MIDTRANS_SERVER_KEY is missing!");
+  process.exit(1); // Fail fast
+}
+
+if (!clientKey) {
+  console.error("❌ [Midtrans Client] MIDTRANS_CLIENT_KEY is missing!");
+  process.exit(1); // Fail fast
+}
+
 const snap = new midtransClient.Snap({
   isProduction,
-  serverKey: process.env.MIDTRANS_SERVER_KEY || "",
-  clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
+  serverKey,
+  clientKey,
 });
 
 interface SnapTransactionDetails {

@@ -2,6 +2,12 @@
 export const prerender = true;
 
 import MainLayout from "@/layouts/MainLayout.astro";
+
+// Only production uses production Midtrans; dev & staging use sandbox
+const isProduction = import.meta.env.MODE === "production";
+const snapUrl = isProduction
+  ? "https://app.midtrans.com/snap/snap.js"
+  : "https://app.sandbox.midtrans.com/snap/snap.js";
 ---
 
 <MainLayout title="Checkout - Sewa Kasur Jogja">
@@ -12,7 +18,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
       <!-- Midtrans Snap.js -->
       <script
         type="text/javascript"
-        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        src={snapUrl}
         data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}
         is:inline></script>
 

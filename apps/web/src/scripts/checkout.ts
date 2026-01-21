@@ -7,30 +7,10 @@ import { getOrder, setPaymentMethod, clearOrder } from "./checkout-session";
 import { submitOrder } from "@/services/api";
 import config from "@/data/config.json";
 import { formatCurrency, formatDate } from "@/lib/format";
+import type { OrderItem, OrderData } from "@/types/order";
 
 // Types
 type PaymentMethod = "bca" | "qris";
-
-interface OrderItem {
-  id: string;
-  name: string;
-  category: string;
-  quantity: number;
-  pricePerDay: number;
-  includes?: string[];
-}
-
-interface OrderData {
-  customerName: string;
-  customerWhatsapp: string;
-  deliveryAddress: string;
-  items: OrderItem[];
-  totalPrice: number;
-  orderDate: string;
-  duration: number;
-  deliveryFee: number;
-  notes?: string;
-}
 
 interface SnapEmbedOptions {
   embedId: string;
@@ -373,16 +353,8 @@ function renderPaymentDetails(method: PaymentMethod): void {
     // Trigger embedded flow
     initSnapPayment();
 
-    // Override Snap callbacks to use the loader
-    // Note: We need to re-bind since initSnapEmbedded defines them internally?
-    // Actually initSnapEmbedded is defined just below in this file? No, it's defined inside renderPaymentDetails?
-    // Wait, initSnapEmbedded call logic is separated.
-    // I should modify the `initSnapEmbedded` logic setup which likely uses the `snap.embed` call.
-    // Let's modify the `window.snap.embed` callbacks directly in this block or where it is defined.
-
-    // Ah, I see `initSnapEmbedded` call in the code I am replacing, but I don't see the DEFINITION of initSnapEmbedded in THIS Chunk.
-    // I need to find where `snap.embed` is called.
-    // It was in lines 500-530 in previous view.
+    // Snap callbacks are handled within initSnapPayment via window.snap.pay
+    // which injects the UI into #snap-container
   }
 
   // Bind copy buttons (only for BCA now, but keeping helper)
@@ -629,7 +601,14 @@ async function initSnapPayment() {
           },
         });
       } else {
-        throw new Error("Midtrans script not loaded.");
+        const error = new Error("Midtrans script not loaded.");
+        console.error(error);
+        if (container) {
+          container.innerHTML = `<div style="text-align:center; padding: 20px;">
+                <p style="color:red; margin-bottom: 10px;">Gagal memuat komponen pembayaran.</p>
+                <button onclick="window.location.reload()" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">Muat Ulang Halaman</button>
+             </div>`;
+        }
       }
     };
 

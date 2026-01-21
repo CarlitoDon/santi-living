@@ -24,11 +24,16 @@ const getServiceUrl = () => {
 // Get API key from environment at RUNTIME
 const getApiKey = () => {
   if (typeof window === "undefined") {
-    return (
-      process.env.PROXY_API_SECRET ||
-      process.env.PROXY_API_KEY ||
-      "santi_secret_auth_token_2026"
-    );
+    const apiKey =
+      process.env.PROXY_API_SECRET || process.env.PROXY_API_KEY || "";
+
+    if (!apiKey && process.env.NODE_ENV === "production") {
+      throw new Error(
+        "[trpc-client] PROXY_API_SECRET environment variable is required in production",
+      );
+    }
+
+    return apiKey;
   }
   return "";
 };
@@ -40,15 +45,6 @@ const getApiKey = () => {
 export function createProxyClient(): TRPCClient<AppRouter> {
   const serviceUrl = getServiceUrl();
   const apiKey = getApiKey();
-
-  // Debug log for troubleshooting
-  if (typeof window === "undefined") {
-    // console.log("[trpc-client] SANTI_PROXY_URL:", serviceUrl);
-    // console.log(
-    //   "[trpc-client] PROXY_API_SECRET set:",
-    //   apiKey !== "santi_secret_auth_token_2026",
-    // );
-  }
 
   return createTRPCClient<AppRouter>({
     links: [

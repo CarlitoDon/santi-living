@@ -54,49 +54,94 @@
 <style>
   .benefits {
     background: var(--color-background);
+    padding: var(--space-4) 0;
+    margin-bottom: var(--space-6);
+    margin-top: var(--space-6);
   }
 
   .benefits-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  /* Center the 5th item on mobile */
+  .benefit-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
   }
 
   .benefit-card {
     background: var(--color-surface);
-    padding: var(--space-5);
-    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
     text-align: center;
     border: 1px solid var(--color-border);
   }
 
   .benefit-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: block;
-    margin-bottom: var(--space-3);
-  }
-
-  .benefit-title {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
     margin-bottom: var(--space-2);
   }
 
-  .benefit-description {
+  .benefit-title {
     font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .benefit-description {
+    font-size: var(--font-size-xs);
     color: var(--color-text-secondary);
     margin: 0;
+    line-height: 1.4;
   }
 
   @media (min-width: 640px) {
+    .benefits {
+      padding: var(--space-6) 0;
+    }
+
     .benefits-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    .benefit-card:last-child {
+      max-width: 100%;
+      grid-column: auto;
+    }
+
+    .benefit-card {
+      padding: var(--space-4);
+    }
+
+    .benefit-icon {
+      font-size: 1.75rem;
+    }
+
+    .benefit-title {
+      font-size: var(--font-size-base);
+    }
+
+    .benefit-description {
+      font-size: var(--font-size-sm);
     }
   }
 
   @media (min-width: 1024px) {
     .benefits-grid {
       grid-template-columns: repeat(5, 1fr);
+    }
+
+    .benefit-card {
+      padding: var(--space-5);
+    }
+
+    .benefit-icon {
+      font-size: 2rem;
     }
   }
 </style>

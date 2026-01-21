@@ -83,14 +83,11 @@ export function getCurrentLocation(): Promise<Coordinates> {
 export async function reverseGeocode(
   coords: Coordinates,
 ): Promise<FormattedAddress> {
-  const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coords.latitude}&lon=${coords.longitude}&zoom=18&addressdetails=1`;
+  // Use local proxy to avoid CORS issues with Nominatim
+  const url = `/api/reverse-geocode?lat=${coords.latitude}&lng=${coords.longitude}`;
 
   try {
-    const response = await fetch(url, {
-      headers: {
-        "Accept-Language": "id",
-      },
-    });
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error("Gagal mendapatkan alamat dari koordinat");

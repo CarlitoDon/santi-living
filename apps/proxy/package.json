@@ -23,6 +23,8 @@
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
     "sync-bundles": "ts-node src/scripts/sync-bundles.ts"
   },
   "dependencies": {
@@ -36,12 +38,15 @@
     "zod": "^4.3.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/midtrans-client": "^1.4.0",
     "@types/node": "^22.0.0",
+    "eslint": "^9.39.2",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.1"
   }
 }

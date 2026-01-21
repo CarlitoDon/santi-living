@@ -1,39 +1,7 @@
+import type { OrderPayload } from "@/types/order";
 import config from "@/data/config.json";
 
-export interface OrderPayload {
-  orderId: string;
-  customerName: string;
-  customerWhatsapp: string;
-  deliveryAddress: string;
-  addressFields?: {
-    street?: string;
-    kelurahan?: string;
-    kecamatan?: string;
-    kota?: string;
-    provinsi?: string;
-    zip?: string;
-    lat?: string;
-    lng?: string;
-  };
-  items: Array<{
-    id: string; // Product ID (e.g., "package-single-standard")
-    name: string;
-    category: "package" | "mattress" | "accessory";
-    quantity: number;
-    pricePerDay: number;
-    includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
-  }>;
-  totalPrice: number;
-  orderDate: string;
-  endDate: string;
-  duration: number;
-  deliveryFee: number;
-  paymentMethod: "qris" | "transfer";
-  notes?: string;
-  volumeDiscountAmount?: number;
-  volumeDiscountLabel?: string;
-  orderUrl?: string; // Link to order tracking page
-}
+export type { OrderPayload };
 
 export async function submitOrder(payload: OrderPayload) {
   // Call local proxy (which adds the API key and forwards to ERP)
@@ -48,7 +16,7 @@ export async function submitOrder(payload: OrderPayload) {
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(
-      errorData.message || errorData.error || "Gagal mengirim pesanan"
+      errorData.message || errorData.error || "Gagal mengirim pesanan",
     );
   }
 
