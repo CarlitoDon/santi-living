@@ -568,6 +568,7 @@ async function initSnapPayment() {
     const triggerSnap = () => {
       if (window.snap) {
         window.snap.pay(snapToken, {
+          gopayMode: "qr", // Force QR code instead of Deeplink
           onSuccess: function (_result: Record<string, unknown>) {
             showStatusMessage(
               "Pembayaran Berhasil!",

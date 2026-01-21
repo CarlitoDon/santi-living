@@ -651,6 +651,7 @@ const formatDate = (dateStr: string) =>
           // 2. Open Snap Popup
           if (window.snap) {
             window.snap.pay(snapToken, {
+              gopayMode: "qr", // Force QR code instead of Deeplink
               onSuccess: async function(result: Record<string, unknown>) {
                 // Payment success - Notify backend
                 try {
