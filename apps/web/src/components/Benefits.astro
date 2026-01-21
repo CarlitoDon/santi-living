@@ -1,0 +1,147 @@
+---
+
+---
+
+<section class="benefits section" id="benefits">
+  <div class="container">
+    <h2 class="section-title">Kenapa sewa kasur di tempat kami?</h2>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">🧼</span>
+        <h3 class="benefit-title">Higienis & Aman</h3>
+        <p class="benefit-description">
+          Tamu tidur nyaman, kamu ga was-was. Kasur sudah dicuci & disterilkan.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-icon">😴</span>
+        <h3 class="benefit-title">Empuk & Layak</h3>
+        <p class="benefit-description">
+          Bukan kasur lipat tipisan. Ini kasur beneran yang bikin tidur nyenyak.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-icon">📅</span>
+        <h3 class="benefit-title">Fleksibel</h3>
+        <p class="benefit-description">
+          Sewa 1 hari boleh, 1 minggu OK, 1 bulan juga bisa. Mau perpanjang?
+          Tinggal WA aja.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-icon">🚚</span>
+        <h3 class="benefit-title">Antar Jemput</h3>
+        <p class="benefit-description">
+          Kamu ga usah keluar rumah. Kami yang anter, kami yang jemput lagi.
+        </p>
+      </div>
+
+      <div class="benefit-card">
+        <span class="benefit-icon">💰</span>
+        <h3 class="benefit-title">Harganya Masuk Akal</h3>
+        <p class="benefit-description">
+          Lebih murah dari beli kasur baru yang ujung-ujungnya numpuk.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    background: var(--color-background);
+    padding: var(--space-4) 0;
+    margin-bottom: var(--space-6);
+    margin-top: var(--space-6);
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  /* Center the 5th item on mobile */
+  .benefit-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  .benefit-card {
+    background: var(--color-surface);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border: 1px solid var(--color-border);
+  }
+
+  .benefit-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .benefit-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .benefit-description {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 640px) {
+    .benefits {
+      padding: var(--space-6) 0;
+    }
+
+    .benefits-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    .benefit-card:last-child {
+      max-width: 100%;
+      grid-column: auto;
+    }
+
+    .benefit-card {
+      padding: var(--space-4);
+    }
+
+    .benefit-icon {
+      font-size: 1.75rem;
+    }
+
+    .benefit-title {
+      font-size: var(--font-size-base);
+    }
+
+    .benefit-description {
+      font-size: var(--font-size-sm);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .benefits-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .benefit-card {
+      padding: var(--space-5);
+    }
+
+    .benefit-icon {
+      font-size: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "globalEnv": [
+    "NODE_ENV",
+    "PROXY_API_SECRET",
+    "SANTI_PROXY_URL",
+    "SYNC_ERP_API_URL",
+    "SYNC_ERP_API_SECRET",
+    "MIDTRANS_CLIENT_KEY",
+    "ERP_SYNC_SERVICE_URL",
+    "BOT_SECRET"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".vercel/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

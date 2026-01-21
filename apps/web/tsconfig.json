@@ -1,0 +1,27 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@data/*": ["src/data/*"],
+      "@assets/*": ["src/assets/*"],
+      "@types/*": ["src/types/*"],
+      "@santi-living/shared": ["../../packages/shared/src"],
+      "@santi-living/shared/*": ["../../packages/shared/src/*"],
+      "@proxy/trpc": ["../proxy/src/trpc"]
+    },
+    "strictNullChecks": true,
+    "noImplicitAny": true
+  },
+  "include": ["src/**/*", "astro.config.mjs"],
+  "exclude": ["node_modules", "dist", ".vercel"],
+  "references": [{ "path": "../proxy" }]
+}

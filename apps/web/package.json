@@ -1,0 +1,44 @@
+{
+  "name": "@santi-living/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lint": "eslint src --ext .ts,.tsx,.astro",
+    "typecheck": "astro check",
+    "typecheck:watch": "astro check --watch"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^9.0.3",
+    "@nanostores/react": "^1.0.0",
+    "@santi-living/shared": "*",
+    "@tailwindcss/vite": "^4.1.18",
+    "@trpc/client": "^11.8.1",
+    "@vercel/speed-insights": "^1.3.1",
+    "astro": "^5.16.6",
+    "leaflet": "^1.9.4",
+    "nanostores": "^1.1.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "superjson": "^2.2.6",
+    "tailwindcss": "^4.1.18",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@santi-living/proxy": "*",
+    "@types/leaflet": "^1.9.21",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
+    "typescript": "^5.9.3"
+  }
+}

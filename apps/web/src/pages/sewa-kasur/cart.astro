@@ -1,0 +1,220 @@
+---
+export const prerender = true;
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import Calculator from "@/components/Calculator.astro";
+---
+
+<MainLayout title="Keranjang - Sewa Kasur Jogja">
+  <main class="cart-page">
+    <div class="container">
+      <div class="cart-header">
+        <a href="/sewa-kasur/checkout" class="btn-back">
+          ← Kembali ke Checkout
+        </a>
+        <h1 class="cart-title">Edit Pesanan</h1>
+      </div>
+
+      <Calculator />
+    </div>
+  </main>
+
+  <script>
+    import { getOrder } from "@/scripts/checkout-session";
+
+    // Wait for calculator to fully initialize before prefilling
+    document.addEventListener("DOMContentLoaded", () => {
+      // Give calculator time to initialize (it caches DOM and binds events)
+      setTimeout(() => {
+        const session = getOrder();
+        if (session) {
+          prefillCalculator(session.order);
+        }
+      }, 300);
+    });
+
+    function prefillCalculator(order: {
+      customerName?: string;
+      customerWhatsapp?: string;
+      duration?: number;
+      orderDate?: string;
+      notes?: string;
+      deliveryAddress?: string;
+      addressFields?: {
+        street?: string;
+        kelurahan?: string;
+        kecamatan?: string;
+        kota?: string;
+        provinsi?: string;
+        zip?: string;
+        lat?: string;
+        lng?: string;
+      };
+      items?: Array<{ name: string; quantity: number }>;
+    }) {
+      // Prefill customer info
+      const customerName = document.getElementById(
+        "customerName",
+      ) as HTMLInputElement;
+      const customerWhatsapp = document.getElementById(
+        "customerWhatsapp",
+      ) as HTMLInputElement;
+      const duration = document.getElementById("duration") as HTMLInputElement;
+      const startDate = document.getElementById(
+        "startDate",
+      ) as HTMLInputElement;
+
+      if (customerName) {
+        customerName.value = order.customerName || "";
+        customerName.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (customerWhatsapp) {
+        customerWhatsapp.value = order.customerWhatsapp || "";
+        customerWhatsapp.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (duration) {
+        duration.value = String(order.duration || 1);
+        duration.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (startDate && order.orderDate) {
+        startDate.value = order.orderDate;
+        startDate.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+
+      // Prefill notes
+      const customerNotes = document.getElementById(
+        "customerNotes",
+      ) as HTMLTextAreaElement;
+      if (customerNotes && order.notes) {
+        customerNotes.value = order.notes;
+        customerNotes.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      // Prefill address using addressFields (if available) or fallback to parsing
+      const addressFields = order.addressFields;
+      if (addressFields) {
+        // Use stored address fields directly
+        const fieldMappings = [
+          { id: "addressStreet", value: addressFields.street },
+          { id: "addressKelurahan", value: addressFields.kelurahan },
+          { id: "addressKecamatan", value: addressFields.kecamatan },
+          { id: "addressKota", value: addressFields.kota },
+          { id: "addressProvinsi", value: addressFields.provinsi },
+          { id: "addressZip", value: addressFields.zip },
+          { id: "addressLat", value: addressFields.lat },
+          { id: "addressLng", value: addressFields.lng },
+        ];
+
+        fieldMappings.forEach(({ id, value }) => {
+          if (value) {
+            const field = document.getElementById(id) as HTMLInputElement;
+            if (field) {
+              field.value = value;
+              field.dispatchEvent(new Event("input", { bubbles: true }));
+            }
+          }
+        });
+      } else if (order.deliveryAddress) {
+        // Fallback: try to parse combined address string
+        const addressParts = order.deliveryAddress
+          .split(",")
+          .map((s: string) => s.trim());
+
+        if (addressParts[0]) {
+          const addressStreet = document.getElementById(
+            "addressStreet",
+          ) as HTMLInputElement;
+          if (addressStreet) {
+            addressStreet.value = addressParts[0];
+            addressStreet.dispatchEvent(new Event("input", { bubbles: true }));
+          }
+        }
+      }
+
+      // Prefill product quantities by simulating button clicks
+      if (order.items && order.items.length > 0) {
+        order.items.forEach((item: { name: string; quantity: number }) => {
+          // Find the plus button for this item using data-name attribute
+          const plusBtn = document.querySelector(
+            `button.btn-plus[data-name="${item.name}"]`,
+          ) as HTMLButtonElement;
+
+          if (plusBtn) {
+            // Click the plus button for each quantity
+            for (let i = 0; i < item.quantity; i++) {
+              plusBtn.click();
+            }
+          } else {
+            // Fallback: try finding by partial name match
+            const allPlusBtns = document.querySelectorAll("button.btn-plus");
+            allPlusBtns.forEach((btn) => {
+              const btnName = (btn as HTMLButtonElement).dataset.name || "";
+              if (btnName.includes(item.name) || item.name.includes(btnName)) {
+                for (let i = 0; i < item.quantity; i++) {
+                  (btn as HTMLButtonElement).click();
+                }
+              }
+            });
+          }
+        });
+      }
+
+      // Final recalculation trigger
+      const durationInput = document.getElementById("duration");
+      if (durationInput) {
+        durationInput.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      // Trigger delivery fee recalculation if we have coordinates
+      if (addressFields?.lat && addressFields?.lng) {
+        const lat = parseFloat(addressFields.lat);
+        const lng = parseFloat(addressFields.lng);
+        if (!isNaN(lat) && !isNaN(lng)) {
+          // Dispatch custom event for calculator to recalculate delivery fee
+          document.dispatchEvent(
+            new CustomEvent("recalculate-delivery-fee", {
+              detail: { lat, lng },
+            }),
+          );
+        }
+      }
+    }
+  </script>
+</MainLayout>
+
+<style>
+  .cart-page {
+    min-height: 100vh;
+    padding: var(--space-6) 0;
+    background: var(--color-background);
+  }
+
+  .cart-header {
+    max-width: 900px;
+    margin: 0 auto var(--space-4);
+    padding: 0 var(--space-4);
+  }
+
+  .btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color 0.2s;
+    min-height: 44px;
+  }
+
+  .btn-back:hover {
+    color: var(--color-primary);
+  }
+
+  .cart-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-top: var(--space-2);
+  }
+</style>

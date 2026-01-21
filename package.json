@@ -1,43 +1,28 @@
 {
   "name": "santi-living",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
-  "description": "Website sewa kasur Jogja - Santi Living",
   "scripts": {
-    "dev": "concurrently --kill-others \"npm:dev:frontend\" \"npm:dev:sync\"",
-    "dev:frontend": "astro dev",
-    "dev:sync": "npm run dev --prefix apps/proxy",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "lint": "echo 'No lint configured'",
-    "typecheck": "astro check",
-    "test": "echo 'No test configured'"
-  },
-  "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@astrojs/react": "^4.4.2",
-    "@astrojs/vercel": "^9.0.3",
-    "@nanostores/react": "^1.0.0",
-    "@trpc/client": "^11.8.1",
-    "@vercel/speed-insights": "^1.3.1",
-    "astro": "^5.16.6",
-    "leaflet": "^1.9.4",
-    "nanostores": "^1.1.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "superjson": "^2.2.6",
-    "zod": "^3.25.76"
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=@santi-living/web",
+    "dev:proxy": "turbo run dev --filter=@santi-living/proxy",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=@santi-living/web",
+    "build:proxy": "turbo run build --filter=@santi-living/proxy",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "typecheck:watch": "concurrently -n \"web,proxy\" -c \"blue,green\" \"cd apps/web && npx astro check --watch\" \"cd apps/proxy && npx tsc --noEmit --watch\"",
+    "test": "turbo run test",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/dist packages/*/dist"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.9.21",
-    "@types/node": "^22.0.0",
     "concurrently": "^9.2.1",
-    "typescript": "^5.9.3"
-  }
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "npm@10.8.2"
 }
