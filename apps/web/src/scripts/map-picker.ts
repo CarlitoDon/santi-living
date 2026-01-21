@@ -43,13 +43,14 @@ export function openMapPicker(options: MapPickerOptions): void {
   setTimeout(() => {
     initMap();
 
-    // Try to get user's current location
+    // Try to get user's current location to center map (but don't set marker)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          // Only center the view - don't set marker here
+          // User must explicitly click on the map to select a location
           map?.setView([latitude, longitude], 16);
-          setMarker(latitude, longitude);
         },
         () => {
           // Use default center if location fails
