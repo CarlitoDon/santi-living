@@ -49,13 +49,10 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const setError = useCallback((field: string, message: string) => {
-    setErrors((prev) => ({ ...prev, [field]: message }));
-  }, []);
-
   const clearError = useCallback((field: string) => {
     setErrors((prev) => {
-      const { [field]: _, ...rest } = prev;
+      const { [field]: _removed, ...rest } = prev;
+      void _removed;
       return rest;
     });
   }, []);
@@ -166,6 +163,7 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
       for (const zone of config.deliveryZones) {
         if (distance <= zone.maxDistance) {
           fee = zone.price;
+
           break;
         }
       }
@@ -310,7 +308,7 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
       }
 
       // Redirect to checkout
-      window.location.href = "/sewa-kasur/checkout";
+      window.location.href = "/checkout";
     } catch (error) {
       console.error("Failed to submit order:", error);
       alert(

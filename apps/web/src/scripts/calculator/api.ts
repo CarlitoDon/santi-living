@@ -179,7 +179,7 @@ export async function handleWhatsAppClick(): Promise<void> {
 
     // Redirect to checkout
     setTimeout(() => {
-      window.location.href = "/sewa-kasur/checkout";
+      window.location.href = "/checkout";
     }, 500);
   } catch (err: unknown) {
     const error = err as Error;

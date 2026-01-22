@@ -70,10 +70,14 @@ export function ResultPanel({
         </div>
 
         {/* Biaya Antar */}
-        <div className="calc-result-item">
-          <span className="calc-result-label">Biaya Antar</span>
-          <span className="calc-result-value">-</span>
-        </div>
+        {state.deliveryFee > 0 && (
+          <div className="calc-result-item">
+            <span className="calc-result-label">Biaya Antar</span>
+            <span className="calc-result-value">
+              Rp {formatCurrency(state.deliveryFee)}
+            </span>
+          </div>
+        )}
 
         {/* Volume Discount */}
         {state.volumeDiscountAmount > 0 && (

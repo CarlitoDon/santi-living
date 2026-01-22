@@ -47,7 +47,7 @@ export function AddressSection({
   const handleLocationClick = async () => {
     setIsLocating(true);
     try {
-      await onLocationClick();
+      onLocationClick();
     } finally {
       setIsLocating(false);
     }

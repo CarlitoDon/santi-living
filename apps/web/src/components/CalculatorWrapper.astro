@@ -58,11 +58,30 @@ const productsData = {
 
 <script>
   import { openMapPicker } from "@/scripts/map-picker";
+  import config from "@/data/config.json";
 
   // Initialize map picker when open event is dispatched
   window.addEventListener("open-map-picker", () => {
     openMapPicker({
       onConfirm: (coords, address) => {
+        // DEBUG: Log coordinates and calculate distance
+        console.log("📍 Map Picker Coords:", coords);
+        console.log("🏪 Store Location:", config.storeLocation);
+
+        // Calculate distance for debugging
+        const R = 6371;
+        const dLat = ((config.storeLocation.lat - coords.lat) * Math.PI) / 180;
+        const dLon = ((config.storeLocation.lng - coords.lng) * Math.PI) / 180;
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos((coords.lat * Math.PI) / 180) *
+            Math.cos((config.storeLocation.lat * Math.PI) / 180) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = R * c;
+        console.log("📏 Calculated Distance (km):", distance);
+
         // Dispatch event back to React component with location data
         window.dispatchEvent(
           new CustomEvent("location-selected", {

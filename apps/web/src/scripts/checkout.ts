@@ -43,7 +43,7 @@ export function initCheckout(): void {
 
   if (!session) {
     // No order data - redirect to calculator
-    window.location.href = "/sewa-kasur/#calculator";
+    window.location.href = "/#calculator";
     return;
   }
 
@@ -172,7 +172,7 @@ function renderSummary(order: OrderData): void {
         </div>
       </div>
 
-      <a href="/sewa-kasur/cart" class="btn-edit-order">
+      <a href="/cart" class="btn-edit-order">
         ✏️ Edit Pesanan
       </a>
     </div>
@@ -439,6 +439,7 @@ declare global {
       pay: (
         token: string,
         options: {
+          gopayMode?: "qr" | "deeplink";
           onSuccess: (result: Record<string, unknown>) => void;
           onPending: (result: Record<string, unknown>) => void;
           onError: (result: Record<string, unknown>) => void;
@@ -528,7 +529,7 @@ async function initSnapPayment() {
           <p style="color: #64748b; margin-bottom: 20px;">${message}</p>
           ${
             showButton
-              ? `<a href="/sewa-kasur/pesanan/${publicToken}" class="btn-primary" style="
+              ? `<a href="/pesanan/${publicToken}" class="btn-primary" style="
                   text-decoration: none; 
                   padding: 10px 20px; 
                   background: #2563eb; 
@@ -576,7 +577,7 @@ async function initSnapPayment() {
               "✅",
             );
             setTimeout(() => {
-              window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+              window.location.href = `/pesanan/${publicToken}`;
             }, 1500);
           },
           onPending: function (_result: Record<string, unknown>) {
@@ -632,7 +633,7 @@ async function confirmPayment(): Promise<void> {
   if (state.selectedMethod === "qris") {
     const publicToken = sessionStorage.getItem("erpPublicToken");
     if (publicToken) {
-      window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+      window.location.href = `/pesanan/${publicToken}`;
       return;
     }
   }
@@ -659,7 +660,7 @@ async function confirmPayment(): Promise<void> {
       await apiConfirm(publicToken, method);
       orderUrl =
         sessionStorage.getItem("erpOrderUrl") ||
-        `/sewa-kasur/pesanan/${publicToken}`;
+        `/pesanan/${publicToken}`;
     } else {
       const payload = {
         ...order,
@@ -673,7 +674,7 @@ async function confirmPayment(): Promise<void> {
     if (orderUrl) {
       window.location.href = orderUrl;
     } else {
-      window.location.href = "/sewa-kasur/thank-you";
+      window.location.href = "/thank-you";
     }
   } catch (error) {
     console.error("Payment confirmation failed:", error);
