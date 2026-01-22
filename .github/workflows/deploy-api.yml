@@ -25,8 +25,9 @@ jobs:
           npm ci
           npm run build
 
-      - name: Deploy to Railway
+      - name: Skip Railway deploy (handled by Railway)
         working-directory: apps/proxy
-        run: railway up --service proxy
+        run: |
+          echo "Skipping 'railway up --service proxy' — Railway auto-deploy handles this."
         env:
           RAILWAY_TOKEN: ${{ github.ref == 'refs/heads/dev' && secrets.RAILWAY_TOKEN_STAGING || secrets.RAILWAY_TOKEN }}

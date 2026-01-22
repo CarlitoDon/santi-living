@@ -9,11 +9,7 @@
       "group": {
         "kind": "build",
         "isDefault": true
-      },
-      "presentation": {
-        "group": "dev"
-      },
-      "isBackground": true
+      }
     },
     {
       "label": "Turbo: Dev Web",
@@ -22,8 +18,7 @@
       "problemMatcher": [],
       "presentation": {
         "group": "frontend"
-      },
-      "isBackground": true
+      }
     },
     {
       "label": "Turbo: Dev Proxy",
@@ -32,8 +27,7 @@
       "problemMatcher": [],
       "presentation": {
         "group": "backend"
-      },
-      "isBackground": true
+      }
     },
     {
       "label": "Turbo: Build All",
@@ -74,8 +68,7 @@
       },
       "presentation": {
         "group": "build"
-      },
-      "isBackground": true
+      }
     }
   ]
 }
