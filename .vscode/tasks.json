@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Turbo: Dev All",
+      "label": "Turbo: Dev All - SL",
       "type": "npm",
       "script": "dev",
       "problemMatcher": [],
@@ -11,8 +11,7 @@
         "isDefault": true
       },
       "presentation": {
-        "group": "dev",
-        "panel": "dedicated"
+        "group": "dev"
       },
       "isBackground": true
     },
@@ -22,8 +21,7 @@
       "script": "dev:web",
       "problemMatcher": [],
       "presentation": {
-        "group": "frontend",
-        "panel": "dedicated"
+        "group": "frontend"
       },
       "isBackground": true
     },
@@ -33,8 +31,7 @@
       "script": "dev:proxy",
       "problemMatcher": [],
       "presentation": {
-        "group": "backend",
-        "panel": "dedicated"
+        "group": "backend"
       },
       "isBackground": true
     },
@@ -76,8 +73,7 @@
         "isDefault": true
       },
       "presentation": {
-        "group": "build",
-        "panel": "dedicated"
+        "group": "build"
       },
       "isBackground": true
     }

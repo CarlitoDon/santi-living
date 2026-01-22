@@ -63,7 +63,7 @@ export interface PartnerResponse {
 
 export interface ConfirmPaymentInput {
   token: string;
-  paymentMethod: "qris" | "transfer";
+  paymentMethod: "qris" | "transfer" | "gopay";
   reference?: string;
 }
 

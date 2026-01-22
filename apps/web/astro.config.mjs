@@ -54,6 +54,10 @@ export default defineConfig({
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
 
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+
+    server: {
+      allowedHosts: ['.ngrok-free.dev', '.ngrok.io']
+    }
   },
 });

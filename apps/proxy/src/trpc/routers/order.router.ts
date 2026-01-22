@@ -14,7 +14,10 @@ import {
   confirmPayment as confirmPaymentErp,
   deleteRentalOrder,
 } from "../../services/erp-client";
-import { createSnapToken } from "../../services/midtrans-client";
+import {
+  createSnapToken,
+  createQrisCharge,
+} from "../../services/midtrans-client";
 import {
   sendOrderConfirmation,
   notifyAdminNewOrder,
@@ -225,7 +228,7 @@ export const orderRouter = router({
           .regex(
             /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
           ),
-        paymentMethod: z.enum(["qris", "transfer"]),
+        paymentMethod: z.enum(["qris", "transfer", "gopay"]),
         reference: z.string().optional(),
       }),
     )
@@ -234,6 +237,30 @@ export const orderRouter = router({
         token: input.token,
         paymentMethod: input.paymentMethod,
         reference: input.reference,
+      });
+    }),
+
+  /**
+   * Update payment method on existing order
+   * Called when customer selects payment method at checkout
+   */
+  updatePaymentMethod: protectedProcedure
+    .input(
+      z.object({
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+        paymentMethod: z.enum(["qris", "transfer", "gopay"]),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const { updatePaymentMethod: updatePaymentMethodErp } =
+        await import("../../services/erp-client");
+      return updatePaymentMethodErp({
+        token: input.token,
+        paymentMethod: input.paymentMethod,
       });
     }),
 
@@ -248,6 +275,8 @@ export const orderRouter = router({
           .regex(
             /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
           ),
+        // Accept paymentMethod directly from frontend to avoid stale DB data
+        paymentMethod: z.enum(["qris", "gopay", "transfer"]).optional(),
       }),
     )
     .mutation(async ({ input }) => {
@@ -260,6 +289,12 @@ export const orderRouter = router({
           message: "Order not found",
         });
       }
+
+      // DEBUG: Log order paymentMethod
+      console.log(
+        "[createPaymentToken] Order paymentMethod:",
+        order.paymentMethod,
+      );
 
       // 2. Generate unique order ID for Midtrans (handling retries)
       // Append timestamp to ensure uniqueness if user retries/regenerates QR
@@ -295,7 +330,19 @@ export const orderRouter = router({
         });
       }
 
-      // 4. Create Snap Token
+      // 4. Create Snap Token with correct payment method
+      // Prefer input.paymentMethod (direct from frontend) over order.paymentMethod (potentially stale)
+      const effectivePaymentMethod = input.paymentMethod || order.paymentMethod;
+      console.log(
+        "[createPaymentToken] Using paymentMethod:",
+        effectivePaymentMethod,
+        "(input:",
+        input.paymentMethod,
+        ", order:",
+        order.paymentMethod,
+        ")",
+      );
+
       const token = await createSnapToken({
         transaction_details: {
           order_id: uniqueOrderId,
@@ -308,11 +355,70 @@ export const orderRouter = router({
           phone: order.partner.phone,
         },
         item_details: itemDetails,
+        paymentMethod: effectivePaymentMethod as
+          | "qris"
+          | "gopay"
+          | "transfer"
+          | undefined,
       });
+
+      const isProduction = process.env.MIDTRANS_IS_PRODUCTION === "true";
+      const snapBaseUrl = isProduction
+        ? "https://app.midtrans.com/snap/v2/vtweb"
+        : "https://app.sandbox.midtrans.com/snap/v2/vtweb";
 
       return {
         token,
-        redirect_url: `https://app.sandbox.midtrans.com/snap/v2/vtweb/${token}`,
+        redirect_url: `${snapBaseUrl}/${token}`,
+      };
+    }),
+
+  /**
+   * Create QRIS payment using Core API (forces QR display on mobile)
+   */
+  createQrisPayment: protectedProcedure
+    .input(
+      z.object({
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      // 1. Get order details
+      const order = await getOrderByToken(input.token);
+
+      if (!order) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Order not found",
+        });
+      }
+
+      // 2. Create unique order ID for Midtrans
+      const uniqueOrderId = `${order.orderNumber}-${Math.floor(Date.now() / 1000)}`;
+
+      console.log(
+        "[createQrisPayment] Creating QRIS for order:",
+        uniqueOrderId,
+      );
+
+      // 3. Create QRIS charge using Core API
+      const qrisResult = await createQrisCharge({
+        order_id: uniqueOrderId,
+        gross_amount: Math.round(order.totalAmount),
+      });
+
+      return {
+        qrCodeUrl: qrisResult.qrCodeUrl,
+        qrString: qrisResult.qrString,
+        transactionId: qrisResult.transactionId,
+        orderId: qrisResult.orderId,
+        expiryTime: qrisResult.expiryTime,
+        orderNumber: order.orderNumber,
+        totalAmount: order.totalAmount,
       };
     }),
 });

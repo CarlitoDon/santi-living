@@ -2,16 +2,15 @@ import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
 
 /**
- * Create Payment Token API
+ * Update Payment Method API
  *
- * Forwards request to erp-service to generate Midtrans Snap Token.
+ * Updates the payment method on an existing order.
+ * Called when customer selects payment method at checkout.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
     const { token, paymentMethod } = body;
-
-    // console.log(`[create-payment-token] Requesting token for order: ${token}, method: ${paymentMethod}`);
 
     if (!token) {
       return new Response(
@@ -23,14 +22,25 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
+    if (
+      !paymentMethod ||
+      !["qris", "transfer", "gopay"].includes(paymentMethod)
+    ) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Valid payment method is required (qris, transfer, gopay)",
+        }),
+        { status: 400 },
+      );
+    }
+
     const client = createProxyClient();
 
-    const result = await client.order.createPaymentToken.mutate({
+    const result = await client.order.updatePaymentMethod.mutate({
       token,
-      paymentMethod, // Pass directly from frontend to ensure correct method
+      paymentMethod,
     });
-
-    // console.log("[create-payment-token] Success:", result);
 
     return new Response(
       JSON.stringify({
@@ -43,15 +53,17 @@ export const POST: APIRoute = async ({ request }) => {
       },
     );
   } catch (error: unknown) {
-    console.error("[create-payment-token] Error:", error);
+    console.error("[update-payment-method] Error:", error);
 
     const message =
-      error instanceof Error ? error.message : "Failed to create payment token";
+      error instanceof Error
+        ? error.message
+        : "Failed to update payment method";
 
     return new Response(
       JSON.stringify({
         success: false,
-        error: "Failed to create payment token",
+        error: "Failed to update payment method",
         message,
       }),
       { status: 500 },

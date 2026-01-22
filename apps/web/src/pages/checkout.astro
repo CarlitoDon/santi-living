@@ -2,6 +2,10 @@
 export const prerender = true;
 
 import MainLayout from "@/layouts/MainLayout.astro";
+import { Image } from "astro:assets";
+import logoQris from "@/assets/images/logo-qris.svg";
+import logoGopay from "@/assets/images/logo-gopay.svg";
+import logoBca from "@/assets/images/logo-bca.png";
 
 // Only production uses production Midtrans; dev & staging use sandbox
 const isProduction = import.meta.env.MODE === "production";
@@ -44,7 +48,7 @@ const snapUrl = isProduction
                 class="payment-option-btn"
                 data-method="bca"
               >
-                <span class="option-icon">🏦</span>
+                <Image src={logoBca} alt="BCA" class="option-logo" />
                 <span class="option-label">Transfer BCA</span>
                 <span class="option-desc">Manual transfer</span>
               </button>
@@ -52,11 +56,21 @@ const snapUrl = isProduction
               <button
                 type="button"
                 class="payment-option-btn"
+                data-method="gopay"
+              >
+                <Image src={logoGopay} alt="GoPay" class="option-logo" />
+                <span class="option-label">GoPay</span>
+                <span class="option-desc">Scan QR / Deeplink</span>
+              </button>
+
+              <button
+                type="button"
+                class="payment-option-btn"
                 data-method="qris"
               >
-                <span class="option-icon">📱</span>
+                <Image src={logoQris} alt="QRIS" class="option-logo" />
                 <span class="option-label">QRIS</span>
-                <span class="option-desc">Scan & bayar</span>
+                <span class="option-desc">Semua e-wallet</span>
               </button>
             </div>
           </div>
@@ -238,6 +252,12 @@ const snapUrl = isProduction
 
   .option-icon {
     font-size: var(--font-size-2xl);
+  }
+
+  .option-logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
   }
 
   .option-label {

@@ -22,6 +22,13 @@ const snap = new midtransClient.Snap({
   clientKey,
 });
 
+// Initialize Core API client for direct QRIS charge
+const coreApi = new midtransClient.CoreApi({
+  isProduction,
+  serverKey,
+  clientKey,
+});
+
 interface SnapTransactionDetails {
   order_id: string;
   gross_amount: number;
@@ -45,30 +52,133 @@ interface CreateSnapTokenInput {
   transaction_details: SnapTransactionDetails;
   customer_details: CustomerDetails;
   item_details?: ItemDetails[];
+  paymentMethod?: "qris" | "gopay" | "transfer";
 }
 
 export const createSnapToken = async (input: CreateSnapTokenInput) => {
-  // Configured specifically for Dynamic QRIS (GoPay/QRIS)
-  const parameter = {
+  // Determine enabled payments based on payment method from order
+  let enabledPayments: string[];
+
+  if (input.paymentMethod === "gopay") {
+    enabledPayments = ["gopay"]; // GoPay - shows deeplink on mobile, QR on desktop
+  } else if (input.paymentMethod === "qris") {
+    enabledPayments = ["qris"]; // QRIS - always shows QR code (any e-wallet can scan)
+  } else {
+    // Default: both options for transfer or unknown
+    enabledPayments = ["qris", "gopay", "bank_transfer"];
+  }
+
+  console.log("[Midtrans] Creating token with:", {
+    enabledPayments,
+    paymentMethod: input.paymentMethod,
+  });
+
+  const parameter: Record<string, unknown> = {
     transaction_details: input.transaction_details,
     credit_card: {
       secure: true,
     },
     customer_details: input.customer_details,
     item_details: input.item_details,
-    // Enable QRIS and GoPay (as fallback if QRIS is disabled on dashboard)
-    enabled_payments: ["qris", "gopay"],
+    enabled_payments: enabledPayments,
     expiry: {
       unit: "minutes",
-      duration: 15, // Short expiry for dynamic QR
+      duration: 15,
     },
   };
 
   try {
-    const transaction = await snap.createTransaction(parameter);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const transaction = await snap.createTransaction(parameter as any);
     return transaction.token;
   } catch (error) {
     console.error("[Midtrans] Failed to create Snap token:", error);
+    throw error;
+  }
+};
+
+// QRIS Core API Types
+interface CreateQrisChargeInput {
+  order_id: string;
+  gross_amount: number;
+  customer_details?: {
+    first_name: string;
+    last_name?: string;
+    email?: string;
+    phone?: string;
+  };
+}
+
+interface QrisChargeResponse {
+  status_code: string;
+  status_message: string;
+  transaction_id: string;
+  order_id: string;
+  gross_amount: string;
+  payment_type: string;
+  transaction_status: string;
+  qr_string: string;
+  acquirer: string;
+  actions: Array<{
+    name: string;
+    method: string;
+    url: string;
+  }>;
+}
+
+/**
+ * Create QRIS charge using Core API
+ * This bypasses Snap to force QR display on mobile
+ */
+export const createQrisCharge = async (
+  input: CreateQrisChargeInput,
+): Promise<{
+  qrCodeUrl: string;
+  qrString: string;
+  transactionId: string;
+  orderId: string;
+  expiryTime: string;
+}> => {
+  const parameter = {
+    payment_type: "qris",
+    transaction_details: {
+      order_id: input.order_id,
+      gross_amount: input.gross_amount,
+    },
+    qris: {
+      acquirer: "gopay", // Use GoPay as acquirer for QRIS
+    },
+    custom_expiry: {
+      expiry_duration: 15,
+      unit: "minute",
+    },
+  };
+
+  console.log("[Midtrans Core API] Creating QRIS charge:", parameter);
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const response = (await coreApi.charge(parameter)) as QrisChargeResponse;
+    console.log("[Midtrans Core API] QRIS charge response:", response);
+
+    // Find the QR code URL from actions
+    const qrAction = response.actions?.find(
+      (a) => a.name === "generate-qr-code",
+    );
+    const qrCodeUrl = qrAction?.url || "";
+
+    // Calculate expiry time (15 minutes from now)
+    const expiryTime = new Date(Date.now() + 15 * 60 * 1000).toISOString();
+
+    return {
+      qrCodeUrl,
+      qrString: response.qr_string,
+      transactionId: response.transaction_id,
+      orderId: response.order_id,
+      expiryTime,
+    };
+  } catch (error) {
+    console.error("[Midtrans Core API] Failed to create QRIS charge:", error);
     throw error;
   }
 };
