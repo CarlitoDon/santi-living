@@ -61,8 +61,9 @@ if (token) {
   }
 }
 
-// Only production uses production Midtrans; dev & staging use sandbox
-const isProduction = import.meta.env.MODE === "production";
+// Use explicit env var to determine Midtrans environment
+// Vercel always uses MODE=production for all deployments, so we need explicit config
+const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
 const snapUrl = isProduction
   ? "https://app.midtrans.com/snap/snap.js"
   : "https://app.sandbox.midtrans.com/snap/snap.js";
