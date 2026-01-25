@@ -632,7 +632,10 @@ async function initSnapPayment() {
         if (window.snap.hide) {
           window.snap.hide();
         }
-        window.snap.embed(snapToken, {
+        // Logic to determine UI Mode
+        const embedOptions: SnapEmbedOptions & {
+          uiMode?: "qr" | "deeplink" | "auto";
+        } = {
           embedId: "snap-container",
           onSuccess: function (_result: Record<string, unknown>) {
             showStatusMessage(
@@ -666,7 +669,14 @@ async function initSnapPayment() {
               true, // Allow retry
             );
           },
-        });
+        };
+
+        // If QRIS selected, force QR mode (GoPay will show QR)
+        if (paymentMethod === "qris") {
+          embedOptions.uiMode = "qr";
+        }
+
+        window.snap.embed(snapToken, embedOptions);
       } else {
         console.error("Snap JS not loaded");
         container.innerHTML =
