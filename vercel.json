@@ -1,0 +1,7 @@
+{
+  "framework": "astro",
+  "installCommand": "npm install",
+  "buildCommand": "npx turbo run build --filter=@santi-living/web",
+  "outputDirectory": "apps/web/dist",
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet packages turbo.json apps/web"
+}
