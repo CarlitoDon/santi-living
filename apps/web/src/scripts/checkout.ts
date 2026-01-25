@@ -633,9 +633,7 @@ async function initSnapPayment() {
           window.snap.hide();
         }
         // Logic to determine UI Mode
-        const embedOptions: SnapEmbedOptions & {
-          uiMode?: "qr" | "deeplink" | "auto";
-        } = {
+        const embedOptions: SnapEmbedOptions = {
           embedId: "snap-container",
           onSuccess: function (_result: Record<string, unknown>) {
             showStatusMessage(
@@ -670,11 +668,6 @@ async function initSnapPayment() {
             );
           },
         };
-
-        // If QRIS selected, force QR mode (GoPay will show QR)
-        if (paymentMethod === "qris") {
-          embedOptions.uiMode = "qr";
-        }
 
         window.snap.embed(snapToken, embedOptions);
       } else {

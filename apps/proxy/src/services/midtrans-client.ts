@@ -62,9 +62,7 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
   if (input.paymentMethod === "gopay") {
     enabledPayments = ["gopay"]; // GoPay - shows deeplink on mobile, QR on desktop
   } else if (input.paymentMethod === "qris") {
-    // QRIS Fallback: Use GoPay but force QR view on frontend
-    // This solves "No payment channels available" if generic QRIS is disabled
-    enabledPayments = ["gopay"];
+    enabledPayments = ["other_qris"]; // Explicitly requested by user
   } else {
     // Default: both options for transfer or unknown
     enabledPayments = ["qris", "gopay", "bank_transfer"];
