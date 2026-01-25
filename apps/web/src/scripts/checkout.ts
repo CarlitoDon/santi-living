@@ -518,9 +518,8 @@ async function initSnapPayment() {
   `;
 
   try {
-    // 1. Get public token - order should already exist from calculator
+    // 1. Get public token
     const publicToken = sessionStorage.getItem("erpPublicToken");
-
     if (!publicToken) {
       throw new Error(
         "Pesanan tidak ditemukan. Silakan kembali ke halaman utama.",
@@ -543,15 +542,12 @@ async function initSnapPayment() {
     });
 
     const updateData = await updateRes.json();
-    console.log("[Checkout] updatePaymentMethod response:", updateData);
-
     if (!updateRes.ok) {
       throw new Error(
         updateData.error || "Gagal mengupdate metode pembayaran.",
       );
     }
 
-    // Clear loading
     container.innerHTML = "";
 
     // Helper for Status Messages
@@ -617,11 +613,10 @@ async function initSnapPayment() {
       }
     };
 
-    // ===== UNIFIED FLOW: Both QRIS and GoPay use Snap =====
-    // Reason: QRIS Core API requires manual activation by Midtrans.
-    // Fallback to Snap (Popup) which allows QRIS by default.
-
-    console.log(`[Checkout] Using Snap flow for ${paymentMethod}`);
+    // 3. Create Snap Token (Unified Flow)
+    // Both GoPay and QRIS use Snap.
+    // We pass 'paymentMethod' so backend can set enabled_payments accordingly.
+    console.log(`[Checkout] Creating Snap token for ${paymentMethod}...`);
 
     const tokenRes = await fetch("/api/create-payment-token", {
       method: "POST",
@@ -673,15 +668,13 @@ async function initSnapPayment() {
           },
         });
       } else {
-        console.error("Snap JS not loaded!");
+        console.error("Snap JS not loaded");
         container.innerHTML =
-          '<p style="color:red;">Gagal memuat sistem pembayaran. Silakan refresh halaman.</p>';
+          '<p style="color:red; text-align:center;">Gagal memuat sistem pembayaran.</p>';
       }
     };
 
-      // Initial Trigger for Snap
-      triggerSnap();
-    } // End if paymentMethod type check (now merged)
+    triggerSnap();
   } catch (err: unknown) {
     console.error("Snap Init Failed:", err);
     if (container) {
