@@ -1,54 +1,66 @@
-# AI Agent Instructions for santi-living
+# AI Agent Instructions for Santi Living
 
 ## Architecture Overview
 
-`santi-living` is a hybrid monorepo containing a main Astro website and two support microservices.
+**Santi Living** is a monorepo managed by **Turborepo** containing:
 
-**Structure:**
-
-- **Root (Frontend)**: Astro + React + Nanostores. Located in `src/`. Serves the landing page and rental interface.
-- **Bot Service**: `apps/bot-service`. Node.js + `whatsapp-web.js`. Handles WhatsApp automation.
-- **ERP Service**: `apps/erp-service`. Node.js + Express + Midtrans. Acts as a bridge between the frontend and the external Sync ERP.
+- **apps/web**: Frontend application built with **Astro** + **React** islands.
+- **apps/proxy**: Backend service built with **Node.js** + **Express** + **tRPC** (bridge to Sync ERP).
+- **Core Principles**: Mobile-First, WhatsApp-First (evolving to Midtrans payment), Zero Cognitive Load.
 
 ## Key Patterns
 
-### 1. Frontend (Astro + React)
+### Frontend (`apps/web`)
 
-- **Hybrid Rendering**: Uses Astro for static content (SEO) and React for interactive islands (Booking Form, Calculator).
-- **State Management**: Uses `nanostores` for shared state between Astro and React components.
-- **Styling**: Tailwind CSS (globally applied).
-- **API**: `src/services/` contains typed wrappers for API calls (e.g., `erp-api.ts`).
+- **Framework**: Astro 5.x. Default to `.astro` files for static content. Use React (`.tsx`) **only** for interactive islands (e.g., Checkout, Calculator).
+- **State Management**: Use **Nanostores** (`@nanostores/react`) for sharing state between islands or React components. Avoid Context API if possible.
+- **Styling**: **Tailwind CSS v4**. Use utility classes.
+- **Checkout Flow**: The checkout logic is centralized in specific islands to handle state.
+- **Midtrans Snap**:
+  - Use `window.snap.embed` for unified payment UI.
+  - **Critical**: For QRIS, use `enabled_payments: ["other_qris"]` to ensure correct rendering (see `memory.md`).
 
-### 2. Services
+### Backend (`apps/proxy`)
 
-- **Bot Service**: Standalone Express app. Uses `whatsapp-web.js` for "Puppeteer-like" WhatsApp automation.
-- **ERP Service**: Proxy/Bridge. Validates requests from Frontend -> Forwards to Sync ERP -> Handle Payments (Midtrans).
-
-### 3. Development Flow
-
-- **Concurrent Start**: `npm run dev` in root starts ALL services (Frontend + Bot + Sync Service) via `concurrently`.
-- **Ports**:
-  - Frontend: `4321` (default Astro) or `3000`
-  - Bot Service: Check `apps/bot-service/src/index.ts`
-  - ERP Service: Check `apps/erp-service/src/index.ts`
+- **Framework**: Express with TypeScript.
+- **Communication**: Exposes **tRPC** routers for the frontend to consume.
+- **Midtrans**: Handles token generation and webhook processing.
+- **Validation**: Use **Zod** for all input/output validation.
 
 ## Development Workflow
 
-- **Start All**: `npm run dev` (Recommended)
-- **Start Bot Only**: `npm run dev:bot`
-- **Start Sync Only**: `npm run dev:sync`
-- **Build**: `npm run build` (Builds Astro only)
+### Commands
+
+| Command             | Action          | Description                              |
+| :------------------ | :-------------- | :--------------------------------------- |
+| `npm run dev`       | **Start All**   | Runs `turbo run dev` (Web + Proxy)       |
+| `npm run build`     | **Build All**   | Runs `turbo run build`                   |
+| `npm run typecheck` | **Check Types** | Runs `tsc` and `astro check` across apps |
+| `npm run lint`      | **Linting**     | Runs ESLint                              |
+
+### Debugging
+
+- **Proxy Logs**: Check terminal output for `[Midtrans]` or `[Proxy]` tagged logs.
+- **Web Logs**: Browser console for Snap/Frontend issues.
 
 ## Do's and Don'ts
 
-- **DO** use `npm run dev` to ensure all inter-dependent services are running.
-- **DO** check `apps/*/package.json` for service-specific dependencies.
-- **DON'T** put business logic in Astro components if it belongs in the `erp-service` (keep frontend dumb).
-- **DON'T** modify `whatsapp-web.js` internals unless necessary; wrap logic in service handlers.
+### ✅ Do
+
+- **Mobile First**: Always design/code for **375px viewport** first.
+- **Touch Targets**: Ensure buttons/inputs are at least **44x44px**.
+- **Type Safety**: strict TypeScript usage. No `any`. Share types via `packages/*` or tRPC router exports.
+- **Dependencies**: Use `npm install` at root (workspaces logic).
+
+### ❌ Don't
+
+- **Don't hardcode URLs**: Use environment variables (e.g., `PUBLIC_API_URL`).
+- **Don't mix styling**: Stick to Tailwind. Avoid CSS modules unless necessary for complex animations.
+- **Don't over-engineer**: Santi Living values simplicity. Follow "Zero Cognitive Load".
 
 ## Key Files Reference
 
-- **Root Config**: `package.json`, `astro.config.mjs`
-- **ERP API Wrapper**: `src/services/erp-api.ts`
-- **Bot Entry**: `apps/bot-service/src/index.ts`
-- **ERP Service Entry**: `apps/erp-service/src/index.ts`
+- `.agent/rules/constitution.md` - Core product principles (Authority).
+- `.github/memory.md` - Technical decisions and known issues.
+- `apps/web/src/scripts/checkout.ts` - Payment logic implementation.
+- `apps/proxy/src/services/midtrans-client.ts` - Midtrans backend service.

@@ -6,10 +6,11 @@ trigger: model_decision
   ============================================================================
   MEMORY SYNC REPORT
   ============================================================================
-  Version: 1.0.0
-  Last Updated: 2026-01-08
+  Version: 1.0.1
+  Last Updated: 2026-01-25
 
   Changes:
+  - Added decision: Use `other_qris` for Midtrans Snap
   - Initial memory creation with first decision entry
   ============================================================================
 -->
@@ -25,6 +26,12 @@ trigger: model_decision
 **Decision**: Selalu commit setelah perubahan dilakukan.
 **Rationale**: Memastikan perubahan tersimpan di version control secara berkala, mencegah kehilangan pekerjaan, dan memudahkan rollback jika diperlukan.
 **Reference**: N/A (operational workflow)
+
+### [2026-01-25] Use `other_qris` for Midtrans Snap QRIS
+
+**Decision**: When offering a direct QRIS payment button via Midtrans Snap, use `enabled_payments: ["other_qris"]` instead of `["qris"]` or `["gopay"]`.
+**Rationale**: The generic `qris` channel in Snap often throws "No payment channels available" if not explicitly enabled, even if the merchant has "GoPay Dynamic QRIS" active. `other_qris` maps correctly to the generic QRIS display without forcing specific UI modes, providing a cleaner integration.
+**Reference**: Midtrans Documentation (Snap API)
 
 ---
 
