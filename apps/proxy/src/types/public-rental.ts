@@ -84,7 +84,7 @@ export const PublicRentalConfirmPaymentInput = z.object({
   token: z
     .string()
     .regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i),
-  paymentMethod: z.enum(["qris", "transfer"]),
+  paymentMethod: z.enum(["qris", "transfer", "gopay"]),
   reference: z.string().optional(),
 });
 

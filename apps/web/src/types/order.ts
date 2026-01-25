@@ -44,7 +44,7 @@ export interface OrderPayload {
   endDate?: string;
   duration: number;
   deliveryFee: number;
-  paymentMethod: "qris" | "transfer";
+  paymentMethod: "qris" | "transfer" | "gopay";
   notes?: string;
   volumeDiscountAmount?: number;
   volumeDiscountLabel?: string;

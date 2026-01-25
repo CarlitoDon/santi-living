@@ -2,16 +2,14 @@ import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
 
 /**
- * Create Payment Token API
+ * Create QRIS Payment API
  *
- * Forwards request to erp-service to generate Midtrans Snap Token.
+ * Uses Midtrans Core API to get QR code directly (forces QR on mobile).
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const { token, paymentMethod } = body;
-
-    // console.log(`[create-payment-token] Requesting token for order: ${token}, method: ${paymentMethod}`);
+    const { token } = body;
 
     if (!token) {
       return new Response(
@@ -25,12 +23,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     const client = createProxyClient();
 
-    const result = await client.order.createPaymentToken.mutate({
+    const result = await client.order.createQrisPayment.mutate({
       token,
-      paymentMethod, // Pass directly from frontend to ensure correct method
     });
-
-    // console.log("[create-payment-token] Success:", result);
 
     return new Response(
       JSON.stringify({
@@ -43,15 +38,15 @@ export const POST: APIRoute = async ({ request }) => {
       },
     );
   } catch (error: unknown) {
-    console.error("[create-payment-token] Error:", error);
+    console.error("[create-qris-payment] Error:", error);
 
     const message =
-      error instanceof Error ? error.message : "Failed to create payment token";
+      error instanceof Error ? error.message : "Failed to create QRIS payment";
 
     return new Response(
       JSON.stringify({
         success: false,
-        error: "Failed to create payment token",
+        error: "Failed to create QRIS payment",
         message,
       }),
       { status: 500 },

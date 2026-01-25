@@ -10,7 +10,7 @@ import { formatCurrency, formatDate } from "@/lib/format";
 import type { OrderItem, OrderData } from "@/types/order";
 
 // Types
-type PaymentMethod = "bca" | "qris";
+type PaymentMethod = "bca" | "gopay" | "qris";
 
 interface SnapEmbedOptions {
   embedId: string;
@@ -43,7 +43,7 @@ export function initCheckout(): void {
 
   if (!session) {
     // No order data - redirect to calculator
-    window.location.href = "/sewa-kasur/#calculator";
+    window.location.href = "/#calculator";
     return;
   }
 
@@ -172,7 +172,7 @@ function renderSummary(order: OrderData): void {
         </div>
       </div>
 
-      <a href="/sewa-kasur/cart" class="btn-edit-order">
+      <a href="/cart" class="btn-edit-order">
         ✏️ Edit Pesanan
       </a>
     </div>
@@ -259,10 +259,10 @@ function renderPaymentDetails(method: PaymentMethod): void {
   const container = elements.paymentDetailsContainer;
   if (!container) return;
 
-  // Toggle mini summary visibility: Hide for QRIS as Snap UI has its own summary
+  // Toggle mini summary visibility: Hide for QRIS/GoPay as Snap UI has its own summary
   if (elements.summaryMiniContainer) {
     elements.summaryMiniContainer.style.display =
-      method === "qris" ? "none" : "block";
+      method === "qris" || method === "gopay" ? "none" : "block";
   }
 
   const session = getOrder();
@@ -322,15 +322,49 @@ function renderPaymentDetails(method: PaymentMethod): void {
         </div>
       </div>
     `;
-  } else {
+  } else if (method === "gopay" || method === "qris") {
+    // Both GoPay and QRIS use Snap embed
     container.innerHTML = `
-      <div class="payment-method-card payment-qris" style="border:none; box-shadow:none; padding:0; background:transparent;">
-        <div class="payment-details">
-          <!-- Snap Container -->
-          <div id="snap-container" class="snap-full-bleed" style="height: 85vh; border-radius: 12px; overflow: hidden;">
-            <!-- Will be populated by Snap.js -->
-          </div>
+      <div class="payment-method-card snap-wrapper" style="
+        background: var(--color-surface);
+        border-radius: var(--radius-xl);
+        padding: var(--space-4);
+        border: 1px solid var(--color-border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        max-width: 100%;
+        margin: 0 auto;
+      ">
+        <h4 style="
+          font-size: var(--font-size-base);
+          font-weight: var(--font-weight-semibold);
+          color: var(--color-text);
+          margin: 0 0 var(--space-3);
+          padding-bottom: var(--space-3);
+          border-bottom: 1px solid var(--color-border);
+        ">${method === "gopay" ? "💚 Pembayaran GoPay" : "📱 Pembayaran QRIS"}</h4>
+        <div id="snap-container" style="
+          min-height: 650px;
+          border-radius: var(--radius-lg);
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+        ">
+          <!-- Will be populated by Snap.js -->
         </div>
+        <style>
+          #snap-container iframe {
+            width: 320px !important;
+            min-width: 320px !important;
+            min-height: 720px !important;
+          }
+          @media (max-width: 100%) {
+            #snap-container iframe {
+              min-width: 320px !important;
+            }
+          }
+        </style>
       </div>
     `;
 
@@ -344,6 +378,15 @@ function renderPaymentDetails(method: PaymentMethod): void {
       ) as HTMLElement;
       if (stickyContainer) stickyContainer.style.display = "none";
     }
+
+    // Make payment details span full width and center it
+    const miniSummary = document.getElementById("summaryMiniContainer");
+    if (miniSummary) miniSummary.style.display = "none";
+
+    // Make the container span full grid width
+    container.style.gridColumn = "1 / -1";
+    container.style.display = "flex";
+    container.style.justifyContent = "center";
 
     // Scroll to container
     setTimeout(() => {
@@ -415,6 +458,11 @@ function bindCopyButtons(): void {
  */
 function goToStep1(): void {
   state.step = 1;
+  state.selectedMethod = null;
+
+  // DON'T clear erpPublicToken - order already exists
+  // We just need to update the payment method when user selects again
+
   elements.step1?.classList.add("active");
   elements.step2?.classList.remove("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -439,6 +487,7 @@ declare global {
       pay: (
         token: string,
         options: {
+          gopayMode?: "qr" | "deeplink";
           onSuccess: (result: Record<string, unknown>) => void;
           onPending: (result: Record<string, unknown>) => void;
           onError: (result: Record<string, unknown>) => void;
@@ -462,47 +511,50 @@ async function initSnapPayment() {
   if (!container) return;
 
   container.innerHTML = `
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 350px;">
       <div class="loading-spinner" style="margin-bottom: 1rem;"></div>
       <p style="color: #666; font-size: 0.9rem;">Menyiapkan Pembayaran...</p>
     </div>
   `;
 
   try {
-    const session = getOrder();
-    if (!session) return;
-    const { order } = session;
-
-    // 1. Ensure Order Exists (Get public token)
-    let publicToken = sessionStorage.getItem("erpPublicToken");
+    // 1. Get public token - order should already exist from calculator
+    const publicToken = sessionStorage.getItem("erpPublicToken");
 
     if (!publicToken) {
-      // Create order if not exists (similar to legacy flow but background)
-      const payload = { ...order, paymentMethod: "qris" as const };
-      const response = await submitOrder(payload);
-      // Save token/url for later
-      sessionStorage.setItem("erpPublicToken", response.token || "");
-      if (response.orderUrl)
-        sessionStorage.setItem("erpOrderUrl", response.orderUrl);
-      publicToken = response.token; // update local var
+      throw new Error(
+        "Pesanan tidak ditemukan. Silakan kembali ke halaman utama.",
+      );
     }
 
-    if (!publicToken) throw new Error("Gagal membuat pesanan.");
+    // 2. Update payment method on existing order
+    const paymentMethod = state.selectedMethod === "gopay" ? "gopay" : "qris";
+    console.log(
+      "[Checkout] selectedMethod:",
+      state.selectedMethod,
+      "-> paymentMethod:",
+      paymentMethod,
+    );
 
-    // 2. Get Snap Token
-    const tokenRes = await fetch("/api/create-payment-token", {
+    const updateRes = await fetch("/api/update-payment-method", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: publicToken }),
+      body: JSON.stringify({ token: publicToken, paymentMethod }),
     });
 
-    if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
-    const { token: snapToken } = await tokenRes.json();
+    const updateData = await updateRes.json();
+    console.log("[Checkout] updatePaymentMethod response:", updateData);
 
-    // 3. Helper for Status Messages inside the Container (since Popup is separate)
+    if (!updateRes.ok) {
+      throw new Error(
+        updateData.error || "Gagal mengupdate metode pembayaran.",
+      );
+    }
+
     // Clear loading
     container.innerHTML = "";
 
+    // Helper for Status Messages
     const showStatusMessage = (
       title: string,
       message: string,
@@ -528,7 +580,7 @@ async function initSnapPayment() {
           <p style="color: #64748b; margin-bottom: 20px;">${message}</p>
           ${
             showButton
-              ? `<a href="/sewa-kasur/pesanan/${publicToken}" class="btn-primary" style="
+              ? `<a href="/pesanan/${publicToken}" class="btn-primary" style="
                   text-decoration: none; 
                   padding: 10px 20px; 
                   background: #2563eb; 
@@ -549,7 +601,7 @@ async function initSnapPayment() {
                   border-radius: 8px;
                   font-weight: 500;
                   cursor: pointer;
-                ">Bayar Sekarng</button>`
+                ">Bayar Sekarang</button>`
               : ""
           }
         </div>
@@ -560,60 +612,214 @@ async function initSnapPayment() {
         document
           .getElementById("btn-retry-snap")
           ?.addEventListener("click", () => {
-            triggerSnap();
+            initSnapPayment();
           });
       }
     };
 
-    const triggerSnap = () => {
-      if (window.snap) {
-        window.snap.pay(snapToken, {
-          onSuccess: function (_result: Record<string, unknown>) {
-            showStatusMessage(
-              "Pembayaran Berhasil!",
-              "Sedang mengalihkan ke detail pesanan...",
-              "✅",
+    // ===== BRANCH: QRIS uses Core API, GoPay uses Snap =====
+    if (paymentMethod === "qris") {
+      // QRIS: Use Core API to get QR code directly (forces QR on mobile)
+      console.log("[Checkout] Using QRIS Core API flow");
+
+      const qrisRes = await fetch("/api/create-qris-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: publicToken }),
+      });
+
+      if (!qrisRes.ok) throw new Error("Gagal membuat QRIS payment.");
+      const qrisData = await qrisRes.json();
+      console.log("[Checkout] QRIS response:", qrisData);
+
+      // Display QR code directly in container
+      container.innerHTML = `
+        <div style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        ">
+          <h3 style="color: #0f172a; margin-bottom: 16px;">Scan QR dengan GoPay/OVO/DANA</h3>
+          <img 
+            id="qris-image"
+            src="/api/proxy-qr-image?url=${encodeURIComponent(qrisData.qrCodeUrl)}" 
+            alt="QRIS QR Code" 
+            style="width: 250px; height: 250px; border-radius: 8px; margin-bottom: 16px;"
+            crossorigin="anonymous"
+          />
+          <p style="color: #64748b; font-size: 14px; margin-bottom: 8px;">
+            Order: ${qrisData.orderNumber}
+          </p>
+          <p style="color: #64748b; font-size: 12px; margin-bottom: 16px;">
+            QR berlaku 15 menit
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <button id="btn-download-qr" style="
+              padding: 10px 20px;
+              background: #10b981;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              font-weight: 500;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+            ">
+              📥 Download QR
+            </button>
+            <a href="/pesanan/${publicToken}" style="
+              text-decoration: none;
+              padding: 10px 20px;
+              background: #2563eb;
+              color: white;
+              border-radius: 8px;
+              font-weight: 500;
+            ">Cek Status Pembayaran</a>
+          </div>
+        </div>
+      `;
+      container.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Add download functionality with branded header
+      document
+        .getElementById("btn-download-qr")
+        ?.addEventListener("click", () => {
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+
+          img.onload = () => {
+            const headerHeight = 60;
+            const footerHeight = 40;
+            const padding = 20;
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width + padding * 2;
+            canvas.height =
+              img.height + headerHeight + footerHeight + padding * 2;
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
+
+            // White background
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Header
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "bold 24px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText(
+              "QRIS Santi Living",
+              canvas.width / 2,
+              headerHeight - 15,
             );
-            setTimeout(() => {
-              window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
-            }, 1500);
-          },
-          onPending: function (_result: Record<string, unknown>) {
-            showStatusMessage(
-              "Menunggu Pembayaran",
-              "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
-              "⏳",
-              true,
+
+            // QR code
+            ctx.drawImage(img, padding, headerHeight, img.width, img.height);
+
+            // Footer
+            ctx.fillStyle = "#64748b";
+            ctx.font = "16px sans-serif";
+            ctx.fillText(
+              "Order: " + qrisData.orderNumber,
+              canvas.width / 2,
+              headerHeight + img.height + 30,
             );
-          },
-          onError: function (_result: Record<string, unknown>) {
-            container.innerHTML =
-              '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
-          },
-          onClose: function () {
-            showStatusMessage(
-              "Pembayaran Belum Selesai",
-              "Anda menutup halaman pembayaran. Klik tombol di bawah untuk membayar.",
-              "⚠️",
-              true,
-              true, // isRetry
-            );
-          },
+
+            // Download
+            canvas.toBlob((blob) => {
+              if (!blob) return;
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = "QRIS-" + qrisData.orderNumber + ".png";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            }, "image/png");
+          };
+
+          img.onerror = () => {
+            alert("Gagal download QR. Coba screenshot saja.");
+          };
+
+          // Use proxy URL to bypass CORS
+          const proxyUrl =
+            "/api/proxy-qr-image?url=" + encodeURIComponent(qrisData.qrCodeUrl);
+          img.src = proxyUrl;
         });
-      } else {
-        const error = new Error("Midtrans script not loaded.");
-        console.error(error);
-        if (container) {
-          container.innerHTML = `<div style="text-align:center; padding: 20px;">
+    } else {
+      // GoPay: Use Snap (deeplink on mobile, QR on desktop)
+      console.log("[Checkout] Using GoPay Snap flow");
+
+      const tokenRes = await fetch("/api/create-payment-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: publicToken, paymentMethod }),
+      });
+
+      if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
+      const { token: snapToken } = await tokenRes.json();
+
+      const triggerSnap = () => {
+        if (window.snap) {
+          if (window.snap.hide) {
+            window.snap.hide();
+          }
+          window.snap.embed(snapToken, {
+            embedId: "snap-container",
+            onSuccess: function (_result: Record<string, unknown>) {
+              showStatusMessage(
+                "Pembayaran Berhasil!",
+                "Sedang mengalihkan ke detail pesanan...",
+                "✅",
+              );
+              setTimeout(() => {
+                window.location.href = `/pesanan/${publicToken}`;
+              }, 1500);
+            },
+            onPending: function (_result: Record<string, unknown>) {
+              showStatusMessage(
+                "Menunggu Pembayaran",
+                "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
+                "⏳",
+                true,
+              );
+            },
+            onError: function (_result: Record<string, unknown>) {
+              container.innerHTML =
+                '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
+            },
+            onClose: function () {
+              showStatusMessage(
+                "Pembayaran Belum Selesai",
+                "Anda menutup halaman pembayaran. Klik tombol di bawah untuk membayar.",
+                "⚠️",
+                true,
+                true,
+              );
+            },
+          });
+        } else {
+          const error = new Error("Midtrans script not loaded.");
+          console.error(error);
+          if (container) {
+            container.innerHTML = `<div style="text-align:center; padding: 20px;">
                 <p style="color:red; margin-bottom: 10px;">Gagal memuat komponen pembayaran.</p>
                 <button onclick="window.location.reload()" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">Muat Ulang Halaman</button>
              </div>`;
+          }
         }
-      }
-    };
+      };
 
-    // Initial Trigger
-    triggerSnap();
+      // Initial Trigger for Snap
+      triggerSnap();
+    }
   } catch (err: unknown) {
     console.error("Snap Init Failed:", err);
     if (container) {
@@ -631,7 +837,7 @@ async function confirmPayment(): Promise<void> {
   if (state.selectedMethod === "qris") {
     const publicToken = sessionStorage.getItem("erpPublicToken");
     if (publicToken) {
-      window.location.href = `/sewa-kasur/pesanan/${publicToken}`;
+      window.location.href = `/pesanan/${publicToken}`;
       return;
     }
   }
@@ -657,8 +863,7 @@ async function confirmPayment(): Promise<void> {
       const { confirmPayment: apiConfirm } = await import("@/services/erp-api");
       await apiConfirm(publicToken, method);
       orderUrl =
-        sessionStorage.getItem("erpOrderUrl") ||
-        `/sewa-kasur/pesanan/${publicToken}`;
+        sessionStorage.getItem("erpOrderUrl") || `/pesanan/${publicToken}`;
     } else {
       const payload = {
         ...order,
@@ -672,7 +877,7 @@ async function confirmPayment(): Promise<void> {
     if (orderUrl) {
       window.location.href = orderUrl;
     } else {
-      window.location.href = "/sewa-kasur/thank-you";
+      window.location.href = "/thank-you";
     }
   } catch (error) {
     console.error("Payment confirmation failed:", error);

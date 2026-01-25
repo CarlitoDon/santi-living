@@ -1,0 +1,725 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import config from "@/data/config.json";
+
+// Disable prerender - this page fetches data dynamically based on token
+export const prerender = false;
+
+// Get token from URL
+const { token } = Astro.params;
+
+// Fetch order from erp-service (server-side)
+let order = null;
+let error = null;
+
+if (token) {
+  try {
+    // Use Proxy Service
+    // Fallback to local if not set, but prefer the staging/prod URL
+    let apiUrl = import.meta.env.PUBLIC_PROXY_URL || import.meta.env.SANTI_PROXY_URL || process.env.SANTI_PROXY_URL || "http://localhost:3000";
+    // Sanitize: Remove trailing slash if present
+    if (apiUrl.endsWith("/")) apiUrl = apiUrl.slice(0, -1);
+
+    // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
+    console.log(`[SSR] Fetching order token: ${token} from ${apiUrl} (Proxy)`);
+    
+    // Using Proxy's order.getByToken
+    const input = encodeURIComponent(JSON.stringify({"0":{"json":{token}}}));
+    const fetchUrl = `${apiUrl}/api/trpc/order.getByToken?batch=1&input=${input}`;
+    console.log(`[SSR] Fetch URL: ${fetchUrl}`);
+    
+    // Proxy "order.getByToken" is a publicProcedure, so no Auth required by default.
+    // But we can send the generic secret just in case context requires it.
+    // const apiKey = import.meta.env.PROXY_API_SECRET || "santi_secret_auth_token_2026";
+    
+    const response = await fetch(fetchUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        // "Authorization": `Bearer ${apiKey}` 
+      }
+    });
+
+    console.log(`[SSR] Response status: ${response.status}`);
+    
+    if (response.ok) {
+      const data = await response.json();
+      // console.log(`[SSR] Data received:`, JSON.stringify(data));
+      
+      // Proxy result format: { result: { data: { json: OrderData } } }
+      // The shape returned by order.getByToken matches the needed fields
+      order = data?.[0]?.result?.data?.json || null;
+      
+      if (!order) console.error("[SSR] Order is null in response data");
+    } else {
+      const text = await response.text();
+      console.error(`[SSR] Fetch failed: ${text}`);
+      error = "Pesanan tidak ditemukan (Gagal memuat data)";
+    }
+  } catch (e) {
+    console.error("[SSR] Exception:", e);
+    error = "Gagal memuat data pesanan (Exception)";
+  }
+}
+
+// Use explicit env var to determine Midtrans environment
+// Vercel always uses MODE=production for all deployments, so we need explicit config
+const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
+const snapUrl = isProduction
+  ? "https://app.midtrans.com/snap/snap.js"
+  : "https://app.sandbox.midtrans.com/snap/snap.js";
+
+// Status badge colors for order status
+const statusColors: Record<string, { bg: string; text: string; label: string }> = {
+  DRAFT: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
+  PENDING: { bg: "#FEF3C7", text: "#92400E", label: "Menunggu Pembayaran" },
+  CONFIRMED: { bg: "#DBEAFE", text: "#1E40AF", label: "Dikonfirmasi" },
+  ACTIVE: { bg: "#D1FAE5", text: "#065F46", label: "Aktif (Sedang Disewa)" },
+  COMPLETED: { bg: "#E5E7EB", text: "#374151", label: "Selesai" },
+  CANCELLED: { bg: "#FEE2E2", text: "#991B1B", label: "Dibatalkan" },
+};
+
+const status = order?.status || "PENDING";
+const paymentStatus = order?.rentalPaymentStatus || "PENDING";
+
+// Combined status logic for customer display
+const getDisplayStatus = () => {
+  if (status === "CANCELLED") return statusColors.CANCELLED;
+  if (status === "COMPLETED") return statusColors.COMPLETED;
+  if (status === "ACTIVE") return statusColors.ACTIVE;
+  if (status === "CONFIRMED") return statusColors.CONFIRMED;
+  
+  // For DRAFT orders, show payment status
+  if (paymentStatus === "AWAITING_CONFIRM") {
+    return { bg: "#DBEAFE", text: "#1E40AF", label: "Pembayaran Diverifikasi" };
+  }
+  if (paymentStatus === "CONFIRMED") {
+    return { bg: "#D1FAE5", text: "#065F46", label: "Menunggu Konfirmasi Admin" };
+  }
+  if (paymentStatus === "FAILED") {
+    return { bg: "#FEE2E2", text: "#991B1B", label: "Pembayaran Gagal" };
+  }
+  
+  return statusColors.DRAFT;
+};
+
+const statusInfo = getDisplayStatus();
+
+// Format helpers
+const formatCurrency = (amount: number) => 
+  new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(amount);
+
+const formatDate = (dateStr: string) =>
+  new Date(dateStr).toLocaleDateString("id-ID", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+---
+
+<MainLayout title={order ? `Pesanan ${order.orderNumber}` : "Pesanan Tidak Ditemukan"}>
+  <!-- Midtrans Snap.js -->
+  <script 
+    type="text/javascript" 
+    is:inline
+    src={snapUrl}
+    data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}>
+  </script>
+
+  <main class="order-page">
+    <div class="container">
+      {error ? (
+        <div class="error-card">
+          <div class="error-icon">❌</div>
+          <h1>Pesanan Tidak Ditemukan</h1>
+          <p>{error}</p>
+          <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+        </div>
+      ) : order ? (
+        <div class="order-card">
+          <!-- Header -->
+          <div class="order-header">
+            <div class="order-number">
+              <span class="label">Nomor Pesanan</span>
+              <span class="value">{order.orderNumber}</span>
+            </div>
+            <div class="status-badge" style={`background: ${statusInfo.bg}; color: ${statusInfo.text}`}>
+              {statusInfo.label}
+            </div>
+          </div>
+
+          <!-- Progress Steps -->
+          <div class="progress-steps">
+            <div class={`step ${["DRAFT", "PENDING", "CONFIRMED", "ACTIVE", "COMPLETED"].includes(status) ? "active" : ""}`}>
+              <div class="step-icon">📝</div>
+              <span>Pesanan Dibuat</span>
+            </div>
+            <div class="step-line"></div>
+            <div class={`step ${paymentStatus === "AWAITING_CONFIRM" || paymentStatus === "CONFIRMED" || status === "CONFIRMED" || status === "ACTIVE" || status === "COMPLETED" ? "active" : ""}`}>
+              <div class="step-icon">💳</div>
+              <span>Pembayaran</span>
+            </div>
+            <div class="step-line"></div>
+            <div class={`step ${["CONFIRMED", "ACTIVE", "COMPLETED"].includes(status) ? "active" : ""}`}>
+              <div class="step-icon">✅</div>
+              <span>Dikonfirmasi</span>
+            </div>
+            <div class="step-line"></div>
+            <div class={`step ${["ACTIVE", "COMPLETED"].includes(status) ? "active" : ""}`}>
+              <div class="step-icon">🚚</div>
+              <span>Dikirim</span>
+            </div>
+            <div class="step-line"></div>
+            <div class={`step ${status === "COMPLETED" ? "active" : ""}`}>
+              <div class="step-icon">🎉</div>
+              <span>Selesai</span>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="section">
+            <h3>📅  Periode Sewa</h3>
+            <div class="date-row">
+              <span class="label">Mulai</span>
+              <span class="value">{formatDate(order.rentalStartDate)}</span>
+            </div>
+            <div class="date-row">
+              <span class="label">Selesai</span>
+              <span class="value">{formatDate(order.rentalEndDate)}</span>
+            </div>
+          </div>
+
+          <!-- Delivery Address -->
+          {order.deliveryAddress && (
+            <div class="section">
+              <h3>📍 Alamat Pengiriman</h3>
+              <p class="address-text">{order.deliveryAddress}</p>
+            </div>
+          )}
+
+          <!-- Order Details + Total (grouped together) -->
+          <div class="section order-summary-section">
+            <h3>📦 Detail Pesanan</h3>
+            <div class="items-list">
+              {order.items.map((item: { name: string; quantity: number; subtotal?: number; unitPrice: number }) => (
+                <div class="item-row">
+                  <span class="item-name">{item.name}</span>
+                  <span class="item-qty">{item.quantity}x</span>
+                  <span class="item-price">{formatCurrency(item.subtotal || item.unitPrice * item.quantity)}</span>
+                </div>
+              ))}
+            </div>
+            
+            <!-- Total (inside same section) -->
+            <div class="total-section">
+              <div class="total-row">
+                <span>Subtotal</span>
+                <span>{formatCurrency(order.subtotal)}</span>
+              </div>
+              {order.discountAmount && order.discountAmount > 0 && (
+                <div class="total-row discount">
+                  <span>Diskon {order.discountLabel || ""}</span>
+                  <span>-{formatCurrency(order.discountAmount)}</span>
+                </div>
+              )}
+              {order.deliveryFee && order.deliveryFee > 0 && (
+                <div class="total-row">
+                  <span>Biaya Antar</span>
+                  <span>{formatCurrency(order.deliveryFee)}</span>
+                </div>
+              )}
+              <div class="total-row grand-total">
+                <span>Total</span>
+                <span>{formatCurrency(order.totalAmount)}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Instructions -->
+          {(status === "DRAFT" || status === "PENDING") && paymentStatus === "PENDING" ? (
+            <div class="section payment-section">
+              <h3>💳 Instruksi Pembayaran</h3>
+              {order.paymentMethod === "qris" ? (
+                <div class="payment-info">
+                  <p>Klik tombol di bawah untuk menampilkan QRIS:</p>
+                  <div class="qris-placeholder">
+                    <span>🔐 Pembayaran via Midtrans (GoPay/QRIS)</span>
+                  </div>
+                </div>
+              ) : (
+                <div class="payment-info">
+                  <p>Transfer ke rekening:</p>
+                  <div class="bank-info">
+                    <strong>BCA 0123456789</strong>
+                    <span>a.n. Santi Living</span>
+                  </div>
+                </div>
+              )}
+              
+              <!-- Confirm Payment Button -->
+              <div class="payment-confirm">
+                <p class="payment-note">
+                  {order.paymentMethod === "qris" 
+                    ? "Lanjutkan pembayaran aman:" 
+                    : "Setelah melakukan pembayaran, klik tombol di bawah untuk konfirmasi:"}
+                </p>
+                <button 
+                  id="confirm-payment-btn" 
+                  class="btn btn-primary btn-confirm-payment"
+                  data-token={token}
+                  data-payment-method={order.paymentMethod || "transfer"}
+                >
+                  {order.paymentMethod === "qris" ? "⚡ Bayar Sekarang (QRIS)" : "✅ Saya Sudah Bayar"}
+                </button>
+              </div>
+            </div>
+          ) : paymentStatus === "AWAITING_CONFIRM" ? (
+            <div class="section payment-section">
+              <h3>⏳ Pembayaran Sedang Diverifikasi</h3>
+              <div class="payment-status-info">
+                <div class="status-icon">🔄</div>
+                <p>Pembayaran Anda sedang diverifikasi oleh tim kami.</p>
+                <p class="status-note">Proses verifikasi biasanya memakan waktu 1-24 jam kerja.</p>
+                {order.paymentClaimedAt && (
+                  <p class="status-time">Pembayaran dikirim pada: {formatDate(order.paymentClaimedAt)}</p>
+                )}
+              </div>
+            </div>
+          ) : paymentStatus === "CONFIRMED" && status === "DRAFT" ? (
+            <div class="section payment-section">
+              <h3>✅ Pembayaran Diterima</h3>
+              <div class="payment-status-info success">
+                <div class="status-icon">✅</div>
+                <p>Pembayaran Anda telah diterima!</p>
+                <p class="status-note">Pesanan Anda akan segera diproses dan dikonfirmasi.</p>
+              </div>
+            </div>
+          ) : paymentStatus === "FAILED" ? (
+            <div class="section payment-section">
+              <h3>❌ Pembayaran Gagal</h3>
+              <div class="payment-status-info error">
+                <div class="status-icon">❌</div>
+                <p>Pembayaran tidak dapat diverifikasi.</p>
+                {order.paymentFailReason && (
+                  <p class="status-note">Alasan: {order.paymentFailReason}</p>
+                )}
+                <p class="status-note">Silakan hubungi kami untuk bantuan lebih lanjut.</p>
+              </div>
+            </div>
+          ) : null}
+
+          <!-- Contact -->
+          <div class="action-buttons">
+            <a href={`https://wa.me/${config.whatsappNumber}`} class="btn btn-whatsapp" target="_blank">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+              </svg>
+              Hubungi Kami
+            </a>
+            <a href="/" class="btn btn-secondary">Kembali ke Beranda</a>
+          </div>
+        </div>
+      ) : (
+        <div class="loading-card">
+          <div class="spinner"></div>
+          <p>Memuat pesanan...</p>
+        </div>
+      )}
+    </div>
+  </main>
+</MainLayout>
+
+<style>
+  .order-page {
+    min-height: 100vh;
+    padding: var(--space-4);
+    background: linear-gradient(to bottom, var(--color-primary-light) 0%, var(--color-background) 30%);
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .order-card, .error-card, .loading-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--space-4);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-card, .loading-card {
+    text-align: center;
+    padding: var(--space-8);
+  }
+
+  .error-icon { font-size: 3rem; margin-bottom: var(--space-4); }
+
+  .order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .order-number .label {
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .order-number .value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+  }
+
+  .status-badge {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    padding: var(--space-2);
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    opacity: 0.4;
+    font-size: var(--font-size-xs);
+  }
+
+  .step.active { opacity: 1; }
+  .step-icon { font-size: 1.2rem; }
+  .step-line { flex: 1; height: 2px; background: var(--color-border); margin: 0 var(--space-1); }
+
+  .section {
+    margin-bottom: 20px;
+    padding-top: 0 !important;
+    padding-bottom: var(--space-3) !important;
+  }
+
+  .section h3 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-3);
+  }
+
+  .items-list {
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+  }
+
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .item-row:not(:last-child) { border-bottom: 1px solid var(--color-border); }
+  .item-name { flex: 1; color: var(--color-text); }
+  .item-qty { color: var(--color-text-muted); margin-right: var(--space-3); }
+  .item-price { font-weight: var(--font-weight-medium); color: var(--color-text); }
+
+  .date-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    padding: var(--space-1) 0;
+  }
+
+  .date-row .label { color: var(--color-text-muted); }
+  .date-row .value { color: var(--color-text); }
+
+  .address-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    background: var(--color-background);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+  }
+
+  .total-section {
+    background: var(--color-background);
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-2);
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) 0;
+  }
+
+  .total-row.discount { color: var(--color-success); }
+  .total-row.grand-total {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .payment-section {
+    background: var(--color-primary-light);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+
+  .payment-info p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
+
+  .qris-placeholder, .bank-info {
+    background: var(--color-surface);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .bank-info { display: flex; flex-direction: column; gap: var(--space-1); }
+  .bank-info strong { font-size: var(--font-size-lg); color: var(--color-text); }
+  .bank-info span { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: #25D366;
+    color: white;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: all 0.2s;
+  }
+
+  .btn-whatsapp:hover { background: #1DA851; transform: translateY(-2px); }
+
+  .btn-secondary {
+    display: block;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { background: var(--color-background); color: var(--color-text); }
+
+  .btn-primary {
+    display: inline-block;
+    padding: var(--space-3) var(--space-6);
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    margin-top: var(--space-4);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-confirm-payment {
+    width: 100%;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--font-size-md);
+  }
+
+  .payment-confirm {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .payment-note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .payment-status-info {
+    text-align: center;
+    padding: 16px;
+    background: var(--color-background);
+    border-radius: var(--radius-md);
+  }
+
+  .payment-status-info .status-icon {
+    font-size: 2.5rem;
+    margin-bottom: 4px;
+  }
+
+  .payment-status-info p {
+    margin: 2px 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .payment-status-info .status-note {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .payment-status-info .status-time {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: 8px;
+  }
+
+  .payment-status-info.success {
+    background: #D1FAE5;
+  }
+
+  .payment-status-info.error {
+    background: #FEE2E2;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--space-4);
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script>
+  // Snap global types are defined in checkout.ts
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const confirmBtn = document.getElementById('confirm-payment-btn') as HTMLButtonElement | null;
+    if (!confirmBtn) return;
+
+    confirmBtn.addEventListener('click', async () => {
+      const token = confirmBtn.getAttribute('data-token');
+      const paymentMethod = confirmBtn.getAttribute('data-payment-method') || 'transfer';
+
+      if (!token) {
+        alert('Token tidak ditemukan');
+        return;
+      }
+
+      // Special flow for QRIS/Midtrans
+      if (paymentMethod === "qris") {
+        confirmBtn.disabled = true;
+        const originalText = confirmBtn.textContent;
+        confirmBtn.textContent = '⏳ Memuat QRIS...';
+
+        try {
+          // 1. Get Payment Token via API Proxy
+          // We use dynamic import for the service helper
+          const { createPaymentToken } = await import("@/services/erp-api");
+          const { token: snapToken } = await createPaymentToken(token);
+
+          // 2. Open Snap Popup
+          if (window.snap) {
+            window.snap.pay(snapToken, {
+              gopayMode: "qr", // Force QR code instead of Deeplink
+              onSuccess: async function(result: Record<string, unknown>) {
+                // Payment success - Notify backend
+                try {
+                  const { confirmPayment } = await import("@/services/erp-api");
+                  await confirmPayment(token, "qris", result.order_id as string | undefined);
+                  alert("Pembayaran Berhasil!");
+                  window.location.reload();
+                } catch (e) {
+                  console.error("Failed to confirm payment status", e);
+                  window.location.reload(); // Reload anyway, webhook should handle it
+                }
+              },
+              onPending: function(_result: Record<string, unknown>) {
+                alert("Menunggu pembayaran...");
+                window.location.reload();
+              },
+              onError: function(_result: Record<string, unknown>) {
+                alert("Pembayaran gagal!");
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = originalText;
+              },
+              onClose: function() {
+                confirmBtn.disabled = false;
+                confirmBtn.textContent = originalText;
+              }
+            });
+          } else {
+            alert("Sistem pembayaran belum siap. Silakan refresh halaman.");
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = originalText;
+          }
+        } catch (error) {
+           console.error('Error initiating payment:', error);
+           alert(`❌ ${error instanceof Error ? error.message : 'Gagal memuat pembayaran'}`);
+           confirmBtn.disabled = false;
+           confirmBtn.textContent = originalText;
+        }
+        return;
+      }
+
+      // Original/Manual Transfer Flow
+      const confirmed = confirm('Apakah Anda yakin sudah melakukan pembayaran?');
+      if (!confirmed) return;
+
+      // Disable button and show loading
+      confirmBtn.disabled = true;
+      const originalText = confirmBtn.textContent;
+      confirmBtn.textContent = '⏳ Memproses...';
+
+      try {
+        // Dynamic import to avoid SSR issues if any
+        const { confirmPayment } = await import("@/services/erp-api");
+        
+        const result = await confirmPayment(token, paymentMethod as "qris" | "transfer");
+
+        if (result.success) {
+           // Reload logic
+           window.location.reload(); 
+        } else {
+           throw new Error("Respon tidak sesuai");
+        }
+      } catch (error) {
+        console.error('Error confirming payment:', error);
+        alert(`❌ ${error instanceof Error ? error.message : 'Terjadi kesalahan'}`);
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = originalText;
+      }
+    });
+  });
+</script>

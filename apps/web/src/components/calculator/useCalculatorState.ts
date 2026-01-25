@@ -162,7 +162,8 @@ export function useCalculatorState() {
 
   const clearError = useCallback((field: string) => {
     setState((prev) => {
-      const { [field]: _, ...rest } = prev.errors;
+      const { [field]: _removed, ...rest } = prev.errors;
+      void _removed;
       return { ...prev, errors: rest };
     });
   }, []);

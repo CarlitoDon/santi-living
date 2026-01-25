@@ -25,7 +25,7 @@ const sendOrderInput = z.object({
       category: z.enum(["package", "mattress", "accessory"]),
       quantity: z.number(),
       pricePerDay: z.number(),
-    })
+    }),
   ),
   totalPrice: z.number(),
   orderDate: z.string(),
@@ -44,7 +44,7 @@ const sendOrderInput = z.object({
       lng: z.string().optional(),
     })
     .optional(),
-  paymentMethod: z.enum(["qris", "transfer"]).optional(),
+  paymentMethod: z.enum(["qris", "transfer", "gopay"]).optional(),
   notes: z.string().optional(),
   volumeDiscountAmount: z.number().optional(),
   volumeDiscountLabel: z.string().optional(),

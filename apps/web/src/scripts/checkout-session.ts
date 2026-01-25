@@ -9,7 +9,7 @@ const STORAGE_KEY = "santi-living-checkout";
 
 export interface CheckoutSession {
   order: OrderPayload;
-  selectedPaymentMethod?: "bca" | "qris";
+  selectedPaymentMethod?: "bca" | "gopay" | "qris";
   createdAt: string;
 }
 
@@ -41,7 +41,7 @@ export function getOrder(): CheckoutSession | null {
 /**
  * Update selected payment method
  */
-export function setPaymentMethod(method: "bca" | "qris"): void {
+export function setPaymentMethod(method: "bca" | "gopay" | "qris"): void {
   const session = getOrder();
   if (session) {
     session.selectedPaymentMethod = method;
@@ -52,7 +52,7 @@ export function setPaymentMethod(method: "bca" | "qris"): void {
 /**
  * Get selected payment method
  */
-export function getPaymentMethod(): "bca" | "qris" | undefined {
+export function getPaymentMethod(): "bca" | "gopay" | "qris" | undefined {
   const session = getOrder();
   return session?.selectedPaymentMethod;
 }

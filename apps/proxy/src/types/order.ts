@@ -38,7 +38,7 @@ export const CreateOrderSchema = z.object({
         quantity: z.number().int().positive(),
         pricePerDay: z.number().positive(),
         includes: z.array(z.string()).optional(), // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
-      })
+      }),
     )
     .min(1),
   totalPrice: z.number().positive(),
@@ -46,7 +46,7 @@ export const CreateOrderSchema = z.object({
   endDate: z.string().min(1), // Accept any date string, will parse in handler
   duration: z.number().int().positive(),
   deliveryFee: z.number().nonnegative(),
-  paymentMethod: z.enum(["qris", "transfer"]),
+  paymentMethod: z.enum(["qris", "transfer", "gopay"]),
   notes: z.string().optional(),
   volumeDiscountAmount: z.number().optional(),
   volumeDiscountLabel: z.string().optional(),

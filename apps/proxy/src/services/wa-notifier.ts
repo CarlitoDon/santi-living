@@ -28,7 +28,7 @@ export interface OrderNotifyPayload {
   endDate: string;
   duration: number;
   deliveryFee: number;
-  paymentMethod?: "qris" | "transfer";
+  paymentMethod?: "qris" | "transfer" | "gopay";
   notes?: string;
   volumeDiscountAmount?: number;
   volumeDiscountLabel?: string;
@@ -52,7 +52,7 @@ interface SimpleNotifyPayload {
 async function withRetry<T>(
   fn: () => Promise<T>,
   maxRetries = 3,
-  baseDelay = 1000
+  baseDelay = 1000,
 ): Promise<T> {
   let lastError: Error | undefined;
 
@@ -69,13 +69,13 @@ async function withRetry<T>(
         lastError.message.includes("400")
       ) {
         console.warn(
-          `[WA Notify] Aborting retry for invalid number: ${lastError.message}`
+          `[WA Notify] Aborting retry for invalid number: ${lastError.message}`,
         );
         throw lastError;
       }
 
       console.warn(
-        `[WA Notify] Attempt ${attempt}/${maxRetries} failed: ${lastError.message}`
+        `[WA Notify] Attempt ${attempt}/${maxRetries} failed: ${lastError.message}`,
       );
 
       if (attempt < maxRetries) {

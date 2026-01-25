@@ -68,6 +68,16 @@ export const syncClient = createTRPCProxyClient<any>({
     confirmPayment: {
       mutate: (input: ConfirmPaymentInput) => Promise<ConfirmPaymentResponse>;
     };
+    updatePaymentMethod: {
+      mutate: (input: {
+        token: string;
+        paymentMethod: "qris" | "transfer" | "gopay";
+      }) => Promise<{
+        success: boolean;
+        orderNumber: string;
+        paymentMethod: string;
+      }>;
+    };
     confirmPaymentByOrderNumber: {
       mutate: (input: {
         orderNumber: string;
@@ -125,6 +135,13 @@ export async function confirmPayment(
   input: ConfirmPaymentInput,
 ): Promise<ConfirmPaymentResponse> {
   return syncClient.publicRental.confirmPayment.mutate(input);
+}
+
+export async function updatePaymentMethod(input: {
+  token: string;
+  paymentMethod: "qris" | "transfer" | "gopay";
+}): Promise<{ success: boolean; orderNumber: string; paymentMethod: string }> {
+  return syncClient.publicRental.updatePaymentMethod.mutate(input);
 }
 
 export async function confirmPaymentByOrderNumber(input: {

@@ -4,9 +4,30 @@ import react from '@astrojs/react';
 import { loadEnv } from 'vite';
 
 // Load environment based on mode
-// Priority: process.env (Vercel dashboard) > .env files
-const mode = process.env.NODE_ENV || 'development';
-const fileEnv = loadEnv(mode, process.cwd(), '');
+// Use VERCEL_ENV (auto-set by Vercel: production/preview/development) for Vercel deployments
+// Fall back to NODE_ENV for local development
+const vercelEnv = process.env.VERCEL_ENV; // 'production' | 'preview' | 'development' | undefined
+const nodeEnv = process.env.NODE_ENV || 'development';
+
+// Determine which .env file to load
+// - On Vercel production: use 'production'
+// - On Vercel preview: use 'staging' (our .env.staging maps to preview)
+// - Local: use NODE_ENV
+let envMode = nodeEnv;
+if (vercelEnv === 'production') {
+  envMode = 'production';
+} else if (vercelEnv === 'preview') {
+  envMode = 'staging'; // Map preview to staging
+}
+
+console.log('[Astro Config] VERCEL_ENV:', vercelEnv || 'NOT SET (local)');
+console.log('[Astro Config] Resolved envMode:', envMode);
+
+const fileEnv = loadEnv(envMode, process.cwd(), '');
+
+// Determine if Midtrans should use production
+// Only production Vercel deployments use production Midtrans
+const isMidtransProduction = vercelEnv === 'production';
 
 // Merge: process.env takes priority over file env
 const env = {
@@ -14,13 +35,13 @@ const env = {
   PROXY_API_SECRET: process.env.PROXY_API_SECRET || fileEnv.PROXY_API_SECRET,
   SYNC_ERP_API_URL: process.env.SYNC_ERP_API_URL || fileEnv.SYNC_ERP_API_URL,
   SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
-  SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
   PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || fileEnv.PUBLIC_SITE_URL,
   MIDTRANS_CLIENT_KEY: process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || 'Mid-client-StayTUBOhdNGsXR4', // Fallback for dev
+  MIDTRANS_IS_PRODUCTION: String(isMidtransProduction), // 'true' or 'false'
 };
 
-console.log('[Astro Config] NODE_ENV:', mode);
 console.log('[Astro Config] SANTI_PROXY_URL:', env.SANTI_PROXY_URL || 'NOT SET');
+console.log('[Astro Config] MIDTRANS_IS_PRODUCTION:', env.MIDTRANS_IS_PRODUCTION);
 
 import sitemap from '@astrojs/sitemap';
 
@@ -48,12 +69,16 @@ export default defineConfig({
       'process.env.SYNC_ERP_API_SECRET': JSON.stringify(env.SYNC_ERP_API_SECRET),
       'process.env.SANTI_PROXY_URL': JSON.stringify(env.SANTI_PROXY_URL),
       'process.env.PROXY_API_SECRET': JSON.stringify(env.PROXY_API_SECRET),
-      'process.env.PROXY_API_SECRET': JSON.stringify(env.PROXY_API_SECRET),
       'process.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
-      'process.env.NODE_ENV': JSON.stringify(mode),
+      'import.meta.env.MIDTRANS_IS_PRODUCTION': JSON.stringify(env.MIDTRANS_IS_PRODUCTION),
+      'process.env.NODE_ENV': JSON.stringify(nodeEnv),
     },
 
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+
+    server: {
+      allowedHosts: ['.ngrok-free.dev', '.ngrok.io']
+    }
   },
 });
