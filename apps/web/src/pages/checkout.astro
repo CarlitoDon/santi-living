@@ -9,11 +9,9 @@ import logoBca from "@/assets/images/logo-bca.png";
 
 // Use explicit env var to determine Midtrans environment
 // Vercel always uses MODE=production for all deployments, so we need explicit config
-const clientKey = import.meta.env.MIDTRANS_CLIENT_KEY || "";
-// Robust check: Trust env var OR detect production key format (doesn't start with SB-)
-const isKeyProduction = clientKey.length > 5 && !clientKey.startsWith("SB-");
-const isEnvProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
-const isProduction = isKeyProduction || isEnvProduction;
+// Use explicit env var to determine Midtrans environment
+// Vercel always uses MODE=production for all deployments, so we need explicit config (from astro.config.mjs)
+const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
 
 const snapUrl = isProduction
   ? "https://app.midtrans.com/snap/snap.js"
@@ -34,10 +32,8 @@ const snapUrl = isProduction
       >
         console.log("[Checkout] Environment Debug:", {
           isProduction: "{isProduction}",
-          isKeyProduction: "{isKeyProduction}",
-          isEnvProduction: "{isEnvProduction}",
           snapUrl: "{snapUrl}",
-          clientKey: "{clientKey}",
+          clientKey: "{import.meta.env.MIDTRANS_CLIENT_KEY}",
         });
       </script>
 

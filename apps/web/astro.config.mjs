@@ -27,7 +27,7 @@ const fileEnv = loadEnv(envMode, process.cwd(), '');
 
 // Determine if Midtrans should use production
 // Only production Vercel deployments use production Midtrans
-const isMidtransProduction = process.env.MIDTRANS_IS_PRODUCTION === 'true' || vercelEnv === 'production';
+const isMidtransProduction = vercelEnv === 'production';
 
 // Merge: process.env takes priority over file env
 const env = {
