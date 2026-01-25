@@ -27,7 +27,7 @@ const fileEnv = loadEnv(envMode, process.cwd(), '');
 
 // Determine if Midtrans should use production
 // Priority: 1. VERCEL_ENV='production', 2. Client Key starts with 'Mid-' (Production Key format)
-const clientKey = process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '';
+const clientKey = (process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '').replace(/["']/g, "");
 const isMidtransProduction = vercelEnv === 'production' || clientKey.startsWith('Mid-');
 
 // Merge: process.env takes priority over file env
