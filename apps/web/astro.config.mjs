@@ -36,7 +36,7 @@ const env = {
   SYNC_ERP_API_URL: process.env.SYNC_ERP_API_URL || fileEnv.SYNC_ERP_API_URL,
   SYNC_ERP_API_SECRET: process.env.SYNC_ERP_API_SECRET || fileEnv.SYNC_ERP_API_SECRET,
   PUBLIC_SITE_URL: process.env.PUBLIC_SITE_URL || fileEnv.PUBLIC_SITE_URL,
-  MIDTRANS_CLIENT_KEY: process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || 'Mid-client-StayTUBOhdNGsXR4', // Fallback for dev
+  MIDTRANS_CLIENT_KEY: process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '', // No fallback to avoid false prod detection
   MIDTRANS_IS_PRODUCTION: String(isMidtransProduction), // 'true' or 'false'
 };
 
