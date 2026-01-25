@@ -1,7 +1,6 @@
 {
   "framework": "astro",
   "installCommand": "npm install",
-  "buildCommand": "npx turbo run build --filter=@santi-living/web",
-  "outputDirectory": "apps/web/.vercel/output",
+  "buildCommand": "cd apps/web && npm run build",
   "ignoreCommand": "git diff HEAD^ HEAD --quiet packages turbo.json apps/web"
 }
