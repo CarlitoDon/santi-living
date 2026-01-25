@@ -26,9 +26,9 @@ console.log('[Astro Config] Resolved envMode:', envMode);
 const fileEnv = loadEnv(envMode, process.cwd(), '');
 
 // Determine if Midtrans should use production
-// Priority: 1. VERCEL_ENV='production', 2. Client Key starts with 'Mid-' (Production Key format)
+// Priority: 1. VERCEL_ENV='production', 2. MIDTRANS_IS_PRODUCTION='true'
 const clientKey = (process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '').replace(/["']/g, "");
-const isMidtransProduction = vercelEnv === 'production' || clientKey.startsWith('Mid-');
+const isMidtransProduction = vercelEnv === 'production' || (process.env.MIDTRANS_IS_PRODUCTION === 'true' || fileEnv.MIDTRANS_IS_PRODUCTION === 'true');
 
 // Merge: process.env takes priority over file env
 const env = {

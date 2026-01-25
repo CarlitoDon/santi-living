@@ -7,15 +7,8 @@ import logoQris from "@/assets/images/logo-qris.svg";
 import logoGopay from "@/assets/images/logo-gopay.svg";
 import logoBca from "@/assets/images/logo-bca.png";
 
-// Use explicit env var to determine Midtrans environment
-// Vercel always uses MODE=production for all deployments, so we need explicit config
-// Use explicit env var to determine Midtrans environment
-// Vercel always uses MODE=production for all deployments, so we need explicit config (from astro.config.mjs)
-// Fallback: Check if client key contains "Mid-" (Production)
 const clientKey = import.meta.env.MIDTRANS_CLIENT_KEY || "";
-const isProduction =
-  import.meta.env.MIDTRANS_IS_PRODUCTION === "true" ||
-  clientKey.includes("Mid-");
+const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
 
 const snapUrl = isProduction
   ? "https://app.midtrans.com/snap/snap.js"
