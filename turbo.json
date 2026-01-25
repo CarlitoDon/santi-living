@@ -11,7 +11,8 @@
     "MIDTRANS_SERVER_KEY",
     "MIDTRANS_IS_PRODUCTION",
     "ERP_SYNC_SERVICE_URL",
-    "BOT_SECRET"
+    "BOT_SECRET",
+    "VERCEL_ENV"
   ],
   "tasks": {
     "build": {
