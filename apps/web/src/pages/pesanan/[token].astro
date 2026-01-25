@@ -64,7 +64,9 @@ if (token) {
 // Use explicit env var to determine Midtrans environment
 // Vercel always uses MODE=production for all deployments, so we need explicit config
 // Note: Logic is centralized in astro.config.mjs which sets import.meta.env.MIDTRANS_IS_PRODUCTION
-const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
+// Fallback: Check if client key contains "Mid-" (Production)
+const clientKey = import.meta.env.MIDTRANS_CLIENT_KEY || "";
+const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true" || clientKey.includes("Mid-");
 const snapUrl = isProduction
   ? "https://app.midtrans.com/snap/snap.js"
   : "https://app.sandbox.midtrans.com/snap/snap.js";
