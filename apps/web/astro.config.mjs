@@ -34,7 +34,19 @@ const fileEnv = loadEnv(envMode, process.cwd(), '');
 // Determine if Midtrans should use production
 // Priority: 1. VERCEL_ENV='production', 2. MIDTRANS_IS_PRODUCTION='true'
 const clientKey = (process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '').replace(/["']/g, "");
-const isMidtransProduction = vercelEnv === 'production' || (process.env.MIDTRANS_IS_PRODUCTION === 'true' || fileEnv.MIDTRANS_IS_PRODUCTION === 'true');
+// If VERCEL_ENV is undefined during build on Vercel, it might be an issue.
+// But we can also check if the client key provided matches the known production key structure if we had one.
+// Better: TRUST the process.env.MIDTRANS_IS_PRODUCTION if it exists.
+console.log('--- ENV RESOLUTION ---');
+console.log('Raw VERCEL_ENV:', process.env.VERCEL_ENV);
+console.log('Raw MIDTRANS_IS_PRODUCTION:', process.env.MIDTRANS_IS_PRODUCTION);
+
+const isMidtransProduction = 
+  process.env.VERCEL_ENV === 'production' || 
+  process.env.MIDTRANS_IS_PRODUCTION === 'true' || 
+  fileEnv.MIDTRANS_IS_PRODUCTION === 'true';
+
+console.log('Resolved isMidtransProduction:', isMidtransProduction);
 
 // Merge: process.env takes priority over file env
 const env = {
@@ -79,6 +91,7 @@ export default defineConfig({
       'process.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_IS_PRODUCTION': JSON.stringify(env.MIDTRANS_IS_PRODUCTION),
+      'import.meta.env.PUBLIC_IS_PRODUCTION_MODE': JSON.stringify(env.MIDTRANS_IS_PRODUCTION), // Explicit override alias
       'import.meta.env.VERCEL_ENV': JSON.stringify(process.env.VERCEL_ENV || 'LOCAL_OR_UNDEFINED'),
       'process.env.NODE_ENV': JSON.stringify(nodeEnv),
     },

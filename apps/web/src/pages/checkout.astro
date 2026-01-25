@@ -1,5 +1,4 @@
----
-export const prerender = true;
+// export const prerender = true; // Disabled to ensure runtime env var access and debugging
 
 import MainLayout from "@/layouts/MainLayout.astro";
 import { Image } from "astro:assets";
@@ -8,7 +7,8 @@ import logoGopay from "@/assets/images/logo-gopay.svg";
 import logoBca from "@/assets/images/logo-bca.png";
 
 const clientKey = import.meta.env.MIDTRANS_CLIENT_KEY || "";
-const isProduction = import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
+// Use the explicit public override if available, otherwise fall back
+const isProduction = import.meta.env.PUBLIC_IS_PRODUCTION_MODE === "true" || import.meta.env.MIDTRANS_IS_PRODUCTION === "true";
 
 const snapUrl = isProduction
   ? "https://app.midtrans.com/snap/snap.js"
@@ -32,6 +32,7 @@ const snapUrl = isProduction
           snapUrl: "{snapUrl}",
           clientKey: "{import.meta.env.MIDTRANS_CLIENT_KEY}",
           metaEnvIsProduction: "{import.meta.env.MIDTRANS_IS_PRODUCTION}",
+          publicIsProductionMode: "{import.meta.env.PUBLIC_IS_PRODUCTION_MODE}",
           vercelEnv: "{import.meta.env.VERCEL_ENV}",
         });
       </script>
