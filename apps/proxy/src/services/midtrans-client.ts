@@ -139,6 +139,13 @@ export const createQrisCharge = async (
   orderId: string;
   expiryTime: string;
 }> => {
+  throw new Error(
+    "QRIS Core API is currently disabled in Production. Please use Snap.",
+  );
+  /* 
+  // DEPRECATED: Disabled because it requires manual activation by Midtrans support.
+  // We are using Snap fallback instead.
+  
   const parameter = {
     payment_type: "qris",
     transaction_details: {
@@ -181,4 +188,5 @@ export const createQrisCharge = async (
     console.error("[Midtrans Core API] Failed to create QRIS charge:", error);
     throw error;
   }
+  */
 };

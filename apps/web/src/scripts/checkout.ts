@@ -617,209 +617,71 @@ async function initSnapPayment() {
       }
     };
 
-    // ===== BRANCH: QRIS uses Core API, GoPay uses Snap =====
-    if (paymentMethod === "qris") {
-      // QRIS: Use Core API to get QR code directly (forces QR on mobile)
-      console.log("[Checkout] Using QRIS Core API flow");
+    // ===== UNIFIED FLOW: Both QRIS and GoPay use Snap =====
+    // Reason: QRIS Core API requires manual activation by Midtrans.
+    // Fallback to Snap (Popup) which allows QRIS by default.
 
-      const qrisRes = await fetch("/api/create-qris-payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: publicToken }),
-      });
+    console.log(`[Checkout] Using Snap flow for ${paymentMethod}`);
 
-      if (!qrisRes.ok) throw new Error("Gagal membuat QRIS payment.");
-      const qrisData = await qrisRes.json();
-      console.log("[Checkout] QRIS response:", qrisData);
+    const tokenRes = await fetch("/api/create-payment-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: publicToken, paymentMethod }),
+    });
 
-      // Display QR code directly in container
-      container.innerHTML = `
-        <div style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 20px;
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        ">
-          <h3 style="color: #0f172a; margin-bottom: 16px;">Scan QR dengan GoPay/OVO/DANA</h3>
-          <img 
-            id="qris-image"
-            src="/api/proxy-qr-image?url=${encodeURIComponent(qrisData.qrCodeUrl)}" 
-            alt="QRIS QR Code" 
-            style="width: 250px; height: 250px; border-radius: 8px; margin-bottom: 16px;"
-            crossorigin="anonymous"
-          />
-          <p style="color: #64748b; font-size: 14px; margin-bottom: 8px;">
-            Order: ${qrisData.orderNumber}
-          </p>
-          <p style="color: #64748b; font-size: 12px; margin-bottom: 16px;">
-            QR berlaku 15 menit
-          </p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-            <button id="btn-download-qr" style="
-              padding: 10px 20px;
-              background: #10b981;
-              color: white;
-              border: none;
-              border-radius: 8px;
-              font-weight: 500;
-              cursor: pointer;
-              display: flex;
-              align-items: center;
-              gap: 6px;
-            ">
-              📥 Download QR
-            </button>
-            <a href="/pesanan/${publicToken}" style="
-              text-decoration: none;
-              padding: 10px 20px;
-              background: #2563eb;
-              color: white;
-              border-radius: 8px;
-              font-weight: 500;
-            ">Cek Status Pembayaran</a>
-          </div>
-        </div>
-      `;
-      container.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
+    const { token: snapToken } = await tokenRes.json();
 
-      // Add download functionality with branded header
-      document
-        .getElementById("btn-download-qr")
-        ?.addEventListener("click", () => {
-          const img = new Image();
-          img.crossOrigin = "anonymous";
-
-          img.onload = () => {
-            const headerHeight = 60;
-            const footerHeight = 40;
-            const padding = 20;
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width + padding * 2;
-            canvas.height =
-              img.height + headerHeight + footerHeight + padding * 2;
-
-            const ctx = canvas.getContext("2d");
-            if (!ctx) return;
-
-            // White background
-            ctx.fillStyle = "#ffffff";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Header
-            ctx.fillStyle = "#0f172a";
-            ctx.font = "bold 24px sans-serif";
-            ctx.textAlign = "center";
-            ctx.fillText(
-              "QRIS Santi Living",
-              canvas.width / 2,
-              headerHeight - 15,
-            );
-
-            // QR code
-            ctx.drawImage(img, padding, headerHeight, img.width, img.height);
-
-            // Footer
-            ctx.fillStyle = "#64748b";
-            ctx.font = "16px sans-serif";
-            ctx.fillText(
-              "Order: " + qrisData.orderNumber,
-              canvas.width / 2,
-              headerHeight + img.height + 30,
-            );
-
-            // Download
-            canvas.toBlob((blob) => {
-              if (!blob) return;
-              const url = window.URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = "QRIS-" + qrisData.orderNumber + ".png";
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              window.URL.revokeObjectURL(url);
-            }, "image/png");
-          };
-
-          img.onerror = () => {
-            alert("Gagal download QR. Coba screenshot saja.");
-          };
-
-          // Use proxy URL to bypass CORS
-          const proxyUrl =
-            "/api/proxy-qr-image?url=" + encodeURIComponent(qrisData.qrCodeUrl);
-          img.src = proxyUrl;
-        });
-    } else {
-      // GoPay: Use Snap (deeplink on mobile, QR on desktop)
-      console.log("[Checkout] Using GoPay Snap flow");
-
-      const tokenRes = await fetch("/api/create-payment-token", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: publicToken, paymentMethod }),
-      });
-
-      if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
-      const { token: snapToken } = await tokenRes.json();
-
-      const triggerSnap = () => {
-        if (window.snap) {
-          if (window.snap.hide) {
-            window.snap.hide();
-          }
-          window.snap.embed(snapToken, {
-            embedId: "snap-container",
-            onSuccess: function (_result: Record<string, unknown>) {
-              showStatusMessage(
-                "Pembayaran Berhasil!",
-                "Sedang mengalihkan ke detail pesanan...",
-                "✅",
-              );
-              setTimeout(() => {
-                window.location.href = `/pesanan/${publicToken}`;
-              }, 1500);
-            },
-            onPending: function (_result: Record<string, unknown>) {
-              showStatusMessage(
-                "Menunggu Pembayaran",
-                "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
-                "⏳",
-                true,
-              );
-            },
-            onError: function (_result: Record<string, unknown>) {
-              container.innerHTML =
-                '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
-            },
-            onClose: function () {
-              showStatusMessage(
-                "Pembayaran Belum Selesai",
-                "Anda menutup halaman pembayaran. Klik tombol di bawah untuk membayar.",
-                "⚠️",
-                true,
-                true,
-              );
-            },
-          });
-        } else {
-          const error = new Error("Midtrans script not loaded.");
-          console.error(error);
-          if (container) {
-            container.innerHTML = `<div style="text-align:center; padding: 20px;">
-                <p style="color:red; margin-bottom: 10px;">Gagal memuat komponen pembayaran.</p>
-                <button onclick="window.location.reload()" style="padding: 8px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer;">Muat Ulang Halaman</button>
-             </div>`;
-          }
+    const triggerSnap = () => {
+      if (window.snap) {
+        if (window.snap.hide) {
+          window.snap.hide();
         }
-      };
+        window.snap.embed(snapToken, {
+          embedId: "snap-container",
+          onSuccess: function (_result: Record<string, unknown>) {
+            showStatusMessage(
+              "Pembayaran Berhasil!",
+              "Sedang mengalihkan ke detail pesanan...",
+              "✅",
+            );
+            setTimeout(() => {
+              window.location.href = `/pesanan/${publicToken}`;
+            }, 1500);
+          },
+          onPending: function (_result: Record<string, unknown>) {
+            showStatusMessage(
+              "Menunggu Pembayaran",
+              "Pesanan telah dibuat. Silakan selesaikan pembayaran atau cek status di halaman pesanan.",
+              "⏳",
+              true,
+              true, // Allow retry
+            );
+          },
+          onError: function (_result: Record<string, unknown>) {
+            container.innerHTML =
+              '<p style="color:red; text-align:center;">Pembayaran gagal. Silakan coba lagi.</p>';
+          },
+          onClose: function () {
+            showStatusMessage(
+              "Pembayaran Belum Selesai",
+              "Anda menutup popup pembayaran.",
+              "⚠️",
+              true,
+              true, // Allow retry
+            );
+          },
+        });
+      } else {
+        console.error("Snap JS not loaded!");
+        container.innerHTML =
+          '<p style="color:red;">Gagal memuat sistem pembayaran. Silakan refresh halaman.</p>';
+      }
+    };
 
       // Initial Trigger for Snap
       triggerSnap();
-    }
+    } // End if paymentMethod type check (now merged)
   } catch (err: unknown) {
     console.error("Snap Init Failed:", err);
     if (container) {
