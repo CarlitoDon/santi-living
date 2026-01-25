@@ -7,6 +7,12 @@ import { loadEnv } from 'vite';
 // Use VERCEL_ENV (auto-set by Vercel: production/preview/development) for Vercel deployments
 // Fall back to NODE_ENV for local development
 const vercelEnv = process.env.VERCEL_ENV; // 'production' | 'preview' | 'development' | undefined
+console.log('--- ASTRO BUILD ENV DEBUG ---');
+console.log('process.env.VERCEL_ENV:', process.env.VERCEL_ENV);
+console.log('process.env.MIDTRANS_IS_PRODUCTION:', process.env.MIDTRANS_IS_PRODUCTION);
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
+console.log('-----------------------------');
+
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 // Determine which .env file to load
@@ -73,6 +79,7 @@ export default defineConfig({
       'process.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_CLIENT_KEY': JSON.stringify(env.MIDTRANS_CLIENT_KEY),
       'import.meta.env.MIDTRANS_IS_PRODUCTION': JSON.stringify(env.MIDTRANS_IS_PRODUCTION),
+      'import.meta.env.VERCEL_ENV': JSON.stringify(process.env.VERCEL_ENV || 'LOCAL_OR_UNDEFINED'),
       'process.env.NODE_ENV': JSON.stringify(nodeEnv),
     },
 
