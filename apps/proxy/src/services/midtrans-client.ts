@@ -145,9 +145,9 @@ export const createQrisCharge = async (
       order_id: input.order_id,
       gross_amount: input.gross_amount,
     },
-    qris: {
-      acquirer: "gopay", // Use GoPay as acquirer for QRIS
-    },
+    // qris: {
+    //   acquirer: "gopay", // Removed to allow default Midtrans acquirer routing
+    // },
     custom_expiry: {
       expiry_duration: 15,
       unit: "minute",
