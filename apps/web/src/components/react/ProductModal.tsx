@@ -329,16 +329,17 @@ export const ProductModal: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 32px;
-          height: 32px;
+          width: 28px;
+          height: 28px;
           background: var(--color-primary-light, #dbeafe);
           border: 1px solid var(--color-primary);
-          border-radius: 50%;
-          font-size: 1.25rem;
+          border-radius: 0.25rem;
+          font-size: 1.125rem;
           font-weight: 700;
           color: var(--color-primary);
           cursor: pointer;
           transition: all 0.15s ease;
+          padding: 0;
         }
 
         .modal-btn-stepper:hover:not(:disabled) {

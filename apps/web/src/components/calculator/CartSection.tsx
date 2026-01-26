@@ -2,7 +2,7 @@
  * CartSection Component - matches original Calculator.astro styling
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Product } from "./types";
 import type { CalculatorActions } from "./useCalculatorState";
 import { CartItem } from "./CartItem";
@@ -15,6 +15,7 @@ interface CartSectionProps {
     accessories: Product[];
   };
   imageMap: Record<string, string>;
+  imageMapLarge: Record<string, string>;
   actions: CalculatorActions;
   error?: string;
 }
@@ -25,6 +26,7 @@ interface AccordionProps {
   color?: "primary" | "secondary" | "accent";
   items: Product[];
   imageMap: Record<string, string>;
+  imageMapLarge: Record<string, string>;
   getItemQuantity: (id: string) => number;
   onAdd: (product: Product) => void;
   onRemove: (id: string) => void;
@@ -38,6 +40,7 @@ function Accordion({
   color = "secondary",
   items,
   imageMap,
+  imageMapLarge,
   getItemQuantity,
   onAdd,
   onRemove,
@@ -49,6 +52,29 @@ function Accordion({
 
   const hasHiddenItems = items.length > initialVisibleCount;
   const visibleItems = showAll ? items : items.slice(0, initialVisibleCount);
+
+  // Listen for deep link expand event
+  useEffect(() => {
+    const handleExpand = (event: CustomEvent<{ productId: string }>) => {
+      const { productId } = event.detail;
+      const hasProduct = items.some((p) => p.id === productId);
+      if (hasProduct) {
+        setIsOpen(true);
+        setShowAll(true);
+      }
+    };
+
+    window.addEventListener(
+      "expand-product-accordion",
+      handleExpand as EventListener,
+    );
+    return () => {
+      window.removeEventListener(
+        "expand-product-accordion",
+        handleExpand as EventListener,
+      );
+    };
+  }, [items]);
 
   return (
     <div className={`calc-accordion ${isOpen ? "active" : ""}`}>
@@ -70,6 +96,7 @@ function Accordion({
               onIncrement={() => onAdd(product)}
               onDecrement={() => onRemove(product.id)}
               optimizedImage={imageMap[product.id]}
+              largeImage={imageMapLarge[product.id]}
             />
           ))}
           {hasHiddenItems && showMoreLabel && (
@@ -90,6 +117,7 @@ function Accordion({
 export function CartSection({
   products,
   imageMap,
+  imageMapLarge,
   actions,
   error,
 }: CartSectionProps) {
@@ -138,6 +166,7 @@ export function CartSection({
         color="primary"
         items={products.mattressPackages}
         imageMap={imageMap}
+        imageMapLarge={imageMapLarge}
         getItemQuantity={getItemQuantity}
         onAdd={handleAdd}
         onRemove={removeItem}
@@ -151,6 +180,7 @@ export function CartSection({
         color="secondary"
         items={products.mattressOnly}
         imageMap={imageMap}
+        imageMapLarge={imageMapLarge}
         getItemQuantity={getItemQuantity}
         onAdd={handleAdd}
         onRemove={removeItem}
@@ -158,15 +188,17 @@ export function CartSection({
         showMoreLabel="Lihat Ukuran Lainnya"
       />
 
-      {/* Accessories */}
+      {/* Accessories - show all items (no showMore button) */}
       <Accordion
         title="Ekstra Tambahan Satuan"
         color="accent"
         items={products.accessories}
         imageMap={imageMap}
+        imageMapLarge={imageMapLarge}
         getItemQuantity={getItemQuantity}
         onAdd={handleAdd}
         onRemove={removeItem}
+        initialVisibleCount={100}
       />
 
       {/* Total Items */}

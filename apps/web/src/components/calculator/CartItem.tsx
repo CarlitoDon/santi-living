@@ -13,6 +13,7 @@ interface CartItemProps {
   onIncrement: () => void;
   onDecrement: () => void;
   optimizedImage?: string;
+  largeImage?: string;
 }
 
 export function CartItem({
@@ -21,12 +22,13 @@ export function CartItem({
   onIncrement,
   onDecrement,
   optimizedImage,
+  largeImage,
 }: CartItemProps) {
   const isSelected = quantity > 0;
 
   const handleImageClick = () => {
     // Convert Product to ProductItem format for modal
-    // Use original image (not optimized thumbnail) for better quality in modal
+    // Use large optimized image for modal display
     const modalProduct: ProductItem = {
       id: product.id,
       name: product.name,
@@ -35,7 +37,7 @@ export function CartItem({
       dimensions: product.dimensions,
       capacity: product.capacity,
       pricePerDay: product.pricePerDay,
-      image: product.image, // Use original, not optimized thumbnail
+      image: largeImage || optimizedImage || product.image,
       includes: product.includes,
     };
     // Pass quantity getter so modal can show current quantity

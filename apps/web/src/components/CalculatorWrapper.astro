@@ -20,17 +20,31 @@ const allProducts = [
   ...products.accessories,
 ];
 
+// Thumbnail images (200x200) for cart items
 const imageMap: Record<string, string> = {};
+// Large images (800x600) for modal
+const imageMapLarge: Record<string, string> = {};
+
 for (const product of allProducts) {
   const imagePath = `/src/assets${product.image}`;
   if (images[imagePath]) {
     const imageModule = await images[imagePath]();
-    const optimized = await getImage({
+    
+    // Thumbnail
+    const optimizedThumb = await getImage({
       src: imageModule.default,
       width: 200,
       height: 200,
     });
-    imageMap[product.id] = optimized.src;
+    imageMap[product.id] = optimizedThumb.src;
+    
+    // Large for modal
+    const optimizedLarge = await getImage({
+      src: imageModule.default,
+      width: 800,
+      height: 600,
+    });
+    imageMapLarge[product.id] = optimizedLarge.src;
   }
 }
 
@@ -51,7 +65,7 @@ const productsData = {
 };
 ---
 
-<Calculator client:load products={productsData} imageMap={imageMap} />
+<Calculator client:load products={productsData} imageMap={imageMap} imageMapLarge={imageMapLarge} />
 
 <!-- Product Modal (shared) -->
 <ProductModal client:idle />

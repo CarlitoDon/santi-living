@@ -23,6 +23,7 @@ interface CalculatorProps {
     accessories: Product[];
   };
   imageMap: Record<string, string>;
+  imageMapLarge: Record<string, string>;
 }
 
 const initialCustomer: CustomerData = {
@@ -41,7 +42,11 @@ const initialCustomer: CustomerData = {
   notes: "",
 };
 
-export function Calculator({ products, imageMap }: CalculatorProps) {
+export function Calculator({
+  products,
+  imageMap,
+  imageMapLarge,
+}: CalculatorProps) {
   const actions = useCalculatorState();
   const { state } = actions;
 
@@ -199,7 +204,14 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
       const hash = window.location.hash;
 
       if (hash === "#calculator" && productId) {
-        // Wait a bit for React to fully render
+        // Dispatch event to expand accordion and show all items
+        window.dispatchEvent(
+          new CustomEvent("expand-product-accordion", {
+            detail: { productId },
+          }),
+        );
+
+        // Wait for accordion to expand and items to render
         setTimeout(() => {
           const productEl = document.querySelector(
             `[data-product-id="${productId}"]`,
@@ -217,7 +229,7 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
               productEl.classList.remove("highlight-pulse");
             }, 4000);
           }
-        }, 500);
+        }, 800); // Longer delay to allow accordion expansion
       }
     };
 
@@ -441,6 +453,7 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
             <CartSection
               products={products}
               imageMap={imageMap}
+              imageMapLarge={imageMapLarge}
               actions={actions}
               error={errors.mattressCart}
             />
