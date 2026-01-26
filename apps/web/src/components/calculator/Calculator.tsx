@@ -191,6 +191,39 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
     };
   }, [actions]);
 
+  // Handle deep links from product page (e.g., /?id=paket-single#calculator)
+  useEffect(() => {
+    const handleDeepLink = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get("id");
+      const hash = window.location.hash;
+
+      if (hash === "#calculator" && productId) {
+        // Wait a bit for React to fully render
+        setTimeout(() => {
+          const productEl = document.querySelector(
+            `[data-product-id="${productId}"]`,
+          );
+
+          if (productEl) {
+            // Scroll to the product
+            productEl.scrollIntoView({ behavior: "smooth", block: "center" });
+
+            // Add highlight pulse effect
+            productEl.classList.add("highlight-pulse");
+
+            // Remove the effect after animation completes (4 iterations * 1s = 4s)
+            setTimeout(() => {
+              productEl.classList.remove("highlight-pulse");
+            }, 4000);
+          }
+        }, 500);
+      }
+    };
+
+    handleDeepLink();
+  }, []);
+
   const validateForm = useCallback((): Record<string, string> => {
     const newErrors: Record<string, string> = {};
 

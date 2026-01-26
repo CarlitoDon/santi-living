@@ -167,8 +167,6 @@ export function CartSection({
         getItemQuantity={getItemQuantity}
         onAdd={handleAdd}
         onRemove={removeItem}
-        initialVisibleCount={2}
-        showMoreLabel="Lihat Ukuran Lainnya"
       />
 
       {/* Total Items */}

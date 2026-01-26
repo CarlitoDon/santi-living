@@ -3,6 +3,8 @@
  */
 
 import type { Product } from "./types";
+import type { ProductItem } from "@/types";
+import { openModal } from "@/store/modalStore";
 import "./styles.css";
 
 interface CartItemProps {
@@ -22,14 +24,36 @@ export function CartItem({
 }: CartItemProps) {
   const isSelected = quantity > 0;
 
+  const handleImageClick = () => {
+    // Convert Product to ProductItem format for modal
+    const modalProduct: ProductItem = {
+      id: product.id,
+      name: product.name,
+      shortName: product.shortName,
+      description: product.description || "",
+      dimensions: product.dimensions,
+      capacity: product.capacity,
+      pricePerDay: product.pricePerDay,
+      image: optimizedImage || product.image,
+      includes: product.includes,
+    };
+    openModal(modalProduct);
+  };
+
   return (
-    <div className={`calc-cart-item ${isSelected ? "selected" : ""}`}>
-      {/* Thumbnail + Info */}
+    <div
+      className={`calc-cart-item ${isSelected ? "selected" : ""}`}
+      data-product-id={product.id}
+    >
+      {/* Thumbnail + Info - clickable to open modal */}
       <img
         src={optimizedImage || product.image}
         alt={product.shortName}
         className="calc-cart-item-thumb"
         loading="lazy"
+        onClick={handleImageClick}
+        style={{ cursor: "pointer" }}
+        title="Klik untuk melihat detail"
       />
 
       <div className="calc-cart-item-info">
