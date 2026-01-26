@@ -17,6 +17,7 @@
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/vercel": "^9.0.3",
+    "@microsoft/clarity": "^1.0.2",
     "@nanostores/react": "^1.0.0",
     "@santi-living/shared": "*",
     "@tailwindcss/vite": "^4.1.18",
@@ -44,9 +45,9 @@
   },
   "optionalDependencies": {
     "@esbuild/linux-x64": "0.25.12",
+    "@img/sharp-linux-x64": "0.34.5",
     "@rollup/rollup-linux-x64-gnu": "4.55.2",
     "@tailwindcss/oxide-linux-x64-gnu": "4.1.18",
-    "lightningcss-linux-x64-gnu": "1.30.2",
-    "@img/sharp-linux-x64": "0.34.5"
+    "lightningcss-linux-x64-gnu": "1.30.2"
   }
 }
