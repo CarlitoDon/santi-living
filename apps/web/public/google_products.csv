@@ -1,0 +1,15 @@
+id,title,description,availability,link,image_link,price,brand,condition,identifier_exists
+package-single-standard,Single Standard (Paket),"Kasur + Sprei + Bantal + Selimut. Dimensi: 90 x 200 cm. Kapasitas: 1 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/paket-90.webp,30000 IDR,Santi Living,new,no
+package-single-super,Single Super (Paket),"Kasur + Sprei + Bantal + Selimut. Dimensi: 100 x 200 cm. Kapasitas: 1 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/paket-100.webp,35000 IDR,Santi Living,new,no
+package-double,Double (Paket),"Kasur + Sprei + Bantal + Selimut. Dimensi: 120 x 200 cm. Kapasitas: 1-2 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/paket-120.webp,40000 IDR,Santi Living,new,no
+package-queen,Queen (Paket),"Kasur + Sprei + 2 Bantal + Selimut. Dimensi: 160 x 200 cm. Kapasitas: 2 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/paket-160.webp,50000 IDR,Santi Living,new,no
+package-king,King (Paket),"Kasur + Sprei + 2 Bantal + Selimut. Dimensi: 180 x 200 cm. Kapasitas: 2-3 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/paket-180.webp,60000 IDR,Santi Living,new,no
+mattress-single-standard,Single Standard (Kasur),"Hanya kasur (Tanpa sprei/bantal/selimut). Dimensi: 90 x 200 cm. Kapasitas: 1 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/saja-90.webp,20000 IDR,Santi Living,new,no
+mattress-single-super,Single Super (Kasur),"Hanya kasur (Tanpa sprei/bantal/selimut). Dimensi: 100 x 200 cm. Kapasitas: 1 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/saja-100-alt.webp,25000 IDR,Santi Living,new,no
+mattress-double,Double (Kasur),"Hanya kasur (Tanpa sprei/bantal/selimut). Dimensi: 120 x 200 cm. Kapasitas: 1-2 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/saja-120.webp,30000 IDR,Santi Living,new,no
+mattress-queen,Queen (Kasur),"Hanya kasur (Tanpa sprei/bantal/selimut). Dimensi: 160 x 200 cm. Kapasitas: 2 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/saja-160.webp,40000 IDR,Santi Living,new,no
+mattress-king,King (Kasur),"Hanya kasur (Tanpa sprei/bantal/selimut). Dimensi: 180 x 200 cm. Kapasitas: 2-3 orang.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/saja-180.webp,50000 IDR,Santi Living,new,no
+acc-pillow,Extra Bantal,"Bantal tidur standar + sarung.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/ekstra-bantal.webp,5000 IDR,Santi Living,new,no
+acc-sprei,Extra Sprei,"Sprei kasur standar (ukuran disesuaikan).",in_stock,https://santiliving.com/produk,https://santiliving.com/images/ekstra-sprei.webp,5000 IDR,Santi Living,new,no
+acc-blanket,Extra Selimut,"Selimut tidur standar.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/ekstra-selimut.webp,5000 IDR,Santi Living,new,no
+acc-bolster,Extra Guling,"Guling tidur standar + sarung.",in_stock,https://santiliving.com/produk,https://santiliving.com/images/ekstra-guling.webp,5000 IDR,Santi Living,new,no
