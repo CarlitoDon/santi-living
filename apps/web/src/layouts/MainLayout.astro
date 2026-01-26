@@ -3,6 +3,7 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import "@/styles/global.css";
 import "@/styles/utilities.css";
 import config from "@/data/config.json";
+import Footer from "@/components/Footer.astro";
 
 interface Props {
   title?: string;
@@ -65,7 +66,7 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="sewa kasur jogja, rental kasur yogyakarta, sewa kasur bulanan, sewa kasur harian, kasur antar jemput jogja"
+      content="sewa kasur jogja, sewa kasur di jogja, rental kasur jogja, sewa kasur yogyakarta, sewa kasur murah jogja, sewa kasur harian jogja, sewa kasur bulanan, kasur antar jemput jogja, sewa extra bed jogja"
     />
     <meta name="author" content="Sewa Kasur Jogja by Santi Mebel" />
     <meta name="robots" content="index, follow" />
@@ -120,7 +121,9 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
         sameAs: config.socialLinks,
         address: {
           "@type": "PostalAddress",
+          streetAddress: "Jl. Godean KM 10",
           addressLocality: config.city,
+          postalCode: "55264",
           addressRegion: "DI Yogyakarta",
           addressCountry: "ID",
         },
@@ -153,6 +156,7 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
   </head>
   <body>
     <slot />
+    <Footer />
     <SpeedInsights />
   </body>
 </html>
