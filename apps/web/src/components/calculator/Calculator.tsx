@@ -224,6 +224,58 @@ export function Calculator({ products, imageMap }: CalculatorProps) {
     handleDeepLink();
   }, []);
 
+  // Listen for modal stepper events
+  useEffect(() => {
+    const allProducts = [
+      ...products.mattressPackages,
+      ...products.mattressOnly,
+      ...products.accessories,
+    ];
+
+    const handleModalIncrement = (
+      event: CustomEvent<{ productId: string }>,
+    ) => {
+      const { productId } = event.detail;
+      const product = allProducts.find((p) => p.id === productId);
+      if (product) {
+        actions.addItem({
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          pricePerDay: product.pricePerDay,
+          includes: product.includes,
+        });
+      }
+    };
+
+    const handleModalDecrement = (
+      event: CustomEvent<{ productId: string }>,
+    ) => {
+      const { productId } = event.detail;
+      actions.removeItem(productId);
+    };
+
+    window.addEventListener(
+      "modal-product-increment",
+      handleModalIncrement as EventListener,
+    );
+    window.addEventListener(
+      "modal-product-decrement",
+      handleModalDecrement as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "modal-product-increment",
+        handleModalIncrement as EventListener,
+      );
+      window.removeEventListener(
+        "modal-product-decrement",
+        handleModalDecrement as EventListener,
+      );
+    };
+  }, [actions, products]);
+
   const validateForm = useCallback((): Record<string, string> => {
     const newErrors: Record<string, string> = {};
 

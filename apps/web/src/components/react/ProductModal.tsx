@@ -1,11 +1,60 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useStore } from "@nanostores/react";
-import { isModalOpen, modalProduct, closeModal } from "@/store/modalStore";
+import {
+  isModalOpen,
+  modalProduct,
+  modalQuantityGetter,
+  closeModal,
+  dispatchModalIncrement,
+  dispatchModalDecrement,
+} from "@/store/modalStore";
 import { formatCurrency } from "@/lib/format";
 
 export const ProductModal: React.FC = () => {
   const isOpen = useStore(isModalOpen);
   const product = useStore(modalProduct);
+  const getQuantity = useStore(modalQuantityGetter);
+  const [quantity, setQuantity] = useState(0);
+
+  // Update quantity when modal opens or when quantity changes
+  useEffect(() => {
+    if (isOpen && getQuantity) {
+      setQuantity(getQuantity());
+    }
+  }, [isOpen, getQuantity]);
+
+  // Listen for quantity updates from Calculator
+  useEffect(() => {
+    const handleQuantityUpdate = () => {
+      if (getQuantity) {
+        setQuantity(getQuantity());
+      }
+    };
+
+    window.addEventListener("modal-quantity-updated", handleQuantityUpdate);
+    return () => {
+      window.removeEventListener(
+        "modal-quantity-updated",
+        handleQuantityUpdate,
+      );
+    };
+  }, [getQuantity]);
+
+  const handleIncrement = useCallback(() => {
+    if (product) {
+      dispatchModalIncrement(product.id);
+      // Optimistically update local state
+      setQuantity((prev) => prev + 1);
+    }
+  }, [product]);
+
+  const handleDecrement = useCallback(() => {
+    if (product && quantity > 0) {
+      dispatchModalDecrement(product.id);
+      // Optimistically update local state
+      setQuantity((prev) => Math.max(0, prev - 1));
+    }
+  }, [product, quantity]);
 
   if (!isOpen || !product) return null;
 
@@ -56,6 +105,29 @@ export const ProductModal: React.FC = () => {
               </span>
             </div>
 
+            {/* Stepper Controls */}
+            <div className="modal-stepper">
+              <span className="modal-stepper-label">Jumlah:</span>
+              <div className="modal-stepper-controls">
+                <button
+                  type="button"
+                  className="modal-btn-stepper"
+                  onClick={handleDecrement}
+                  disabled={quantity === 0}
+                >
+                  −
+                </button>
+                <span className="modal-stepper-qty">{quantity}</span>
+                <button
+                  type="button"
+                  className="modal-btn-stepper"
+                  onClick={handleIncrement}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
             <button className="btn btn-primary btn-block" onClick={closeModal}>
               Tutup
             </button>
@@ -74,7 +146,7 @@ export const ProductModal: React.FC = () => {
           opacity: 0;
           visibility: hidden;
           transition: all 0.3s ease;
-          display: flex; /* React specific: always display flex, control vis with opacity */
+          display: flex;
         }
         
         .modal.active {
@@ -207,12 +279,11 @@ export const ProductModal: React.FC = () => {
         .modal-description {
           color: var(--color-text-secondary);
           line-height: 1.6;
-          margin-bottom: var(--space-6);
+          margin-bottom: var(--space-4);
         }
 
         .modal-price-container {
-          margin-top: auto;
-          margin-bottom: var(--space-6);
+          margin-bottom: var(--space-4);
         }
 
         .modal-price-label {
@@ -226,6 +297,65 @@ export const ProductModal: React.FC = () => {
           font-size: var(--font-size-2xl);
           font-weight: var(--font-weight-bold);
           color: var(--color-primary);
+        }
+
+        /* Stepper Styles */
+        .modal-stepper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: var(--color-surface-elevated);
+          padding: var(--space-3) var(--space-4);
+          border-radius: var(--radius-md);
+          margin-bottom: var(--space-4);
+        }
+
+        .modal-stepper-label {
+          font-weight: var(--font-weight-semibold);
+          color: var(--color-text);
+        }
+
+        .modal-stepper-controls {
+          display: flex;
+          align-items: center;
+          gap: var(--space-3);
+          background: var(--color-background);
+          padding: var(--space-1) var(--space-2);
+          border-radius: var(--radius-full);
+          border: 1px solid var(--color-border);
+        }
+
+        .modal-btn-stepper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          background: var(--color-primary-light, #dbeafe);
+          border: 1px solid var(--color-primary);
+          border-radius: 50%;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+
+        .modal-btn-stepper:hover:not(:disabled) {
+          background: var(--color-primary);
+          color: white;
+        }
+
+        .modal-btn-stepper:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
+
+        .modal-stepper-qty {
+          min-width: 2rem;
+          text-align: center;
+          font-weight: var(--font-weight-bold);
+          font-size: var(--font-size-lg);
         }
       `}</style>
     </div>

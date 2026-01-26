@@ -26,6 +26,7 @@ export function CartItem({
 
   const handleImageClick = () => {
     // Convert Product to ProductItem format for modal
+    // Use original image (not optimized thumbnail) for better quality in modal
     const modalProduct: ProductItem = {
       id: product.id,
       name: product.name,
@@ -34,10 +35,11 @@ export function CartItem({
       dimensions: product.dimensions,
       capacity: product.capacity,
       pricePerDay: product.pricePerDay,
-      image: optimizedImage || product.image,
+      image: product.image, // Use original, not optimized thumbnail
       includes: product.includes,
     };
-    openModal(modalProduct);
+    // Pass quantity getter so modal can show current quantity
+    openModal(modalProduct, () => quantity);
   };
 
   return (
