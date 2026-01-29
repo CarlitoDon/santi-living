@@ -99,44 +99,158 @@ export async function reverseGeocode(
       throw new Error("Alamat tidak ditemukan untuk lokasi ini");
     }
 
-    return formatAddress(data.address);
+    return formatAddress(data.address, data.display_name);
   } catch {
     throw new Error("Koneksi gagal. Periksa internet Anda.");
   }
 }
 
 /**
+ * Normalize a name for comparison
+ * Removes common prefixes and standardizes spacing/casing
+ */
+function normalizeName(name: string | undefined): string {
+  if (!name) return "";
+  return name
+    .toLowerCase()
+    .replace(/^(kabupaten|kota|kecamatan|kelurahan|desa)\s+/i, "")
+    .replace(/\s+/g, "")
+    .trim();
+}
+
+/**
+ * Extract kelurahan from display_name when village field equals municipality
+ * display_name format: "Road, Desa, Kecamatan, Kabupaten, Provinsi, Postcode, Country"
+ *
+ * Example: "Kalibawang, Banjaroyo, Kalibawang, Kulon Progo, Daerah Istimewa Yogyakarta, ..."
+ * Parts: [road/area, desa, kecamatan, kabupaten, ...]
+ *
+ * We look for a part that comes BEFORE the kecamatan and is different from it
+ */
+function extractKelurahanFromDisplayName(
+  displayName: string,
+  kecamatanName: string,
+): string {
+  const parts = displayName.split(",").map((p) => p.trim());
+  const normalizedKecamatan = normalizeName(kecamatanName);
+
+  // Find the index of kecamatan in display_name
+  let kecamatanIndex = -1;
+  for (let i = 0; i < parts.length; i++) {
+    if (normalizeName(parts[i]) === normalizedKecamatan) {
+      kecamatanIndex = i;
+      break;
+    }
+  }
+
+  // If we found kecamatan and there's a part before it that's different from kecamatan
+  if (kecamatanIndex > 0) {
+    // Check the part immediately before kecamatan
+    const potentialDesa = parts[kecamatanIndex - 1];
+    if (
+      normalizeName(potentialDesa) !== normalizedKecamatan &&
+      potentialDesa.length > 0
+    ) {
+      console.debug(
+        "[geolocation] Extracted desa from display_name:",
+        potentialDesa,
+        "at index",
+        kecamatanIndex - 1,
+      );
+      return potentialDesa;
+    }
+
+    // If immediately before is same as kecamatan, try one more step back
+    if (kecamatanIndex > 1) {
+      const potentialDesa2 = parts[kecamatanIndex - 2];
+      if (
+        normalizeName(potentialDesa2) !== normalizedKecamatan &&
+        potentialDesa2.length > 0
+      ) {
+        console.debug(
+          "[geolocation] Extracted desa from display_name (2nd attempt):",
+          potentialDesa2,
+        );
+        return potentialDesa2;
+      }
+    }
+  }
+
+  return "";
+}
+
+/**
  * Format Nominatim address to Indonesian address string
  * @param address Nominatim address object
  * @returns Formatted address for Indonesia
+ *
+ * Nominatim Indonesia structure varies by area type:
+ *
+ * URBAN areas (e.g., Kota Yogyakarta):
+ * - road: street name
+ * - neighbourhood: kampung/area kecil (e.g., "Kampung Tegal Kemuning")
+ * - suburb: kelurahan (e.g., "Tegalpanggung")
+ * - city_district: kecamatan (e.g., "Danurejan")
+ * - city: kota (e.g., "Kota Yogyakarta") - NOTE: no county in urban areas!
+ * - state: provinsi
+ *
+ * RURAL areas (e.g., Sleman, Bantul, etc.):
+ * - road: street name
+ * - hamlet: dusun
+ * - village: desa/kelurahan (e.g., "Sendangarum")
+ * - city: larger village area (NOT kabupaten!) - can be confusing
+ * - municipality: kecamatan (e.g., "Minggir")
+ * - county: kabupaten (e.g., "Sleman")
+ * - state: provinsi
  */
-function formatAddress(address: Record<string, string>): FormattedAddress {
-  // Extract components from Nominatim Indonesia structure
-  // Based on actual API response structure:
-  // - road: street name (often empty in rural areas)
-  // - hamlet/neighbourhood: sub-village area
-  // - village: desa/kelurahan name
-  // - city/city_district: kelurahan (urban areas)
-  // - municipality: kecamatan
-  // - county: kabupaten/kota
-  // - state: provinsi
-
+function formatAddress(
+  address: Record<string, string>,
+  displayName?: string,
+): FormattedAddress {
   const road = address.road || "";
 
-  // Kelurahan: can be in city, village, hamlet, neighbourhood
+  // Detect if we have an ambiguous village/municipality situation
+  // This happens when Nominatim returns kecamatan name in village field
+  const villageEqualsKecamatan =
+    address.village &&
+    address.municipality &&
+    normalizeName(address.village) === normalizeName(address.municipality);
+
+  // Try to extract actual kelurahan from display_name if village is ambiguous
+  let extractedKelurahan = "";
+  if (villageEqualsKecamatan && displayName) {
+    extractedKelurahan = extractKelurahanFromDisplayName(
+      displayName,
+      address.municipality || "",
+    );
+    console.debug(
+      "[geolocation] Village equals kecamatan, extracted kelurahan from display_name:",
+      extractedKelurahan,
+    );
+  }
+
+  // Kelurahan/Desa:
+  // - Urban: suburb (kelurahan)
+  // - Rural: village (desa) > hamlet (dusun)
+  // - Fallback: extracted from display_name when village == municipality
   const kelurahan =
-    address.city ||
-    address.village ||
-    address.hamlet ||
-    address.neighbourhood ||
     address.suburb ||
+    (villageEqualsKecamatan && extractedKelurahan
+      ? extractedKelurahan
+      : address.village) ||
+    address.hamlet ||
     "";
 
-  // Kecamatan: can be in municipality, city_district
-  const kecamatan = address.municipality || address.city_district || "";
+  // Kecamatan:
+  // - Urban: city_district
+  // - Rural: municipality
+  const kecamatan = address.city_district || address.municipality || "";
 
-  // Kabupaten/Kota: county
-  const kota = address.county || address.town || "";
+  // Kabupaten/Kota:
+  // - Rural: county (e.g., "Sleman") - this should take priority!
+  // - Urban: city (e.g., "Kota Yogyakarta") - only when county doesn't exist
+  // NOTE: In rural areas, "city" field is NOT kabupaten - it's a village area!
+  const kota = address.county || address.city || address.town || "";
 
   // Provinsi: state
   const provinsi = address.state || "DI Yogyakarta";
@@ -145,12 +259,16 @@ function formatAddress(address: Record<string, string>): FormattedAddress {
   const postcode = address.postcode || "";
 
   // Build street-level address
-  // Use road if available, otherwise use kelurahan name as the area
-  const street = road || kelurahan || "Area tidak diketahui";
+  // Use road if available, otherwise use neighbourhood or kelurahan name as the area
+  const street =
+    road || address.neighbourhood || kelurahan || "Area tidak diketahui";
 
   // Build full address
   const parts = [street];
-  if (kelurahan && kelurahan !== street) parts.push(kelurahan);
+  // Add neighbourhood if we used road and neighbourhood exists
+  if (road && address.neighbourhood) parts.push(address.neighbourhood);
+  if (kelurahan && kelurahan !== street && kelurahan !== address.neighbourhood)
+    parts.push(kelurahan);
   if (kecamatan) parts.push(kecamatan);
   if (kota) parts.push(kota);
   if (provinsi) parts.push(provinsi);

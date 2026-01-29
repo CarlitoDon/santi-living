@@ -1,9 +1,4 @@
-/**
- * Calculator React Component
- * Main container that orchestrates all sections
- */
-
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useCalculatorState } from "./useCalculatorState";
 import { CartSection } from "./CartSection";
 import { ScheduleSection } from "./ScheduleSection";
@@ -13,7 +8,7 @@ import { ResultPanel } from "./ResultPanel";
 import type { Product, CustomerData } from "./types";
 import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP } from "@/services/erp-api";
-import { saveOrder } from "@/scripts/checkout-session";
+import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import config from "@/data/config.json";
 
 interface CalculatorProps {
@@ -26,21 +21,60 @@ interface CalculatorProps {
   imageMapLarge: Record<string, string>;
 }
 
+// Custom event type for location selection from map picker
+interface LocationSelectedEventDetail {
+  coords: { lat: number; lng: number };
+  address: {
+    street?: string;
+    kelurahan?: string;
+    kecamatan?: string;
+    kota?: string;
+    provinsi?: string;
+    postcode?: string;
+  };
+}
+
+type LocationSelectedEvent = CustomEvent<LocationSelectedEventDetail>;
+
 const initialCustomer: CustomerData = {
   name: "",
   whatsapp: "",
   address: {
     street: "",
     kelurahan: "",
+    kelurahanKode: "",
     kecamatan: "",
+    kecamatanKode: "",
     kota: "",
-    provinsi: "DI Yogyakarta",
+    kotaKode: "",
+    provinsi: "Daerah Istimewa Yogyakarta",
+    provinsiKode: "34",
     zip: "",
     lat: "",
     lng: "",
   },
   notes: "",
 };
+
+// Helper function (moved up so it can be used in useEffect)
+function haversineDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number,
+): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
 
 export function Calculator({
   products,
@@ -53,6 +87,182 @@ export function Calculator({
   const [customer, setCustomer] = useState<CustomerData>(initialCustomer);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [originalOrderId, setOriginalOrderId] = useState<string | null>(null);
+
+  // Ref to track if we've already pre-filled (prevents infinite loop)
+  const hasPrefilledRef = useRef(false);
+
+  // Detect edit mode and pre-fill from session (runs only once)
+  useEffect(() => {
+    // Skip if already pre-filled
+    if (hasPrefilledRef.current) return;
+
+    // Check if we're in edit mode (set by cart.astro)
+    const editMode =
+      (window as unknown as { __CALCULATOR_EDIT_MODE__?: boolean })
+        .__CALCULATOR_EDIT_MODE__ === true;
+    setIsEditMode(editMode);
+
+    if (editMode) {
+      const session = getOrder();
+      if (session?.order) {
+        // Mark as pre-filled to prevent running again
+        hasPrefilledRef.current = true;
+
+        const order = session.order;
+
+        // Save original orderId for update
+        if (order.orderId) {
+          setOriginalOrderId(order.orderId);
+        }
+
+        // Pre-fill customer data
+        setCustomer({
+          name: order.customerName || "",
+          whatsapp: order.customerWhatsapp || "",
+          address: {
+            street: order.addressFields?.street || "",
+            kelurahan: order.addressFields?.kelurahan || "",
+            kelurahanKode: order.addressFields?.kelurahanKode || "",
+            kecamatan: order.addressFields?.kecamatan || "",
+            kecamatanKode: order.addressFields?.kecamatanKode || "",
+            kota: order.addressFields?.kota || "",
+            kotaKode: order.addressFields?.kotaKode || "",
+            provinsi:
+              order.addressFields?.provinsi || "Daerah Istimewa Yogyakarta",
+            provinsiKode: order.addressFields?.provinsiKode || "34",
+            zip: order.addressFields?.zip || "",
+            lat: order.addressFields?.lat || "",
+            lng: order.addressFields?.lng || "",
+          },
+          notes: order.notes || "",
+        });
+
+        // Pre-fill duration
+        if (order.duration) {
+          actions.setDuration(order.duration);
+        }
+
+        // Pre-fill start date
+        if (order.orderDate) {
+          actions.setStartDate(order.orderDate);
+        }
+
+        // Pre-fill items - find products and add them
+        const allProducts = [
+          ...products.mattressPackages,
+          ...products.mattressOnly,
+          ...products.accessories,
+        ];
+
+        if (order.items && order.items.length > 0) {
+          order.items.forEach(
+            (item: {
+              id?: string;
+              name: string;
+              quantity: number;
+              pricePerDay?: number;
+              category?: string;
+              includes?: string[];
+            }) => {
+              // Find product by ID first, then by name
+              const product =
+                allProducts.find((p) => p.id === item.id) ||
+                allProducts.find(
+                  (p) =>
+                    p.name === item.name ||
+                    p.name.includes(item.name) ||
+                    item.name.includes(p.name),
+                );
+
+              if (product) {
+                for (let i = 0; i < item.quantity; i++) {
+                  actions.addItem({
+                    id: product.id,
+                    name: product.name,
+                    category: product.category,
+                    pricePerDay: product.pricePerDay,
+                    includes: product.includes,
+                  });
+                }
+              }
+            },
+          );
+        }
+
+        // Pre-fill delivery fee if we have coordinates
+        if (order.addressFields?.lat && order.addressFields?.lng) {
+          const lat = parseFloat(order.addressFields.lat);
+          const lng = parseFloat(order.addressFields.lng);
+          if (!isNaN(lat) && !isNaN(lng)) {
+            const storeLocation = config.storeLocation;
+            const distance = haversineDistance(
+              lat,
+              lng,
+              storeLocation.lat,
+              storeLocation.lng,
+            );
+
+            let fee = 0;
+            for (const zone of config.deliveryZones) {
+              if (distance <= zone.maxDistance) {
+                fee = zone.price;
+                break;
+              }
+            }
+            if (
+              fee === 0 &&
+              distance >
+                config.deliveryZones[config.deliveryZones.length - 1]
+                  .maxDistance
+            ) {
+              fee = Math.round(distance * config.deliveryPricePerKm);
+              fee = Math.max(fee, config.minDeliveryPrice);
+            }
+
+            actions.setDeliveryFee(fee, distance);
+          }
+        }
+      }
+    }
+  }, []); // Empty dependency - run only once on mount
+
+  // Recalculate delivery fee when lat/lng changes (from dropdown or GPS)
+  useEffect(() => {
+    const { lat, lng } = customer.address;
+    if (!lat || !lng) return;
+
+    const latNum = parseFloat(lat);
+    const lngNum = parseFloat(lng);
+    if (isNaN(latNum) || isNaN(lngNum)) return;
+
+    const storeLocation = config.storeLocation;
+    const distance = haversineDistance(
+      latNum,
+      lngNum,
+      storeLocation.lat,
+      storeLocation.lng,
+    );
+
+    let fee = 0;
+    for (const zone of config.deliveryZones) {
+      if (distance <= zone.maxDistance) {
+        fee = zone.price;
+        break;
+      }
+    }
+    if (
+      fee === 0 &&
+      distance >
+        config.deliveryZones[config.deliveryZones.length - 1].maxDistance
+    ) {
+      fee = Math.round(distance * config.deliveryPricePerKm);
+      fee = Math.max(fee, config.minDeliveryPrice);
+    }
+
+    actions.setDeliveryFee(fee, distance);
+  }, [customer.address.lat, customer.address.lng]);
 
   const clearError = useCallback((field: string) => {
     setErrors((prev) => {
@@ -71,16 +281,30 @@ export function Calculator({
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
 
+      // Match address names to Nusantarakita kode values
+      const { matchAddressToKode } = await import("@/services/address-matcher");
+      const matched = await matchAddressToKode({
+        kelurahan: address.kelurahan,
+        kecamatan: address.kecamatan,
+        kota: address.kota,
+        provinsi: address.provinsi,
+        postcode: address.postcode,
+      });
+
       setCustomer((prev) => ({
         ...prev,
         address: {
           ...prev.address,
           street: address.street || prev.address.street,
-          kelurahan: address.kelurahan || "",
-          kecamatan: address.kecamatan || "",
-          kota: address.kota || "",
+          kelurahan: matched.kelurahan || address.kelurahan || "",
+          kelurahanKode: matched.kelurahanKode,
+          kecamatan: matched.kecamatan || address.kecamatan || "",
+          kecamatanKode: matched.kecamatanKode,
+          kota: matched.kota || address.kota || "",
+          kotaKode: matched.kotaKode,
           provinsi: address.provinsi || "DI Yogyakarta",
-          zip: address.postcode || "",
+          provinsiKode: "34",
+          zip: matched.zip || address.postcode || "",
           lat: coords.latitude.toString(),
           lng: coords.longitude.toString(),
         },
@@ -113,10 +337,13 @@ export function Calculator({
       }
 
       actions.setDeliveryFee(fee, distance);
+
+      // Clear location error since we now have coordinates
+      clearError("addressLocation");
     } catch (error) {
       alert((error as Error).message || "Gagal mendapatkan lokasi");
     }
-  }, [actions]);
+  }, [actions, clearError]);
 
   const handleMapPickerClick = useCallback(() => {
     // Dispatch custom event to open map picker modal
@@ -125,31 +352,33 @@ export function Calculator({
 
   // Listen for location-selected event from map picker
   useEffect(() => {
-    const handleLocationSelected = (
-      event: CustomEvent<{
-        coords: { lat: number; lng: number };
-        address: {
-          street?: string;
-          kelurahan?: string;
-          kecamatan?: string;
-          kota?: string;
-          provinsi?: string;
-          postcode?: string;
-        };
-      }>,
-    ) => {
+    const handleLocationSelected = async (event: LocationSelectedEvent) => {
       const { coords, address } = event.detail;
 
-      // Update customer address
+      // Match address names to Nusantarakita kode values
+      const { matchAddressToKode } = await import("@/services/address-matcher");
+      const matched = await matchAddressToKode({
+        kelurahan: address.kelurahan,
+        kecamatan: address.kecamatan,
+        kota: address.kota,
+        provinsi: address.provinsi,
+        postcode: address.postcode,
+      });
+
+      // Update customer address with matched kode values
       setCustomer((prev) => ({
         ...prev,
         address: {
           street: address.street || prev.address.street,
-          kelurahan: address.kelurahan || "",
-          kecamatan: address.kecamatan || "",
-          kota: address.kota || "",
-          provinsi: address.provinsi || "DI Yogyakarta",
-          zip: address.postcode || "",
+          kelurahan: matched.kelurahan || address.kelurahan || "",
+          kelurahanKode: matched.kelurahanKode,
+          kecamatan: matched.kecamatan || address.kecamatan || "",
+          kecamatanKode: matched.kecamatanKode,
+          kota: matched.kota || address.kota || "",
+          kotaKode: matched.kotaKode,
+          provinsi: address.provinsi || "Daerah Istimewa Yogyakarta",
+          provinsiKode: "34",
+          zip: matched.zip || address.postcode || "",
           lat: coords.lat.toString(),
           lng: coords.lng.toString(),
         },
@@ -182,19 +411,21 @@ export function Calculator({
       }
 
       actions.setDeliveryFee(fee, distance);
+
+      // Clear location error since we now have coordinates
+      clearError("addressLocation");
     };
 
-    window.addEventListener(
-      "location-selected",
-      handleLocationSelected as EventListener,
-    );
-    return () => {
-      window.removeEventListener(
-        "location-selected",
-        handleLocationSelected as EventListener,
-      );
+    // Typed wrapper to satisfy addEventListener signature
+    const eventHandler = (e: Event) => {
+      handleLocationSelected(e as LocationSelectedEvent);
     };
-  }, [actions]);
+
+    window.addEventListener("location-selected", eventHandler);
+    return () => {
+      window.removeEventListener("location-selected", eventHandler);
+    };
+  }, [actions, clearError]);
 
   // Handle deep links from product page (e.g., /?id=paket-single#calculator)
   useEffect(() => {
@@ -334,6 +565,12 @@ export function Calculator({
       newErrors.addressZip = "Kode Pos wajib diisi";
     }
 
+    // Validate coordinates for delivery fee calculation
+    if (!customer.address.lat || !customer.address.lng) {
+      newErrors.addressLocation =
+        "Lokasi wajib dipilih untuk menghitung ongkir. Gunakan tombol 'Pilih di Peta' atau 'Lokasi Saya'.";
+    }
+
     setErrors(newErrors);
     return newErrors;
   }, [state, customer]);
@@ -343,8 +580,18 @@ export function Calculator({
     if (Object.keys(validationErrors).length > 0) {
       // Scroll to first error
       const firstErrorField = Object.keys(validationErrors)[0];
-      const element = document.getElementById(firstErrorField);
-      element?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Special handling for addressLocation - scroll to location buttons
+      if (firstErrorField === "addressLocation") {
+        const locationButtons = document.getElementById("location-buttons");
+        locationButtons?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      } else {
+        const element = document.getElementById(firstErrorField);
+        element?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
       return;
     }
 
@@ -365,7 +612,11 @@ export function Calculator({
         fullAddress += ` (${customer.address.lat}, ${customer.address.lng})`;
       }
 
-      const orderId = `SL-${Date.now().toString(36).toUpperCase()}`;
+      // Use existing orderId in edit mode, generate new one otherwise
+      const orderId =
+        isEditMode && originalOrderId
+          ? originalOrderId
+          : `SL-${Date.now().toString(36).toUpperCase()}`;
 
       const bookingData = {
         orderId,
@@ -392,16 +643,20 @@ export function Calculator({
         volumeDiscountLabel: state.volumeDiscountLabel,
       };
 
-      // Save to session
+      // Save to session (update existing order data)
       saveOrder(bookingData);
 
-      // Create in ERP
-      const erpResponse = await createOrderInERP(bookingData);
+      // Only create new order in ERP if not in edit mode
+      // In edit mode, we just update the session and redirect back to checkout
+      if (!isEditMode) {
+        // Create in ERP
+        const erpResponse = await createOrderInERP(bookingData);
 
-      if (erpResponse.orderUrl) {
-        sessionStorage.setItem("erpOrderUrl", erpResponse.orderUrl);
-        sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
-        sessionStorage.setItem("erpPublicToken", erpResponse.publicToken);
+        if (erpResponse.orderUrl) {
+          sessionStorage.setItem("erpOrderUrl", erpResponse.orderUrl);
+          sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
+          sessionStorage.setItem("erpPublicToken", erpResponse.publicToken);
+        }
       }
 
       // Redirect to checkout
@@ -482,29 +737,12 @@ export function Calculator({
             state={state}
             onSubmit={handleSubmit}
             isSubmitting={isSubmitting}
+            submitButtonText={
+              isEditMode ? "Update Pesanan" : "Pesan via WhatsApp"
+            }
           />
         </div>
       </div>
     </section>
   );
-}
-
-// Helper function
-function haversineDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number,
-): number {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
 }

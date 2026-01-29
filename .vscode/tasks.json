@@ -9,56 +9,71 @@
       "group": {
         "kind": "build",
         "isDefault": true
-      }
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "instancePolicy": "terminateOldest"
+      },
+      "isBackground": true
     },
     {
-      "label": "Turbo: Dev Web",
+      "label": "Turbo: Dev Web - SL",
       "type": "npm",
       "script": "dev:web",
       "problemMatcher": [],
       "presentation": {
         "group": "frontend"
-      }
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "instancePolicy": "terminateOldest"
+      },
+      "isBackground": true
     },
     {
-      "label": "Turbo: Dev Proxy",
+      "label": "Turbo: Dev Proxy - SL",
       "type": "npm",
       "script": "dev:proxy",
       "problemMatcher": [],
       "presentation": {
         "group": "backend"
-      }
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "instancePolicy": "terminateOldest"
+      },
+      "isBackground": true
     },
     {
-      "label": "Turbo: Build All",
+      "label": "Turbo: Build All - SL",
       "type": "npm",
       "script": "build",
       "problemMatcher": [],
       "group": "build"
     },
     {
-      "label": "Turbo: Build Web",
+      "label": "Turbo: Build Web - SL",
       "type": "npm",
       "script": "build:web",
       "problemMatcher": [],
       "group": "build"
     },
     {
-      "label": "Turbo: Lint",
+      "label": "Turbo: Lint - SL",
       "type": "npm",
       "script": "lint",
       "problemMatcher": ["$eslint-stylish"],
       "group": "test"
     },
     {
-      "label": "Turbo: Typecheck",
+      "label": "Turbo: Typecheck - SL",
       "type": "npm",
       "script": "typecheck",
       "problemMatcher": ["$tsc"],
       "group": "test"
     },
     {
-      "label": "TypeScript: Watch",
+      "label": "TypeScript: Watch - SL",
       "type": "npm",
       "script": "typecheck:watch",
       "problemMatcher": "$tsc-watch",
@@ -68,7 +83,12 @@
       },
       "presentation": {
         "group": "build"
-      }
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "instancePolicy": "terminateOldest"
+      },
+      "isBackground": true
     }
   ]
 }

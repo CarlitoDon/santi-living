@@ -25,6 +25,66 @@ interface CheckoutState {
   selectedMethod: PaymentMethod | null;
 }
 
+/**
+ * Snap Token Cache - prevents duplicate QRIS generation
+ */
+interface SnapTokenCache {
+  token: string;
+  paymentMethod: PaymentMethod;
+  createdAt: number;
+}
+
+const SNAP_TOKEN_CACHE_KEY = "snapTokenCache";
+const SNAP_TOKEN_MAX_AGE_MINUTES = 14; // Midtrans tokens valid for ~15 mins
+
+function getSnapTokenCache(
+  publicToken: string,
+  paymentMethod: PaymentMethod,
+): string | null {
+  const cacheKey = `${SNAP_TOKEN_CACHE_KEY}_${publicToken}`;
+  const cached = sessionStorage.getItem(cacheKey);
+  if (!cached) return null;
+
+  try {
+    const data: SnapTokenCache = JSON.parse(cached);
+    // Check if same payment method
+    if (data.paymentMethod !== paymentMethod) return null;
+    // Check if not expired
+    const ageMinutes = (Date.now() - data.createdAt) / 1000 / 60;
+    if (ageMinutes >= SNAP_TOKEN_MAX_AGE_MINUTES) {
+      sessionStorage.removeItem(cacheKey);
+      return null;
+    }
+    console.log(
+      `[Checkout] Using cached Snap token (age: ${ageMinutes.toFixed(1)} min)`,
+    );
+    return data.token;
+  } catch {
+    return null;
+  }
+}
+
+function setSnapTokenCache(
+  publicToken: string,
+  paymentMethod: PaymentMethod,
+  token: string,
+): void {
+  const cacheKey = `${SNAP_TOKEN_CACHE_KEY}_${publicToken}`;
+  const data: SnapTokenCache = {
+    token,
+    paymentMethod,
+    createdAt: Date.now(),
+  };
+  sessionStorage.setItem(cacheKey, JSON.stringify(data));
+  console.log(`[Checkout] Cached Snap token for ${paymentMethod}`);
+}
+
+function clearSnapTokenCache(publicToken: string): void {
+  const cacheKey = `${SNAP_TOKEN_CACHE_KEY}_${publicToken}`;
+  sessionStorage.removeItem(cacheKey);
+  console.log("[Checkout] Cleared Snap token cache");
+}
+
 // State
 let state: CheckoutState = {
   step: 1,
@@ -613,19 +673,31 @@ async function initSnapPayment() {
       }
     };
 
-    // 3. Create Snap Token (Unified Flow)
-    // Both GoPay and QRIS use Snap.
-    // We pass 'paymentMethod' so backend can set enabled_payments accordingly.
-    console.log(`[Checkout] Creating Snap token for ${paymentMethod}...`);
+    // 3. Check for cached Snap token first (prevents duplicate QRIS)
+    let snapToken: string;
+    const cachedToken = getSnapTokenCache(publicToken, paymentMethod);
 
-    const tokenRes = await fetch("/api/create-payment-token", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: publicToken, paymentMethod }),
-    });
+    if (cachedToken) {
+      // Use cached token - no API call needed
+      snapToken = cachedToken;
+      console.log(`[Checkout] Reusing cached Snap token for ${paymentMethod}`);
+    } else {
+      // Create new Snap Token via API
+      console.log(`[Checkout] Creating new Snap token for ${paymentMethod}...`);
 
-    if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
-    const { token: snapToken } = await tokenRes.json();
+      const tokenRes = await fetch("/api/create-payment-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: publicToken, paymentMethod }),
+      });
+
+      if (!tokenRes.ok) throw new Error("Gagal mengambil token pembayaran.");
+      const tokenData = await tokenRes.json();
+      snapToken = tokenData.token;
+
+      // Cache the new token for reuse
+      setSnapTokenCache(publicToken, paymentMethod, snapToken);
+    }
 
     const triggerSnap = () => {
       if (window.snap) {
@@ -636,6 +708,8 @@ async function initSnapPayment() {
         const embedOptions: SnapEmbedOptions = {
           embedId: "snap-container",
           onSuccess: function (_result: Record<string, unknown>) {
+            // Clear cache on success - payment completed
+            clearSnapTokenCache(publicToken);
             showStatusMessage(
               "Pembayaran Berhasil!",
               "Sedang mengalihkan ke detail pesanan...",

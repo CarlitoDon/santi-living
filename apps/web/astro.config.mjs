@@ -33,8 +33,7 @@ const fileEnv = loadEnv(envMode, process.cwd(), '');
 
 // Determine if Midtrans should use production
 // Priority: 1. VERCEL_ENV='production', 2. MIDTRANS_IS_PRODUCTION='true'
-const clientKey = (process.env.MIDTRANS_CLIENT_KEY || fileEnv.MIDTRANS_CLIENT_KEY || '').replace(/["']/g, "");
-// If VERCEL_ENV is undefined during build on Vercel, it might be an issue.
+// Note: clientKey is not used here but configured via env object below
 // But we can also check if the client key provided matches the known production key structure if we had one.
 // Better: TRUST the process.env.MIDTRANS_IS_PRODUCTION if it exists.
 console.log('--- ENV RESOLUTION ---');

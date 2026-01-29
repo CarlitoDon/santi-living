@@ -7,7 +7,6 @@ import logoQris from "@/assets/images/logo-qris.svg";
 import logoGopay from "@/assets/images/logo-gopay.svg";
 import logoBca from "@/assets/images/logo-bca.png";
 
-const clientKey = import.meta.env.MIDTRANS_CLIENT_KEY || "";
 // Use the explicit public override if available, otherwise fall back
 const isProduction =
   import.meta.env.PUBLIC_IS_PRODUCTION_MODE === "true" ||
@@ -30,14 +29,16 @@ const snapUrl = isProduction
         data-client-key={import.meta.env.MIDTRANS_CLIENT_KEY}
         is:inline
       >
-        ("[Checkout] Environment Debug:", {
-          isProduction: "{isProduction}",
-          snapUrl: "{snapUrl}",
-          clientKey: "{import.meta.env.MIDTRANS_CLIENT_KEY}",
-          metaEnvIsProduction: "{import.meta.env.MIDTRANS_IS_PRODUCTION}",
-          publicIsProductionMode: "{import.meta.env.PUBLIC_IS_PRODUCTION_MODE}",
-          vercelEnv: "{import.meta.env.VERCEL_ENV}",
-        });
+        ("[Checkout] Environment Debug:",
+          {
+            isProduction: "{isProduction}",
+            snapUrl: "{snapUrl}",
+            clientKey: "{import.meta.env.MIDTRANS_CLIENT_KEY}",
+            metaEnvIsProduction: "{import.meta.env.MIDTRANS_IS_PRODUCTION}",
+            publicIsProductionMode:
+              "{import.meta.env.PUBLIC_IS_PRODUCTION_MODE}",
+            vercelEnv: "{import.meta.env.VERCEL_ENV}",
+          });
       </script>
 
       <!-- Step 1: Summary + Payment Method Selection -->

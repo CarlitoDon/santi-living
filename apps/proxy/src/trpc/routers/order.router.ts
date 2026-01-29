@@ -140,10 +140,10 @@ export const orderRouter = router({
           volumeDiscountLabel: input.volumeDiscountLabel,
           orderUrl,
         });
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error("[WA Notify] Failed to send order confirmation:", err);
 
-        const errorMessage = err.message || "";
+        const errorMessage = err instanceof Error ? err.message : String(err);
         // Check for invalid number (from Bot Service 400)
         if (
           errorMessage.includes("[INVALID_PHONE]") ||
@@ -291,7 +291,7 @@ export const orderRouter = router({
       }
 
       // DEBUG: Log order paymentMethod
-      console.log(
+      console.warn(
         "[createPaymentToken] Order paymentMethod:",
         order.paymentMethod,
       );
@@ -303,9 +303,11 @@ export const orderRouter = router({
       )}`;
 
       // 3. Prepare Item Details (Products + Delivery + Discount)
+      // IMPORTANT: Use item.subtotal which already includes duration calculation
+      // item.unitPrice is the per-day price, item.subtotal = unitPrice * quantity * duration
       const itemDetails = order.items.map((item) => ({
         id: item.name.substring(0, 50),
-        price: Math.round(item.unitPrice), // Assuming unitPrice is total price for that item (duration already applied or price is fixed)
+        price: Math.round(item.subtotal / item.quantity), // Total price per unit (includes duration)
         quantity: item.quantity,
         name: item.name.substring(0, 50),
       }));
@@ -333,7 +335,7 @@ export const orderRouter = router({
       // 4. Create Snap Token with correct payment method
       // Prefer input.paymentMethod (direct from frontend) over order.paymentMethod (potentially stale)
       const effectivePaymentMethod = input.paymentMethod || order.paymentMethod;
-      console.log(
+      console.warn(
         "[createPaymentToken] Using paymentMethod:",
         effectivePaymentMethod,
         "(input:",
@@ -351,7 +353,7 @@ export const orderRouter = router({
         customer_details: {
           first_name: order.partner.name.split(" ")[0],
           last_name: order.partner.name.split(" ").slice(1).join(" ") || "",
-          email: "customer@santiliving.com",
+          email: `${order.partner.name.toLowerCase().replace(" ", "_")}@santiliving.com`,
           phone: order.partner.phone,
         },
         item_details: itemDetails,
@@ -400,7 +402,7 @@ export const orderRouter = router({
       // 2. Create unique order ID for Midtrans
       const uniqueOrderId = `${order.orderNumber}-${Math.floor(Date.now() / 1000)}`;
 
-      console.log(
+      console.warn(
         "[createQrisPayment] Creating QRIS for order:",
         uniqueOrderId,
       );

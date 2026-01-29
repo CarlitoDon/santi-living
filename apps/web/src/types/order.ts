@@ -9,9 +9,13 @@
 export interface AddressFields {
   street?: string;
   kelurahan?: string;
+  kelurahanKode?: string;
   kecamatan?: string;
+  kecamatanKode?: string;
   kota?: string;
+  kotaKode?: string;
   provinsi?: string;
+  provinsiKode?: string;
   zip?: string;
   lat?: string;
   lng?: string;
