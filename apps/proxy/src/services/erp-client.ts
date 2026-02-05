@@ -128,7 +128,24 @@ export async function getOrderByToken(
 export async function findOrCreatePartner(
   input: CreatePartnerInput,
 ): Promise<PartnerResponse> {
-  return syncClient.publicRental.findOrCreatePartner.mutate(input);
+  console.error("[ERP Client] findOrCreatePartner called with:", {
+    companyId: input.companyId,
+    name: input.name,
+    phone: input.phone,
+  });
+  try {
+    const result =
+      await syncClient.publicRental.findOrCreatePartner.mutate(input);
+    console.error("[ERP Client] findOrCreatePartner SUCCESS:", result.id);
+    return result;
+  } catch (error) {
+    console.error("[ERP Client] findOrCreatePartner FAILED:", {
+      errorMessage: error instanceof Error ? error.message : String(error),
+      errorName: error instanceof Error ? error.name : "Unknown",
+      cause: error instanceof Error ? (error as any).cause : undefined,
+    });
+    throw error;
+  }
 }
 
 export async function confirmPayment(

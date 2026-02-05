@@ -36,7 +36,16 @@ export const orderRouter = router({
     .mutation(async ({ input }) => {
       const addressFields = input.addressFields || {};
 
+      // DEBUG: Log environment and incoming data
+      console.error("[order.create] DEBUG:", {
+        apiUrl: process.env.SYNC_ERP_API_URL || "NOT SET",
+        companyId: SANTI_LIVING_COMPANY_ID,
+        customerName: input.customerName,
+        timestamp: new Date().toISOString(),
+      });
+
       // 1. Find or create partner in sync-erp
+      console.error("[order.create] Step 1: findOrCreatePartner...");
       const partner = await findOrCreatePartner({
         companyId: SANTI_LIVING_COMPANY_ID,
         name: input.customerName,

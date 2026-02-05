@@ -9,7 +9,15 @@ import { createProxyClient } from "../../lib/trpc-client";
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    // console.log("[submit-order] Creating order for:", body.customerName);
+
+    // DEBUG: Log environment and request info
+    const proxyUrl =
+      process.env.SANTI_PROXY_URL || process.env.PUBLIC_PROXY_URL || "NOT SET";
+    console.warn("[submit-order] DEBUG:", {
+      proxyUrl,
+      customerName: body.customerName,
+      timestamp: new Date().toISOString(),
+    });
 
     const client = createProxyClient();
 
