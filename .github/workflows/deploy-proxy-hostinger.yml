@@ -41,17 +41,35 @@ jobs:
       - name: Deploy to Hostinger
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          SSH_PASSPHRASE: ${{ secrets.HOSTINGER_SSH_PASSPHRASE }}
         run: |
           eval $(ssh-agent -a $SSH_AUTH_SOCK)
-          echo "${{ secrets.HOSTINGER_SSH_PASSPHRASE }}" | SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/id_ed25519
+
+          # Create dummy askpass script to handle passphrase
+          echo 'echo "$SSH_PASSPHRASE"' > ~/.ssh/askpass
+          chmod +x ~/.ssh/askpass
+
+          export SSH_ASKPASS=~/.ssh/askpass
+          export DISPLAY=:0 # Needed for some ssh versions to trigger askpass
+
+          # Use expect-style approach via setsid
+          setsid -w ssh-add ~/.ssh/id_ed25519 < /dev/null
 
           # Upload files
-          rsync -avz --delete -e "ssh -p 65002" dist/ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/dist/
-          rsync -avz -e "ssh -p 65002" package.json ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/
+          rsync -avz --delete \
+            --exclude='node_modules' \
+            -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+            dist/ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/dist/
+
+          rsync -avz \
+            -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+            package.json ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/
 
           # Install dependencies and restart
-          ssh -p 65002 ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} << 'EOF'
+          ssh -p 65002 -o StrictHostKeyChecking=no ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} << 'EOF'
+            export PATH=/opt/alt/alt-nodejs20/root/usr/bin:$PATH
             cd ~/public_html/apps/proxy
+            rm -rf node_modules
             npm install --production
             touch tmp/restart.txt 2>/dev/null || true
           EOF
