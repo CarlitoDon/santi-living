@@ -1,0 +1,57 @@
+name: Deploy Proxy to Hostinger
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/proxy/**"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/proxy
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: .
+
+      - name: Build Proxy
+        run: npm run build
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HOSTINGER_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p 65002 ${{ secrets.HOSTINGER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to Hostinger
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          eval $(ssh-agent -a $SSH_AUTH_SOCK)
+          echo "${{ secrets.HOSTINGER_SSH_PASSPHRASE }}" | SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/id_ed25519
+
+          # Upload files
+          rsync -avz --delete -e "ssh -p 65002" dist/ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/dist/
+          rsync -avz -e "ssh -p 65002" package.json ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/apps/proxy/
+
+          # Install dependencies and restart
+          ssh -p 65002 ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} << 'EOF'
+            cd ~/public_html/apps/proxy
+            npm install --production
+            touch tmp/restart.txt 2>/dev/null || true
+          EOF

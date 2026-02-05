@@ -175,10 +175,70 @@ export async function matchAddressToKode(
               );
             }
           } else {
-            console.warn(
-              "❌ [address-matcher] No match for kecamatan:",
-              geocodedAddress.kecamatan,
-            );
+            // Fallback: OSM might return swapped values (e.g., city_district = kelurahan, village = kecamatan)
+            // Try matching kelurahan field as kecamatan
+            if (geocodedAddress.kelurahan) {
+              console.debug(
+                "🔄 [address-matcher] Trying fallback: using kelurahan as kecamatan:",
+                geocodedAddress.kelurahan,
+              );
+              const fallbackKecamatan = findBestMatch(
+                geocodedAddress.kelurahan,
+                kecamatanList,
+              );
+
+              if (fallbackKecamatan) {
+                result.kecamatanKode = fallbackKecamatan.kode;
+                result.kecamatan = fallbackKecamatan.nama;
+                console.debug(
+                  "✅ [address-matcher] Fallback matched kecamatan:",
+                  fallbackKecamatan.nama,
+                );
+
+                // Now use the original kecamatan field as kelurahan (it's actually the kelurahan name)
+                const kelurahanList = await getKelurahan(
+                  fallbackKecamatan.kode,
+                );
+                console.debug(
+                  "📍 [address-matcher] Looking for kelurahan (swapped):",
+                  geocodedAddress.kecamatan,
+                  "in",
+                  kelurahanList.map((k) => k.nama),
+                );
+                const matchedKelurahan = findBestMatch(
+                  geocodedAddress.kecamatan,
+                  kelurahanList,
+                );
+
+                if (matchedKelurahan) {
+                  result.kelurahanKode = matchedKelurahan.kode;
+                  result.kelurahan = matchedKelurahan.nama;
+                  console.debug(
+                    "✅ [address-matcher] Matched kelurahan (swapped):",
+                    matchedKelurahan.nama,
+                  );
+                  if (matchedKelurahan.kode_pos && !result.zip) {
+                    result.zip = matchedKelurahan.kode_pos;
+                  }
+                } else {
+                  console.warn(
+                    "❌ [address-matcher] No match for kelurahan (swapped):",
+                    geocodedAddress.kecamatan,
+                  );
+                }
+              } else {
+                console.warn(
+                  "❌ [address-matcher] No match for kecamatan:",
+                  geocodedAddress.kecamatan,
+                  "(fallback also failed)",
+                );
+              }
+            } else {
+              console.warn(
+                "❌ [address-matcher] No match for kecamatan:",
+                geocodedAddress.kecamatan,
+              );
+            }
           }
         }
       } else {
