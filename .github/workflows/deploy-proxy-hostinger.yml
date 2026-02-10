@@ -89,15 +89,15 @@ jobs:
           rsync -avz --delete \
             --exclude='node_modules' \
             --exclude='.env' \
-            -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+            -e "ssh -p 65002 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             dist/ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/$DEPLOY_DIR/dist/
 
           rsync -avz \
-            -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+            -e "ssh -p 65002 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
             package.json ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:~/public_html/$DEPLOY_DIR/
 
           # Install dependencies and restart
-          ssh -p 65002 -o StrictHostKeyChecking=no ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} <<EOF
+          ssh -p 65002 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }} <<EOF
             export PATH=/opt/alt/alt-nodejs20/root/usr/bin:\$PATH
             cd ~/public_html/$DEPLOY_DIR
             rm -rf node_modules
