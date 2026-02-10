@@ -13,6 +13,7 @@ import {
   getOrderByToken,
   confirmPayment as confirmPaymentErp,
   deleteRentalOrder,
+  updateRentalOrder,
 } from "../../services/erp-client";
 import {
   createSnapToken,
@@ -224,6 +225,123 @@ export const orderRouter = router({
     )
     .query(async ({ input }) => {
       return getOrderByToken(input.token);
+    }),
+
+  /**
+   * Update order - called by santi-living frontend when user edits order
+   * Only updates DRAFT orders with PENDING payment
+   */
+  update: protectedProcedure
+    .input(
+      z.object({
+        token: z
+          .string()
+          .regex(
+            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+          ),
+        customerName: z.string().min(2).optional(),
+        customerWhatsapp: z
+          .string()
+          .regex(/^(08|62)\d{8,12}$/)
+          .optional(),
+        deliveryAddress: z.string().optional(),
+        addressFields: z
+          .object({
+            street: z.string().optional(),
+            kelurahan: z.string().optional(),
+            kecamatan: z.string().optional(),
+            kota: z.string().optional(),
+            provinsi: z.string().optional(),
+            zip: z.string().optional(),
+            lat: z.string().optional(),
+            lng: z.string().optional(),
+          })
+          .optional(),
+        items: z
+          .array(
+            z.object({
+              id: z.string(),
+              name: z.string(),
+              category: z.enum(["package", "mattress", "accessory"]),
+              quantity: z.number().int().positive(),
+              pricePerDay: z.number().positive(),
+              includes: z.array(z.string()).optional(),
+            }),
+          )
+          .optional(),
+        totalPrice: z.number().optional(),
+        orderDate: z.string().optional(),
+        endDate: z.string().optional(),
+        duration: z.number().optional(),
+        deliveryFee: z.number().nonnegative().optional(),
+        paymentMethod: z.enum(["qris", "transfer", "gopay"]).optional(),
+        notes: z.string().optional(),
+        volumeDiscountAmount: z.number().optional(),
+        volumeDiscountLabel: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const addressFields = input.addressFields || {};
+
+      console.error("[order.update] Updating order:", {
+        token: input.token,
+        customerName: input.customerName,
+        timestamp: new Date().toISOString(),
+      });
+
+      // Map items to ERP format
+      const erpItems = input.items?.map((item) => {
+        const baseItem = {
+          quantity: item.quantity,
+          name: item.name,
+          pricePerDay: item.pricePerDay,
+          category: item.category as "package" | "mattress" | "accessory",
+          components: item.includes,
+        };
+
+        if (item.category === "package") {
+          return { ...baseItem, rentalBundleId: item.id };
+        } else {
+          return { ...baseItem, rentalItemId: item.id };
+        }
+      });
+
+      const result = await updateRentalOrder({
+        token: input.token,
+        customerName: input.customerName,
+        customerPhone: input.customerWhatsapp,
+        rentalStartDate: input.orderDate
+          ? new Date(input.orderDate)
+          : undefined,
+        rentalEndDate: input.endDate ? new Date(input.endDate) : undefined,
+        notes: input.notes,
+        deliveryFee: input.deliveryFee,
+        deliveryAddress: input.deliveryAddress,
+        street: addressFields.street,
+        kelurahan: addressFields.kelurahan,
+        kecamatan: addressFields.kecamatan,
+        kota: addressFields.kota,
+        provinsi: addressFields.provinsi,
+        zip: addressFields.zip,
+        latitude: addressFields.lat
+          ? parseFloat(addressFields.lat)
+          : undefined,
+        longitude: addressFields.lng
+          ? parseFloat(addressFields.lng)
+          : undefined,
+        paymentMethod: input.paymentMethod,
+        discountAmount: input.volumeDiscountAmount,
+        discountLabel: input.volumeDiscountLabel,
+        items: erpItems,
+      });
+
+      return {
+        id: result.id,
+        orderNumber: result.orderNumber,
+        publicToken: result.publicToken,
+        status: result.status,
+        totalAmount: result.totalAmount,
+      };
     }),
 
   /**

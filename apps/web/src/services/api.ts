@@ -23,6 +23,28 @@ export async function submitOrder(payload: OrderPayload) {
   return await response.json();
 }
 
+export async function updateOrder(
+  token: string,
+  payload: OrderPayload,
+) {
+  const response = await fetch("/api/update-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...payload, token }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(
+      errorData.message || errorData.error || "Gagal mengupdate pesanan",
+    );
+  }
+
+  return await response.json();
+}
+
 export async function getBotStatus() {
   const baseUrl = import.meta.env.PUBLIC_BOT_API_URL || config.botApi.baseUrl;
   const response = await fetch(`${baseUrl}/status`);

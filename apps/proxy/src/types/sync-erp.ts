@@ -55,6 +55,45 @@ export interface OrderResponse {
   createdAt: string;
 }
 
+export interface UpdateOrderInput {
+  token: string;
+  customerName?: string;
+  customerPhone?: string;
+  rentalStartDate?: Date;
+  rentalEndDate?: Date;
+  notes?: string;
+  deliveryFee?: number;
+  deliveryAddress?: string;
+  street?: string;
+  kelurahan?: string;
+  kecamatan?: string;
+  kota?: string;
+  provinsi?: string;
+  zip?: string;
+  latitude?: number;
+  longitude?: number;
+  paymentMethod?: string;
+  discountAmount?: number;
+  discountLabel?: string;
+  items?: Array<{
+    rentalItemId?: string;
+    rentalBundleId?: string;
+    quantity: number;
+    name?: string;
+    pricePerDay?: number;
+    category?: 'package' | 'mattress' | 'accessory';
+    components?: string[];
+  }>;
+}
+
+export interface UpdateOrderResponse {
+  id: string;
+  orderNumber: string;
+  publicToken: string;
+  status: string;
+  totalAmount: number;
+}
+
 export interface PartnerResponse {
   id: string;
   name: string;
@@ -158,6 +197,9 @@ export type SyncErpRouter = AnyRouter & {
         orderNumber: string;
         status: string;
       }>;
+    };
+    updateOrder: {
+      mutation: (input: UpdateOrderInput) => Promise<UpdateOrderResponse>;
     };
     deleteOrder: {
       mutation: (input: { id: string }) => Promise<{ success: boolean }>;

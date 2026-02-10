@@ -70,6 +70,53 @@ export async function createOrderInERP(
 }
 
 /**
+ * Update existing order in ERP
+ * Used when customer edits order via "Edit Pesanan" flow
+ *
+ * @returns Updated order response
+ * @throws Error if API call fails (e.g., order not DRAFT)
+ */
+export async function updateOrderInERP(
+  token: string,
+  payload: OrderPayload,
+): Promise<ErpOrderResponse> {
+  const response = await fetch("/api/update-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token,
+      customerName: payload.customerName,
+      customerWhatsapp: payload.customerWhatsapp,
+      deliveryAddress: payload.deliveryAddress,
+      addressFields: payload.addressFields,
+      items: payload.items,
+      totalPrice: payload.totalPrice,
+      orderDate: new Date(payload.orderDate).toISOString(),
+      endDate: payload.endDate
+        ? new Date(payload.endDate).toISOString()
+        : undefined,
+      duration: payload.duration,
+      deliveryFee: payload.deliveryFee,
+      paymentMethod: payload.paymentMethod,
+      notes: payload.notes,
+      volumeDiscountAmount: payload.volumeDiscountAmount,
+      volumeDiscountLabel: payload.volumeDiscountLabel,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(
+      error.message || error.details || "Failed to update order in ERP",
+    );
+  }
+
+  return response.json();
+}
+
+/**
  * Get order status by token
  * Used by order tracking page
  */

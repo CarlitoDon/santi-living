@@ -17,6 +17,8 @@ import type {
   ConfirmPaymentResponse,
   OrderStatusType,
   RentalPaymentStatus,
+  UpdateOrderInput,
+  UpdateOrderResponse,
 } from "../types/sync-erp";
 
 const getBaseUrl = () => {
@@ -89,6 +91,9 @@ export const syncClient = createTRPCProxyClient<any>({
         orderNumber: string;
         status: string;
       }>;
+    };
+    updateOrder: {
+      mutate: (input: UpdateOrderInput) => Promise<UpdateOrderResponse>;
     };
     deleteOrder: {
       mutate: (input: { id: string }) => Promise<{ success: boolean }>;
@@ -170,6 +175,20 @@ export async function confirmPaymentByOrderNumber(input: {
   return syncClient.publicRental.confirmPaymentByOrderNumber.mutate(input);
 }
 
+export async function updateRentalOrder(
+  input: UpdateOrderInput,
+): Promise<UpdateOrderResponse> {
+  console.warn(`[ERP Client] Updating order token: ${input.token}`);
+  try {
+    const result = await syncClient.publicRental.updateOrder.mutate(input);
+    console.warn(`[ERP Client] Update successful: ${result.orderNumber}`);
+    return result;
+  } catch (error) {
+    console.error(`[ERP Client] Update FAILED for token: ${input.token}`, error);
+    throw error;
+  }
+}
+
 export async function deleteRentalOrder(
   id: string,
 ): Promise<{ success: boolean }> {
@@ -195,4 +214,6 @@ export type {
   ConfirmPaymentResponse,
   OrderStatusType,
   RentalPaymentStatus,
+  UpdateOrderInput,
+  UpdateOrderResponse,
 };

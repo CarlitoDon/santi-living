@@ -7,7 +7,7 @@ import { AddressSection } from "./AddressSection";
 import { ResultPanel } from "./ResultPanel";
 import type { Product, CustomerData } from "./types";
 import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
-import { createOrderInERP } from "@/services/erp-api";
+import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import config from "@/data/config.json";
 
@@ -647,7 +647,7 @@ export function Calculator({
       saveOrder(bookingData);
 
       // Only create new order in ERP if not in edit mode
-      // In edit mode, we just update the session and redirect back to checkout
+      // In edit mode, call update API to sync changes to sync-erp
       if (!isEditMode) {
         // Create in ERP
         const erpResponse = await createOrderInERP(bookingData);
@@ -656,6 +656,17 @@ export function Calculator({
           sessionStorage.setItem("erpOrderUrl", erpResponse.orderUrl);
           sessionStorage.setItem("erpOrderNumber", erpResponse.orderNumber);
           sessionStorage.setItem("erpPublicToken", erpResponse.publicToken);
+        }
+      } else {
+        // Update existing order in ERP
+        const existingToken = sessionStorage.getItem("erpPublicToken");
+        if (existingToken) {
+          try {
+            await updateOrderInERP(existingToken, bookingData);
+          } catch (updateErr) {
+            console.warn("Failed to update order in ERP:", updateErr);
+            // Continue to checkout even if update fails — session data is already updated
+          }
         }
       }
 
