@@ -1,5 +1,5 @@
 /**
- * ResultPanel Component - matches original Calculator.astro styling
+ * ResultPanel Component - Receipt/Nota style summary
  */
 
 import type { CalculatorState } from "./types";
@@ -30,52 +30,50 @@ export function ResultPanel({
   submitButtonText = "Pesan via WhatsApp",
 }: ResultPanelProps) {
   const hasItems = state.totalQuantity > 0;
-  const itemName =
-    state.items.length === 0
-      ? "-"
-      : state.items.length === 1
-        ? state.items[0].name
-        : `${state.items.length} jenis`;
 
   return (
     <div className="calc-result-panel">
-      {/* Summary */}
-      <div className="calc-result-summary">
-        <h3 className="calc-result-title">Ringkasan</h3>
-
-        {/* Kasur */}
-        <div className="calc-result-item">
-          <span className="calc-result-label">Kasur</span>
-          <span className="calc-result-value">{itemName}</span>
-        </div>
-
-        {/* Jumlah */}
-        <div className="calc-result-item">
-          <span className="calc-result-label">Jumlah</span>
-          <span className="calc-result-value">{state.totalQuantity} unit</span>
-        </div>
-
-        {/* Durasi */}
-        <div className="calc-result-item">
-          <span className="calc-result-label">Durasi</span>
-          <span className="calc-result-value">{state.duration} hari</span>
-        </div>
-
-        {/* Tanggal */}
-        <div className="calc-result-item">
-          <span className="calc-result-label">Tanggal</span>
-          <span className="calc-result-value">
-            {state.startDate && state.endDate
-              ? `${formatDate(state.startDate)} - ${formatDate(state.endDate)}`
-              : "-"}
+      {/* Receipt Header */}
+      <div className="calc-receipt-header">
+        <h3 className="calc-receipt-title">Ringkasan Pesanan</h3>
+        {state.startDate && state.endDate && (
+          <span className="calc-receipt-date">
+            {formatDate(state.startDate)} – {formatDate(state.endDate)} &middot;{" "}
+            {state.duration} hari
           </span>
-        </div>
+        )}
+      </div>
 
-        {/* Biaya Antar */}
+      {/* Item Lines */}
+      {state.items.length > 0 && (
+        <div className="calc-receipt-items">
+          {state.items.map((item) => {
+            const lineTotal = item.quantity * item.pricePerDay * state.duration;
+            return (
+              <div key={item.id} className="calc-receipt-line">
+                <div className="calc-receipt-line-top">
+                  <span className="calc-receipt-item-name">{item.name}</span>
+                  <span className="calc-receipt-item-total">
+                    Rp {formatCurrency(lineTotal)}
+                  </span>
+                </div>
+                <div className="calc-receipt-line-detail">
+                  {item.quantity} unit × Rp {formatCurrency(item.pricePerDay)}
+                  /hari × {state.duration} hari
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Subtotals */}
+      <div className="calc-receipt-subtotals">
+        {/* Delivery Fee */}
         {state.deliveryFee > 0 && (
-          <div className="calc-result-item">
-            <span className="calc-result-label">Biaya Antar</span>
-            <span className="calc-result-value">
+          <div className="calc-receipt-row">
+            <span className="calc-receipt-row-label">Biaya Antar</span>
+            <span className="calc-receipt-row-value">
               Rp {formatCurrency(state.deliveryFee)}
             </span>
           </div>
@@ -83,22 +81,22 @@ export function ResultPanel({
 
         {/* Volume Discount */}
         {state.volumeDiscountAmount > 0 && (
-          <div className="calc-result-item calc-result-discount">
-            <span className="calc-result-label discount-label">
+          <div className="calc-receipt-row calc-receipt-discount">
+            <span className="calc-receipt-row-label">
               Diskon{" "}
               {state.volumeDiscountLabel && `(${state.volumeDiscountLabel})`}
             </span>
-            <span className="calc-result-value discount-value">
-              -Rp {formatCurrency(state.volumeDiscountAmount)}
+            <span className="calc-receipt-row-value">
+              −Rp {formatCurrency(state.volumeDiscountAmount)}
             </span>
           </div>
         )}
       </div>
 
       {/* Total */}
-      <div className="calc-result-total-row">
-        <span className="calc-result-total-label">Total</span>
-        <span className="calc-result-total-value">
+      <div className="calc-receipt-total">
+        <span className="calc-receipt-total-label">Total</span>
+        <span className="calc-receipt-total-value">
           Rp {formatCurrency(state.total)}
         </span>
       </div>
