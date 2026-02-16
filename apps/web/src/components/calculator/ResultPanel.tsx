@@ -113,11 +113,18 @@ export function ResultPanel({
         </span>
       </div>
 
-      {/* Upsell */}
+      {/* Upsells */}
       {state.nextTierUnitsNeeded > 0 && state.nextTierDiscountPercent > 0 && (
         <div className="calc-upsell-prompt">
           💡 Tambah <strong>{state.nextTierUnitsNeeded} unit</strong> lagi untuk
           diskon <strong>{state.nextTierDiscountPercent}%</strong>!
+        </div>
+      )}
+
+      {hasItems && state.duration < 3 && (
+        <div className="calc-upsell-prompt">
+          📅 Sewa <strong>{3 - state.duration} hari</strong> lebih lama untuk
+          diskon durasi <strong>5%</strong>!
         </div>
       )}
 
