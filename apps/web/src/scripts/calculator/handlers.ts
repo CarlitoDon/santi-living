@@ -16,6 +16,7 @@ import { openModal } from "@/store/modalStore";
 import {
   calculateVolumeDiscount,
   calculateTotals,
+  calculateDurationDiscount,
   type VolumeDiscountConfig,
 } from "@/lib/calculator-logic";
 import {
@@ -400,15 +401,20 @@ export function updateCalculation(): void {
   state.nextTierUnitsNeeded = nextTierUnitsNeeded;
   state.nextTierDiscountPercent = nextTierDiscountPercent;
 
+  const durationDiscount = calculateDurationDiscount(state.duration);
+  state.durationDiscountPercent = durationDiscount.percent;
+
   const totals = calculateTotals(
     state.items,
     state.duration,
     state.deliveryFee || 0,
     volumeDiscountRate,
+    durationDiscount.discount,
   );
 
   state.subtotal = totals.subtotal;
   state.volumeDiscountAmount = totals.discountAmount;
+  state.durationDiscountAmount = totals.durationDiscountAmount;
   state.total = totals.total;
 
   state.deliveryEstimate = calculateDeliveryEstimate(

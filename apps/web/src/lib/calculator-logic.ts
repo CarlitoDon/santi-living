@@ -69,6 +69,30 @@ export function calculateVolumeDiscount(
 }
 
 /**
+ * Duration discount tiers
+ * 3+ days = 5% extra discount on mattress subtotal
+ */
+const DURATION_DISCOUNT_TIERS = [
+  { minDays: 3, discount: 0.05, label: "3+ hari" },
+];
+
+/**
+ * Calculate duration-based discount
+ */
+export function calculateDurationDiscount(duration: number) {
+  // Find the highest matching tier (sorted desc to support future tiers)
+  const tier = [...DURATION_DISCOUNT_TIERS]
+    .sort((a, b) => b.minDays - a.minDays)
+    .find((t) => duration >= t.minDays);
+
+  return {
+    discount: tier?.discount || 0,
+    percent: (tier?.discount || 0) * 100,
+    label: tier?.label || "",
+  };
+}
+
+/**
  * Calculate cart totals
  */
 export function calculateTotals(
@@ -76,6 +100,7 @@ export function calculateTotals(
   duration: number,
   deliveryFee: number,
   volumeDiscountRate: number,
+  durationDiscountRate: number = 0,
 ) {
   // Calculate subtotals by category
   const mattressSubtotal = items
@@ -86,17 +111,27 @@ export function calculateTotals(
     .filter((i) => i.category === "accessory")
     .reduce((sum, i) => sum + i.quantity * i.pricePerDay * duration, 0);
 
-  // Calculate discount amount (only on mattresses)
-  const discountAmount = Math.round(mattressSubtotal * volumeDiscountRate);
+  // Volume discount (only on mattresses)
+  const volumeDiscountAmount = Math.round(
+    mattressSubtotal * volumeDiscountRate,
+  );
+
+  // Duration discount (on mattress subtotal AFTER volume discount)
+  const afterVolumeDiscount = mattressSubtotal - volumeDiscountAmount;
+  const durationDiscountAmount = Math.round(
+    afterVolumeDiscount * durationDiscountRate,
+  );
 
   const subtotal = mattressSubtotal + accessorySubtotal;
-  const total = subtotal - discountAmount + deliveryFee;
+  const total =
+    subtotal - volumeDiscountAmount - durationDiscountAmount + deliveryFee;
 
   return {
     mattressSubtotal,
     accessorySubtotal,
     subtotal,
-    discountAmount,
+    discountAmount: volumeDiscountAmount,
+    durationDiscountAmount,
     total,
   };
 }

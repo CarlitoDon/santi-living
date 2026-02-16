@@ -91,6 +91,18 @@ export function ResultPanel({
             </span>
           </div>
         )}
+
+        {/* Duration Discount */}
+        {state.durationDiscountAmount > 0 && (
+          <div className="calc-receipt-row calc-receipt-discount">
+            <span className="calc-receipt-row-label">
+              Diskon Durasi ({state.durationDiscountPercent}%)
+            </span>
+            <span className="calc-receipt-row-value">
+              −Rp {formatCurrency(state.durationDiscountAmount)}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Total */}

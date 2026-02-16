@@ -11,6 +11,7 @@ import {
 } from "@/lib/domain/rental";
 import {
   calculateVolumeDiscount,
+  calculateDurationDiscount,
   calculateTotals,
   type VolumeDiscountConfig,
 } from "@/lib/calculator-logic";
@@ -31,6 +32,8 @@ const initialState: CalculatorState = {
   volumeDiscountAmount: 0,
   volumeDiscountLabel: "",
   volumeDiscountPercent: 0,
+  durationDiscountAmount: 0,
+  durationDiscountPercent: 0,
   nextTierUnitsNeeded: 0,
   nextTierDiscountPercent: 0,
   isValid: false,
@@ -69,15 +72,20 @@ export function useCalculatorState() {
       next.nextTierUnitsNeeded = nextTierUnitsNeeded;
       next.nextTierDiscountPercent = nextTierDiscountPercent;
 
+      const durationDiscount = calculateDurationDiscount(next.duration);
+      next.durationDiscountPercent = durationDiscount.percent;
+
       const totals = calculateTotals(
         next.items,
         next.duration,
         next.deliveryFee || 0,
         volumeDiscountRate,
+        durationDiscount.discount,
       );
 
       next.subtotal = totals.subtotal;
       next.volumeDiscountAmount = totals.discountAmount;
+      next.durationDiscountAmount = totals.durationDiscountAmount;
       next.total = totals.total;
 
       next.deliveryEstimate = calculateDeliveryEstimate(

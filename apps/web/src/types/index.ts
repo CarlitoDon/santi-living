@@ -50,6 +50,8 @@ export interface CalculatorState {
   volumeDiscountAmount: number;
   volumeDiscountLabel: string;
   volumeDiscountPercent: number;
+  durationDiscountAmount: number;
+  durationDiscountPercent: number;
   nextTierUnitsNeeded: number;
   nextTierDiscountPercent: number;
 
