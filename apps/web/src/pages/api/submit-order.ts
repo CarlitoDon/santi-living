@@ -13,8 +13,16 @@ export const POST: APIRoute = async ({ request }) => {
     // DEBUG: Log environment and request info
     const proxyUrl =
       process.env.SANTI_PROXY_URL || process.env.PUBLIC_PROXY_URL || "NOT SET";
+    const apiKeySet = !!(
+      process.env.PROXY_API_SECRET || process.env.PROXY_API_KEY
+    );
     console.warn("[submit-order] DEBUG:", {
       proxyUrl,
+      PROXY_API_SECRET: apiKeySet
+        ? `SET (${process.env.PROXY_API_SECRET?.substring(0, 8)}...)`
+        : "❌ NOT SET",
+      PROXY_API_KEY: process.env.PROXY_API_KEY ? "SET" : "NOT SET",
+      NODE_ENV: process.env.NODE_ENV,
       customerName: body.customerName,
       timestamp: new Date().toISOString(),
     });
