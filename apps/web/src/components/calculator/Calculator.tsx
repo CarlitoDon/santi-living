@@ -76,6 +76,19 @@ function haversineDistance(
   return R * c;
 }
 
+/**
+ * Calculate delivery fee based on fuel cost.
+ * Formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 6800 (harga solar/liter)
+ * Rounded up to nearest Rp1.000
+ */
+function calculateDeliveryFee(distanceKm: number): number {
+  const ROUND_TRIPS = 4; // antar berangkat + pulang, ambil berangkat + pulang
+  const KM_PER_LITER = 10;
+  const FUEL_PRICE = 6800; // harga solar per liter
+  const rawFee = ((distanceKm * ROUND_TRIPS) / KM_PER_LITER) * FUEL_PRICE;
+  return Math.ceil(rawFee / 1000) * 1000; // round up to nearest Rp1.000
+}
+
 export function Calculator({
   products,
   imageMap,
@@ -204,23 +217,7 @@ export function Calculator({
               storeLocation.lng,
             );
 
-            let fee = 0;
-            for (const zone of config.deliveryZones) {
-              if (distance <= zone.maxDistance) {
-                fee = zone.price;
-                break;
-              }
-            }
-            if (
-              fee === 0 &&
-              distance >
-                config.deliveryZones[config.deliveryZones.length - 1]
-                  .maxDistance
-            ) {
-              fee = Math.round(distance * config.deliveryPricePerKm);
-              fee = Math.max(fee, config.minDeliveryPrice);
-            }
-
+            const fee = calculateDeliveryFee(distance);
             actions.setDeliveryFee(fee, distance);
           }
         }
@@ -245,22 +242,7 @@ export function Calculator({
       storeLocation.lng,
     );
 
-    let fee = 0;
-    for (const zone of config.deliveryZones) {
-      if (distance <= zone.maxDistance) {
-        fee = zone.price;
-        break;
-      }
-    }
-    if (
-      fee === 0 &&
-      distance >
-        config.deliveryZones[config.deliveryZones.length - 1].maxDistance
-    ) {
-      fee = Math.round(distance * config.deliveryPricePerKm);
-      fee = Math.max(fee, config.minDeliveryPrice);
-    }
-
+    const fee = calculateDeliveryFee(distance);
     actions.setDeliveryFee(fee, distance);
   }, [customer.address.lat, customer.address.lng]);
 
@@ -319,23 +301,7 @@ export function Calculator({
         storeLocation.lng,
       );
 
-      // Simple delivery fee calculation based on zones
-      let fee = 0;
-      for (const zone of config.deliveryZones) {
-        if (distance <= zone.maxDistance) {
-          fee = zone.price;
-          break;
-        }
-      }
-      if (
-        fee === 0 &&
-        distance >
-          config.deliveryZones[config.deliveryZones.length - 1].maxDistance
-      ) {
-        fee = Math.round(distance * config.deliveryPricePerKm);
-        fee = Math.max(fee, config.minDeliveryPrice);
-      }
-
+      const fee = calculateDeliveryFee(distance);
       actions.setDeliveryFee(fee, distance);
 
       // Clear location error since we now have coordinates
@@ -393,23 +359,7 @@ export function Calculator({
         storeLocation.lng,
       );
 
-      let fee = 0;
-      for (const zone of config.deliveryZones) {
-        if (distance <= zone.maxDistance) {
-          fee = zone.price;
-
-          break;
-        }
-      }
-      if (
-        fee === 0 &&
-        distance >
-          config.deliveryZones[config.deliveryZones.length - 1].maxDistance
-      ) {
-        fee = Math.round(distance * config.deliveryPricePerKm);
-        fee = Math.max(fee, config.minDeliveryPrice);
-      }
-
+      const fee = calculateDeliveryFee(distance);
       actions.setDeliveryFee(fee, distance);
 
       // Clear location error since we now have coordinates

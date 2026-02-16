@@ -359,26 +359,12 @@ export function updateDeliveryFee(lat: number, lng: number): void {
 
   state.distance = distance;
 
-  let fee = 0;
-  const zones = config.deliveryZones || [];
-  const zone = zones.find((z) => distance <= z.maxDistance);
-
-  if (zone) {
-    fee = zone.price;
-  } else {
-    const lastZone = zones[zones.length - 1];
-    const extraDist = distance - lastZone.maxDistance;
-    const baseFee = lastZone.price;
-    const extraFee = Math.ceil(extraDist) * (config.deliveryPricePerKm || 0);
-    fee = baseFee + extraFee;
-
-    if (config.minDeliveryPrice && fee < config.minDeliveryPrice) {
-      fee = config.minDeliveryPrice;
-    }
-  }
-
-  fee = Math.ceil(fee / 1000) * 1000;
-  state.deliveryFee = fee;
+  // Fuel cost formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 6800 (harga solar/liter)
+  const ROUND_TRIPS = 4;
+  const KM_PER_LITER = 10;
+  const FUEL_PRICE = 6800;
+  const rawFee = ((distance * ROUND_TRIPS) / KM_PER_LITER) * FUEL_PRICE;
+  state.deliveryFee = Math.ceil(rawFee / 1000) * 1000; // round up to nearest Rp1.000
   updateCalculation();
 }
 

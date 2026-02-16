@@ -4,11 +4,6 @@
 
 import type { CartItem } from "@/types";
 
-interface DeliveryZone {
-  maxDistance: number;
-  price: number;
-}
-
 export interface VolumeDiscountTier {
   minQty: number;
   maxQty: number;
@@ -20,47 +15,19 @@ export interface VolumeDiscountConfig {
   volumeDiscounts?: VolumeDiscountTier[];
 }
 
-interface DeliveryConfig {
-  storeLocation?: { lat: number; lng: number };
-  deliveryZones?: DeliveryZone[];
-  deliveryPricePerKm?: number;
-  minDeliveryPrice?: number;
-}
-
 /**
- * Calculate delivery fee based on distance and configuration
+ * Calculate delivery fee based on fuel cost.
+ * Formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 6800 (harga solar/liter)
+ * Rounded up to nearest Rp1.000
  */
-export function calculateDeliveryFee(
-  distance: number,
-  config: DeliveryConfig,
-): number {
-  if (distance <= 0) return 0;
+export function calculateDeliveryFee(distanceKm: number): number {
+  if (distanceKm <= 0) return 0;
 
-  const zones = config.deliveryZones || [];
-
-  // Find matching zone
-  const zone = zones.find((z) => distance <= z.maxDistance);
-
-  if (zone) {
-    return zone.price;
-  }
-
-  // Exceeds max zone - calculate per km
-  if (zones.length === 0) return 0; // Fallback if no zones defined
-
-  const lastZone = zones[zones.length - 1];
-  const extraDist = distance - lastZone.maxDistance;
-  const baseFee = lastZone.price;
-  const extraFee = Math.ceil(extraDist) * (config.deliveryPricePerKm || 0);
-  let fee = baseFee + extraFee;
-
-  // Ensure minimum price if set
-  if (config.minDeliveryPrice && fee < config.minDeliveryPrice) {
-    fee = config.minDeliveryPrice;
-  }
-
-  // Round to nearest 1000
-  return Math.ceil(fee / 1000) * 1000;
+  const ROUND_TRIPS = 4; // antar berangkat + pulang, ambil berangkat + pulang
+  const KM_PER_LITER = 10;
+  const FUEL_PRICE = 6800; // harga solar per liter
+  const rawFee = ((distanceKm * ROUND_TRIPS) / KM_PER_LITER) * FUEL_PRICE;
+  return Math.ceil(rawFee / 1000) * 1000; // round up to nearest Rp1.000
 }
 
 /**
