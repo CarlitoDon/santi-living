@@ -21,6 +21,8 @@ let state: CalculatorState = {
   volumeDiscountAmount: 0,
   volumeDiscountLabel: "",
   volumeDiscountPercent: 0,
+  durationDiscountAmount: 0,
+  durationDiscountPercent: 0,
   nextTierUnitsNeeded: 0,
   nextTierDiscountPercent: 0,
   isValid: false,
