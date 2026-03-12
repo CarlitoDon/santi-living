@@ -1,20 +1,36 @@
 ---
-
+import config from "@/data/config.json";
 ---
 
 <section class="final-cta section" id="final-cta">
   <div class="container">
     <div class="final-cta-content">
-      <h2 class="final-cta-title">Butuh kasur sekarang?</h2>
+      <h2 class="final-cta-title">Butuh kasur busa sekarang?</h2>
       <p class="final-cta-description">
         Hubungi kami sekarang juga! Bisa antar hari ini.
       </p>
 
-      <a href="#calculator" class="btn btn-primary btn-lg final-cta-btn">
-        Pesan Sewa Kasur Sekarang
-      </a>
+      <div class="final-cta-features">
+        <span class="cta-feature">✓ Kasur busa bersih & steril</span>
+        <span class="cta-feature">✓ Antar same day</span>
+        <span class="cta-feature">✓ Mulai Rp25rb/hari</span>
+      </div>
 
-      <p class="final-cta-note">Respon cepat • Area Jogja</p>
+      <div class="final-cta-buttons">
+        <a href="#calculator" class="btn btn-primary btn-lg final-cta-btn">
+          Hitung Biaya Sewa
+        </a>
+        <a
+          href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Mebel,%20saya%20mau%20sewa%20kasur%20busa`}
+          class="btn btn-outline btn-lg final-cta-btn-wa"
+          target="_blank"
+          rel="noopener"
+        >
+          💬 Chat WhatsApp
+        </a>
+      </div>
+
+      <p class="final-cta-note">Respon cepat • Area Jogja & sekitarnya</p>
     </div>
   </div>
 </section>
@@ -26,41 +42,96 @@
       var(--color-primary) 0%,
       var(--color-primary-dark, #1a4ea0) 100%
     );
-    padding: var(--space-12) 0;
+    padding: var(--space-10) 0;
   }
 
   .final-cta-content {
     text-align: center;
-    max-width: 500px;
+    max-width: 520px;
     margin: 0 auto;
   }
 
   .final-cta-title {
     font-size: var(--font-size-2xl);
     color: white;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-2);
   }
 
   .final-cta-description {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-4);
+  }
+
+  .final-cta-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-4);
     margin-bottom: var(--space-6);
+  }
+
+  .cta-feature {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+  }
+
+  .final-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
   .final-cta-btn {
     background: white;
     color: var(--color-primary);
     display: inline-block;
-    margin-bottom: var(--space-4);
+    width: 100%;
+    max-width: 280px;
+    font-weight: var(--font-weight-bold);
   }
 
   .final-cta-btn:hover {
     background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+  }
+
+  .final-cta-btn-wa {
+    display: inline-block;
+    width: 100%;
+    max-width: 280px;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-base);
+    transition: all 0.2s;
+  }
+
+  .final-cta-btn-wa:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
   }
 
   .final-cta-note {
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--font-size-xs);
+    color: rgba(255, 255, 255, 0.6);
     margin: 0;
   }
+
+  @media (min-width: 640px) {
+    .final-cta-buttons {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
 </style>
+
