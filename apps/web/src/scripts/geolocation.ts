@@ -109,7 +109,8 @@ export async function reverseGeocode(
  * Normalize a name for comparison
  * Removes common prefixes and standardizes spacing/casing
  */
-function normalizeName(name: string | undefined): string {
+/** @internal Exported for testing */
+export function normalizeName(name: string | undefined): string {
   if (!name) return "";
   return name
     .toLowerCase()
@@ -127,7 +128,8 @@ function normalizeName(name: string | undefined): string {
  *
  * We look for a part that comes BEFORE the kecamatan and is different from it
  */
-function extractKelurahanFromDisplayName(
+/** @internal Exported for testing */
+export function extractKelurahanFromDisplayName(
   displayName: string,
   kecamatanName: string,
 ): string {
@@ -203,7 +205,8 @@ function extractKelurahanFromDisplayName(
  * - county: kabupaten (e.g., "Sleman")
  * - state: provinsi
  */
-function formatAddress(
+/** @internal Exported for testing */
+export function formatAddress(
   address: Record<string, string>,
   displayName?: string,
 ): FormattedAddress {

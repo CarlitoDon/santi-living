@@ -123,7 +123,7 @@ export function ResultPanel({
 
       {hasItems && state.duration < 3 && (
         <div className="calc-upsell-prompt">
-          📅 Sewa <strong>{3 - state.duration} hari</strong> lebih lama untuk
+          📅 Tambah <strong>{3 - state.duration} hari</strong> lagi untuk
           diskon durasi <strong>5%</strong>!
         </div>
       )}

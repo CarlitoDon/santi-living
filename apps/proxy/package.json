@@ -25,6 +25,7 @@
     "typecheck:watch": "tsc --noEmit --watch",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
+    "test": "vitest run",
     "sync-bundles": "ts-node src/scripts/sync-bundles.ts"
   },
   "dependencies": {
@@ -47,6 +48,7 @@
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.1"
+    "typescript-eslint": "^8.53.1",
+    "vitest": "^4.0.18"
   }
 }

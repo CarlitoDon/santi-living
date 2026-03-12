@@ -110,7 +110,9 @@ export function calculateDeliveryEstimate(
   }
 
   const now = new Date();
-  const start = new Date(startDate);
+  // Parse YYYY-MM-DD as local midnight (new Date("YYYY-MM-DD") is UTC, which breaks timezone comparison)
+  const [year, month, day] = startDate.split("-").map(Number);
+  const start = new Date(year, month - 1, day);
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const isToday = start.getTime() === today.getTime();
 
