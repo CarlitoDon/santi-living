@@ -1,5 +1,6 @@
 ---
-import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
 import Header from "@/components/Header.astro";
 import Sidebar from "@/components/Sidebar.astro";
@@ -7,15 +8,19 @@ import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
 
 export const prerender = true;
 
-export async function getStaticPaths() {
+export const getStaticPaths = (async () => {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
+  return posts.map((post: CollectionEntry<"blog">) => ({
     params: { slug: post.slug },
     props: { post },
   }));
-}
+}) satisfies GetStaticPaths;
 
-const { post } = Astro.props;
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+const { post } = Astro.props as Props;
 const { Content } = await post.render();
 
 // Format date
@@ -67,7 +72,7 @@ const articleSchema = {
         
         {post.data.tags && post.data.tags.length > 0 && (
           <div class="article-tags">
-            {post.data.tags.map(tag => (
+            {post.data.tags.map((tag: string) => (
               <span class="tag">#{tag}</span>
             ))}
           </div>
