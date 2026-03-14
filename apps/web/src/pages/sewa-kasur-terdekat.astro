@@ -1,0 +1,422 @@
+---
+export const prerender = true;
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import Header from "@/components/Header.astro";
+import Sidebar from "@/components/Sidebar.astro";
+import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+import config from "@/data/config.json";
+---
+
+<MainLayout
+  title="Sewa Kasur Terdekat di Jogja | Pengiriman 2-4 Jam - Santi Mebel"
+  description="Cari sewa kasur terdekat di Jogja? Santi Mebel Godean siap antar kasur bersih ke lokasi kamu dalam 2-4 jam. Gratis ongkir radius 3km. Mulai Rp25rb/hari."
+>
+  <Header />
+  <Sidebar />
+
+  <main class="terdekat-page" style="padding-top: 70px;">
+    <!-- Hero -->
+    <section class="terdekat-hero">
+      <div class="container">
+        <h1 class="terdekat-hero-title">Sewa Kasur Terdekat di Jogja</h1>
+        <p class="terdekat-hero-subtitle">
+          Pengiriman cepat 2-4 jam ke lokasi kamu. Kasur bersih, harga terjangkau.
+        </p>
+        <div class="terdekat-hero-badge">📍 Lokasi: Godean, Sleman, Yogyakarta</div>
+      </div>
+    </section>
+
+    <!-- Kenapa Kami Terdekat -->
+    <section class="terdekat-section">
+      <div class="container">
+        <h2 class="terdekat-section-title">Kenapa Santi Mebel Jadi Pilihan Terdekat?</h2>
+        <div class="advantage-grid">
+          <div class="advantage-card">
+            <div class="advantage-icon">🚚</div>
+            <h3>Antar 2-4 Jam</h3>
+            <p>Order sebelum jam 15:00, kasur sampai hari ini juga</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-icon">🎉</div>
+            <h3>Gratis Ongkir</h3>
+            <p>Pengiriman GRATIS untuk radius 3 km dari toko kami di Godean</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-icon">✨</div>
+            <h3>Kasur Bersih & Steril</h3>
+            <p>Dicuci profesional & dibungkus plastik setiap pengiriman</p>
+          </div>
+          <div class="advantage-card">
+            <div class="advantage-icon">💰</div>
+            <h3>Mulai Rp25rb/hari</h3>
+            <p>Harga terjangkau + diskon 10-15% untuk sewa banyak</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Area Layanan -->
+    <section class="terdekat-section terdekat-section-alt">
+      <div class="container">
+        <h2 class="terdekat-section-title">Area Pengiriman Kasur Terdekat</h2>
+        <p class="terdekat-section-desc">Kami melayani seluruh wilayah DIY dengan ongkir terjangkau</p>
+
+        <div class="area-grid">
+          <div class="area-card area-free">
+            <div class="area-badge">GRATIS ONGKIR</div>
+            <h3>Radius 0-3 km</h3>
+            <p>Godean, Gamping, Moyudan</p>
+            <div class="area-price">Rp 0</div>
+          </div>
+          <div class="area-card">
+            <div class="area-badge">ZONA 1</div>
+            <h3>Radius 3-8 km</h3>
+            <p>Sleman, Mlati, Depok, Sedayu</p>
+            <div class="area-price">Rp 15.000</div>
+          </div>
+          <div class="area-card">
+            <div class="area-badge">ZONA 2</div>
+            <h3>Radius 8-15 km</h3>
+            <p>Kota Jogja, Bantul, Kalasan</p>
+            <div class="area-price">Rp 25.000</div>
+          </div>
+          <div class="area-card">
+            <div class="area-badge">ZONA 3</div>
+            <h3>> 15 km</h3>
+            <p>Kulon Progo, Gunung Kidul, dll</p>
+            <div class="area-price">Rp 1.500/km</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cara Order -->
+    <section class="terdekat-section">
+      <div class="container">
+        <h2 class="terdekat-section-title">Cara Sewa Kasur Terdekat</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Pilih Kasur</h3>
+            <p>Pilih jenis & ukuran kasur di <a href="/produk">halaman produk</a> kami</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Hubungi Kami</h3>
+            <p>Chat WhatsApp atau isi form checkout di website</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Kasur Diantar</h3>
+            <p>Tim kami antar kasur bersih ke lokasi kamu dalam 2-4 jam</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="terdekat-cta">
+      <div class="container">
+        <h2 class="terdekat-cta-title">Butuh kasur terdekat sekarang?</h2>
+        <p class="terdekat-cta-desc">Hubungi kami — bisa antar hari ini!</p>
+        <div class="terdekat-cta-buttons">
+          <a href="/produk" class="btn btn-primary btn-lg">Lihat Katalog Kasur</a>
+          <a
+            href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Mebel,%20saya%20cari%20sewa%20kasur%20terdekat%20di%20area%20[lokasi]`}
+            class="btn btn-outline btn-lg terdekat-cta-wa"
+            target="_blank"
+            rel="noopener"
+            data-wa-source="terdekat_page"
+          >
+            💬 Chat WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LocalBusiness Schema with areaServed -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Sewa Kasur Jogja by Santi Mebel",
+        "description": "Layanan sewa kasur terdekat di Jogja dengan pengiriman cepat 2-4 jam",
+        "url": "https://santiliving.com/sewa-kasur-terdekat",
+        "telephone": `+${config.whatsappNumber}`,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Jl. Godean KM 10",
+          "addressLocality": "Yogyakarta",
+          "postalCode": "55264",
+          "addressRegion": "DI Yogyakarta",
+          "addressCountry": "ID"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -7.7956,
+          "longitude": 110.3695
+        },
+        "areaServed": [
+          {"@type": "City", "name": "Yogyakarta"},
+          {"@type": "AdministrativeArea", "name": "Sleman"},
+          {"@type": "AdministrativeArea", "name": "Bantul"},
+          {"@type": "AdministrativeArea", "name": "Kulon Progo"},
+          {"@type": "AdministrativeArea", "name": "Gunung Kidul"}
+        ],
+        "priceRange": "Rp 25.000 - Rp 65.000"
+      })}
+    />
+  </main>
+
+  <StickyWhatsApp />
+</MainLayout>
+
+<style>
+  .terdekat-hero {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    padding: var(--space-10) 0 var(--space-8);
+    text-align: center;
+    color: white;
+  }
+
+  .terdekat-hero-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-2);
+    color: white;
+  }
+
+  .terdekat-hero-subtitle {
+    font-size: var(--font-size-base);
+    opacity: 0.9;
+    margin-bottom: var(--space-3);
+  }
+
+  .terdekat-hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: var(--space-1) var(--space-4);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+  }
+
+  .terdekat-section {
+    padding: var(--space-10) 0;
+  }
+
+  .terdekat-section-alt {
+    background: var(--color-surface);
+  }
+
+  .terdekat-section-title {
+    text-align: center;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .terdekat-section-desc {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Advantage Grid */
+  .advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    max-width: 640px;
+    margin: var(--space-6) auto 0;
+  }
+
+  .advantage-card {
+    text-align: center;
+    padding: var(--space-5);
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .advantage-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-2);
+  }
+
+  .advantage-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-1);
+  }
+
+  .advantage-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Area Grid */
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .area-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    text-align: center;
+  }
+
+  .area-free {
+    border-color: #059669;
+    background: #f0fdf4;
+  }
+
+  .area-badge {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-1);
+  }
+
+  .area-free .area-badge {
+    color: #059669;
+  }
+
+  .area-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-1);
+  }
+
+  .area-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  .area-price {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .area-free .area-price {
+    color: #059669;
+  }
+
+  /* Steps */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    max-width: 640px;
+    margin: var(--space-6) auto 0;
+  }
+
+  .step-card {
+    text-align: center;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    margin: 0 auto var(--space-2);
+  }
+
+  .step-card h3 {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-1);
+  }
+
+  .step-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .step-card a {
+    color: var(--color-primary);
+  }
+
+  /* CTA */
+  .terdekat-cta {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    padding: var(--space-10) 0;
+    text-align: center;
+    color: white;
+  }
+
+  .terdekat-cta-title {
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--space-2);
+  }
+
+  .terdekat-cta-desc {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-6);
+  }
+
+  .terdekat-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .terdekat-cta-buttons .btn-primary {
+    background: white;
+    color: #059669;
+    max-width: 280px;
+    width: 100%;
+  }
+
+  .terdekat-cta-wa {
+    max-width: 280px;
+    width: 100%;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .terdekat-cta-wa:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  @media (min-width: 640px) {
+    .terdekat-hero-title {
+      font-size: var(--font-size-3xl);
+    }
+    .terdekat-cta-buttons {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+    }
+  }
+</style>
