@@ -9,6 +9,7 @@ import {
   notifyPaymentStatusWebhook,
 } from "./webhooks/notify";
 import { authMiddleware } from "./middleware/auth";
+import { companyScopeMiddleware } from "./middleware/company-scope";
 import { webhookIdempotencyMiddleware } from "./middleware/webhook-idempotency";
 
 export function createServer() {
@@ -45,12 +46,14 @@ export function createServer() {
   app.post(
     "/api/orders/:token/notify-admin",
     authMiddleware,
+    companyScopeMiddleware,
     webhookIdempotencyMiddleware,
     notifyAdminWebhook,
   );
   app.post(
     "/api/orders/:token/notify-payment",
     authMiddleware,
+    companyScopeMiddleware,
     webhookIdempotencyMiddleware,
     notifyPaymentStatusWebhook,
   );

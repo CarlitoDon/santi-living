@@ -11,6 +11,20 @@ const readFirstEnv = (...keys: string[]) => {
 
 const normalizeBaseUrl = (url: string) => url.replace(/\/$/, "");
 
+export const getPublicBaseUrl = () => {
+  const baseUrl = readFirstEnv("PUBLIC_BASE_URL");
+  if (baseUrl) {
+    return normalizeBaseUrl(baseUrl);
+  }
+
+  const isDev = process.env.NODE_ENV !== "production";
+  return isDev ? "http://localhost:4321" : "https://santiliving.com";
+};
+
+export const getAdminWhatsappNumber = () => {
+  return readFirstEnv("ADMIN_WHATSAPP_NUMBER");
+};
+
 export const parseBearerToken = (header?: string | null) => {
   if (!header || !header.startsWith("Bearer ")) {
     return null;

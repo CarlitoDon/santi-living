@@ -41,8 +41,9 @@ describe("proxy trpc scope boundary", () => {
       });
 
       await expect(
-        client.order.createQrisPayment.mutate({
+        client.order.createPaymentToken.mutate({
           token: "f8c78332-c715-43d4-bf6e-5ef4f8f00b5d",
+          paymentMethod: "qris",
         }),
       ).rejects.toThrow("Company scope mismatch");
     } finally {

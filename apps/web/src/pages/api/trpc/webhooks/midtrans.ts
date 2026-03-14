@@ -10,7 +10,7 @@ import { getProxyBaseUrl } from "../../../../lib/proxy-config";
  * - Correct: /api/webhooks/midtrans
  *
  * This simply redirects to the correct endpoint.
- * TODO: Update Midtrans Dashboard notification URL to use /api/webhooks/midtrans
+ * Legacy endpoint kept for backward compatibility during dashboard cutover.
  */
 export const POST: APIRoute = async ({ request }) => {
   console.log(
@@ -46,7 +46,11 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(responseText, {
       status: proxyResponse.status,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Deprecation: "true",
+        Sunset: "Tue, 30 Jun 2026 23:59:59 GMT",
+      },
     });
   } catch (error) {
     console.error("[Midtrans Webhook Redirect] Error:", error);

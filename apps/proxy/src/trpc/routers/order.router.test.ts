@@ -294,24 +294,3 @@ describe("orderRouter.create", () => {
   });
 
 });
-
-describe("orderRouter.createQrisPayment", () => {
-  beforeEach(() => {
-    process.env.PROXY_API_SECRET = "proxy-test-secret";
-    process.env.SANTI_LIVING_COMPANY_ID = "santi-company-test";
-  });
-
-  it("rejects the deprecated direct QRIS charge path", async () => {
-    const caller = buildCaller({
-      authorization: "Bearer proxy-test-secret",
-    });
-
-    await expect(
-      caller.createQrisPayment({
-        token: "f8c78332-c715-43d4-bf6e-5ef4f8f00b5d",
-      }),
-    ).rejects.toThrow(
-      "Direct QRIS charge is deprecated. Use createPaymentToken with paymentMethod=qris.",
-    );
-  });
-});

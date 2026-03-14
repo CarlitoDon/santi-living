@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import { botClient } from "../services/bot-client";
 import { getOrderByToken, deleteRentalOrder } from "../services/erp-client";
+import { getAdminWhatsappNumber, getPublicBaseUrl } from "../config/runtime";
 import { retryWithBackoff } from "../utils/retry";
 import { sendHttpError } from "../utils/http-error";
 
@@ -62,6 +63,7 @@ async function sendCustomerOrderNotification(
   token: string,
   customerPhone: string,
 ): Promise<void> {
+  const publicBaseUrl = getPublicBaseUrl();
   // Fetch full order details (also retried as part of the outer retry)
   const order = await getOrderByToken(token);
 
@@ -109,7 +111,7 @@ async function sendCustomerOrderNotification(
       kecamatan: order.kecamatan || undefined,
       kota: order.kota || undefined,
     },
-    orderUrl: `https://santi-living.com/sewa-kasur/pesanan/${token}`,
+    orderUrl: `${publicBaseUrl}/sewa-kasur/pesanan/${token}`,
   });
 
   logWebhook("[Webhook] Bot sendOrder mutation success");
@@ -128,7 +130,8 @@ async function sendCustomerSimpleNotification(
   customerPhone: string,
   orderNumber: string,
 ): Promise<void> {
-  const publicOrderUrl = `https://santi-living.com/sewa-kasur/pesanan/${token}`;
+  const publicBaseUrl = getPublicBaseUrl();
+  const publicOrderUrl = `${publicBaseUrl}/sewa-kasur/pesanan/${token}`;
   const customerMessage = `Halo Kak *${customerName}*! 👋
 
 Ini link untuk melihat status pesanan Kakak:
@@ -164,8 +167,9 @@ export const notifyAdminWebhook = async (req: Request, res: Response) => {
 
   try {
     // ── 1. Notify Admin via WhatsApp ──
-    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
-    const orderUrl = `https://santi-living.com/admin/orders/${token}`;
+    const adminPhone = getAdminWhatsappNumber() || "62895601968858";
+    const publicBaseUrl = getPublicBaseUrl();
+    const orderUrl = `${publicBaseUrl}/admin/orders/${token}`;
 
     const message = `🔔 *PESANAN BARU DARI WEBSITE*
 
@@ -318,10 +322,11 @@ export const notifyPaymentStatusWebhook = async (
       return;
     }
 
-    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
+    const adminPhone = getAdminWhatsappNumber() || "62895601968858";
     const customerPhone = order.partner.phone;
-    const orderUrl = `https://santi-living.com/admin/orders/${token}`;
-    const publicOrderUrl = `https://santi-living.com/sewa-kasur/pesanan/${token}`;
+    const publicBaseUrl = getPublicBaseUrl();
+    const orderUrl = `${publicBaseUrl}/admin/orders/${token}`;
+    const publicOrderUrl = `${publicBaseUrl}/sewa-kasur/pesanan/${token}`;
 
     // 2. Handle "confirmed" (Payment verified/QRIS auto-success)
     if (action === "confirmed") {

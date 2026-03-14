@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
+import { getAdminWhatsappNumber } from "../config/runtime";
 import { sendHttpError } from "../utils/http-error";
 
 // import midtransClient from "midtrans-client";
@@ -199,7 +200,7 @@ async function handleChallenge(
   try {
     // Notify admin via WhatsApp
     const { botClient } = await import("../services/bot-client");
-    const adminPhone = process.env.ADMIN_WHATSAPP_NUMBER || "62895601968858";
+    const adminPhone = getAdminWhatsappNumber() || "62895601968858";
 
     const message = `⚠️ *PERHATIAN: PEMBAYARAN PERLU REVIEW*
 

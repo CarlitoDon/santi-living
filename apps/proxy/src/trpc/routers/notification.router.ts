@@ -12,6 +12,10 @@ import {
   notifyAdminNewOrder,
 } from "../../services/wa-notifier";
 import { getOrderByToken } from "../../services/erp-client";
+import {
+  getAdminWhatsappNumber,
+  getPublicBaseUrl,
+} from "../../config/runtime";
 
 export const notificationRouter = router({
   /**
@@ -31,7 +35,7 @@ export const notificationRouter = router({
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
       const customerPhone = order.partner.phone;
-      const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:4321";
+      const baseUrl = getPublicBaseUrl();
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
 
       if (!customerPhone) {
@@ -66,7 +70,7 @@ export const notificationRouter = router({
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
       const customerPhone = order.partner.phone;
-      const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:4321";
+      const baseUrl = getPublicBaseUrl();
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
 
       if (!customerPhone) {
@@ -108,7 +112,7 @@ export const notificationRouter = router({
       }),
     )
     .mutation(async ({ input }) => {
-      const adminWhatsapp = process.env.ADMIN_WHATSAPP_NUMBER;
+      const adminWhatsapp = getAdminWhatsappNumber();
       if (!adminWhatsapp) {
         return {
           success: false,
@@ -117,7 +121,7 @@ export const notificationRouter = router({
       }
 
       const order = await getOrderByToken(input.token);
-      const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:4321";
+      const baseUrl = getPublicBaseUrl();
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
 
       await notifyAdminNewOrder({

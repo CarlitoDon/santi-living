@@ -9,6 +9,12 @@ import superjson from "superjson";
 import type { AppRouter } from "@santi-living/proxy";
 import { getProxyApiSecret, getProxyTrpcUrl } from "./proxy-config";
 
+type ProxyClientRequestHeaders = {
+  correlationId?: string;
+  idempotencyKey?: string;
+  companyId?: string;
+};
+
 // Get service URL from environment at RUNTIME (not build time)
 const getServiceUrl = () => {
   const trpcUrl = getProxyTrpcUrl();
@@ -35,7 +41,9 @@ const getApiKey = () => {
  * Create a TRPC client instance
  * Note: This should be called on the server-side (API routes/SSR) only
  */
-export function createProxyClient(): TRPCClient<AppRouter> {
+export function createProxyClient(
+  requestHeaders: ProxyClientRequestHeaders = {},
+): TRPCClient<AppRouter> {
   const serviceUrl = getServiceUrl();
   const apiKey = getApiKey();
 
@@ -46,6 +54,15 @@ export function createProxyClient(): TRPCClient<AppRouter> {
         transformer: superjson,
         headers: () => ({
           Authorization: `Bearer ${apiKey}`,
+          ...(requestHeaders.correlationId
+            ? { "X-Correlation-Id": requestHeaders.correlationId }
+            : {}),
+          ...(requestHeaders.idempotencyKey
+            ? { "Idempotency-Key": requestHeaders.idempotencyKey }
+            : {}),
+          ...(requestHeaders.companyId
+            ? { "X-Company-Id": requestHeaders.companyId }
+            : {}),
         }),
       }),
     ],

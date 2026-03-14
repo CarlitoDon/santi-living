@@ -2,6 +2,7 @@ import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
 import type { AppRouter } from "../types/bot-router";
 import { getSyncErpBotTrpcUrl } from "../config/runtime";
+import { getOutboundRequestContext } from "./request-context";
 
 const getBotSecret = () => {
   const secret = process.env.SYNC_ERP_BOT_SECRET || "";
@@ -16,9 +17,16 @@ export const botClient: TRPCClient<AppRouter> = createTRPCClient<AppRouter>({
     httpBatchLink({
       url: getSyncErpBotTrpcUrl(),
       transformer: superjson,
-      headers: () => ({
-        Authorization: `Bearer ${getBotSecret()}`,
-      }),
+      headers: () => {
+        const { correlationId } = getOutboundRequestContext();
+
+        return {
+          Authorization: `Bearer ${getBotSecret()}`,
+          ...(correlationId
+            ? { "X-Correlation-Id": correlationId }
+            : {}),
+        };
+      },
     }),
   ],
 });

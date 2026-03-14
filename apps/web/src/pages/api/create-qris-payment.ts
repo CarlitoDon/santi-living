@@ -5,7 +5,7 @@ import { createApiErrorResponse } from "../../lib/http-error";
 /**
  * Create QRIS Payment API
  *
- * Uses Midtrans Core API to get QR code directly (forces QR on mobile).
+ * Uses payment token flow with paymentMethod=qris.
  */
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -18,8 +18,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     const client = createProxyClient();
 
-    const result = await client.order.createQrisPayment.mutate({
+    const result = await client.order.createPaymentToken.mutate({
       token,
+      paymentMethod: "qris",
     });
 
     return new Response(

@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { randomUUID } from "node:crypto";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
 
@@ -10,25 +11,27 @@ import { createApiErrorResponse } from "../../lib/http-error";
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
+    const correlationId = request.headers.get("x-correlation-id") || randomUUID();
+    const idempotencyKey =
+      request.headers.get("idempotency-key") ||
+      request.headers.get("x-idempotency-key") ||
+      `submit-order-${correlationId}`;
+    const companyId = request.headers.get("x-company-id") || undefined;
 
-    // DEBUG: Log environment and request info
-    const proxyUrl =
-      process.env.SANTI_PROXY_URL || process.env.PUBLIC_PROXY_URL || "NOT SET";
-    const apiKeySet = !!(
-      process.env.PROXY_API_SECRET || process.env.PROXY_API_KEY
-    );
-    console.warn("[submit-order] DEBUG:", {
-      proxyUrl,
-      PROXY_API_SECRET: apiKeySet
-        ? `SET (${process.env.PROXY_API_SECRET?.substring(0, 8)}...)`
-        : "❌ NOT SET",
-      PROXY_API_KEY: process.env.PROXY_API_KEY ? "SET" : "NOT SET",
-      NODE_ENV: process.env.NODE_ENV,
-      customerName: body.customerName,
-      timestamp: new Date().toISOString(),
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[submit-order] Received create order request", {
+        customerName: body.customerName,
+        hasItems: Array.isArray(body.items) && body.items.length > 0,
+        correlationId,
+        timestamp: new Date().toISOString(),
+      });
+    }
+
+    const client = createProxyClient({
+      correlationId,
+      idempotencyKey,
+      companyId,
     });
-
-    const client = createProxyClient();
 
     const result = await client.order.create.mutate({
       customerName: body.customerName,

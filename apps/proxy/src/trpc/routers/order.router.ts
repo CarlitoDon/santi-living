@@ -7,7 +7,12 @@ import { z } from "zod";
 import { router, protectedProcedure, publicProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { CreateOrderSchema } from "../../types/order";
-import { requireSantiLivingCompanyId } from "../../config/runtime";
+import {
+  getPublicBaseUrl,
+  parseCompanyScopeHeader,
+  requireSantiLivingCompanyId,
+} from "../../config/runtime";
+import { runWithOutboundRequestContext } from "../../services/request-context";
 import {
   createRentalOrder,
   findOrCreatePartner,
@@ -19,91 +24,112 @@ import {
   createSnapToken,
 } from "../../services/midtrans-client";
 
+const readHeaderValue = (value: string | string[] | undefined) => {
+  const rawValue = Array.isArray(value) ? value[0] : value;
+
+  if (!rawValue) {
+    return undefined;
+  }
+
+  const normalized = rawValue.trim();
+  return normalized.length > 0 ? normalized : undefined;
+};
+
 export const orderRouter = router({
   /**
    * Create order - called by santi-living frontend
    */
   create: protectedProcedure
     .input(CreateOrderSchema)
-    .mutation(async ({ input }) => {
-      const companyId = requireSantiLivingCompanyId();
+    .mutation(async ({ input, ctx }) => {
+      const configuredCompanyId = requireSantiLivingCompanyId();
       const addressFields = input.addressFields || {};
-
-      // 1. Find or create partner in sync-erp
-      const partner = await findOrCreatePartner({
-        companyId,
-        name: input.customerName,
-        phone: input.customerWhatsapp,
-        address: input.deliveryAddress,
-        street: addressFields.street,
-        kelurahan: addressFields.kelurahan,
-        kecamatan: addressFields.kecamatan,
-        kota: addressFields.kota,
-        provinsi: addressFields.provinsi,
-        zip: addressFields.zip,
-        latitude: addressFields.lat ? parseFloat(addressFields.lat) : undefined,
-        longitude: addressFields.lng
-          ? parseFloat(addressFields.lng)
-          : undefined,
-      });
-
-      // 2. Map items to rental items/bundles
-      const rentalItems = input.items.map((item) => {
-        const baseItem = {
-          quantity: item.quantity,
-          name: item.name,
-          pricePerDay: item.pricePerDay,
-          category: item.category,
-          components: item.includes,
-        };
-
-        if (item.category === "package") {
-          return { ...baseItem, rentalBundleId: item.id };
-        } else {
-          return { ...baseItem, rentalItemId: item.id };
-        }
-      });
-
-      // 3. Create rental order in sync-erp
-      const order = await createRentalOrder({
-        companyId,
-        partnerId: partner.id,
-        rentalStartDate: new Date(input.orderDate),
-        rentalEndDate: new Date(input.endDate),
-        items: rentalItems,
-        notes: input.notes,
-        deliveryFee: input.deliveryFee,
-        deliveryAddress: input.deliveryAddress,
-        street: addressFields.street,
-        kelurahan: addressFields.kelurahan,
-        kecamatan: addressFields.kecamatan,
-        kota: addressFields.kota,
-        provinsi: addressFields.provinsi,
-        zip: addressFields.zip,
-        latitude: addressFields.lat ? parseFloat(addressFields.lat) : undefined,
-        longitude: addressFields.lng
-          ? parseFloat(addressFields.lng)
-          : undefined,
-        paymentMethod: input.paymentMethod,
-        discountAmount: input.volumeDiscountAmount,
-        discountLabel: input.volumeDiscountLabel,
-      });
-
-      // 4. Generate public URL
-      const isDev = process.env.NODE_ENV !== "production";
-      const baseUrl =
-        process.env.PUBLIC_BASE_URL ||
-        (isDev ? "http://localhost:4321" : "https://santiliving.com");
-      const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
-
-      return {
-        id: order.id,
-        orderNumber: order.orderNumber,
-        publicToken: order.publicToken,
-        status: order.status,
-        createdAt: order.createdAt,
-        orderUrl,
+      const outboundContext = {
+        correlationId: readHeaderValue(
+          ctx.req.headers["x-correlation-id"] as string | string[] | undefined,
+        ),
+        idempotencyKey: readHeaderValue(
+          ctx.req.headers["idempotency-key"] as string | string[] | undefined,
+        ),
+        companyId:
+          parseCompanyScopeHeader(ctx.req.headers["x-company-id"]) ||
+          configuredCompanyId,
       };
+
+      return runWithOutboundRequestContext(outboundContext, async () => {
+        // 1. Find or create partner in sync-erp
+        const partner = await findOrCreatePartner({
+          companyId: configuredCompanyId,
+          name: input.customerName,
+          phone: input.customerWhatsapp,
+          address: input.deliveryAddress,
+          street: addressFields.street,
+          kelurahan: addressFields.kelurahan,
+          kecamatan: addressFields.kecamatan,
+          kota: addressFields.kota,
+          provinsi: addressFields.provinsi,
+          zip: addressFields.zip,
+          latitude: addressFields.lat ? parseFloat(addressFields.lat) : undefined,
+          longitude: addressFields.lng
+            ? parseFloat(addressFields.lng)
+            : undefined,
+        });
+
+        // 2. Map items to rental items/bundles
+        const rentalItems = input.items.map((item) => {
+          const baseItem = {
+            quantity: item.quantity,
+            name: item.name,
+            pricePerDay: item.pricePerDay,
+            category: item.category,
+            components: item.includes,
+          };
+
+          if (item.category === "package") {
+            return { ...baseItem, rentalBundleId: item.id };
+          } else {
+            return { ...baseItem, rentalItemId: item.id };
+          }
+        });
+
+        // 3. Create rental order in sync-erp
+        const order = await createRentalOrder({
+          companyId: configuredCompanyId,
+          partnerId: partner.id,
+          rentalStartDate: new Date(input.orderDate),
+          rentalEndDate: new Date(input.endDate),
+          items: rentalItems,
+          notes: input.notes,
+          deliveryFee: input.deliveryFee,
+          deliveryAddress: input.deliveryAddress,
+          street: addressFields.street,
+          kelurahan: addressFields.kelurahan,
+          kecamatan: addressFields.kecamatan,
+          kota: addressFields.kota,
+          provinsi: addressFields.provinsi,
+          zip: addressFields.zip,
+          latitude: addressFields.lat ? parseFloat(addressFields.lat) : undefined,
+          longitude: addressFields.lng
+            ? parseFloat(addressFields.lng)
+            : undefined,
+          paymentMethod: input.paymentMethod,
+          discountAmount: input.volumeDiscountAmount,
+          discountLabel: input.volumeDiscountLabel,
+        });
+
+        // 4. Generate public URL
+        const baseUrl = getPublicBaseUrl();
+        const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
+
+        return {
+          id: order.id,
+          orderNumber: order.orderNumber,
+          publicToken: order.publicToken,
+          status: order.status,
+          createdAt: order.createdAt,
+          orderUrl,
+        };
+      });
     }),
 
   /**
@@ -392,24 +418,4 @@ export const orderRouter = router({
       };
     }),
 
-  /**
-   * Create QRIS payment using Core API (forces QR display on mobile)
-   */
-  createQrisPayment: protectedProcedure
-    .input(
-      z.object({
-        token: z
-          .string()
-          .regex(
-            /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
-          ),
-      }),
-    )
-    .mutation(async () => {
-      throw new TRPCError({
-        code: "PRECONDITION_FAILED",
-        message:
-          "Direct QRIS charge is deprecated. Use createPaymentToken with paymentMethod=qris.",
-      });
-    }),
 });

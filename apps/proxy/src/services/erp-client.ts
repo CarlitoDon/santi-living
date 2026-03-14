@@ -13,6 +13,7 @@ import {
 import superjson from "superjson";
 import { getSyncErpApiPublicRentalUrl } from "../config/runtime";
 import type { PublicRentalRouter } from "../types/public-rental";
+import { getOutboundRequestContext } from "./request-context";
 import {
   OrderStatusConst,
   RentalPaymentStatusConst,
@@ -50,8 +51,18 @@ export const syncClient: TRPCClient<PublicRentalRouter> =
       httpBatchLink({
         url: getSyncErpApiPublicRentalUrl(),
         headers() {
+          const { correlationId, idempotencyKey, companyId } =
+            getOutboundRequestContext();
+
           return {
             Authorization: `Bearer ${getApiSecret()}`,
+            ...(correlationId
+              ? { "X-Correlation-Id": correlationId }
+              : {}),
+            ...(idempotencyKey
+              ? { "Idempotency-Key": idempotencyKey }
+              : {}),
+            ...(companyId ? { "X-Company-Id": companyId } : {}),
           };
         },
         transformer: superjson,
