@@ -2,18 +2,5 @@
   "framework": "astro",
   "installCommand": "npm install",
   "buildCommand": "cd apps/web && npm run build && cp -r .vercel/output ../../.vercel/output",
-  "ignoreCommand": "git diff HEAD^ HEAD --quiet packages turbo.json apps/web",
-  "redirects": [
-    {
-      "source": "/:path(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.santiliving.com"
-        }
-      ],
-      "destination": "https://santiliving.com/:path",
-      "permanent": true
-    }
-  ]
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet packages turbo.json apps/web"
 }
