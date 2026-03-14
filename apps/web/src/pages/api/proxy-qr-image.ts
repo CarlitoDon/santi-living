@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Proxy QR Image API
@@ -10,27 +11,22 @@ export const GET: APIRoute = async ({ url }) => {
     const qrUrl = url.searchParams.get("url");
 
     if (!qrUrl) {
-      return new Response(
-        JSON.stringify({ error: "URL parameter is required" }),
-        { status: 400, headers: { "Content-Type": "application/json" } },
-      );
+      return createApiErrorResponse(400, "BAD_REQUEST", "URL parameter is required");
     }
 
     // Only allow Midtrans URLs for security
     if (!qrUrl.includes("midtrans.com")) {
-      return new Response(JSON.stringify({ error: "Invalid URL" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      });
+      return createApiErrorResponse(403, "FORBIDDEN", "Invalid URL");
     }
 
     const response = await fetch(qrUrl);
 
     if (!response.ok) {
-      return new Response(JSON.stringify({ error: "Failed to fetch image" }), {
-        status: response.status,
-        headers: { "Content-Type": "application/json" },
-      });
+      return createApiErrorResponse(
+        response.status,
+        "UPSTREAM_ERROR",
+        "Failed to fetch image",
+      );
     }
 
     const imageData = await response.arrayBuffer();
@@ -45,9 +41,6 @@ export const GET: APIRoute = async ({ url }) => {
     });
   } catch (error) {
     console.error("[proxy-qr-image] Error:", error);
-    return new Response(JSON.stringify({ error: "Failed to proxy image" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return createApiErrorResponse(500, "UPSTREAM_ERROR", "Failed to proxy image");
   }
 };

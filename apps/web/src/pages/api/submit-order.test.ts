@@ -154,7 +154,7 @@ describe("POST /api/submit-order", () => {
     await expect(response.json()).resolves.toEqual({
       success: false,
       error: {
-        code: "VALIDATION_ERROR",
+        code: "BAD_REQUEST",
         message: "ZodError: INVALID_PHONE",
       },
     });

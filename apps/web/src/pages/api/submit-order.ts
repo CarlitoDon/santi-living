@@ -1,27 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
-
-type ErrorCode = "VALIDATION_ERROR" | "UPSTREAM_ERROR";
-
-const buildErrorResponse = (
-  status: number,
-  code: ErrorCode,
-  message: string,
-) => {
-  return new Response(
-    JSON.stringify({
-      success: false,
-      error: {
-        code,
-        message,
-      },
-    }),
-    {
-      status,
-      headers: { "Content-Type": "application/json" },
-    },
-  );
-};
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Submit Order API
@@ -100,9 +79,9 @@ export const POST: APIRoute = async ({ request }) => {
       status = 400;
     }
 
-    return buildErrorResponse(
+    return createApiErrorResponse(
       status,
-      status === 400 ? "VALIDATION_ERROR" : "UPSTREAM_ERROR",
+      status === 400 ? "BAD_REQUEST" : "UPSTREAM_ERROR",
       message,
     );
   }

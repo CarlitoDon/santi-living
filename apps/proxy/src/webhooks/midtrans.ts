@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
+import { sendHttpError } from "../utils/http-error";
 
 // import midtransClient from "midtrans-client";
 
@@ -28,7 +29,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
 
     if (signatureKey !== notification.signature_key) {
       console.warn(`[Midtrans Webhook] Invalid signature for order ${orderId}`);
-      res.status(403).json({ message: "Invalid signature" });
+      sendHttpError(res, 403, "FORBIDDEN", "Invalid signature");
       return;
     }
 
@@ -90,7 +91,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
     res.status(200).json({ status: "OK" });
   } catch (error) {
     console.error("[Midtrans Webhook] Error:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    sendHttpError(res, 500, "INTERNAL_ERROR", "Internal Server Error");
   }
 };
 

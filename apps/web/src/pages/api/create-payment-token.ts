@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Create Payment Token API
@@ -14,13 +15,7 @@ export const POST: APIRoute = async ({ request }) => {
     // console.log(`[create-payment-token] Requesting token for order: ${token}, method: ${paymentMethod}`);
 
     if (!token) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Token is required",
-        }),
-        { status: 400 },
-      );
+      return createApiErrorResponse(400, "BAD_REQUEST", "Token is required");
     }
 
     const client = createProxyClient();
@@ -48,13 +43,6 @@ export const POST: APIRoute = async ({ request }) => {
     const message =
       error instanceof Error ? error.message : "Failed to create payment token";
 
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: "Failed to create payment token",
-        message,
-      }),
-      { status: 500 },
-    );
+    return createApiErrorResponse(500, "UPSTREAM_ERROR", message);
   }
 };

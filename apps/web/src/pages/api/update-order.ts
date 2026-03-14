@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Update Order API
@@ -12,10 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
 
     if (!body.token) {
-      return new Response(
-        JSON.stringify({ error: "Missing order token" }),
-        { status: 400, headers: { "Content-Type": "application/json" } },
-      );
+      return createApiErrorResponse(400, "BAD_REQUEST", "Missing order token");
     }
 
     console.warn("[update-order] DEBUG:", {
@@ -66,12 +64,10 @@ export const POST: APIRoute = async ({ request }) => {
       status = 400;
     }
 
-    return new Response(
-      JSON.stringify({
-        error: "Order update failed",
-        message,
-      }),
-      { status, headers: { "Content-Type": "application/json" } },
+    return createApiErrorResponse(
+      status,
+      status === 400 ? "BAD_REQUEST" : "UPSTREAM_ERROR",
+      message,
     );
   }
 };

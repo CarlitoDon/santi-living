@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import logoQris from "@/assets/images/logo-qris.svg";
 import logoGopay from "@/assets/images/logo-gopay.svg";
 import logoBca from "@/assets/images/logo-bca.png";
+import { getProxyBaseUrl } from "@/lib/proxy-config";
 
 // Disable prerender - this page fetches data dynamically based on token
 export const prerender = false;
@@ -18,11 +19,7 @@ let error = null;
 
 if (token) {
   try {
-    // Use Proxy Service
-    // Fallback to local if not set, but prefer the staging/prod URL
-    let apiUrl = import.meta.env.PUBLIC_PROXY_URL || import.meta.env.SANTI_PROXY_URL || process.env.SANTI_PROXY_URL || "http://localhost:3000";
-    // Sanitize: Remove trailing slash if present
-    if (apiUrl.endsWith("/")) apiUrl = apiUrl.slice(0, -1);
+    const apiUrl = getProxyBaseUrl();
 
     // TRPC batch format for GET: URL needs ?batch=1&input={"0":{"json":{...}}}
     console.log(`[SSR] Fetching order token: ${token} from ${apiUrl} (Proxy)`);

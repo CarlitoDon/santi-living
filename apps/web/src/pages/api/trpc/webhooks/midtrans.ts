@@ -1,4 +1,6 @@
 import type { APIRoute } from "astro";
+import { createApiErrorResponse } from "../../../../lib/http-error";
+import { getProxyBaseUrl } from "../../../../lib/proxy-config";
 
 /**
  * Midtrans Webhook Redirect
@@ -16,7 +18,7 @@ export const POST: APIRoute = async ({ request }) => {
   );
 
   // Forward to the correct endpoint
-  const PROXY_URL = import.meta.env.SANTI_PROXY_URL || "http://localhost:3002";
+  const PROXY_URL = getProxyBaseUrl();
 
   try {
     const body = await request.text();
@@ -48,9 +50,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error("[Midtrans Webhook Redirect] Error:", error);
-    return new Response(
-      JSON.stringify({ error: "Failed to forward webhook" }),
-      { status: 500 },
+    return createApiErrorResponse(
+      500,
+      "UPSTREAM_ERROR",
+      "Failed to forward webhook",
     );
   }
 };

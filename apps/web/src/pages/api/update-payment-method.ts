@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Update Payment Method API
@@ -13,25 +14,17 @@ export const POST: APIRoute = async ({ request }) => {
     const { token, paymentMethod } = body;
 
     if (!token) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Token is required",
-        }),
-        { status: 400 },
-      );
+      return createApiErrorResponse(400, "BAD_REQUEST", "Token is required");
     }
 
     if (
       !paymentMethod ||
       !["qris", "transfer", "gopay"].includes(paymentMethod)
     ) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Valid payment method is required (qris, transfer, gopay)",
-        }),
-        { status: 400 },
+      return createApiErrorResponse(
+        400,
+        "BAD_REQUEST",
+        "Valid payment method is required (qris, transfer, gopay)",
       );
     }
 
@@ -60,13 +53,6 @@ export const POST: APIRoute = async ({ request }) => {
         ? error.message
         : "Failed to update payment method";
 
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: "Failed to update payment method",
-        message,
-      }),
-      { status: 500 },
-    );
+    return createApiErrorResponse(500, "UPSTREAM_ERROR", message);
   }
 };

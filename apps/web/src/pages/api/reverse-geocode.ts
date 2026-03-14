@@ -4,16 +4,14 @@
  */
 
 import type { APIRoute } from "astro";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 export const GET: APIRoute = async ({ url }) => {
   const lat = url.searchParams.get("lat");
   const lng = url.searchParams.get("lng");
 
   if (!lat || !lng) {
-    return new Response(JSON.stringify({ error: "lat and lng are required" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+    return createApiErrorResponse(400, "BAD_REQUEST", "lat and lng are required");
   }
 
   const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
@@ -42,12 +40,6 @@ export const GET: APIRoute = async ({ url }) => {
     });
   } catch (error) {
     console.error("[reverse-geocode] Error:", error);
-    return new Response(
-      JSON.stringify({ error: "Failed to reverse geocode" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+    return createApiErrorResponse(500, "UPSTREAM_ERROR", "Failed to reverse geocode");
   }
 };

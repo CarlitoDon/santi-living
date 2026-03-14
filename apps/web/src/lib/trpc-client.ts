@@ -7,25 +7,18 @@
 import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
 import type { AppRouter } from "@santi-living/proxy";
+import { getProxyApiSecret, getProxyTrpcUrl } from "./proxy-config";
 
 // Get service URL from environment at RUNTIME (not build time)
 const getServiceUrl = () => {
-  // On server-side (Vercel Functions), read from process.env
-  if (typeof window === "undefined") {
-    return (
-      process.env.SANTI_PROXY_URL ||
-      process.env.PUBLIC_PROXY_URL ||
-      "http://localhost:3002"
-    );
-  }
-  return "http://localhost:3002";
+  const trpcUrl = getProxyTrpcUrl();
+  return trpcUrl.replace(/\/api\/trpc$/, "");
 };
 
 // Get API key from environment at RUNTIME
 const getApiKey = () => {
   if (typeof window === "undefined") {
-    const apiKey =
-      process.env.PROXY_API_SECRET || process.env.PROXY_API_KEY || "";
+    const apiKey = getProxyApiSecret();
 
     if (!apiKey && process.env.NODE_ENV === "production") {
       throw new Error(

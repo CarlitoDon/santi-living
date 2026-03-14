@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Confirm Payment API
@@ -16,12 +17,10 @@ export const POST: APIRoute = async ({ request }) => {
     // );
 
     if (!token || !paymentMethod) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Token and Payment Method are required",
-        }),
-        { status: 400 },
+      return createApiErrorResponse(
+        400,
+        "BAD_REQUEST",
+        "Token and Payment Method are required",
       );
     }
 
@@ -51,13 +50,10 @@ export const POST: APIRoute = async ({ request }) => {
     const message =
       error instanceof Error ? error.message : "Failed to confirm payment";
 
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: "Payment confirmation failed",
-        message,
-      }),
-      { status: 500 },
+    return createApiErrorResponse(
+      500,
+      "UPSTREAM_ERROR",
+      message,
     );
   }
 };

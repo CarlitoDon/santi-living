@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
 
 /**
  * Create QRIS Payment API
@@ -12,13 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { token } = body;
 
     if (!token) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Token is required",
-        }),
-        { status: 400 },
-      );
+      return createApiErrorResponse(400, "BAD_REQUEST", "Token is required");
     }
 
     const client = createProxyClient();
@@ -43,13 +38,6 @@ export const POST: APIRoute = async ({ request }) => {
     const message =
       error instanceof Error ? error.message : "Failed to create QRIS payment";
 
-    return new Response(
-      JSON.stringify({
-        success: false,
-        error: "Failed to create QRIS payment",
-        message,
-      }),
-      { status: 500 },
-    );
+    return createApiErrorResponse(500, "UPSTREAM_ERROR", message);
   }
 };

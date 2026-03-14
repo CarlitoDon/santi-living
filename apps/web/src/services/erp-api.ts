@@ -6,21 +6,12 @@
  */
 
 import type { OrderPayload, ErpOrderResponse } from "@/types/order";
+import { getProxyBaseUrl } from "@/lib/proxy-config";
 
 export type { OrderPayload, ErpOrderResponse };
 
 const getErpApiUrl = () => {
-  // In development use localhost, in production use env var
-  if (
-    typeof window !== "undefined" &&
-    window.location.hostname === "localhost"
-  ) {
-    return "http://localhost:3002"; // proxy service port
-  }
-  const PROXY_URL =
-    (import.meta as unknown as { env: { PUBLIC_PROXY_URL?: string } }).env
-      ?.PUBLIC_PROXY_URL || "http://localhost:3002";
-  return PROXY_URL;
+  return getProxyBaseUrl();
 };
 
 const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
