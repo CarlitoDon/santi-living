@@ -1,16 +1,18 @@
 ---
 export const prerender = true;
 
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import MainLayout from "@/layouts/MainLayout.astro";
 import Header from "@/components/Header.astro";
 import Sidebar from "@/components/Sidebar.astro";
 import BlogCard from "@/components/BlogCard.astro";
 
-// Get all published blog posts, sorted by date (newest first)
-const posts = await getCollection("blog", ({ data }) => {
-  return import.meta.env.PROD ? data.pubDate <= new Date() : true;
-});
+const allPosts = await getCollection("blog");
+
+// Filter unpublished posts in production and keep stable typing.
+const posts: CollectionEntry<"blog">[] = import.meta.env.PROD
+  ? allPosts.filter((post: CollectionEntry<"blog">) => post.data.pubDate <= new Date())
+  : allPosts;
 
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
