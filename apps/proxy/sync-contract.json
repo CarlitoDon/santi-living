@@ -1,5 +1,5 @@
 {
-  "publicRentalRouterHash": "411dd8744f4b6fde6b580f5d060b4b8c",
-  "checkedAt": "2026-03-14T05:18:00.000Z",
+  "publicRentalRouterHash": "eea8c3f9c317ebf7788db76ef3541536",
+  "checkedAt": "2026-03-14T14:18:00.000Z",
   "description": "MD5 hash of sync-erp publicRental router files. Used by scripts/check-sync.ts to ensure type safety."
 }

@@ -303,7 +303,7 @@ describe("orderRouter.create", () => {
           "x-correlation-id": "corr-order-ctx-001",
           "idempotency-key": "idem-order-ctx-001",
         },
-      } as Context["req"],
+      } as unknown as Context["req"],
       res: {} as Context["res"],
     });
 
