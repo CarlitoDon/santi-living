@@ -2,6 +2,31 @@ import type { Request, Response } from "express";
 import { botClient } from "../services/bot-client";
 import { getOrderByToken, deleteRentalOrder } from "../services/erp-client";
 import { retryWithBackoff } from "../utils/retry";
+import { sendHttpError } from "../utils/http-error";
+
+type OrderDetails = Awaited<ReturnType<typeof getOrderByToken>>;
+type OrderItem = OrderDetails["items"][number];
+
+const logWebhook = (...args: unknown[]) => {
+  console.warn(...args);
+};
+
+const getErrorMessage = (error: unknown) => {
+  return error instanceof Error ? error.message : String(error);
+};
+
+const getErrorMetadata = (error: unknown) => {
+  if (!error || typeof error !== "object") {
+    return "{}";
+  }
+
+  const typedError = error as {
+    shape?: unknown;
+    data?: unknown;
+  };
+
+  return JSON.stringify(typedError.shape || typedError.data || {}, null, 2);
+};
 
 // Format currency to IDR
 const formatCurrency = (amount: number) => {
@@ -35,10 +60,8 @@ const isPermanentError = (error: unknown): boolean => {
  */
 async function sendCustomerOrderNotification(
   token: string,
-  customerName: string,
   customerPhone: string,
-  orderNumber: string,
-): Promise<{ order: any; method: "detailed" | "simple" }> {
+): Promise<void> {
   // Fetch full order details (also retried as part of the outer retry)
   const order = await getOrderByToken(token);
 
@@ -46,7 +69,7 @@ async function sendCustomerOrderNotification(
     throw new Error("Order not found");
   }
 
-  console.log(
+  logWebhook(
     `[Webhook] Order fetched successfully: ${order.orderNumber}`,
   );
 
@@ -60,12 +83,12 @@ async function sendCustomerOrderNotification(
   await botClient.bot.sendOrder.mutate({
     orderId: order.orderNumber,
     customerName: order.partner.name,
-    customerWhatsapp: order.partner.phone,
+    customerWhatsapp: customerPhone,
     deliveryAddress:
       (order.deliveryAddress || order.partner.address || "").length < 5
         ? "Alamat belum lengkap (Hubungi Admin)"
         : (order.deliveryAddress || order.partner.address || ""),
-    items: order.items.map((item: any, index: number) => ({
+    items: order.items.map((item: OrderItem, index: number) => ({
       id: item.rentalItemId || item.rentalBundleId || `item-${index}`,
       name: item.name,
       category: "package" as const,
@@ -89,12 +112,10 @@ async function sendCustomerOrderNotification(
     orderUrl: `https://santi-living.com/sewa-kasur/pesanan/${token}`,
   });
 
-  console.log("[Webhook] Bot sendOrder mutation success");
-  console.log(
+  logWebhook("[Webhook] Bot sendOrder mutation success");
+  logWebhook(
     `[Webhook] Detailed notification sent to customer: ${customerPhone}`,
   );
-
-  return { order, method: "detailed" };
 }
 
 /**
@@ -122,7 +143,7 @@ Terima kasih sudah memesan di *Sewa Kasur Jogja by Santi Mebel*! 🙏`;
     message: customerMessage,
   });
 
-  console.log(
+  logWebhook(
     `[Webhook] Simple notification sent to customer: ${customerPhone}`,
   );
 }
@@ -132,12 +153,12 @@ export const notifyAdminWebhook = async (req: Request, res: Response) => {
   const { action, orderNumber, customerName, customerPhone, totalAmount } =
     req.body;
 
-  console.log(
+  logWebhook(
     `[Webhook] Received admin notification for order: ${orderNumber}`,
   );
 
   if (action !== "new_order") {
-    res.status(400).json({ message: "Invalid action" });
+    sendHttpError(res, 400, "BAD_REQUEST", "Invalid action");
     return;
   }
 
@@ -162,7 +183,7 @@ Detail customer: ${orderUrl}
       message,
     });
 
-    console.log(`[Webhook] Notification sent to admin: ${adminPhone}`);
+    logWebhook(`[Webhook] Notification sent to admin: ${adminPhone}`);
 
     // ── 2. Notify Customer (with retry) ──
     if (customerPhone) {
@@ -172,9 +193,7 @@ Detail customer: ${orderUrl}
           () =>
             sendCustomerOrderNotification(
               token,
-              customerName,
               customerPhone,
-              orderNumber,
             ),
           {
             label: "CustomerOrderNotification",
@@ -184,11 +203,11 @@ Detail customer: ${orderUrl}
             isPermanentError,
           },
         );
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.warn(
           "[Webhook] Detailed customer notification failed after retries:",
-          err.message,
-          JSON.stringify(err?.shape || err?.data || {}, null, 2),
+          getErrorMessage(err),
+          getErrorMetadata(err),
         );
 
         // Check for permanent Invalid Number error → ROLLBACK
@@ -202,7 +221,7 @@ Detail customer: ${orderUrl}
             const order = await getOrderByToken(token);
             if (order?.id) {
               await deleteRentalOrder(order.id);
-              console.log(
+              logWebhook(
                 `[Webhook] Order ${token} rolled back successfully.`,
               );
             } else {
@@ -212,11 +231,12 @@ Detail customer: ${orderUrl}
             console.error("[Webhook] Failed to rollback order:", rollbackErr);
           }
 
-          res.status(400).json({
-            success: false,
-            error: "Invalid WhatsApp Number",
-            message: "Nomor WhatsApp tidak terdaftar",
-          });
+          sendHttpError(
+            res,
+            400,
+            "BAD_REQUEST",
+            "Nomor WhatsApp tidak terdaftar",
+          );
           return;
         }
 
@@ -264,7 +284,12 @@ Detail customer: ${orderUrl}
     res.json({ success: true });
   } catch (error) {
     console.error("[Webhook] Failed to notify admin:", error);
-    res.status(500).json({ message: "Failed to send notification" });
+    sendHttpError(
+      res,
+      500,
+      "INTERNAL_ERROR",
+      "Failed to send notification",
+    );
   }
 };
 
@@ -273,9 +298,9 @@ export const notifyPaymentStatusWebhook = async (
   res: Response,
 ) => {
   const token = req.params.token as string;
-  const { action, paymentMethod, paymentReference } = req.body;
+  const { action, paymentMethod, paymentReference, failReason } = req.body;
 
-  console.log(`[Webhook] Payment status update for ${token}: ${action}`);
+  logWebhook(`[Webhook] Payment status update for ${token}: ${action}`);
 
   try {
     // 1. Fetch Order Details (with retry for transient DB errors)
@@ -289,7 +314,7 @@ export const notifyPaymentStatusWebhook = async (
     );
 
     if (!order) {
-      res.status(404).json({ message: "Order not found" });
+      sendHttpError(res, 404, "NOT_FOUND", "Order not found");
       return;
     }
 
@@ -330,9 +355,9 @@ ${publicOrderUrl}
 
 Terima kasih! 🙏`;
 
-        await retryWithBackoff(
-          () =>
-            botClient.bot.sendMessage.mutate({
+      await retryWithBackoff(
+        () =>
+          botClient.bot.sendMessage.mutate({
               phone: customerPhone,
               message: customerMsg,
             }),
@@ -388,10 +413,56 @@ ${publicOrderUrl}`;
         );
       }
     }
+    // 4. Handle "rejected" (Expired / denied / cancelled Midtrans payment)
+    else if (action === "rejected") {
+      const adminMsg = `❌ *PEMBAYARAN GAGAL / KADALUWARSA*
+
+Order: *${order.orderNumber}*
+Customer: ${order.partner.name}
+Total: ${formatCurrency(Number(order.totalAmount))}
+Method: ${paymentMethod || order.paymentMethod || "-"}
+Alasan: ${failReason || "-"}
+
+Silakan follow up customer atau arahkan untuk mencoba pembayaran ulang:
+${orderUrl}`;
+
+      await botClient.bot.sendMessage.mutate({
+        phone: adminPhone,
+        message: adminMsg,
+      });
+
+      if (customerPhone) {
+        const customerMsg = `❌ *Pembayaran Belum Berhasil*
+
+Halo Kak ${order.partner.name}, pembayaran untuk pesanan *${order.orderNumber}* belum berhasil kami terima.
+
+Metode: ${paymentMethod || order.paymentMethod || "-"}
+Alasan: ${failReason || "Pembayaran gagal diproses"}
+
+Kakak bisa mencoba pembayaran ulang atau hubungi admin kami jika butuh bantuan.
+
+Cek status pesanan:
+${publicOrderUrl}`;
+
+        await retryWithBackoff(
+          () =>
+            botClient.bot.sendMessage.mutate({
+              phone: customerPhone,
+              message: customerMsg,
+            }),
+          {
+            label: "PaymentRejectedCustomer",
+            maxRetries: 2,
+            baseDelayMs: 2000,
+            isPermanentError,
+          },
+        );
+      }
+    }
 
     res.json({ success: true, processed: true });
   } catch (error) {
     console.error("[Webhook] Failed to process payment notification:", error);
-    res.status(500).json({ message: "Internal Error" });
+    sendHttpError(res, 500, "INTERNAL_ERROR", "Internal Error");
   }
 };

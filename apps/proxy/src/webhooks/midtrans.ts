@@ -82,7 +82,7 @@ export const midtransWebhook = async (req: Request, res: Response) => {
       transactionStatus == "deny" ||
       transactionStatus == "expire"
     ) {
-      await handleFailure(orderId, transactionStatus);
+      await handleFailure(orderId, transactionStatus, notification);
     } else if (transactionStatus == "pending") {
       // Waiting for payment
     }
@@ -105,39 +105,26 @@ interface MidtransNotification {
   transaction_id?: string;
 }
 
+function extractOrderNumber(midtransOrderId: string): string {
+  const match = midtransOrderId.match(/^(RNT-\d{6}-\d{5})(?:-\d+)?$/);
+
+  if (match?.[1]) {
+    return match[1];
+  }
+
+  const parts = midtransOrderId.split("-");
+  if (parts.length > 3 && /^\d+$/.test(parts[parts.length - 1] || "")) {
+    return parts.slice(0, -1).join("-");
+  }
+
+  return midtransOrderId;
+}
+
 async function handleSuccess(
   midtransOrderId: string,
   notification: MidtransNotification,
 ) {
-  // Extract base order number (remove suffix if any)
-  // Format: RNT-XXXX-TIMESTAMP or just RNT-XXXX
-  const parts = midtransOrderId.split("-");
-
-  // Assuming standard format RNT-XXXXXX (or similar)
-  // If we appended a timestamp, it would be RNT-XXXXXX-TIMESTAMP
-  // Standard Order Number is likely "RNT-" + digits.
-  // Let's try to reconstruct or parse.
-  // Safety: We can pass the full midtransOrderId if that's what we stored?
-  // No, we stored `orderNumber + "-" + timestamp`.
-  // So we should take everything BEFORE the last dash if it looks like a timestamp?
-  // Or just pass the extracted parts.
-
-  // Robust extraction: RNT-000001 (len 10) + - + TIMESTAMP
-  // Let's look for "RNT-" prefix.
-
-  // However, simpler approach:
-  // If we sent `${order.orderNumber}-${scale}`
-  // We can just try to find by `orderNumber` which is `RNT-XXXXXX`.
-  // So we strip the last part if there are > 2 parts?
-  // RNT-0001 (2 parts). RNT-0001-123123 (3 parts).
-
-  let orderNumber = midtransOrderId;
-  if (parts.length > 2) {
-    // Remove the last part (timestamp) added for uniqueness in order.router.ts
-    // Format: ORDER-NUM-TIMESTAMP
-    parts.pop();
-    orderNumber = parts.join("-");
-  }
+  const orderNumber = extractOrderNumber(midtransOrderId);
 
   // eslint-disable-next-line no-console
   console.log(
@@ -167,17 +154,45 @@ async function handleSuccess(
   }
 }
 
-async function handleFailure(midtransOrderId: string, reason: string) {
-  console.warn(`[Midtrans Webhook] Order ${midtransOrderId} failed: ${reason}`);
-  // Optional: Update status to FAILED or CANCELLED in DB
+async function handleFailure(
+  midtransOrderId: string,
+  reason: string,
+  notification: MidtransNotification,
+) {
+  const orderNumber = extractOrderNumber(midtransOrderId);
+
+  console.warn(
+    `[Midtrans Webhook] Order ${orderNumber} failed: ${reason}`,
+  );
+
+  try {
+    const { rejectPaymentByOrderNumber } =
+      await import("../services/erp-client");
+    await rejectPaymentByOrderNumber({
+      orderNumber,
+      paymentMethod: notification.payment_type,
+      failReason: `Midtrans transaction ${reason}`,
+    });
+    console.warn(
+      `[Midtrans Webhook] Successfully marked order ${orderNumber} as failed`,
+    );
+  } catch (error) {
+    console.error(
+      `[Midtrans Webhook] Failed to mark order ${orderNumber} as failed`,
+      error,
+    );
+    throw error;
+  }
 }
 
 async function handleChallenge(
   midtransOrderId: string,
   notification: MidtransNotification,
 ) {
+  const orderNumber = extractOrderNumber(midtransOrderId);
+
   console.warn(
-    `[Midtrans Webhook] FRAUD CHALLENGE for order ${midtransOrderId}`,
+    `[Midtrans Webhook] FRAUD CHALLENGE for order ${orderNumber}`,
   );
 
   try {
@@ -187,7 +202,7 @@ async function handleChallenge(
 
     const message = `⚠️ *PERHATIAN: PEMBAYARAN PERLU REVIEW*
 
-Order ID: ${midtransOrderId}
+Order ID: ${orderNumber}
 Status: ${notification.transaction_status}
 Fraud Status: ${notification.fraud_status}
 Payment Type: ${notification.payment_type}
@@ -202,11 +217,11 @@ Silakan cek dashboard Midtrans untuk approve/deny transaksi ini.`;
 
     // eslint-disable-next-line no-console
     console.log(
-      `[Midtrans Webhook] Challenge notification sent to admin for order ${midtransOrderId}`,
+      `[Midtrans Webhook] Challenge notification sent to admin for order ${orderNumber}`,
     );
   } catch (e) {
     console.error(
-      `[Midtrans Webhook] Failed to notify admin about challenge for ${midtransOrderId}`,
+      `[Midtrans Webhook] Failed to notify admin about challenge for ${orderNumber}`,
       e,
     );
     // Don't throw - we still want to return 200 to Midtrans

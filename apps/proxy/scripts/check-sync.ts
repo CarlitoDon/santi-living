@@ -8,15 +8,19 @@ const CONTRACT_FILE = path.join(__dirname, "../sync-contract.json");
 // But project structure is apps/proxy/scripts/check-sync.ts
 // So sync-erp is at ../../../../sync-erp
 const REMOTE_REPO_PATH = path.resolve(__dirname, "../../../../sync-erp");
-const ROUTER_PATH = path.join(
-  REMOTE_REPO_PATH,
+const ROUTER_PATHS = [
   "apps/api/src/trpc/routers/public-rental.router.ts",
-);
+  "apps/api/src/trpc/routers/public-rental/public-rental-partner.router.ts",
+  "apps/api/src/trpc/routers/public-rental/public-rental-order.router.ts",
+  "apps/api/src/trpc/routers/public-rental/public-rental-payment.router.ts",
+].map((relativePath) => path.join(REMOTE_REPO_PATH, relativePath));
 
-function calculateFileHash(filePath: string): string {
-  const fileBuffer = fs.readFileSync(filePath);
+function calculateFileHash(filePaths: string[]): string {
   const hashSum = crypto.createHash("md5");
-  hashSum.update(fileBuffer);
+  for (const filePath of filePaths) {
+    hashSum.update(filePath);
+    hashSum.update(fs.readFileSync(filePath));
+  }
   return hashSum.digest("hex");
 }
 
@@ -30,15 +34,16 @@ function main() {
     process.exit(0);
   }
 
-  if (!fs.existsSync(ROUTER_PATH)) {
+  const missingPath = ROUTER_PATHS.find((routerPath) => !fs.existsSync(routerPath));
+  if (missingPath) {
     console.error(
-      `❌ [Sync Check] Sync ERP repo found, but router file missing at: ${ROUTER_PATH}`,
+      `❌ [Sync Check] Sync ERP repo found, but router file missing at: ${missingPath}`,
     );
     // If repo exists but file is moved, that's a breaking change too!
     process.exit(1);
   }
 
-  const currentHash = calculateFileHash(ROUTER_PATH);
+  const currentHash = calculateFileHash(ROUTER_PATHS);
 
   let contract: { publicRentalRouterHash: string };
   try {
@@ -55,7 +60,7 @@ function main() {
     console.error(`Local Hash:   ${contract.publicRentalRouterHash}`);
     console.error(`Remote Hash:  ${currentHash}`);
     console.error(
-      "\nThe public-rental.router.ts in sync-erp has been modified.",
+      "\nThe publicRental router contract in sync-erp has been modified.",
     );
     console.error(
       "Your local contract types in src/types/sync-erp.ts might be OUTDATED.",

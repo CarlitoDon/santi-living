@@ -2,32 +2,30 @@ import midtransClient from "midtrans-client";
 
 const isProduction = process.env.MIDTRANS_IS_PRODUCTION === "true";
 
-// Initialize Snap API client
-const serverKey = process.env.MIDTRANS_SERVER_KEY || "";
-const clientKey = process.env.MIDTRANS_CLIENT_KEY || "";
+const getMidtransCredentials = () => {
+  const serverKey = process.env.MIDTRANS_SERVER_KEY || "";
+  const clientKey = process.env.MIDTRANS_CLIENT_KEY || "";
 
-if (!serverKey) {
-  console.error("❌ [Midtrans Client] MIDTRANS_SERVER_KEY is missing!");
-  process.exit(1); // Fail fast
-}
+  if (!serverKey) {
+    throw new Error("MIDTRANS_SERVER_KEY is missing");
+  }
 
-if (!clientKey) {
-  console.error("❌ [Midtrans Client] MIDTRANS_CLIENT_KEY is missing!");
-  process.exit(1); // Fail fast
-}
+  if (!clientKey) {
+    throw new Error("MIDTRANS_CLIENT_KEY is missing");
+  }
 
-const snap = new midtransClient.Snap({
-  isProduction,
-  serverKey,
-  clientKey,
-});
+  return { serverKey, clientKey };
+};
 
-// Initialize Core API client for direct QRIS charge
-const coreApi = new midtransClient.CoreApi({
-  isProduction,
-  serverKey,
-  clientKey,
-});
+const createSnapClient = () => {
+  const { serverKey, clientKey } = getMidtransCredentials();
+
+  return new midtransClient.Snap({
+    isProduction,
+    serverKey,
+    clientKey,
+  });
+};
 
 interface SnapTransactionDetails {
   order_id: string;
@@ -56,6 +54,7 @@ interface CreateSnapTokenInput {
 }
 
 export const createSnapToken = async (input: CreateSnapTokenInput) => {
+  const snap = createSnapClient();
   // Determine enabled payments based on payment method from order
   let enabledPayments: string[];
 
@@ -67,11 +66,6 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
     // Default: both options for transfer or unknown
     enabledPayments = ["qris", "gopay", "bank_transfer"];
   }
-
-  console.log("[Midtrans] Creating token with:", {
-    enabledPayments,
-    paymentMethod: input.paymentMethod,
-  });
 
   const parameter: Record<string, unknown> = {
     transaction_details: input.transaction_details,
@@ -97,7 +91,6 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
   }
 };
 
-// QRIS Core API Types
 interface CreateQrisChargeInput {
   order_id: string;
   gross_amount: number;
@@ -109,29 +102,12 @@ interface CreateQrisChargeInput {
   };
 }
 
-interface QrisChargeResponse {
-  status_code: string;
-  status_message: string;
-  transaction_id: string;
-  order_id: string;
-  gross_amount: string;
-  payment_type: string;
-  transaction_status: string;
-  qr_string: string;
-  acquirer: string;
-  actions: Array<{
-    name: string;
-    method: string;
-    url: string;
-  }>;
-}
-
 /**
  * Create QRIS charge using Core API
  * This bypasses Snap to force QR display on mobile
  */
 export const createQrisCharge = async (
-  input: CreateQrisChargeInput,
+  _input: CreateQrisChargeInput,
 ): Promise<{
   qrCodeUrl: string;
   qrString: string;
@@ -139,6 +115,8 @@ export const createQrisCharge = async (
   orderId: string;
   expiryTime: string;
 }> => {
+  getMidtransCredentials();
+
   throw new Error(
     "QRIS Core API is currently disabled in Production. Please use Snap.",
   );

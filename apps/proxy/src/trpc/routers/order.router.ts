@@ -7,26 +7,17 @@ import { z } from "zod";
 import { router, protectedProcedure, publicProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { CreateOrderSchema } from "../../types/order";
+import { requireSantiLivingCompanyId } from "../../config/runtime";
 import {
   createRentalOrder,
   findOrCreatePartner,
   getOrderByToken,
   confirmPayment as confirmPaymentErp,
-  deleteRentalOrder,
   updateRentalOrder,
 } from "../../services/erp-client";
 import {
   createSnapToken,
-  createQrisCharge,
 } from "../../services/midtrans-client";
-import {
-  sendOrderConfirmation,
-  notifyAdminNewOrder,
-} from "../../services/wa-notifier";
-
-// Default company ID for Santi Living
-const SANTI_LIVING_COMPANY_ID =
-  process.env.SANTI_LIVING_COMPANY_ID || "demo-company-rental";
 
 export const orderRouter = router({
   /**
@@ -35,20 +26,12 @@ export const orderRouter = router({
   create: protectedProcedure
     .input(CreateOrderSchema)
     .mutation(async ({ input }) => {
+      const companyId = requireSantiLivingCompanyId();
       const addressFields = input.addressFields || {};
 
-      // DEBUG: Log environment and incoming data
-      console.error("[order.create] DEBUG:", {
-        apiUrl: process.env.SYNC_ERP_API_URL || "NOT SET",
-        companyId: SANTI_LIVING_COMPANY_ID,
-        customerName: input.customerName,
-        timestamp: new Date().toISOString(),
-      });
-
       // 1. Find or create partner in sync-erp
-      console.error("[order.create] Step 1: findOrCreatePartner...");
       const partner = await findOrCreatePartner({
-        companyId: SANTI_LIVING_COMPANY_ID,
+        companyId,
         name: input.customerName,
         phone: input.customerWhatsapp,
         address: input.deliveryAddress,
@@ -83,7 +66,7 @@ export const orderRouter = router({
 
       // 3. Create rental order in sync-erp
       const order = await createRentalOrder({
-        companyId: SANTI_LIVING_COMPANY_ID,
+        companyId,
         partnerId: partner.id,
         rentalStartDate: new Date(input.orderDate),
         rentalEndDate: new Date(input.endDate),
@@ -112,93 +95,6 @@ export const orderRouter = router({
         process.env.PUBLIC_BASE_URL ||
         (isDev ? "http://localhost:4321" : "https://santiliving.com");
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
-
-      // 5. Send WhatsApp notifications (async, non-blocking)
-      // 5. Send WhatsApp notifications (async, blocking for validation)
-      // We await this to ensure the number is valid. If it fails with "Invalid Number", we rollback.
-      try {
-        await sendOrderConfirmation({
-          orderId: order.orderNumber,
-          customerName: input.customerName,
-          customerWhatsapp: input.customerWhatsapp,
-          deliveryAddress: input.deliveryAddress,
-          addressFields: {
-            street: addressFields.street,
-            kelurahan: addressFields.kelurahan,
-            kecamatan: addressFields.kecamatan,
-            kota: addressFields.kota,
-            provinsi: addressFields.provinsi,
-            zip: addressFields.zip,
-            lat: addressFields.lat,
-            lng: addressFields.lng,
-          },
-          items: input.items.map((item) => ({
-            id: item.id,
-            name: item.name,
-            category: item.category,
-            quantity: item.quantity,
-            pricePerDay: item.pricePerDay,
-          })),
-          totalPrice: input.totalPrice,
-          orderDate: input.orderDate,
-          endDate: input.endDate,
-          duration: input.duration,
-          deliveryFee: input.deliveryFee,
-          paymentMethod: input.paymentMethod,
-          notes: input.notes,
-          volumeDiscountAmount: input.volumeDiscountAmount,
-          volumeDiscountLabel: input.volumeDiscountLabel,
-          orderUrl,
-        });
-      } catch (err: unknown) {
-        console.error("[WA Notify] Failed to send order confirmation:", err);
-
-        const errorMessage = err instanceof Error ? err.message : String(err);
-        // Check for invalid number (from Bot Service 400)
-        if (
-          errorMessage.includes("[INVALID_PHONE]") ||
-          errorMessage.includes("Invalid WhatsApp Number") || // Legacy fallback
-          errorMessage.includes("no lid")
-        ) {
-          try {
-            console.warn(
-              `[OrderRouter] Rolling back order ${order.orderNumber} due to invalid number`,
-            );
-            await deleteRentalOrder(order.id);
-          } catch (deleteErr) {
-            console.error(
-              `[OrderRouter] Failed to rollback order ${order.orderNumber}:`,
-              deleteErr,
-            );
-            // We still throw the original validation error so the user knows
-          }
-
-          // Throw specific TRPC error for frontend to catch
-          throw new TRPCError({
-            code: "BAD_REQUEST",
-            message:
-              "[INVALID_PHONE] Nomor WhatsApp tidak terdaftar atau tidak aktif",
-          });
-        }
-
-        // For other errors (network, bot down), we just log and continue
-      }
-
-      // Notify admin
-      const adminWhatsapp = process.env.ADMIN_WHATSAPP_NUMBER;
-      if (adminWhatsapp) {
-        notifyAdminNewOrder({
-          adminWhatsapp,
-          orderNumber: order.orderNumber,
-          customerName: input.customerName,
-          customerPhone: input.customerWhatsapp,
-          totalAmount: input.totalPrice,
-          orderUrl,
-          erpOrderId: order.id,
-        }).catch((err) =>
-          console.error("[WA Notify] Failed to send admin notification:", err),
-        );
-      }
 
       return {
         id: order.id,
@@ -282,12 +178,6 @@ export const orderRouter = router({
     )
     .mutation(async ({ input }) => {
       const addressFields = input.addressFields || {};
-
-      console.error("[order.update] Updating order:", {
-        token: input.token,
-        customerName: input.customerName,
-        timestamp: new Date().toISOString(),
-      });
 
       // Map items to ERP format
       const erpItems = input.items?.map((item) => {
@@ -481,7 +371,7 @@ export const orderRouter = router({
           first_name: order.partner.name.split(" ")[0],
           last_name: order.partner.name.split(" ").slice(1).join(" ") || "",
           email: `${order.partner.name.toLowerCase().replace(" ", "_")}@santiliving.com`,
-          phone: order.partner.phone,
+          phone: order.partner.phone || "",
         },
         item_details: itemDetails,
         paymentMethod: effectivePaymentMethod as
@@ -515,39 +405,11 @@ export const orderRouter = router({
           ),
       }),
     )
-    .mutation(async ({ input }) => {
-      // 1. Get order details
-      const order = await getOrderByToken(input.token);
-
-      if (!order) {
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Order not found",
-        });
-      }
-
-      // 2. Create unique order ID for Midtrans
-      const uniqueOrderId = `${order.orderNumber}-${Math.floor(Date.now() / 1000)}`;
-
-      console.warn(
-        "[createQrisPayment] Creating QRIS for order:",
-        uniqueOrderId,
-      );
-
-      // 3. Create QRIS charge using Core API
-      const qrisResult = await createQrisCharge({
-        order_id: uniqueOrderId,
-        gross_amount: Math.round(order.totalAmount),
+    .mutation(async () => {
+      throw new TRPCError({
+        code: "PRECONDITION_FAILED",
+        message:
+          "Direct QRIS charge is deprecated. Use createPaymentToken with paymentMethod=qris.",
       });
-
-      return {
-        qrCodeUrl: qrisResult.qrCodeUrl,
-        qrString: qrisResult.qrString,
-        transactionId: qrisResult.transactionId,
-        orderId: qrisResult.orderId,
-        expiryTime: qrisResult.expiryTime,
-        orderNumber: order.orderNumber,
-        totalAmount: order.totalAmount,
-      };
     }),
 });

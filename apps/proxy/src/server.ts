@@ -8,6 +8,8 @@ import {
   notifyAdminWebhook,
   notifyPaymentStatusWebhook,
 } from "./webhooks/notify";
+import { authMiddleware } from "./middleware/auth";
+import { webhookIdempotencyMiddleware } from "./middleware/webhook-idempotency";
 
 export function createServer() {
   const app = express();
@@ -22,7 +24,11 @@ export function createServer() {
     cors({
       origin: allowedOrigins,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "X-Company-Id",
+      ],
     }),
   );
   app.use(express.json());
@@ -36,8 +42,18 @@ export function createServer() {
 
   // Webhooks
   app.post("/api/webhooks/midtrans", midtransWebhook);
-  app.post("/api/orders/:token/notify-admin", notifyAdminWebhook);
-  app.post("/api/orders/:token/notify-payment", notifyPaymentStatusWebhook);
+  app.post(
+    "/api/orders/:token/notify-admin",
+    authMiddleware,
+    webhookIdempotencyMiddleware,
+    notifyAdminWebhook,
+  );
+  app.post(
+    "/api/orders/:token/notify-payment",
+    authMiddleware,
+    webhookIdempotencyMiddleware,
+    notifyPaymentStatusWebhook,
+  );
 
   // TRPC Endpoints
   app.use(

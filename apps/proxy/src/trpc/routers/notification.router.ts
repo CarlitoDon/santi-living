@@ -30,11 +30,16 @@ export const notificationRouter = router({
     )
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
+      const customerPhone = order.partner.phone;
       const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:4321";
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
 
+      if (!customerPhone) {
+        throw new Error("Customer phone is missing on this order");
+      }
+
       await sendOrderLinkToCustomer({
-        customerWhatsapp: order.partner.phone,
+        customerWhatsapp: customerPhone,
         customerName: order.partner.name,
         orderNumber: order.orderNumber,
         orderUrl,
@@ -60,19 +65,24 @@ export const notificationRouter = router({
     )
     .mutation(async ({ input }) => {
       const order = await getOrderByToken(input.token);
+      const customerPhone = order.partner.phone;
       const baseUrl = process.env.PUBLIC_BASE_URL || "http://localhost:4321";
       const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
 
+      if (!customerPhone) {
+        throw new Error("Customer phone is missing on this order");
+      }
+
       if (input.action === "confirmed") {
         await notifyPaymentConfirmed({
-          customerWhatsapp: order.partner.phone,
+          customerWhatsapp: customerPhone,
           customerName: order.partner.name,
           orderNumber: order.orderNumber,
           orderUrl,
         });
       } else {
         await notifyPaymentRejected({
-          customerWhatsapp: order.partner.phone,
+          customerWhatsapp: customerPhone,
           customerName: order.partner.name,
           orderNumber: order.orderNumber,
           orderUrl,
@@ -114,7 +124,7 @@ export const notificationRouter = router({
         adminWhatsapp,
         orderNumber: order.orderNumber,
         customerName: order.partner.name,
-        customerPhone: order.partner.phone,
+        customerPhone: order.partner.phone || "-",
         totalAmount: order.totalAmount,
         orderUrl,
         erpOrderId: input.erpOrderId,

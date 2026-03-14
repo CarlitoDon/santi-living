@@ -23,6 +23,27 @@ const getErpApiUrl = () => {
   return PROXY_URL;
 };
 
+const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
+  if (!errorBody || typeof errorBody !== "object") {
+    return fallback;
+  }
+
+  const payload = errorBody as {
+    message?: string;
+    details?: string;
+    error?: {
+      message?: string;
+    };
+  };
+
+  return (
+    payload.error?.message ||
+    payload.message ||
+    payload.details ||
+    fallback
+  );
+};
+
 /**
  * Send order to ERP sync service
  * This creates the order in sync-erp database
@@ -61,9 +82,7 @@ export async function createOrderInERP(
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(
-      error.message || error.details || "Failed to create order in ERP",
-    );
+    throw new Error(readApiErrorMessage(error, "Failed to create order in ERP"));
   }
 
   return response.json();
@@ -108,9 +127,7 @@ export async function updateOrderInERP(
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(
-      error.message || error.details || "Failed to update order in ERP",
-    );
+    throw new Error(readApiErrorMessage(error, "Failed to update order in ERP"));
   }
 
   return response.json();
@@ -156,9 +173,7 @@ export async function confirmPayment(
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(
-      error.message || error.details || "Gagal konfirmasi pembayaran",
-    );
+    throw new Error(readApiErrorMessage(error, "Gagal konfirmasi pembayaran"));
   }
 
   return response.json();
@@ -176,9 +191,7 @@ export async function createPaymentToken(token: string) {
 
   if (!response.ok) {
     const error = await response.json();
-    throw new Error(
-      error.message || error.details || "Gagal membuat token pembayaran",
-    );
+    throw new Error(readApiErrorMessage(error, "Gagal membuat token pembayaran"));
   }
 
   return response.json();

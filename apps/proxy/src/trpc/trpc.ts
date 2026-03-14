@@ -7,6 +7,11 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import type { Request, Response } from "express";
+import {
+  parseBearerToken,
+  parseCompanyScopeHeader,
+  requireProxyApiSecret,
+} from "../config/runtime";
 
 // Context passed to every procedure
 export interface Context {
@@ -26,21 +31,47 @@ export const publicProcedure = t.procedure;
 // Auth middleware - validates API key
 const isAuthed = t.middleware(({ ctx, next }) => {
   const authHeader = ctx.req.headers.authorization;
-  const apiSecret =
-    process.env.PROXY_API_SECRET || "santi_secret_auth_token_2026";
+  let apiSecret = "";
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  try {
+    apiSecret = requireProxyApiSecret();
+  } catch (error) {
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message:
+        error instanceof Error ? error.message : "Proxy auth is not configured",
+    });
+  }
+
+  const token = parseBearerToken(authHeader);
+
+  if (!token) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message: "Missing authorization header",
     });
   }
 
-  const token = authHeader.substring(7);
   if (token !== apiSecret) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
       message: "Invalid API key",
+    });
+  }
+
+  const configuredCompanyId = process.env.SANTI_LIVING_COMPANY_ID?.trim();
+  const requestedCompanyId = parseCompanyScopeHeader(
+    ctx.req.headers["x-company-id"],
+  );
+
+  if (
+    configuredCompanyId &&
+    requestedCompanyId &&
+    requestedCompanyId !== configuredCompanyId
+  ) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Company scope mismatch",
     });
   }
 

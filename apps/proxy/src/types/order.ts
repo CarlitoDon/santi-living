@@ -2,11 +2,11 @@ import { z } from "zod";
 import {
   RentalPaymentStatusConst,
   OrderStatusConst,
-} from "../services/erp-client";
+} from "./sync-erp";
 import type {
   RentalPaymentStatus,
   OrderStatusType,
-} from "../services/erp-client";
+} from "./sync-erp";
 
 // Re-export for convenience
 export { RentalPaymentStatusConst, OrderStatusConst };

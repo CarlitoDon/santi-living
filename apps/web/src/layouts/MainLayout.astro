@@ -177,5 +177,26 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     <slot />
     <Footer />
     <SpeedInsights />
+
+    <!-- WhatsApp Click Tracking (GA4) -->
+    <script is:inline>
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href*="wa.me"]');
+        if (!link) return;
+        var source = link.getAttribute('data-wa-source') || 'unknown';
+        if (link.closest('.sticky-whatsapp')) source = 'sticky_button';
+        else if (link.closest('.final-cta')) source = 'final_cta';
+        else if (link.closest('.sidebar')) source = 'sidebar';
+        else if (link.closest('footer')) source = 'footer';
+        else if (link.closest('.calculator-section')) source = 'calculator';
+        if (typeof gtag === 'function') {
+          gtag('event', 'whatsapp_click', {
+            event_category: 'conversion',
+            event_label: source,
+            page_path: window.location.pathname
+          });
+        }
+      });
+    </script>
   </body>
 </html>

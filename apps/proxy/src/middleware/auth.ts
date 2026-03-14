@@ -1,27 +1,42 @@
 import type { Request, Response, NextFunction } from "express";
+import { parseBearerToken, requireProxyApiSecret } from "../config/runtime";
+import { sendHttpError } from "../utils/http-error";
 
 export const authMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const apiKey = process.env.API_KEY;
+  let apiKey = "";
 
-  // Skip auth in development if no API_KEY set
-  if (!apiKey) {
-    return next();
+  try {
+    apiKey = requireProxyApiSecret();
+  } catch (error) {
+    return sendHttpError(
+      res,
+      503,
+      "SERVICE_UNAVAILABLE",
+      error instanceof Error
+        ? error.message
+        : "Proxy auth is not configured",
+    );
   }
 
   const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Missing authorization header" });
+  const token = parseBearerToken(authHeader);
+
+  if (!token) {
+    return sendHttpError(
+      res,
+      401,
+      "UNAUTHORIZED",
+      "Missing authorization header",
+    );
   }
 
-  const token = authHeader.substring(7);
-
   if (token !== apiKey) {
-    return res.status(403).json({ error: "Invalid API key" });
+    return sendHttpError(res, 403, "FORBIDDEN", "Invalid API key");
   }
 
   next();

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 // ============================================================
 // Setup: vi.hoisted runs FIRST (before vi.mock and imports)
@@ -48,6 +48,11 @@ const baseInput = {
   ],
 };
 
+const ORIGINAL_ENV = {
+  MIDTRANS_SERVER_KEY: process.env.MIDTRANS_SERVER_KEY,
+  MIDTRANS_CLIENT_KEY: process.env.MIDTRANS_CLIENT_KEY,
+};
+
 // ============================================================
 // Tests
 // ============================================================
@@ -55,6 +60,8 @@ const baseInput = {
 describe("createSnapToken", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    process.env.MIDTRANS_SERVER_KEY = "test-server-key";
+    process.env.MIDTRANS_CLIENT_KEY = "test-client-key";
     mockCreateTransaction.mockResolvedValue({ token: "snap-token-abc" });
   });
 
@@ -105,12 +112,32 @@ describe("createSnapToken", () => {
     mockCreateTransaction.mockRejectedValue(new Error("401 Unauthorized"));
     await expect(createSnapToken(baseInput)).rejects.toThrow("401 Unauthorized");
   });
+
+  it("fails lazily when Midtrans credentials are missing", async () => {
+    delete process.env.MIDTRANS_SERVER_KEY;
+    delete process.env.MIDTRANS_CLIENT_KEY;
+
+    await expect(createSnapToken(baseInput)).rejects.toThrow(
+      "MIDTRANS_SERVER_KEY is missing",
+    );
+    expect(mockCreateTransaction).not.toHaveBeenCalled();
+  });
 });
 
 describe("createQrisCharge", () => {
+  beforeEach(() => {
+    process.env.MIDTRANS_SERVER_KEY = "test-server-key";
+    process.env.MIDTRANS_CLIENT_KEY = "test-client-key";
+  });
+
   it("throws disabled error", async () => {
     await expect(
       createQrisCharge({ order_id: "ORD-001", gross_amount: 100000 }),
     ).rejects.toThrow("QRIS Core API is currently disabled");
   });
+});
+
+afterAll(() => {
+  process.env.MIDTRANS_SERVER_KEY = ORIGINAL_ENV.MIDTRANS_SERVER_KEY;
+  process.env.MIDTRANS_CLIENT_KEY = ORIGINAL_ENV.MIDTRANS_CLIENT_KEY;
 });
