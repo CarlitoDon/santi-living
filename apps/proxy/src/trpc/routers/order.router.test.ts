@@ -1,5 +1,6 @@
 import { beforeEach, afterAll, describe, expect, it, vi } from "vitest";
 import type { Context } from "../trpc";
+import { getOutboundRequestContext } from "../../services/request-context";
 
 const {
   mockFindOrCreatePartner,
@@ -291,6 +292,55 @@ describe("orderRouter.create", () => {
       "Company scope mismatch",
     );
     expect(mockFindOrCreatePartner).not.toHaveBeenCalled();
+  });
+
+  it("propagates correlation and idempotency headers to outbound ERP context", async () => {
+    const caller = orderRouter.createCaller({
+      req: {
+        headers: {
+          authorization: "Bearer proxy-test-secret",
+          "x-company-id": "santi-company-test",
+          "x-correlation-id": "corr-order-ctx-001",
+          "idempotency-key": "idem-order-ctx-001",
+        },
+      } as Context["req"],
+      res: {} as Context["res"],
+    });
+
+    let partnerContext: ReturnType<typeof getOutboundRequestContext> = {};
+    let orderContext: ReturnType<typeof getOutboundRequestContext> = {};
+
+    mockFindOrCreatePartner.mockImplementationOnce(async () => {
+      partnerContext = getOutboundRequestContext();
+      return {
+        id: "partner-123",
+        name: "Budi Santoso",
+      };
+    });
+
+    mockCreateRentalOrder.mockImplementationOnce(async () => {
+      orderContext = getOutboundRequestContext();
+      return {
+        id: "order-123",
+        orderNumber: "RNT-260320-00001",
+        publicToken: "f8c78332-c715-43d4-bf6e-5ef4f8f00b5d",
+        status: "DRAFT",
+        createdAt: "2026-03-14T10:00:00.000Z",
+      };
+    });
+
+    await caller.create(baseInput);
+
+    expect(partnerContext).toEqual({
+      correlationId: "corr-order-ctx-001",
+      idempotencyKey: "idem-order-ctx-001",
+      companyId: "santi-company-test",
+    });
+    expect(orderContext).toEqual({
+      correlationId: "corr-order-ctx-001",
+      idempotencyKey: "idem-order-ctx-001",
+      companyId: "santi-company-test",
+    });
   });
 
 });

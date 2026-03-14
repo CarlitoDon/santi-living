@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
+import { mapUpstreamError } from "../../lib/upstream-error";
 
 /**
  * Confirm Payment API
@@ -46,14 +47,12 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error: unknown) {
     console.error("[confirm-payment] Error:", error);
-
-    const message =
-      error instanceof Error ? error.message : "Failed to confirm payment";
+    const mappedError = mapUpstreamError(error, "Failed to confirm payment");
 
     return createApiErrorResponse(
-      500,
-      "UPSTREAM_ERROR",
-      message,
+      mappedError.status,
+      mappedError.code,
+      mappedError.message,
     );
   }
 };

@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
+import { mapUpstreamError } from "../../lib/upstream-error";
 
 /**
  * Update Order API
@@ -47,27 +48,17 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Failed to update order";
+    const mappedError = mapUpstreamError(error, "Failed to update order");
 
     console.error("[update-order] FAILURE:", {
-      msg: message,
+      msg: mappedError.message,
       raw: error,
     });
 
-    let status = 500;
-    if (
-      message.includes("draft") ||
-      message.includes("not found") ||
-      message.includes("Bad Request")
-    ) {
-      status = 400;
-    }
-
     return createApiErrorResponse(
-      status,
-      status === 400 ? "BAD_REQUEST" : "UPSTREAM_ERROR",
-      message,
+      mappedError.status,
+      mappedError.code,
+      mappedError.message,
     );
   }
 };

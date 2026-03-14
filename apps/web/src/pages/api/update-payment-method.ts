@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
+import { mapUpstreamError } from "../../lib/upstream-error";
 
 /**
  * Update Payment Method API
@@ -47,12 +48,15 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error: unknown) {
     console.error("[update-payment-method] Error:", error);
+    const mappedError = mapUpstreamError(
+      error,
+      "Failed to update payment method",
+    );
 
-    const message =
-      error instanceof Error
-        ? error.message
-        : "Failed to update payment method";
-
-    return createApiErrorResponse(500, "UPSTREAM_ERROR", message);
+    return createApiErrorResponse(
+      mappedError.status,
+      mappedError.code,
+      mappedError.message,
+    );
   }
 };

@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { randomUUID } from "node:crypto";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
+import { mapUpstreamError } from "../../lib/upstream-error";
 
 /**
  * Submit Order API
@@ -67,25 +68,12 @@ export const POST: APIRoute = async ({ request }) => {
       raw: error,
     });
 
-    const message =
-      error instanceof Error ? error.message : "Failed to create order";
-
-    // Determine status code based on error type
-    // If it's a known business validation error, return 400
-    let status = 500;
-    if (
-      message.includes("INVALID_PHONE") ||
-      message.includes("validation") ||
-      message.includes("Bad Request") ||
-      message.includes("ZodError")
-    ) {
-      status = 400;
-    }
+    const mappedError = mapUpstreamError(error, "Failed to create order");
 
     return createApiErrorResponse(
-      status,
-      status === 400 ? "BAD_REQUEST" : "UPSTREAM_ERROR",
-      message,
+      mappedError.status,
+      mappedError.code,
+      mappedError.message,
     );
   }
 };
