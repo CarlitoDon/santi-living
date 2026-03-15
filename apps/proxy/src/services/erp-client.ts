@@ -51,7 +51,18 @@ export const syncClient: TRPCClient<PublicRentalRouter> =
       httpBatchLink({
         url: getSyncErpApiPublicRentalUrl(),
         headers() {
-          const { correlationId, idempotencyKey, companyId } =
+          const {
+            correlationId,
+            idempotencyKey,
+            companyId,
+            attributionSource,
+            attributionMedium,
+            attributionCampaign,
+            attributionGclid,
+            attributionFbclid,
+            attributionWbraid,
+            attributionGbraid,
+          } =
             getOutboundRequestContext();
 
           return {
@@ -63,6 +74,27 @@ export const syncClient: TRPCClient<PublicRentalRouter> =
               ? { "Idempotency-Key": idempotencyKey }
               : {}),
             ...(companyId ? { "X-Company-Id": companyId } : {}),
+            ...(attributionSource
+              ? { "X-Attribution-Source": attributionSource }
+              : {}),
+            ...(attributionMedium
+              ? { "X-Attribution-Medium": attributionMedium }
+              : {}),
+            ...(attributionCampaign
+              ? { "X-Attribution-Campaign": attributionCampaign }
+              : {}),
+            ...(attributionGclid
+              ? { "X-Attribution-Gclid": attributionGclid }
+              : {}),
+            ...(attributionFbclid
+              ? { "X-Attribution-Fbclid": attributionFbclid }
+              : {}),
+            ...(attributionWbraid
+              ? { "X-Attribution-Wbraid": attributionWbraid }
+              : {}),
+            ...(attributionGbraid
+              ? { "X-Attribution-Gbraid": attributionGbraid }
+              : {}),
           };
         },
         transformer: superjson,
