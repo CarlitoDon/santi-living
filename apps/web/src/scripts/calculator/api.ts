@@ -6,6 +6,7 @@
 import { saveOrder } from "../checkout-session";
 import { getStateRef, getElements } from "./state";
 import { showError, scrollToError } from "./validation";
+import { formatAttributionForNotes } from "@/lib/attribution";
 
 /**
  * Handle WhatsApp click - validate and submit order
@@ -116,6 +117,10 @@ export async function handleWhatsAppClick(): Promise<void> {
 
   // Generate order ID
   const orderId = `SL-${Date.now().toString(36).toUpperCase()}`;
+  const attributionNote = formatAttributionForNotes();
+  const notesWithAttribution = [customerNotes.trim(), attributionNote]
+    .filter(Boolean)
+    .join("\n\n");
 
   const bookingData = {
     orderId: orderId,
@@ -146,7 +151,7 @@ export async function handleWhatsAppClick(): Promise<void> {
     duration: state.duration,
     deliveryFee: state.deliveryFee || 0,
     paymentMethod: state.paymentMethod,
-    notes: customerNotes,
+    notes: notesWithAttribution || undefined,
     volumeDiscountAmount: state.volumeDiscountAmount,
     volumeDiscountLabel: state.volumeDiscountLabel,
   };
