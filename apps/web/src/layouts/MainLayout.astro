@@ -42,10 +42,32 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
 
-      gtag("config", "G-SNZV7HCF7Y");
-      gtag("config", "G-MLNE098NSZ"); // Google Ads
+      function getOrCreateGaUserId() {
+        var storageKey = "sl_ga_user_id";
+        var existing = localStorage.getItem(storageKey);
+        if (existing) return existing;
+
+        var generated;
+        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+          generated = crypto.randomUUID();
+        } else {
+          generated = "sl-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+        }
+
+        localStorage.setItem(storageKey, generated);
+        return generated;
+      }
+
+      gtag("js", new Date());
+      var gaUserId = getOrCreateGaUserId();
+
+      gtag("config", "G-SNZV7HCF7Y", {
+        user_id: gaUserId,
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
+      });
+      gtag("config", "G-MLNE098NSZ", { user_id: gaUserId }); // Google Ads
     </script>
 
     <!-- Google Tag Manager -->

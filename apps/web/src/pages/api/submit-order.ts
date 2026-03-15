@@ -18,6 +18,20 @@ export const POST: APIRoute = async ({ request }) => {
       request.headers.get("x-idempotency-key") ||
       `submit-order-${correlationId}`;
     const companyId = request.headers.get("x-company-id") || undefined;
+    const attributionSource =
+      request.headers.get("x-attribution-source") || undefined;
+    const attributionMedium =
+      request.headers.get("x-attribution-medium") || undefined;
+    const attributionCampaign =
+      request.headers.get("x-attribution-campaign") || undefined;
+    const attributionGclid =
+      request.headers.get("x-attribution-gclid") || undefined;
+    const attributionFbclid =
+      request.headers.get("x-attribution-fbclid") || undefined;
+    const attributionWbraid =
+      request.headers.get("x-attribution-wbraid") || undefined;
+    const attributionGbraid =
+      request.headers.get("x-attribution-gbraid") || undefined;
 
     if (process.env.NODE_ENV !== "production") {
       console.warn("[submit-order] Received create order request", {
@@ -32,6 +46,13 @@ export const POST: APIRoute = async ({ request }) => {
       correlationId,
       idempotencyKey,
       companyId,
+      attributionSource,
+      attributionMedium,
+      attributionCampaign,
+      attributionGclid,
+      attributionFbclid,
+      attributionWbraid,
+      attributionGbraid,
     });
 
     const result = await client.order.create.mutate({

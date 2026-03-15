@@ -13,6 +13,13 @@ type ProxyClientRequestHeaders = {
   correlationId?: string;
   idempotencyKey?: string;
   companyId?: string;
+  attributionSource?: string;
+  attributionMedium?: string;
+  attributionCampaign?: string;
+  attributionGclid?: string;
+  attributionFbclid?: string;
+  attributionWbraid?: string;
+  attributionGbraid?: string;
 };
 
 // Get service URL from environment at RUNTIME (not build time)
@@ -62,6 +69,27 @@ export function createProxyClient(
             : {}),
           ...(requestHeaders.companyId
             ? { "X-Company-Id": requestHeaders.companyId }
+            : {}),
+          ...(requestHeaders.attributionSource
+            ? { "X-Attribution-Source": requestHeaders.attributionSource }
+            : {}),
+          ...(requestHeaders.attributionMedium
+            ? { "X-Attribution-Medium": requestHeaders.attributionMedium }
+            : {}),
+          ...(requestHeaders.attributionCampaign
+            ? { "X-Attribution-Campaign": requestHeaders.attributionCampaign }
+            : {}),
+          ...(requestHeaders.attributionGclid
+            ? { "X-Attribution-Gclid": requestHeaders.attributionGclid }
+            : {}),
+          ...(requestHeaders.attributionFbclid
+            ? { "X-Attribution-Fbclid": requestHeaders.attributionFbclid }
+            : {}),
+          ...(requestHeaders.attributionWbraid
+            ? { "X-Attribution-Wbraid": requestHeaders.attributionWbraid }
+            : {}),
+          ...(requestHeaders.attributionGbraid
+            ? { "X-Attribution-Gbraid": requestHeaders.attributionGbraid }
             : {}),
         }),
       }),

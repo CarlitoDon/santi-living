@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { randomUUID } from "node:crypto";
 import { createProxyClient } from "../../lib/trpc-client";
 import { createApiErrorResponse } from "../../lib/http-error";
 import { mapUpstreamError } from "../../lib/upstream-error";
@@ -12,6 +13,26 @@ import { mapUpstreamError } from "../../lib/upstream-error";
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
+    const correlationId = request.headers.get("x-correlation-id") || randomUUID();
+    const idempotencyKey =
+      request.headers.get("idempotency-key") ||
+      request.headers.get("x-idempotency-key") ||
+      `update-order-${correlationId}`;
+    const companyId = request.headers.get("x-company-id") || undefined;
+    const attributionSource =
+      request.headers.get("x-attribution-source") || undefined;
+    const attributionMedium =
+      request.headers.get("x-attribution-medium") || undefined;
+    const attributionCampaign =
+      request.headers.get("x-attribution-campaign") || undefined;
+    const attributionGclid =
+      request.headers.get("x-attribution-gclid") || undefined;
+    const attributionFbclid =
+      request.headers.get("x-attribution-fbclid") || undefined;
+    const attributionWbraid =
+      request.headers.get("x-attribution-wbraid") || undefined;
+    const attributionGbraid =
+      request.headers.get("x-attribution-gbraid") || undefined;
 
     if (!body.token) {
       return createApiErrorResponse(400, "BAD_REQUEST", "Missing order token");
@@ -23,7 +44,18 @@ export const POST: APIRoute = async ({ request }) => {
       timestamp: new Date().toISOString(),
     });
 
-    const client = createProxyClient();
+    const client = createProxyClient({
+      correlationId,
+      idempotencyKey,
+      companyId,
+      attributionSource,
+      attributionMedium,
+      attributionCampaign,
+      attributionGclid,
+      attributionFbclid,
+      attributionWbraid,
+      attributionGbraid,
+    });
 
     const result = await client.order.update.mutate({
       token: body.token,

@@ -7,10 +7,12 @@ import { getOrder, setPaymentMethod, clearOrder } from "./checkout-session";
 import { submitOrder } from "@/services/api";
 import config from "@/data/config.json";
 import { formatCurrency, formatDate } from "@/lib/format";
+import { getAttributionEventParams } from "@/lib/attribution";
 import type { OrderItem, OrderData } from "@/types/order";
 
 // Types
 type PaymentMethod = "bca" | "gopay" | "qris";
+const BEGIN_CHECKOUT_TRACKED_KEY = "sl_begin_checkout_tracked";
 
 interface SnapEmbedOptions {
   embedId: string;
@@ -91,6 +93,55 @@ let state: CheckoutState = {
   selectedMethod: null,
 };
 
+function fireGtagEvent(name: string, params: Record<string, unknown>): void {
+  if (typeof window.gtag !== "function") {
+    return;
+  }
+
+  window.gtag("event", name, params);
+}
+
+function trackBeginCheckout(order: OrderData, method: PaymentMethod | null): void {
+  if (sessionStorage.getItem(BEGIN_CHECKOUT_TRACKED_KEY) === "1") {
+    return;
+  }
+
+  const attributionParams = getAttributionEventParams();
+  fireGtagEvent("begin_checkout", {
+    currency: "IDR",
+    value: order.totalPrice,
+    payment_type: method ?? undefined,
+    items: order.items.map((item) => ({
+      item_id: item.id,
+      item_name: item.name,
+      item_category: item.category,
+      quantity: item.quantity,
+      price: item.pricePerDay,
+    })),
+    ...attributionParams,
+  });
+
+  sessionStorage.setItem(BEGIN_CHECKOUT_TRACKED_KEY, "1");
+}
+
+function trackPurchase(order: OrderData, transactionId: string): void {
+  const attributionParams = getAttributionEventParams();
+  fireGtagEvent("purchase", {
+    transaction_id: transactionId,
+    currency: "IDR",
+    value: order.totalPrice,
+    payment_type: state.selectedMethod ?? undefined,
+    items: order.items.map((item) => ({
+      item_id: item.id,
+      item_name: item.name,
+      item_category: item.category,
+      quantity: item.quantity,
+      price: item.pricePerDay,
+    })),
+    ...attributionParams,
+  });
+}
+
 // DOM Elements
 let elements: Record<string, HTMLElement | null> = {};
 
@@ -98,6 +149,8 @@ let elements: Record<string, HTMLElement | null> = {};
  * Initialize checkout page
  */
 export function initCheckout(): void {
+  sessionStorage.removeItem(BEGIN_CHECKOUT_TRACKED_KEY);
+
   // Check if we have order data
   const session = getOrder();
 
@@ -532,6 +585,11 @@ function goToStep1(): void {
  * Navigate to step 2
  */
 function goToStep2(): void {
+  const session = getOrder();
+  if (session) {
+    trackBeginCheckout(session.order, state.selectedMethod);
+  }
+
   state.step = 2;
   elements.step1?.classList.remove("active");
   elements.step2?.classList.add("active");
@@ -543,6 +601,7 @@ function goToStep2(): void {
  */
 declare global {
   interface Window {
+    gtag?: (...args: unknown[]) => void;
     snap: {
       pay: (
         token: string,
@@ -710,6 +769,12 @@ async function initSnapPayment() {
           onSuccess: function (_result: Record<string, unknown>) {
             // Clear cache on success - payment completed
             clearSnapTokenCache(publicToken);
+            const session = getOrder();
+            if (session) {
+              const orderNumber =
+                sessionStorage.getItem("erpOrderNumber") || publicToken;
+              trackPurchase(session.order, orderNumber);
+            }
             showStatusMessage(
               "Pembayaran Berhasil!",
               "Sedang mengalihkan ke detail pesanan...",
@@ -796,6 +861,8 @@ async function confirmPayment(): Promise<void> {
       await apiConfirm(publicToken, method);
       orderUrl =
         sessionStorage.getItem("erpOrderUrl") || `/pesanan/${publicToken}`;
+      const orderNumber = sessionStorage.getItem("erpOrderNumber") || publicToken;
+      trackPurchase(order, orderNumber);
     } else {
       const payload = {
         ...order,
@@ -803,9 +870,15 @@ async function confirmPayment(): Promise<void> {
       };
       const response = await submitOrder(payload);
       orderUrl = response.orderUrl || "";
+      const transactionId =
+        response.orderNumber ||
+        sessionStorage.getItem("erpOrderNumber") ||
+        `offline-${Date.now()}`;
+      trackPurchase(order, transactionId);
     }
 
     clearOrder();
+    sessionStorage.removeItem(BEGIN_CHECKOUT_TRACKED_KEY);
     if (orderUrl) {
       window.location.href = orderUrl;
     } else {

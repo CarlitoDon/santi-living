@@ -4,6 +4,13 @@ export type OutboundRequestContext = {
   correlationId?: string;
   idempotencyKey?: string;
   companyId?: string;
+  attributionSource?: string;
+  attributionMedium?: string;
+  attributionCampaign?: string;
+  attributionGclid?: string;
+  attributionFbclid?: string;
+  attributionWbraid?: string;
+  attributionGbraid?: string;
 };
 
 const outboundRequestContextStorage =

@@ -35,6 +35,93 @@ const readHeaderValue = (value: string | string[] | undefined) => {
   return normalized.length > 0 ? normalized : undefined;
 };
 
+const buildOutboundContext = (
+  headers: Record<string, string | string[] | undefined>,
+  configuredCompanyId: string,
+) => ({
+  ...(readHeaderValue(
+    headers["x-correlation-id"] as string | string[] | undefined,
+  )
+    ? {
+        correlationId: readHeaderValue(
+          headers["x-correlation-id"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(headers["idempotency-key"] as string | string[] | undefined)
+    ? {
+        idempotencyKey: readHeaderValue(
+          headers["idempotency-key"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  companyId:
+    parseCompanyScopeHeader(headers["x-company-id"]) || configuredCompanyId,
+  ...(readHeaderValue(
+    headers["x-attribution-source"] as string | string[] | undefined,
+  )
+    ? {
+        attributionSource: readHeaderValue(
+          headers["x-attribution-source"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-medium"] as string | string[] | undefined,
+  )
+    ? {
+        attributionMedium: readHeaderValue(
+          headers["x-attribution-medium"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-campaign"] as string | string[] | undefined,
+  )
+    ? {
+        attributionCampaign: readHeaderValue(
+          headers["x-attribution-campaign"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-gclid"] as string | string[] | undefined,
+  )
+    ? {
+        attributionGclid: readHeaderValue(
+          headers["x-attribution-gclid"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-fbclid"] as string | string[] | undefined,
+  )
+    ? {
+        attributionFbclid: readHeaderValue(
+          headers["x-attribution-fbclid"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-wbraid"] as string | string[] | undefined,
+  )
+    ? {
+        attributionWbraid: readHeaderValue(
+          headers["x-attribution-wbraid"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+  ...(readHeaderValue(
+    headers["x-attribution-gbraid"] as string | string[] | undefined,
+  )
+    ? {
+        attributionGbraid: readHeaderValue(
+          headers["x-attribution-gbraid"] as string | string[] | undefined,
+        ),
+      }
+    : {}),
+});
+
 export const orderRouter = router({
   /**
    * Create order - called by santi-living frontend
@@ -44,17 +131,10 @@ export const orderRouter = router({
     .mutation(async ({ input, ctx }) => {
       const configuredCompanyId = requireSantiLivingCompanyId();
       const addressFields = input.addressFields || {};
-      const outboundContext = {
-        correlationId: readHeaderValue(
-          ctx.req.headers["x-correlation-id"] as string | string[] | undefined,
-        ),
-        idempotencyKey: readHeaderValue(
-          ctx.req.headers["idempotency-key"] as string | string[] | undefined,
-        ),
-        companyId:
-          parseCompanyScopeHeader(ctx.req.headers["x-company-id"]) ||
-          configuredCompanyId,
-      };
+      const outboundContext = buildOutboundContext(
+        ctx.req.headers,
+        configuredCompanyId,
+      );
 
       return runWithOutboundRequestContext(outboundContext, async () => {
         // 1. Find or create partner in sync-erp
@@ -202,8 +282,13 @@ export const orderRouter = router({
         volumeDiscountLabel: z.string().optional(),
       }),
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      const configuredCompanyId = requireSantiLivingCompanyId();
       const addressFields = input.addressFields || {};
+      const outboundContext = buildOutboundContext(
+        ctx.req.headers,
+        configuredCompanyId,
+      );
 
       // Map items to ERP format
       const erpItems = input.items?.map((item) => {
@@ -222,34 +307,39 @@ export const orderRouter = router({
         }
       });
 
-      const result = await updateRentalOrder({
-        token: input.token,
-        customerName: input.customerName,
-        customerPhone: input.customerWhatsapp,
-        rentalStartDate: input.orderDate
-          ? new Date(input.orderDate)
-          : undefined,
-        rentalEndDate: input.endDate ? new Date(input.endDate) : undefined,
-        notes: input.notes,
-        deliveryFee: input.deliveryFee,
-        deliveryAddress: input.deliveryAddress,
-        street: addressFields.street,
-        kelurahan: addressFields.kelurahan,
-        kecamatan: addressFields.kecamatan,
-        kota: addressFields.kota,
-        provinsi: addressFields.provinsi,
-        zip: addressFields.zip,
-        latitude: addressFields.lat
-          ? parseFloat(addressFields.lat)
-          : undefined,
-        longitude: addressFields.lng
-          ? parseFloat(addressFields.lng)
-          : undefined,
-        paymentMethod: input.paymentMethod,
-        discountAmount: input.volumeDiscountAmount,
-        discountLabel: input.volumeDiscountLabel,
-        items: erpItems,
-      });
+      const result = await runWithOutboundRequestContext(
+        outboundContext,
+        async () => {
+          return updateRentalOrder({
+            token: input.token,
+            customerName: input.customerName,
+            customerPhone: input.customerWhatsapp,
+            rentalStartDate: input.orderDate
+              ? new Date(input.orderDate)
+              : undefined,
+            rentalEndDate: input.endDate ? new Date(input.endDate) : undefined,
+            notes: input.notes,
+            deliveryFee: input.deliveryFee,
+            deliveryAddress: input.deliveryAddress,
+            street: addressFields.street,
+            kelurahan: addressFields.kelurahan,
+            kecamatan: addressFields.kecamatan,
+            kota: addressFields.kota,
+            provinsi: addressFields.provinsi,
+            zip: addressFields.zip,
+            latitude: addressFields.lat
+              ? parseFloat(addressFields.lat)
+              : undefined,
+            longitude: addressFields.lng
+              ? parseFloat(addressFields.lng)
+              : undefined,
+            paymentMethod: input.paymentMethod,
+            discountAmount: input.volumeDiscountAmount,
+            discountLabel: input.volumeDiscountLabel,
+            items: erpItems,
+          });
+        },
+      );
 
       return {
         id: result.id,
