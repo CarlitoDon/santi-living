@@ -6,7 +6,7 @@
 
 - **apps/web**: Frontend application built with **Astro** + **React** islands.
 - **apps/proxy**: Backend service built with **Node.js** + **Express** + **tRPC** (bridge to Sync ERP).
-- **Core Principles**: Mobile-First, WhatsApp-First (evolving to Midtrans payment), Zero Cognitive Load.
+- **Core Principles**: Mobile-First, WhatsApp-First (Final Gate for conversions), Zero Cognitive Load.
 
 ## Key Patterns
 

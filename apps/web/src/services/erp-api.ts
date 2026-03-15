@@ -7,6 +7,10 @@
 
 import type { OrderPayload, ErpOrderResponse } from "@/types/order";
 import { getProxyBaseUrl } from "@/lib/proxy-config";
+import {
+  buildAttributionHeaders,
+  captureAttributionOnPageLoad,
+} from "@/lib/attribution";
 
 export type { OrderPayload, ErpOrderResponse };
 
@@ -45,11 +49,15 @@ const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
 export async function createOrderInERP(
   payload: OrderPayload,
 ): Promise<ErpOrderResponse> {
+  captureAttributionOnPageLoad();
+  const attributionHeaders = buildAttributionHeaders();
+
   // Use internal proxy to handle TRPC conversion (avoids CORS)
   const response = await fetch("/api/submit-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...attributionHeaders,
     },
     body: JSON.stringify({
       customerName: payload.customerName,
@@ -90,10 +98,14 @@ export async function updateOrderInERP(
   token: string,
   payload: OrderPayload,
 ): Promise<ErpOrderResponse> {
+  captureAttributionOnPageLoad();
+  const attributionHeaders = buildAttributionHeaders();
+
   const response = await fetch("/api/update-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...attributionHeaders,
     },
     body: JSON.stringify({
       token,

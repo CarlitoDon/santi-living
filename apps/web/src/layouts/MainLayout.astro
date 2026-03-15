@@ -179,9 +179,18 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     <SpeedInsights />
 
     <!-- WhatsApp Click Tracking (GA4) -->
-    <script is:inline>
+    <script>
+      import {
+        captureAttributionOnPageLoad,
+        getAttributionEventParams,
+      } from "@/lib/attribution";
+
+      captureAttributionOnPageLoad();
+
       document.addEventListener('click', function(e) {
-        var link = e.target.closest('a[href*="wa.me"]');
+        var target = e.target as Element | null;
+        if (!target) return;
+        var link = target.closest('a[href*="wa.me"]');
         if (!link) return;
         var source = link.getAttribute('data-wa-source') || 'unknown';
         if (link.closest('.sticky-whatsapp')) source = 'sticky_button';
@@ -189,11 +198,14 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
         else if (link.closest('.sidebar')) source = 'sidebar';
         else if (link.closest('footer')) source = 'footer';
         else if (link.closest('.calculator-section')) source = 'calculator';
-        if (typeof gtag === 'function') {
-          gtag('event', 'whatsapp_click', {
+        var attributionParams = getAttributionEventParams();
+        var gtagFn = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+        if (typeof gtagFn === 'function') {
+          gtagFn('event', 'whatsapp_click', {
             event_category: 'conversion',
             event_label: source,
-            page_path: window.location.pathname
+            page_path: window.location.pathname,
+            ...attributionParams
           });
         }
       });

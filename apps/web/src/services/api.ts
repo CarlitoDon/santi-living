@@ -1,14 +1,22 @@
 import type { OrderPayload } from "@/types/order";
 import config from "@/data/config.json";
+import {
+  buildAttributionHeaders,
+  captureAttributionOnPageLoad,
+} from "@/lib/attribution";
 
 export type { OrderPayload };
 
 export async function submitOrder(payload: OrderPayload) {
+  captureAttributionOnPageLoad();
+  const attributionHeaders = buildAttributionHeaders();
+
   // Call local proxy (which adds the API key and forwards to ERP)
   const response = await fetch("/api/submit-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...attributionHeaders,
     },
     body: JSON.stringify(payload),
   });
@@ -27,10 +35,14 @@ export async function updateOrder(
   token: string,
   payload: OrderPayload,
 ) {
+  captureAttributionOnPageLoad();
+  const attributionHeaders = buildAttributionHeaders();
+
   const response = await fetch("/api/update-order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      ...attributionHeaders,
     },
     body: JSON.stringify({ ...payload, token }),
   });
