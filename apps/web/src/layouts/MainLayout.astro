@@ -62,23 +62,19 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
       gtag("js", new Date());
       var gaUserId = getOrCreateGaUserId();
 
+      // Primary GA4 Property
       gtag("config", "G-SNZV7HCF7Y", {
         user_id: gaUserId,
         allow_google_signals: true,
         allow_ad_personalization_signals: true,
+        page_path: window.location.pathname,
       });
-      gtag("config", "G-MLNE098NSZ", { user_id: gaUserId }); // Google Ads
-    </script>
 
-    <!-- Google Tag Manager -->
-    <script is:inline>
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-P9QXS5T2');
+      // Native Google Ads Tag (Correct ID: AW-17865321955)
+      gtag("config", "AW-17865321955", {
+        user_id: gaUserId
+      });
     </script>
-    <!-- End Google Tag Manager -->
 
     <!-- Microsoft Clarity -->
     <script>
@@ -192,10 +188,6 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     />
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P9QXS5T2"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <slot />
     <Footer />
     <SpeedInsights />

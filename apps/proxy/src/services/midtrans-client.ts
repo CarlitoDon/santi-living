@@ -82,8 +82,7 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
   };
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const transaction = await snap.createTransaction(parameter as any);
+    const transaction = await snap.createTransaction(parameter);
     return transaction.token;
   } catch (error) {
     console.error("[Midtrans] Failed to create Snap token:", error);

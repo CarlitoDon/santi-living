@@ -11,6 +11,12 @@ import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import config from "@/data/config.json";
 
+declare global {
+  interface Window {
+    __CALCULATOR_EDIT_MODE__?: boolean;
+  }
+}
+
 interface CalculatorProps {
   products: {
     mattressPackages: Product[];
@@ -112,9 +118,7 @@ export function Calculator({
     if (hasPrefilledRef.current) return;
 
     // Check if we're in edit mode (set by cart.astro)
-    const editMode =
-      (window as unknown as { __CALCULATOR_EDIT_MODE__?: boolean })
-        .__CALCULATOR_EDIT_MODE__ === true;
+    const editMode = window.__CALCULATOR_EDIT_MODE__ === true;
     setIsEditMode(editMode);
 
     if (editMode) {

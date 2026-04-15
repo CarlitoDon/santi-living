@@ -1,12 +1,5 @@
-type ImportMetaEnvLike = {
-  PUBLIC_PROXY_URL?: string;
-  SANTI_PROXY_URL?: string;
-  PROXY_API_SECRET?: string;
-  PROXY_API_KEY?: string;
-};
-
-const readImportMetaEnv = (): ImportMetaEnvLike => {
-  return ((import.meta as unknown as { env?: ImportMetaEnvLike }).env || {});
+const readImportMetaEnv = (): ImportMetaEnv => {
+  return (import.meta.env || {}) as ImportMetaEnv;
 };
 
 const normalizeUrl = (url: string) => url.replace(/\/$/, "");
