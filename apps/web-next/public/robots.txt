@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /pesanan/
+Disallow: /api/
+
+# Host
+Host: https://santiliving.com
+
+# Sitemaps
+Sitemap: https://santiliving.com/sitemap.xml
