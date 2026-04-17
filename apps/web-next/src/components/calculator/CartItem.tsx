@@ -40,8 +40,7 @@ export function CartItem({
       image: largeImage || optimizedImage || product.image,
       includes: product.includes,
     };
-    // Pass quantity getter so modal can show current quantity
-    openModal(modalProduct, () => quantity);
+    openModal(modalProduct);
   };
 
   return (

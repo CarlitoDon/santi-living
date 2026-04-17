@@ -1,34 +1,53 @@
-import { atom } from "nanostores";
-import type { ProductItem } from "@/types";
+'use client';
 
-export const isModalOpen = atom(false);
-export const modalProduct = atom<ProductItem | null>(null);
-export const modalQuantityGetter = atom<(() => number) | null>(null);
+import { createContext, useContext, useState, useCallback } from 'react';
+import type { ProductItem } from '@/types';
 
-export function openModal(product: ProductItem, getQuantity?: () => number) {
-  modalProduct.set(product);
-  modalQuantityGetter.set(getQuantity || null);
-  isModalOpen.set(true);
+interface ModalState {
+  isOpen: boolean;
+  product: ProductItem | null;
+  open: (product: ProductItem) => void;
+  close: () => void;
+}
+
+// Simple module-level state for cross-component communication
+let _listeners: Array<() => void> = [];
+let _isOpen = false;
+let _product: ProductItem | null = null;
+
+function emitChange() {
+  for (const listener of _listeners) {
+    listener();
+  }
+}
+
+export function openModal(product: ProductItem) {
+  _isOpen = true;
+  _product = product;
+  emitChange();
 }
 
 export function closeModal() {
-  isModalOpen.set(false);
-  // Optional: clear product after delay to allow animation
-  setTimeout(() => {
-    modalProduct.set(null);
-    modalQuantityGetter.set(null);
-  }, 300);
+  _isOpen = false;
+  _product = null;
+  emitChange();
 }
 
-// Dispatch increment/decrement events for Calculator to handle
-export function dispatchModalIncrement(productId: string) {
-  window.dispatchEvent(
-    new CustomEvent("modal-product-increment", { detail: { productId } }),
-  );
-}
+export function useModalStore(): ModalState {
+  const [, setTick] = useState(0);
 
-export function dispatchModalDecrement(productId: string) {
-  window.dispatchEvent(
-    new CustomEvent("modal-product-decrement", { detail: { productId } }),
-  );
+  // Subscribe to changes
+  const forceUpdate = useCallback(() => setTick((t) => t + 1), []);
+
+  // Register listener on mount (caller should wrap in useEffect if needed)
+  if (typeof window !== 'undefined' && !_listeners.includes(forceUpdate)) {
+    _listeners.push(forceUpdate);
+  }
+
+  return {
+    isOpen: _isOpen,
+    product: _product,
+    open: openModal,
+    close: closeModal,
+  };
 }
