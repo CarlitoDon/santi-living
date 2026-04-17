@@ -125,7 +125,7 @@ export default function HomePage() {
           }}>
             🏆 #1 Rental Kasur di Yogyakarta
           </div>
-          <h1 style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', marginBottom: 'var(--space-4)', lineHeight: 1.15, fontWeight: 800 }}>
+          <h1 style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', marginBottom: 'var(--space-4)', lineHeight: 1.15, fontWeight: 800, color: 'white' }}>
             Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
           </h1>
           <p style={{

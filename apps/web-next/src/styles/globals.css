@@ -183,7 +183,7 @@ h5,
 h6 {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  color: var(--color-text);
+  color: inherit;
 }
 
 h1 {
