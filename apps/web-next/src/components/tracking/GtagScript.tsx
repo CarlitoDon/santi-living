@@ -16,6 +16,7 @@ export function GtagScript() {
           function gtag(){dataLayer.push(arguments);}
 
           function getOrCreateGaUserId() {
+            if (typeof window === "undefined") return "";
             var storageKey = "sl_ga_user_id";
             var existing = localStorage.getItem(storageKey);
             if (existing) return existing;
@@ -57,10 +58,7 @@ export function GtagScript() {
                 'transport_type': 'beacon'
               });
               gtag('event', 'conversion', {
-                'send_to': '${ADS_ID}/whatsapp_lead',
-                'event_callback': function() {
-                  console.log('Ads conversion sent');
-                }
+                'send_to': '${ADS_ID}/whatsapp_lead'
               });
             }
             var telLink = target.closest('a[href^="tel:"]');

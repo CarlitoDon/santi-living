@@ -67,7 +67,7 @@ export const createSnapToken = async (input: CreateSnapTokenInput) => {
     enabledPayments = ["qris", "gopay", "bank_transfer"];
   }
 
-  const parameter: Record<string, unknown> = {
+  const parameter = {
     transaction_details: input.transaction_details,
     credit_card: {
       secure: true,
