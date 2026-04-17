@@ -1,28 +1,24 @@
 {
   "name": "santi-living",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
-    "dev": "turbo run dev",
-    "dev:web": "turbo run dev --filter=@santi-living/web",
-    "dev:proxy": "turbo run dev --filter=@santi-living/proxy",
-    "build": "turbo run build",
-    "build:web": "turbo run build --filter=@santi-living/web",
-    "build:proxy": "turbo run build --filter=@santi-living/proxy",
-    "lint": "turbo run lint",
-    "typecheck": "turbo run typecheck",
-    "typecheck:watch": "concurrently -n \"web,proxy\" -c \"blue,green\" \"cd apps/web && npx astro check --watch\" \"cd apps/proxy && npx tsc --noEmit --watch\"",
-    "test": "turbo run test",
-    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules apps/*/dist packages/*/dist"
+    "dev": "npm run dev:web",
+    "dev:web": "cd apps/web-next && npm run dev",
+    "dev:proxy": "cd apps/proxy && npm run dev",
+    "build": "cd apps/web-next && npm run build",
+    "build:web": "cd apps/web-next && npm run build",
+    "build:proxy": "cd apps/proxy && npm run build",
+    "lint": "cd apps/web-next && npm run lint",
+    "test": "cd apps/web-next && npm test",
+    "clean": "rm -rf node_modules apps/*/node_modules apps/*/.next apps/*/dist"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
-    "turbo": "^2.5.4"
+    "concurrently": "^9.2.1"
   },
   "packageManager": "npm@10.8.2"
 }
