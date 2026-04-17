@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import type { ProductItem } from '@/types';
 
 interface ModalState {
@@ -11,7 +11,7 @@ interface ModalState {
 }
 
 // Simple module-level state for cross-component communication
-let _listeners: Array<() => void> = [];
+const _listeners: Array<() => void> = [];
 let _isOpen = false;
 let _product: ProductItem | null = null;
 
