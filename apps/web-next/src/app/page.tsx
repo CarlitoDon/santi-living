@@ -36,6 +36,9 @@ const benefits = [
   { icon: '📍', title: 'Gratis Jemput', desc: 'Pengambilan kasur gratis saat masa sewa berakhir' },
 ];
 
+const features = ['Bisa antar hari ini', 'Gratis jemput', 'Kasur bersih & wangi'];
+const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'];
+
 export default function HomePage() {
   const localBusinessSchema = {
     '@context': 'https://schema.org' as const,
@@ -57,7 +60,7 @@ export default function HomePage() {
       latitude: config.storeLocation.lat,
       longitude: config.storeLocation.lng,
     },
-    areaServed: ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'].map((a) => ({ '@type': 'City' as const, name: a })),
+    areaServed: serviceAreas.map((a) => ({ '@type': 'City' as const, name: a })),
   };
 
   const faqSchema = {
@@ -71,216 +74,120 @@ export default function HomePage() {
   };
 
   return (
-    <main style={{ paddingTop: '70px' }}>
+    <main className="pt-[70px]">
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
 
-      {/* Hero */}
-      <section style={{
-        position: 'relative',
-        background: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 30%, #2563eb 60%, #3b82f6 100%)',
-        padding: 'var(--space-16) 0 var(--space-12)',
-        color: 'white',
-        textAlign: 'center',
-        overflow: 'hidden',
-      }}>
-        {/* Decorative background elements */}
-        <div style={{
-          position: 'absolute', top: '-120px', right: '-80px',
-          width: '400px', height: '400px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', bottom: '-100px', left: '-60px',
-          width: '350px', height: '350px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(96,165,250,0.3) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{
-          position: 'absolute', top: '20%', left: '10%',
-          width: '200px', height: '200px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(147,197,253,0.15) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
-        {/* Grid pattern overlay */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
-          backgroundSize: '24px 24px',
-          pointerEvents: 'none',
-        }} />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(255,255,255,0.1)',
-            backdropFilter: 'blur(8px)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            padding: 'var(--space-1) var(--space-4)',
-            borderRadius: 'var(--radius-full)',
-            fontSize: 'var(--font-size-xs)',
-            marginBottom: 'var(--space-4)',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-          }}>
+      {/* ===== HERO ===== */}
+      <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] via-60% to-[#3b82f6] py-16 md:py-24 text-center text-white overflow-hidden">
+        {/* Decorative blobs */}
+        <div className="absolute -top-30 -right-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.4)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute -bottom-24 -left-16 w-[350px] h-[350px] rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.3)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[20%] left-[10%] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.15)_0%,transparent_70%)] pointer-events-none" />
+        {/* Dot grid */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4">
+          <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-4">
             🏆 #1 Rental Kasur di Yogyakarta
           </div>
-          <h1 style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', marginBottom: 'var(--space-4)', lineHeight: 1.15, fontWeight: 800, color: 'white' }}>
+          <h1 className="text-[clamp(2rem,6vw,3rem)] leading-[1.15] font-extrabold mb-4">
             Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
           </h1>
-          <p style={{
-            display: 'inline-block',
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1))',
-            backdropFilter: 'blur(4px)',
-            border: '1px solid rgba(255,255,255,0.2)',
-            padding: 'var(--space-2) var(--space-6)',
-            borderRadius: 'var(--radius-full)',
-            fontSize: 'var(--font-size-xl)',
-            fontWeight: 'var(--font-weight-bold)',
-            marginBottom: 'var(--space-4)',
-          }}>
+          <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-lg font-bold mb-4">
             Mulai Rp25.000/hari
           </p>
-          <p style={{ opacity: 0.85, maxWidth: '520px', margin: '0 auto var(--space-6)', fontSize: 'var(--font-size-lg)', lineHeight: 1.6 }}>
+          <p className="opacity-85 max-w-lg mx-auto mb-8 text-lg leading-relaxed">
             Rental kasur bersih &amp; murah di Yogyakarta — Antar jemput same day, tanpa ribet
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-5)', flexWrap: 'wrap', marginBottom: 'var(--space-8)' }}>
-            {['Bisa antar hari ini', 'Gratis jemput', 'Kasur bersih & wangi'].map((f) => (
-              <span key={f} style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                fontSize: 'var(--font-size-sm)',
-                background: 'rgba(255,255,255,0.1)',
-                padding: 'var(--space-1) var(--space-3)',
-                borderRadius: 'var(--radius-full)',
-              }}>
+
+          {/* Feature badges */}
+          <div className="flex justify-center gap-3 flex-wrap mb-8">
+            {features.map((f) => (
+              <span key={f} className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
                 ✅ {f}
               </span>
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-4)', flexWrap: 'wrap' }}>
-            <a href="#calculator" className="btn btn-primary btn-lg" style={{
-              textDecoration: 'none', background: 'white', color: '#1e3a8a',
-              fontWeight: 700, boxShadow: '0 4px 14px rgba(0,0,0,0.15)',
-              padding: 'var(--space-3) var(--space-8)',
-            }}>
+
+          {/* CTA buttons */}
+          <div className="flex justify-center gap-4 flex-wrap">
+            <a
+              href="#calculator"
+              className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors"
+            >
               Sewa Sekarang
             </a>
-            <Link href="/produk" className="btn btn-lg" style={{
-              textDecoration: 'none',
-              border: '2px solid rgba(255,255,255,0.4)',
-              color: 'white',
-              background: 'rgba(255,255,255,0.08)',
-              backdropFilter: 'blur(4px)',
-              padding: 'var(--space-3) var(--space-8)',
-            }}>
+            <Link
+              href="/produk"
+              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white/40 bg-white/8 backdrop-blur-xs text-white rounded-md hover:bg-white/15 transition-colors"
+            >
               Lihat Produk →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section style={{ padding: 'var(--space-12) 0', background: 'white' }}>
-        <div className="container">
-          <h2 className="section-title" style={{ fontSize: 'var(--font-size-2xl)' }}>Kenapa Sewa Kasur di Santi Living?</h2>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
-            gap: 'var(--space-5)',
-            marginTop: 'var(--space-8)',
-          }}>
+      {/* ===== BENEFITS ===== */}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">
+            Kenapa Sewa Kasur di Santi Living?
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {benefits.map((b) => (
-              <div key={b.title} style={{
-                textAlign: 'center',
-                padding: 'var(--space-6) var(--space-4)',
-                borderRadius: 'var(--radius-xl)',
-                background: 'white',
-                border: '1px solid var(--color-border)',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                transition: 'all 0.2s ease',
-              }}>
-                <div style={{
-                  fontSize: '2rem',
-                  width: '56px', height: '56px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  borderRadius: '14px',
-                  background: 'var(--color-primary-light)',
-                  margin: '0 auto var(--space-3)',
-                }}>{b.icon}</div>
-                <h3 style={{ fontSize: 'var(--font-size-sm)', marginBottom: 'var(--space-2)', color: 'var(--color-primary)', fontWeight: 600 }}>{b.title}</h3>
-                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>{b.desc}</p>
+              <div
+                key={b.title}
+                className="text-center p-5 rounded-xl bg-white border border-border shadow-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+              >
+                <div className="text-2xl w-14 h-14 flex items-center justify-center rounded-[14px] bg-primary-light mx-auto mb-3">
+                  {b.icon}
+                </div>
+                <h3 className="text-sm font-semibold text-primary mb-1">{b.title}</h3>
+                <p className="text-xs text-text-secondary leading-snug">{b.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Calculator */}
+      {/* ===== CALCULATOR ===== */}
       <CalculatorSection />
 
-      {/* How To Rent */}
-      <section style={{ padding: 'var(--space-10) 0', background: 'var(--color-surface)' }}>
-        <div className="container">
-          <h2 className="section-title">Cara Sewa Kasur di Santi Living</h2>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: 'var(--space-4)',
-            marginTop: 'var(--space-6)',
-          }}>
+      {/* ===== HOW TO RENT ===== */}
+      <section className="py-12 md:py-16 bg-surface">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">
+            Cara Sewa Kasur di Santi Living
+          </h2>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
             {steps.map((s, i) => (
-              <div key={i} style={{
-                textAlign: 'center',
-                flex: '1 1 140px',
-                maxWidth: '160px',
-              }}>
-                <div style={{
-                  fontSize: '2rem',
-                  width: '56px',
-                  height: '56px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  background: 'var(--color-primary-light)',
-                  margin: '0 auto var(--space-2)',
-                }}>
+              <div key={i} className="text-center flex-1 min-w-[130px] max-w-[160px]">
+                <div className="text-2xl w-14 h-14 flex items-center justify-center rounded-full bg-primary-light mx-auto mb-2">
                   {s.icon}
                 </div>
-                <div style={{
-                  fontSize: 'var(--font-size-xs)',
-                  fontWeight: 'var(--font-weight-bold)',
-                  color: 'var(--color-primary)',
-                  marginBottom: '2px',
-                }}>
-                  Langkah {i + 1}
-                </div>
-                <h3 style={{ fontSize: 'var(--font-size-sm)', marginBottom: 'var(--space-1)' }}>{s.title}</h3>
-                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-secondary)' }}>{s.desc}</p>
+                <div className="text-xs font-bold text-primary mb-0.5">Langkah {i + 1}</div>
+                <h3 className="text-sm font-bold mb-1">{s.title}</h3>
+                <p className="text-xs text-text-secondary">{s.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Area */}
-      <section style={{ padding: 'var(--space-10) 0' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2 className="section-title">Area Layanan Kami</h2>
-          <p style={{ color: 'var(--color-text-secondary)', marginBottom: 'var(--space-6)', maxWidth: '500px', margin: '0 auto var(--space-6)' }}>
+      {/* ===== SERVICE AREA ===== */}
+      <section className="py-12 md:py-16">
+        <div className="max-w-5xl mx-auto px-4 text-center">
+          <h2 className="text-xl md:text-2xl font-bold mb-3">Area Layanan Kami</h2>
+          <p className="text-text-secondary max-w-lg mx-auto mb-6">
             Melayani pengiriman kasur sewa ke seluruh Yogyakarta dan sekitarnya
           </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'var(--space-2)' }}>
-            {['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'].map((area) => (
-              <span key={area} style={{
-                padding: 'var(--space-2) var(--space-4)',
-                background: 'var(--color-primary-light)',
-                borderRadius: 'var(--radius-full)',
-                fontSize: 'var(--font-size-sm)',
-                color: 'var(--color-primary)',
-                fontWeight: 'var(--font-weight-medium)',
-              }}>
+          <div className="flex flex-wrap justify-center gap-2">
+            {serviceAreas.map((area) => (
+              <span
+                key={area}
+                className="px-4 py-2 bg-primary-light text-primary font-medium text-sm rounded-full"
+              >
                 📍 {area}
               </span>
             ))}
@@ -288,33 +195,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section style={{ padding: 'var(--space-10) 0', background: 'var(--color-surface)' }}>
-        <div className="container" style={{ maxWidth: '720px' }}>
-          <h2 className="section-title">Pertanyaan Umum</h2>
-          <div style={{ marginTop: 'var(--space-6)' }}>
+      {/* ===== FAQ ===== */}
+      <section className="py-12 md:py-16 bg-surface">
+        <div className="max-w-2xl mx-auto px-4">
+          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">Pertanyaan Umum</h2>
+          <div className="space-y-3">
             {faqItems.map((item, i) => (
-              <details key={i} style={{
-                marginBottom: 'var(--space-3)',
-                background: 'white',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-              }}>
-                <summary style={{
-                  padding: 'var(--space-4)',
-                  cursor: 'pointer',
-                  fontWeight: 'var(--font-weight-medium)',
-                  listStyle: 'none',
-                }}>
+              <details
+                key={i}
+                className="bg-white rounded-lg border border-border overflow-hidden group"
+              >
+                <summary className="px-4 py-3.5 cursor-pointer font-medium list-none select-none hover:bg-gray-50 transition-colors">
                   {item.q}
                 </summary>
-                <div style={{
-                  padding: '0 var(--space-4) var(--space-4)',
-                  color: 'var(--color-text-secondary)',
-                  fontSize: 'var(--font-size-sm)',
-                  lineHeight: 1.6,
-                }}>
+                <div className="px-4 pb-4 text-sm text-text-secondary leading-relaxed">
                   {item.a}
                 </div>
               </details>
@@ -323,30 +217,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section style={{
-        padding: 'var(--space-10) 0',
-        background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)',
-        color: 'white',
-        textAlign: 'center',
-      }}>
-        <div className="container">
-          <h2 style={{ color: 'white', marginBottom: 'var(--space-3)' }}>
-            Siap Sewa Kasur Hari Ini?
-          </h2>
-          <p style={{ opacity: 0.9, marginBottom: 'var(--space-6)', maxWidth: '480px', margin: '0 auto var(--space-6)' }}>
+      {/* ===== FINAL CTA ===== */}
+      <section className="py-12 md:py-16 bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white text-center">
+        <div className="max-w-xl mx-auto px-4">
+          <h2 className="text-2xl font-bold mb-3">Siap Sewa Kasur Hari Ini?</h2>
+          <p className="opacity-90 mb-8 leading-relaxed">
             Pesan sekarang dan kasur bisa sampai hari ini! Tim kami siap mengantarkan kasur bersih ke lokasi Anda.
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
-            <a href="#calculator" className="btn btn-lg" style={{ textDecoration: 'none', background: 'white', color: '#1e3a8a' }}>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <a
+              href="#calculator"
+              className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#1e3a8a] font-bold rounded-md hover:bg-gray-50 transition-colors"
+            >
               Pesan Sekarang
             </a>
             <a
               href={`https://wa.me/${config.whatsappNumber}`}
-              className="btn btn-lg btn-whatsapp"
+              className="inline-flex items-center justify-center px-8 py-3 bg-secondary text-white font-bold rounded-md hover:bg-secondary-hover transition-colors"
               target="_blank"
               rel="noopener"
-              style={{ textDecoration: 'none' }}
             >
               💬 Chat WhatsApp
             </a>

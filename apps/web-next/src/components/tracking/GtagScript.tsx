@@ -14,33 +14,63 @@ export function GtagScript() {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+
+          function getOrCreateGaUserId() {
+            var storageKey = "sl_ga_user_id";
+            var existing = localStorage.getItem(storageKey);
+            if (existing) return existing;
+
+            var generated;
+            if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+              generated = crypto.randomUUID();
+            } else {
+              generated = "sl-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+            }
+
+            localStorage.setItem(storageKey, generated);
+            return generated;
+          }
+
+          var gaUserId = getOrCreateGaUserId();
+
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
-          gtag('config', '${ADS_ID}');
+          gtag('config', '${GA_MEASUREMENT_ID}', {
+            'user_id': gaUserId,
+            'allow_google_signals': true,
+            'allow_ad_personalization_signals': true
+          });
+          gtag('config', '${ADS_ID}', {
+            'user_id': gaUserId
+          });
         `}
       </Script>
       <Script id="wa-conversion-tracker" strategy="afterInteractive">
         {`
           document.addEventListener('click', function(e) {
-            var link = e.target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
+            var target = e.target;
+            var link = target.closest('a[href*="wa.me"], a[href*="whatsapp"]');
             if (link) {
+              var source = link.getAttribute('data-wa-source') || 'unknown';
               gtag('event', 'whatsapp_click', {
-                event_category: 'engagement',
-                event_label: link.dataset.waSource || 'unknown',
-                transport_type: 'beacon'
+                'event_category': 'engagement',
+                'event_label': source,
+                'transport_type': 'beacon'
               });
               gtag('event', 'conversion', {
-                send_to: '${ADS_ID}/whatsapp_lead'
+                'send_to': '${ADS_ID}/whatsapp_lead',
+                'event_callback': function() {
+                  console.log('Ads conversion sent');
+                }
               });
             }
-            var telLink = e.target.closest('a[href^="tel:"]');
+            var telLink = target.closest('a[href^="tel:"]');
             if (telLink) {
               gtag('event', 'phone_click', {
-                event_category: 'engagement',
-                transport_type: 'beacon'
+                'event_category': 'engagement',
+                'transport_type': 'beacon'
               });
               gtag('event', 'conversion', {
-                send_to: '${ADS_ID}/phone_lead'
+                'send_to': '${ADS_ID}/phone_lead'
               });
             }
           });
