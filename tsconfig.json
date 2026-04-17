@@ -4,8 +4,8 @@
     "noEmit": true
   },
   "references": [
-    { "path": "apps/web" },
-    { "path": "apps/proxy" },
+    { "path": "./apps/proxy" },
+    { "path": "./apps/web-next" },
     { "path": "packages/shared" }
   ],
   "files": [],
