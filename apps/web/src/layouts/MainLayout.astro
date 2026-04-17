@@ -192,7 +192,7 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     <Footer />
     <SpeedInsights />
 
-    <!-- WhatsApp Click Tracking (GA4) -->
+    <!-- WhatsApp & Phone Click Tracking (GA4 + Google Ads Conversion) -->
     <script>
       import {
         captureAttributionOnPageLoad,
@@ -204,22 +204,52 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
       document.addEventListener('click', function(e) {
         var target = e.target as Element | null;
         if (!target) return;
-        var link = target.closest('a[href*="wa.me"]');
-        if (!link) return;
-        var source = link.getAttribute('data-wa-source') || 'unknown';
-        if (link.closest('.sticky-whatsapp')) source = 'sticky_button';
-        else if (link.closest('.final-cta')) source = 'final_cta';
-        else if (link.closest('.sidebar')) source = 'sidebar';
-        else if (link.closest('footer')) source = 'footer';
-        else if (link.closest('.calculator-section')) source = 'calculator';
-        var attributionParams = getAttributionEventParams();
+
         var gtagFn = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-        if (typeof gtagFn === 'function') {
+        if (typeof gtagFn !== 'function') return;
+
+        // === WhatsApp Click ===
+        var waLink = target.closest('a[href*="wa.me"]');
+        if (waLink) {
+          var source = waLink.getAttribute('data-wa-source') || 'unknown';
+          if (waLink.closest('.sticky-whatsapp')) source = 'sticky_button';
+          else if (waLink.closest('.final-cta')) source = 'final_cta';
+          else if (waLink.closest('.sidebar')) source = 'sidebar';
+          else if (waLink.closest('footer')) source = 'footer';
+          else if (waLink.closest('.calculator-section')) source = 'calculator';
+          var attributionParams = getAttributionEventParams();
+
+          // GA4 Custom Event
           gtagFn('event', 'whatsapp_click', {
             event_category: 'conversion',
             event_label: source,
             page_path: window.location.pathname,
             ...attributionParams
+          });
+
+          // Google Ads Conversion Event (tracks actual leads)
+          gtagFn('event', 'conversion', {
+            send_to: 'AW-17865321955/whatsapp_lead',
+            value: 25000,
+            currency: 'IDR',
+            event_callback: function() {},
+          });
+          return;
+        }
+
+        // === Phone/Tel Click ===
+        var telLink = target.closest('a[href^="tel:"]');
+        if (telLink) {
+          gtagFn('event', 'phone_click', {
+            event_category: 'conversion',
+            event_label: 'phone_call',
+            page_path: window.location.pathname,
+          });
+
+          gtagFn('event', 'conversion', {
+            send_to: 'AW-17865321955/phone_lead',
+            value: 25000,
+            currency: 'IDR',
           });
         }
       });

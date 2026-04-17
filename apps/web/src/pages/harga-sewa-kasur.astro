@@ -267,6 +267,33 @@ const deliveryZones = config.deliveryZones;
         ]
       })}
     />
+    
+    <!-- ItemList / OfferCatalog Schema -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Daftar Harga Sewa Kasur Jogja",
+        "description": "Katalog harga sewa kasur busa dan paket lengkap di Santi Mebel Jogja",
+        "itemListElement": products.mattressPackages.concat(products.mattressOnly).map((p, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Product",
+            "name": p.name,
+            "description": `Sewa kasur ${p.name} ukuran ${p.dimensions} untuk ${p.capacity}`,
+            "offers": {
+              "@type": "Offer",
+              "price": p.pricePerDay,
+              "priceCurrency": "IDR",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        }))
+      })}
+    />
   </main>
 
   <StickyWhatsApp />
