@@ -13,6 +13,7 @@
   "dependencies": {
     "@trpc/client": "^11.8.1",
     "gray-matter": "^4.0.3",
+    "leaflet": "^1.9.4",
     "next": "16.2.4",
     "next-sitemap": "^4.2.3",
     "react": "19.2.4",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@testing-library/react": "^16.3.2",
+    "@types/leaflet": "^1.9.21",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

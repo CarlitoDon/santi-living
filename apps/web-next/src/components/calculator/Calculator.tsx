@@ -10,6 +10,9 @@ import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import { config } from "@/data/config";
+import dynamic from "next/dynamic";
+
+const MapPicker = dynamic(() => import("./MapPicker").then(mod => mod.MapPicker), { ssr: false });
 
 declare global {
   interface Window {
@@ -711,6 +714,7 @@ export function Calculator({
           />
         </div>
       </div>
+      <MapPicker />
     </section>
   );
 }
