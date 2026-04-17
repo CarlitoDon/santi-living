@@ -35,7 +35,7 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-SNZV7HCF7Y"
+      src="https://www.googletagmanager.com/gtag/js?id=G-MLNE098NSZ"
       is:inline></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -62,15 +62,15 @@ const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
       gtag("js", new Date());
       var gaUserId = getOrCreateGaUserId();
 
-      // Primary GA4 Property
-      gtag("config", "G-SNZV7HCF7Y", {
+      // Primary ACTIVE GA4 Property (Linked to Google Ads)
+      gtag("config", "G-MLNE098NSZ", {
         user_id: gaUserId,
         allow_google_signals: true,
         allow_ad_personalization_signals: true,
         page_path: window.location.pathname,
       });
 
-      // Native Google Ads Tag (Correct ID: AW-17865321955)
+      // Native Google Ads Tag
       gtag("config", "AW-17865321955", {
         user_id: gaUserId
       });
