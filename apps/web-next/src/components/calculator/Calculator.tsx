@@ -508,20 +508,12 @@ export function Calculator({
       newErrors.addressStreet = "Alamat jalan wajib diisi";
     }
 
-    if (!customer.address.kelurahan.trim()) {
-      newErrors.addressKelurahan = "Kelurahan wajib diisi";
-    }
-
     if (!customer.address.kecamatan.trim()) {
       newErrors.addressKecamatan = "Kecamatan wajib diisi";
     }
 
     if (!customer.address.kota.trim()) {
       newErrors.addressKota = "Kabupaten/Kota wajib diisi";
-    }
-
-    if (!customer.address.zip.trim()) {
-      newErrors.addressZip = "Kode Pos wajib diisi";
     }
 
     // Validate coordinates for delivery fee calculation
