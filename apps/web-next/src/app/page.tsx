@@ -128,38 +128,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== TRUST & HYGIENE SECTION ===== */}
+      {/* ===== WHY CHOOSE US / BENEFITS ===== */}
       <section className="py-12 md:py-20 bg-slate-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900">Kenapa Memilih Santi Living?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900">Kenapa Sewa Kasur di Santi Living?</h2>
           <p className="text-slate-600 max-w-2xl mx-auto mb-12">
-            Kami bukan sekadar persewaan kasur. Kami memberikan jaminan kenyamanan dan kesehatan untuk setiap malam Anda di Yogyakarta.
+            Kami memberikan jaminan kenyamanan, kesehatan, dan kecepatan layanan untuk setiap pelanggan di Yogyakarta.
           </p>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Top Row: Hygiene & Brand Trust */}
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✨</div>
               <h3 className="font-bold text-xl mb-3 text-slate-900">7 Tahap Higienitas</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                Setiap unit melewati proses Vacuum industrial, sterilisasi UV-C, hingga pembungkusan plastik kedap udara sebelum dikirim.
+                Unit melewati Vacuum industrial, sterilisasi UV-C, dan pembungkusan plastik kedap udara sebelum dikirim.
               </p>
             </div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🏅</div>
-              <h3 className="font-bold text-xl mb-3 text-slate-900">Merk Terpercaya</h3>
+              <h3 className="font-bold text-xl mb-3 text-slate-900">Royal Grand Exclusive</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                Hanya menggunakan busa berkualitas tinggi (High Density) dari brand ternama seperti Royal Grand Exclusive. Anti kempes!
+                Hanya menggunakan busa berkualitas tinggi (High Density) yang anti kempes dan menopang tulang belakang dengan baik.
               </p>
             </div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🚀</div>
-              <h3 className="font-bold text-xl mb-3 text-slate-900">Same Day Jogja</h3>
+              <h3 className="font-bold text-xl mb-3 text-slate-900">Same Day Delivery</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
                 Layanan pengantaran kilat 2-4 jam untuk area Jogja, Sleman, dan Bantul. Pesan pagi, siang sudah bisa dipakai.
               </p>
             </div>
+          </div>
+
+          {/* Bottom Row: Practical Benefits */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 border-t border-slate-200 pt-12">
+            {benefits.map((b) => (
+              <FeatureCard key={b.title} icon={b.icon} title={b.title} description={b.desc} />
+            ))}
           </div>
         </div>
       </section>
@@ -172,7 +180,7 @@ export default function HomePage() {
               <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase mb-2">
                 🔥 PROMO TERBATAS
               </div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Diskon Ongkir up to 70%!</h2>
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">Diskon Ongkir up to 70%!</h2>
               <p className="text-white/90 max-w-xl">
                 Cukup berikan review bintang 5 di Google Maps Santi Living dan dapatkan potongan biaya pengiriman hingga 70% untuk penyewaan hari ini.
               </p>
@@ -187,20 +195,6 @@ export default function HomePage() {
                 Tulis Review Sekarang ⭐
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== BENEFITS ===== */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">
-            Kenapa Sewa Kasur di Santi Living?
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {benefits.map((b) => (
-              <FeatureCard key={b.title} icon={b.icon} title={b.title} description={b.desc} />
-            ))}
           </div>
         </div>
       </section>
