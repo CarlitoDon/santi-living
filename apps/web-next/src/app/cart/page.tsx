@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 
 export const metadata: Metadata = {
@@ -32,7 +33,9 @@ export default function CartPage() {
         </div>
 
         <div style={{ marginTop: 'var(--space-4)' }}>
-          <CalculatorSection editMode={true} />
+          <Suspense fallback={<div style={{ padding: '20px', textAlign: 'center' }}>Memuat kalkulator...</div>}>
+            <CalculatorSection editMode={true} />
+          </Suspense>
         </div>
       </div>
     </main>

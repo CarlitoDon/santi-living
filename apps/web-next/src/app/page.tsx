@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { config } from '@/data/config';
 import { CalculatorSection } from '@/components/calculator/CalculatorSection';
@@ -152,7 +153,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== CALCULATOR ===== */}
-      <CalculatorSection />
+      <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Memuat kalkulator...</div>}>
+        <CalculatorSection />
+      </Suspense>
 
       {/* ===== HOW TO RENT ===== */}
       <section className="py-12 md:py-16 bg-surface">
