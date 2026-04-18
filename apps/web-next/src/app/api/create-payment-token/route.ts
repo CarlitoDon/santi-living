@@ -1,30 +1,28 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createProxyClient } from "@/lib/trpc-client";
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { createProxyClient } from '@/lib/trpc-client';
 import { mapUpstreamError } from "@/lib/upstream-error";
+
+const CreatePaymentTokenSchema = z.object({
+  token: z.string().min(10),
+  paymentMethod: z.enum(["qris", "gopay", "transfer"]).optional(),
+});
 
 export async function POST(request: NextRequest) {
   try {
     const body: unknown = await request.json();
-    const parsed = body as Record<string, unknown>;
-    const token = parsed.token as string;
-    const paymentMethod = parsed.paymentMethod as "qris" | "gopay" | "transfer" | undefined;
+    const parsed = CreatePaymentTokenSchema.parse(body);
 
-    if (!token) {
-      return NextResponse.json(
-        { error: { code: "BAD_REQUEST", message: "Token is required" } },
-        { status: 400 }
-      );
-    }
-
-    const client = createProxyClient();
-
-    const result = await client.order.createPaymentToken.mutate({
-      token,
-      paymentMethod,
+    const client = createProxyClient({
+      idempotencyKey: `token-${parsed.token}`,
     });
 
-    return NextResponse.json({ ...result, success: true }, { status: 200 });
+    const result = await client.order.createPaymentToken.mutate(parsed);
+    return NextResponse.json({ ...result, success: true });
   } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: { code: 'VALIDATION_ERROR', details: error.errors } }, { status: 400 });
+    }
     console.error("[create-payment-token] Error:", error);
     const mappedError = mapUpstreamError(error, "Failed to create payment token");
     return NextResponse.json(

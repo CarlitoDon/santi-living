@@ -8,7 +8,7 @@ tags: ["tips", "kos", "hemat"]
 
 Saat baru pindah kos di Yogyakarta, salah satu kebutuhan paling penting yang harus segera disiapkan adalah kasur. Tidur yang nyenyak adalah modal utama agar kamu bisa fokus kuliah dan beraktivitas. Namun, pertanyaannya seringkali: lebih baik membeli kasur baru atau menyewa saja?
 
-Bagi sebagian besar mahasiswa — terutama yang hanya akan menetap selama 1-4 tahun — menyewa kasur seringkali menjadi solusi yang jauh lebih praktis dan hemat. Berikut panduan lengkap untukmu!
+Bagi sebagian besar mahasiswa — terutama yang hanya akan menetap selama 1-4 tahun — menyewa kasur seringkali menjadi solusi yang jauh lebih praktis dan hemat. (Baca juga: [5 Alasan Mahasiswa Jogja Pilih Sewa Kasur](/artikel/5-alasan-mahasiswa-jogja-pilih-sewa-kasur)). Berikut panduan lengkap untukmu!
 
 ## Kenapa Menyewa Kasur Lebih Cocok untuk Anak Kos?
 

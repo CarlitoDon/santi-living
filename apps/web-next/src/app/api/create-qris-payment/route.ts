@@ -1,29 +1,30 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createProxyClient } from "@/lib/trpc-client";
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+import { createProxyClient } from '@/lib/trpc-client';
 import { mapUpstreamError } from "@/lib/upstream-error";
+
+const CreateQrisSchema = z.object({
+  token: z.string().min(10),
+});
 
 export async function POST(request: NextRequest) {
   try {
     const body: unknown = await request.json();
-    const parsed = body as Record<string, unknown>;
-    const token = parsed.token as string;
+    const { token } = CreateQrisSchema.parse(body);
 
-    if (!token) {
-      return NextResponse.json(
-        { error: { code: "BAD_REQUEST", message: "Token is required" } },
-        { status: 400 }
-      );
-    }
-
-    const client = createProxyClient();
-
-    const result = await client.order.createPaymentToken.mutate({
-      token,
-      paymentMethod: "qris",
+    const client = createProxyClient({
+      idempotencyKey: `qris-${token}`,
     });
 
-    return NextResponse.json({ ...result, success: true }, { status: 200 });
+    const result = await client.order.createPaymentToken.mutate({ 
+      token, 
+      paymentMethod: "qris" 
+    });
+    return NextResponse.json({ ...result, success: true });
   } catch (error: unknown) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: { code: 'VALIDATION_ERROR', details: error.errors } }, { status: 400 });
+    }
     console.error("[create-qris-payment] Error:", error);
     const mappedError = mapUpstreamError(error, "Failed to create QRIS payment");
     return NextResponse.json(

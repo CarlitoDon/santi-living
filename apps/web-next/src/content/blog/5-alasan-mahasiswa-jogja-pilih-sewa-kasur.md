@@ -8,7 +8,7 @@ tags: ["mahasiswa", "jogja", "sewa kasur", "tips hemat"]
 
 Yogyakarta dikenal sebagai Kota Pelajar dengan ratusan ribu mahasiswa yang datang dari seluruh penjuru Indonesia setiap tahunnya. Saat pertama kali menetap di Jogja, mengisi kamar kost adalah tantangan tersendiri. Salah satu perdebatan yang sering muncul adalah: **beli kasur baru atau sewa kasur saja?**
 
-Ternyata, tren di kalangan mahasiswa Jogja saat ini mulai bergeser. Banyak dari mereka yang lebih memilih layanan **sewa kasur Jogja** dibandingkan harus merogoh kocek jutaan rupiah untuk membeli kasur baru. Apa alasannya? Mari kita bedah satu per satu!
+Ternyata, tren di kalangan mahasiswa Jogja saat ini mulai bergeser. Banyak dari mereka yang lebih memilih layanan **sewa kasur Jogja** dibandingkan harus merogoh kocek jutaan rupiah untuk membeli kasur baru. Apa alasannya? Mari kita bedah satu per satu! (Simak juga [Tips Memilih Kasur Sewa untuk Kos](/artikel/tips-sewa-kasur-untuk-kos) agar tidak salah pilih).
 
 ## 1. Menghemat Dana Awal yang Signifikan
 Sebagai mahasiswa, pengeluaran di awal semester biasanya sangat membengkak untuk membayar uang pangkal, UKT, hingga deposit kost. Membeli kasur busa berkualitas atau springbed bisa memakan biaya antara Rp1.500.000 hingga Rp3.000.000. 

@@ -19,7 +19,7 @@ Sebelum mencari kasur, ukur sisa ruang di kamar atau ruang tamu Anda.
 Jangan biarkan tamu Anda bangun dengan sakit punggung. Banyak "kasur gulung" murahan di pasaran yang sangat tipis (di bawah 5-8 cm). Untuk kenyamanan standar hotel, pastikan Anda menyediakan kasur dengan ketebalan minimal **15 cm**. Kasur busa *high density* di **Santi Living** dirancang khusus untuk memberikan topangan punggung yang baik meski digunakan di atas lantai.
 
 ## 3. Prioritaskan Kebersihan (Higienitas)
-Kasur cadangan yang disimpan lama di gudang seringkali berdebu, lembab, atau berbau apek. Tamu Anda berhak mendapatkan tempat tidur yang bersih. Jika Anda tidak sempat mencuci kasur cadangan, layanan **sewa kasur harian Jogja** adalah pilihan terbaik. Anda mendapatkan unit yang sudah didisinfeksi, wangi, dan lengkap dengan sprei bersih.
+Kasur cadangan yang disimpan lama di gudang seringkali berdebu, lembab, atau berbau apek. Tamu Anda berhak mendapatkan tempat tidur yang bersih. Jika Anda tidak sempat mencuci kasur cadangan, layanan **sewa kasur harian Jogja** adalah pilihan terbaik. Anda mendapatkan unit yang sudah didisinfeksi, wangi, dan lengkap dengan sprei bersih. (Lihat juga: [Layanan Extra Bed untuk Tamu Hotel & Penginapan](/artikel/sewa-kasur-extra-bed-tamu-hotel-penginapan-jogja)).
 
 ## 4. Keuntungan Menyewa vs Membeli
 Membeli kasur baru untuk penggunaan 2-3 hari dalam setahun adalah pemborosan.
