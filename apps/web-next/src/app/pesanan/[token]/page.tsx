@@ -98,7 +98,7 @@ export default async function PesananPage({ params }: PageProps) {
   const statusInfo = getDisplayStatus(status, paymentStatus);
 
   return (
-    <main style={{ paddingTop: '70px', minHeight: '100vh', padding: 'var(--space-4)', background: 'linear-gradient(to bottom, var(--color-primary-light) 0%, var(--color-background) 30%)' }}>
+    <main style={{ minHeight: '100vh', padding: 'calc(80px + var(--space-4)) var(--space-4) var(--space-4)', background: 'linear-gradient(to bottom, var(--color-primary-light) 0%, var(--color-background) 30%)' }}>
       <div className="container" style={{ maxWidth: '600px' }}>
         <div style={{ background: 'white', borderRadius: 'var(--radius-xl)', padding: 'var(--space-4)', boxShadow: '0 4px 24px rgba(0,0,0,0.1)' }}>
           {/* Header */}

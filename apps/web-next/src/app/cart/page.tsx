@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <main style={{ paddingTop: '70px', minHeight: '100vh', padding: 'var(--space-6) 0' }}>
+    <main style={{ minHeight: '100vh', padding: 'calc(80px + var(--space-6)) 0 var(--space-6)' }}>
       <div className="container" style={{ maxWidth: '900px' }}>
         <div style={{ padding: '0 var(--space-4)' }}>
           <Link
