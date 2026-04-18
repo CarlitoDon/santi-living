@@ -75,7 +75,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="pt-[100px]">
+    <main className="pt-[70px]">
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
 
