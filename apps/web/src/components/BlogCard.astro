@@ -1,0 +1,131 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+
+// Format date
+const date = post.data.pubDate.toLocaleDateString("id-ID", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article class="blog-card">
+  <div class="blog-card-content">
+    <div class="blog-card-meta">
+      <time datetime={post.data.pubDate.toISOString()}>{date}</time>
+      {post.data.tags && post.data.tags.length > 0 && (
+        <span class="blog-card-tag">{post.data.tags[0]}</span>
+      )}
+    </div>
+    
+    <h3 class="blog-card-title">
+      <a href={`/artikel/${post.slug}`}>{post.data.title}</a>
+    </h3>
+    
+    <p class="blog-card-desc">{post.data.description}</p>
+    
+    <div class="blog-card-footer">
+      <span class="blog-card-author">{post.data.author}</span>
+      <a href={`/artikel/${post.slug}`} class="blog-card-readmore">Baca selengkapnya →</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary);
+  }
+
+  .blog-card-content {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-3);
+  }
+
+  .blog-card-tag {
+    background: var(--color-gray-100);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-full);
+    text-transform: capitalize;
+  }
+
+  .blog-card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.4;
+    margin-bottom: var(--space-2);
+  }
+
+  .blog-card-title a {
+    color: var(--color-gray-900);
+    text-decoration: none;
+  }
+
+  .blog-card-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .blog-card-desc {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-gray-100);
+  }
+
+  .blog-card-author {
+    color: var(--color-gray-500);
+  }
+
+  .blog-card-readmore {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+  }
+
+  .blog-card-readmore:hover {
+    text-decoration: underline;
+  }
+</style>

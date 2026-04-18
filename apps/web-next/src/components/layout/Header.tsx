@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Navigation } from './Navigation';
 
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
@@ -37,6 +38,7 @@ export function Header() {
     <header ref={headerRef} className="site-header">
       <div className="container">
         <div className="header-content">
+          <Navigation />
           <div className="header-logo-group">
             <h1 className="site-title">
               <Link href="/" className="logo-link">

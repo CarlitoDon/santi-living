@@ -1,0 +1,50 @@
+import type { APIRoute } from "astro";
+import { createProxyClient } from "../../lib/trpc-client";
+import { createApiErrorResponse } from "../../lib/http-error";
+import { mapUpstreamError } from "../../lib/upstream-error";
+
+/**
+ * Create QRIS Payment API
+ *
+ * Uses payment token flow with paymentMethod=qris.
+ */
+export const POST: APIRoute = async ({ request }) => {
+  try {
+    const body = await request.json();
+    const { token } = body;
+
+    if (!token) {
+      return createApiErrorResponse(400, "BAD_REQUEST", "Token is required");
+    }
+
+    const client = createProxyClient();
+
+    const result = await client.order.createPaymentToken.mutate({
+      token,
+      paymentMethod: "qris",
+    });
+
+    return new Response(
+      JSON.stringify({
+        ...result,
+        success: true,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  } catch (error: unknown) {
+    console.error("[create-qris-payment] Error:", error);
+    const mappedError = mapUpstreamError(
+      error,
+      "Failed to create QRIS payment",
+    );
+
+    return createApiErrorResponse(
+      mappedError.status,
+      mappedError.code,
+      mappedError.message,
+    );
+  }
+};

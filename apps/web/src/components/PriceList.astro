@@ -1,0 +1,88 @@
+---
+import PriceCard from "./PriceCard.astro";
+import ProductModal from "./ProductModal.astro";
+import products from "@/data/products.json";
+---
+
+<section class="price-list section" id="harga">
+  <div class="container">
+    <div class="category-section">
+      <h2 class="section-title">Paket Kasur Busa Lengkap</h2>
+      <p class="section-subtitle">
+        Sudah termasuk Kasur Busa + Sprei + Bantal + Selimut
+      </p>
+      <div class="price-grid">
+        {
+          products.mattressPackages.map((product) => (
+            <PriceCard product={product} />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="category-section">
+      <h2 class="section-title">Kasur Busa Saja</h2>
+      <p class="section-subtitle">Hanya kasur busa (Tanpa sprei/bantal/selimut)</p>
+      <div class="price-grid">
+        {
+          products.mattressOnly.map((product) => (
+            <PriceCard product={product} />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="category-section">
+      <h2 class="section-title">Ekstra Tambahan Satuan</h2>
+      <p class="section-subtitle">Butuh tambahan? Sewa satuan juga bisa</p>
+      <div class="price-grid">
+        {products.accessories.map((product) => <PriceCard product={product} />)}
+      </div>
+    </div>
+  </div>
+  <ProductModal />
+</section>
+
+<script>
+  import { initProductModal } from "@/scripts/product-modal";
+  initProductModal();
+</script>
+
+<style>
+  .price-list {
+    background: var(--color-surface);
+  }
+
+  .category-section {
+    margin-bottom: var(--space-12);
+  }
+
+  .category-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: calc(-1 * var(--space-6));
+    margin-bottom: var(--space-6);
+  }
+
+  .price-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 640px) {
+    .price-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .price-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

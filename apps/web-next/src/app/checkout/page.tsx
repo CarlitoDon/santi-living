@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { CheckoutFlow } from '@/components/checkout/CheckoutFlow';
 
 export const metadata: Metadata = {
   title: 'Checkout - Sewa Kasur Busa Jogja',
@@ -33,21 +34,7 @@ export default function CheckoutPage() {
           strategy="afterInteractive"
         />
 
-        {/* Checkout flow placeholder — will be migrated from existing checkout script */}
-        <div style={{
-          padding: 'var(--space-8)',
-          textAlign: 'center',
-          background: 'var(--color-surface)',
-          borderRadius: 'var(--radius-lg)',
-          border: '1px solid var(--color-border)',
-        }}>
-          <p style={{ color: 'var(--color-text-muted)' }}>
-            🔧 Checkout flow component — will be migrated from existing checkout script
-          </p>
-          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: 'var(--space-2)' }}>
-            Midtrans environment: {isProduction ? 'Production' : 'Sandbox'}
-          </p>
-        </div>
+        <CheckoutFlow />
       </div>
     </main>
   );

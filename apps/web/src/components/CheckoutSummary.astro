@@ -1,0 +1,252 @@
+---
+interface Props {
+  order: {
+    customerName: string;
+    customerWhatsapp: string;
+    deliveryAddress: string;
+    items: Array<{
+      name: string;
+      category: string;
+      quantity: number;
+      pricePerDay: number;
+    }>;
+    totalPrice: number;
+    orderDate: string;
+    duration: number;
+    deliveryFee: number;
+  };
+}
+
+const { order } = Astro.props;
+
+// Calculate subtotal (total - delivery fee)
+const subtotal = order.totalPrice - order.deliveryFee;
+
+// Format date range
+const startDate = new Date(order.orderDate);
+const endDate = new Date(startDate);
+endDate.setDate(endDate.getDate() + order.duration - 1);
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("id-ID", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};
+
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat("id-ID").format(amount);
+};
+---
+
+<div class="checkout-summary">
+  <h3 class="summary-title">Ringkasan Pesanan</h3>
+
+  <div class="summary-section">
+    <div class="summary-row">
+      <span class="summary-label">Nama</span>
+      <span class="summary-value">{order.customerName}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">WhatsApp</span>
+      <span class="summary-value">{order.customerWhatsapp}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Alamat</span>
+      <span class="summary-value address">{order.deliveryAddress}</span>
+    </div>
+  </div>
+
+  <div class="summary-divider"></div>
+
+  <div class="summary-section">
+    <h4 class="summary-subtitle">Produk</h4>
+    {
+      order.items.map((item) => (
+        <div class="summary-item">
+          <div class="item-info">
+            <span class="item-name">{item.name}</span>
+            <span class="item-qty">{item.quantity}x</span>
+          </div>
+          <span class="item-price">
+            Rp{" "}
+            {formatCurrency(item.pricePerDay * item.quantity * order.duration)}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="summary-divider"></div>
+
+  <div class="summary-section">
+    <div class="summary-row">
+      <span class="summary-label">Durasi</span>
+      <span class="summary-value">{order.duration} hari</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Tanggal</span>
+      <span class="summary-value">
+        {formatDate(startDate)} - {formatDate(endDate)}
+      </span>
+    </div>
+  </div>
+
+  <div class="summary-divider"></div>
+
+  <div class="summary-section summary-totals">
+    <div class="summary-row">
+      <span class="summary-label">Subtotal</span>
+      <span class="summary-value">Rp {formatCurrency(subtotal)}</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Ongkir</span>
+      <span class="summary-value">Rp {formatCurrency(order.deliveryFee)}</span>
+    </div>
+    <div class="summary-row total">
+      <span class="summary-label">Total</span>
+      <span class="summary-value">Rp {formatCurrency(order.totalPrice)}</span>
+    </div>
+  </div>
+
+  <a href="/cart" class="btn-edit-order"> ✏️ Edit Pesanan </a>
+</div>
+
+<style>
+  .checkout-summary {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    border: 1px solid var(--color-border);
+  }
+
+  .summary-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+  }
+
+  .summary-subtitle {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .summary-section {
+    margin-bottom: var(--space-3);
+  }
+
+  .summary-divider {
+    height: 1px;
+    background: var(--color-border);
+    margin: var(--space-3) 0;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .summary-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .summary-label {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .summary-value {
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+    text-align: right;
+  }
+
+  .summary-value.address {
+    max-width: 60%;
+    word-break: break-word;
+  }
+
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) 0;
+    border-bottom: 1px dashed var(--color-border-light);
+  }
+
+  .summary-item:last-child {
+    border-bottom: none;
+  }
+
+  .item-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .item-name {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+  }
+
+  .item-qty {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    background: var(--color-background);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .item-price {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .summary-totals .summary-row.total {
+    padding-top: var(--space-2);
+    border-top: 2px solid var(--color-border);
+    margin-top: var(--space-2);
+  }
+
+  .summary-totals .total .summary-label,
+  .summary-totals .total .summary-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .btn-edit-order {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: var(--space-3);
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-edit-order:hover {
+    background: var(--color-background);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+</style>

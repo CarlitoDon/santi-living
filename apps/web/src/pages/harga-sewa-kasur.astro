@@ -1,0 +1,566 @@
+---
+export const prerender = true;
+
+import MainLayout from "@/layouts/MainLayout.astro";
+import Header from "@/components/Header.astro";
+import Sidebar from "@/components/Sidebar.astro";
+import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+import config from "@/data/config.json";
+import products from "@/data/products.json";
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("id-ID").format(price);
+
+const volumeDiscounts = config.volumeDiscounts;
+const deliveryZones = config.deliveryZones;
+---
+
+<MainLayout
+  title="Harga Sewa Kasur Jogja 2026 | Mulai Rp25.000/hari - Santi Mebel"
+  description="Daftar harga sewa kasur di Jogja terlengkap 2026. Kasur busa Single Rp25rb, Double Rp35rb, Queen Rp45rb/hari. Diskon 10-15% untuk sewa banyak. Gratis ongkir area Godean."
+>
+  <Header />
+  <Sidebar />
+
+  <main class="harga-page" style="padding-top: 70px;">
+    <!-- Hero Section -->
+    <section class="harga-hero">
+      <div class="container">
+        <h1 class="harga-hero-title">Harga Sewa Kasur di Jogja — Update 2026</h1>
+        <p class="harga-hero-subtitle">
+          Transparan, terjangkau, dan lengkap. Pilih sesuai kebutuhan kamu.
+        </p>
+      </div>
+    </section>
+
+    <!-- Paket Kasur Lengkap -->
+    <section class="harga-section" id="paket-lengkap">
+      <div class="container">
+        <h2 class="harga-section-title">📦 Paket Kasur Lengkap</h2>
+        <p class="harga-section-desc">Kasur Busa + Sprei + Bantal + Selimut — tinggal tidur!</p>
+
+        <div class="harga-table-wrapper">
+          <table class="harga-table">
+            <thead>
+              <tr>
+                <th>Ukuran</th>
+                <th>Dimensi</th>
+                <th>Kapasitas</th>
+                <th>Harga/Hari</th>
+                <th>Harga/Minggu</th>
+                <th>Harga/Bulan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.mattressPackages.map((p) => (
+                <tr>
+                  <td class="product-name">{p.name}</td>
+                  <td>{p.dimensions}</td>
+                  <td>{p.capacity}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay)}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay * 7)}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay * 30)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kasur Saja -->
+    <section class="harga-section harga-section-alt" id="kasur-saja">
+      <div class="container">
+        <h2 class="harga-section-title">🛏️ Kasur Busa Saja</h2>
+        <p class="harga-section-desc">Tanpa sprei, bantal, dan selimut — cocok buat yang sudah punya perlengkapan sendiri</p>
+
+        <div class="harga-table-wrapper">
+          <table class="harga-table">
+            <thead>
+              <tr>
+                <th>Ukuran</th>
+                <th>Dimensi</th>
+                <th>Kapasitas</th>
+                <th>Harga/Hari</th>
+                <th>Harga/Minggu</th>
+                <th>Harga/Bulan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.mattressOnly.map((p) => (
+                <tr>
+                  <td class="product-name">{p.name}</td>
+                  <td>{p.dimensions}</td>
+                  <td>{p.capacity}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay)}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay * 7)}</td>
+                  <td class="price-cell">Rp {formatPrice(p.pricePerDay * 30)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ekstra -->
+    <section class="harga-section" id="ekstra">
+      <div class="container">
+        <h2 class="harga-section-title">✨ Ekstra Tambahan</h2>
+        <p class="harga-section-desc">Butuh tambahan? Pesan satuan juga bisa</p>
+
+        <div class="accessories-grid">
+          {products.accessories.map((item) => (
+            <div class="accessory-card">
+              <div class="accessory-name">{item.name}</div>
+              <div class="accessory-price">Rp {formatPrice(item.pricePerDay)}<span>/hari</span></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Diskon Volume -->
+    <section class="harga-section harga-section-alt" id="diskon">
+      <div class="container">
+        <h2 class="harga-section-title">🎉 Diskon Sewa Banyak</h2>
+        <p class="harga-section-desc">Semakin banyak kasur yang disewa, semakin hemat!</p>
+
+        <div class="discount-grid">
+          {volumeDiscounts.filter(d => d.discount > 0).map((d) => (
+            <div class="discount-card">
+              <div class="discount-qty">{d.minQty}-{d.maxQty > 100 ? '∞' : d.maxQty} unit</div>
+              <div class="discount-value">{d.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Ongkir -->
+    <section class="harga-section" id="ongkir">
+      <div class="container">
+        <h2 class="harga-section-title">🚚 Biaya Pengiriman</h2>
+        <p class="harga-section-desc">Antar jemput ke lokasi kamu di area Jogja</p>
+
+        <div class="harga-table-wrapper">
+          <table class="harga-table">
+            <thead>
+              <tr>
+                <th>Jarak dari Toko</th>
+                <th>Biaya Ongkir</th>
+              </tr>
+            </thead>
+            <tbody>
+              {deliveryZones.map((zone) => (
+                <tr>
+                  <td>≤ {zone.maxDistance} km</td>
+                  <td class="price-cell">{zone.price === 0 ? '🎉 GRATIS' : `Rp ${formatPrice(zone.price)}`}</td>
+                </tr>
+              ))}
+              <tr>
+                <td>&gt; {deliveryZones[deliveryZones.length - 1].maxDistance} km</td>
+                <td class="price-cell">Rp {formatPrice(config.deliveryPricePerKm)}/km</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="ongkir-note">📍 Lokasi toko: {config.storeLocation.name} (Jl. Godean KM 10)</p>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="harga-section harga-section-alt" id="faq-harga">
+      <div class="container">
+        <h2 class="harga-section-title">❓ Pertanyaan Umum Tentang Harga</h2>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-question">Berapa harga sewa kasur di Jogja?</summary>
+            <p class="faq-answer">Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Apakah ada diskon untuk sewa banyak?</summary>
+            <p class="faq-answer">Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%. Cocok untuk acara, kos-kosan, atau penginapan.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Apakah ada ongkir gratis?</summary>
+            <p class="faq-answer">Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko kami di Godean. Untuk area lain, ongkir mulai dari Rp15.000.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Minimal sewa berapa hari?</summary>
+            <p class="faq-answer">Minimal sewa 1 hari. Yap, bisa sewa harian! Cocok untuk tamu dadakan atau acara singkat.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">Apakah harga sudah termasuk antar jemput?</summary>
+            <p class="faq-answer">Harga kasur belum termasuk ongkir. Tapi untuk area Godean (radius 3 km), pengiriman GRATIS!</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="harga-cta">
+      <div class="container">
+        <h2 class="harga-cta-title">Mau sewa kasur sekarang?</h2>
+        <p class="harga-cta-desc">Hubungi kami via WhatsApp untuk order atau tanya-tanya</p>
+        <div class="harga-cta-buttons">
+          <a href="/#calculator" class="btn btn-primary btn-lg">Hitung Biaya Sewa</a>
+          <a
+            href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Mebel,%20saya%20mau%20tanya%20harga%20sewa%20kasur`}
+            class="btn btn-outline btn-lg harga-cta-wa"
+            target="_blank"
+            rel="noopener"
+            data-wa-source="harga_page"
+          >
+            💬 Chat WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema Markup -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Berapa harga sewa kasur di Jogja?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah ada diskon untuk sewa banyak?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Apakah ada ongkir gratis?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko di Godean. Untuk area lain, ongkir mulai dari Rp15.000."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Minimal sewa berapa hari?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Minimal sewa 1 hari. Bisa sewa harian, cocok untuk tamu dadakan atau acara singkat."
+            }
+          }
+        ]
+      })}
+    />
+    
+    <!-- ItemList / OfferCatalog Schema -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Daftar Harga Sewa Kasur Jogja",
+        "description": "Katalog harga sewa kasur busa dan paket lengkap di Santi Mebel Jogja",
+        "itemListElement": products.mattressPackages.concat(products.mattressOnly).map((p, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Product",
+            "name": p.name,
+            "description": `Sewa kasur ${p.name} ukuran ${p.dimensions} untuk ${p.capacity}`,
+            "offers": {
+              "@type": "Offer",
+              "price": p.pricePerDay,
+              "priceCurrency": "IDR",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        }))
+      })}
+    />
+  </main>
+
+  <StickyWhatsApp />
+</MainLayout>
+
+<style>
+  .harga-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark, #1a4ea0) 100%);
+    padding: var(--space-10) 0 var(--space-8);
+    text-align: center;
+    color: white;
+  }
+
+  .harga-hero-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-2);
+    color: white;
+  }
+
+  .harga-hero-subtitle {
+    font-size: var(--font-size-base);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  .harga-section {
+    padding: var(--space-10) 0;
+  }
+
+  .harga-section-alt {
+    background: var(--color-surface);
+  }
+
+  .harga-section-title {
+    text-align: center;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .harga-section-desc {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Table */
+  .harga-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .harga-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+  }
+
+  .harga-table thead {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .harga-table th {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  .harga-table td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .harga-table tbody tr:hover {
+    background: rgba(37, 99, 235, 0.04);
+  }
+
+  .harga-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .product-name {
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  .price-cell {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    white-space: nowrap;
+  }
+
+  /* Accessories */
+  .accessories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .accessory-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-align: center;
+  }
+
+  .accessory-name {
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-1);
+  }
+
+  .accessory-price {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+  }
+
+  .accessory-price span {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary);
+  }
+
+  /* Discount */
+  .discount-grid {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .discount-card {
+    background: white;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-6);
+    text-align: center;
+    min-width: 140px;
+  }
+
+  .discount-qty {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-1);
+  }
+
+  .discount-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+  }
+
+  .ongkir-note {
+    text-align: center;
+    margin-top: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  /* FAQ */
+  .faq-list {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    background: white;
+    overflow: hidden;
+  }
+
+  .faq-question {
+    padding: var(--space-4);
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .faq-question::after {
+    content: "+";
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    transition: transform 0.2s;
+  }
+
+  .faq-item[open] .faq-question::after {
+    content: "−";
+  }
+
+  .faq-answer {
+    padding: 0 var(--space-4) var(--space-4);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CTA */
+  .harga-cta {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark, #1a4ea0) 100%);
+    padding: var(--space-10) 0;
+    text-align: center;
+    color: white;
+  }
+
+  .harga-cta-title {
+    font-size: var(--font-size-2xl);
+    color: white;
+    margin-bottom: var(--space-2);
+  }
+
+  .harga-cta-desc {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: var(--space-6);
+  }
+
+  .harga-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .harga-cta-buttons .btn-primary {
+    background: white;
+    color: var(--color-primary);
+    max-width: 280px;
+    width: 100%;
+  }
+
+  .harga-cta-wa {
+    max-width: 280px;
+    width: 100%;
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .harga-cta-wa:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+  }
+
+  @media (min-width: 640px) {
+    .harga-hero-title {
+      font-size: var(--font-size-3xl);
+    }
+    .accessories-grid {
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 640px;
+    }
+    .harga-cta-buttons {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>

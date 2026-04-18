@@ -1,0 +1,126 @@
+---
+import testimonials from "@/data/testimonials.json";
+import type { Testimonial } from "@/types";
+
+const reviews = testimonials as Testimonial[];
+---
+
+<section class="testimonials section" id="testimoni">
+  <div class="container">
+    <h2 class="section-title">Kata Pelanggan</h2>
+
+    <div class="testimonials-grid">
+      {
+        reviews.map((review) => (
+          <div class="testimonial-card">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar">{review.name.charAt(0)}</div>
+              <div class="testimonial-info">
+                <div class="testimonial-name">
+                  {review.name}
+                  {review.verified && <span class="verified-badge">✓</span>}
+                </div>
+                <div class="testimonial-location">{review.location}</div>
+              </div>
+            </div>
+
+            <div class="testimonial-rating">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span class={`star ${i < review.rating ? "star-filled" : ""}`}>
+                  ★
+                </span>
+              ))}
+            </div>
+
+            <p class="testimonial-text">"{review.text}"</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--color-background);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .testimonial-card {
+    background: var(--color-surface);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+
+  .testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+  }
+
+  .testimonial-name {
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .verified-badge {
+    font-size: var(--font-size-xs);
+    background: var(--color-secondary);
+    color: var(--color-text-inverse);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .testimonial-location {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+  }
+
+  .testimonial-rating {
+    margin-bottom: var(--space-3);
+  }
+
+  .star {
+    color: var(--color-border);
+    font-size: var(--font-size-lg);
+  }
+
+  .star-filled {
+    color: var(--color-warning);
+  }
+
+  .testimonial-text {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
