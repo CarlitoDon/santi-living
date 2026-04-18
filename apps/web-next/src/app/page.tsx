@@ -34,12 +34,12 @@ const steps = [
 ];
 
 const benefits = [
-  { icon: '✨', title: 'Bersih & Steril', desc: 'Setiap kasur melalui proses pembersihan dan sterilisasi profesional' },
-  { icon: '🚀', title: 'Same Day Delivery', desc: 'Pesan sebelum jam 15:00, kasur sampai hari ini untuk area Jogja' },
-  { icon: '💰', title: 'Harga Transparan', desc: 'Tidak ada biaya tersembunyi, harga sudah termasuk sprei & bantal' },
-  { icon: '📦', title: 'Stok Selalu Ready', desc: '100+ unit kasur siap kirim kapanpun Anda butuhkan' },
-  { icon: '🔄', title: 'Fleksibel', desc: 'Sewa harian, mingguan, atau bulanan — sesuai kebutuhan Anda' },
-  { icon: '📍', title: 'Gratis Jemput', desc: 'Pengambilan kasur gratis saat masa sewa berakhir' },
+  { icon: '✨', title: '7 Tahap Higienitas', desc: 'Di-vacuum industri, steril UV-C, dan dibungkus plastik kedap udara.' },
+  { icon: '🏅', title: 'Royal Grand Exclusive', desc: 'Kasur busa High Density anti kempes untuk support tulang belakang.' },
+  { icon: '🚀', title: 'Same Day Delivery', desc: 'Layanan antar jemput kilat 2-4 jam untuk area Jogja, Sleman, Bantul.' },
+  { icon: '💰', title: 'Harga Transparan', desc: 'Tanpa biaya tersembunyi, harga sewa sudah termasuk sprei bersih & bantal.' },
+  { icon: '📦', title: 'Stok Selalu Ready', desc: 'Ratusan unit kasur selalu siap dikirim kapanpun Anda butuhkan.' },
+  { icon: '📍', title: 'Gratis Jemput', desc: 'Bebas biaya pengambilan unit kasur saat masa sewa Anda berakhir.' },
 ];
 
 const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'];
@@ -136,35 +136,7 @@ export default function HomePage() {
             Kami memberikan jaminan kenyamanan, kesehatan, dan kecepatan layanan untuk setiap pelanggan di Yogyakarta.
           </p>
           
-          {/* Top Row: Hygiene & Brand Trust */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✨</div>
-              <h3 className="font-bold text-xl mb-3 text-slate-900">7 Tahap Higienitas</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Unit melewati Vacuum industrial, sterilisasi UV-C, dan pembungkusan plastik kedap udara sebelum dikirim.
-              </p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🏅</div>
-              <h3 className="font-bold text-xl mb-3 text-slate-900">Royal Grand Exclusive</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Hanya menggunakan busa berkualitas tinggi (High Density) yang anti kempes dan menopang tulang belakang dengan baik.
-              </p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🚀</div>
-              <h3 className="font-bold text-xl mb-3 text-slate-900">Same Day Delivery</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Layanan pengantaran kilat 2-4 jam untuk area Jogja, Sleman, dan Bantul. Pesan pagi, siang sudah bisa dipakai.
-              </p>
-            </div>
-          </div>
-
-          {/* Bottom Row: Practical Benefits */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 border-t border-slate-200 pt-12">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-4">
             {benefits.map((b) => (
               <FeatureCard key={b.title} icon={b.icon} title={b.title} description={b.desc} />
             ))}
