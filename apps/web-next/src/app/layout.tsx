@@ -1,5 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Serif } from 'next/font/google';
+
+export const viewport: Viewport = {
+  themeColor: '#2563eb',
+};
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
@@ -39,6 +43,7 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: [
+      { url: '/favicon.ico', type: 'image/x-icon' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
