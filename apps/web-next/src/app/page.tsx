@@ -164,6 +164,33 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== PROMO REVIEW GOOGLE MAPS ===== */}
+      <section className="py-10 bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-inner">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase mb-2">
+                🔥 PROMO TERBATAS
+              </div>
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-2">Diskon Ongkir up to 70%!</h2>
+              <p className="text-white/90 max-w-xl">
+                Cukup berikan review bintang 5 di Google Maps Santi Living dan dapatkan potongan biaya pengiriman hingga 70% untuk penyewaan hari ini.
+              </p>
+            </div>
+            <div className="flex shrink-0">
+              <a 
+                href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white text-orange-600 px-8 py-3 rounded-full font-bold shadow-xl hover:scale-105 transition-transform"
+              >
+                Tulis Review Sekarang ⭐
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ===== BENEFITS ===== */}
       <section className="py-12 md:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4">
