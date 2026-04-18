@@ -21,7 +21,7 @@ const clientKey = process.env.MIDTRANS_CLIENT_KEY ?? '';
 
 export default function CheckoutPage() {
   return (
-    <main style={{ paddingTop: '70px', minHeight: '100vh', padding: 'var(--space-6) 0', background: 'var(--color-background)' }}>
+    <main style={{ minHeight: '100vh', padding: 'calc(80px + var(--space-6)) 0 var(--space-6)', background: 'var(--color-background)' }}>
       <div className="container" style={{ maxWidth: '900px' }}>
         <h1 style={{ fontSize: 'var(--font-size-2xl)', textAlign: 'center', marginBottom: 'var(--space-6)' }}>
           Checkout
