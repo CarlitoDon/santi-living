@@ -48,7 +48,7 @@ export function Navigation() {
   return (
     <>
       <button 
-        className="bg-transparent border-none cursor-pointer p-2 block z-[1001] absolute left-0 top-1/2 -translate-y-1/2" 
+        className="bg-transparent border-none cursor-pointer p-2 block z-[1001] relative shrink-0 hover:bg-slate-50 rounded-md transition-colors" 
         onClick={() => setIsOpen(true)}
         aria-label="Open Menu"
         aria-expanded={isOpen}
