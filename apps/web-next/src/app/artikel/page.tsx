@@ -4,9 +4,21 @@ import { getAllPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Artikel & Tips Sewa Kasur | Santi Living',
-  description: 'Tips sewa kasur, panduan memilih kasur busa, dan informasi seputar layanan Santi Living di Jogja.',
+  description:
+    'Panduan lengkap seputar sewa kasur, tips memilih kasur busa berkualitas, dan informasi layanan rental kasur harian/bulanan di Jogja.',
   alternates: {
     canonical: 'https://santiliving.com/artikel',
+  },
+  openGraph: {
+    title: 'Artikel & Tips Sewa Kasur Jogja - Santi Living',
+    description: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman di Yogyakarta.',
+    url: 'https://santiliving.com/artikel',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Artikel & Tips Sewa Kasur Jogja',
+    description: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman.',
   },
 };
 

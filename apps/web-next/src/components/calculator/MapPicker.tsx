@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { reverseGeocode } from "@/scripts/geolocation";
 import { showAlert } from "@/utils/alert";
+import "leaflet/dist/leaflet.css";
 
 const DEFAULT_CENTER: [number, number] = [-7.797068, 110.370529];
 const DEFAULT_ZOOM = 13;
@@ -16,23 +15,10 @@ export function MapPicker() {
   const [selectedCoords, setSelectedCoords] = useState<{ lat: number; lng: number } | null>(null);
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<L.Map | null>(null);
-  const markerRef = useRef<L.Marker | null>(null);
+  const mapInstanceRef = useRef<any>(null);
+  const markerRef = useRef<any>(null);
 
   useEffect(() => {
-    // Custom icon setup for leaflet in Next.js/Browser
-    const iconDefault = L.icon({
-      iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-      iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-      shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      tooltipAnchor: [16, -28],
-      shadowSize: [41, 41]
-    });
-    L.Marker.prototype.options.icon = iconDefault;
-
     const handleOpen = () => {
       setIsOpen(true);
       setAddressDisplay("Klik pada peta untuk memilih lokasi...");
@@ -49,77 +35,104 @@ export function MapPicker() {
   useEffect(() => {
     if (!isOpen || !mapContainerRef.current) return;
 
-    if (!mapInstanceRef.current) {
-      const map = L.map(mapContainerRef.current, {
-        center: DEFAULT_CENTER,
-        zoom: DEFAULT_ZOOM,
-        zoomControl: true,
+    let isMounted = true;
+
+    async function initMap() {
+      // Lazy load Leaflet only when modal opens
+      const L = (await import("leaflet")).default;
+
+      if (!isMounted || !mapContainerRef.current) return;
+
+      // Custom icon setup for leaflet in Next.js/Browser
+      const iconDefault = L.icon({
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        tooltipAnchor: [16, -28],
+        shadowSize: [41, 41]
       });
+      L.Marker.prototype.options.icon = iconDefault;
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
-      }).addTo(map);
+      if (!mapInstanceRef.current) {
+        const map = L.map(mapContainerRef.current, {
+          center: DEFAULT_CENTER,
+          zoom: DEFAULT_ZOOM,
+          zoomControl: true,
+        });
 
-      mapInstanceRef.current = map;
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 19,
+        }).addTo(map);
 
-      const setMarker = (lat: number, lng: number) => {
-        setSelectedCoords({ lat, lng });
-        
-        if (markerRef.current) {
-          markerRef.current.setLatLng([lat, lng]);
-        } else {
-          markerRef.current = L.marker([lat, lng], { draggable: true }).addTo(map);
+        mapInstanceRef.current = map;
+
+        const setMarker = (lat: number, lng: number) => {
+          setSelectedCoords({ lat, lng });
           
-          markerRef.current.on("dragend", async () => {
-            const pos = markerRef.current!.getLatLng();
-            setSelectedCoords({ lat: pos.lat, lng: pos.lng });
-            await updateAddress(pos.lat, pos.lng);
-          });
-        }
-      };
-
-      const updateAddress = async (lat: number, lng: number) => {
-        setAddressDisplay("Mencari alamat...");
-        try {
-          const address = await reverseGeocode({ latitude: lat, longitude: lng });
-          setAddressDisplay(address.fullAddress);
-        } catch {
-          setAddressDisplay("Tidak dapat mendapatkan alamat");
-        }
-      };
-
-      map.on("click", async (e: L.LeafletMouseEvent) => {
-        const { lat, lng } = e.latlng;
-        setMarker(lat, lng);
-        await updateAddress(lat, lng);
-      });
-
-      // Try current location
-      if (navigator.geolocation && window.isSecureContext) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            map.setView([latitude, longitude], 16);
-            setMarker(latitude, longitude);
-            updateAddress(latitude, longitude);
-          },
-          () => {
-            // failed to load GPS, keep default
+          if (markerRef.current) {
+            markerRef.current.setLatLng([lat, lng]);
+          } else {
+            markerRef.current = L.marker([lat, lng], { draggable: true }).addTo(map);
+            
+            markerRef.current.on("dragend", async () => {
+              const pos = markerRef.current!.getLatLng();
+              setSelectedCoords({ lat: pos.lat, lng: pos.lng });
+              await updateAddress(pos.lat, pos.lng);
+            });
           }
-        );
+        };
+
+        const updateAddress = async (lat: number, lng: number) => {
+          setAddressDisplay("Mencari alamat...");
+          try {
+            const address = await reverseGeocode({ latitude: lat, longitude: lng });
+            setAddressDisplay(address.fullAddress);
+          } catch {
+            setAddressDisplay("Tidak dapat mendapatkan alamat");
+          }
+        };
+
+        map.on("click", async (e: any) => {
+          const { lat, lng } = e.latlng;
+          setMarker(lat, lng);
+          await updateAddress(lat, lng);
+        });
+
+        // Try current location
+        if (navigator.geolocation && window.isSecureContext) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              if (isMounted) {
+                map.setView([latitude, longitude], 16);
+                setMarker(latitude, longitude);
+                updateAddress(latitude, longitude);
+              }
+            },
+            () => {
+              // failed to load GPS, keep default
+            }
+          );
+        }
       }
+
+      // Fix leaflet mounting rendering issues
+      setTimeout(() => {
+        if (isMounted) mapInstanceRef.current?.invalidateSize();
+      }, 100);
     }
 
-    // Fix leaflet mounting rendering issues
-    setTimeout(() => {
-      mapInstanceRef.current?.invalidateSize();
-    }, 100);
+    initMap();
     
     // Prevent document scrolling when modal is open
     document.body.style.overflow = "hidden";
 
     return () => {
+      isMounted = false;
       document.body.style.overflow = "";
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
