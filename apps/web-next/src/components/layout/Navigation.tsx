@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,7 +100,7 @@ export function Navigation() {
               })}
               <li>
                 <a
-                  href="https://wa.me/6289519119092"
+                  href={getWhatsAppUrl('Halo Santi Living, saya mau bertanya seputar layanan sewa kasur.')}
                   className="mt-6 bg-blue-600 text-white text-center block w-full p-4 rounded-xl font-bold shadow-[0_4px_12px_rgba(37,99,235,0.25)] hover:bg-blue-700 hover:-translate-y-[1px] hover:shadow-[0_6px_16px_rgba(37,99,235,0.3)] transition-all no-underline"
                   target="_blank"
                   rel="noopener noreferrer"

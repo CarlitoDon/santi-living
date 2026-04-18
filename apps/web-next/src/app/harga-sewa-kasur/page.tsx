@@ -8,6 +8,7 @@ import { PriceTable } from '@/components/pricing/PriceTable';
 import { PageHero } from '@/components/layout/PageHero';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { generateProductSchemaList, generateFAQSchema } from '@/utils/seo';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 import { formatPrice } from '@/utils/currency';
 
@@ -24,7 +25,7 @@ export default function HargaSewaKasurPage() {
   const faqData = [
       {
         question: 'Berapa harga sewa kasur di Jogja?',
-        answer: 'Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.',
+        answer: 'Harga sewa kasur di Santi Living mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.',
       },
       {
         question: 'Apakah ada diskon untuk sewa banyak?',
@@ -142,7 +143,7 @@ export default function HargaSewaKasurPage() {
               Hitung Biaya Sewa
             </Link>
             <a
-              href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Mebel,%20saya%20mau%20tanya%20harga%20sewa%20kasur`}
+              href={getWhatsAppUrl('Halo Santi Living, saya mau tanya harga sewa kasur')}
               className="max-w-[280px] w-full bg-transparent text-white border-2 border-white/50 no-underline py-3 px-6 rounded-md font-semibold hover:bg-white/15 hover:border-white transition-colors flex justify-center items-center gap-2"
               target="_blank"
               rel="noopener noreferrer"

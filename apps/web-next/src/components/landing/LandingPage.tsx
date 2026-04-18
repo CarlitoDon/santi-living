@@ -2,7 +2,8 @@
 
 import type { LandingPageConfig, ThemeColor } from '@/types/landing';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
-import { config } from '@/data/config';
+import { FeatureCard } from '@/components/ui/FeatureCard';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 import Link from 'next/link';
 
 interface LandingPageProps {
@@ -74,11 +75,7 @@ export function LandingPage({ config: cfg }: LandingPageProps) {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
               {cfg.benefits.map((b, i) => (
-                <div key={i} className="text-center p-6 bg-slate-50 border border-slate-200 rounded-xl hover:-translate-y-1 hover:shadow-md transition-all">
-                  <div className="text-4xl mb-3">{b.icon}</div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-1">{b.title}</h3>
-                  <p className="text-sm text-slate-500 m-0">{b.description}</p>
-                </div>
+                <FeatureCard key={i} icon={b.icon} title={b.title} description={b.description} />
               ))}
             </div>
           </div>
@@ -173,7 +170,7 @@ export function LandingPage({ config: cfg }: LandingPageProps) {
               Hitung Biaya Sewa
             </Link>
             <a
-              href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(cfg.cta.waText)}`}
+              href={getWhatsAppUrl(cfg.cta.waText)}
               className="bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white transition-colors text-center inline-flex justify-center items-center h-14"
               target="_blank"
               rel="noopener"

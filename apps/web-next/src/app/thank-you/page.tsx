@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { config } from '@/data/config';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Terima Kasih | Santi Living',
@@ -19,7 +19,7 @@ export default function ThankYouPage() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'center' }}>
             <a
-              href={`https://wa.me/${config.whatsappNumber}`}
+              href={getWhatsAppUrl()}
               className="btn btn-whatsapp btn-lg"
               target="_blank"
               rel="noopener"

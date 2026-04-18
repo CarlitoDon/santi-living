@@ -1,6 +1,6 @@
 import { getProxyBaseUrl } from '@/lib/proxy-config';
 import { OrderSchema, type Order } from '@/types/order';
-import { config } from '@/data/config';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -172,7 +172,7 @@ export default async function PesananPage({ params }: PageProps) {
           {/* Actions */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
             <a
-              href={`https://wa.me/${config.whatsappNumber}`}
+              href={getWhatsAppUrl()}
               className="btn btn-whatsapp"
               target="_blank"
               rel="noopener"

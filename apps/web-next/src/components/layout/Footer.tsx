@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { config } from '@/data/config';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -68,7 +69,7 @@ export function Footer() {
             <div className="flex gap-3">
               <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">📷</a>
               <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">🎵</a>
-              <a href={`https://wa.me/${config.whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">💬</a>
+              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">💬</a>
             </div>
           </div>
         </div>

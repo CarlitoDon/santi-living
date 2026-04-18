@@ -6,7 +6,9 @@ import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroBackground } from '@/components/home/HeroBackground';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { FeatureCard } from '@/components/ui/FeatureCard';
 import { generateFAQSchema } from '@/utils/seo';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export const metadata: Metadata = {
   title: 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living',
@@ -131,16 +133,7 @@ export default function HomePage() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {benefits.map((b) => (
-              <div
-                key={b.title}
-                className="text-center p-5 rounded-xl bg-white border border-border shadow-card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <div className="text-2xl w-14 h-14 flex items-center justify-center rounded-[14px] bg-primary-light mx-auto mb-3">
-                  {b.icon}
-                </div>
-                <h3 className="text-sm font-semibold text-primary mb-1">{b.title}</h3>
-                <p className="text-xs text-text-secondary leading-snug">{b.desc}</p>
-              </div>
+              <FeatureCard key={b.title} icon={b.icon} title={b.title} description={b.desc} />
             ))}
           </div>
         </div>
@@ -256,7 +249,7 @@ export default function HomePage() {
               Pesan Sekarang
             </a>
             <a
-              href={`https://wa.me/${config.whatsappNumber}`}
+              href={getWhatsAppUrl()}
               className="inline-flex items-center justify-center px-8 py-3 bg-secondary text-white font-bold rounded-md hover:bg-secondary-hover transition-colors"
               target="_blank"
               rel="noopener"

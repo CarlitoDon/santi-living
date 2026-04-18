@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { config } from '@/data/config';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export function StickyWhatsApp() {
   const [visible, setVisible] = useState(false);
@@ -19,7 +19,7 @@ export function StickyWhatsApp() {
 
   return (
     <a
-      href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Living,%20saya%20mau%20tanya%20tentang%20sewa%20kasur`}
+      href={getWhatsAppUrl('Halo Santi Living, saya mau tanya tentang sewa kasur')}
       className="sticky-wa"
       target="_blank"
       rel="noopener"
