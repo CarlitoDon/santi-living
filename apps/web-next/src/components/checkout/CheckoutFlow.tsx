@@ -204,15 +204,15 @@ export function CheckoutFlow() {
           if (window.snap.hide) window.snap.hide();
           window.snap.embed(snapToken, {
             embedId: 'snap-container-inner',
-            onSuccess: (_result: Record<string, unknown>) => {
+            onSuccess: () => {
               clearSnapTokenCache(publicToken);
               if (order) trackPurchase(order, sessionStorage.getItem('erpOrderNumber') || publicToken, method);
               window.location.href = `/pesanan/${publicToken}`;
             },
-            onPending: (_result: Record<string, unknown>) => {
+            onPending: () => {
               // Usually handled internally or we can redirect to pesanan
             },
-            onError: (_result: Record<string, unknown>) => {
+            onError: () => {
               setSnapStatus('error');
               setSnapError('Pembayaran gagal. Silakan coba lagi.');
             },

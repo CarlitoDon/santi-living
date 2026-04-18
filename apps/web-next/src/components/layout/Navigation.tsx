@@ -10,7 +10,9 @@ export function Navigation() {
 
   // Close sidebar on route change
   useEffect(() => {
-    setIsOpen(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 0);
   }, [pathname]);
 
   // Handle body scroll locking
