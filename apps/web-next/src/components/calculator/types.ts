@@ -65,7 +65,8 @@ export interface Product {
   dimensions?: string;
   capacity?: string;
   pricePerDay: number;
+  costPrice: number;
   category: "package" | "mattress" | "accessory";
   image: string;
-  includes?: string[];
+  includes: string[];
 }

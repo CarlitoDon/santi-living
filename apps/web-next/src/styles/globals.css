@@ -151,6 +151,10 @@ body {
   overflow-x: hidden;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 img,
 picture,
 video,

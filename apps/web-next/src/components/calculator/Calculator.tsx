@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { useCalculatorState } from "./useCalculatorState";
 import { CartSection } from "./CartSection";
 import { ScheduleSection } from "./ScheduleSection";
@@ -11,6 +12,8 @@ import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import { config } from "@/data/config";
 import dynamic from "next/dynamic";
+import { showAlert } from "@/utils/alert";
+import { ProductModal } from "@/components/produk/ProductCard";
 
 const MapPicker = dynamic(() => import("./MapPicker").then(mod => mod.MapPicker), { ssr: false });
 
@@ -28,6 +31,7 @@ interface CalculatorProps {
   };
   imageMap: Record<string, string>;
   imageMapLarge: Record<string, string>;
+  editMode?: boolean;
 }
 
 // Custom event type for location selection from map picker
@@ -102,6 +106,7 @@ export function Calculator({
   products,
   imageMap,
   imageMapLarge,
+  editMode = false,
 }: CalculatorProps) {
   const actions = useCalculatorState();
   const { state } = actions;
@@ -111,17 +116,19 @@ export function Calculator({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isEditMode, setIsEditMode] = useState(false);
   const [originalOrderId, setOriginalOrderId] = useState<string | null>(null);
+  const [modalProduct, setModalProduct] = useState<Product | null>(null);
+  const searchParams = useSearchParams();
 
   // Ref to track if we've already pre-filled (prevents infinite loop)
   const hasPrefilledRef = useRef(false);
+  const hasAutoAddedRef = useRef(false);
 
   // Detect edit mode and pre-fill from session (runs only once)
   useEffect(() => {
     // Skip if already pre-filled
     if (hasPrefilledRef.current) return;
 
-    // Check if we're in edit mode (set by cart.astro)
-    const editMode = window.__CALCULATOR_EDIT_MODE__ === true;
+    // Check if we're in edit mode
     setIsEditMode(editMode);
 
     if (editMode) {
@@ -282,6 +289,10 @@ export function Calculator({
         postcode: address.postcode,
       });
 
+      if (!matched.kotaKode) {
+        throw new Error("Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta. Apabila Anda merasa ini adalah sebuah kesalahan, silakan hubungi admin via WhatsApp.");
+      }
+
       setCustomer((prev) => ({
         ...prev,
         address: {
@@ -316,7 +327,7 @@ export function Calculator({
       // Clear location error since we now have coordinates
       clearError("addressLocation");
     } catch (error) {
-      alert((error as Error).message || "Gagal mendapatkan lokasi");
+      showAlert((error as Error).message || "Gagal mendapatkan lokasi", "Pencarian Lokasi Gagal", "error");
     }
   }, [actions, clearError]);
 
@@ -339,6 +350,11 @@ export function Calculator({
         provinsi: address.provinsi,
         postcode: address.postcode,
       });
+
+      if (!matched.kotaKode) {
+        showAlert("Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta. Apabila Anda merasa ini adalah sebuah kesalahan, silakan hubungi admin via WhatsApp.", "Lokasi Tidak Mendukung", "warning");
+        return;
+      }
 
       // Update customer address with matched kode values
       setCustomer((prev) => ({
@@ -389,42 +405,57 @@ export function Calculator({
   // Handle deep links from product page (e.g., /?id=paket-single#calculator)
   useEffect(() => {
     const handleDeepLink = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get("id");
-      const hash = window.location.hash;
+      // In Next.js App router, hash isn't available in searchParams. 
+      // Using window.location is fine but we must wait a tick for the router to finish transitioning
+      setTimeout(() => {
+        const productId = searchParams.get("id");
+        const autoAdd = searchParams.get("autoAdd") === "true";
+        const hash = window.location.hash;
 
-      if (hash === "#calculator" && productId) {
-        // Dispatch event to expand accordion and show all items
-        window.dispatchEvent(
-          new CustomEvent("expand-product-accordion", {
-            detail: { productId },
-          }),
-        );
-
-        // Wait for accordion to expand and items to render
-        setTimeout(() => {
-          const productEl = document.querySelector(
-            `[data-product-id="${productId}"]`,
+        if (hash === "#calculator" && productId) {
+          // Dispatch event to expand accordion and show all items
+          window.dispatchEvent(
+            new CustomEvent("expand-product-accordion", {
+              detail: { productId },
+            }),
           );
 
-          if (productEl) {
-            // Scroll to the product
-            productEl.scrollIntoView({ behavior: "smooth", block: "center" });
-
-            // Add highlight pulse effect
-            productEl.classList.add("highlight-pulse");
-
-            // Remove the effect after animation completes (4 iterations * 1s = 4s)
+          if (autoAdd && !hasAutoAddedRef.current) {
+            hasAutoAddedRef.current = true;
             setTimeout(() => {
-              productEl.classList.remove("highlight-pulse");
-            }, 4000);
+              window.dispatchEvent(
+                new CustomEvent("modal-product-increment", {
+                  detail: { productId },
+                }),
+              );
+            }, 200); // Wait for Calculator event listeners to attach
           }
-        }, 800); // Longer delay to allow accordion expansion
-      }
+
+          // Wait for accordion to expand and items to render
+          setTimeout(() => {
+            const productEl = document.querySelector(
+              `[data-product-id="${productId}"]`,
+            );
+
+            if (productEl) {
+              // Scroll to the product
+              productEl.scrollIntoView({ behavior: "smooth", block: "center" });
+
+              // Add highlight pulse effect
+              productEl.classList.add("highlight-pulse");
+
+              // Remove the effect after animation completes (4 iterations * 1s = 4s)
+              setTimeout(() => {
+                productEl.classList.remove("highlight-pulse");
+              }, 4000);
+            }
+          }, 800); // Longer delay to allow accordion expansion
+        }
+      }, 100);
     };
 
     handleDeepLink();
-  }, []);
+  }, [searchParams]);
 
   // Listen for modal stepper events
   useEffect(() => {
@@ -466,6 +497,16 @@ export function Calculator({
       handleModalDecrement as EventListener,
     );
 
+    // Handle custom open modal event from inside Calculator
+    const handleOpenModal = (e: Event) => {
+      setModalProduct((e as CustomEvent).detail);
+    };
+
+    window.addEventListener(
+      "open-calculator-modal",
+      handleOpenModal,
+    );
+
     return () => {
       window.removeEventListener(
         "modal-product-increment",
@@ -474,6 +515,10 @@ export function Calculator({
       window.removeEventListener(
         "modal-product-decrement",
         handleModalDecrement as EventListener,
+      );
+      window.removeEventListener(
+        "open-calculator-modal",
+        handleOpenModal,
       );
     };
   }, [actions, products]);
@@ -625,10 +670,12 @@ export function Calculator({
       window.location.href = "/checkout";
     } catch (error) {
       console.error("Failed to submit order:", error);
-      alert(
+      showAlert(
         `Mohon maaf, terjadi kesalahan: ${
           (error as Error).message || "Gagal memproses pesanan"
         }. Silakan coba lagi.`,
+        "Pemesanan Gagal",
+        "error"
       );
     } finally {
       setIsSubmitting(false);
@@ -707,6 +754,34 @@ export function Calculator({
         </div>
       </div>
       <MapPicker />
+      <ProductModal
+        product={modalProduct}
+        isOpen={!!modalProduct}
+        onClose={() => setModalProduct(null)}
+        quantity={modalProduct ? actions.getItemQuantity(modalProduct.id) : 0}
+        onIncrement={() => {
+          if (modalProduct) {
+             const baseProduct = [
+              ...products.mattressPackages,
+              ...products.mattressOnly,
+              ...products.accessories,
+            ].find((p) => p.id === modalProduct.id);
+            if(baseProduct) {
+              actions.addItem({
+                id: baseProduct.id,
+                name: baseProduct.name,
+                category: baseProduct.category as "package" | "mattress" | "accessory",
+                pricePerDay: baseProduct.pricePerDay,
+                includes: baseProduct.includes,
+              });
+            }
+          }
+        }}
+        onDecrement={() => {
+          if (modalProduct) actions.removeItem(modalProduct.id);
+        }}
+        onSewaClick={() => setModalProduct(null)}
+      />
     </section>
   );
 }

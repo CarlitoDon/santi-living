@@ -13,6 +13,7 @@ export const ProductSchema = z.object({
   capacity: z.string().optional(),
   image: z.string(),
   includes: z.array(z.string()),
+  category: z.enum(['package', 'mattress', 'accessory']).optional(),
 });
 
 export type Product = z.infer<typeof ProductSchema>;

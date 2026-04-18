@@ -7,128 +7,66 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="site-footer">
+    <footer className="bg-slate-900 text-white pt-12 pb-6 mt-4">
       <div className="container">
-        <div className="footer-grid">
+        <div className="grid gap-8 mb-8 md:grid-cols-[2fr_1fr_1fr]">
           {/* NAP Section for Local SEO */}
-          <div className="footer-nap">
-            <h3 className="footer-brand">{config.businessName}</h3>
-            <address className="footer-address">
-              <p>
-                <span className="footer-icon">📍</span>
-                Jl. Godean KM 10, Godean<br />
-                Yogyakarta 55182, Indonesia
+          <div>
+            <h3 className="text-lg font-bold mb-4 text-white">{config.businessName}</h3>
+            <address className="not-italic text-slate-400 leading-[1.8]">
+              <p className="mb-2 flex items-start gap-2">
+                <span className="shrink-0">📍</span>
+                <span>
+                  Jl. Godean KM 10, Godean<br />
+                  Yogyakarta 55182, Indonesia
+                </span>
               </p>
-              <p>
-                <span className="footer-icon">📞</span>
-                <a href={`tel:+${config.whatsappNumber}`}>{config.whatsappDisplay}</a>
+              <p className="mb-2 flex items-start gap-2">
+                <span className="shrink-0">📞</span>
+                <a 
+                  href={`tel:+${config.whatsappNumber}`} 
+                  className="text-slate-400 no-underline hover:text-white transition-colors"
+                >
+                  {config.whatsappDisplay}
+                </a>
               </p>
-              <p>
-                <span className="footer-icon">⏰</span>
+              <p className="mb-2 flex items-start gap-2">
+                <span className="shrink-0">⏰</span>
                 Senin - Minggu: 07:00 - 21:00 WIB
               </p>
             </address>
           </div>
 
           {/* Quick Links */}
-          <div className="footer-links">
-            <h4>Layanan Kami</h4>
-            <ul>
-              <li><Link href="/produk">Katalog Produk</Link></li>
-              <li><Link href="/harga-sewa-kasur">Harga Sewa Busa</Link></li>
-              <li><Link href="/sewa-kasur-terdekat">Sewa Kasur Terdekat</Link></li>
-              <li><Link href="/sewa-kasur-lipat">Sewa Kasur Lipat</Link></li>
-              <li><Link href="/sewa-kasur-bulanan">Sewa Kasur Bulanan</Link></li>
-              <li><Link href="/artikel">Artikel &amp; Tips</Link></li>
-              <li><Link href="/about">Tentang Kami</Link></li>
+          <div>
+            <h4 className="text-base font-semibold mb-4 text-white">Layanan Kami</h4>
+            <ul className="list-none p-0 m-0">
+              <li className="mb-2"><Link href="/produk" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Katalog Produk</Link></li>
+              <li className="mb-2"><Link href="/harga-sewa-kasur" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Harga Sewa Busa</Link></li>
+              <li className="mb-2"><Link href="/sewa-kasur-terdekat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Terdekat</Link></li>
+              <li className="mb-2"><Link href="/sewa-kasur-lipat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Lipat</Link></li>
+              <li className="mb-2"><Link href="/sewa-kasur-bulanan" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Bulanan</Link></li>
+              <li className="mb-2"><Link href="/artikel" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Artikel &amp; Tips</Link></li>
+              <li className="mb-2"><Link href="/about" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Tentang Kami</Link></li>
             </ul>
           </div>
 
           {/* Social */}
-          <div className="footer-social">
-            <h4>Ikuti Kami</h4>
-            <div className="social-links">
-              <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
-              <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
-              <a href={`https://wa.me/${config.whatsappNumber}`} target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+          <div>
+            <h4 className="text-base font-semibold mb-4 text-white">Ikuti Kami</h4>
+            <div className="flex gap-3">
+              <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">📷</a>
+              <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">🎵</a>
+              <a href={`https://wa.me/${config.whatsappNumber}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-[1.2rem] transition-colors duration-200 hover:bg-blue-600 no-underline">💬</a>
             </div>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <p>&copy; {currentYear} {config.businessName}. Semua hak dilindungi.</p>
-          <p className="footer-tagline">Layanan Sewa Kasur Busa Terpercaya di Yogyakarta</p>
+        <div className="border-t border-slate-800 pt-6 text-center text-slate-500 text-sm">
+          <p className="mb-1">&copy; {currentYear} {config.businessName}. Semua hak dilindungi.</p>
+          <p className="text-xs">Layanan Sewa Kasur Busa Terpercaya di Yogyakarta</p>
         </div>
       </div>
-
-      <style jsx>{`
-        .site-footer {
-          background: var(--color-gray-900, #0f172a);
-          color: white;
-          padding: var(--space-12) 0 var(--space-6);
-          margin-top: var(--space-4);
-        }
-        .footer-grid {
-          display: grid;
-          gap: var(--space-8);
-          margin-bottom: var(--space-8);
-        }
-        @media (min-width: 768px) {
-          .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
-        }
-        .footer-brand {
-          font-size: var(--font-size-lg);
-          font-weight: var(--font-weight-bold);
-          margin-bottom: var(--space-4);
-          color: white;
-        }
-        .footer-address {
-          font-style: normal;
-          color: #94a3b8;
-          line-height: 1.8;
-        }
-        .footer-address p {
-          margin-bottom: var(--space-2);
-          display: flex;
-          align-items: flex-start;
-          gap: var(--space-2);
-        }
-        .footer-icon { flex-shrink: 0; }
-        .footer-address a { color: #94a3b8; text-decoration: none; }
-        .footer-address a:hover { color: white; }
-        .footer-links h4, .footer-social h4 {
-          font-size: var(--font-size-base);
-          font-weight: var(--font-weight-semibold);
-          margin-bottom: var(--space-4);
-          color: white;
-        }
-        .footer-links ul { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: var(--space-2); }
-        .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
-        .footer-links a:hover { color: white; }
-        .social-links { display: flex; gap: var(--space-3); }
-        .social-links a {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          background: #1e293b;
-          border-radius: var(--radius-full);
-          font-size: 1.2rem;
-          transition: background 0.2s;
-        }
-        .social-links a:hover { background: var(--color-primary); }
-        .footer-bottom {
-          border-top: 1px solid #1e293b;
-          padding-top: var(--space-6);
-          text-align: center;
-          color: #64748b;
-          font-size: var(--font-size-sm);
-        }
-        .footer-bottom p { margin-bottom: var(--space-1); }
-        .footer-tagline { font-size: var(--font-size-xs); }
-      `}</style>
     </footer>
   );
 }

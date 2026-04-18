@@ -4,7 +4,6 @@
 
 import type { Product } from "./types";
 import type { ProductItem } from "@/types";
-import { openModal } from "@/store/modalStore";
 import "./styles.css";
 
 interface CartItemProps {
@@ -40,7 +39,7 @@ export function CartItem({
       image: largeImage || optimizedImage || product.image,
       includes: product.includes,
     };
-    openModal(modalProduct);
+    window.dispatchEvent(new CustomEvent('open-calculator-modal', { detail: modalProduct }));
   };
 
   return (

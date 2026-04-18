@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 
 export const metadata: Metadata = {
   title: 'Edit Pesanan | Santi Living',
@@ -30,17 +31,8 @@ export default function CartPage() {
           </h1>
         </div>
 
-        {/* Calculator component placeholder — will be migrated with the full Calculator React component */}
-        <div style={{
-          padding: 'var(--space-8)',
-          textAlign: 'center',
-          background: 'var(--color-surface)',
-          borderRadius: 'var(--radius-lg)',
-          marginTop: 'var(--space-4)',
-        }}>
-          <p style={{ color: 'var(--color-text-muted)' }}>
-            🔧 Calculator component — will be migrated from existing React component
-          </p>
+        <div style={{ marginTop: 'var(--space-4)' }}>
+          <CalculatorSection editMode={true} />
         </div>
       </div>
     </main>

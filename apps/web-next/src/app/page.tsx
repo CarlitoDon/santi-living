@@ -176,7 +176,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== SERVICE AREA ===== */}
-      <section className="py-12 md:py-16">
+      <section id="service-area" className="py-12 md:py-16">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <h2 className="text-xl md:text-2xl font-bold mb-3">Area Layanan Kami</h2>
           <p className="text-text-secondary max-w-lg mx-auto mb-6">

@@ -8,6 +8,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
 import { GtagScript } from '@/components/tracking/GtagScript';
+import { AlertModal } from '@/components/ui/AlertModal';
 import '@/styles/globals.css';
 import '@/styles/utilities.css';
 
@@ -119,11 +120,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
-        {children}
+        <div style={{ flex: 1 }}>
+          {children}
+        </div>
         <Footer />
         <StickyWhatsApp />
+        <AlertModal />
       </body>
     </html>
   );

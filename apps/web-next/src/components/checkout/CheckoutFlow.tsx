@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getOrder, setPaymentMethod } from '@/lib/checkout-session';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { getAttributionEventParams } from '@/lib/attribution';
+import { showAlert } from '@/utils/alert';
 import type { OrderData, OrderPayloadItem } from '@/types/order';
 import config from '@/data/config.json';
 import Link from 'next/link';
@@ -248,7 +249,7 @@ export function CheckoutFlow() {
     if (publicToken) {
        window.location.href = `/pesanan/${publicToken}`;
     } else {
-       alert('Token pesanan tidak ditemukan');
+       showAlert('Token pesanan tidak ditemukan', 'Kesalahan', 'error');
     }
   };
 

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { reverseGeocode } from "@/scripts/geolocation";
+import { showAlert } from "@/utils/alert";
 
 const DEFAULT_CENTER: [number, number] = [-7.797068, 110.370529];
 const DEFAULT_ZOOM = 13;
@@ -153,7 +154,7 @@ export function MapPicker() {
       
       handleClose();
     } catch {
-      alert("Gagal mendapatkan detail alamat untuk lokasi ini.");
+      showAlert("Gagal mendapatkan detail alamat untuk lokasi ini.", "Pencarian Lokasi Gagal", "error");
     } finally {
       setIsProcessing(false);
     }

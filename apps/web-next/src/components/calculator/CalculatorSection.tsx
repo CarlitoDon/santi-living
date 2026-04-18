@@ -43,12 +43,13 @@ for (const p of allProducts) {
   imageMapLarge[p.id] = p.image;
 }
 
-export function CalculatorSection() {
+export function CalculatorSection({ editMode = false }: { editMode?: boolean }) {
   return (
     <Calculator
       products={productsData}
       imageMap={imageMap}
       imageMapLarge={imageMapLarge}
+      editMode={editMode}
     />
   );
 }
