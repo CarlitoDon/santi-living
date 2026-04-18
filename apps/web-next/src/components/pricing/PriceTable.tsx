@@ -1,8 +1,6 @@
 import type { Product } from '@/types/product';
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('id-ID').format(price);
-}
+import { formatPrice } from '@/utils/currency';
 
 export function PriceTable({ title, desc, items, type }: { title: string; desc: string; items: Product[]; type: string }) {
   return (

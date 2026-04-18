@@ -5,6 +5,8 @@ import { config } from '@/data/config';
 import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroBackground } from '@/components/home/HeroBackground';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { generateFAQSchema } from '@/utils/seo';
 
 export const metadata: Metadata = {
   title: 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living',
@@ -65,15 +67,7 @@ export default function HomePage() {
     areaServed: serviceAreas.map((a) => ({ '@type': 'City' as const, name: a })),
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org' as const,
-    '@type': 'FAQPage' as const,
-    mainEntity: faqItems.map((item) => ({
-      '@type': 'Question' as const,
-      name: item.q,
-      acceptedAnswer: { '@type': 'Answer' as const, text: item.a },
-    })),
-  };
+  const faqSchema = generateFAQSchema(faqItems);
 
   return (
     <main className="pt-[80px]">
@@ -201,22 +195,7 @@ export default function HomePage() {
       {/* ===== FAQ ===== */}
       <section className="py-12 md:py-16 bg-surface">
         <div className="max-w-2xl mx-auto px-4">
-          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">Pertanyaan Umum</h2>
-          <div className="space-y-3">
-            {faqItems.map((item, i) => (
-              <details
-                key={i}
-                className="bg-white rounded-lg border border-border overflow-hidden group"
-              >
-                <summary className="px-4 py-3.5 cursor-pointer font-medium list-none select-none hover:bg-gray-50 transition-colors">
-                  {item.q}
-                </summary>
-                <div className="px-4 pb-4 text-sm text-text-secondary leading-relaxed">
-                  {item.a}
-                </div>
-              </details>
-            ))}
-          </div>
+          <FAQAccordion items={faqItems} title="Pertanyaan Umum" />
         </div>
       </section>
 

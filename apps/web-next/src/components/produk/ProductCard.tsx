@@ -4,9 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import type { Product } from '@/types/product';
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('id-ID').format(price);
-}
+import { formatPrice } from '@/utils/currency';
 
 export function ProductCard({ product, onClick }: { product: Product; onClick: () => void }) {
   return (

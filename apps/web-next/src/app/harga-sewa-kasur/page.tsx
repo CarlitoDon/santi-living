@@ -5,10 +5,11 @@ import { products } from '@/data/products';
 import { config } from '@/data/config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { PriceTable } from '@/components/pricing/PriceTable';
+import { PageHero } from '@/components/layout/PageHero';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { generateProductSchemaList, generateFAQSchema } from '@/utils/seo';
 
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('id-ID').format(price);
-}
+import { formatPrice } from '@/utils/currency';
 
 export default function HargaSewaKasurPage() {
   const itemListSchema = {
@@ -17,79 +18,43 @@ export default function HargaSewaKasurPage() {
     name: 'Daftar Harga Sewa Kasur Busa Jogja',
     description: 'Harga sewa kasur busa harian di Yogyakarta - Santi Living',
     numberOfItems: products.mattressPackages.length + products.mattressOnly.length + products.accessories.length,
-    itemListElement: [
-      ...products.mattressPackages.concat(products.mattressOnly).map((p, i) => ({
-        '@type': 'ListItem' as const,
-        position: i + 1,
-        item: {
-          '@type': 'Product' as const,
-          name: p.name,
-          description: p.description,
-          offers: {
-            '@type': 'Offer' as const,
-            price: p.pricePerDay,
-            priceCurrency: 'IDR',
-            availability: 'https://schema.org/InStock',
-            seller: { '@type': 'Organization' as const, name: 'Santi Living' },
-          },
-        },
-      })),
-    ],
+    itemListElement: generateProductSchemaList([...products.mattressPackages, ...products.mattressOnly], 1)
   };
 
-  const faqSchema = {
-    '@context': 'https://schema.org' as const,
-    '@type': 'FAQPage' as const,
-    mainEntity: [
+  const faqData = [
       {
-        '@type': 'Question',
-        name: 'Berapa harga sewa kasur di Jogja?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.',
-        },
+        question: 'Berapa harga sewa kasur di Jogja?',
+        answer: 'Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.',
       },
       {
-        '@type': 'Question',
-        name: 'Apakah ada diskon untuk sewa banyak?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%.',
-        },
+        question: 'Apakah ada diskon untuk sewa banyak?',
+        answer: 'Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%. Cocok untuk acara, kos-kosan, atau penginapan.',
       },
       {
-        '@type': 'Question',
-        name: 'Apakah ada ongkir gratis?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko di Godean. Untuk area lain, ongkir mulai dari Rp15.000.',
-        },
+        question: 'Apakah ada ongkir gratis?',
+        answer: 'Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko di Godean. Untuk area lain, ongkir mulai dari Rp15.000.',
       },
       {
-        '@type': 'Question',
-        name: 'Minimal sewa berapa hari?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Minimal sewa 1 hari. Bisa sewa harian, cocok untuk tamu dadakan atau acara singkat.',
-        },
+        question: 'Minimal sewa berapa hari?',
+        answer: 'Minimal sewa 1 hari. Bisa sewa harian, cocok untuk tamu dadakan atau acara singkat.',
       },
-    ],
-  };
+      {
+        question: 'Apakah harga sudah termasuk antar jemput?',
+        answer: 'Harga kasur belum termasuk ongkir. Tapi untuk area Godean (radius 3 km), pengiriman GRATIS!',
+      }
+  ];
+
+  const faqSchema = generateFAQSchema(faqData);
 
   return (
     <main style={{ paddingTop: '80px', paddingBottom: 0 }}>
       <JsonLd data={itemListSchema} />
       <JsonLd data={faqSchema} />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-[#1a4ea0] py-8 text-center text-white">
-        <div className="container">
-          <h1 className="text-2xl md:text-3xl mb-2 text-white font-bold">Harga Sewa Kasur di Jogja — Update 2026</h1>
-          <p className="text-base text-white/85 m-0 max-w-2xl mx-auto">
-            Transparan, terjangkau, dan lengkap. Pilih sesuai kebutuhan kamu.
-          </p>
-        </div>
-      </section>
+      <PageHero 
+        title="Harga Sewa Kasur di Jogja — Update 2026" 
+        subtitle="Transparan, terjangkau, dan lengkap. Pilih sesuai kebutuhan kamu." 
+      />
 
       {/* Prices */}
       <PriceTable title="📦 Paket Kasur Lengkap" desc="Kasur Busa + Sprei + Bantal + Selimut — tinggal tidur!" items={products.mattressPackages} type="package" />
@@ -161,43 +126,8 @@ export default function HargaSewaKasurPage() {
       {/* FAQ */}
       <section className="py-10 bg-slate-50" id="faq-harga">
         <div className="container">
-          <h2 className="text-center text-xl md:text-2xl mb-6 font-bold text-slate-900">❓ Pertanyaan Umum Tentang Harga</h2>
-          <div className="max-w-[640px] mx-auto space-y-3">
-            <details className="group border border-slate-200 rounded-md bg-white overflow-hidden">
-              <summary className="p-4 cursor-pointer font-semibold list-none flex items-center justify-between text-slate-800 group-open:text-blue-600">
-                Berapa harga sewa kasur di Jogja?
-                <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">Harga sewa kasur di Santi Mebel mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.</p>
-            </details>
-            <details className="group border border-slate-200 rounded-md bg-white overflow-hidden">
-              <summary className="p-4 cursor-pointer font-semibold list-none flex items-center justify-between text-slate-800 group-open:text-blue-600">
-                Apakah ada diskon untuk sewa banyak?
-                <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%. Cocok untuk acara, kos-kosan, atau penginapan.</p>
-            </details>
-            <details className="group border border-slate-200 rounded-md bg-white overflow-hidden">
-              <summary className="p-4 cursor-pointer font-semibold list-none flex items-center justify-between text-slate-800 group-open:text-blue-600">
-                Apakah ada ongkir gratis?
-                <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko kami di Godean. Untuk area lain, ongkir mulai dari Rp15.000.</p>
-            </details>
-            <details className="group border border-slate-200 rounded-md bg-white overflow-hidden">
-              <summary className="p-4 cursor-pointer font-semibold list-none flex items-center justify-between text-slate-800 group-open:text-blue-600">
-                Minimal sewa berapa hari?
-                <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">Minimal sewa 1 hari. Yap, bisa sewa harian! Cocok untuk tamu dadakan atau acara singkat.</p>
-            </details>
-            <details className="group border border-slate-200 rounded-md bg-white overflow-hidden">
-              <summary className="p-4 cursor-pointer font-semibold list-none flex items-center justify-between text-slate-800 group-open:text-blue-600">
-                Apakah harga sudah termasuk antar jemput?
-                <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-              </summary>
-              <p className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">Harga kasur belum termasuk ongkir. Tapi untuk area Godean (radius 3 km), pengiriman GRATIS!</p>
-            </details>
+          <div className="max-w-[640px] mx-auto">
+            <FAQAccordion items={faqData} title="❓ Pertanyaan Umum Tentang Harga" />
           </div>
         </div>
       </section>

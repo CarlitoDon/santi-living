@@ -1,174 +1,189 @@
 'use client';
 
-import type { LandingPageConfig } from '@/types/landing';
-import { LandingHero } from './LandingHero';
-import { LandingSection } from './LandingSection';
-import { LandingFAQ } from './LandingFAQ';
-import { LandingCTA } from './LandingCTA';
-import { ACCENT_COLOR_MAP } from '@/types/landing';
+import type { LandingPageConfig, ThemeColor } from '@/types/landing';
+import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { config } from '@/data/config';
 import Link from 'next/link';
 
 interface LandingPageProps {
   config: LandingPageConfig;
 }
 
+const GRADIENT_MAP: Record<ThemeColor, string> = {
+  blue: 'bg-gradient-to-br from-blue-600 to-[#1e3a8a]',
+  purple: 'bg-gradient-to-br from-purple-600 to-[#6d28d9]',
+  green: 'bg-gradient-to-br from-emerald-600 to-[#047857]',
+  cyan: 'bg-gradient-to-br from-cyan-600 to-[#0e7490]',
+};
+
+const TEXT_MAP: Record<ThemeColor, string> = {
+  blue: 'text-blue-600',
+  purple: 'text-purple-600',
+  green: 'text-emerald-600',
+  cyan: 'text-cyan-600',
+};
+
+const BORDER_MAP: Record<ThemeColor, string> = {
+  blue: 'border-blue-600',
+  purple: 'border-purple-600',
+  green: 'border-emerald-600',
+  cyan: 'border-cyan-600',
+};
+
+const BG_MAP: Record<ThemeColor, string> = {
+  blue: 'bg-blue-600',
+  purple: 'bg-purple-600',
+  green: 'bg-emerald-600',
+  cyan: 'bg-cyan-600',
+};
+
 export function LandingPage({ config: cfg }: LandingPageProps) {
-  const accent = ACCENT_COLOR_MAP[cfg.color];
+  const gradientClass = GRADIENT_MAP[cfg.color] || GRADIENT_MAP.blue;
+  const textClass = TEXT_MAP[cfg.color] || TEXT_MAP.blue;
+  const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
+  const bgClass = BG_MAP[cfg.color] || BG_MAP.blue;
 
   return (
-    <main style={{ paddingTop: '70px' }}>
-      <LandingHero
-        title={cfg.hero.title}
-        subtitle={cfg.hero.subtitle}
-        badge={cfg.hero.badge}
-        color={cfg.color}
-      />
+    <main className="pt-[80px]">
+      {/* Hero */}
+      <section className={`${gradientClass} py-12 md:py-16 pb-14 text-center text-white relative overflow-hidden`}>
+        <div className="absolute top-[10%] left-[5%] w-[150px] h-[150px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
+        
+        <div className="container relative z-10">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md">
+            {cfg.hero.title}
+          </h1>
+          <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium mb-4">
+            {cfg.hero.subtitle}
+          </p>
+          {cfg.hero.badge && (
+            <div className="mx-auto inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-white border border-white/20 backdrop-blur-sm shadow-sm">
+              {cfg.hero.badge}
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Benefits */}
       {cfg.benefits && cfg.benefits.length > 0 && (
-        <LandingSection title={`Kenapa Pilih ${cfg.hero.title.replace('Jogja', '').trim()}?`}>
-          <div className="benefit-grid">
-            {cfg.benefits.map((b, i) => (
-              <div key={i} className="benefit-card">
-                <div className="benefit-icon">{b.icon}</div>
-                <h3>{b.title}</h3>
-                <p>{b.description}</p>
-              </div>
-            ))}
+        <section className="py-12 md:py-16">
+          <div className="container">
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
+              {`Kenapa Pilih ${cfg.hero.title.replace('Jogja', '').trim()}?`}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {cfg.benefits.map((b, i) => (
+                <div key={i} className="text-center p-6 bg-slate-50 border border-slate-200 rounded-xl hover:-translate-y-1 hover:shadow-md transition-all">
+                  <div className="text-4xl mb-3">{b.icon}</div>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{b.title}</h3>
+                  <p className="text-sm text-slate-500 m-0">{b.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </LandingSection>
+        </section>
       )}
 
       {/* Price Cards */}
       {cfg.priceCards && cfg.priceCards.length > 0 && (
-        <LandingSection title="Harga Sewa" alt>
-          <div className="price-cards">
-            {cfg.priceCards.map((card, i) => (
-              <div key={i} className={`price-card ${card.popular ? 'price-card-popular' : ''}`}
-                style={card.popular ? { borderColor: accent, boxShadow: `0 4px 12px ${accent}26` } : undefined}
-              >
-                {card.popular && (
-                  <div className="price-card-badge" style={{ background: accent }}>Best Value</div>
-                )}
-                <div className="price-card-header">{card.name}</div>
-                <div className="price-card-size">{card.size}</div>
-                <div className="price-card-price" style={{ color: accent }}>
-                  {card.price}<span>/bulan</span>
+        <section className="py-12 md:py-16 bg-slate-50">
+          <div className="container">
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">Harga Sewa</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {cfg.priceCards.map((card, i) => (
+                <div 
+                  key={i} 
+                  className={`bg-white rounded-xl p-6 text-center shadow-sm relative border ${card.popular ? `border-2 ${borderClass} shadow-md scale-105 z-10` : 'border-slate-200'}`}
+                >
+                  {card.popular && (
+                    <div className={`absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full ${bgClass}`}>
+                      Best Value
+                    </div>
+                  )}
+                  <h3 className="font-bold text-slate-900 mb-1 text-lg">{card.name}</h3>
+                  <div className="text-sm text-slate-500 mb-4">{card.size}</div>
+                  <div className={`text-3xl font-extrabold ${textClass} mb-1 flex items-baseline justify-center gap-1`}>
+                    {card.price} <span className="text-sm font-normal text-slate-500">/bulan</span>
+                  </div>
+                  <div className="text-xs text-slate-500 mb-3">{card.daily}</div>
+                  <div className="text-xs text-slate-400 mt-auto pt-4 border-t border-slate-100">{card.note}</div>
                 </div>
-                <div className="price-card-daily">{card.daily}</div>
-                <div className="price-card-note">{card.note}</div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="text-center mt-8 text-sm">
+              <Link href="/harga-sewa-kasur" className={`font-semibold ${textClass} hover:opacity-80`}>
+                Lihat daftar harga lengkap semua ukuran →
+              </Link>
+            </div>
           </div>
-          <p className="price-link">
-            <Link href="/harga-sewa-kasur">Lihat daftar harga lengkap semua ukuran →</Link>
-          </p>
-        </LandingSection>
+        </section>
       )}
 
       {/* Audience */}
       {cfg.audience && cfg.audience.length > 0 && (
-        <LandingSection title="Siapa yang Biasanya Menyewa?">
-          <div className="audience-grid">
-            {cfg.audience.map((item, i) => (
-              <div key={i} className="audience-item">
-                <span className="audience-icon">{item.icon}</span>
-                <div>
-                  <strong>{item.title}</strong>
-                  <p>{item.description}</p>
+        <section className="py-12 md:py-16">
+          <div className="container">
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">Siapa yang Biasanya Menyewa?</h2>
+            <div className="flex flex-col gap-6 max-w-xl mx-auto">
+              {cfg.audience.map((item, i) => (
+                <div key={i} className="flex gap-4 items-start bg-slate-50 p-4 rounded-lg border border-slate-200">
+                  <div className="text-3xl flex-shrink-0 mt-1">{item.icon}</div>
+                  <div>
+                    <h3 className="font-bold text-slate-900 mb-1 text-base">{item.title}</h3>
+                    <p className="text-sm text-slate-500 m-0">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </LandingSection>
+        </section>
       )}
 
       {/* Extra HTML sections */}
       {cfg.sections?.map((section, i) => (
-        <LandingSection key={i} title={section.title} alt={i % 2 === 0}>
-          <div dangerouslySetInnerHTML={{ __html: section.content }} />
-        </LandingSection>
+        <section key={i} className={`py-12 md:py-16 ${i % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`}>
+          <div className="container">
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{section.title}</h2>
+            <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: section.content }} />
+          </div>
+        </section>
       ))}
 
       {/* FAQ */}
-      <LandingFAQ faqs={cfg.faqs} color={cfg.color} />
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container">
+          <div className="max-w-2xl mx-auto">
+            <FAQAccordion items={cfg.faqs} title="Pertanyaan Umum" />
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
-      <LandingCTA
-        title={cfg.cta.title}
-        description={cfg.cta.description}
-        waText={cfg.cta.waText}
-        waSource={cfg.cta.waSource}
-        color={cfg.color}
-      />
-
-      <style jsx>{`
-        .benefit-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: var(--space-4);
-          max-width: 640px;
-          margin: var(--space-6) auto 0;
-        }
-        .benefit-card {
-          text-align: center;
-          padding: var(--space-5);
-          background: var(--color-surface);
-          border-radius: var(--radius-lg);
-          border: 1px solid var(--color-border);
-        }
-        .benefit-icon { font-size: 2rem; margin-bottom: var(--space-2); }
-        .benefit-card h3 { font-size: var(--font-size-base); margin-bottom: var(--space-1); }
-        .benefit-card p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin: 0; }
-        .price-cards {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: var(--space-4);
-          max-width: 720px;
-          margin: 0 auto;
-        }
-        .price-card {
-          background: white;
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-lg);
-          padding: var(--space-5);
-          text-align: center;
-          position: relative;
-        }
-        .price-card-badge {
-          position: absolute;
-          top: -10px;
-          left: 50%;
-          transform: translateX(-50%);
-          color: white;
-          font-size: var(--font-size-xs);
-          font-weight: var(--font-weight-bold);
-          padding: 2px var(--space-3);
-          border-radius: var(--radius-full);
-        }
-        .price-card-header { font-weight: var(--font-weight-bold); margin-bottom: var(--space-1); }
-        .price-card-size { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-3); }
-        .price-card-price { font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); }
-        .price-card-price span { font-size: var(--font-size-sm); font-weight: var(--font-weight-normal); color: var(--color-text-secondary); }
-        .price-card-daily { font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--space-1); }
-        .price-card-note { font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--space-2); }
-        .price-link { text-align: center; margin-top: var(--space-4); font-size: var(--font-size-sm); }
-        .price-link a { color: var(--color-primary); font-weight: var(--font-weight-semibold); }
-        .audience-grid {
-          max-width: 560px;
-          margin: var(--space-6) auto 0;
-          display: flex;
-          flex-direction: column;
-          gap: var(--space-4);
-        }
-        .audience-item { display: flex; gap: var(--space-3); align-items: flex-start; }
-        .audience-icon { flex-shrink: 0; font-size: 1.5rem; margin-top: 2px; }
-        .audience-item strong { display: block; margin-bottom: 2px; }
-        .audience-item p { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin: 0; }
-        @media (max-width: 639px) {
-          .price-cards { grid-template-columns: 1fr; max-width: 300px; }
-        }
-      `}</style>
+      <section className={`${gradientClass} py-12 md:py-16 text-center text-white`}>
+        <div className="container">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white">{cfg.cta.title}</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">{cfg.cta.description}</p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
+            <Link 
+              href="/#calculator" 
+              className="bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14"
+            >
+              Hitung Biaya Sewa
+            </Link>
+            <a
+              href={`https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(cfg.cta.waText)}`}
+              className="bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white transition-colors text-center inline-flex justify-center items-center h-14"
+              target="_blank"
+              rel="noopener"
+              data-wa-source={cfg.cta.waSource}
+            >
+              💬 Chat WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

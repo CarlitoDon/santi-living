@@ -3,7 +3,6 @@
  */
 
 import type { Product } from "./types";
-import type { ProductItem } from "@/types";
 import "./styles.css";
 
 interface CartItemProps {
@@ -26,9 +25,9 @@ export function CartItem({
   const isSelected = quantity > 0;
 
   const handleImageClick = () => {
-    // Convert Product to ProductItem format for modal
+    // Convert Product to modal format
     // Use large optimized image for modal display
-    const modalProduct: ProductItem = {
+    const modalProduct: Product = {
       id: product.id,
       name: product.name,
       shortName: product.shortName,
@@ -36,8 +35,10 @@ export function CartItem({
       dimensions: product.dimensions,
       capacity: product.capacity,
       pricePerDay: product.pricePerDay,
+      costPrice: product.costPrice || 0,
       image: largeImage || optimizedImage || product.image,
-      includes: product.includes,
+      includes: product.includes || [],
+      category: 'package',
     };
     window.dispatchEvent(new CustomEvent('open-calculator-modal', { detail: modalProduct }));
   };

@@ -1,19 +1,19 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import type { ProductItem } from '@/types';
+import type { Product } from '@/types/product';
 
 interface ModalState {
   isOpen: boolean;
-  product: ProductItem | null;
-  open: (product: ProductItem) => void;
+  product: Product | null;
+  open: (product: Product) => void;
   close: () => void;
 }
 
 // Simple module-level state for cross-component communication
 const _listeners: Array<() => void> = [];
 let _isOpen = false;
-let _product: ProductItem | null = null;
+let _product: Product | null = null;
 
 function emitChange() {
   for (const listener of _listeners) {
@@ -21,7 +21,7 @@ function emitChange() {
   }
 }
 
-export function openModal(product: ProductItem) {
+export function openModal(product: Product) {
   _isOpen = true;
   _product = product;
   emitChange();

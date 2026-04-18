@@ -2,20 +2,6 @@
 // TypeScript Types - Santi Living
 // ==========================================================================
 
-/**
- * Product Item (from JSON)
- */
-export interface ProductItem {
-  id: string;
-  name: string;
-  shortName: string;
-  description: string;
-  pricePerDay: number;
-  dimensions?: string;
-  capacity?: string;
-  image: string;
-  includes?: string[];
-}
 
 /**
  * Cart item
