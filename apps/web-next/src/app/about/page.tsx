@@ -24,18 +24,12 @@ export default function AboutPage() {
         <div className="container">
           <div className="grid gap-8 md:grid-cols-2 md:items-center">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-left text-slate-900">Tentang Kami</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-left text-slate-900">Cerita di Balik Santi Living</h2>
               <p className="text-lg leading-[1.6] text-slate-600 mb-4">
-                <strong>Santi Mebel Godean</strong> telah melayani kebutuhan furniture
-                warga Jogja selama bertahun-tahun. Kini, kami menghadirkan{' '}
-                <strong>Sewa Kasur Busa Jogja</strong> sebagai solusi praktis bagi Anda
-                yang membutuhkan kasur busa tambahan berkualitas dengan harga terjangkau.
+                <strong>Santi Living</strong> adalah lini bisnis modern yang lahir dari <strong>Santi Mebel Godean</strong>, sebuah toko furnitur legendaris di Yogyakarta yang telah dipercaya oleh masyarakat selama <strong>tiga generasi</strong>. Berbekal pengalaman puluhan tahun dalam memahami kualitas material furnitur, kami menyadari adanya perubahan kebutuhan masyarakat urban.
               </p>
               <p className="text-lg leading-[1.6] text-slate-600 mb-4">
-                Kami memahami kebutuhan akan kasur busa yang bersih, nyaman, dan cepat
-                sampai. Oleh karena itu, kami berkomitmen memberikan layanan{' '}
-                <strong>same-day delivery</strong> untuk area Jogja agar tamu atau
-                keluarga Anda tidak perlu menunggu lama.
+                Di era modern ini, fleksibilitas adalah kunci. Tidak semua orang harus membeli dan memiliki barang berukuran besar, terutama mahasiswa atau perantau. Oleh karena itu, <strong>Santi Living hadir membawa solusi baru: layanan sewa kasur dan perlengkapan rumah tangga</strong>. Kami menjamin Anda mendapatkan produk berkualitas (seperti busa High Density Royal Grand Exclusive) dengan layanan antar-jemput yang cepat, higienis, dan tanpa repot.
               </p>
               <div className="grid grid-cols-3 gap-4 mt-8 bg-blue-50 p-6 rounded-lg text-center">
                 <div>
