@@ -204,12 +204,12 @@ export default function HomePage() {
               <address className="not-italic bg-surface p-5 rounded-xl border border-border">
                 <p className="font-bold text-primary mb-1">Workshop Santi Living</p>
                 <p className="text-sm text-text-secondary mb-3">
-                  Jl. Godean KM10, Geneng RT05/RW04,<br />
-                  Sidoagung, Godean, Sleman,<br />
-                  DI Yogyakarta 55264
+                  Jl. Godean KM 4, Kwarasan, Nogotirto,<br />
+                  Kec. Gamping, Kabupaten Sleman,<br />
+                  DI Yogyakarta 55292
                 </p>
                 <a 
-                  href="https://maps.google.com/maps?cid=5972493505984637593" 
+                  href="https://maps.google.com/maps?cid=5972418444444444444" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
@@ -220,7 +220,7 @@ export default function HomePage() {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-card h-[300px] md:h-[350px] border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.218!2d110.2785!3d-7.7686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713398400000!5m2!1sen!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.072!2d110.334!3d-7.771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713400000000!5m2!1sen!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

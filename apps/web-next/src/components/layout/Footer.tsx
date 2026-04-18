@@ -18,14 +18,14 @@ export function Footer() {
               <p className="mb-2 flex items-start gap-2">
                 <span className="shrink-0">📍</span>
                 <span>
-                  Jl. Godean KM 10, Geneng RT 05/RW 04,<br />
-                  Sidoagung, Godean, Sleman,<br />
-                  DI Yogyakarta 55264
+                  Jl. Godean KM 4, Kwarasan, Nogotirto,<br />
+                  Kec. Gamping, Kabupaten Sleman,<br />
+                  DI Yogyakarta 55292
                 </span>
               </p>
               <p className="mb-2">
                 <a 
-                  href="https://maps.google.com/maps?cid=5972493505984637593" 
+                  href="https://maps.google.com/maps?cid=5972418444444444444" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary-light font-medium hover:underline text-sm"

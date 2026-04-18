@@ -84,16 +84,16 @@ export default function RootLayout({
     "telephone": "+6289519119092",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Jl. Godean KM 10, Geneng RT 05/RW 04, Sidoagung, Godean",
+      "streetAddress": "Jl. Godean KM 4, Kwarasan, Nogotirto, Kec. Gamping",
       "addressLocality": "Sleman",
       "addressRegion": "DI Yogyakarta",
-      "postalCode": "55264",
+      "postalCode": "55292",
       "addressCountry": "ID"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": -7.7793,
-      "longitude": 110.3397
+      "latitude": -7.7673015,
+      "longitude": 110.2938902
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
