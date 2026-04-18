@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { config } from '@/data/config';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 
@@ -13,7 +14,21 @@ export function Footer() {
         <div className="grid gap-8 mb-8 md:grid-cols-[2fr_1fr_1fr]">
           {/* NAP Section for Local SEO */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">{config.businessName}</h3>
+            <Link href="/" className="inline-flex flex-row items-end gap-1.5 md:gap-2 group mb-6 no-underline text-inherit">
+              <span className="block font-serif text-2xl font-extrabold text-white tracking-tight leading-none group-hover:text-blue-400 transition-colors">Santi Living</span>
+              <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
+                <span className="text-[10px] font-medium italic text-slate-400">by</span>
+                <div className="relative h-[18px] w-[55px] opacity-90 group-hover:opacity-100 transition-all duration-300">
+                  <Image
+                    src="/images/logo-santi-mebel.png"
+                    alt="Santi Mebel Jogja"
+                    className="object-contain"
+                    fill
+                    sizes="55px"
+                  />
+                </div>
+              </span>
+            </Link>
             <address className="not-italic text-slate-400 leading-[1.8]">
               <p className="mb-2 flex items-start gap-2">
                 <span className="shrink-0">📍</span>
