@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { config } from '@/data/config';
 import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 import { JsonLd } from '@/components/seo/JsonLd';
+import { HeroBackground } from '@/components/home/HeroBackground';
 
 export const metadata: Metadata = {
   title: 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living',
@@ -79,15 +80,14 @@ export default function HomePage() {
       <JsonLd data={faqSchema} />
 
       {/* ===== HERO ===== */}
-      <section className="relative bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] via-60% to-[#3b82f6] py-16 md:py-24 text-center text-white overflow-hidden">
-        {/* Decorative blobs */}
-        <div className="absolute -top-30 -right-20 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,0.4)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute -bottom-24 -left-16 w-[350px] h-[350px] rounded-full bg-[radial-gradient(circle,rgba(96,165,250,0.3)_0%,transparent_70%)] pointer-events-none" />
+      <section className="relative py-16 md:py-24 text-center text-white overflow-hidden min-h-[55vh] flex items-center">
+        <HeroBackground />
+
         <div className="absolute top-[20%] left-[10%] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.15)_0%,transparent_70%)] pointer-events-none" />
         {/* Dot grid */}
         <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none" />
 
-        <div className="relative z-10 max-w-3xl mx-auto px-4">
+        <div className="relative z-10 max-w-3xl mx-auto px-4 w-full">
           <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-4">
             🏆 #1 Rental Kasur di Yogyakarta
           </div>

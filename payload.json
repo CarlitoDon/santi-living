@@ -1,0 +1,28 @@
+{
+  "customerName": "Test",
+  "customerWhatsapp": "08123456789",
+  "deliveryAddress": "Jalan Gejayan, Sleman",
+  "addressFields": {
+    "street": "Jalan Gejayan",
+    "district": "Depok",
+    "city": "Sleman"
+  },
+  "items": [
+    {
+      "id": "item-1",
+      "name": "Single Standard",
+      "category": "package",
+      "quantity": 1,
+      "pricePerDay": 35000
+    }
+  ],
+  "totalPrice": 54000,
+  "orderDate": "2026-04-17",
+  "endDate": "2026-04-18",
+  "duration": 1,
+  "deliveryFee": 19000,
+  "paymentMethod": "transfer",
+  "notes": "",
+  "volumeDiscountAmount": 0,
+  "volumeDiscountLabel": ""
+}
