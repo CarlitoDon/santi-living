@@ -32,7 +32,7 @@ export function ProductCard({ product, onClick }: { product: Product; onClick: (
         </div>
 
         <div className="flex items-baseline gap-1 mt-auto">
-          <span className="text-lg font-extrabold text-blue-600">Rp {formatPrice(product.pricePerDay)}</span>
+          <span className="text-lg font-extrabold text-blue-600">{formatPrice(product.pricePerDay)}</span>
           <span className="text-xs text-slate-500">/hari</span>
         </div>
       </div>
@@ -113,7 +113,7 @@ export function ProductModal({
             <div className="mb-4">
               <h2 className="text-xl leading-snug mb-2 text-slate-900 font-bold">{product.name}</h2>
               <div className="inline-flex items-baseline gap-1 bg-blue-50 px-4 py-2 rounded-lg border border-blue-200">
-                <span className="text-xl font-extrabold text-blue-600">Rp {formatPrice(product.pricePerDay)}</span>
+                <span className="text-xl font-extrabold text-blue-600">{formatPrice(product.pricePerDay)}</span>
                 <span className="text-blue-500 text-sm">/hari</span>
               </div>
             </div>

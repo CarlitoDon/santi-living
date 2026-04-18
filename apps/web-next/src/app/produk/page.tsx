@@ -53,7 +53,7 @@ export default function ProdukPage() {
 
           <h2 className="text-2xl mb-1 text-slate-900 font-bold mt-12">✨ Aksesoris</h2>
           <p className="text-base text-slate-500 mb-6 pb-4 border-b border-slate-200">Bantal, guling, sprei, dan perlengkapan tidur lainnya</p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {products.accessories.map((p) => (
               <ProductCard key={p.id} product={{...p, category: 'accessory'}} onClick={() => openModal({...p, category: 'accessory'})} />
             ))}
