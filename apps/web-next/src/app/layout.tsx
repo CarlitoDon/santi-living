@@ -84,7 +84,7 @@ export default function RootLayout({
     "telephone": "+6289519119092",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Jl. Godean",
+      "streetAddress": "Jl. Godean KM 10, Geneng RT 05/RW 04, Sidoagung, Godean",
       "addressLocality": "Sleman",
       "addressRegion": "DI Yogyakarta",
       "postalCode": "55264",

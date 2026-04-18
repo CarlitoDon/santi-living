@@ -35,20 +35,20 @@ export function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="site-header">
-      <div className="container">
-        <div className="header-content">
+    <header ref={headerRef} className="fixed top-0 left-0 w-full z-[100] bg-white border-b border-slate-200 py-3 will-change-transform shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="relative flex justify-center items-center h-[54px]">
           <Navigation />
-          <div className="header-logo-group">
-            <h1 className="site-title">
-              <Link href="/" className="logo-link">
-                <span className="site-name">Santi Living</span>
-                <span className="brand-line">
-                  <span className="by">by</span>
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="m-0 leading-tight">
+              <Link href="/" className="no-underline text-inherit flex flex-col md:flex-row items-center md:gap-3">
+                <span className="block font-serif text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Santi Living</span>
+                <span className="flex items-center gap-1">
+                  <span className="text-[10px] font-normal italic text-slate-500">by</span>
                   <Image
                     src="/images/logo-santi-mebel.png"
                     alt="Santi Mebel Jogja"
-                    className="brand-logo"
+                    className="h-[24px] md:h-[28px] w-auto rounded-sm"
                     width={80}
                     height={28}
                     priority
@@ -59,70 +59,6 @@ export function Header() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .site-header {
-          background: var(--color-surface);
-          border-bottom: 1px solid var(--color-border);
-          padding: var(--space-4) 0;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          z-index: 100;
-          will-change: transform;
-        }
-        .header-content {
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: var(--space-2);
-          min-height: 50px;
-        }
-        .logo-link {
-          text-decoration: none;
-          color: inherit;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .site-title {
-          margin: 0;
-          line-height: 1.2;
-        }
-        .site-name {
-          display: block;
-          font-family: var(--font-noto-serif), 'Noto Serif', serif;
-          font-size: var(--font-size-3xl);
-          font-weight: var(--font-weight-bold);
-          color: var(--color-text);
-          letter-spacing: -0.5px;
-        }
-        .brand-line {
-          display: flex;
-          align-items: center;
-          gap: var(--space-1);
-        }
-        .by {
-          font-size: 10px;
-          font-weight: var(--font-weight-normal);
-          font-style: italic;
-          color: var(--color-text-muted);
-        }
-        .brand-logo {
-          height: 28px;
-          width: auto;
-          border-radius: var(--radius-sm);
-        }
-        @media (min-width: 768px) {
-          .logo-link {
-            flex-direction: row;
-            align-items: center;
-            gap: var(--space-3);
-          }
-        }
-      `}</style>
     </header>
   );
 }

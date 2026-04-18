@@ -76,7 +76,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="pt-[70px]">
+    <main className="pt-[80px]">
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
 
@@ -216,6 +216,48 @@ export default function HomePage() {
                 </div>
               </details>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LOCATION / MAPS ===== */}
+      <section id="location" className="py-12 md:py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">Lokasi Kami</h2>
+              <p className="text-text-secondary mb-4 leading-relaxed">
+                Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke seluruh area DIY.
+              </p>
+              <address className="not-italic bg-surface p-5 rounded-xl border border-border">
+                <p className="font-bold text-primary mb-1">Workshop Santi Living</p>
+                <p className="text-sm text-text-secondary mb-3">
+                  Jl. Godean KM10, Geneng RT05/RW04,<br />
+                  Sidoagung, Godean, Sleman,<br />
+                  DI Yogyakarta 55264
+                </p>
+                <a 
+                  href="https://maps.google.com/maps?cid=5972493505984637593" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
+                >
+                  📍 Lihat di Google Maps
+                </a>
+              </address>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-card h-[300px] md:h-[350px] border border-border">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.218!2d110.2785!3d-7.7686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713398400000!5m2!1sen!2sid"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Maps - Santi Living"
+              ></iframe>
+            </div>
           </div>
         </div>
       </section>

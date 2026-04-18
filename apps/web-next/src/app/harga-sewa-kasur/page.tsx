@@ -77,7 +77,7 @@ export default function HargaSewaKasurPage() {
   };
 
   return (
-    <main style={{ paddingTop: '70px', paddingBottom: 0 }}>
+    <main style={{ paddingTop: '80px', paddingBottom: 0 }}>
       <JsonLd data={itemListSchema} />
       <JsonLd data={faqSchema} />
 
