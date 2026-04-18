@@ -18,9 +18,9 @@ export function Footer() {
               <p className="mb-2 flex items-start gap-2">
                 <span className="shrink-0">📍</span>
                 <span>
-                  Jl. Godean KM 4, Kwarasan, Nogotirto,<br />
-                  Kec. Gamping, Kabupaten Sleman,<br />
-                  DI Yogyakarta 55292
+                  Jl. Godean KM 10 Geneng, RT.05/RW.04,<br />
+                  Sidoagung, Kec. Godean, Kabupaten Sleman,<br />
+                  DI Yogyakarta 55264
                 </span>
               </p>
               <p className="mb-2">
