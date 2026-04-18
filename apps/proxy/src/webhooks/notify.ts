@@ -55,6 +55,32 @@ const isPermanentError = (error: unknown): boolean => {
   );
 };
 
+const sendEmergencyEmail = async (errorMessage: string) => {
+  const apiKey = process.env.RESEND_API_KEY || "re_FPkNvGXV_BzFz6GCt8bKqWYUCXtEbm14X";
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from: "onboarding@resend.dev",
+        to: "khusnudhoni@gmail.com",
+        subject: "🚨 [URGENT] Bot WhatsApp Mati / Gagal Terhubung!",
+        html: `<p>Sistem mendeteksi kegagalan pengiriman webhooks WhatsApp.</p><p><strong>Detail Error:</strong> <br/>${errorMessage}</p><p>Mohon segera login ke VPS dan periksa session Baileys WhatsApp, restart proxy, atau scan ulang QR.</p>`,
+      }),
+    });
+    if (!res.ok) {
+      console.error("[Webhook] Failed to send emergency email", await res.text());
+    } else {
+      console.log("[Webhook] Emergency email sent to admin!");
+    }
+  } catch (err) {
+    console.error("[Webhook] Unknown error sending email:", err);
+  }
+};
+
 /**
  * Send detailed order notification to customer via bot sendOrder.
  * Wrapped with retry for transient failures.
@@ -288,11 +314,18 @@ Detail customer: ${orderUrl}
     res.json({ success: true });
   } catch (error) {
     console.error("[Webhook] Failed to notify admin:", error);
+    
+    const errMsg = getErrorMessage(error) || "Failed to send notification";
+    
+    if (!isPermanentError(error)) {
+      void sendEmergencyEmail(errMsg);
+    }
+    
     sendHttpError(
       res,
       500,
       "INTERNAL_ERROR",
-      "Failed to send notification",
+      errMsg,
     );
   }
 };
@@ -468,6 +501,10 @@ ${publicOrderUrl}`;
     res.json({ success: true, processed: true });
   } catch (error) {
     console.error("[Webhook] Failed to process payment notification:", error);
-    sendHttpError(res, 500, "INTERNAL_ERROR", "Internal Error");
+    const errMsg = getErrorMessage(error);
+    if (!isPermanentError(error)) {
+      void sendEmergencyEmail(errMsg);
+    }
+    sendHttpError(res, 500, "INTERNAL_ERROR", "Internal Error: " + errMsg);
   }
 };

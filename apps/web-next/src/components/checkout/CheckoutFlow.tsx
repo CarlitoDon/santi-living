@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
-import { getOrder, setPaymentMethod, clearOrder } from '@/lib/checkout-session';
+import { getOrder, setPaymentMethod } from '@/lib/checkout-session';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { getAttributionEventParams } from '@/lib/attribution';
 import type { OrderData, OrderPayloadItem } from '@/types/order';
@@ -117,17 +117,19 @@ export function CheckoutFlow() {
   const snapContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsClient(true);
-    const session = getOrder();
-    if (!session) {
-      window.location.href = '/#calculator';
-      return;
-    }
-    sessionStorage.removeItem(BEGIN_CHECKOUT_TRACKED_KEY);
-    setOrder(session.order);
-    if (session.selectedPaymentMethod) {
-      setSelectedMethodState(session.selectedPaymentMethod);
-    }
+    setTimeout(() => {
+      setIsClient(true);
+      const session = getOrder();
+      if (!session) {
+        window.location.href = '/#calculator';
+        return;
+      }
+      sessionStorage.removeItem(BEGIN_CHECKOUT_TRACKED_KEY);
+      setOrder(session.order);
+      if (session.selectedPaymentMethod) {
+        setSelectedMethodState(session.selectedPaymentMethod);
+      }
+    }, 0);
   }, []);
 
   const handleSelectMethod = (method: PaymentMethodType) => {
@@ -202,15 +204,15 @@ export function CheckoutFlow() {
           if (window.snap.hide) window.snap.hide();
           window.snap.embed(snapToken, {
             embedId: 'snap-container-inner',
-            onSuccess: (result: Record<string, unknown>) => {
+            onSuccess: (_result: Record<string, unknown>) => {
               clearSnapTokenCache(publicToken);
               if (order) trackPurchase(order, sessionStorage.getItem('erpOrderNumber') || publicToken, method);
               window.location.href = `/pesanan/${publicToken}`;
             },
-            onPending: (result: Record<string, unknown>) => {
+            onPending: (_result: Record<string, unknown>) => {
               // Usually handled internally or we can redirect to pesanan
             },
-            onError: (result: Record<string, unknown>) => {
+            onError: (_result: Record<string, unknown>) => {
               setSnapStatus('error');
               setSnapError('Pembayaran gagal. Silakan coba lagi.');
             },
