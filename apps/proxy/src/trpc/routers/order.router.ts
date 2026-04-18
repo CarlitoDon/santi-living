@@ -199,7 +199,7 @@ export const orderRouter = router({
 
         // 4. Generate public URL
         const baseUrl = getPublicBaseUrl();
-        const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${order.publicToken}`;
+        const orderUrl = `${baseUrl}/pesanan/${order.publicToken}`;
 
         return {
           id: order.id,

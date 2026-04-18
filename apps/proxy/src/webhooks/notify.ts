@@ -137,7 +137,7 @@ async function sendCustomerOrderNotification(
       kecamatan: order.kecamatan || undefined,
       kota: order.kota || undefined,
     },
-    orderUrl: `${publicBaseUrl}/sewa-kasur/pesanan/${token}`,
+    orderUrl: `${publicBaseUrl}/pesanan/${token}`,
   });
 
   logWebhook("[Webhook] Bot sendOrder mutation success");
@@ -157,7 +157,7 @@ async function sendCustomerSimpleNotification(
   orderNumber: string,
 ): Promise<void> {
   const publicBaseUrl = getPublicBaseUrl();
-  const publicOrderUrl = `${publicBaseUrl}/sewa-kasur/pesanan/${token}`;
+  const publicOrderUrl = `${publicBaseUrl}/pesanan/${token}`;
   const customerMessage = `Halo Kak *${customerName}*! 👋
 
 Ini link untuk melihat status pesanan Kakak:
@@ -359,7 +359,7 @@ export const notifyPaymentStatusWebhook = async (
     const customerPhone = order.partner.phone;
     const publicBaseUrl = getPublicBaseUrl();
     const orderUrl = `${publicBaseUrl}/admin/orders/${token}`;
-    const publicOrderUrl = `${publicBaseUrl}/sewa-kasur/pesanan/${token}`;
+    const publicOrderUrl = `${publicBaseUrl}/pesanan/${token}`;
 
     // 2. Handle "confirmed" (Payment verified/QRIS auto-success)
     if (action === "confirmed") {

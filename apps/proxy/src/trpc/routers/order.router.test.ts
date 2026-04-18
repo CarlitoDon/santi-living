@@ -215,7 +215,7 @@ describe("orderRouter.create", () => {
       status: "DRAFT",
       createdAt: "2026-03-14T10:00:00.000Z",
       orderUrl:
-        "https://santi.test/sewa-kasur/pesanan/f8c78332-c715-43d4-bf6e-5ef4f8f00b5d",
+        "https://santi.test/pesanan/f8c78332-c715-43d4-bf6e-5ef4f8f00b5d",
     });
   });
 

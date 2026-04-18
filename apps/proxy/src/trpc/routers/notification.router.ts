@@ -36,7 +36,7 @@ export const notificationRouter = router({
       const order = await getOrderByToken(input.token);
       const customerPhone = order.partner.phone;
       const baseUrl = getPublicBaseUrl();
-      const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
+      const orderUrl = `${baseUrl}/pesanan/${input.token}`;
 
       if (!customerPhone) {
         throw new Error("Customer phone is missing on this order");
@@ -71,7 +71,7 @@ export const notificationRouter = router({
       const order = await getOrderByToken(input.token);
       const customerPhone = order.partner.phone;
       const baseUrl = getPublicBaseUrl();
-      const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
+      const orderUrl = `${baseUrl}/pesanan/${input.token}`;
 
       if (!customerPhone) {
         throw new Error("Customer phone is missing on this order");
@@ -122,7 +122,7 @@ export const notificationRouter = router({
 
       const order = await getOrderByToken(input.token);
       const baseUrl = getPublicBaseUrl();
-      const orderUrl = `${baseUrl}/sewa-kasur/pesanan/${input.token}`;
+      const orderUrl = `${baseUrl}/pesanan/${input.token}`;
 
       await notifyAdminNewOrder({
         adminWhatsapp,
