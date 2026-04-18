@@ -100,11 +100,15 @@ export default function HomePage() {
 
           {/* Feature badges */}
           <div className="flex justify-center gap-3 flex-wrap mb-8">
-            {features.map((f) => (
-              <span key={f} className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
-                ✅ {f}
-              </span>
-            ))}
+            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
+              ✨ Sterilisasi UV-C & Vacuum
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
+              🛡️ Busa INOAC / Swallow High Density
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
+              🚚 Same Day Delivery Jogja
+            </span>
           </div>
 
           {/* CTA buttons */}
@@ -121,6 +125,42 @@ export default function HomePage() {
             >
               Lihat Produk →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== TRUST & HYGIENE SECTION ===== */}
+      <section className="py-12 md:py-20 bg-slate-50">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900">Kenapa Memilih Santi Living?</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto mb-12">
+            Kami bukan sekadar persewaan kasur. Kami memberikan jaminan kenyamanan dan kesehatan untuk setiap malam Anda di Yogyakarta.
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">✨</div>
+              <h3 className="font-bold text-xl mb-3 text-slate-900">7 Tahap Higienitas</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Setiap unit melewati proses Vacuum industrial, sterilisasi UV-C, hingga pembungkusan plastik kedap udara sebelum dikirim.
+              </p>
+            </div>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🏅</div>
+              <h3 className="font-bold text-xl mb-3 text-slate-900">Merk Terpercaya</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Hanya menggunakan busa berkualitas tinggi (High Density) dari brand ternama seperti INOAC dan Swallow. Anti kempes!
+              </p>
+            </div>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🚀</div>
+              <h3 className="font-bold text-xl mb-3 text-slate-900">Same Day Jogja</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Layanan pengantaran kilat 2-4 jam untuk area Jogja, Sleman, dan Bantul. Pesan pagi, siang sudah bisa dipakai.
+              </p>
+            </div>
           </div>
         </div>
       </section>
