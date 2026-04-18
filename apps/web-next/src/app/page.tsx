@@ -104,7 +104,7 @@ export default function HomePage() {
               ✨ Sterilisasi UV-C & Vacuum
             </span>
             <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
-              🛡️ Busa INOAC / Swallow High Density
+              🛡️ Kasur Royal Grand Exclusive High Density
             </span>
             <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
               🚚 Same Day Delivery Jogja
@@ -150,7 +150,7 @@ export default function HomePage() {
               <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl">🏅</div>
               <h3 className="font-bold text-xl mb-3 text-slate-900">Merk Terpercaya</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                Hanya menggunakan busa berkualitas tinggi (High Density) dari brand ternama seperti INOAC dan Swallow. Anti kempes!
+                Hanya menggunakan busa berkualitas tinggi (High Density) dari brand ternama seperti Royal Grand Exclusive. Anti kempes!
               </p>
             </div>
             

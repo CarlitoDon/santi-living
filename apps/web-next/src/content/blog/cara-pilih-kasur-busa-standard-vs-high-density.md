@@ -27,6 +27,7 @@ Keuntungannya sangat nyata:
 ## Menjamin Apa yang Anda Sewa
 Kenapa harus pusing berjudi mengecek label Density di toko? Jika Anda menyewa kasur di Santi Mebel, **seluruh unit kasur kami disyaratkan minimal menggunakan busa semi High-Density** ke atas!
 
-Kami secara spesifik memilih kasur busa berkualitas medium-to-hard brand-brand ternama seperti INOAC, Royal, maupun Swallow. Ketebalan minimum kasur standar kami diawasi ketat di angka setidaknya 15cm-20cm untuk menjamin tak satupun tulang tamu atau keluarga Anda terekspos lantai ubin.
+Kami secara spesifik memilih kasur busa berkualitas tinggi dari brand ternama seperti **Royal Grand Exclusive**.
+ Ketebalan minimum kasur standar kami diawasi ketat di angka setidaknya 15cm-20cm untuk menjamin tak satupun tulang tamu atau keluarga Anda terekspos lantai ubin.
 
 Daftar harga semua kasur anti-kempes ini bisa Anda [lihat lengkap di halaman harga produk](/harga-sewa-kasur). (Sedang mencari kasur untuk kost? Simak juga [Tips Memilih Kasur Sewa untuk Kos](/artikel/tips-sewa-kasur-untuk-kos)). Prioritaskan kesehatan postur tubuh Anda dari malam ini!
