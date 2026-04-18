@@ -47,7 +47,7 @@ export function Header() {
 
           {/* Center: Brand Logo */}
           <div className="flex-shrink-0 flex items-center justify-center">
-            <h1 className="m-0 leading-none">
+            <div className="m-0 leading-none">
               <Link href="/" className="no-underline text-inherit flex flex-row items-end gap-1.5 md:gap-2 group">
                 <span className="block font-serif text-[22px] md:text-3xl font-extrabold text-slate-900 tracking-tight leading-none group-hover:text-blue-600 transition-colors">Santi Living</span>
                 <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
@@ -64,7 +64,7 @@ export function Header() {
                   </div>
                 </span>
               </Link>
-            </h1>
+            </div>
           </div>
 
           {/* Right: CTA WhatsApp */}

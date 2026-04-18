@@ -11,6 +11,7 @@ import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import { config } from "@/data/config";
+import { haversineDistance, calculateDeliveryFee } from "@/lib/calculator-logic";
 import dynamic from "next/dynamic";
 import { showAlert } from "@/utils/alert";
 import { ProductModal } from "@/components/produk/ProductCard";
@@ -68,39 +69,6 @@ const initialCustomer: CustomerData = {
   },
   notes: "",
 };
-
-// Helper function (moved up so it can be used in useEffect)
-function haversineDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number,
-): number {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLon = ((lon2 - lon1) * Math.PI) / 180;
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-}
-
-/**
- * Calculate delivery fee based on fuel cost.
- * Formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 6800 (harga solar/liter)
- * Rounded up to nearest Rp1.000
- */
-function calculateDeliveryFee(distanceKm: number): number {
-  const ROUND_TRIPS = 4; // antar berangkat + pulang, ambil berangkat + pulang
-  const KM_PER_LITER = 10;
-  const FUEL_PRICE = 6800; // harga solar per liter
-  const rawFee = ((distanceKm * ROUND_TRIPS) / KM_PER_LITER) * FUEL_PRICE;
-  return Math.ceil(rawFee / 1000) * 1000; // round up to nearest Rp1.000
-}
 
 export function Calculator({
   products,
