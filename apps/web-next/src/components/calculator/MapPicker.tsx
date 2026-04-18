@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { reverseGeocode } from "@/scripts/geolocation";
 import { showAlert } from "@/utils/alert";
+import type L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const DEFAULT_CENTER: [number, number] = [-7.797068, 110.370529];
@@ -15,8 +16,8 @@ export function MapPicker() {
   const [selectedCoords, setSelectedCoords] = useState<{ lat: number; lng: number } | null>(null);
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
-  const markerRef = useRef<any>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
+  const markerRef = useRef<L.Marker | null>(null);
 
   useEffect(() => {
     const handleOpen = () => {
@@ -39,7 +40,8 @@ export function MapPicker() {
 
     async function initMap() {
       // Lazy load Leaflet only when modal opens
-      const L = (await import("leaflet")).default;
+      const Leaflet = await import("leaflet");
+      const L = Leaflet.default;
 
       if (!isMounted || !mapContainerRef.current) return;
 
@@ -79,9 +81,11 @@ export function MapPicker() {
             markerRef.current = L.marker([lat, lng], { draggable: true }).addTo(map);
             
             markerRef.current.on("dragend", async () => {
-              const pos = markerRef.current!.getLatLng();
-              setSelectedCoords({ lat: pos.lat, lng: pos.lng });
-              await updateAddress(pos.lat, pos.lng);
+              if (markerRef.current) {
+                const pos = markerRef.current.getLatLng();
+                setSelectedCoords({ lat: pos.lat, lng: pos.lng });
+                await updateAddress(pos.lat, pos.lng);
+              }
             });
           }
         };
@@ -96,7 +100,7 @@ export function MapPicker() {
           }
         };
 
-        map.on("click", async (e: any) => {
+        map.on("click", async (e: L.LeafletMouseEvent) => {
           const { lat, lng } = e.latlng;
           setMarker(lat, lng);
           await updateAddress(lat, lng);

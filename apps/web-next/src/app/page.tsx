@@ -42,7 +42,6 @@ const benefits = [
   { icon: '📍', title: 'Gratis Jemput', desc: 'Pengambilan kasur gratis saat masa sewa berakhir' },
 ];
 
-const features = ['Bisa antar hari ini', 'Gratis jemput', 'Kasur bersih & wangi'];
 const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'];
 
 export default function HomePage() {
