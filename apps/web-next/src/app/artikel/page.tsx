@@ -5,6 +5,9 @@ import { getAllPosts } from '@/lib/blog';
 export const metadata: Metadata = {
   title: 'Artikel & Tips Sewa Kasur | Santi Living',
   description: 'Tips sewa kasur, panduan memilih kasur busa, dan informasi seputar layanan Santi Living di Jogja.',
+  alternates: {
+    canonical: 'https://santiliving.com/artikel',
+  },
 };
 
 export default function ArtikelIndexPage() {

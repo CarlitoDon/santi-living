@@ -3,6 +3,7 @@
  */
 
 import type { Product } from "./types";
+import Image from "next/image";
 import "./styles.css";
 
 interface CartItemProps {
@@ -49,16 +50,21 @@ export function CartItem({
       data-product-id={product.id}
     >
       {/* Thumbnail + Info - clickable to open modal */}
-      {/* eslint-disable-next-line @next/next/no-img-element -- dynamic product images from various sources */}
-      <img
-        src={optimizedImage || product.image}
-        alt={product.shortName}
-        className="calc-cart-item-thumb"
-        loading="lazy"
+      <div 
+        className="calc-cart-item-thumb-wrapper" 
         onClick={handleImageClick}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", position: "relative", width: "64px", height: "64px", flexShrink: 0, overflow: "hidden", borderRadius: "8px" }}
         title="Klik untuk melihat detail"
-      />
+      >
+        <Image
+          src={optimizedImage || product.image || "/assets/images/kasur-std.webp"}
+          alt={product.shortName}
+          fill
+          sizes="64px"
+          style={{ objectFit: "cover" }}
+          className="calc-cart-item-thumb"
+        />
+      </div>
 
       <div className="calc-cart-item-info">
         <span className="calc-cart-item-name">{product.shortName}</span>

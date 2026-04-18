@@ -20,6 +20,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: post.frontmatter.title,
     description: post.frontmatter.description,
+    alternates: {
+      canonical: `https://santiliving.com/artikel/${slug}`,
+    },
   };
 }
 
@@ -31,8 +34,37 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
   const processedContent = await remark().use(html).process(post.content);
   const htmlContent = processedContent.toString();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.frontmatter.title,
+    "description": post.frontmatter.description,
+    "author": {
+      "@type": "Person",
+      "name": post.frontmatter.author
+    },
+    "datePublished": post.frontmatter.pubDate.toISOString(),
+    "image": post.frontmatter.image || "https://santiliving.com/logo.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Santi Living",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://santiliving.com/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://santiliving.com/artikel/${slug}`
+    }
+  };
+
   return (
     <main style={{ paddingTop: '70px' }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <article style={{ padding: 'var(--space-10) 0' }}>
         <div className="container" style={{ maxWidth: '720px' }}>
           <header style={{ marginBottom: 'var(--space-8)' }}>
