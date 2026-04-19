@@ -208,6 +208,21 @@ export function Calculator({
   // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only effect for edit mode prefill
   }, []);
 
+  // Secure Context Check for ngrok/mobile debugging
+  useEffect(() => {
+    if (typeof window !== "undefined" && !window.isSecureContext) {
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      if (!isLocal) {
+        console.warn("Insecure Context detected! Geolocation will be disabled by the browser.");
+        showAlert(
+          "Peringatan: Kamu membuka website via HTTP (tidak aman). Geolocation & Peta tidak akan berfungsi. Silakan gunakan alamat HTTPS (https://...).",
+          "Koneksi Tidak Aman",
+          "warning"
+        );
+      }
+    }
+  }, []);
+
   // Hydrate draft customer from session storage
   useEffect(() => {
     if (editMode) return; // Ignore drafts when explicitly in edit mode
@@ -264,6 +279,16 @@ export function Calculator({
   }, []);
 
   const handleLocationClick = useCallback(async () => {
+    // Check for Secure Context (HTTPS)
+    if (typeof window !== "undefined" && !window.isSecureContext) {
+      showAlert(
+        "Geolocation memerlukan koneksi aman (HTTPS). Silakan akses website menggunakan alamat https://...",
+        "Koneksi Tidak Aman",
+        "error"
+      );
+      return;
+    }
+
     try {
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
@@ -279,7 +304,9 @@ export function Calculator({
       });
 
       if (!matched.kotaKode) {
-        throw new Error("Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta. Apabila Anda merasa ini adalah sebuah kesalahan, silakan hubungi admin via WhatsApp.");
+        throw new Error(
+          "Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta. Apabila Anda merasa ini adalah sebuah kesalahan, silakan hubungi admin via WhatsApp."
+        );
       }
 
       setCustomer((prev) => ({
@@ -307,7 +334,7 @@ export function Calculator({
         coords.latitude,
         coords.longitude,
         storeLocation.lat,
-        storeLocation.lng,
+        storeLocation.lng
       );
 
       const fee = calculateDeliveryFee(distance);
@@ -316,11 +343,18 @@ export function Calculator({
       // Clear location error since we now have coordinates
       clearError("addressLocation");
     } catch (error) {
-      showAlert((error as Error).message || "Gagal mendapatkan lokasi", "Pencarian Lokasi Gagal", "error");
+      console.error("Geolocation full error:", error);
+      const msg = (error as Error).message || "Gagal mendapatkan lokasi";
+      showAlert(
+        `Pencarian Lokasi Gagal: ${msg}. Pastikan GPS aktif dan beri izin pada browser.`,
+        "Gagal",
+        "error"
+      );
     }
   }, [actions, clearError]);
 
   const handleMapPickerClick = useCallback(() => {
+    console.log("Map Picker Request Dispatched");
     // Dispatch custom event to open map picker modal
     window.dispatchEvent(new CustomEvent("open-map-picker"));
   }, []);

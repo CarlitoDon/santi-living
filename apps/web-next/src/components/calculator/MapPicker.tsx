@@ -21,6 +21,7 @@ export function MapPicker() {
 
   useEffect(() => {
     const handleOpen = () => {
+      console.log("MapPicker: open-map-picker event received");
       setIsOpen(true);
       setAddressDisplay("Klik pada peta untuk memilih lokasi...");
       setSelectedCoords(null);
@@ -107,6 +108,7 @@ export function MapPicker() {
         });
 
         // Try current location
+        console.log("MapPicker: Attempting initial GPS centering...");
         if (navigator.geolocation && window.isSecureContext) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
