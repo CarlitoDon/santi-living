@@ -270,6 +270,7 @@ export default function HomePage() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Google Maps - Santi Living"
+                suppressHydrationWarning
               ></iframe>
             </div>
           </div>

@@ -112,7 +112,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="id" className={`${inter.variable} ${notoSerif.variable}`}>
+    <html lang="id" className={`${inter.variable} ${notoSerif.variable}`} suppressHydrationWarning>
       <head>
         <GtagScript />
         <script
