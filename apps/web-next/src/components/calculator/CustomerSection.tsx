@@ -54,6 +54,7 @@ export function CustomerSection({
           value={customer.name}
           onChange={handleNameChange}
           className={`calc-form-input ${errors.customerName ? "error" : ""}`}
+          suppressHydrationWarning
         />
         {errors.customerName && (
           <p className="calc-error-message">{errors.customerName}</p>
@@ -72,6 +73,7 @@ export function CustomerSection({
           value={customer.whatsapp}
           onChange={handleWhatsappChange}
           className={`calc-form-input ${errors.customerWhatsapp ? "error" : ""}`}
+          suppressHydrationWarning
         />
         {errors.customerWhatsapp && (
           <p className="calc-error-message">{errors.customerWhatsapp}</p>

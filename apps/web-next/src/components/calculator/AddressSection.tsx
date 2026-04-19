@@ -132,6 +132,7 @@ export function AddressSection({
           value={customer.address.street}
           onChange={(e) => handleAddressChange({ street: e.target.value })}
           className={`calc-form-input ${errors.addressStreet ? "error" : ""}`}
+          suppressHydrationWarning
         />
         {errors.addressStreet && (
           <p className="calc-error-message">{errors.addressStreet}</p>
@@ -264,6 +265,7 @@ export function AddressSection({
           disabled
           className="calc-form-input"
           style={{ maxWidth: "150px", background: "#f8fafc", color: "#64748b" }}
+          suppressHydrationWarning
         />
       </div>
 
@@ -285,6 +287,7 @@ export function AddressSection({
               background: errors.addressLocation ? "#fef2f2" : "#f8fafc",
               color: errors.addressLocation ? "#dc2626" : "#64748b",
             }}
+            suppressHydrationWarning
           />
         </div>
         <div className="calc-form-group" style={{ marginBottom: 0 }}>
@@ -303,6 +306,7 @@ export function AddressSection({
               background: errors.addressLocation ? "#fef2f2" : "#f8fafc",
               color: errors.addressLocation ? "#dc2626" : "#64748b",
             }}
+            suppressHydrationWarning
           />
         </div>
       </div>
@@ -319,6 +323,7 @@ export function AddressSection({
           onChange={handleNotesChange}
           rows={3}
           className="calc-form-textarea"
+          suppressHydrationWarning
         />
       </div>
     </div>

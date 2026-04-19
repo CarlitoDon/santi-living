@@ -89,6 +89,7 @@ export function ScheduleSection({ actions, errors }: ScheduleSectionProps) {
             onChange={handleDurationChange}
             onBlur={handleDurationBlur}
             className={`calc-form-input calc-duration-input ${errors.duration ? "error" : ""}`}
+            suppressHydrationWarning
           />
           <span className="calc-duration-unit">hari</span>
           <button

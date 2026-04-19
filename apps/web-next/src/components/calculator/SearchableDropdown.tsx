@@ -197,6 +197,7 @@ export function SearchableDropdown({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyDown={handleKeyDown}
+              suppressHydrationWarning
             />
           </div>
 
