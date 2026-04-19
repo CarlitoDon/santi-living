@@ -163,6 +163,36 @@
       "costPrice": 35000,
       "image": "/images/ekstra-guling.webp",
       "includes": ["guling"]
+    },
+    {
+      "id": "elec-tv",
+      "name": "Sewa TV LED 32 Inch",
+      "shortName": "TV 32 Inch",
+      "description": "TV LED 32 Inch resolusi HD, cocok untuk nobar atau presentasi kecil. Port HDMI & USB tersedia.",
+      "pricePerDay": 50000,
+      "costPrice": 1500000,
+      "image": "/images/tv-32.webp",
+      "includes": ["tv", "remote", "kabel power"]
+    },
+    {
+      "id": "elec-kipas",
+      "name": "Sewa Kipas Angin Berdiri",
+      "shortName": "Kipas Angin",
+      "description": "Kipas angin berdiri (Stand Fan) 16 inch. Angin kencang, cocok untuk kamar kos.",
+      "pricePerDay": 15000,
+      "costPrice": 250000,
+      "image": "/images/kipas-angin.webp",
+      "includes": ["kipas angin"]
+    },
+    {
+      "id": "elec-cooler",
+      "name": "Sewa Air Cooler",
+      "shortName": "Air Cooler",
+      "description": "Air cooler penyejuk ruangan. Lebih dingin dari kipas angin biasa, hemat listrik.",
+      "pricePerDay": 35000,
+      "costPrice": 800000,
+      "image": "/images/air-cooler.webp",
+      "includes": ["air cooler", "ice pack"]
     }
   ]
 }

@@ -15,6 +15,8 @@ const GRADIENT_MAP: Record<ThemeColor, string> = {
   purple: 'bg-gradient-to-br from-purple-600 to-[#6d28d9]',
   green: 'bg-gradient-to-br from-emerald-600 to-[#047857]',
   cyan: 'bg-gradient-to-br from-cyan-600 to-[#0e7490]',
+  emerald: 'bg-gradient-to-br from-emerald-500 to-[#065f46]',
+  indigo: 'bg-gradient-to-br from-indigo-600 to-[#3730a3]',
 };
 
 const TEXT_MAP: Record<ThemeColor, string> = {
@@ -22,6 +24,8 @@ const TEXT_MAP: Record<ThemeColor, string> = {
   purple: 'text-purple-600',
   green: 'text-emerald-600',
   cyan: 'text-cyan-600',
+  emerald: 'text-emerald-600',
+  indigo: 'text-indigo-600',
 };
 
 const BORDER_MAP: Record<ThemeColor, string> = {
@@ -29,6 +33,8 @@ const BORDER_MAP: Record<ThemeColor, string> = {
   purple: 'border-purple-600',
   green: 'border-emerald-600',
   cyan: 'border-cyan-600',
+  emerald: 'border-emerald-600',
+  indigo: 'border-indigo-600',
 };
 
 const BG_MAP: Record<ThemeColor, string> = {
@@ -36,6 +42,8 @@ const BG_MAP: Record<ThemeColor, string> = {
   purple: 'bg-purple-600',
   green: 'bg-emerald-600',
   cyan: 'bg-cyan-600',
+  emerald: 'bg-emerald-600',
+  indigo: 'bg-indigo-600',
 };
 
 export function LandingPage({ config: cfg }: LandingPageProps) {
