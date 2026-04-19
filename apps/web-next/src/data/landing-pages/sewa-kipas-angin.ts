@@ -2,12 +2,12 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaKipasAngin: LandingPageConfig = {
   meta: {
-    title: 'Sewa Kipas Angin Jogja | Harian & Bulanan untuk Anak Kos',
-    description: 'Sewa kipas angin berdiri (stand fan) di Jogja. Solusi praktis & murah untuk mahasiswa kos atau acara hajatan. Antar jemput same day.',
+    title: 'Sewa & Rental Kipas Angin Jogja Terdekat | Harian & Bulanan',
+    description: 'Layanan sewa dan rental kipas angin berdiri (stand fan) terdekat di Jogja. Solusi praktis & murah untuk mahasiswa kos atau acara. Antar jemput same day.',
   },
   hero: {
     title: 'Sewa Kipas Angin Jogja',
-    subtitle: 'Jogja lagi panas? Sewa kipas angin harian atau bulanan, langsung adem!',
+    subtitle: 'Cari rental kipas angin terdekat? Sewa harian atau bulanan, langsung adem!',
     badge: 'Mulai Rp15.000/hari',
   },
   color: 'emerald',

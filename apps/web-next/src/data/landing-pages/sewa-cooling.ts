@@ -2,12 +2,12 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaCooling: LandingPageConfig = {
   meta: {
-    title: 'Sewa Air Cooler Jogja | Solusi Dingin Hemat Listrik',
-    description: 'Sewa Air Cooler di Jogja harian/bulanan. Lebih dingin dari kipas, lebih hemat dari AC. Cocok untuk kamar kos atau ruang keluarga.',
+    title: 'Sewa & Rental Air Cooler Jogja Terdekat | Dingin Hemat Listrik',
+    description: 'Pusat sewa dan rental Air Cooler terdekat di Jogja harian/bulanan. Lebih dingin dari kipas, lebih hemat dari AC. Cocok untuk kamar kos atau ruang keluarga.',
   },
   hero: {
     title: 'Sewa Air Cooler Jogja',
-    subtitle: 'Dingin maksimal tanpa tagihan listrik jebol. Solusi cerdas pengganti AC!',
+    subtitle: 'Rental air cooler terdekat, dingin maksimal tanpa tagihan listrik jebol. Solusi cerdas!',
     badge: 'Mulai Rp35.000/hari',
   },
   color: 'indigo',

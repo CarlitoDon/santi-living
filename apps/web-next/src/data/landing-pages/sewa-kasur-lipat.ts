@@ -2,13 +2,13 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaKasurLipat: LandingPageConfig = {
   meta: {
-    title: 'Sewa Kasur Lipat Jogja | Praktis untuk Tamu & Acara',
+    title: 'Sewa & Rental Kasur Lipat Jogja Terdekat | Praktis untuk Tamu',
     description:
-      'Sewa kasur lipat di Jogja mulai Rp25.000/hari. Praktis dilipat, mudah disimpan, cocok untuk tamu mendadak, acara keluarga, atau event. Antar jemput gratis area Godean.',
+      'Layanan sewa dan rental kasur lipat terdekat di Jogja mulai Rp25.000/hari. Praktis dilipat, mudah disimpan, cocok untuk tamu mendadak atau acara keluarga. Antar jemput same day.',
   },
   hero: {
-    title: 'Sewa Kasur Lipat Jogja',
-    subtitle: 'Solusi praktis untuk tamu mendadak, acara keluarga, dan event — mudah disimpan!',
+    title: 'Sewa & Rental Kasur Lipat Jogja',
+    subtitle: 'Penyewaan rental kasur lipat terdekat, solusi praktis untuk tamu mendadak dan event — mudah disimpan!',
     badge: 'Mulai Rp25.000/hari',
   },
   color: 'purple',
