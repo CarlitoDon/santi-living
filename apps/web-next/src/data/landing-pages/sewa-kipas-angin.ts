@@ -8,7 +8,7 @@ export const sewaKipasAngin: LandingPageConfig = {
   hero: {
     title: 'Sewa Kipas Angin Jogja',
     subtitle: 'Cari rental kipas angin terdekat? Sewa harian atau bulanan, langsung adem!',
-    badge: 'Mulai Rp15.000/hari',
+    badge: 'Mulai Rp29.000/hari',
   },
   color: 'emerald',
   benefits: [
@@ -18,9 +18,9 @@ export const sewaKipasAngin: LandingPageConfig = {
     { icon: '🚚', title: 'Layanan Antar Jemput', description: 'Gak perlu repot bawa sendiri. Tim kami antar langsung ke pintu kamar Anda.' },
   ],
   priceCards: [
-    { name: 'Kipas Angin (Harian)', size: '16 Inch Stand Fan', price: 'Rp 15.000', daily: 'Per Hari', note: 'Cocok untuk event / tamu', popular: false },
-    { name: 'Kipas Angin (Mingguan)', size: '16 Inch Stand Fan', price: 'Rp 75.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: true },
-    { name: 'Kipas Angin (Bulanan)', size: '16 Inch Stand Fan', price: 'Rp 150.000', daily: 'Per Bulan', note: 'Paling hemat untuk anak kos', popular: false },
+    { name: 'Kipas Angin (Harian)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Hari', note: 'Cocok untuk event / tamu', popular: false },
+    { name: 'Kipas Angin (Mingguan)', size: '16 Inch Stand Fan', price: 'Rp 145.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: true },
+    { name: 'Kipas Angin (Bulanan)', size: '16 Inch Stand Fan', price: 'Rp 290.000', daily: 'Per Bulan', note: 'Paling hemat untuk anak kos', popular: false },
   ],
   audience: [
     { icon: '🎓', title: 'Anak Kos', description: 'Kamar kos panas tapi budget terbatas untuk beli AC? Sewa kipas bulanan adalah solusinya.' },
