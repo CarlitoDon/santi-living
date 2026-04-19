@@ -14,11 +14,7 @@ interface ScheduleSectionProps {
 export function ScheduleSection({ actions, errors }: ScheduleSectionProps) {
   const { state, setDuration, setStartDate, clearError } = actions;
 
-  // Use state for today to avoid server/client hydration mismatch
-  const [today, setToday] = useState("");
-  useEffect(() => {
-    setToday(new Date().toISOString().split("T")[0]);
-  }, []);
+  const today = new Date().toISOString().split("T")[0];
 
   // Local state for duration input to allow empty/intermediate values
   const [durationInput, setDurationInput] = useState(String(state.duration));
@@ -121,7 +117,7 @@ export function ScheduleSection({ actions, errors }: ScheduleSectionProps) {
         <input
           type="date"
           id="startDate"
-          min={today ? today : undefined}
+          min={today}
           value={state.startDate || ""}
           onChange={handleDateChange}
           className={`calc-form-input ${errors.startDate ? "error" : ""}`}
