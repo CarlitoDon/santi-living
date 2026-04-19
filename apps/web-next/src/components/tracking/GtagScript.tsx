@@ -15,6 +15,18 @@ export function GtagScript() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
 
+          // --- DEVELOPER MODE FLAG ---
+          if (typeof window !== "undefined") {
+            if (localStorage.getItem("developer_mode") === "true") {
+              window["ga-disable-${GA_MEASUREMENT_ID}"] = true;
+              window["ga-disable-${ADS_ID}"] = true;
+              console.log("🛠️ Developer Mode Active: Google Analytics & Ads tracking disabled.");
+            }
+            // Helpers to toggle in console
+            window.enableDevMode = function() { localStorage.setItem("developer_mode", "true"); console.log("Dev mode enabled. Reloading..."); location.reload(); };
+            window.disableDevMode = function() { localStorage.removeItem("developer_mode"); console.log("Dev mode disabled. Reloading..."); location.reload(); };
+          }
+
           function getOrCreateGaUserId() {
             if (typeof window === "undefined") return "";
             var storageKey = "sl_ga_user_id";
