@@ -17,7 +17,7 @@ export interface VolumeDiscountConfig {
 
 /**
  * Calculate delivery fee based on fuel cost.
- * Formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 6800 (harga solar/liter)
+ * Formula: distance × 4 (antar PP + ambil PP) ÷ 10 (km/liter) × 8000 (harga solar/liter)
  * Rounded up to nearest Rp1.000
  */
 export function calculateDeliveryFee(distanceKm: number): number {
@@ -25,7 +25,7 @@ export function calculateDeliveryFee(distanceKm: number): number {
 
   const ROUND_TRIPS = 4; // antar berangkat + pulang, ambil berangkat + pulang
   const KM_PER_LITER = 10;
-  const FUEL_PRICE = 6800; // harga solar per liter
+  const FUEL_PRICE = 8000; // harga solar per liter
   const rawFee = ((distanceKm * ROUND_TRIPS) / KM_PER_LITER) * FUEL_PRICE;
   return Math.ceil(rawFee / 1000) * 1000; // round up to nearest Rp1.000
 }
