@@ -44,6 +44,8 @@ const benefits = [
 
 const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'];
 
+import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
+
 export default function HomePage() {
   const localBusinessSchema = {
     '@context': 'https://schema.org' as const,
@@ -72,66 +74,74 @@ export default function HomePage() {
 
   return (
     <main className="pt-[80px]">
+      <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={faqSchema} />
 
-      {/* ===== HERO ===== */}
-      <section className="relative py-16 md:py-24 text-center text-white overflow-hidden min-h-[55vh] flex items-center">
-        <HeroBackground />
+      {/* ===== HERO + CALCULATOR unified block (Bottom Sheet Rising pattern) ===== */}
+      {/* Single container so hero background extends behind the calculator card */}
+      <div className="relative bg-gradient-to-br from-[#3b82f6]/90 to-[#1e40af]/95">
 
-        <div className="absolute top-[20%] left-[10%] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.15)_0%,transparent_70%)] pointer-events-none" />
-        {/* Dot grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none" />
+        {/* Hero text content */}
+        <section className="relative pt-10 pb-28 md:pt-16 md:pb-36 text-center text-white flex items-center z-[2] overflow-hidden">
+          {/* Photo background — constrained to hero section only */}
+          <HeroBackground />
+          {/* Dot grid overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none z-[1]" />
+          {/* Ambient glow orb */}
+          <div className="absolute top-[15%] left-[10%] w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(147,197,253,0.15)_0%,transparent_70%)] pointer-events-none z-[1]" />
+          <div className="relative z-[10] max-w-3xl mx-auto px-4 w-full">
+            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-3 text-white/90">
+              🏆 #1 Rental Kasur di Yogyakarta
+            </div>
+            <h1 className="text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.15] font-extrabold mb-3">
+              Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
+            </h1>
+            <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-base font-bold mb-3">
+              Mulai Rp25.000/hari
+            </p>
+            <p className="opacity-85 max-w-lg mx-auto mb-6 text-base leading-relaxed">
+              Rental kasur bersih &amp; murah di Yogyakarta — Antar jemput same day, tanpa ribet
+            </p>
 
-        <div className="relative z-10 max-w-3xl mx-auto px-4 w-full">
-          <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-4">
-            🏆 #1 Rental Kasur di Yogyakarta
+            {/* Feature badges */}
+            <div className="flex justify-center gap-2 flex-wrap mb-6">
+              <span className="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-full">
+                ✨ Sterilisasi UV-C & Vacuum
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-full">
+                🛡️ Kasur Royal Grand Exclusive High Density
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-full">
+                🚚 Same Day Delivery
+              </span>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              <a
+                href="#calculator"
+                className="inline-flex items-center justify-center px-6 py-2.5 bg-white !text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors text-sm"
+              >
+                Sewa Sekarang
+              </a>
+              <Link
+                href="/produk"
+                className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-white/40 bg-white/8 backdrop-blur-xs !text-white rounded-md hover:bg-white/15 transition-colors text-sm"
+              >
+                Lihat Produk →
+              </Link>
+            </div>
           </div>
-          <h1 className="text-[clamp(2rem,6vw,3rem)] leading-[1.15] font-extrabold mb-4">
-            Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
-          </h1>
-          <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-lg font-bold mb-4">
-            Mulai Rp25.000/hari
-          </p>
-          <p className="opacity-85 max-w-lg mx-auto mb-8 text-lg leading-relaxed">
-            Rental kasur bersih &amp; murah di Yogyakarta — Antar jemput same day, tanpa ribet
-          </p>
+        </section>
 
-          {/* Feature badges */}
-          <div className="flex justify-center gap-3 flex-wrap mb-8">
-            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
-              ✨ Sterilisasi UV-C & Vacuum
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
-              🛡️ Kasur Royal Grand Exclusive High Density
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-sm bg-white/10 px-3 py-1 rounded-full">
-              🚚 Same Day Delivery Jogja
-            </span>
-          </div>
-
-          {/* CTA buttons */}
-          <div className="flex justify-center gap-4 flex-wrap">
-            <a
-              href="#calculator"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white !text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors"
-            >
-              Sewa Sekarang
-            </a>
-            <Link
-              href="/produk"
-              className="inline-flex items-center justify-center px-8 py-3 border-2 border-white/40 bg-white/8 backdrop-blur-xs !text-white rounded-md hover:bg-white/15 transition-colors"
-            >
-              Lihat Produk →
-            </Link>
-          </div>
+        {/* Calculator card rises up over the hero photo — negative margin pulls it INTO the photo area */}
+        <div className="relative z-[10] -mt-20 md:-mt-28">
+          <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Memuat kalkulator...</div>}>
+            <CalculatorSection />
+          </Suspense>
         </div>
-      </section>
-
-      {/* ===== CALCULATOR (NEW POSITION: DIRECTLY BELOW HERO) ===== */}
-      <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Memuat kalkulator...</div>}>
-        <CalculatorSection />
-      </Suspense>
+      </div>
 
       {/* ===== WHY CHOOSE US / BENEFITS ===== */}
       <section className="py-12 md:py-20 bg-slate-50">

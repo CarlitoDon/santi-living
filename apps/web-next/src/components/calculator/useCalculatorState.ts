@@ -3,7 +3,7 @@
  * Manages the complete state for the rental calculator
  */
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { CartItem, CalculatorState } from "./types";
 import {
   calculateEndDate,
@@ -42,6 +42,31 @@ const initialState: CalculatorState = {
 
 export function useCalculatorState() {
   const [state, setState] = useState<CalculatorState>(initialState);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const draft = sessionStorage.getItem("santi-living-draft-calculator");
+      if (draft) {
+        const parsed = JSON.parse(draft) as Partial<CalculatorState>;
+        setState((prev) => ({ ...prev, ...parsed }));
+      }
+    } catch (e) {
+      console.warn("Failed to parse calculator draft from session", e);
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Save to sessionStorage on state change
+  useEffect(() => {
+    if (isHydrated) {
+      sessionStorage.setItem(
+        "santi-living-draft-calculator",
+        JSON.stringify(state)
+      );
+    }
+  }, [state, isHydrated]);
 
   const recalculate = useCallback((updates: Partial<CalculatorState>) => {
     setState((prev) => {

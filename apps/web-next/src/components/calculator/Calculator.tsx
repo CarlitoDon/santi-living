@@ -208,6 +208,27 @@ export function Calculator({
   // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only effect for edit mode prefill
   }, []);
 
+  // Hydrate draft customer from session storage
+  useEffect(() => {
+    if (editMode) return; // Ignore drafts when explicitly in edit mode
+    try {
+      const draft = sessionStorage.getItem("santi-living-draft-customer");
+      if (draft) {
+        const parsed = JSON.parse(draft);
+        setCustomer((prev) => ({ ...prev, ...parsed }));
+      }
+    } catch (e) {
+      console.warn("Failed to parse customer draft", e);
+    }
+  }, [editMode]);
+
+  // Save customer draft to session storage whenever it changes
+  useEffect(() => {
+    if (!editMode) {
+      sessionStorage.setItem("santi-living-draft-customer", JSON.stringify(customer));
+    }
+  }, [customer, editMode]);
+
   // Recalculate delivery fee when lat/lng changes (from dropdown or GPS)
   useEffect(() => {
     const { lat, lng } = customer.address;
@@ -655,12 +676,11 @@ export function Calculator({
     <section
       id="calculator"
       style={{
-        background:
-          "linear-gradient(to bottom, var(--color-primary-light, #dbeafe) 0%, var(--color-background, #ffffff) 15%, var(--color-background, #ffffff) 100%)",
-        paddingTop: "2rem",
-        paddingBottom: "1.5rem",
-        borderRadius: "24px 24px 0 0",
-        marginTop: "2rem",
+        background: '#f8fafc',
+        paddingTop: '2rem',
+        paddingBottom: '1.5rem',
+        borderRadius: '28px 28px 0 0',
+        boxShadow: '0 -8px 40px rgba(30, 64, 175, 0.18)',
       }}
     >
       <div style={{ padding: "0 1rem" }}>
