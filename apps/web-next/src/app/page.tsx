@@ -118,20 +118,30 @@ export default function HomePage() {
             </div>
 
             {/* CTA buttons */}
-            <div className="flex justify-center gap-3 flex-wrap">
+            <div className="flex justify-center gap-4 flex-wrap">
               <a
                 href="#calculator"
-                className="inline-flex items-center justify-center px-6 py-2.5 bg-white !text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors text-sm"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white !text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors"
               >
                 Sewa Sekarang
               </a>
+              <a
+                href={getWhatsAppUrl()}
+                className="inline-flex items-center justify-center px-8 py-3 bg-emerald-600 text-white font-bold rounded-md shadow-lg hover:bg-emerald-700 transition-colors"
+                target="_blank"
+                rel="noopener"
+                data-wa-source="hero_cta"
+              >
+                💬 Chat WhatsApp
+              </a>
               <Link
                 href="/produk"
-                className="inline-flex items-center justify-center px-6 py-2.5 border-2 border-white/40 bg-white/8 backdrop-blur-xs !text-white rounded-md hover:bg-white/15 transition-colors text-sm"
+                className="inline-flex items-center justify-center px-8 py-3 border-2 border-white/40 bg-white/8 backdrop-blur-xs !text-white rounded-md hover:bg-white/15 transition-colors"
               >
                 Lihat Produk →
               </Link>
             </div>
+
           </div>
         </section>
 
