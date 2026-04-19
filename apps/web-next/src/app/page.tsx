@@ -125,15 +125,6 @@ export default function HomePage() {
               >
                 Sewa Sekarang
               </a>
-              <a
-                href={getWhatsAppUrl()}
-                className="inline-flex items-center justify-center px-8 py-3 bg-emerald-600 text-white font-bold rounded-md shadow-lg hover:bg-emerald-700 transition-colors"
-                target="_blank"
-                rel="noopener"
-                data-wa-source="hero_cta"
-              >
-                💬 Chat WhatsApp
-              </a>
               <Link
                 href="/produk"
                 className="inline-flex items-center justify-center px-8 py-3 border-2 border-white/40 bg-white/8 backdrop-blur-xs !text-white rounded-md hover:bg-white/15 transition-colors"
@@ -141,7 +132,6 @@ export default function HomePage() {
                 Lihat Produk →
               </Link>
             </div>
-
           </div>
         </section>
 
