@@ -10,11 +10,11 @@
 
 | 🔑 Target Keyword | 📈 Vol. Pencarian (Est.) | 🥇 Posisi Saat Ini | 🎯 Target Posisi | 🔗 Landing Page Terkait | 📝 Status Konten (Blog/LP) |
 | :--- | :---: | :---: | :---: | :--- | :--- |
-| **sewa bantal jogja** | High | TBD | #1 - #3 | `/produk` | 🟡 Perlu artikel spesifik |
-| **sewa cooling jogja** | Medium | TBD | #1 - #3 | *Belum Ada* | 🔴 Harus buat Landing Page |
-| **sewa selimut jogja** | Low-Med | TBD | #1 - #3 | `/produk` | 🟡 Perlu artikel "Travel/Camping" |
-| **sewa tv jogja** | High | TBD | #1 - #3 | *Belum Ada* | 🔴 Harus buat Landing Page |
-| **sewa kipas angin jogja** | High | TBD | #1 - #3 | *Belum Ada* | 🔴 Harus buat Landing Page |
+| **sewa bantal jogja** | High | TBD | #1 - #3 | `/sewa-bantal-jogja` | 🟢 Selesai |
+| **sewa cooling jogja** | Medium | TBD | #1 - #3 | `/sewa-cooling` | 🟢 Selesai |
+| **sewa selimut jogja** | Low-Med | TBD | #1 - #3 | `/sewa-selimut-jogja` | 🟢 Selesai |
+| **sewa tv jogja** | High | TBD | #1 - #3 | `/sewa-tv` | 🟢 Selesai |
+| **sewa kipas angin jogja** | High | TBD | #1 - #3 | `/sewa-kipas-angin` | 🟢 Selesai |
 
 *Catatan: Posisi (Current Rank) akan diupdate secara berkala menggunakan data dari Google Search Console.*
 
