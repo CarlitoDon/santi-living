@@ -15,7 +15,7 @@
     { "minQty": 6, "maxQty": 999, "discount": 0.15, "label": "Hemat 15%" }
   ],
   "operatingHours": "08:00 - 21:00",
-  "cutoffHour": 15,
+  "cutoffHour": 20,
   "priceRange": "Rp 25.000 - Rp 50.000",
   "siteUrl": "https://santiliving.com",
   "socialLinks": [

@@ -3,6 +3,7 @@ import { Inter, Noto_Serif } from 'next/font/google';
 
 export const viewport: Viewport = {
   themeColor: '#2563eb',
+  viewportFit: 'cover',
 };
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';

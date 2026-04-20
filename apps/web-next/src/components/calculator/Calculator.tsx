@@ -802,7 +802,54 @@ export function Calculator({
         onDecrement={() => {
           if (modalProduct) actions.removeItem(modalProduct.id);
         }}
-        onSewaClick={() => setModalProduct(null)}
+        onSewaClick={() => {
+          if (modalProduct) {
+            // Auto-add item if not yet in cart
+            const currentQty = actions.getItemQuantity(modalProduct.id);
+            if (currentQty === 0) {
+              const baseProduct = [
+                ...products.mattressPackages,
+                ...products.mattressOnly,
+                ...products.accessories,
+              ].find((p) => p.id === modalProduct.id);
+              if (baseProduct) {
+                actions.addItem({
+                  id: baseProduct.id,
+                  name: baseProduct.name,
+                  category: baseProduct.category as "package" | "mattress" | "accessory",
+                  pricePerDay: baseProduct.pricePerDay,
+                  includes: baseProduct.includes,
+                });
+              }
+            }
+
+            const productId = modalProduct.id;
+
+            // Close modal
+            setModalProduct(null);
+
+            // Expand accordion to show the product
+            window.dispatchEvent(
+              new CustomEvent("expand-product-accordion", {
+                detail: { productId },
+              }),
+            );
+
+            // Wait for accordion to expand, then scroll + pulse
+            setTimeout(() => {
+              const productEl = document.querySelector(
+                `[data-product-id="${productId}"]`,
+              );
+              if (productEl) {
+                productEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                productEl.classList.add("highlight-pulse");
+                setTimeout(() => {
+                  productEl.classList.remove("highlight-pulse");
+                }, 4000);
+              }
+            }, 500);
+          }
+        }}
       />
     </section>
   );
