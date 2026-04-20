@@ -60,7 +60,6 @@ export function ProductModal({
   onSewaClick?: () => void;
 }) {
   const router = useRouter();
-  const mountedRef = useRef(typeof document !== 'undefined');
   const scrollBodyRef = useRef<HTMLDivElement>(null);
 
   // iOS-safe body scroll lock: position:fixed preserves scroll position and prevents rubber-band bounce
@@ -113,7 +112,7 @@ export function ProductModal({
     };
   }, [isOpen]);
 
-  if (!mountedRef.current || !isOpen || !product) return null;
+  if (!isOpen || !product) return null;
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -252,5 +251,6 @@ export function ProductModal({
     </div>
   );
 
+  if (typeof document === 'undefined') return null;
   return createPortal(modalContent, document.body);
 }
