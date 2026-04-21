@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 
 interface StepScheduleProps {
@@ -15,15 +15,12 @@ export function StepSchedule({ errors, onClearError, onNext, onBack }: StepSched
   const { state } = actions;
 
   const today = new Date().toISOString().split('T')[0];
-  // Track whether the user is actively editing the input
-  const isEditingRef = useRef(false);
+  // localInput is non-null only while the user is typing; otherwise derive from state
   const [localInput, setLocalInput] = useState<string | null>(null);
-  // Derive displayed value: use local override while editing, otherwise state
-  const durationInput = localInput !== null && isEditingRef.current ? localInput : String(state.duration);
+  const durationInput = localInput ?? String(state.duration);
 
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
-    isEditingRef.current = true;
     setLocalInput(raw);
     const parsed = parseInt(raw, 10);
     if (!isNaN(parsed) && parsed >= 1) {
@@ -33,7 +30,6 @@ export function StepSchedule({ errors, onClearError, onNext, onBack }: StepSched
   };
 
   const handleDurationBlur = () => {
-    isEditingRef.current = false;
     const parsed = parseInt(localInput ?? String(state.duration), 10);
     if (isNaN(parsed) || parsed < 1) {
       actions.setDuration(1);
