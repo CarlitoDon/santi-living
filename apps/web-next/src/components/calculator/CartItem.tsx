@@ -51,31 +51,36 @@ export function CartItem({
     >
       {/* Thumbnail + Info - clickable to open modal */}
       <div 
-        className="calc-cart-item-thumb-wrapper" 
+        className="flex items-center gap-3 flex-1 min-w-0"
         onClick={handleImageClick}
-        style={{ cursor: "pointer", position: "relative", width: "64px", height: "64px", flexShrink: 0, overflow: "hidden", borderRadius: "8px" }}
+        style={{ cursor: "pointer" }}
         title="Klik untuk melihat detail"
       >
-        <Image
-          src={optimizedImage || product.image || "/assets/images/kasur-std.webp"}
-          alt={product.shortName}
-          fill
-          sizes="64px"
-          style={{ objectFit: "cover" }}
-          className="calc-cart-item-thumb"
-        />
-      </div>
+        <div 
+          className="calc-cart-item-thumb-wrapper" 
+          style={{ position: "relative", width: "64px", height: "64px", flexShrink: 0, overflow: "hidden", borderRadius: "8px" }}
+        >
+          <Image
+            src={optimizedImage || product.image || "/assets/images/kasur-std.webp"}
+            alt={product.shortName}
+            fill
+            sizes="64px"
+            style={{ objectFit: "cover" }}
+            className="calc-cart-item-thumb"
+          />
+        </div>
 
-      <div className="calc-cart-item-info">
-        <span className="calc-cart-item-name">{product.shortName}</span>
-        {product.dimensions && (
-          <span className="calc-cart-item-dimensions">
-            {product.dimensions}
+        <div className="calc-cart-item-info">
+          <span className="calc-cart-item-name">{product.shortName}</span>
+          {product.dimensions && (
+            <span className="calc-cart-item-dimensions">
+              {product.dimensions}
+            </span>
+          )}
+          <span className="calc-cart-item-price">
+            Rp {new Intl.NumberFormat("id-ID").format(product.pricePerDay)}/hari
           </span>
-        )}
-        <span className="calc-cart-item-price">
-          Rp {new Intl.NumberFormat("id-ID").format(product.pricePerDay)}/hari
-        </span>
+        </div>
       </div>
 
       {/* Stepper controls */}

@@ -143,7 +143,7 @@ export default function HomePage() {
 
         {/* Calculator card rises up over the hero photo — negative margin pulls it INTO the photo area */}
         <div className="relative z-[10] -mt-20 md:-mt-28">
-          <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Memuat kalkulator...</div>}>
+          <Suspense fallback={<div className="bg-white rounded-2xl shadow-xl mx-4 min-h-[400px] flex items-center justify-center text-gray-400">Memuat kalkulator sewa...</div>}>
             <CalculatorSection />
           </Suspense>
         </div>
