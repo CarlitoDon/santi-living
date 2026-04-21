@@ -8,9 +8,10 @@ interface StepCustomerProps {
   setErrors: (fn: (prev: Record<string, string>) => Record<string, string>) => void;
   onClearError: (field: string) => void;
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function StepCustomer({ errors, setErrors, onClearError, onNext }: StepCustomerProps) {
+export function StepCustomer({ errors, setErrors, onClearError, onNext, onBack }: StepCustomerProps) {
   const { customer, setCustomer } = useCalculatorContext();
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,13 +93,18 @@ export function StepCustomer({ errors, setErrors, onClearError, onNext }: StepCu
         {errors.customerWhatsapp && <p className="wizard-error">{errors.customerWhatsapp}</p>}
       </div>
 
-      <button
-        type="button"
-        onClick={handleNext}
-        className="wizard-next-btn"
-      >
-        Lanjutkan →
-      </button>
+      <div className="wizard-btn-row">
+        <button type="button" onClick={onBack} className="wizard-back-btn-bottom">
+          ← Kembali
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          className="wizard-next-btn"
+        >
+          Lanjutkan →
+        </button>
+      </div>
     </div>
   );
 }

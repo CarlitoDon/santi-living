@@ -7,9 +7,10 @@ interface StepScheduleProps {
   errors: Record<string, string>;
   onClearError: (field: string) => void;
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function StepSchedule({ errors, onClearError, onNext }: StepScheduleProps) {
+export function StepSchedule({ errors, onClearError, onNext, onBack }: StepScheduleProps) {
   const { actions } = useCalculatorContext();
   const { state } = actions;
 
@@ -139,14 +140,19 @@ export function StepSchedule({ errors, onClearError, onNext }: StepScheduleProps
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={handleNext}
-        className="wizard-next-btn"
-        disabled={!validate()}
-      >
-        Lanjutkan →
-      </button>
+      <div className="wizard-btn-row">
+        <button type="button" onClick={onBack} className="wizard-back-btn-bottom">
+          ← Kembali
+        </button>
+        <button
+          type="button"
+          onClick={handleNext}
+          className="wizard-next-btn"
+          disabled={!validate()}
+        >
+          Lanjutkan →
+        </button>
+      </div>
     </div>
   );
 }

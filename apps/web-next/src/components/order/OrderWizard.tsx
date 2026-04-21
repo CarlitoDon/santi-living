@@ -16,21 +16,31 @@ const STEPS = [
   { id: 4, label: 'Review' },
 ] as const;
 
-function ProgressBar({ current, total }: { current: number; total: number }) {
+function ProgressBar({ current, total, onStepClick }: { current: number; total: number; onStepClick: (step: number) => void }) {
   return (
     <div className="wizard-progress">
       {Array.from({ length: total }, (_, i) => {
         const step = i + 1;
         const isCompleted = step < current;
         const isActive = step === current;
+        const isClickable = isCompleted;
         return (
           <div key={step} className="wizard-progress-step">
-            <div
-              className={`wizard-progress-dot ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+            <button
+              type="button"
+              className={`wizard-progress-dot ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''} ${isClickable ? 'clickable' : ''}`}
+              onClick={() => isClickable && onStepClick(step)}
+              disabled={!isClickable}
+              aria-label={`Ke langkah ${step}: ${STEPS[i].label}`}
             >
               {isCompleted ? '✓' : step}
-            </div>
-            <span className={`wizard-progress-label ${isActive ? 'active' : ''}`}>
+            </button>
+            <span className={`wizard-progress-label ${isActive ? 'active' : ''} ${isClickable ? 'clickable' : ''}`}
+              onClick={() => isClickable && onStepClick(step)}
+              role={isClickable ? 'button' : undefined}
+              tabIndex={isClickable ? 0 : undefined}
+              onKeyDown={(e) => isClickable && e.key === 'Enter' && onStepClick(step)}
+            >
               {STEPS[i].label}
             </span>
             {i < total - 1 && (
@@ -85,6 +95,14 @@ export function OrderWizard() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [step, router]);
 
+  const goToStep = useCallback((target: number) => {
+    if (target < step) {
+      setDirection('backward');
+      setStep(target);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [step]);
+
   // Cart summary bar (always visible)
   const { state } = actions;
   const pricePerDay = state.items.reduce(
@@ -115,7 +133,7 @@ export function OrderWizard() {
       </div>
 
       {/* Progress */}
-      <ProgressBar current={step} total={4} />
+      <ProgressBar current={step} total={4} onStepClick={goToStep} />
 
       {/* Step Content */}
       <div className={`wizard-step-content wizard-slide-${direction}`} key={step}>
@@ -124,6 +142,7 @@ export function OrderWizard() {
             errors={errors}
             onClearError={clearError}
             onNext={goNext}
+            onBack={goBack}
           />
         )}
         {step === 2 && (
@@ -132,6 +151,7 @@ export function OrderWizard() {
             setErrors={setErrors}
             onClearError={clearError}
             onNext={goNext}
+            onBack={goBack}
           />
         )}
         {step === 3 && (
@@ -140,10 +160,11 @@ export function OrderWizard() {
             setErrors={setErrors}
             onClearError={clearError}
             onNext={goNext}
+            onBack={goBack}
           />
         )}
         {step === 4 && (
-          <StepReview setErrors={setErrors} />
+          <StepReview setErrors={setErrors} onBack={goBack} />
         )}
       </div>
     </div>

@@ -32,9 +32,10 @@ interface StepAddressProps {
   setErrors: (fn: (prev: Record<string, string>) => Record<string, string>) => void;
   onClearError: (field: string) => void;
   onNext: () => void;
+  onBack: () => void;
 }
 
-export function StepAddress({ errors, setErrors, onClearError, onNext }: StepAddressProps) {
+export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }: StepAddressProps) {
   const { customer, setCustomer, actions } = useCalculatorContext();
   const [isLocating, setIsLocating] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<'kota' | 'kecamatan' | 'kelurahan' | null>(null);
@@ -327,9 +328,14 @@ export function StepAddress({ errors, setErrors, onClearError, onNext }: StepAdd
         />
       </div>
 
-      <button type="button" onClick={handleNext} className="wizard-next-btn">
-        Lanjutkan →
-      </button>
+      <div className="wizard-btn-row">
+        <button type="button" onClick={onBack} className="wizard-back-btn-bottom">
+          ← Kembali
+        </button>
+        <button type="button" onClick={handleNext} className="wizard-next-btn">
+          Lanjutkan →
+        </button>
+      </div>
 
       <MapPicker />
     </div>
