@@ -83,7 +83,7 @@ export default function HomePage() {
       <div className="relative bg-gradient-to-br from-[#3b82f6]/90 to-[#1e40af]/95">
 
         {/* Hero text content */}
-        <section className="relative pt-8 pb-20 md:pt-10 md:pb-24 text-center text-white flex items-center z-[2] overflow-hidden">
+        <section className="relative pt-5 pb-16 md:pt-8 md:pb-20 text-center text-white flex items-center z-[2] overflow-hidden">
           {/* Photo background — constrained to hero section only */}
           <HeroBackground />
           {/* Dot grid overlay */}
@@ -142,7 +142,7 @@ export default function HomePage() {
         </section>
 
         {/* Calculator card rises up over the hero photo — negative margin pulls it INTO the photo area */}
-        <div className="relative z-[10] -mt-20 md:-mt-28">
+        <div className="relative z-[10] -mt-10 md:-mt-20">
           <Suspense fallback={<div className="bg-white rounded-2xl shadow-xl mx-4 min-h-[400px] flex items-center justify-center text-gray-400">Memuat kalkulator sewa...</div>}>
             <CalculatorSection />
           </Suspense>
