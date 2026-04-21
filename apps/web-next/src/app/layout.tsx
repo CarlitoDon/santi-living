@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
 import { GtagScript } from '@/components/tracking/GtagScript';
+import { ClarityScript } from '@/components/tracking/ClarityScript';
 import { AlertModal } from '@/components/ui/AlertModal';
 import '@/styles/globals.css';
 import '@/styles/utilities.css';
@@ -116,6 +117,7 @@ export default function RootLayout({
     <html lang="id" className={`${inter.variable} ${notoSerif.variable}`} suppressHydrationWarning>
       <head>
         <GtagScript />
+        <ClarityScript />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
