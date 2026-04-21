@@ -7,6 +7,7 @@ export const viewport: Viewport = {
 };
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ConditionalLayout } from '@/components/layout/ConditionalLayout';
 import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
 import { GtagScript } from '@/components/tracking/GtagScript';
 import { ClarityScript } from '@/components/tracking/ClarityScript';
@@ -128,11 +129,9 @@ export default function RootLayout({
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Providers>
-          <Header />
-          <div style={{ flex: 1 }}>
+          <ConditionalLayout header={<Header />} footer={<Footer />}>
             {children}
-          </div>
-          <Footer />
+          </ConditionalLayout>
         </Providers>
         <StickyWhatsApp />
         <AlertModal />
