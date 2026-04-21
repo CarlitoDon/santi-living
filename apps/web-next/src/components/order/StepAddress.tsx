@@ -68,17 +68,18 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
   } = useAddressDropdown(customer.address, handleAddressChange);
 
   // Recalculate delivery fee when coords change
+  const addressLat = customer.address.lat;
+  const addressLng = customer.address.lng;
   useEffect(() => {
-    const { lat, lng } = customer.address;
-    if (!lat || !lng) return;
-    const latNum = parseFloat(lat);
-    const lngNum = parseFloat(lng);
+    if (!addressLat || !addressLng) return;
+    const latNum = parseFloat(addressLat);
+    const lngNum = parseFloat(addressLng);
     if (isNaN(latNum) || isNaN(lngNum)) return;
     const storeLocation = config.storeLocation;
     const distance = haversineDistance(latNum, lngNum, storeLocation.lat, storeLocation.lng);
     const fee = calculateDeliveryFee(distance);
     actions.setDeliveryFee(fee, distance);
-  }, [customer.address.lat, customer.address.lng, actions]);
+  }, [addressLat, addressLng, actions]);
 
   // Listen for map picker location-selected
   useEffect(() => {

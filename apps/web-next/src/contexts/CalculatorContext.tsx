@@ -3,7 +3,7 @@
 import { createContext, useContext, type ReactNode } from 'react';
 import { useCalculatorState, type CalculatorActions } from '@/components/calculator/useCalculatorState';
 import type { CustomerData } from '@/components/calculator/types';
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 const initialCustomer: CustomerData = {
   name: '',
@@ -36,30 +36,27 @@ const CalculatorContext = createContext<CalculatorContextValue | null>(null);
 
 export function CalculatorProvider({ children }: { children: ReactNode }) {
   const actions = useCalculatorState();
-  const [customer, setCustomerState] = useState<CustomerData>(initialCustomer);
-  const isHydratedRef = useRef(false);
 
-  // Hydrate customer from sessionStorage
-  useEffect(() => {
+  // Lazy initializer: hydrate customer from sessionStorage on first render
+  const [customer, setCustomerState] = useState<CustomerData>(() => {
+    if (typeof window === 'undefined') return initialCustomer;
     try {
       const draft = sessionStorage.getItem('santi-living-draft-customer');
       if (draft) {
         const parsed: unknown = JSON.parse(draft);
         if (parsed && typeof parsed === 'object') {
-          setCustomerState((prev) => ({ ...prev, ...(parsed as Partial<CustomerData>) }));
+          return { ...initialCustomer, ...(parsed as Partial<CustomerData>) };
         }
       }
     } catch (e) {
       console.warn('Failed to parse customer draft', e);
     }
-    isHydratedRef.current = true;
-  }, []);
+    return initialCustomer;
+  });
 
-  // Persist customer to sessionStorage
+  // Persist customer to sessionStorage on changes
   useEffect(() => {
-    if (isHydratedRef.current) {
-      sessionStorage.setItem('santi-living-draft-customer', JSON.stringify(customer));
-    }
+    sessionStorage.setItem('santi-living-draft-customer', JSON.stringify(customer));
   }, [customer]);
 
   const setCustomer = useCallback((updates: Partial<CustomerData>) => {
