@@ -8,13 +8,25 @@ export function StickyWhatsApp() {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Hide on /pesan (wizard has its own flow)
+      if (window.location.pathname.startsWith('/pesan')) {
+        setVisible(false);
+        return;
+      }
       const isAtTop = window.scrollY <= 30;
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200;
-      setVisible(!isAtTop && !isAtBottom);
+      // Check if CartBar is present (items in cart)
+      const cartBarPresent = !!document.querySelector('.cart-bar');
+      setVisible(!isAtTop && !isAtBottom && !cartBarPresent);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Re-check periodically for CartBar appearance
+    const interval = setInterval(handleScroll, 1000);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(interval);
+    };
   }, []);
 
   if (!visible) return null;
