@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Suspense } from 'react';
 
 import { config } from '@/data/config';
-import { CalculatorSection } from '@/components/calculator/CalculatorSection';
+import { ProductPicker } from '@/components/home/ProductPicker';
+import { CartBar } from '@/components/home/CartBar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroBackground } from '@/components/home/HeroBackground';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
@@ -141,13 +141,27 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Calculator card rises up over the hero photo — negative margin pulls it INTO the photo area */}
+        {/* Product Picker — lightweight grid replaces the old Calculator form */}
         <div className="relative z-[10] -mt-10 md:-mt-20">
-          <Suspense fallback={<div className="bg-white rounded-2xl shadow-xl mx-4 min-h-[400px] flex items-center justify-center text-gray-400">Memuat kalkulator sewa...</div>}>
-            <CalculatorSection />
-          </Suspense>
+          <div
+            style={{
+              background: '#f8fafc',
+              paddingTop: '2rem',
+              paddingBottom: '1.5rem',
+              borderRadius: '28px 28px 0 0',
+              boxShadow: '0 -8px 40px rgba(30, 64, 175, 0.18)',
+            }}
+          >
+            <h2 className="font-bold text-center text-slate-800" style={{ fontSize: '1.25rem', marginBottom: '1.5rem', padding: '0 1rem' }}>
+              ⚡️ Pilih Kasur
+            </h2>
+            <ProductPicker />
+          </div>
         </div>
       </div>
+
+      {/* Sticky Cart Bar */}
+      <CartBar />
 
       {/* ===== WHY CHOOSE US / BENEFITS ===== */}
       <section className="py-12 md:py-20 bg-slate-50">

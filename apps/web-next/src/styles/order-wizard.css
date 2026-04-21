@@ -1,0 +1,517 @@
+/* === Order Wizard === */
+
+.wizard-container {
+  max-width: 576px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+}
+
+.wizard-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60dvh;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* Header */
+.wizard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  background: #f8fafc;
+  z-index: 20;
+}
+
+.wizard-back-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.wizard-header-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.125rem;
+}
+
+.wizard-header-count {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.wizard-header-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Progress Bar */
+.wizard-progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  padding: 0.5rem 0 1.5rem;
+  position: relative;
+}
+
+.wizard-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.wizard-progress-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  background: white;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.wizard-progress-dot.active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.wizard-progress-dot.completed {
+  border-color: #22c55e;
+  background: #22c55e;
+  color: white;
+}
+
+.wizard-progress-label {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  margin-top: 0.375rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.wizard-progress-label.active {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.wizard-progress-line {
+  position: absolute;
+  top: 16px;
+  left: calc(50% + 16px);
+  right: calc(-50% + 16px);
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.wizard-progress-line.completed {
+  background: #22c55e;
+}
+
+/* Step Content */
+.wizard-step-content {
+  animation: wizardFadeIn 0.3s ease;
+}
+
+.wizard-slide-forward {
+  animation: wizardSlideLeft 0.3s ease;
+}
+
+.wizard-slide-backward {
+  animation: wizardSlideRight 0.3s ease;
+}
+
+@keyframes wizardFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes wizardSlideLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes wizardSlideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Step */
+.wizard-step {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
+
+.wizard-step-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 0.25rem;
+}
+
+.wizard-step-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 1.5rem;
+}
+
+/* Fields */
+.wizard-field {
+  margin-bottom: 1rem;
+}
+
+.wizard-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .wizard-field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wizard-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.375rem;
+}
+
+.wizard-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: #1e293b;
+  background: white;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.wizard-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.wizard-input.error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.wizard-error {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin: 0.25rem 0 0;
+  font-weight: 500;
+}
+
+/* Duration Row */
+.wizard-duration-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wizard-stepper-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.wizard-stepper-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.wizard-stepper-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.wizard-duration-input {
+  width: 60px;
+  text-align: center;
+  padding: 0.5rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  -moz-appearance: textfield;
+}
+
+.wizard-duration-input::-webkit-inner-spin-button,
+.wizard-duration-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.wizard-duration-unit {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Upsell */
+.wizard-upsell {
+  background: #fffbeb;
+  border: 1px solid #fbbf24;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8rem;
+  color: #92400e;
+  margin-bottom: 1rem;
+}
+
+/* Info box */
+.wizard-info-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8rem;
+  color: #1e40af;
+  margin-bottom: 1rem;
+}
+
+/* Location buttons */
+.wizard-location-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.wizard-location-btn {
+  flex: 1;
+  padding: 0.625rem;
+  border: 1.5px solid #3b82f6;
+  border-radius: 0.5rem;
+  background: white;
+  color: #3b82f6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.wizard-location-btn:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+.wizard-location-btn.secondary {
+  border-color: #64748b;
+  color: #64748b;
+}
+
+.wizard-location-btn.secondary:hover {
+  background: #64748b;
+  color: white;
+}
+
+.wizard-location-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Next Button */
+.wizard-next-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: 0.5rem;
+}
+
+.wizard-next-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.wizard-next-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.wizard-next-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* Submit Button (WhatsApp green) */
+.wizard-submit-btn {
+  width: 100%;
+  padding: 0.875rem;
+  background: #25d366;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background 0.15s, transform 0.1s;
+  margin-top: 0.5rem;
+}
+
+.wizard-submit-btn:hover:not(:disabled) {
+  background: #1da851;
+}
+
+.wizard-submit-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.wizard-submit-btn:disabled {
+  background: #86efac;
+  cursor: not-allowed;
+}
+
+/* Review Cards */
+.review-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.review-card-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin: 0 0 0.75rem;
+}
+
+.review-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.review-item-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.review-item-total {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+.review-item-detail {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 0.125rem;
+}
+
+.review-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.375rem 0;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.review-row span:last-child {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.review-discount span:last-child {
+  color: #16a34a;
+}
+
+.review-address {
+  font-size: 0.8rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.review-notes {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0.5rem 0 0;
+  font-style: italic;
+}
+
+.review-totals {
+  background: white;
+  border: 2px solid #2563eb;
+}
+
+.review-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0 0;
+  margin-top: 0.5rem;
+  border-top: 2px solid #e2e8f0;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1e293b;
+}
