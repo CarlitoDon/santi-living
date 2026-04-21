@@ -65,7 +65,11 @@ export function StepReview({ setErrors, onBack }: StepReviewProps) {
         customerName: customer.name,
         customerWhatsapp: customer.whatsapp,
         deliveryAddress: fullAddress,
-        addressFields: customer.address,
+        addressFields: {
+          street: customer.address.street,
+          district: customer.address.kecamatan,
+          city: customer.address.kota,
+        },
         items: state.items.map((item) => ({
           id: item.id,
           name: item.name,
