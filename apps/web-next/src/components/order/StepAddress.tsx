@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import type { AddressFields } from '@/components/calculator/types';
 import { useAddressDropdown } from '@/components/calculator/useAddressDropdown';
@@ -80,6 +80,58 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
     const fee = calculateDeliveryFee(distance);
     actions.setDeliveryFee(fee, distance);
   }, [addressLat, addressLng, actions]);
+
+  // Auto-prefill from cached GPS (set by useAutoLocation on homepage)
+  const didAutoPrefillRef = useRef(false);
+  useEffect(() => {
+    if (didAutoPrefillRef.current) return;
+    if (customer.address.lat && customer.address.lng) return; // already has location
+    const cached = sessionStorage.getItem('sl_auto_location_result');
+    if (!cached) return;
+
+    didAutoPrefillRef.current = true;
+
+    void (async () => {
+      try {
+        const raw: unknown = JSON.parse(cached);
+        if (!raw || typeof raw !== 'object' || !('coords' in raw) || !('address' in raw)) return;
+        const data = raw as { coords: { lat: number; lng: number }; address: Record<string, string | undefined> };
+
+        const { matchAddressToKode } = await import('@/services/address-matcher');
+        const matched = await matchAddressToKode({
+          kelurahan: data.address.kelurahan,
+          kecamatan: data.address.kecamatan,
+          kota: data.address.kota,
+          provinsi: data.address.provinsi,
+          postcode: data.address.postcode,
+        });
+
+        if (!matched.kotaKode) return; // outside service area
+
+        setCustomer({
+          address: {
+            street: data.address.street || '',
+            kelurahan: matched.kelurahan || data.address.kelurahan || '',
+            kelurahanKode: matched.kelurahanKode,
+            kecamatan: matched.kecamatan || data.address.kecamatan || '',
+            kecamatanKode: matched.kecamatanKode,
+            kota: matched.kota || data.address.kota || '',
+            kotaKode: matched.kotaKode,
+            provinsi: data.address.provinsi || 'Daerah Istimewa Yogyakarta',
+            provinsiKode: '34',
+            zip: matched.zip || data.address.postcode || '',
+            lat: data.coords.lat.toString(),
+            lng: data.coords.lng.toString(),
+          },
+        });
+        onClearError('addressLocation');
+        console.debug('[StepAddress] Auto-prefilled from cached GPS.');
+      } catch (e) {
+        console.debug('[StepAddress] Auto-prefill failed:', e);
+      }
+    })();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Listen for map picker location-selected
   useEffect(() => {
