@@ -165,7 +165,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== PROMO REVIEW GOOGLE MAPS ===== */}
+
+      {/* ===== HOW TO RENT (Condensed) ===== */}
+      <section className="py-10 md:py-14 bg-surface border-y border-border">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-center text-xl md:text-2xl font-bold mb-6">
+            Cara Sewa Kasur
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {steps.map((s, i) => (
+              <div key={i} className="text-center group">
+                <div className="text-xl w-12 h-12 flex items-center justify-center rounded-xl bg-white shadow-sm border border-border mx-auto mb-2 group-hover:border-primary transition-colors">
+                  {s.icon}
+                </div>
+                <h3 className="text-xs font-bold mb-1">{s.title}</h3>
+                <p className="text-[10px] leading-tight text-text-secondary">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ===== FAQ ===== */}
+      <section className="py-12 md:py-16 bg-surface">
+        <div className="max-w-2xl mx-auto px-4">
+          <FAQAccordion items={faqItems} title="Pertanyaan Umum" />
+        </div>
+      </section>
+
+      {/* ===== PROMO REVIEW GOOGLE MAPS (Moved from above) ===== */}
       <section className="py-10 bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-inner">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -192,54 +221,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== HOW TO RENT ===== */}
-      <section className="py-12 md:py-16 bg-surface">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-center text-xl md:text-2xl font-bold mb-8">
-            Cara Sewa Kasur di Santi Living
-          </h2>
-          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            {steps.map((s, i) => (
-              <div key={i} className="text-center flex-1 min-w-[130px] max-w-[160px]">
-                <div className="text-2xl w-14 h-14 flex items-center justify-center rounded-full bg-primary-light mx-auto mb-2">
-                  {s.icon}
-                </div>
-                <div className="text-xs font-bold text-primary mb-0.5">Langkah {i + 1}</div>
-                <h3 className="text-sm font-bold mb-1">{s.title}</h3>
-                <p className="text-xs text-text-secondary">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SERVICE AREA ===== */}
-      <section id="service-area" className="py-12 md:py-16">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-xl md:text-2xl font-bold mb-3">Area Layanan Kami</h2>
-          <p className="text-text-secondary max-w-lg mx-auto mb-6">
-            Melayani pengiriman kasur sewa ke seluruh Yogyakarta dan sekitarnya
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {serviceAreas.map((area) => (
-              <span
-                key={area}
-                className="px-4 py-2 bg-primary-light text-primary font-medium text-sm rounded-full"
-              >
-                📍 {area}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FAQ ===== */}
-      <section className="py-12 md:py-16 bg-surface">
-        <div className="max-w-2xl mx-auto px-4">
-          <FAQAccordion items={faqItems} title="Pertanyaan Umum" />
-        </div>
-      </section>
-
       {/* ===== LOCATION / MAPS ===== */}
       <section id="location" className="py-12 md:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4">
@@ -249,7 +230,7 @@ export default function HomePage() {
               <p className="text-text-secondary mb-4 leading-relaxed">
                 Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke seluruh area DIY.
               </p>
-              <address className="not-italic bg-surface p-5 rounded-xl border border-border">
+              <address className="not-italic bg-surface p-5 rounded-xl border border-border mb-4">
                 <p className="font-bold text-primary mb-1">Workshop Santi Living</p>
                 <p className="text-sm text-text-secondary mb-3">
                   Jl. Godean KM 4, Kwarasan, Nogotirto,<br />
@@ -265,6 +246,17 @@ export default function HomePage() {
                   📍 Lihat di Google Maps
                 </a>
               </address>
+
+              <div className="text-left">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Area Layanan (Delivery)</p>
+                <div className="flex flex-wrap gap-2">
+                  {serviceAreas.map((area) => (
+                    <span key={area} className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="rounded-2xl overflow-hidden shadow-card h-[300px] md:h-[350px] border border-border">
               <iframe
@@ -298,8 +290,8 @@ export default function HomePage() {
               Pesan Sekarang
             </a>
             <a
-              href={getWhatsAppUrl()}
-              className="inline-flex items-center justify-center px-8 py-3 bg-secondary text-white font-bold rounded-md hover:bg-secondary-hover transition-colors"
+              href={getWhatsAppUrl(WA_PRESET_ORDER)}
+              className="inline-flex items-center justify-center px-8 py-3 bg-[#25d366] text-white font-bold rounded-md hover:bg-[#1da851] transition-colors"
               target="_blank"
               rel="noopener"
             >

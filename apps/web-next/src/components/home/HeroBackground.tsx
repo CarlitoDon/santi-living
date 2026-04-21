@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const slides = [
-  { src: '/images/stok-kasur.png', alt: 'Stok kasur sewa Jogja' },
+  { src: '/images/stok-kasur.webp', alt: 'Stok kasur sewa Jogja' },
   { src: '/images/gudang.webp', alt: 'Gudang kasur Santi Living' },
 ];
 

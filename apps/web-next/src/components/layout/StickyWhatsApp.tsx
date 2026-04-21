@@ -8,7 +8,9 @@ export function StickyWhatsApp() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 30);
+      const isAtTop = window.scrollY <= 30;
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200;
+      setVisible(!isAtTop && !isAtBottom);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
