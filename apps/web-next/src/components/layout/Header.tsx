@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Navigation } from './Navigation';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
 
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
@@ -70,7 +70,7 @@ export function Header() {
           {/* Right: CTA WhatsApp */}
           <div className="flex-1 flex justify-end">
             <a
-              href={getWhatsAppUrl('Halo Santi Living, saya mau pesan sewa kasur.')}
+              href={getWhatsAppUrl(WA_PRESET_ORDER)}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-[0_4px_12px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_16px_rgba(34,197,94,0.4)] hover:-translate-y-[1px] transition-all"
@@ -79,7 +79,7 @@ export function Header() {
               <span>Pesan</span>
             </a>
             <a
-              href={getWhatsAppUrl('Halo Santi Living, saya mau pesan sewa kasur.')}
+              href={getWhatsAppUrl(WA_PRESET_ORDER)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex sm:hidden items-center justify-center bg-gradient-to-r from-green-500 to-green-600 active:from-green-600 active:to-green-700 text-white w-9 h-9 rounded-full shadow-[0_4px_12px_rgba(34,197,94,0.3)] hover:shadow-[0_6px_16px_rgba(34,197,94,0.4)] transition-all"
