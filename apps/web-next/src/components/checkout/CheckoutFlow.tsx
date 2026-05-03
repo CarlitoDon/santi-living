@@ -86,12 +86,7 @@ function trackBeginCheckout(order: OrderData, method: PaymentMethodType | null):
     ...attributionParams,
   });
 
-  // Native Google Ads begin_checkout
-  fireGtagEvent('conversion', {
-    'send_to': 'AW-17865321955/begin_checkout',
-    'value': order.totalPrice,
-    'currency': 'IDR'
-  });
+  // Removed invalid native Google Ads begin_checkout label
 
   sessionStorage.setItem(BEGIN_CHECKOUT_TRACKED_KEY, '1');
 }
@@ -113,13 +108,7 @@ function trackPurchase(order: OrderData, transactionId: string, currentMethod: P
     ...attributionParams,
   });
 
-  // Native Google Ads purchase
-  fireGtagEvent('conversion', {
-    'send_to': 'AW-17865321955/purchase',
-    'value': order.totalPrice,
-    'currency': 'IDR',
-    'transaction_id': transactionId
-  });
+  // Removed invalid native Google Ads purchase label
 }
 
 export function CheckoutFlow() {

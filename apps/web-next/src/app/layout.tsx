@@ -11,6 +11,7 @@ import { ConditionalLayout } from '@/components/layout/ConditionalLayout';
 import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
 import { GtagScript } from '@/components/tracking/GtagScript';
 import { ClarityScript } from '@/components/tracking/ClarityScript';
+import { AttributionCapture } from '@/components/tracking/AttributionCapture';
 import { AlertModal } from '@/components/ui/AlertModal';
 import { Providers } from './providers';
 import '@/styles/globals.css';
@@ -129,6 +130,7 @@ export default function RootLayout({
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Providers>
+          <AttributionCapture />
           <ConditionalLayout header={<Header />} footer={<Footer />}>
             {children}
           </ConditionalLayout>

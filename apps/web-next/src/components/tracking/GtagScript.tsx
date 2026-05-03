@@ -50,10 +50,12 @@ export function GtagScript() {
           gtag('config', '${GA_MEASUREMENT_ID}', {
             'user_id': gaUserId,
             'allow_google_signals': true,
-            'allow_ad_personalization_signals': true
+            'allow_ad_personalization_signals': true,
+            'cookie_flags': 'SameSite=None;Secure'
           });
           gtag('config', '${ADS_ID}', {
-            'user_id': gaUserId
+            'user_id': gaUserId,
+            'cookie_flags': 'SameSite=None;Secure'
           });
         `}
       </Script>
@@ -70,7 +72,7 @@ export function GtagScript() {
                 'transport_type': 'beacon'
               });
               gtag('event', 'conversion', {
-                'send_to': '${ADS_ID}/whatsapp_lead'
+                'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC'
               });
             }
             var telLink = target.closest('a[href^="tel:"]');
@@ -78,9 +80,6 @@ export function GtagScript() {
               gtag('event', 'phone_click', {
                 'event_category': 'engagement',
                 'transport_type': 'beacon'
-              });
-              gtag('event', 'conversion', {
-                'send_to': '${ADS_ID}/phone_lead'
               });
             }
           });
