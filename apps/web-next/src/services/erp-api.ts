@@ -31,12 +31,27 @@ const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
     };
   };
 
-  return (
-    payload.error?.message ||
+  const rawMessage = payload.error?.message ||
     payload.message ||
     payload.details ||
-    fallback
-  );
+    fallback;
+
+  const lowerMsg = rawMessage.toLowerCase();
+  
+  // Sanitize internal backend/system errors to prevent exposing system details
+  if (
+    lowerMsg.includes("bot ") || 
+    lowerMsg.includes("scan qr") || 
+    lowerMsg.includes("dashboard admin") ||
+    lowerMsg.includes("internal server") ||
+    lowerMsg.includes("timeout") ||
+    lowerMsg.includes("network") ||
+    lowerMsg.includes("prisma")
+  ) {
+    return "Sistem kami sedang mengalami gangguan sementara. Silakan hubungi admin via WhatsApp untuk melakukan pemesanan.";
+  }
+
+  return rawMessage;
 };
 
 /**

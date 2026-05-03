@@ -101,8 +101,9 @@ export function StepReview({ setErrors, onBack }: StepReviewProps) {
       window.location.href = '/checkout';
     } catch (error) {
       console.error('Failed to submit order:', error);
+      const errorMessage = (error as Error).message || 'Gagal memproses pesanan. Silakan coba lagi.';
       showAlert(
-        `Mohon maaf, terjadi kesalahan: ${(error as Error).message || 'Gagal memproses pesanan'}. Silakan coba lagi.`,
+        errorMessage,
         'Pemesanan Gagal',
         'error',
       );
