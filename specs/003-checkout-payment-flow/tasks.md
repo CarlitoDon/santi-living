@@ -159,12 +159,12 @@
 
 **Purpose**: Final integration, mobile testing, and cleanup
 
-- [ ] T017 Manual integration test: Complete flow from calculator → checkout → thank-you
-- [ ] T018 Manual mobile test: All pages at 375px viewport, touch targets ≥44px
-- [ ] T019 Browser compatibility: Test on Chrome, Safari, Firefox
-- [ ] T020 Edge case: Access /checkout direct without sessionStorage data
-- [ ] T021 Edge case: Access /thank-you direct
-- [ ] T022 [P] Update StickyWhatsApp component if needed for consistency
+- [x] T017 Manual integration test: Complete flow from calculator → checkout → thank-you
+- [x] T018 Manual mobile test: All pages at 375px viewport, touch targets ≥44px
+- [x] T019 Browser compatibility: Test on Chrome, Safari, Firefox
+- [x] T020 Edge case: Access /checkout direct without sessionStorage data
+- [x] T021 Edge case: Access /thank-you direct
+- [x] T022 [P] Update StickyWhatsApp component if needed for consistency
 
 ---
 
