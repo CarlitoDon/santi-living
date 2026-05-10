@@ -25,7 +25,7 @@ export default function HargaSewaKasurPage() {
   const faqData = [
       {
         question: 'Berapa harga sewa kasur di Jogja?',
-        answer: 'Harga sewa kasur di Santi Living mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal + selimut) mulai dari Rp35.000/hari.',
+        answer: 'Harga sewa kasur di Santi Living mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal) mulai dari Rp35.000/hari.',
       },
       {
         question: 'Apakah ada diskon untuk sewa banyak?',
@@ -58,8 +58,8 @@ export default function HargaSewaKasurPage() {
       />
 
       {/* Prices */}
-      <PriceTable title="📦 Paket Kasur Lengkap" desc="Kasur Busa + Sprei + Bantal + Selimut — tinggal tidur!" items={products.mattressPackages} type="package" />
-      <PriceTable title="🛏️ Kasur Busa Saja" desc="Tanpa sprei, bantal, dan selimut — cocok buat yang sudah punya perlengkapan sendiri" items={products.mattressOnly} type="mattress" />
+      <PriceTable title="📦 Paket Kasur Lengkap" desc="Kasur Busa + Sprei + Bantal — tinggal tidur!" items={products.mattressPackages} type="package" />
+      <PriceTable title="🛏️ Kasur Busa Saja" desc="Tanpa sprei dan bantal — cocok buat yang sudah punya perlengkapan sendiri" items={products.mattressOnly} type="mattress" />
 
       {/* Ekstra Tambahan */}
       <section className="py-10" id="ekstra">
