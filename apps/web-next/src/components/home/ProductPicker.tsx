@@ -13,7 +13,7 @@ const formatCurrency = (amount: number) =>
 // Map catalog to Calculator Product type
 const allCategories: { label: string; products: Product[] }[] = [
   {
-    label: 'Paket Kasur (Kasur + Bantal + Selimut)',
+    label: 'Paket Kasur (Kasur + Sprei + Bantal)',
     products: products.mattressPackages.map((p) => ({ ...p, category: 'package' as const })),
   },
   {

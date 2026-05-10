@@ -36,7 +36,7 @@ export default function ProdukPage() {
       <section className="py-8 pb-12">
         <div className="container">
           <h2 className="text-2xl mb-1 text-slate-900 font-bold">📦 Paket Lengkap</h2>
-          <p className="text-base text-slate-500 mb-6 pb-4 border-b border-slate-200">Kasur Busa + Sprei + Bantal + Selimut</p>
+          <p className="text-base text-slate-500 mb-6 pb-4 border-b border-slate-200">Kasur Busa + Sprei + Bantal</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {products.mattressPackages.map((p) => (
               <ProductCard key={p.id} product={{...p, category: 'package'}} onClick={() => openModal({...p, category: 'package'})} />
@@ -44,7 +44,7 @@ export default function ProdukPage() {
           </div>
 
           <h2 className="text-2xl mb-1 text-slate-900 font-bold mt-12">🛏️ Kasur Saja</h2>
-          <p className="text-base text-slate-500 mb-6 pb-4 border-b border-slate-200">Tanpa perlengkapan (Bantal/Selimut)</p>
+          <p className="text-base text-slate-500 mb-6 pb-4 border-b border-slate-200">Tanpa perlengkapan (Sprei/Bantal)</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {products.mattressOnly.map((p) => (
               <ProductCard key={p.id} product={{...p, category: 'mattress'}} onClick={() => openModal({...p, category: 'mattress'})} />

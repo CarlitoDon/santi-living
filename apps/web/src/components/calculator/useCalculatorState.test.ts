@@ -15,7 +15,7 @@ const mattressItem: Omit<CartItem, "quantity"> = {
   name: "Paket Single",
   category: "package",
   pricePerDay: 35000,
-  includes: ["kasur busa", "sprei", "bantal", "selimut"],
+  includes: ["kasur busa", "sprei", "bantal"],
 };
 
 const mattressItem2: Omit<CartItem, "quantity"> = {

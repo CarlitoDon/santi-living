@@ -20,7 +20,7 @@ export const sewaKasurBulanan: LandingPageConfig = {
   ],
   priceCards: [
     { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 750.000', daily: '≈ Rp 25.000/hari', note: '1 orang • kasur busa saja', popular: false },
-    { name: 'Paket Lengkap Single', size: 'Kasur + Sprei + Bantal + Selimut', price: 'Rp 1.050.000', daily: '≈ Rp 35.000/hari', note: '1 orang • siap pakai langsung', popular: true },
+    { name: 'Paket Lengkap Single', size: 'Kasur + Sprei + Bantal', price: 'Rp 1.050.000', daily: '≈ Rp 35.000/hari', note: '1 orang • siap pakai langsung', popular: true },
     { name: 'Double', size: '120 × 200 cm', price: 'Rp 1.050.000', daily: '≈ Rp 35.000/hari', note: '1-2 orang • kasur busa saja', popular: false },
   ],
   audience: [

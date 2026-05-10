@@ -161,7 +161,7 @@ export function CartSection({
 
       {/* Mattress Packages */}
       <Accordion
-        title="Paket Kasur (Kasur + Bantal + Selimut)"
+        title="Paket Kasur (Kasur + Sprei + Bantal)"
         defaultOpen
         color="primary"
         items={products.mattressPackages}
