@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const faqItems = [
-  { q: 'Berapa harga sewa kasur di Jogja?', a: 'Mulai dari Rp25.000/hari untuk kasur busa single. Paket lengkap (kasur + sprei + bantal + selimut) mulai Rp35.000/hari.' },
+  { q: 'Berapa harga sewa kasur di Jogja?', a: 'Mulai dari Rp25.000/hari untuk kasur busa single. Paket lengkap (kasur + sprei + bantal) mulai Rp35.000/hari.' },
   { q: 'Apakah bisa antar hari ini?', a: 'Ya! Pesan sebelum jam 15:00 WIB dan kasur bisa sampai di hari yang sama untuk area Jogja, Sleman, dan Bantul.' },
   { q: 'Bagaimana cara memesan?', a: 'Sangat mudah — pilih kasur, isi formulir pemesanan, dan lakukan pembayaran. Tim kami akan langsung mengantar kasur ke lokasi Anda.' },
   { q: 'Apakah kasur sewaan bersih?', a: 'Ya, setiap kasur kami cuci dan sterilkan sebelum dikirim. Kami juga menyediakan sprei bersih dan bantal baru untuk setiap pelanggan.' },
@@ -37,7 +37,7 @@ const benefits = [
   { icon: '✨', title: '7 Tahap Higienitas', desc: 'Di-vacuum industri, steril UV-C, dan dibungkus plastik kedap udara.' },
   { icon: '🏅', title: 'Royal Grand Exclusive', desc: 'Kasur busa High Density anti kempes untuk support tulang belakang.' },
   { icon: '🚀', title: 'Same Day Delivery', desc: 'Layanan antar jemput kilat 2-4 jam untuk area Jogja, Sleman, Bantul.' },
-  { icon: '💰', title: 'Harga Transparan', desc: 'Tanpa biaya tersembunyi, harga sewa sudah termasuk sprei bersih & bantal.' },
+  { icon: '💰', title: 'Harga Transparan', desc: 'Tanpa biaya tersembunyi, harga sewa paket sudah termasuk sprei bersih & bantal.' },
   { icon: '📦', title: 'Stok Selalu Ready', desc: 'Ratusan unit kasur selalu siap dikirim kapanpun Anda butuhkan.' },
   { icon: '📍', title: 'Gratis Jemput', desc: 'Bebas biaya pengambilan unit kasur saat masa sewa Anda berakhir.' },
 ];

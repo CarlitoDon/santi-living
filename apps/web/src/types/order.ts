@@ -30,7 +30,7 @@ export interface OrderItem {
   category: "package" | "mattress" | "accessory";
   quantity: number;
   pricePerDay: number;
-  includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal", "selimut"]
+  includes?: string[]; // Bundle components: ["kasur busa", "sprei", "bantal"]
 }
 
 /**
