@@ -17,10 +17,10 @@ Bagi warga Jogja yang membutuhkan kasur, pertanyaan klasik selalu muncul: lebih 
 - **Total biaya 2 tahun (setelah depresiasi): ~Rp 2.500.000 — Rp 6.000.000+**
 
 **Biaya Sewa di Santi Living:**
-- Mulai dari Rp 150.000/bulan (tarif bervariasi sesuai tipe kasur)
+- Mulai dari Rp 25.000/hari (kasur saja) atau Rp 35.000/hari (paket lengkap dengan sprei & bantal)
 - Biaya perawatan: SUDAH TERMASUK dalam harga sewa
 - Tidak perlu pusing urusan jual kembali
-- **Total biaya 1 tahun: ~Rp 1.800.000 (jauh lebih hemat untuk jangka pendek)**
+- **Total biaya 3 bulan: ~Rp 2.250.000 (paket lengkap, jauh lebih hemat untuk jangka pendek)**
 
 ## Kapan Membeli Lebih Masuk Akal?
 
@@ -54,10 +54,12 @@ Menyewa dari Santi Living adalah pilihan cerdas jika:
 Andi, mahasiswa S1 di Jogja, butuh kasur selama 4 tahun kuliah:
 
 - **Beli kasur baru:** Rp 2.500.000 + perawatan Rp 400.000/tahun × 4 = **Rp 4.100.000**
-- **Sewa Santi Living:** Rp 150.000/bulan, dengan paket semesteran bisa dapat diskon khusus
+- **Sewa Santi Living:** Rp 35.000/hari paket lengkap, dengan paket semesteran bisa dapat diskon khusus
 
 Untuk kebutuhan jangka pendek-menengah (1-3 tahun), sewa kasur dari Santi Living adalah pilihan yang jauh lebih ekonomis dan praktis. Anda bisa mengalokasikan budget lebih untuk kebutuhan lain tanpa mengorbankan kualitas tidur.
 
 ---
 
-*Santi Living — Keputusan Cerdas untuk Tidur Nyenyak di Jogja.*
+**Masih bingung sewa atau beli?** Konsultasi gratis via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Kami bantu hitung mana yang lebih hemat untuk Anda!
+
+> *Santi Living — Keputusan Cerdas untuk Tidur Nyenyak di Jogja.*
