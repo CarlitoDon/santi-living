@@ -1,6 +1,6 @@
 ---
-title: "Santi Mebel: Persewaan Kasur Terpercaya di Jogja dengan Layanan Profesional"
-description: "Kenali Santi Mebel dan layanan Santi Living: sewa kasur terpercaya di Jogja dengan ratusan unit ready, sterilisasi 7 tahap, dan pengiriman same day ke seluruh DIY."
+title: "Santi Mebel & Santi Living: Sewa Kasur Terpercaya di Jogja Sejak 2020"
+description: "Santi Mebel, usaha mebel terpercaya di Godean Sleman, kini menghadirkan divisi Santi Living untuk sewa kasur profesional. Ratusan unit ready, sterilisasi 7 tahap, antar same day."
 pubDate: 2026-05-18
 author: "Tim Santi Mebel"
 tags: ["santi mebel", "santi living", "sewa kasur jogja", "tentang kami", "terpercaya", "godean"]
