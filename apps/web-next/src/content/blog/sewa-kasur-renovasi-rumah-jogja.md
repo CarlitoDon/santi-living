@@ -45,4 +45,8 @@ Kami menyediakan paket sewa kasur yang dirancang khusus untuk situasi renovasi:
 
 **Jangan biarkan renovasi mengorbankan kualitas tidur Anda.** Dengan Santi Living, renovasi berjalan lancar dan tidur tetap nyenyak.
 
+---
+
+**Sedang renovasi rumah?** Sewa kasur sementara via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Pesan sekarang, diantar hari ini juga!
+
 > *Santi Living — Renovasi Lancar, Tidur Tetap Nyaman. Sewa Kasur Sementara di Jogja.*
