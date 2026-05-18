@@ -53,4 +53,8 @@ Kami menghadirkan paket sewa khusus:
 
 **Buat tamu Anda merasa dihargai dengan tempat tidur yang layak.** Sambut Ramadhan dan Lebaran penuh berkah bersama Santi Living.
 
+---
+
+**Butuh kasur tambahan untuk Lebaran?** Pesan sekarang via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Gratis antar jemput se-Jogja!
+
 > *Santi Living — Sewa Kasur Lebaran Jogja, Sambut Tamu dengan Kenyamanan Terbaik.*
