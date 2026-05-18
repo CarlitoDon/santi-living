@@ -37,6 +37,8 @@ Berikut harga terbaru untuk paket sewa kasur lengkap (kasur + sprei + bantal + g
 - Kipas Angin Berdiri — Rp29.000/hari
 - Air Cooler — Rp35.000/hari
 
+> 💰 **[Lihat daftar lengkap rental kasur + semua ukuran →](/artikel/rental-kasur-jogja-santi-living)**
+
 ## Simulasi Biaya: Sewa vs Beli
 
 Mari kita hitung secara nyata. Misalnya Anda butuh kasur untuk tamu yang menginap 3 hari:
@@ -56,17 +58,19 @@ Selisihnya? **Rp845.000 - Rp1.545.000**. Uang yang bisa Anda gunakan untuk keper
 
 ## Kapan Sewa Lebih Menguntungkan daripada Beli?
 
-| Durasi Kebutuhan | Rekomendasi | Alasan |
-|-----------------|-------------|--------|
-| 1-30 hari | ✅ Sewa | Jauh lebih hemat |
-| 1-3 bulan | ✅ Sewa | Masih lebih ekonomis |
-| 3-6 bulan | ⚖️ Tergantung | Hitung total biaya sewa vs beli |
-| 6+ bulan | 🛒 Beli | Sewa mulai tidak efisien |
+- **1-30 hari** — ✅ Sewa: Jauh lebih hemat
+- **1-3 bulan** — ✅ Sewa: Masih lebih ekonomis
+- **3-6 bulan** — ⚖️ Tergantung: Hitung total biaya sewa vs beli
+- **6+ bulan** — 🛒 Beli: Sewa mulai tidak efisien
+
+> 📖 **[Baca panduan lengkap sewa vs beli kasur →](/artikel/perbandingan-sewa-vs-beli-kasur-jogja)**
 
 ## Tips Hemat Sewa Kasur
 
 ### 1. Pilih Ukuran yang Tepat
 Jangan sewa King size kalau cukup pakai Single. Beda ukuran, beda harga. Untuk satu orang, Single Standard (90×200) sudah sangat cukup.
+
+> 📖 **[Tips memilih ukuran kasur sewa yang tepat →](/artikel/tips-memilih-ukuran-kasur-sewa-jogja)**
 
 ### 2. Ambil Paket, Bukan Satuan
 Paket lengkap (kasur + sprei + bantal) jauh lebih hemat daripada menyewa satu per satu. Selisihnya bisa Rp15.000-20.000 per item.
@@ -93,6 +97,8 @@ Setiap rupiah yang Anda bayar sudah mencakup:
 
 **Tidak ada biaya tersembunyi.** Harga yang tertera adalah harga final.
 
+> 📖 **[Pelajari proses sterilisasi 7 tahap kami →](/artikel/proses-sterilisasi-kasur-santi-living-jogja)**
+
 ## Area Pengiriman & Estimasi Biaya Ongkir
 
 - **Godean & sekitar (radius 5 km):** GRATIS
@@ -103,6 +109,14 @@ Setiap rupiah yang Anda bayar sudah mencakup:
 - **Gunung Kidul:** Rp50.000 - Rp70.000
 
 *Catatan: Ongkir bisa gratis atau diskon besar dengan promo tertentu.*
+
+## Siapa yang Butuh Sewa Kasur?
+
+- **Mahasiswa kos** — Solusi hemat tanpa beli kasur mahal. [Baca panduan lengkap →](/artikel/cara-memilih-kasur-sewa-untuk-kos-jogja)
+- **Tamu menginap** — Extra bed untuk keluarga atau teman. [Baca: Panduan extra bed →](/artikel/panduan-pilih-kasur-ekstra-untuk-tamu)
+- **Pemilik kos** — Kasur tambahan untuk kamar baru. [Baca: Sewa kasur untuk pemilik kos →](/artikel/sewa-kasur-pemilik-kos-kosan-jogja)
+- **Hotel & homestay** — Stok extra bed saat peak season. [Baca: Sewa extra bed hotel →](/artikel/sewa-extra-bed-hotel-penginapan-jogja)
+- **Acara keluarga** — Pernikahan, pengajian, wisuda. [Baca: Sewa kasur pernikahan →](/artikel/sewa-kasur-acara-pernikahan-jogja-hemat)
 
 ## Cara Cek Harga & Pesan
 
@@ -126,6 +140,8 @@ A: Kerusakan ringan (noda minuman, dll) tidak dikenakan biaya. Untuk kerusakan b
 **Q: Bisa sewa kurang dari 24 jam?**
 A: Bisa! Minimum sewa 1 hari (24 jam). Untuk kebutuhan beberapa jam saja, tetap dihitung 1 hari.
 
+> 📖 **[Panduan lengkap sewa kasur pertama kali di Jogja →](/artikel/panduan-sewa-kasur-pertama-kali-jogja)**
+
 📱 **Chat sekarang untuk harga terbaru: [0895-1911-9092](https://wa.me/6289519119092)**
 
-> *Santi Living — Harga sewa kasur Jogja paling transparan. Mulai Rp25.000/hari, tanpa biaya tersembunyi.*
+> *Santi Living — Harga sewa kasur Jogja paling transparan. Mulai Rp25.000/hari, tanpa biaya tersembunyi. Divisi khusus persewaan kasur dari Santi Mebel.*
