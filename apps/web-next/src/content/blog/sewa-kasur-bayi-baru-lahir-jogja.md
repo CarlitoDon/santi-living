@@ -42,6 +42,8 @@ Tidak perlu repot keluar rumah dengan bayi. Tim Santi Living mengantar pesanan l
 
 **Sambut si kecil dengan tidur yang nyaman, tanpa perlu khawatir budget.** Percayakan kebutuhan tidur bayi Anda kepada Santi Living — mitra terpercaya keluarga di Jogja.
 
+<a href="https://wa.me/6289519119092" style="display:inline-block;background:#25D366;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;">Chat via WhatsApp</a>
+
 ---
 
 **Siap menyambut buah hati?** Pesan perlengkapan tidur bayi via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Gratis antar jemput se-Jogja!

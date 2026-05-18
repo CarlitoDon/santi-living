@@ -58,6 +58,8 @@ Andi, mahasiswa S1 di Jogja, butuh kasur selama 4 tahun kuliah:
 
 Untuk kebutuhan jangka pendek-menengah (1-3 tahun), sewa kasur dari Santi Living adalah pilihan yang jauh lebih ekonomis dan praktis. Anda bisa mengalokasikan budget lebih untuk kebutuhan lain tanpa mengorbankan kualitas tidur.
 
+<a href="https://wa.me/6289519119092" style="display:inline-block;background:#25D366;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;">Chat via WhatsApp</a>
+
 ---
 
 **Masih bingung sewa atau beli?** Konsultasi gratis via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Kami bantu hitung mana yang lebih hemat untuk Anda!

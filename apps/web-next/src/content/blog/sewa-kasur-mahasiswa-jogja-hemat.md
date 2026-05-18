@@ -40,4 +40,6 @@ Kami melayani pengiriman ke seluruh area Yogyakarta, termasuk:
 
 **Butuh kasur untuk kost?** Chat WhatsApp sekarang: [0895-1911-9092](https://wa.me/6289519119092) — Pesan hari ini, diantar hari ini!
 
+<a href="https://wa.me/6289519119092" style="display:inline-block;background:#25D366;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;">Chat via WhatsApp</a>
+
 > *Santi Living — Sewa Kasur Jogja, Solusi Tidur Nyenyak untuk Semua.*
