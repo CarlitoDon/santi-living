@@ -14,7 +14,7 @@ Di sinilah Santi Living hadir sebagai solusi cerdas. Kami menyediakan layanan **
 
 ## Kenapa Sewa Lebih Baik daripada Beli?
 
-Pertama, **biaya awal jauh lebih ringan**. Harga kasur baru berkualitas bisa mencapai jutaan rupiah — uang yang seharusnya bisa dialokasikan untuk kebutuhan kuliah, buku, atau biaya hidup sehari-hari. Dengan sewa, kamu cukup membayar per bulan atau per semester sesuai durasi kuliahmu.
+Pertama, **biaya awal jauh lebih ringan**. Harga kasur baru berkualitas bisa mencapai jutaan rupiah — uang yang seharusnya bisa dialokasikan untuk kebutuhan kuliah, buku, atau biaya hidup sehari-hari. Dengan sewa, kamu cukup membayar per hari atau per minggu sesuai durasi kuliahmu.
 
 Kedua, **praktis dan bebas repot**. Setelah masa kuliah selesai atau kamu pindah kost, tidak perlu pusing memikirkan cara menjual atau memindahkan kasur. Cukup kembalikan ke Santi Living, selesai.
 
@@ -23,9 +23,9 @@ Ketiga, **kualitas tetap premium**. Kasur yang kami sewakan selalu dalam kondisi
 ## Pilihan Kasur untuk Mahasiswa
 
 Santi Living menyediakan berbagai pilihan kasur yang cocok untuk mahasiswa:
-- **Kasur single (90x200 cm)** — pas untuk kamar kost standar
+- **Kasur single (90x200 cm)** — pas untuk kamar kost standar, mulai Rp 25.000/hari
 - **Kasur busa premium** — empuk dan mendukung postur tubuh
-- **Paket bundling dengan bantal dan sprei** — lebih hemat!
+- **Paket bundling dengan bantal dan sprei** — lebih hemat mulai Rp 35.000/hari!
 
 ## Area Layanan di Jogja
 
@@ -34,6 +34,10 @@ Kami melayani pengiriman ke seluruh area Yogyakarta, termasuk:
 - Daerah Seturan, Pogung, Gejayan, Babarsari
 - Area Malioboro dan sekitarnya
 
-**Tidur nyenyak adalah hak setiap mahasiswa.** Dengan Santi Living, kamu bisa mendapatkan kualitas tidur terbaik tanpa menguras tabungan. Hubungi kami sekarang dan pesan kasur sewaanmu hari ini!
+**Tidur nyenyak adalah hak setiap mahasiswa.** Dengan Santi Living, kamu bisa mendapatkan kualitas tidur terbaik tanpa menguras tabungan.
+
+---
+
+**Butuh kasur untuk kost?** Chat WhatsApp sekarang: [0895-1911-9092](https://wa.me/6289519119092) — Pesan hari ini, diantar hari ini!
 
 > *Santi Living — Sewa Kasur Jogja, Solusi Tidur Nyenyak untuk Semua.*
