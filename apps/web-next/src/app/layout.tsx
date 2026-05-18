@@ -80,14 +80,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Santi Living",
+    "url": "https://santiliving.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://santiliving.com/artikel?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Santi Living",
+    "url": "https://santiliving.com",
+    "logo": "https://santiliving.com/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+62-895-1911-9092",
+      "contactType": "customer service",
+      "areaServed": "ID",
+      "availableLanguage": "Indonesian"
+    },
+    "sameAs": [
+      "https://www.instagram.com/santiliving",
+      "https://www.tiktok.com/@santiliving"
+    ]
+  };
+
+  const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Sewa Kasur Jogja – Santi Living",
     "image": "https://santiliving.com/logo.png",
     "@id": "https://santiliving.com",
     "url": "https://santiliving.com",
-    "telephone": "+6289519119092",
+    "telephone": "+628****9092",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Kec. Godean",
@@ -125,7 +159,15 @@ export default function RootLayout({
         <link rel="preload" href="/images/stok-kasur.webp" as="image" type="image/webp" fetchPriority="high" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
