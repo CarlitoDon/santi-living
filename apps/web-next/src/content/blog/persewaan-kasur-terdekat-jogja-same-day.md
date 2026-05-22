@@ -1,6 +1,6 @@
 ---
-title: "Persewaan Kasur Terdekat di Jogja: Same Day Delivery, Bersih & Terjangkau"
-description: "⭐ Persewaan kasur terdekat di Jogja — 51 review bintang 5! Antar 2-4 jam, gratis jemput. Sleman, Bantul, Kota Yogya. Mulai Rp35.000/hari. Chat WA sekarang!"
+title: "Persewaan Kasur Terdekat Jogja: Gratis Antar, 2 Jam Sampai!"
+description: "⭐ Persewaan kasur terdekat di Jogja — 51 review bintang 5! Gratis antar jemput Sleman, Bantul, Kota Yogya. Kasur bersih HD Foam, mulai Rp25.000/hari. WA 0895-1911-9092"
 pubDate: 2026-05-18
 author: "Tim Santi Mebel"
 tags: ["persewaan kasur terdekat", "sewa kasur jogja", "same day delivery", "sleman", "bantul", "sewa kasur"]
