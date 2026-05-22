@@ -8,6 +8,7 @@ import { router, protectedProcedure, publicProcedure } from "../trpc";
 import { TRPCError } from "@trpc/server";
 import { CreateOrderSchema } from "../../types/order";
 import {
+  getAdminWhatsappNumber,
   getPublicBaseUrl,
   parseCompanyScopeHeader,
   requireSantiLivingCompanyId,
@@ -20,9 +21,14 @@ import {
   confirmPayment as confirmPaymentErp,
   updateRentalOrder,
 } from "../../services/erp-client";
+import { verifyWhatsappPhone } from "../../services/bot-client";
 import {
   createSnapToken,
 } from "../../services/midtrans-client";
+import {
+  notifyAdminNewOrder,
+  sendOrderConfirmation,
+} from "../../services/wa-notifier";
 
 const readHeaderValue = (value: string | string[] | undefined) => {
   const rawValue = Array.isArray(value) ? value[0] : value;
@@ -122,6 +128,87 @@ const buildOutboundContext = (
     : {}),
 });
 
+const preflightWhatsappPhone = async (phone: string) => {
+  try {
+    const result = await verifyWhatsappPhone(phone);
+
+    if (!result.valid || !result.exists) {
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message:
+          result.reason || "Nomor WhatsApp tidak terdaftar atau tidak aktif",
+      });
+    }
+
+    return result;
+  } catch (error) {
+    if (error instanceof TRPCError) {
+      throw error;
+    }
+
+    const message = error instanceof Error ? error.message : String(error);
+    throw new TRPCError({
+      code: "SERVICE_UNAVAILABLE",
+      message:
+        message ||
+        "Bot WhatsApp belum siap. Silakan coba lagi atau hubungi admin.",
+      cause: error,
+    });
+  }
+};
+
+const notifyOrderCreated = async (
+  input: z.infer<typeof CreateOrderSchema>,
+  order: {
+    id: string;
+    orderNumber: string;
+    publicToken: string;
+    orderUrl: string;
+  },
+) => {
+  try {
+    await sendOrderConfirmation({
+      orderId: order.orderNumber,
+      customerName: input.customerName,
+      customerWhatsapp: input.customerWhatsapp,
+      deliveryAddress: input.deliveryAddress,
+      addressFields: input.addressFields,
+      items: input.items,
+      totalPrice: input.totalPrice,
+      orderDate: input.orderDate,
+      endDate: input.endDate,
+      duration: input.duration,
+      deliveryFee: input.deliveryFee,
+      paymentMethod: input.paymentMethod,
+      notes: input.notes,
+      volumeDiscountAmount: input.volumeDiscountAmount,
+      volumeDiscountLabel: input.volumeDiscountLabel,
+      orderUrl: order.orderUrl,
+    });
+  } catch (error) {
+    console.error("[Order Router] Customer WA notification failed:", error);
+  }
+
+  const adminWhatsapp = getAdminWhatsappNumber();
+  if (!adminWhatsapp) {
+    return;
+  }
+
+  try {
+    await notifyAdminNewOrder({
+      adminWhatsapp,
+      orderNumber: order.orderNumber,
+      customerName: input.customerName,
+      customerPhone: input.customerWhatsapp,
+      totalAmount: input.totalPrice,
+      orderUrl: order.orderUrl,
+      erpOrderId: order.id,
+    });
+  } catch (error) {
+    console.error("[Order Router] Admin WA notification failed:", error);
+  }
+};
+
 export const orderRouter = router({
   /**
    * Create order - called by santi-living frontend
@@ -137,6 +224,8 @@ export const orderRouter = router({
       );
 
       return runWithOutboundRequestContext(outboundContext, async () => {
+        await preflightWhatsappPhone(input.customerWhatsapp);
+
         // 1. Find or create partner in sync-erp
         const partner = await findOrCreatePartner({
           companyId: configuredCompanyId,
@@ -195,11 +284,22 @@ export const orderRouter = router({
           paymentMethod: input.paymentMethod,
           discountAmount: input.volumeDiscountAmount,
           discountLabel: input.volumeDiscountLabel,
+          externalSource: "santi-living",
+          metadata: {
+            storefront: "santi-living",
+            customerWhatsapp: input.customerWhatsapp,
+          },
         });
 
         // 4. Generate public URL
         const baseUrl = getPublicBaseUrl();
         const orderUrl = `${baseUrl}/pesanan/${order.publicToken}`;
+        void notifyOrderCreated(input, {
+          id: order.id,
+          orderNumber: order.orderNumber,
+          publicToken: order.publicToken,
+          orderUrl,
+        });
 
         return {
           id: order.id,
@@ -440,7 +540,7 @@ export const orderRouter = router({
       // item.unitPrice is the per-day price, item.subtotal = unitPrice * quantity * duration
       const itemDetails = order.items.map((item) => ({
         id: item.name.substring(0, 50),
-        price: Math.round(item.subtotal / item.quantity), // Total price per unit (includes duration)
+        price: Math.round((item.subtotal ?? 0) / item.quantity), // Total price per unit (includes duration)
         quantity: item.quantity,
         name: item.name.substring(0, 50),
       }));
@@ -477,6 +577,13 @@ export const orderRouter = router({
         order.paymentMethod,
         ")",
       );
+
+      if (order.totalAmount === null) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Order total amount is missing",
+        });
+      }
 
       const token = await createSnapToken({
         transaction_details: {

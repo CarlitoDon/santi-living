@@ -30,3 +30,7 @@ export const botClient: TRPCClient<AppRouter> = createTRPCClient<AppRouter>({
     }),
   ],
 });
+
+export async function verifyWhatsappPhone(phone: string) {
+  return botClient.bot.verifyPhone.mutate({ phone });
+}

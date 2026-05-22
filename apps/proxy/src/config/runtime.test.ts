@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
-  getSyncErpApiPublicRentalUrl,
+  getSyncErpApiBaseUrl,
   getSyncErpBotTrpcUrl,
   parseBearerToken,
 } from "./runtime";
@@ -16,19 +16,15 @@ describe("runtime helpers", () => {
     process.env.SYNC_ERP_BOT_URL = originalEnv.SYNC_ERP_BOT_URL;
   });
 
-  it("normalizes SYNC_ERP_API_URL to publicRental endpoint", () => {
+  it("normalizes SYNC_ERP_API_URL to REST API v1 endpoint", () => {
     process.env.SYNC_ERP_API_URL = "https://api.example.com/api/trpc/";
-    expect(getSyncErpApiPublicRentalUrl()).toBe(
-      "https://api.example.com/api/trpc/publicRental",
-    );
+    expect(getSyncErpApiBaseUrl()).toBe("https://api.example.com/api/v1");
   });
 
-  it("keeps explicit publicRental endpoint untouched", () => {
+  it("migrates explicit legacy publicRental endpoint to REST API v1", () => {
     process.env.SYNC_ERP_API_URL =
       "https://api.example.com/api/trpc/publicRental";
-    expect(getSyncErpApiPublicRentalUrl()).toBe(
-      "https://api.example.com/api/trpc/publicRental",
-    );
+    expect(getSyncErpApiBaseUrl()).toBe("https://api.example.com/api/v1");
   });
 
   it("normalizes bot endpoint to /api/trpc", () => {

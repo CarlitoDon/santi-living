@@ -8,6 +8,9 @@ const {
   mockGetOrderByToken,
   mockConfirmPayment,
   mockUpdateRentalOrder,
+  mockVerifyWhatsappPhone,
+  mockSendOrderConfirmation,
+  mockNotifyAdminNewOrder,
 } = vi.hoisted(() => ({
   processEnvSetup: (() => {
     process.env.SANTI_LIVING_COMPANY_ID = "santi-company-test";
@@ -17,6 +20,9 @@ const {
   mockGetOrderByToken: vi.fn(),
   mockConfirmPayment: vi.fn(),
   mockUpdateRentalOrder: vi.fn(),
+  mockVerifyWhatsappPhone: vi.fn(),
+  mockSendOrderConfirmation: vi.fn(),
+  mockNotifyAdminNewOrder: vi.fn(),
 }));
 
 vi.mock("../../services/erp-client", () => ({
@@ -43,6 +49,15 @@ vi.mock("../../services/erp-client", () => ({
 vi.mock("../../services/midtrans-client", () => ({
   createSnapToken: vi.fn(),
   createQrisCharge: vi.fn(),
+}));
+
+vi.mock("../../services/bot-client", () => ({
+  verifyWhatsappPhone: mockVerifyWhatsappPhone,
+}));
+
+vi.mock("../../services/wa-notifier", () => ({
+  sendOrderConfirmation: mockSendOrderConfirmation,
+  notifyAdminNewOrder: mockNotifyAdminNewOrder,
 }));
 
 import { orderRouter } from "./order.router";
@@ -128,6 +143,13 @@ describe("orderRouter.create", () => {
     process.env.PUBLIC_BASE_URL = "https://santi.test";
     process.env.NODE_ENV = "test";
 
+    mockVerifyWhatsappPhone.mockResolvedValue({
+      valid: true,
+      exists: true,
+      normalizedPhone: "6281234567890",
+    });
+    mockSendOrderConfirmation.mockResolvedValue({ success: true });
+    mockNotifyAdminNewOrder.mockResolvedValue({ success: true });
     mockFindOrCreatePartner.mockResolvedValue({
       id: "partner-123",
       name: "Budi Santoso",
@@ -156,6 +178,7 @@ describe("orderRouter.create", () => {
 
     const result = await caller.create(baseInput);
 
+    expect(mockVerifyWhatsappPhone).toHaveBeenCalledWith("081234567890");
     expect(mockFindOrCreatePartner).toHaveBeenCalledWith({
       companyId: "santi-company-test",
       name: "Budi Santoso",
@@ -207,6 +230,11 @@ describe("orderRouter.create", () => {
       paymentMethod: "qris",
       discountAmount: 10000,
       discountLabel: "Promo Maret",
+      externalSource: "santi-living",
+      metadata: {
+        storefront: "santi-living",
+        customerWhatsapp: "081234567890",
+      },
     });
     expect(result).toEqual({
       id: "order-123",
@@ -224,6 +252,23 @@ describe("orderRouter.create", () => {
 
     await expect(caller.create(baseInput)).rejects.toThrow(
       "Missing authorization header",
+    );
+    expect(mockFindOrCreatePartner).not.toHaveBeenCalled();
+    expect(mockCreateRentalOrder).not.toHaveBeenCalled();
+  });
+
+  it("rejects invalid WhatsApp numbers before touching ERP services", async () => {
+    const caller = buildCaller({
+      authorization: "Bearer proxy-test-secret",
+    });
+    mockVerifyWhatsappPhone.mockResolvedValueOnce({
+      valid: false,
+      exists: false,
+      reason: "Nomor WhatsApp tidak terdaftar atau tidak aktif",
+    });
+
+    await expect(caller.create(baseInput)).rejects.toThrow(
+      "Nomor WhatsApp tidak terdaftar atau tidak aktif",
     );
     expect(mockFindOrCreatePartner).not.toHaveBeenCalled();
     expect(mockCreateRentalOrder).not.toHaveBeenCalled();
