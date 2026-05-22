@@ -1,6 +1,6 @@
 ---
-title: "Harga Sewa Kasur Jogja 2026: Panduan Lengkap dari Rp25.000/Hari"
-description: "💰 Harga sewa kasur Jogja 2026: Rp25.000/hari kasur saja, Rp35.000 paket lengkap (kasur+sprei+bantal). Ada simulasi sewa vs beli. Gratis antar jemput! Chat WA 0895-1911-9092."
+title: "Harga Sewa Kasur 2026: Daftar Lengkap Rp25rb/Hari | Santi Living Jogja"
+description: "💰 Daftar harga sewa kasur 2026: Rp25.000/hari kasur saja, Rp35.000 paket lengkap. Simulasi sewa vs beli hemat Rp1,5 juta! Gratis antar jemput Jogja. WA 0895-1911-9092"
 pubDate: 2026-05-18
 author: "Tim Santi Mebel"
 tags: ["harga sewa kasur", "sewa kasur jogja", "biaya sewa", "tips hemat", "panduan lengkap", "2026"]
