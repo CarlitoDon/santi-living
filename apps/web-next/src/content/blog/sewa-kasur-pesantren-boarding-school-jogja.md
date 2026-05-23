@@ -105,7 +105,7 @@ A: Ya, kami menggunakan busa High Density yang tahan lama meski dipakai setiap h
 A: Kasur kami melalui proses anti-bacterial dan UV-C sterilization. Aman untuk yang memiliki alergi ringan.
 
 **Q: Bisa dikirim ke luar Sleman?**
-A: Bisa! Kami melayani seluruh wilayah DIY termasuk Kulonprogo dan Gunung Kidul.
+A: Bisa untuk area layanan aktif seperti Sleman, Bantul, Kota Yogyakarta, dan Kulonprogo. Area lain perlu konfirmasi admin sebelum booking.
 
 📱 **Hubungi untuk penawaran grosir: [0895-1911-9092](https://wa.me/6289519119092)**
 

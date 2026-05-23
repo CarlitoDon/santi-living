@@ -21,7 +21,7 @@ const faqItems = [
   { q: 'Apakah bisa antar hari ini?', a: 'Ya! Pesan sebelum jam 15:00 WIB dan kasur bisa sampai di hari yang sama untuk area Jogja, Sleman, dan Bantul.' },
   { q: 'Bagaimana cara memesan?', a: 'Sangat mudah — pilih kasur, isi formulir pemesanan, dan lakukan pembayaran. Tim kami akan langsung mengantar kasur ke lokasi Anda.' },
   { q: 'Apakah kasur sewaan bersih?', a: 'Ya, setiap kasur kami cuci dan sterilkan sebelum dikirim. Kami juga menyediakan sprei bersih dan bantal baru untuk setiap pelanggan.' },
-  { q: 'Apa saja area jangkauan pengiriman?', a: 'Kami melayani seluruh area Yogyakarta: Sleman, Bantul, Kota Jogja, Kulonprogo, dan Gunung Kidul. Area terdekat dari Godean mendapat gratis ongkir!' },
+  { q: 'Apa saja area jangkauan pengiriman?', a: 'Area layanan aktif kami: Sleman, Bantul, Kota Jogja, dan Kulonprogo. Area terdekat dari Godean mendapat gratis ongkir!' },
   { q: 'Berapa lama minimal sewa?', a: 'Minimal sewa 1 hari. Anda bisa sewa harian, mingguan, atau bulanan sesuai kebutuhan.' },
 ];
 
@@ -42,7 +42,7 @@ const benefits = [
   { icon: '📍', title: 'Gratis Jemput', desc: 'Bebas biaya pengambilan unit kasur saat masa sewa Anda berakhir.' },
 ];
 
-const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo', 'Gunung Kidul'];
+const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo'];
 
 import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
 
@@ -242,7 +242,7 @@ export default function HomePage() {
             <div>
               <h2 className="text-xl md:text-2xl font-bold mb-4">Lokasi Kami</h2>
               <p className="text-text-secondary mb-4 leading-relaxed">
-                Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke seluruh area DIY.
+                Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke area layanan aktif Yogyakarta.
               </p>
               <address className="not-italic bg-surface p-5 rounded-xl border border-border mb-4">
                 <p className="font-bold text-primary mb-1">Workshop Santi Living</p>

@@ -74,7 +74,7 @@ A: Segera hubungi kami. Kami ganti dengan kasur baru tanpa biaya tambahan.
 A: Bisa, minimum sewa adalah 1 hari (24 jam).
 
 **Q: Apakah bisa sewa untuk area di luar Jogja?**
-A: Untuk area DIY (Sleman, Bantul, Kulonprogo, Gunung Kidul) kami layani. Untuk di luar DIY, silakan hubungi kami untuk negosiasi.
+A: Area layanan aktif kami mencakup Sleman, Bantul, Kota Yogyakarta, dan Kulonprogo. Untuk area lain, silakan hubungi admin untuk konfirmasi sebelum booking.
 
 **Q: Bagaimana cara memperpanjang sewa?**
 A: Hubungi WhatsApp kami sebelum masa sewa berakhir. Kami akan atur perpanjangan.

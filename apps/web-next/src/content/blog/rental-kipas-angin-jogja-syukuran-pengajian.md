@@ -20,7 +20,7 @@ Santi Living sangat memahami pentingnya kelancaran acara Anda. Kami menyewakan *
 
 ## Kami Antar Sampai Teras Rumah Anda
 
-Persiapan acara syukuran sudah cukup merepotkan. Jangan tambah beban pikiran Anda dengan harus menjemput barang sewaan. Tim kurir kami melayani **pengantaran kilat** ke seluruh area Jogja, Sleman, dan Bantul. 
+Persiapan acara syukuran sudah cukup merepotkan. Jangan tambah beban pikiran Anda dengan harus menjemput barang sewaan. Tim kurir kami melayani **pengantaran kilat** ke area aktif Jogja, Sleman, dan Bantul.
 
 Anda pesan hari ini, barang akan tiba sebelum tamu pertama Anda datang.
 

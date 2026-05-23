@@ -29,7 +29,7 @@ Santi Living menyediakan berbagai pilihan kasur yang cocok untuk mahasiswa:
 
 ## Area Layanan di Jogja
 
-Kami melayani pengiriman ke seluruh area Yogyakarta, termasuk:
+Kami melayani pengiriman ke area aktif Yogyakarta, termasuk:
 - Sekitar kampus UGM, UNY, UII, UPN, dan kampus lainnya
 - Daerah Seturan, Pogung, Gejayan, Babarsari
 - Area Malioboro dan sekitarnya

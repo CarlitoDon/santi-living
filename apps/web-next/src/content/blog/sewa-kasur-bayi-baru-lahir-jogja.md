@@ -38,7 +38,7 @@ Kami memahami kebersihan adalah prioritas utama untuk bayi yang sistem imunnya m
 
 ## Layanan Antar Jemput Gratis
 
-Tidak perlu repot keluar rumah dengan bayi. Tim Santi Living mengantar pesanan langsung ke alamat Anda di seluruh area Jogja — mencakup Sleman, Bantul, Kota, Kulon Progo, dan Gunungkidul. Proses pemesanan cepat dan fleksibel.
+Tidak perlu repot keluar rumah dengan bayi. Tim Santi Living mengantar pesanan langsung ke area layanan aktif Jogja — mencakup Sleman, Bantul, Kota Yogyakarta, dan Kulon Progo. Proses pemesanan cepat dan fleksibel.
 
 **Sambut si kecil dengan tidur yang nyaman, tanpa perlu khawatir budget.** Percayakan kebutuhan tidur bayi Anda kepada Santi Living — mitra terpercaya keluarga di Jogja.
 

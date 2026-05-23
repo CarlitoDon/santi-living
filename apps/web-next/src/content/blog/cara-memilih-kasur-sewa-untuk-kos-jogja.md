@@ -83,12 +83,13 @@ Sebelum memutuskan, cek review dari pelanggan lain. Vendor terpercaya biasanya p
 
 ## Area Layanan Sewa Kasur Kos di Jogja
 
-Santi Living melayani pengiriman ke seluruh area DIY:
+Santi Living melayani pengiriman ke area layanan aktif Yogyakarta:
 - **Sleman** — Depok, Gamping, Mlati, Ngaglik, Godean
 - **Bantul** — Sewon, Kasihan, Banguntapan, Piyungan
 - **Kota Yogyakarta** — Umbulharjo, Kotagede, Tegalrejo, Danurejan
 - **Kulonprogo** — Wates, Sentolo, Pengasih
-- **Gunung Kidul** — Wonosari, Playen, Patuk
+
+Untuk area di luar daftar tersebut, konfirmasi admin terlebih dahulu sebelum booking.
 
 ## Cara Pesan Kasur Sewa untuk Kos
 

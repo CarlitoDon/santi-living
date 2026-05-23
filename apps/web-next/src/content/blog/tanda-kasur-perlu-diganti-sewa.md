@@ -44,7 +44,7 @@ Proses request penggantian di Santi Living sangat mudah:
 
 1. **Hubungi tim Santi Living** melalui WhatsApp di [0895-1911-9092](https://wa.me/6289519119092)
 2. **Sampaikan keluhan spesifik** — sebutkan tanda-tanda yang Anda alami dari daftar di atas
-3. **Tim kami menjadwalkan pengecekan** — biasanya dalam 1-2 hari kerja di seluruh area Jogja
+3. **Tim kami menjadwalkan pengecekan** — biasanya dalam 1-2 hari kerja di area layanan aktif Jogja
 4. **Kasur pengganti dikirim** setelah pengecekan disetujui, tanpa biaya tambahan selama masih dalam masa sewa
 
 Santi Living berkomitmen menjaga kualitas tidur pelanggan. Jangan ragu menghubungi kami — kenyamanan Anda adalah prioritas kami.

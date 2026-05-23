@@ -18,11 +18,11 @@ Ketika tamu sudah di depan pintu atau keluarga besar tiba mendadak, Anda butuh k
 - **Biaya ongkir lebih murah** — Semakin dekat, semakin hemat
 - **Bisa antar jemput fleksibel** — Mau pagi, siang, atau malam, kami atur
 
-Santi Living berpusat di **Jl. Godean KM4, Sleman** — lokasi strategis yang menjangkau seluruh wilayah DIY.
+Santi Living berpusat di **Jl. Godean KM4, Sleman** — lokasi strategis untuk menjangkau area layanan aktif Yogyakarta.
 
 ## Area Jangkauan Persewaan Kasur Santi Living
 
-Kami melayani pengiriman ke seluruh Daerah Istimewa Yogyakarta:
+Kami melayani pengiriman ke area layanan aktif Yogyakarta:
 
 | Wilayah | Estimasi Pengiriman |
 |---------|-------------------|
@@ -30,7 +30,7 @@ Kami melayani pengiriman ke seluruh Daerah Istimewa Yogyakarta:
 | Sleman (Godean, Gamping, Depok) | 30-45 menit |
 | Bantul (Kasihan, Sewon, Banguntapan) | 45-75 menit |
 | Kulonprogo | 60-90 menit |
-| Gunung Kidul | 90-120 menit |
+| Area di luar layanan aktif | Konfirmasi admin sebelum booking |
 
 ## Apa yang Membedakan Santi Living dari Persewaan Lain?
 

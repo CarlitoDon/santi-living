@@ -106,7 +106,7 @@ Setiap rupiah yang Anda bayar sudah mencakup:
 - **Sleman (luar Godean):** Rp20.000 - Rp30.000
 - **Bantul:** Rp25.000 - Rp35.000
 - **Kulonprogo:** Rp35.000 - Rp50.000
-- **Gunung Kidul:** Rp50.000 - Rp70.000
+- **Area di luar layanan aktif:** konfirmasi admin sebelum booking
 
 *Catatan: Ongkir bisa gratis atau diskon besar dengan promo tertentu.*
 

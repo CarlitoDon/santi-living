@@ -46,7 +46,7 @@ Menyewa dari Santi Living adalah pilihan cerdas jika:
 2. **Fleksibilitas upgrade** — ingin ganti tipe kasur? Mudah dan cepat
 3. **Biaya transparan** — tidak ada biaya tersembunyi, semua jelas di awal
 4. **Bebas biaya perawatan** — tim kami yang mengurus pembersihan dan sanitasi
-5. **Gratis antar jemput** di seluruh area Jogja dan sekitarnya
+5. **Gratis antar jemput** di area layanan aktif Jogja dan sekitarnya
 6. **Kasur selalu bersih dan higienis** — setiap unit disanitasi sebelum dikirim ke pelanggan
 
 ## Simulasi Biaya: Kasus Mahasiswa
