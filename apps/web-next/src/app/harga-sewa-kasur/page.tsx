@@ -143,10 +143,12 @@ export default function HargaSewaKasurPage() {
               Hitung Biaya Sewa
             </Link>
             <a
-              href={getWhatsAppUrl('Halo Santi Living, saya mau tanya harga sewa kasur')}
+              href={getWhatsAppUrl('Halo Santi Living, saya mau tanya harga sewa kasur', 'harga_page')}
               className="max-w-[280px] w-full bg-transparent text-white border-2 border-white/50 no-underline py-3 px-6 rounded-md font-semibold hover:bg-white/15 hover:border-white transition-colors flex justify-center items-center gap-2"
               target="_blank"
               rel="noopener noreferrer"
+              data-wa-source="harga_page"
+              data-wa-location="harga_page"
             >
               💬 Chat WhatsApp
             </a>

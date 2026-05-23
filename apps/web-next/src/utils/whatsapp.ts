@@ -24,13 +24,89 @@ Terima kasih.`;
 export const WA_PRESET_INQUIRY = 'Halo Santi Living, saya mau tanya tentang sewa kasur';
 
 /**
+ * Short CTA source codes appended to WA messages for manual attribution.
+ * Format: [W:xx] — easy to spot in WhatsApp chat without breaking readability.
+ */
+export const WA_SOURCE_CODES: Record<string, string> = {
+  header_desktop: 'hd',
+  header_mobile: 'hm',
+  sticky_button: 'st',
+  hero_cta: 'hc',
+  hero_phone: 'hp',
+  footer_cta: 'fc',
+  nav_sidebar: 'nv',
+  harga_page: 'hg',
+  order_page: 'od',
+  thank_you: 'ty',
+  promo_section: 'pr',
+  footer_social: 'fs',
+  product_page: 'pp',
+  blog_cta: 'bl',
+  calculator: 'cl',
+};
+
+/**
+ * Computes a short attribution code from sl_attribution_v1 localStorage data.
+ * CLIENT-SIDE ONLY — call this from click handlers, never during render.
+ * Returns a short code like "g/cpc" or "g/organic" or "fb/ig" etc.
+ */
+export function getAttributionTag(): string {
+  if (typeof window === 'undefined') return '';
+  try {
+    const raw = localStorage.getItem('sl_attribution_v1');
+    if (!raw) return '';
+    const parsed = JSON.parse(raw);
+    const t = parsed.last || {};
+    const source = (t.source || '').toLowerCase();
+    const medium = (t.medium || '').toLowerCase();
+
+    // Google Ads
+    if (t.gclid || (source === 'google' && medium === 'cpc')) return 'g/cpc';
+    if (t.gbraid) return 'g/cpc-b';
+    // Google organic
+    if (source === 'google' && medium === 'organic') return 'g/org';
+    // GBP
+    if (source.includes('google') && medium === 'organic') return 'gbp';
+    // Social
+    if (source.includes('instagram') || source.includes('ig')) return 'ig';
+    if (source.includes('facebook') || source.includes('fb')) return 'fb';
+    if (source.includes('tiktok')) return 'tt';
+    // Referral
+    if (medium === 'referral') return 'ref';
+    // Direct
+    if (source === '(direct)' || source === '(none)') return 'dir';
+    // Default
+    return source ? source.slice(0, 6) : '';
+  } catch {
+    return '';
+  }
+}
+
+/**
  * Generates a correctly encoded WhatsApp URL using the globally configured phone number.
  * Ensures the `data/config.json` number acts as the single source of truth.
+ * Appends only the static CTA source code [W:<code>] for deterministic SSR/client render.
+ *
+ * Attribution (Ads/organic/manual) is NOT read here — it's handled client-side
+ * in GtagScript.tsx click handler to avoid hydration mismatch.
  *
  * @param text The pre-filled message text.
+ * @param sourceKey Optional source key from WA_SOURCE_CODES (e.g. 'header_desktop').
  * @returns A fully encoded WhatsApp URI.
  */
-export function getWhatsAppUrl(text?: string): string {
-  if (!text) return `https://wa.me/${config.whatsappNumber}`;
-  return `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(text)}`;
+export function getWhatsAppUrl(text?: string, sourceKey?: string): string {
+  let message = text || '';
+
+  // Append ONLY the static CTA source code — no localStorage reads (deterministic for SSR)
+  if (sourceKey) {
+    const code = WA_SOURCE_CODES[sourceKey] || sourceKey.slice(0, 2);
+    const tag = `[W:${code}]`;
+    // Append tag at the end, separated by newline
+    if (message) {
+      message = `${message}\n${tag}`;
+    }
+  }
+
+  if (!message) return `https://wa.me/${config.whatsappNumber}`;
+  return `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }

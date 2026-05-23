@@ -178,11 +178,12 @@ export function LandingPage({ config: cfg }: LandingPageProps) {
               Hitung Biaya Sewa
             </Link>
             <a
-              href={getWhatsAppUrl(cfg.cta.waText)}
+              href={getWhatsAppUrl(cfg.cta.waText, cfg.cta.waSource)}
               className="bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white transition-colors text-center inline-flex justify-center items-center h-14"
               target="_blank"
               rel="noopener"
               data-wa-source={cfg.cta.waSource}
+              data-wa-location="landing"
             >
               💬 Chat WhatsApp
             </a>

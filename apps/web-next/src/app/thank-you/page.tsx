@@ -19,11 +19,13 @@ export default function ThankYouPage() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', alignItems: 'center' }}>
             <a
-              href={getWhatsAppUrl()}
+              href={getWhatsAppUrl(undefined, 'thank_you')}
               className="btn btn-whatsapp btn-lg"
               target="_blank"
               rel="noopener"
               style={{ width: '100%', maxWidth: '280px', textDecoration: 'none' }}
+              data-wa-source="thank_you"
+              data-wa-location="thank_you"
             >
               💬 Chat WhatsApp
             </a>

@@ -172,11 +172,13 @@ export default async function PesananPage({ params }: PageProps) {
           {/* Actions */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
             <a
-              href={getWhatsAppUrl()}
+              href={getWhatsAppUrl(undefined, 'order_page')}
               className="btn btn-whatsapp"
               target="_blank"
               rel="noopener"
               style={{ textDecoration: 'none', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', textAlign: 'center' }}
+              data-wa-source="order_page"
+              data-wa-location="order"
             >
               💬 Hubungi Kami
             </a>
