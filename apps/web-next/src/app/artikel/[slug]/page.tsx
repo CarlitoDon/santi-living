@@ -8,6 +8,30 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+function rewriteWhatsappLinks(htmlContent: string, slug: string): string {
+  return htmlContent.replace(/href="https:\/\/wa\.me\/(\d+)(\?[^"]*)?"/g, (match, phone: string, query = '') => {
+    try {
+      const sourceUrl = new URL(`https://wa.me/${phone}${query}`);
+      const params = new URLSearchParams({
+        to: phone,
+        cta_source: 'blog_cta',
+        landing_page: `/artikel/${slug}`,
+        source: 'blog',
+        medium: 'organic',
+        campaign: slug,
+      });
+      const text = sourceUrl.searchParams.get('text');
+      if (text) {
+        params.set('text', text);
+      }
+
+      return `href="/api/wa?${params.toString()}"`;
+    } catch {
+      return match;
+    }
+  });
+}
+
 export async function generateStaticParams() {
   const posts = getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
@@ -32,7 +56,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
   if (!post) notFound();
 
   const processedContent = await remark().use(html).process(post.content);
-  const htmlContent = processedContent.toString();
+  const htmlContent = rewriteWhatsappLinks(processedContent.toString(), slug);
 
   const articleSchema = {
     "@context": "https://schema.org",
