@@ -63,9 +63,11 @@ export function getAttributionTag(): string {
     // Google Ads
     if (t.gclid || (source === 'google' && medium === 'cpc')) return 'g/cpc';
     if (t.gbraid) return 'g/cpc-b';
+    if (t.wbraid) return 'g/cpc-w';
     // Google organic
     if (source === 'google' && medium === 'organic') return 'g/org';
     // GBP
+    if (source.includes('google_business_profile')) return 'gbp';
     if (source.includes('google') && medium === 'organic') return 'gbp';
     // Social
     if (source.includes('instagram') || source.includes('ig')) return 'ig';
@@ -83,8 +85,8 @@ export function getAttributionTag(): string {
 }
 
 /**
- * Generates a correctly encoded WhatsApp URL using the globally configured phone number.
- * Ensures the `data/config.json` number acts as the single source of truth.
+ * Generates a tracked WhatsApp redirect URL using the globally configured phone number.
+ * The redirect endpoint logs a lead event before sending the visitor to WhatsApp.
  * Appends only the static CTA source code [W:<code>] for deterministic SSR/client render.
  *
  * Attribution (Ads/organic/manual) is NOT read here — it's handled client-side
@@ -92,7 +94,7 @@ export function getAttributionTag(): string {
  *
  * @param text The pre-filled message text.
  * @param sourceKey Optional source key from WA_SOURCE_CODES (e.g. 'header_desktop').
- * @returns A fully encoded WhatsApp URI.
+ * @returns A tracked relative redirect URL.
  */
 export function getWhatsAppUrl(text?: string, sourceKey?: string): string {
   let message = text || '';
@@ -107,6 +109,14 @@ export function getWhatsAppUrl(text?: string, sourceKey?: string): string {
     }
   }
 
-  if (!message) return `https://wa.me/${config.whatsappNumber}`;
-  return `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const params = new URLSearchParams({
+    to: config.whatsappNumber,
+    cta_source: sourceKey || 'unknown',
+  });
+
+  if (message) {
+    params.set('text', message);
+  }
+
+  return `/api/wa?${params.toString()}`;
 }

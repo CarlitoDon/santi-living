@@ -57,13 +57,12 @@ Kasur Santi Living sudah melalui sterilisasi 7 tahap. Langsung bisa dipakai mala
 
 ## Area Layanan
 
-Santi Living melayani pengiriman ke area layanan aktif Yogyakarta:
+Santi Living melayani pengiriman ke seluruh area DIY:
 - **Sleman** — Kaliurang, Godean, Gamping, Depok
 - **Bantul** — Kasihan, Sewon, Banguntapan
 - **Kota Yogyakarta** — Seluruh kecamatan
 - **Kulonprogo** — Wates dan sekitarnya
-
-Untuk area di luar daftar tersebut, konfirmasi admin terlebih dahulu sebelum booking.
+- **Gunung Kidul** — Wonosari dan sekitarnya
 
 ## Pesan Sekarang
 

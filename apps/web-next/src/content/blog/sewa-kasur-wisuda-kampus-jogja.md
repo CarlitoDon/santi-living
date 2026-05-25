@@ -48,7 +48,7 @@ Dengan menyewa kasur tambahan, Anda bisa mengakomodasi keluarga langsung di kos,
 
 ## Area Layanan
 
-Sleman, Bantul, Kota Yogyakarta, dan Kulonprogo.
+Sleman, Bantul, Kota Yogyakarta, Kulonprogo, dan Gunung Kidul.
 
 ## Cara Pesan
 

@@ -65,10 +65,10 @@ Ini bukan hanya menghemat biaya — ini adalah **revenue stream baru** untuk bis
 
 ## Area Pengiriman
 
-Kami melayani pengiriman ke area layanan aktif Yogyakarta:
-- Kota Yogyakarta, Sleman, Bantul, Kulonprogo
+Kami melayani pengiriman ke seluruh area DIY:
+- Kota Yogyakarta, Sleman, Bantul, Kulonprogo, Gunung Kidul
 
-Untuk penginapan di area Kaliurang, Parangtritis, atau area yang lebih jauh, konfirmasi admin terlebih dahulu sebelum booking.
+Untuk penginapan di area Kaliurang, Parangtritis, atau pantai selatan, tetap bisa kami jangkau.
 
 ## Tips Memilih Extra Bed untuk Penginapan
 

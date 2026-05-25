@@ -16,7 +16,7 @@ Berbeda dengan persewaan kasur konvensional yang sering asal-asalan, Santi Livin
 
 - **Ratusan unit kasur** busa High Density yang siap kirim
 - **Proses sterilisasi 7 tahap** untuk setiap kasur yang dikembalikan
-- **Layanan antar jemput** ke area layanan aktif Yogyakarta
+- **Layanan antar jemput** ke seluruh wilayah DIY
 - **Harga transparan** tanpa biaya tersembunyi
 
 ## Layanan yang Tersedia di Santi Living
@@ -40,7 +40,7 @@ Harga grosir khusus untuk acara besar (pernikahan, hajatan, pengajian) dengan ju
 ## Kenapa Warga Jogja Memilih Santi Mebel?
 
 ### Lokasi Strategis
-Berada di Godean — jantung Sleman yang bisa menjangkau Kota Jogja, Bantul, dan Kulonprogo dengan cepat.
+Berada di Godean — jantung Sleman yang bisa menjangkau Kota Jogja, Bantul, Kulonprogo, dan Gunung Kidul dengan cepat.
 
 ### Stok Melimpah
 Tidak perlu booking berminggu-minggu sebelumnya. Bahkan untuk pesanan 30-50 unit, stok kami selalu ready.
@@ -62,7 +62,7 @@ Kami percaya kenyamanan tidur tidak harus mahal. Dengan Rp35.000/hari, Anda suda
 - **Depok, Sleman Timur** — Rp20.000-30.000
 - **Bantul** — Rp25.000-35.000
 - **Kulonprogo** — Rp35.000-50.000
-- **Area di luar layanan aktif** — konfirmasi admin sebelum booking
+- **Gunung Kidul** — Rp50.000-70.000
 
 ## Cara Menghubungi Santi Mebel
 

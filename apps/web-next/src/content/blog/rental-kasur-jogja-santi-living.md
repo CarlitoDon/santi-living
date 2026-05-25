@@ -53,7 +53,7 @@ Setiap kasur melewati proses sterilisasi ketat: inspeksi, vacuum, anti-bakteri, 
 Kami menggunakan kasur busa High Density (HD Foam) yang tidak mudah kempes dan nyaman untuk punggung. Bukan kasur tipis atau bekas.
 
 **3. Same Day Delivery**
-Pesan sekarang, kasur tiba dalam 2-4 jam. Melayani area Sleman, Bantul, Kota Yogyakarta, dan Kulonprogo.
+Pesan sekarang, kasur tiba dalam 2-4 jam. Melayani area Sleman, Bantul, Kota Yogyakarta, Kulonprogo, dan Gunung Kidul.
 
 **4. Harga Transparan**
 Tidak ada biaya tersembunyi. Harga yang tertera adalah harga final. Gratis ongkir area tertentu.
@@ -95,14 +95,14 @@ Tidak perlu KTP atau deposit besar. Cukup bayar sewa, kasur langsung dikirim.
 Bisa! Kami punya stok 50+ unit dan harga grosir khusus untuk order dalam jumlah besar.
 
 **Area mana saja yang dilayani?**
-Area layanan aktif: Sleman, Bantul, Kota Yogyakarta, dan Kulonprogo.
+Seluruh DIY: Sleman, Bantul, Kota Yogyakarta, Kulonprogo, dan Gunung Kidul.
 
 **Apakah bisa perpanjang masa sewa?**
 Tentu! Cukup chat WhatsApp sebelum masa sewa habis, kami perpanjang otomatis.
 
 ---
 
-> 💬 **Santi Living** — divisi khusus persewaan kasur dari Santi Mebel. Melayani rental kasur harian, mingguan, dan bulanan di area aktif Yogyakarta dengan jaminan kebersihan dan kenyamanan terbaik.
+> 💬 **Santi Living** — divisi khusus persewaan kasur dari Santi Mebel. Melayani rental kasur harian, mingguan, dan bulanan di seluruh Yogyakarta dengan jaminan kebersihan dan kenyamanan terbaik.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
