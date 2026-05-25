@@ -15,7 +15,7 @@ Berikut adalah 7 keuntungan jika Anda memilih sewa kasur tambahan di **Santi Liv
 3. **Kasur Kualitas Hotel**: Kami menyediakan kasur **Royal Grand Exclusive** yang empuk dan nyaman.
 4. **Higienitas Terjamin**: Setiap kasur dilapisi sprei bersih yang sudah dilaundry dan melalui proses sterilisasi UV-C.
 5. **Antar Jemput Tanpa Ribet**: Tim kami yang akan mengantar dan mengambil kembali kasur tersebut. Anda cukup duduk manis.
-6. **Fleksibilitas Lokasi**: Kami mengantar ke seluruh area DIY, baik ke rumah pribadi, apartemen, maupun penginapan.
+6. **Fleksibilitas Lokasi**: Kami mengantar ke area layanan aktif Yogyakarta, baik ke rumah pribadi, apartemen, maupun penginapan.
 7. **Bisa Sewa Satuan atau Banyak**: Tidak ada minimal order untuk area tertentu.
 
 Jadikan momen liburan Anda di Jogja lebih berkesan tanpa harus menguras kantong. [**Cek Katalog Produk Kami Disini**](/produk).

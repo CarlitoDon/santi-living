@@ -33,8 +33,11 @@ export function HeroBackground() {
               alt={slide.alt}
               fill
               priority={index === 0}
+              unoptimized={index === 0}
+              quality={index === 0 ? 75 : 60}
               className="object-cover"
-              sizes="100vw"
+              sizes={index === 0 ? '(max-width: 768px) 100vw, 700px' : '100vw'}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
             />
           </div>
         ))}

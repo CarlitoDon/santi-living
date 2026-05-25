@@ -56,6 +56,10 @@ const sendMessageInput = z.object({
   message: z.string(),
 });
 
+const verifyPhoneInput = z.object({
+  phone: z.string(),
+});
+
 // Output types
 export interface SendOrderOutput {
   success: boolean;
@@ -67,8 +71,20 @@ export interface SendMessageOutput {
   messageId: string;
 }
 
+export interface VerifyPhoneOutput {
+  valid: boolean;
+  exists: boolean;
+  normalizedPhone?: string;
+  reason?: string;
+}
+
 // Router type definition (for inference only)
 const botRouter = t.router({
+  verifyPhone: t.procedure
+    .input(verifyPhoneInput)
+    .mutation((): VerifyPhoneOutput => {
+      throw new Error("Type-only");
+    }),
   sendOrder: t.procedure.input(sendOrderInput).mutation((): SendOrderOutput => {
     throw new Error("Type-only");
   }),

@@ -32,6 +32,6 @@ Kebutuhan Anda mungkin berubah. Tahun ini mungkin Anda butuh kasur single karena
 ## Kesimpulan
 Menyewa kasur di Jogja bukan hanya soal hemat biaya, tapi soal **gaya hidup yang efisien dan cerdas**. Anda mendapatkan kenyamanan maksimal tanpa harus terbebani oleh kepemilikan aset yang merepotkan.
 
-Sudah siap membuat kamar kost Anda nyaman hari ini? **Santi Living** siap mengantar kasur berkualitas ke kost Anda di seluruh area Jogja, Sleman, dan Bantul. 
+Sudah siap membuat kamar kost Anda nyaman hari ini? **Santi Living** siap mengantar kasur berkualitas ke kost Anda di area aktif Jogja, Sleman, dan Bantul.
 
 [**Cek Harga Sewa Kasur Disini**](https://santiliving.com/#calculator) atau langsung [**Chat Admin WhatsApp**](https://wa.me/6289519119092) untuk konsultasi gratis!

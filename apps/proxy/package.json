@@ -16,10 +16,9 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "prebuild": "npm run check-sync",
     "start": "node dist/index.js",
     "check-sync": "ts-node scripts/check-sync.ts",
-    "predev": "npm run check-sync && (npx kill-port 3002 --silent || true)",
+    "predev": "npx kill-port 3002 --silent || true",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",

@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import crypto from "crypto";
-import { getAdminWhatsappNumber } from "../config/runtime";
+import { getAdminWhatsappNumber, getPublicBaseUrl } from "../config/runtime";
 import { sendHttpError } from "../utils/http-error";
 
 // import midtransClient from "midtrans-client";
@@ -142,6 +142,7 @@ async function handleSuccess(
       transactionId: notification.transaction_id,
       amount: parseFloat(notification.gross_amount),
     });
+    await notifyPaymentSuccess(orderNumber, notification.transaction_id);
     // eslint-disable-next-line no-console
     console.log(
       `[Midtrans Webhook] Successfully confirmed order ${orderNumber}`,
@@ -175,6 +176,7 @@ async function handleFailure(
       paymentMethod: notification.payment_type,
       failReason: `Midtrans transaction ${reason}`,
     });
+    await notifyPaymentFailure(orderNumber, `Midtrans transaction ${reason}`);
     console.warn(
       `[Midtrans Webhook] Successfully marked order ${orderNumber} as failed`,
     );
@@ -184,6 +186,75 @@ async function handleFailure(
       error,
     );
     throw error;
+  }
+}
+
+async function notifyPaymentSuccess(
+  orderNumber: string,
+  paymentReference?: string,
+) {
+  try {
+    const { getOrderByNumber } = await import("../services/erp-client");
+    const { notifyPaymentConfirmed } = await import("../services/wa-notifier");
+    const { botClient } = await import("../services/bot-client");
+    const order = await getOrderByNumber(orderNumber);
+    const orderUrl = `${getPublicBaseUrl()}/pesanan/${order.publicToken}`;
+
+    if (order.partner.phone) {
+      await notifyPaymentConfirmed({
+        customerWhatsapp: order.partner.phone,
+        customerName: order.partner.name,
+        orderNumber: order.orderNumber,
+        orderUrl,
+        paymentReference,
+      });
+    }
+
+    const adminWhatsapp = getAdminWhatsappNumber();
+    if (adminWhatsapp) {
+      await botClient.bot.sendMessage.mutate({
+        phone: adminWhatsapp,
+        message: `✅ *PEMBAYARAN DITERIMA*\n\nOrder: *${order.orderNumber}*\nCustomer: ${order.partner.name}\nTotal: Rp ${Number(order.totalAmount || 0).toLocaleString("id-ID")}\n\nDetail: ${orderUrl}`,
+      });
+    }
+  } catch (error) {
+    console.error(
+      `[Midtrans Webhook] Failed to send payment success notification for ${orderNumber}`,
+      error,
+    );
+  }
+}
+
+async function notifyPaymentFailure(orderNumber: string, failReason: string) {
+  try {
+    const { getOrderByNumber } = await import("../services/erp-client");
+    const { notifyPaymentRejected } = await import("../services/wa-notifier");
+    const { botClient } = await import("../services/bot-client");
+    const order = await getOrderByNumber(orderNumber);
+    const orderUrl = `${getPublicBaseUrl()}/pesanan/${order.publicToken}`;
+
+    if (order.partner.phone) {
+      await notifyPaymentRejected({
+        customerWhatsapp: order.partner.phone,
+        customerName: order.partner.name,
+        orderNumber: order.orderNumber,
+        orderUrl,
+        failReason,
+      });
+    }
+
+    const adminWhatsapp = getAdminWhatsappNumber();
+    if (adminWhatsapp) {
+      await botClient.bot.sendMessage.mutate({
+        phone: adminWhatsapp,
+        message: `❌ *PEMBAYARAN GAGAL*\n\nOrder: *${order.orderNumber}*\nCustomer: ${order.partner.name}\nAlasan: ${failReason}\n\nDetail: ${orderUrl}`,
+      });
+    }
+  } catch (error) {
+    console.error(
+      `[Midtrans Webhook] Failed to send payment failure notification for ${orderNumber}`,
+      error,
+    );
   }
 }
 

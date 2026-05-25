@@ -71,19 +71,23 @@ export const requireSantiLivingCompanyId = () => {
   return companyId;
 };
 
-export const getSyncErpApiPublicRentalUrl = () => {
-  const baseUrl = readFirstEnv("SYNC_ERP_API_URL") || "http://localhost:3001/api/trpc";
+export const getSyncErpApiBaseUrl = () => {
+  const baseUrl = readFirstEnv("SYNC_ERP_API_URL") || "http://localhost:3001/api/v1";
   const normalizedBaseUrl = normalizeBaseUrl(baseUrl);
 
-  if (normalizedBaseUrl.endsWith("/api/trpc/publicRental")) {
+  if (normalizedBaseUrl.endsWith("/api/v1")) {
     return normalizedBaseUrl;
   }
 
-  if (normalizedBaseUrl.endsWith("/api/trpc")) {
-    return `${normalizedBaseUrl}/publicRental`;
+  if (normalizedBaseUrl.endsWith("/api/trpc/publicRental")) {
+    return normalizedBaseUrl.replace("/api/trpc/publicRental", "/api/v1");
   }
 
-  return normalizedBaseUrl;
+  if (normalizedBaseUrl.endsWith("/api/trpc")) {
+    return normalizedBaseUrl.replace("/api/trpc", "/api/v1");
+  }
+
+  return `${normalizedBaseUrl}/api/v1`;
 };
 
 export const getSyncErpBotTrpcUrl = () => {

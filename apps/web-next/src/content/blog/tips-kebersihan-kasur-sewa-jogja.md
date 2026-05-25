@@ -46,12 +46,16 @@ Jangan menunggu! Jika Anda menemukan:
 - Bau tidak sedap yang menetap
 - Tanda-tanda kerusakan atau jamur
 
-Segera hubungi tim Santi Living. Kami akan mengirimkan unit pengganti atau melakukan perawatan profesional. **Ingat: mengabaikan masalah kecil bisa membuatnya menjadi besar.**
+Segera hubungi tim Santi Living via WhatsApp di [0895-1911-9092](https://wa.me/6289519119092). Kami akan mengirimkan unit pengganti atau melakukan perawatan profesional. **Ingat: mengabaikan masalah kecil bisa membuatnya menjadi besar.**
 
 ## Bonus: Kelembaban Udara Jogja
 
 Jogja cukup lembab, terutama saat musim hujan. Tips tambahan: gunakan dehumidifier atau silica gel di sekitar tempat tidur untuk mengurangi kelembaban yang bisa memicu jamur pada kasur.
 
 **Dengan perawatan sederhana ini, kasur sewaan Anda akan tetap bersih, segar, dan nyaman sepanjang masa pemakaian.**
+
+---
+
+**Butuh kasur bersih dan terawat?** Pesan via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Setiap unit sudah melalui sterilisasi 7 tahap!
 
 > *Santi Living — Kami Antar Bersih, Anda Jaga Nyaman. Sewa Kasur Jogja.*

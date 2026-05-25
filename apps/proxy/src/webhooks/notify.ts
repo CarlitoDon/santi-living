@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { botClient } from "../services/bot-client";
-import { getOrderByToken, deleteRentalOrder } from "../services/erp-client";
+import { getOrderByToken } from "../services/erp-client";
 import { getAdminWhatsappNumber, getPublicBaseUrl } from "../config/runtime";
 import { retryWithBackoff } from "../utils/retry";
 import { sendHttpError } from "../utils/http-error";
@@ -240,26 +240,13 @@ Detail customer: ${orderUrl}
           getErrorMetadata(err),
         );
 
-        // Check for permanent Invalid Number error → ROLLBACK
+        // Permanent phone errors are handled in Santi before order creation.
+        // If a late notification fails, keep the ERP order and surface a manual
+        // follow-up path instead of deleting business state.
         if (isPermanentError(err)) {
           console.error(
-            `[Webhook] Invalid WhatsApp number detected for order ${token}. Rolling back...`,
+            `[Webhook] Invalid WhatsApp number detected for order ${token}. Keeping ERP order for manual follow-up.`,
           );
-
-          // Try to get order for rollback
-          try {
-            const order = await getOrderByToken(token);
-            if (order?.id) {
-              await deleteRentalOrder(order.id);
-              logWebhook(
-                `[Webhook] Order ${token} rolled back successfully.`,
-              );
-            } else {
-              console.error("[Webhook] Cannot rollback: Order ID missing.");
-            }
-          } catch (rollbackErr) {
-            console.error("[Webhook] Failed to rollback order:", rollbackErr);
-          }
 
           sendHttpError(
             res,

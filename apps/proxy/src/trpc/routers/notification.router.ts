@@ -129,7 +129,7 @@ export const notificationRouter = router({
         orderNumber: order.orderNumber,
         customerName: order.partner.name,
         customerPhone: order.partner.phone || "-",
-        totalAmount: order.totalAmount,
+        totalAmount: order.totalAmount ?? 0,
         orderUrl,
         erpOrderId: input.erpOrderId,
       });
