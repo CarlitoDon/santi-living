@@ -13,11 +13,18 @@ function sanitizedPhone(value: string | null): string {
   return digits || config.whatsappNumber;
 }
 
-function appendLeadId(text: string, eventId: string): string {
-  const tag = `[L:${eventId.slice(0, 8)}]`;
-  if (!text.trim()) return tag;
-  if (text.includes(tag)) return text;
-  return `${text}\n${tag}`;
+function sanitizeWhatsAppText(text: string): string {
+  return text
+    .replace(/\n?\[W:[^\]]+\]/g, '')
+    .replace(/\n?\[L:[^\]]+\]/g, '')
+    .replace(/\{Paket Single \/ Paket Double\}/g, '')
+    .replace(/\{jumlah hari\}/g, '')
+    .replace(/\{jumlah\}/g, '')
+    .replace(/\{tanggal\}/g, '')
+    .replace(/\{alamat lengkap\}/g, '')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
 }
 
 export async function GET(request: NextRequest) {
@@ -57,7 +64,7 @@ export async function GET(request: NextRequest) {
     console.info('[santi_lead_event]', JSON.stringify(record));
 
     const to = sanitizedPhone(params.get('to'));
-    const text = appendLeadId(params.get('text') ?? '', eventId);
+    const text = sanitizeWhatsAppText(params.get('text') ?? '');
     const redirectUrl = new URL(`https://wa.me/${to}`);
     if (text) {
       redirectUrl.searchParams.set('text', text);

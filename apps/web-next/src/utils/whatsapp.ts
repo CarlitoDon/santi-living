@@ -6,27 +6,20 @@ import { config } from '@/data/config';
  * improving lead quality and reducing back-and-forth.
  */
 export const WA_PRESET_ORDER = `Halo Admin Santi Living by Santi Mebel Jogja,
-Saya ingin menyewa kasur.
+Saya ingin sewa kasur. Mohon info ketersediaan, harga sewa, dan ongkirnya.
 
-Detail rencana sewa saya:
-Paket: {Paket Single / Paket Double}
-Jumlah unit: {jumlah}
-Tanggal mulai sewa: {tanggal}
-Durasi sewa: {jumlah hari}
-
-Alamat pengiriman:
-{alamat lengkap}
-
-Mohon info ketersediaan, harga sewa, dan ongkirnya.
+Rencana sewa:
+Paket/ukuran kasur:
+Jumlah unit:
+Tanggal mulai:
+Durasi sewa:
+Area/alamat pengiriman:
 Terima kasih.`;
 
 /** Short inquiry preset for header/nav buttons */
 export const WA_PRESET_INQUIRY = 'Halo Santi Living, saya mau tanya tentang sewa kasur';
 
-/**
- * Short CTA source codes appended to WA messages for manual attribution.
- * Format: [W:xx] — easy to spot in WhatsApp chat without breaking readability.
- */
+/** Short CTA source codes kept for backward-compatible analytics labels. */
 export const WA_SOURCE_CODES: Record<string, string> = {
   header_desktop: 'hd',
   header_mobile: 'hm',
@@ -87,7 +80,6 @@ export function getAttributionTag(): string {
 /**
  * Generates a tracked WhatsApp redirect URL using the globally configured phone number.
  * The redirect endpoint logs a lead event before sending the visitor to WhatsApp.
- * Appends only the static CTA source code [W:<code>] for deterministic SSR/client render.
  *
  * Attribution (Ads/organic/manual) is NOT read here — it's handled client-side
  * in GtagScript.tsx click handler to avoid hydration mismatch.
@@ -97,25 +89,13 @@ export function getAttributionTag(): string {
  * @returns A tracked relative redirect URL.
  */
 export function getWhatsAppUrl(text?: string, sourceKey?: string): string {
-  let message = text || '';
-
-  // Append ONLY the static CTA source code — no localStorage reads (deterministic for SSR)
-  if (sourceKey) {
-    const code = WA_SOURCE_CODES[sourceKey] || sourceKey.slice(0, 2);
-    const tag = `[W:${code}]`;
-    // Append tag at the end, separated by newline
-    if (message) {
-      message = `${message}\n${tag}`;
-    }
-  }
-
   const params = new URLSearchParams({
     to: config.whatsappNumber,
     cta_source: sourceKey || 'unknown',
   });
 
-  if (message) {
-    params.set('text', message);
+  if (text) {
+    params.set('text', text);
   }
 
   return `/api/wa?${params.toString()}`;
