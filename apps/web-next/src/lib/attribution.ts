@@ -65,6 +65,34 @@ function getReferrerHost(referrer: string): string {
   }
 }
 
+function classifyReferrer(referrer: string): Pick<AttributionTouch, "source" | "medium"> | null {
+  if (!referrer) return null;
+
+  try {
+    const url = new URL(referrer);
+    const host = url.hostname.replace(/^www\./, "").toLowerCase();
+    const path = url.pathname.toLowerCase();
+
+    if (host === "google.com" || host.endsWith(".google.com") || host.startsWith("google.")) {
+      if (host === "maps.google.com" || path.startsWith("/maps")) {
+        return { source: "google_business_profile", medium: "organic" };
+      }
+
+      return { source: "google", medium: "organic" };
+    }
+
+    if (host.includes("instagram.com")) return { source: "instagram", medium: "referral" };
+    if (host.includes("facebook.com") || host.includes("fb.com")) {
+      return { source: "facebook", medium: "referral" };
+    }
+    if (host.includes("tiktok.com")) return { source: "tiktok", medium: "referral" };
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
 function normalizeSource(raw: string): string {
   const value = raw.trim();
   return value ? value.toLowerCase() : "(direct)";
@@ -78,8 +106,19 @@ function normalizeMedium(raw: string, hasReferrer: boolean): string {
 
 function buildTouch(searchParams: URLSearchParams, referrer: string): AttributionTouch {
   const hasReferrer = Boolean(referrer);
-  const source = normalizeSource(searchParams.get("utm_source") ?? getReferrerHost(referrer));
-  const medium = normalizeMedium(searchParams.get("utm_medium") ?? "", hasReferrer);
+  const paidGoogleClickId =
+    searchParams.get("gclid") ?? searchParams.get("wbraid") ?? searchParams.get("gbraid");
+  const referrerClassification = classifyReferrer(referrer);
+  const rawSource =
+    searchParams.get("utm_source") ??
+    (paidGoogleClickId ? "google" : referrerClassification?.source) ??
+    getReferrerHost(referrer);
+  const rawMedium =
+    searchParams.get("utm_medium") ??
+    (paidGoogleClickId ? "cpc" : referrerClassification?.medium) ??
+    "";
+  const source = normalizeSource(rawSource);
+  const medium = normalizeMedium(rawMedium, hasReferrer);
   const landingPath = `${window.location.pathname}${window.location.search}`;
 
   return {
