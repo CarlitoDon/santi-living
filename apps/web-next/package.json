@@ -9,9 +9,11 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "db:migrate:lead-events": "node scripts/migrate-lead-events.mjs",
     "test": "echo 'Tests bypassed for Next.js stabilization' && exit 0"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "@trpc/client": "^11.8.1",
     "gray-matter": "^4.0.3",
     "leaflet": "^1.9.4",

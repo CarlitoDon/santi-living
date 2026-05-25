@@ -15,18 +15,58 @@ export const OUT_OF_SERVICE_CITIES = [
   'semanu',
 ] as const;
 
-const LeadTextSchema = z.string().trim().max(500).optional();
-const LocationPermissionSchema = z.enum([
+const LeadTextSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed ? trimmed.slice(0, 500) : undefined;
+}, z.string().max(500).optional());
+const LongLeadTextSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed ? trimmed.slice(0, 1200) : undefined;
+}, z.string().max(1200).optional());
+const EventIdSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}, z.string().min(8).max(80).optional());
+const OptionalNumberSchema = z.preprocess((value) => {
+  if (value === '' || value === null || value === undefined) return undefined;
+  return value;
+}, z.coerce.number().optional());
+const OptionalDateTimeSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}, z.string().datetime().optional());
+
+const LocationPermissionSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}, z.enum([
   'granted',
   'denied',
   'timeout',
   'unavailable',
   'unsupported',
   'error',
-]).optional();
+]).optional());
+
+const GeocodeStatusSchema = z.preprocess((value) => {
+  if (typeof value !== 'string') return value;
+  const trimmed = value.trim();
+  return trimmed || undefined;
+}, z.enum([
+  'not_requested',
+  'success',
+  'failed',
+  'timeout',
+  'unavailable',
+]).optional());
 
 export const LeadEventSchema = z.object({
-  event_id: z.string().trim().min(8).max(80).optional(),
+  event_id: EventIdSchema,
   event_type: z.enum([
     'whatsapp_click',
     'phone_click',
@@ -42,7 +82,7 @@ export const LeadEventSchema = z.object({
   content: LeadTextSchema,
   cta_source: LeadTextSchema,
   cta_location: LeadTextSchema,
-  landing_page: z.string().trim().max(1200).optional(),
+  landing_page: LongLeadTextSchema,
   city: LeadTextSchema,
   device: LeadTextSchema,
   gclid: LeadTextSchema,
@@ -50,15 +90,22 @@ export const LeadEventSchema = z.object({
   gbraid: LeadTextSchema,
   fbclid: LeadTextSchema,
   location_permission: LocationPermissionSchema,
-  latitude: z.coerce.number().min(-90).max(90).optional(),
-  longitude: z.coerce.number().min(-180).max(180).optional(),
-  location_accuracy_m: z.coerce.number().nonnegative().max(100000).optional(),
-  user_agent: z.string().trim().max(800).optional(),
-  referrer: z.string().trim().max(1200).optional(),
-  timestamp: z.string().datetime().optional(),
+  latitude: OptionalNumberSchema.pipe(z.number().min(-90).max(90).optional()),
+  longitude: OptionalNumberSchema.pipe(z.number().min(-180).max(180).optional()),
+  location_accuracy_m: OptionalNumberSchema.pipe(z.number().nonnegative().max(100000).optional()),
+  geocode_status: GeocodeStatusSchema,
+  geocode_source: LeadTextSchema,
+  geocode_city: LeadTextSchema,
+  geocode_kecamatan: LeadTextSchema,
+  geocode_kelurahan: LeadTextSchema,
+  geocode_full_address: LongLeadTextSchema,
+  user_agent: LongLeadTextSchema,
+  referrer: LongLeadTextSchema,
+  timestamp: OptionalDateTimeSchema,
 });
 
 export type LeadEventInput = z.infer<typeof LeadEventSchema>;
+export type LeadCityClassification = 'service_area' | 'out_of_service' | 'unknown';
 
 export function normalizeLeadText(value: string | null | undefined): string | undefined {
   const trimmed = value?.trim();
@@ -75,10 +122,14 @@ export function isServiceAreaCity(city: string | null | undefined): boolean {
   return SERVICE_AREA_CITIES.some((item) => normalized.includes(item));
 }
 
-export function classifyLeadCity(city: string | null | undefined): 'service_area' | 'out_of_service' | 'unknown' {
+export function classifyLeadCity(city: string | null | undefined): LeadCityClassification {
   if (isOutOfServiceCity(city)) return 'out_of_service';
   if (isServiceAreaCity(city)) return 'service_area';
   return 'unknown';
+}
+
+export function resolveLeadCity(input: Pick<LeadEventInput, 'city' | 'geocode_city'>): string | undefined {
+  return input.city ?? input.geocode_city;
 }
 
 export function buildLeadLogRecord(
@@ -86,10 +137,10 @@ export function buildLeadLogRecord(
   input: LeadEventInput,
   receivedAt: string
 ) {
-  const city = input.city;
+  const city = resolveLeadCity(input);
 
   return {
-    schema: 'santi_lead_event_v1',
+    schema: 'santi_lead_event_v2',
     event_id: eventId,
     event_type: input.event_type,
     source: input.source ?? '(unknown)',
@@ -111,6 +162,12 @@ export function buildLeadLogRecord(
     latitude: typeof input.latitude === 'number' ? Number(input.latitude.toFixed(7)) : '',
     longitude: typeof input.longitude === 'number' ? Number(input.longitude.toFixed(7)) : '',
     location_accuracy_m: typeof input.location_accuracy_m === 'number' ? Math.round(input.location_accuracy_m) : '',
+    geocode_status: input.geocode_status ?? '',
+    geocode_source: input.geocode_source ?? '',
+    geocode_city: input.geocode_city ?? '',
+    geocode_kecamatan: input.geocode_kecamatan ?? '',
+    geocode_kelurahan: input.geocode_kelurahan ?? '',
+    geocode_full_address: input.geocode_full_address ?? '',
     user_agent: input.user_agent ?? '',
     referrer: input.referrer ?? '',
     event_timestamp: input.timestamp ?? receivedAt,
