@@ -237,15 +237,6 @@ export function GtagScript() {
 
               // --- Client-side attribution enrichment ---
               try {
-                var textParam = url.searchParams.get('text') || '';
-                var tagMatch = textParam.match(/\\[W:([^\\]]+)\\]/);
-                if (attrCode && tagMatch && tagMatch[1].indexOf('/') === -1) {
-                  var oldTag = tagMatch[0];
-                  var newTag = '[W:' + tagMatch[1] + '/' + attrCode + ']';
-                  textParam = textParam.replace(oldTag, newTag);
-                  url.searchParams.set('text', textParam);
-                }
-
                 if (url.pathname === '/api/wa') {
                   url.searchParams.set('event_id', leadEventId);
                   url.searchParams.set('cta_source', ctaSource);
