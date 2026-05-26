@@ -1,7 +1,8 @@
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { buildLeadLogRecord, LeadEventSchema } from '@/lib/lead-attribution';
+import { LeadEventSchema } from '@/lib/lead-attribution';
+import { persistLeadEvent } from '@/lib/lead-db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,15 +10,28 @@ export async function POST(request: NextRequest) {
     const parsed = LeadEventSchema.parse(body);
     const eventId = parsed.event_id ?? randomUUID();
     const receivedAt = new Date().toISOString();
-    const record = buildLeadLogRecord(eventId, parsed, receivedAt);
+    const persistence = await persistLeadEvent(eventId, parsed, receivedAt, { geocode: true });
+    const record = persistence.record;
 
-    console.info('[santi_lead_event]', JSON.stringify(record));
+    console.info('[santi_lead_event]', JSON.stringify({
+      ...record,
+      db_configured: persistence.configured,
+      db_persisted: persistence.persisted,
+    }));
+    if (persistence.errorMessage) {
+      console.error('[santi_lead_event] DB_PERSIST_FAILURE:', {
+        event_id: eventId,
+        message: persistence.errorMessage,
+      });
+    }
 
     return NextResponse.json({
       ok: true,
       eventId,
       receivedAt,
-      cityClassification: record.city_classification,
+      cityClassification: persistence.cityClassification,
+      persisted: persistence.persisted,
+      storageConfigured: persistence.configured,
     });
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {

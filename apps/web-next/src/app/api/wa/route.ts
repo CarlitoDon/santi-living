@@ -7,6 +7,7 @@ import {
   LeadEventSchema,
   normalizeLeadText,
 } from '@/lib/lead-attribution';
+import { persistLeadEvent } from '@/lib/lead-db';
 
 function sanitizedPhone(value: string | null): string {
   const digits = (value || config.whatsappNumber).replace(/\D/g, '');
@@ -59,9 +60,20 @@ export async function GET(request: NextRequest) {
       referrer: request.headers.get('referer') ?? undefined,
       timestamp: receivedAt,
     });
-    const record = buildLeadLogRecord(eventId, parsed, receivedAt);
+    const persistence = await persistLeadEvent(eventId, parsed, receivedAt, { geocode: false });
+    const record = persistence.record ?? buildLeadLogRecord(eventId, parsed, receivedAt);
 
-    console.info('[santi_lead_event]', JSON.stringify(record));
+    console.info('[santi_lead_event]', JSON.stringify({
+      ...record,
+      db_configured: persistence.configured,
+      db_persisted: persistence.persisted,
+    }));
+    if (persistence.errorMessage) {
+      console.error('[santi_lead_event] DB_PERSIST_FAILURE:', {
+        event_id: eventId,
+        message: persistence.errorMessage,
+      });
+    }
 
     const to = sanitizedPhone(params.get('to'));
     const text = sanitizeWhatsAppText(params.get('text') ?? '');
