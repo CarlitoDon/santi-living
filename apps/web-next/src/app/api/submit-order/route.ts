@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { createProxyClient } from '@/lib/trpc-client';
+import { LeadEventSchema, normalizeLeadText } from '@/lib/lead-attribution';
+import { persistLeadEvent } from '@/lib/lead-db';
 
 const SubmitOrderSchema = z.object({
   customerName: z.string().min(2),
@@ -55,6 +57,45 @@ export async function POST(request: NextRequest) {
     });
 
     const result = await client.order.create.mutate(parsed);
+    try {
+      const receivedAt = new Date().toISOString();
+      const leadEventId = `form-${correlationId}-${randomUUID()}`.slice(0, 80);
+      const leadEvent = LeadEventSchema.parse({
+        event_id: leadEventId,
+        event_type: 'form_submit',
+        source: normalizeLeadText(request.headers.get('x-attribution-source')),
+        medium: normalizeLeadText(request.headers.get('x-attribution-medium')),
+        campaign: normalizeLeadText(request.headers.get('x-attribution-campaign')),
+        term: normalizeLeadText(request.headers.get('x-attribution-term')),
+        content: normalizeLeadText(request.headers.get('x-attribution-content')),
+        cta_source: 'checkout_form',
+        cta_location: 'submit_order',
+        landing_page: normalizeLeadText(request.headers.get('referer')),
+        city: parsed.addressFields.city,
+        gclid: normalizeLeadText(request.headers.get('x-attribution-gclid')),
+        fbclid: normalizeLeadText(request.headers.get('x-attribution-fbclid')),
+        wbraid: normalizeLeadText(request.headers.get('x-attribution-wbraid')),
+        gbraid: normalizeLeadText(request.headers.get('x-attribution-gbraid')),
+        user_agent: request.headers.get('user-agent') ?? undefined,
+        referrer: request.headers.get('referer') ?? undefined,
+        timestamp: receivedAt,
+      });
+      const persistence = await persistLeadEvent(leadEventId, leadEvent, receivedAt, { geocode: false });
+      console.info('[santi_lead_event]', JSON.stringify({
+        ...persistence.record,
+        db_configured: persistence.configured,
+        db_persisted: persistence.persisted,
+      }));
+      if (persistence.errorMessage) {
+        console.error('[santi_lead_event] DB_PERSIST_FAILURE:', {
+          event_id: leadEventId,
+          message: persistence.errorMessage,
+        });
+      }
+    } catch (leadError) {
+      const message = leadError instanceof Error ? leadError.message : String(leadError);
+      console.error('[santi_lead_event] FORM_TRACKING_FAILURE:', { message });
+    }
 
     return NextResponse.json(result, { status: 201 });
   } catch (error: unknown) {

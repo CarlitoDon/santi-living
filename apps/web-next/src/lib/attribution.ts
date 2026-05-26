@@ -193,6 +193,8 @@ export function buildAttributionHeaders(): Record<string, string> {
   };
 
   if (touch.campaign) headers["x-attribution-campaign"] = touch.campaign;
+  if (touch.term) headers["x-attribution-term"] = touch.term;
+  if (touch.content) headers["x-attribution-content"] = touch.content;
   if (touch.gclid) headers["x-attribution-gclid"] = touch.gclid;
   if (touch.fbclid) headers["x-attribution-fbclid"] = touch.fbclid;
   if (touch.wbraid) headers["x-attribution-wbraid"] = touch.wbraid;

@@ -282,10 +282,10 @@ export function GtagScript() {
 
                 gtag('event', 'whatsapp_click', eventParams);
 
+                sendLeadEvent(leadPayload);
+
                 if (url.pathname === '/api/wa') {
                   applyLocationToSearchParams(url, location);
-                } else {
-                  sendLeadEvent(leadPayload);
                 }
 
                 // Google Ads conversion
@@ -300,9 +300,48 @@ export function GtagScript() {
             }
             var telLink = target.closest('a[href^="tel:"]');
             if (telLink) {
+              var phoneEventId = createLeadEventId();
+              var phoneAttr = {};
+              try {
+                var phoneRaw = localStorage.getItem('sl_attribution_v1');
+                if (phoneRaw) {
+                  var phoneParsed = JSON.parse(phoneRaw);
+                  var phoneTouch = phoneParsed.last || {};
+                  phoneAttr = {
+                    utm_source: phoneTouch.source || '',
+                    utm_medium: phoneTouch.medium || '',
+                    utm_campaign: phoneTouch.campaign || '',
+                    gclid: phoneTouch.gclid || '',
+                    gbraid: phoneTouch.gbraid || '',
+                    wbraid: phoneTouch.wbraid || '',
+                    fbclid: phoneTouch.fbclid || ''
+                  };
+                }
+              } catch(ex) {}
+
               gtag('event', 'phone_click', {
                 'event_category': 'engagement',
+                'event_id': phoneEventId,
                 'transport_type': 'beacon'
+              });
+
+              sendLeadEvent({
+                event_id: phoneEventId,
+                event_type: 'phone_click',
+                source: phoneAttr.utm_source || '',
+                medium: phoneAttr.utm_medium || '',
+                campaign: phoneAttr.utm_campaign || '',
+                cta_source: telLink.getAttribute('data-phone-source') || 'phone_link',
+                cta_location: telLink.getAttribute('data-phone-location') || '',
+                landing_page: window.location.pathname + window.location.search,
+                device: '',
+                gclid: phoneAttr.gclid || '',
+                gbraid: phoneAttr.gbraid || '',
+                wbraid: phoneAttr.wbraid || '',
+                fbclid: phoneAttr.fbclid || '',
+                user_agent: navigator.userAgent || '',
+                referrer: document.referrer || '',
+                timestamp: new Date().toISOString()
               });
             }
           });
