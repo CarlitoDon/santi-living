@@ -14,6 +14,13 @@ if (!databaseUrl) {
 const sql = neon(databaseUrl);
 const migrationPath = join(__dirname, '..', 'db', 'migrations', '001_lead_events.sql');
 const migrationSql = await readFile(migrationPath, 'utf8');
+const statements = migrationSql
+  .split(';')
+  .map((statement) => statement.trim())
+  .filter(Boolean);
 
-await sql.query(migrationSql);
+for (const statement of statements) {
+  await sql.query(statement);
+}
+
 console.log('lead_events migration applied');
