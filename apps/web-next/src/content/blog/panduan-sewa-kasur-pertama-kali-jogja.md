@@ -91,4 +91,4 @@ A: Hubungi WhatsApp kami sebelum masa sewa berakhir. Kami akan atur perpanjangan
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

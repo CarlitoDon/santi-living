@@ -107,7 +107,7 @@ Anda tidak perlu datang ke workshop. Semua proses dari pemesanan hingga pengemba
 
 ## Kenapa Memilih Santi Living?
 
-Santi Living adalah divisi penyewaan kasur dari Santi Mebel yang berlokasi di Jl. Godean KM 4, Sleman. Dengan pengalaman melayani ratusan pelanggan, berikut alasan mengapa keluarga dari luar kota mempercayakan kebutuhan kasur mereka kepada kami:
+Santi Living adalah divisi penyewaan kasur dari Santi Mebel yang berlokasi di Jl. Godean KM 10, Sleman. Dengan pengalaman melayani ratusan pelanggan, berikut alasan mengapa keluarga dari luar kota mempercayakan kebutuhan kasur mereka kepada kami:
 
 - **Stok 50+ unit** yang selalu ready untuk memenuhi kebutuhan mendadak
 - **Sterilisasi 7 tahap** menjamin kebersihan setiap kasur yang dikirim

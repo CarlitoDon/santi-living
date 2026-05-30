@@ -60,4 +60,4 @@ Terlalu keras membuat bahu dan pinggul sakit. Terlalu empuk membuat punggung tid
 
 Konsultasikan kebutuhan kasur yang tepat untuk punggung Anda.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

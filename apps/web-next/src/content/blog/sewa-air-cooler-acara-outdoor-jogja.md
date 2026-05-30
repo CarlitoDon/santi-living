@@ -95,7 +95,7 @@ Proses pemesanan dibuat sederhana agar cocok untuk kebutuhan dadakan maupun tere
 5. Gunakan unit sesuai arahan, lalu koordinasikan pengembalian setelah acara selesai.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**  
-📍 Workshop Santi Living/Santi Mebel: Jl. Godean KM4, Yogyakarta
+📍 Workshop Santi Living/Santi Mebel: Jl. Godean KM10, Yogyakarta
 
 ## FAQ Sewa Air Cooler untuk Acara di Jogja
 

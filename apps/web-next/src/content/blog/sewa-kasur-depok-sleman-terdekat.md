@@ -79,4 +79,4 @@ A: 100%. Setiap kasur melalui 7 tahap sterilisasi sebelum dikirim.
 > **Santi Living** — divisi persewaan kasur dari Santi Mebel — melayani **sewa kasur Depok Sleman** dan seluruh Yogyakarta. Kasur bersih, harga transparan, antar jemput gratis.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+> 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**

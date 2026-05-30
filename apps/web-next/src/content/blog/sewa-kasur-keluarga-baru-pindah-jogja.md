@@ -70,4 +70,4 @@ Santi Living melayani pengiriman ke seluruh area DIY:
 
 Kirimkan: nama, alamat kos/kontrakan, dan tanggal butuh kasur. Kami antar sebelum Anda tiba!
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

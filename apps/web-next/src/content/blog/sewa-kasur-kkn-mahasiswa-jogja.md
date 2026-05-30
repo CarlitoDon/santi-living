@@ -23,7 +23,7 @@ Berbeda dengan tinggal di kos atau kontrakan yang sudah dilengkapi fasilitas, lo
 
 ### Keunggulan Sewa Kasur KKN dari Santi Living
 
-Santi Living, yang berlokasi di **Jl. Godean KM4, Sleman**, telah melayani ribuan pelanggan di seluruh wilayah Yogyakarta. Berikut keunggulan yang membuat layanan ini cocok untuk kebutuhan KKN:
+Santi Living, yang berlokasi di **Jl. Godean KM10, Sleman**, telah melayani ribuan pelanggan di seluruh wilayah Yogyakarta. Berikut keunggulan yang membuat layanan ini cocok untuk kebutuhan KKN:
 
 #### 1. Harga Grosir Khusus Kelompok KKN
 
@@ -101,4 +101,4 @@ KKN adalah pengalaman berharga yang seharusnya tidak terganggu oleh masalah tidu
 
 Harga grosir yang terjangkau, kasur bersih yang tersanitasi, serta layanan antar jemput ke lokasi KKN menjadikan Santi Living pilihan tepat untuk kebutuhan akomodasi sementara mahasiswa.
 
-**Siap sewa kasur untuk KKN?** Langsung chat WhatsApp **0895-1911-9092** atau kunjungi workshop kami di **Jl. Godean KM4, Sleman**. Stok ready, siap kirim ke lokasi KKN Anda!
+**Siap sewa kasur untuk KKN?** Langsung chat WhatsApp **0895-1911-9092** atau kunjungi workshop kami di **Jl. Godean KM10, Sleman**. Stok ready, siap kirim ke lokasi KKN Anda!

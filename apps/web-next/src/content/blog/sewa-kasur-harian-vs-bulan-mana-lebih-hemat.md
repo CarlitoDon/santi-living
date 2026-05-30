@@ -77,4 +77,4 @@ Skenario: Mahasiswa baru, semester 1, butuh kasur untuk 6 bulan
 
 Konsultasikan durasi sewa yang tepat untuk kebutuhan Anda.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

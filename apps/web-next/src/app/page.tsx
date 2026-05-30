@@ -249,7 +249,7 @@ export default function HomePage() {
               <address className="not-italic bg-surface p-5 rounded-xl border border-border mb-4">
                 <p className="font-bold text-primary mb-1">Workshop Santi Living</p>
                 <p className="text-sm text-text-secondary mb-3">
-                  Jl. Godean KM 4, Kwarasan, Nogotirto,<br />
+                  Jl. Godean KM 10, Kwarasan, Nogotirto,<br />
                   Kec. Gamping, Kabupaten Sleman,<br />
                   DI Yogyakarta 55292
                 </p>

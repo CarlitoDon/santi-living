@@ -66,4 +66,4 @@ Untuk **kebutuhan harian** → Pilih kasur busa (mulai Rp25.000/hari)
 
 Konsultasikan kebutuhan Anda, tim kami akan membantu memilih kasur yang tepat.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

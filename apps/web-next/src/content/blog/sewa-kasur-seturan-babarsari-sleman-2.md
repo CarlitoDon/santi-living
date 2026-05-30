@@ -75,4 +75,4 @@ A: Bisa! Chat kami, kami ganti dengan ukuran yang sesuai.
 > **Santi Living** — **sewa kasur Seturan Babarsari** dan seluruh Sleman. Kasur bersih, antar cepat, harga mulai Rp25.000/hari.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman**
+> 📍 **Workshop: Jl. Godean KM10, Sleman**

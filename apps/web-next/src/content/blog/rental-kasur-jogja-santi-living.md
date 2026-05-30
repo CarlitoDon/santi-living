@@ -105,5 +105,5 @@ Tentu! Cukup chat WhatsApp sebelum masa sewa habis, kami perpanjang otomatis.
 > 💬 **Santi Living** — divisi khusus persewaan kasur dari Santi Mebel. Melayani rental kasur harian, mingguan, dan bulanan di seluruh Yogyakarta dengan jaminan kebersihan dan kenyamanan terbaik.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
 🌐 **[santiliving.com](https://santiliving.com)**

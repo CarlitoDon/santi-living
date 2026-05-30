@@ -66,4 +66,4 @@ Dengan menyewa kasur massal, panitia bisa menyediakan akomodasi di aula, gedung 
 
 Sertakan: nama event, jumlah peserta, tanggal, lokasi venue, dan durasi sewa.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

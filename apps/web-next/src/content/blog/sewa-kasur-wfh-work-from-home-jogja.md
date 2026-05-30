@@ -46,4 +46,4 @@ Setiap kasur Santi Living melalui sterilisasi 7 tahap. Anda tidak perlu khawatir
 
 Hubungi **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)** untuk konsultasi kasur yang cocok untuk kebutuhan WFH Anda.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

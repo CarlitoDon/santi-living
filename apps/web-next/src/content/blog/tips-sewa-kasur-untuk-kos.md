@@ -57,5 +57,5 @@ Butuh kasur untuk kosmu di Jogja sekarang? Langsung [hubungi WhatsApp kami](http
 > *Santi Living — divisi khusus persewaan kasur dari Santi Mebel. Melayani sewa kasur harian, mingguan, dan bulanan untuk mahasiswa kos di seluruh Yogyakarta.*
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
 🌐 **[santiliving.com](https://santiliving.com)**

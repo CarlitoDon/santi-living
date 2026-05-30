@@ -67,7 +67,7 @@ Anda dapat mengunduh dokumen direktori mobile-first komprehensif berukuran **PDF
 
 Mari berkolaborasi memberikan pelayanan tidur terbaik untuk tamu pariwisata Yogyakarta sekaligus meningkatkan profitabilitas properti Anda! Hubungi kantor operasional kami:
 
-* **Alamat Workshop**: Jl. Godean KM 4, Sleman, Daerah Istimewa Yogyakarta
+* **Alamat Workshop**: Jl. Godean KM 10, Sleman, Daerah Istimewa Yogyakarta
 * **WhatsApp Business**: [Chat WA: 0895-1911-9092](https://wa.me/6289519119092)
 * **Website Resmi**: [santiliving.com](https://santiliving.com)
 

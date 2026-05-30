@@ -70,4 +70,4 @@ A: 100%. Setiap kasur melalui 7 tahap sterilisasi sebelum dikirim.
 > **Santi Living** — **sewa kasur Mlati Sleman** dan seluruh Yogyakarta. Kasur bersih, antar cepat, harga mulai Rp25.000/hari.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman**
+> 📍 **Workshop: Jl. Godean KM10, Sleman**
