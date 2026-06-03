@@ -89,6 +89,8 @@ const notificationRouter = t.router({});
 // App Router
 // ---------------------------------------------------------------------------
 
+// This value intentionally exists only to derive the AppRouter type below.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _appRouter = t.router({
   order: orderRouter,
   notification: notificationRouter,
