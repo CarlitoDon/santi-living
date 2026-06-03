@@ -12,8 +12,8 @@ export function FeatureCard({ icon, title, description }: FeatureCardProps) {
       <div className="text-3xl w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mx-auto mb-4 shrink-0">
         {icon}
       </div>
-      <h3 className="text-lg font-bold text-slate-900 mb-2">{title}</h3>
-      <p className="text-sm text-slate-500 leading-relaxed m-0 flex-grow">{description}</p>
+      <h3 className="text-lg font-bold text-slate-900 mb-2 text-center">{title}</h3>
+      <p className="text-sm text-slate-500 leading-relaxed m-0 flex-grow text-center">{description}</p>
     </div>
   );
 }
