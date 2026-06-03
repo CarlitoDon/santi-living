@@ -49,6 +49,3 @@ CREATE INDEX IF NOT EXISTS lead_events_event_type_idx
 
 CREATE INDEX IF NOT EXISTS lead_events_source_campaign_idx
   ON lead_events (source, campaign);
-
-CREATE INDEX IF NOT EXISTS lead_events_product_category_idx
-  ON lead_events (product_category);
