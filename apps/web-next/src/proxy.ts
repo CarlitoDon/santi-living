@@ -16,6 +16,15 @@ export default function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // Host-based routing for karpet.santiliving.com
+  if (
+    (hostname.startsWith('karpet.santiliving.com') || hostname.startsWith('karpet.localhost')) &&
+    url.pathname === '/'
+  ) {
+    url.pathname = '/sewa-karpet';
+    return NextResponse.rewrite(url);
+  }
+
   return NextResponse.next();
 }
 
