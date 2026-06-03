@@ -21,7 +21,7 @@ export default function proxy(request: NextRequest) {
     (hostname.startsWith('karpet.santiliving.com') || hostname.startsWith('karpet.localhost')) &&
     url.pathname === '/'
   ) {
-    url.pathname = '/sewa-karpet';
+    url.pathname = '/sewa-karpet-jogja';
     return NextResponse.rewrite(url);
   }
 

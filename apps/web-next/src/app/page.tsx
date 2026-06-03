@@ -56,10 +56,10 @@ export default function HomePage() {
     telephone: `+${config.whatsappNumber}`,
     address: {
       '@type': 'PostalAddress' as const,
-      streetAddress: 'Jl. Godean KM 5',
-      addressLocality: 'Yogyakarta',
+      streetAddress: 'Jl. Godean KM 10, Kwarasan, Nogotirto, Gamping',
+      addressLocality: 'Sleman',
       addressRegion: 'DI Yogyakarta',
-      postalCode: '55564',
+      postalCode: '55292',
       addressCountry: 'ID',
     },
     geo: {
@@ -181,6 +181,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== KARPET INTERNAL LINK ===== */}
+      <section className="py-10 md:py-14 bg-white border-y border-slate-100">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-4xl rounded-3xl border border-indigo-100 bg-indigo-50 p-6 text-center shadow-sm md:p-8">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
+              Perlengkapan acara tambahan
+            </p>
+            <h2 className="mb-3 text-2xl font-extrabold text-slate-900">
+              Butuh sewa karpet Jogja untuk hajatan, pengajian, atau event?
+            </h2>
+            <p className="mx-auto mb-5 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+              Selain sewa kasur, Santi Living juga membuka selector konsultasi untuk karpet merah, karpet permadani, dan paket perlengkapan acara. Cek opsi karpet dari subdomain khusus agar kebutuhan venue bisa dihitung admin.
+            </p>
+            <a
+              href="https://karpet.santiliving.com/sewa-karpet-jogja"
+              className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white no-underline shadow-sm hover:bg-indigo-700"
+            >
+              Sewa Karpet Jogja →
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* ===== HOW TO RENT (Condensed) ===== */}
       <section className="py-10 md:py-14 bg-surface border-y border-border">

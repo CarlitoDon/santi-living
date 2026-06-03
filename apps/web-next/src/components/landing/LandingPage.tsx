@@ -62,7 +62,11 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       >
         {cfg.hero.bgImage && (
           <div className="absolute inset-0 -z-10">
-            <img src={cfg.hero.bgImage} alt="hero background" className="w-full h-full object-cover opacity-30" />
+            <img
+              src={cfg.hero.bgImage}
+              alt={cfg.hero.bgImageAlt || `${cfg.hero.title} - visual layanan Santi Living`}
+              className="w-full h-full object-cover opacity-30"
+            />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(99,102,241,0.12))' }} />
           </div>
         )}
