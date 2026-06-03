@@ -92,7 +92,7 @@ export default function HomePage() {
             <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-3 text-white/90">
               🏆 #1 Rental Kasur di Yogyakarta
             </div>
-            <h1 className="text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.15] font-extrabold mb-2">
+            <h1 className="text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.15] font-extrabold mb-2 text-center">
               Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
             </h1>
             <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-base font-bold mb-4">
@@ -294,8 +294,8 @@ export default function HomePage() {
       {/* ===== FINAL CTA ===== */}
       <section className="py-12 md:py-16 bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white text-center">
         <div className="max-w-xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-3">Siap Sewa Kasur Hari Ini?</h2>
-          <p className="opacity-90 mb-8 leading-relaxed">
+          <h2 className="text-2xl font-bold mb-3 text-center">Siap Sewa Kasur Hari Ini?</h2>
+          <p className="opacity-90 mb-8 leading-relaxed text-center">
             Pesan sekarang dan kasur bisa sampai hari ini! Tim kami siap mengantarkan kasur bersih ke lokasi Anda.
           </p>
           <div className="flex justify-center gap-3 flex-wrap">

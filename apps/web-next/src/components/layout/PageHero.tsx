@@ -12,16 +12,16 @@ export function PageHero({ title, subtitle, badge }: PageHeroProps) {
       <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none opacity-50" />
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 text-center">
         {badge && (
           <div className="mx-auto mb-4 inline-block rounded-full bg-white/10 px-4 py-1 text-xs sm:text-sm font-semibold uppercase tracking-wider text-blue-100 border border-white/20 backdrop-blur-sm shadow-sm">
             {badge}
           </div>
         )}
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md tracking-tight text-center">
           {title}
         </h1>
-        <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium">
+        <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium text-center">
           {subtitle}
         </p>
       </div>

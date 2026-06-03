@@ -69,7 +69,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
         <div className="absolute top-[10%] left-[5%] w-[150px] h-[150px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
         <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
         
-        <div className="container relative z-10">
+        <div className="container relative z-10 text-center">
           {cfg.hero.badges && cfg.hero.badges.length > 0 && (
             <div className="flex items-center justify-center gap-2 mb-3">
               {cfg.hero.badges.map((b, bi) => (
@@ -91,10 +91,10 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
             </div>
           )}
 
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md text-center">
             {cfg.hero.title}
           </h1>
-          <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium mb-4">
+          <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium mb-4 text-center">
             {cfg.hero.subtitle}
           </p>
           {cfg.hero.badge && (
@@ -237,9 +237,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
 
       {/* CTA */}
       <section className={`${gradientClass} py-12 md:py-16 text-center text-white`}>
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white">{cfg.cta.title}</h2>
-          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed">{cfg.cta.description}</p>
+        <div className="container text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white text-center">{cfg.cta.title}</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed text-center">{cfg.cta.description}</p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Link 

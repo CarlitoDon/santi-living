@@ -135,9 +135,9 @@ export default function HargaSewaKasurPage() {
 
       {/* CTA */}
       <section className="bg-gradient-to-br from-blue-600 to-[#1a4ea0] py-10 text-center text-white">
-        <div className="container">
-          <h2 className="text-2xl md:text-3xl text-white mb-2 font-bold">Mau sewa kasur sekarang?</h2>
-          <p className="text-white/85 mb-8 max-w-xl mx-auto">Hubungi kami via WhatsApp untuk order atau tanya-tanya</p>
+        <div className="container text-center">
+          <h2 className="text-2xl md:text-3xl text-white mb-2 font-bold text-center">Mau sewa kasur sekarang?</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto text-center">Hubungi kami via WhatsApp untuk order atau tanya-tanya</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/#calculator" className="bg-white text-blue-600 max-w-[280px] w-full border-none py-3 px-6 rounded-md font-semibold hover:bg-slate-50 transition-colors text-center no-underline">
               Hitung Biaya Sewa
