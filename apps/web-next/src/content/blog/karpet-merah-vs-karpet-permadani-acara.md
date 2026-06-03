@@ -38,12 +38,11 @@ Permadani memberi kesan hangat dan lebih santai. Opsi ini sering dipakai ketika 
 
 ## Perbandingan Cepat
 
-| Kebutuhan | Karpet Merah | Karpet Permadani |
-|---|---|---|
-| Kesan utama | Formal dan seremoni | Hangat dan nyaman |
-| Cocok untuk | Wedding, VIP, grand opening | Pengajian, tahlilan, keluarga |
-| Data penting | Panjang dan lebar jalur | Jumlah tamu dan luas ruang |
-| Risiko utama | Outdoor, kotor, akses jalur | Noda makanan, kelembapan, durasi duduk |
+**Karpet merah** paling cocok untuk kesan formal dan seremoni, seperti wedding, VIP, grand opening, atau jalur masuk tamu. Data yang perlu disiapkan adalah panjang dan lebar jalur, titik masuk, serta kondisi indoor/outdoor.
+
+**Karpet permadani** paling cocok untuk suasana hangat dan nyaman, seperti pengajian, tahlilan, acara keluarga, atau ruang lesehan. Data yang perlu disiapkan adalah jumlah tamu, luas ruang, durasi duduk, dan risiko noda makanan atau kelembapan.
+
+Jika acaranya menggabungkan prosesi formal dan area duduk keluarga, dua jenis karpet ini bisa dipakai bersamaan agar setiap titik acara terasa lebih rapi.
 
 ## Bisa Digabung?
 
@@ -66,6 +65,10 @@ Kirim informasi berikut ke admin:
 
 Dengan data ini, admin bisa membantu menentukan apakah karpet merah, permadani, atau kombinasi keduanya lebih sesuai.
 
+## Konsultasi Pilihan Karpet via WhatsApp
+
+Masih ragu memilih karpet merah atau karpet permadani? Kirim foto area, ukuran, jenis acara, tanggal, dan lokasi ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**. Tim Santi Living di **Jl. Godean KM 10, Sleman, Yogyakarta** akan bantu cek opsi yang paling masuk akal untuk acara Anda di Jogja.
+
 ## Penutup
 
-Karpet merah lebih tepat untuk jalur formal dan momen seremoni. Karpet permadani lebih tepat untuk area duduk dan acara keluarga. Jika masih ragu, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) dan kirim detail acara agar rekomendasi lebih akurat.
+Karpet merah lebih tepat untuk jalur formal dan momen seremoni. Karpet permadani lebih tepat untuk area duduk dan acara keluarga. Jika masih ragu, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) dan kirim detail acara lewat [WhatsApp Santi Living](https://wa.me/6289519119092) agar rekomendasi lebih akurat.
