@@ -103,3 +103,7 @@ A: Kami ganti langsung tanpa biaya tambahan.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 > 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
+
+## Tambahan Karpet untuk Order Bulk dan Event
+
+Untuk order kasur grosir yang dipakai pada hajatan, asrama acara, seminar, atau gathering, panitia sering juga membutuhkan alas area. Lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).

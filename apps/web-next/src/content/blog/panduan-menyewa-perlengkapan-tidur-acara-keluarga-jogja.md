@@ -93,3 +93,7 @@ Menyewa perlengkapan tidur untuk acara keluarga besar di Jogja adalah solusi yan
 Kami memiliki pengalaman melayani berbagai skala acara, dari riunio keluarga kecil hingga wedding besar dengan ratusan tamu. Hubungi kami melalui WhatsApp untuk konsultasi gratis dan penawaran khusus berdasarkan kebutuhan spesifik acara keluarga Anda di Jogja.
 
 *Catatan: Sebaiknya booking minimal 3-5 hari sebelumnya untuk acara di akhir pekan atau hari libur nasional, karena permintaan tende naik pada periode tersebut.*
+
+## Tambahan Karpet untuk Perlengkapan Acara
+
+Jika acara keluarga juga membutuhkan alas ruang tamu, pengajian, atau jalur tamu, lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Karpet dapat dikonsultasikan bersama kasur, bantal, selimut, kipas, air cooler, dan TV.

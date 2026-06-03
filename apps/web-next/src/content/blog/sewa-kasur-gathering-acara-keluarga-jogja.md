@@ -137,3 +137,7 @@ Dengan kualitas kasur premium, harga terjangkau, dan pelayanan profesional, Sant
 Kunjungi [santiliving.com](https://santiliving.com) atau hubungi WhatsApp kami untuk konsultasi gratis dan penawaran harga terbaik. Dapatkan layanan **sewa kasur gathering event Jogja** yang terpercaya dan berkualitas hanya di Santi Living!
 
 Jangan tunggu lagi — pesan sekarang dan pastikan acara gathering Anda berkesan untuk semua tamu!
+
+## Tambahan Karpet untuk Gathering
+
+Untuk gathering keluarga yang memakai ruang tamu, aula kecil, villa, atau area lesehan, karpet bisa membantu membuat area berkumpul lebih rapi. Baca panduan [sewa karpet Jogja](/sewa-karpet-jogja) atau [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) jika tamu akan duduk lesehan.

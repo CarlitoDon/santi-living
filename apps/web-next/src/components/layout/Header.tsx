@@ -52,16 +52,20 @@ export function Header() {
                 <span className="block font-serif text-[22px] md:text-3xl font-extrabold text-slate-900 tracking-tight leading-none group-hover:text-blue-600 transition-colors">Santi Living</span>
                 <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
                   <span className="text-[10px] md:text-[11px] font-medium italic text-slate-400">by</span>
-                  <div className="relative h-[16px] w-[50px] md:h-[22px] md:w-[65px] opacity-90 group-hover:opacity-100 transition-all duration-300">
-                    <Image
-                      src="/images/logo-santi-mebel.png"
-                      alt="Santi Mebel Jogja"
-                      className="object-contain"
-                      fill
-                      sizes="(max-width: 768px) 50px, 65px"
-                      priority
-                    />
-                  </div>
+                  <Image
+                    src="/images/logo-santi-mebel.png"
+                    alt="Santi Mebel Jogja"
+                    width={65}
+                    height={22}
+                    className="opacity-90 group-hover:opacity-100 transition-all duration-300"
+                    style={{
+                      width: 'clamp(50px, 4.5vw, 65px)',
+                      height: 'auto',
+                      objectFit: 'contain',
+                    }}
+                    sizes="(max-width: 768px) 50px, 65px"
+                    priority
+                  />
                 </span>
               </Link>
             </div>

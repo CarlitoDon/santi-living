@@ -22,3 +22,7 @@ Memutar video promosi produk, testimoni pelanggan, atau demonstrasi cara kerja p
 Buat *booth* Anda tampil paling profesional dan modern di antara *tenant* lainnya. 
 
 [**Pesan TV untuk Booth Pameran Anda Sekarang!**](/sewa-tv)
+
+## Tambahan Karpet untuk Booth Pameran
+
+Booth yang memakai TV display biasanya juga membutuhkan alas area yang rapi. Baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja) atau cek [sewa karpet Jogja](/sewa-karpet-jogja).

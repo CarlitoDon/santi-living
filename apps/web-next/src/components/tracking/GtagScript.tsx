@@ -380,6 +380,60 @@ export function GtagScript() {
             window.location.href = url.toString();
           }
 
+          function inferKarpetIntent(path, ctaSource, text) {
+            var combined = [path, ctaSource, text].join(' ').toLowerCase();
+            if (combined.indexOf('karpet merah') !== -1 || combined.indexOf('karpet-merah') !== -1 || combined.indexOf('red carpet') !== -1) {
+              return 'sewa_karpet_merah';
+            }
+            if (combined.indexOf('permadani') !== -1 || combined.indexOf('pengajian') !== -1 || combined.indexOf('tahlilan') !== -1) {
+              return 'sewa_karpet_permadani';
+            }
+            if (combined.indexOf('pameran') !== -1 || combined.indexOf('seminar') !== -1 || combined.indexOf('booth') !== -1) {
+              return 'sewa_karpet_pameran';
+            }
+            if (combined.indexOf('paket') !== -1 || combined.indexOf('perlengkapan acara') !== -1) {
+              return 'paket_perlengkapan_acara';
+            }
+            if (combined.indexOf('karpet') !== -1) {
+              return 'sewa_karpet_jogja';
+            }
+            return '';
+          }
+
+          function inferWaTracking(link, url, ctaSource, ctaLocation) {
+            var path = window.location.pathname || '';
+            var text = '';
+            try {
+              text = url.searchParams.get('text') || '';
+            } catch(ex) {}
+
+            var combined = [path, ctaSource, text].join(' ').toLowerCase();
+            var productCategory = link.getAttribute('data-product-category') || '';
+            if (!productCategory && combined.indexOf('karpet') !== -1) {
+              productCategory = 'karpet';
+            }
+
+            var pageType = link.getAttribute('data-page-type') || '';
+            if (!pageType) {
+              if (path.indexOf('/artikel/') === 0) {
+                pageType = 'article';
+              } else if (path === '/sewa-karpet-jogja') {
+                pageType = 'money_page';
+              } else if (path.indexOf('/sewa-karpet') === 0) {
+                pageType = 'subcategory_page';
+              }
+            }
+
+            var intent = link.getAttribute('data-wa-intent') || inferKarpetIntent(path, ctaSource, text);
+
+            return {
+              product_category: productCategory,
+              page_type: pageType,
+              intent: intent,
+              location: ctaLocation || ''
+            };
+          }
+
           document.addEventListener('click', function(e) {
             var target = e.target;
             if (target && target.nodeType === 3) target = target.parentElement;
@@ -423,6 +477,7 @@ export function GtagScript() {
               } catch(ex) {}
 
               var attrCode = getWaAttributionCode(attr);
+              var waTracking = inferWaTracking(link, url, ctaSource, ctaLocation);
 
               // Build event params with full attribution
               var eventParams = {
@@ -430,6 +485,10 @@ export function GtagScript() {
                 'event_label': ctaSource,
                 'cta_source': ctaSource,
                 'cta_location': ctaLocation,
+                'product_category': waTracking.product_category,
+                'page_type': waTracking.page_type,
+                'intent': waTracking.intent,
+                'location': waTracking.location,
                 'attribution_code': attrCode || '',
                 'page_location': window.location.href,
                 'page_path': window.location.pathname,
@@ -455,6 +514,9 @@ export function GtagScript() {
                   url.searchParams.set('event_id', leadEventId);
                   url.searchParams.set('cta_source', ctaSource);
                   if (ctaLocation) url.searchParams.set('cta_location', ctaLocation);
+                  if (waTracking.product_category) url.searchParams.set('product_category', waTracking.product_category);
+                  if (waTracking.page_type) url.searchParams.set('page_type', waTracking.page_type);
+                  if (waTracking.intent) url.searchParams.set('intent', waTracking.intent);
                   url.searchParams.set('landing_page', window.location.pathname + window.location.search);
                   if (attr.utm_source) url.searchParams.set('source', attr.utm_source);
                   if (attr.utm_medium) url.searchParams.set('medium', attr.utm_medium);
@@ -478,6 +540,9 @@ export function GtagScript() {
                   campaign: attr.utm_campaign || '',
                   cta_source: ctaSource,
                   cta_location: ctaLocation,
+                  product_category: waTracking.product_category,
+                  page_type: waTracking.page_type,
+                  intent: waTracking.intent,
                   landing_page: window.location.pathname + window.location.search,
                   device: '',
                   gclid: attr.gclid || '',

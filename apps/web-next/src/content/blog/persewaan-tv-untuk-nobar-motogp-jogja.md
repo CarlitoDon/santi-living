@@ -22,3 +22,7 @@ Santi Living hadir untuk memastikan sorak-sorai nobar Anda tidak terhambat oleh 
 Jadikan momen kemenangan jagoan Anda lebih berkesan dengan visual yang maksimal. Jangan sampai kehabisan unit di akhir pekan!
 
 [**Booking TV untuk Jadwal Nobar Anda Sekarang!**](/sewa-tv)
+
+## Tambahan Karpet untuk Area Nobar
+
+Jika nobar dilakukan lesehan di basecamp, garasi, atau ruang komunitas, pertimbangkan juga [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) atau cek opsi umum [sewa karpet Jogja](/sewa-karpet-jogja) agar area duduk lebih rapi.

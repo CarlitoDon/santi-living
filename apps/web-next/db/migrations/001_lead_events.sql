@@ -9,6 +9,9 @@ CREATE TABLE IF NOT EXISTS lead_events (
   content TEXT,
   cta_source TEXT,
   cta_location TEXT,
+  product_category TEXT,
+  page_type TEXT,
+  intent TEXT,
   landing_page TEXT,
   city TEXT,
   city_classification TEXT NOT NULL DEFAULT 'unknown',
@@ -46,3 +49,6 @@ CREATE INDEX IF NOT EXISTS lead_events_event_type_idx
 
 CREATE INDEX IF NOT EXISTS lead_events_source_campaign_idx
   ON lead_events (source, campaign);
+
+CREATE INDEX IF NOT EXISTS lead_events_product_category_idx
+  ON lead_events (product_category);

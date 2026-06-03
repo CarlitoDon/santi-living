@@ -23,3 +23,7 @@ Layanan ini sangat cocok bagi Anda yang sedang mengadakan:
 4. Penginapan sementara untuk rombongan wisata.
 
 Jangan biarkan tamu Anda kurang istirahat. Jadikan acara Anda lebih berkesan dengan pelayanan maksimal dari kami. [**Chat WhatsApp Admin untuk Penawaran Bulk Order**](https://wa.me/6289519119092).
+
+## Tambahan Karpet untuk Acara Keluarga
+
+Untuk area tamu, pengajian keluarga, atau ruang lesehan sementara, baca [sewa karpet Jogja](/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja). Kebutuhan ini bisa dikonsultasikan bersama extra bed.

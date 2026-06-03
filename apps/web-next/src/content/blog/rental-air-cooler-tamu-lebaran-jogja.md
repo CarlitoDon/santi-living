@@ -25,3 +25,7 @@ Perlu diingat bahwa saat musim libur panjang, permintaan terhadap layanan **sewa
 Kami akan mengirimkan unit Air Cooler yang sudah bersih beserta *Blue Ice Pack* secara gratis ke lokasi rumah atau *homestay* Anda di Sleman, Kota Jogja, maupun Bantul.
 
 [**Amankan Stok Air Cooler Anda untuk Liburan Ini!**](/sewa-cooling)
+
+## Tambahan Karpet untuk Tamu Keluarga
+
+Jika ruang tamu atau area keluarga dipakai lesehan saat liburan, pertimbangkan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) bersama kebutuhan air cooler dan kasur tamu. Untuk paket lintas perlengkapan, baca [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
