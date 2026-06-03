@@ -78,6 +78,10 @@ Bisa ditanyakan, tetapi peluang tersedia lebih besar jika panitia menghubungi le
 **Apakah karpet bisa dipaketkan dengan perlengkapan lain?**  
 Bisa konsultasikan paket karpet dengan kasur, kipas, air cooler, TV, bantal, atau selimut.
 
+## Konsultasi Harga via WhatsApp
+
+Untuk estimasi cepat, kirim jenis acara, ukuran area, tanggal, lokasi, foto venue, dan kebutuhan tambahan ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**. Workshop Santi Living berada di **Jl. Godean KM 10, Sleman, Yogyakarta**, sehingga tim bisa membantu cek opsi karpet merah, karpet permadani, karpet pameran, ongkir, durasi, dan bundle perlengkapan acara.
+
 ## Penutup
 
-Harga sewa karpet Jogja yang akurat hanya bisa dihitung setelah jenis acara, ukuran area, tanggal, dan lokasi jelas. Untuk kebutuhan event, hajatan, pengajian, wedding, atau pameran, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) lalu kirim detail acara via WhatsApp agar estimasi lebih tepat.
+Harga sewa karpet Jogja yang akurat hanya bisa dihitung setelah jenis acara, ukuran area, tanggal, dan lokasi jelas. Untuk kebutuhan event, hajatan, pengajian, wedding, atau pameran, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) lalu kirim detail acara via [WhatsApp Santi Living](https://wa.me/6289519119092) agar estimasi lebih tepat.
