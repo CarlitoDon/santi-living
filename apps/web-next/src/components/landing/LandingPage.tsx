@@ -126,6 +126,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                     rel="noopener"
                     data-wa-source={a.waSource || cfg.cta.waSource}
                     data-wa-location="hero"
+                    data-product-category={cfg.tracking?.productCategory}
+                    data-page-type={cfg.tracking?.pageType}
+                    data-wa-intent={cfg.tracking?.intent}
                   >
                     <span className="mr-3">💬</span>
                     {a.label}
@@ -180,7 +183,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                   <h3 className="font-bold text-slate-900 mb-1 text-lg">{card.name}</h3>
                   <div className="text-sm text-slate-500 mb-4">{card.size}</div>
                   <div className={`text-3xl font-extrabold ${textClass} mb-1 flex items-baseline justify-center gap-1`}>
-                    {card.price} <span className="text-sm font-normal text-slate-500">/bulan</span>
+                    {card.price}
                   </div>
                   <div className="text-xs text-slate-500 mb-3">{card.daily}</div>
                   <div className="text-xs text-slate-400 mt-auto pt-4 border-t border-slate-100">{card.note}</div>
@@ -255,6 +258,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               rel="noopener"
               data-wa-source={cfg.cta.waSource}
               data-wa-location="landing"
+              data-product-category={cfg.tracking?.productCategory}
+              data-page-type={cfg.tracking?.pageType}
+              data-wa-intent={cfg.tracking?.intent}
             >
               💬 Chat WhatsApp
             </a>

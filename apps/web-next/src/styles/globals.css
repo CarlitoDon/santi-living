@@ -584,3 +584,11 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-right: var(--container-padding);
 }
 
+/* Force container centering — non-layered CSS always beats @layer rules */
+.container {
+  max-width: var(--container-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}

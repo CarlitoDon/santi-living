@@ -76,6 +76,11 @@ export const LandingPageConfigSchema = z.object({
     bgImage: z.string().optional(),
   }),
   color: ThemeColorSchema,
+  tracking: z.object({
+    productCategory: z.string().optional(),
+    pageType: z.string().optional(),
+    intent: z.string().optional(),
+  }).optional(),
   benefits: z.array(BenefitSchema).optional(),
   priceCards: z.array(PriceCardSchema).optional(),
   audience: z.array(AudienceItemSchema).optional(),
