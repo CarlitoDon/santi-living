@@ -60,6 +60,10 @@ Untuk kebutuhan instalasi khusus, admin perlu mengecek jenis karpet, lokasi, dan
 **Apakah harga bisa langsung final?**  
 Belum tentu. Harga final mengikuti ukuran, durasi, lokasi, akses venue, cleaning, dan ketersediaan.
 
+## Booking Karpet Seminar atau Pameran
+
+Agar estimasi lebih cepat, kirim denah booth, ukuran area, jadwal setup, lokasi venue, dan kebutuhan perlengkapan lain ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**. Santi Living beroperasi dari **Jl. Godean KM 10, Sleman, Yogyakarta** dan bisa bantu koordinasi kebutuhan sewa karpet Jogja untuk seminar, bazar, expo, pameran, atau event kampus.
+
 ## Penutup
 
-Sewa karpet pameran dan seminar harus dimulai dari layout. Kirim denah, foto venue, dan kebutuhan perlengkapan lain agar admin bisa menyusun estimasi yang realistis untuk acara Anda di Jogja.
+Sewa karpet pameran dan seminar harus dimulai dari layout. Kirim denah, foto venue, dan kebutuhan perlengkapan lain lewat [WhatsApp Santi Living](https://wa.me/6289519119092) agar admin bisa menyusun estimasi yang realistis untuk acara Anda di Jogja.
