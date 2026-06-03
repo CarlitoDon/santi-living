@@ -50,4 +50,4 @@ Santi Living menyediakan **sewa kasur dalam jumlah besar** untuk berbagai acara 
 
 Pesan H-2 sebelum acara untuk memastikan ketersediaan. Sertakan jumlah kasur dan durasi sewa.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

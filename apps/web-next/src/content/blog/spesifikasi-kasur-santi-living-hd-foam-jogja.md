@@ -112,4 +112,4 @@ A: Untuk kebutuhan khusus seperti pasca-operasi, chat kami. Kami bisa rekomendas
 > **Santi Living** — menyewakan kasur busa HD Foam berkualitas untuk kebutuhan harian, mingguan, dan bulanan di Yogyakarta. Kasur bersih, nyaman, dan terjangkau.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+> 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**

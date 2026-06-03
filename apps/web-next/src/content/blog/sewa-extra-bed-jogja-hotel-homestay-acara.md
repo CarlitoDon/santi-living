@@ -98,6 +98,6 @@ Paket ini sangat cocok untuk:
 Jangan sampai acara Anda terganggu karena kekurangan tempat tidur. Santi Living siap menyediakan extra bed bersih dan nyaman untuk kebutuhan apapun.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman**
+📍 **Workshop: Jl. Godean KM10, Sleman**
 
 > *Santi Living — Sewa extra bed Jogja terpercaya. Harga mulai Rp35.000/hari, pengiriman same day, stok ready 50+ unit.*

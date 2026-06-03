@@ -66,4 +66,4 @@ Dengan menyewa kasur dalam jumlah besar, rombongan tour bisa menginap di homesta
 
 Sertakan: jumlah peserta, tanggal menginap, lokasi penginapan, dan durasi sewa.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

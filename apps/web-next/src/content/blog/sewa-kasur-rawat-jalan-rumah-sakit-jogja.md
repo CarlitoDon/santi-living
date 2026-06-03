@@ -40,7 +40,7 @@ Berikut alasan kenapa **sewa kasur** menjadi solusi terbaik:
 
 Hubungi kami via **WhatsApp: 0895-1911-9092** untuk konsultasi dan pemesanan. Tim kami siap membantu Anda 24 jam.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
 📱 **WhatsApp:** [0895-1911-9092](https://wa.me/6289519119092)
 
 > *"Santi Living — Sewa kasur bersih, nyaman, dan terjangkau untuk kebutuhan medis Anda."*

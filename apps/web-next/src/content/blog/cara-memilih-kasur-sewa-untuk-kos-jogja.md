@@ -103,5 +103,5 @@ Santi Living melayani pengiriman ke seluruh area DIY:
 > 💬 **Santi Living** — solusi cerdas untuk mahasiswa kos di Yogyakarta. Rental kasur bersih, nyaman, dan terjangkau. Divisi khusus persewaan kasur dari Santi Mebel.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
 🌐 **[santiliving.com](https://santiliving.com)**

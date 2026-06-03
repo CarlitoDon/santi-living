@@ -81,4 +81,4 @@ A: Kasur kami dirawat dengan 7 tahap sterilisasi. Setiap unit bersih, wangi, dan
 > **Santi Living** — solusi **sewa kasur Gamping Sleman** untuk mahasiswa, keluarga, dan pemilik kos. Kasur bersih, antar cepat, harga terjangkau.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman**
+> 📍 **Workshop: Jl. Godean KM10, Sleman**

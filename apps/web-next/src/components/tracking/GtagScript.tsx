@@ -91,6 +91,14 @@ export function GtagScript() {
             return 'lead-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
           }
 
+          function trackGtagEvent() {
+            try {
+              if (typeof gtag === 'function') {
+                gtag.apply(null, arguments);
+              }
+            } catch(ex) {}
+          }
+
           function sendLeadEvent(payload) {
             try {
               var body = JSON.stringify(payload);
@@ -117,7 +125,7 @@ export function GtagScript() {
               var settled = false;
               var watchdog = setTimeout(function() {
                 finish({ location_permission: 'timeout' });
-              }, 6500);
+              }, 11500);
 
               function finish(location) {
                 if (settled) return;
@@ -143,13 +151,218 @@ export function GtagScript() {
                 },
                 {
                   enableHighAccuracy: true,
-                  timeout: 5000,
+                  timeout: 10000,
                   maximumAge: 0
                 }
               );
             } catch(ex) {
               callback({ location_permission: 'error' });
             }
+          }
+
+          function compactAddressParts(parts) {
+            var seen = {};
+            var output = [];
+            for (var i = 0; i < parts.length; i++) {
+              var value = String(parts[i] || '').trim();
+              if (!value) continue;
+              var key = value.toLowerCase();
+              if (seen[key]) continue;
+              seen[key] = true;
+              output.push(value);
+            }
+            return output.join(', ');
+          }
+
+          function readCachedAutoLocation() {
+            try {
+              var raw = sessionStorage.getItem('sl_auto_location_result');
+              if (!raw) return null;
+              var parsed = JSON.parse(raw);
+              if (!parsed || !parsed.coords || !parsed.address) return null;
+              if (typeof parsed.coords.lat !== 'number' || typeof parsed.coords.lng !== 'number') return null;
+
+              var address = parsed.address || {};
+              return {
+                location_permission: 'cached',
+                latitude: parsed.coords.lat,
+                longitude: parsed.coords.lng,
+                address_text: compactAddressParts([
+                  address.street,
+                  address.kelurahan,
+                  address.kecamatan,
+                  address.kota,
+                  address.provinsi,
+                  address.postcode
+                ]),
+                city: address.kota || ''
+              };
+            } catch(ex) {
+              return null;
+            }
+          }
+
+          function normalizeAddressName(value) {
+            return String(value || '')
+              .toLowerCase()
+              .replace(/^(kabupaten|kota|kecamatan|kelurahan|desa)\\s+/i, '')
+              .replace(/\\s+/g, '')
+              .trim();
+          }
+
+          function extractKelurahanFromDisplayName(displayName, kecamatanName) {
+            var parts = String(displayName || '').split(',').map(function(part) {
+              return part.trim();
+            });
+            var normalizedKecamatan = normalizeAddressName(kecamatanName);
+            var kecamatanIndex = -1;
+
+            for (var i = 0; i < parts.length; i++) {
+              if (normalizeAddressName(parts[i]) === normalizedKecamatan) {
+                kecamatanIndex = i;
+                break;
+              }
+            }
+
+            if (kecamatanIndex > 0) {
+              var previous = parts[kecamatanIndex - 1];
+              if (previous && normalizeAddressName(previous) !== normalizedKecamatan) return previous;
+            }
+            if (kecamatanIndex > 1) {
+              var beforePrevious = parts[kecamatanIndex - 2];
+              if (beforePrevious && normalizeAddressName(beforePrevious) !== normalizedKecamatan) return beforePrevious;
+            }
+
+            return '';
+          }
+
+          function formatReverseGeocodePayload(payload) {
+            var address = payload && payload.address ? payload.address : {};
+            var displayName = payload && payload.display_name ? payload.display_name : '';
+            var road = address.road || '';
+            var villageEqualsKecamatan =
+              address.village &&
+              address.municipality &&
+              normalizeAddressName(address.village) === normalizeAddressName(address.municipality);
+            var extractedKelurahan = villageEqualsKecamatan
+              ? extractKelurahanFromDisplayName(displayName, address.municipality || '')
+              : '';
+            var kelurahan =
+              address.suburb ||
+              (villageEqualsKecamatan && extractedKelurahan ? extractedKelurahan : address.village) ||
+              address.hamlet ||
+              '';
+            var kecamatan = address.city_district || address.municipality || '';
+            var kota = address.county || address.city || address.town || '';
+            var provinsi = address.state || 'DI Yogyakarta';
+            var postcode = address.postcode || '';
+            var street = road || address.neighbourhood || kelurahan || 'Area tidak diketahui';
+
+            var fullAddress = compactAddressParts([
+              street,
+              road ? address.neighbourhood : '',
+              kelurahan,
+              kecamatan,
+              kota,
+              provinsi,
+              postcode
+            ]);
+
+            return {
+              fullAddress: fullAddress || displayName || '',
+              street: street,
+              kelurahan: kelurahan,
+              kecamatan: kecamatan,
+              kota: kota,
+              provinsi: provinsi,
+              postcode: postcode
+            };
+          }
+
+          function reverseGeocodeLocation(location, callback) {
+            if (location && location.address_text) {
+              callback(location);
+              return;
+            }
+
+            if (!location || typeof location.latitude !== 'number' || typeof location.longitude !== 'number') {
+              callback(location || {});
+              return;
+            }
+
+            var completed = false;
+            var timeout = setTimeout(function() {
+              if (completed) return;
+              completed = true;
+              callback(location);
+            }, 4500);
+
+            fetch('/api/reverse-geocode?lat=' + encodeURIComponent(location.latitude) + '&lng=' + encodeURIComponent(location.longitude))
+              .then(function(response) {
+                if (!response.ok) throw new Error('reverse geocode failed');
+                return response.json();
+              })
+              .then(function(payload) {
+                if (completed) return;
+                completed = true;
+                clearTimeout(timeout);
+
+                var formatted = formatReverseGeocodePayload(payload);
+                var enrichedLocation = Object.assign({}, location, {
+                  address_text: formatted.fullAddress,
+                  city: formatted.kota || ''
+                });
+
+                try {
+                  var detail = {
+                    coords: { lat: location.latitude, lng: location.longitude },
+                    address: {
+                      street: formatted.street,
+                      kelurahan: formatted.kelurahan,
+                      kecamatan: formatted.kecamatan,
+                      kota: formatted.kota,
+                      provinsi: formatted.provinsi,
+                      postcode: formatted.postcode
+                    }
+                  };
+                  sessionStorage.setItem('sl_auto_location_result', JSON.stringify(detail));
+                  window.dispatchEvent(new CustomEvent('location-selected', { detail: detail }));
+                } catch(ex) {}
+
+                callback(enrichedLocation);
+              })
+              .catch(function() {
+                if (completed) return;
+                completed = true;
+                clearTimeout(timeout);
+                callback(location);
+              });
+          }
+
+          function buildWhatsAppTextWithAddress(text, addressText) {
+            var address = String(addressText || '').trim();
+            var current = String(text || '').trim();
+            if (!address) return current;
+
+            if (current.indexOf('{alamat lengkap}') !== -1) {
+              return current.replace(/\\{alamat lengkap\\}/g, address);
+            }
+
+            if (/Alamat pengiriman:\\s*$/i.test(current)) {
+              return current + '\\n' + address;
+            }
+
+            if (!current) {
+              current = 'Halo Admin Santi Living by Santi Mebel Jogja,\\nSaya ingin menyewa kasur.';
+            }
+
+            return current + '\\n\\nAlamat pengiriman:\\n' + address;
+          }
+
+          function applyAddressToWhatsappText(url, addressText) {
+            if (!addressText) return;
+            var currentText = url.searchParams.get('text') || '';
+            url.searchParams.set('text', buildWhatsAppTextWithAddress(currentText, addressText));
           }
 
           function applyLocationToSearchParams(url, location) {
@@ -160,6 +373,7 @@ export function GtagScript() {
             if (typeof location.location_accuracy_m === 'number') {
               url.searchParams.set('location_accuracy_m', String(Math.round(location.location_accuracy_m)));
             }
+            if (location.city) url.searchParams.set('city', location.city);
           }
 
           function navigateToWhatsapp(url) {
@@ -254,7 +468,8 @@ export function GtagScript() {
                 link.href = url.toString();
               } catch(ex) {}
 
-              requestLeadLocation(function(location) {
+              function finishWhatsAppClick(location) {
+                reverseGeocodeLocation(location, function(enrichedLocation) {
                 var leadPayload = {
                   event_id: leadEventId,
                   event_type: 'whatsapp_click',
@@ -269,10 +484,11 @@ export function GtagScript() {
                   gbraid: attr.gbraid || '',
                   wbraid: attr.wbraid || '',
                   fbclid: attr.fbclid || '',
-                  location_permission: location.location_permission || 'error',
-                  latitude: location.latitude,
-                  longitude: location.longitude,
-                  location_accuracy_m: location.location_accuracy_m,
+                  location_permission: enrichedLocation.location_permission || 'error',
+                  latitude: enrichedLocation.latitude,
+                  longitude: enrichedLocation.longitude,
+                  location_accuracy_m: enrichedLocation.location_accuracy_m,
+                  city: enrichedLocation.city || '',
                   user_agent: navigator.userAgent || '',
                   referrer: document.referrer || '',
                   timestamp: new Date().toISOString()
@@ -280,21 +496,30 @@ export function GtagScript() {
 
                 eventParams.location_permission = leadPayload.location_permission;
 
-                gtag('event', 'whatsapp_click', eventParams);
+                trackGtagEvent('event', 'whatsapp_click', eventParams);
 
                 sendLeadEvent(leadPayload);
 
                 if (url.pathname === '/api/wa') {
-                  applyLocationToSearchParams(url, location);
+                  applyLocationToSearchParams(url, enrichedLocation);
                 }
+                applyAddressToWhatsappText(url, enrichedLocation.address_text);
 
                 // Google Ads conversion
-                gtag('event', 'conversion', {
+                trackGtagEvent('event', 'conversion', {
                   'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC'
                 });
 
                 navigateToWhatsapp(url);
               });
+              }
+
+              var cachedAutoLocation = readCachedAutoLocation();
+              if (cachedAutoLocation) {
+                finishWhatsAppClick(cachedAutoLocation);
+              } else {
+                requestLeadLocation(finishWhatsAppClick);
+              }
 
               return;
             }
@@ -319,7 +544,7 @@ export function GtagScript() {
                 }
               } catch(ex) {}
 
-              gtag('event', 'phone_click', {
+              trackGtagEvent('event', 'phone_click', {
                 'event_category': 'engagement',
                 'event_id': phoneEventId,
                 'transport_type': 'beacon'

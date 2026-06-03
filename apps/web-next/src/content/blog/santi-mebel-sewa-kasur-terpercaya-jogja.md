@@ -10,7 +10,7 @@ tags: ["santi mebel", "santi living", "sewa kasur jogja", "tentang kami", "terpe
 
 ## Tentang Santi Mebel & Santi Living
 
-Santi Mebel adalah usaha mebel dan perlengkapan rumah tangga yang berpusat di **Jl. Godean KM4, Sleman, Yogyakarta**. Dari usaha mebel inilah lahir **Santi Living** — divisi khusus yang fokus pada layanan **sewa kasur dan perlengkapan tidur**.
+Santi Mebel adalah usaha mebel dan perlengkapan rumah tangga yang berpusat di **Jl. Godean KM10, Sleman, Yogyakarta**. Dari usaha mebel inilah lahir **Santi Living** — divisi khusus yang fokus pada layanan **sewa kasur dan perlengkapan tidur**.
 
 Berbeda dengan persewaan kasur konvensional yang sering asal-asalan, Santi Living menjalankan bisnis dengan standar profesional:
 
@@ -67,7 +67,7 @@ Kami percaya kenyamanan tidur tidak harus mahal. Dengan Rp35.000/hari, Anda suda
 ## Cara Menghubungi Santi Mebel
 
 - **WhatsApp:** [0895-1911-9092](https://wa.me/6289519119092)
-- **Workshop:** Jl. Godean KM4, Sleman, Yogyakarta
+- **Workshop:** Jl. Godean KM10, Sleman, Yogyakarta
 - **Google Maps:** Cari "Santi Mebel" atau "Santi Living"
 - **Website:** [santiliving.com](https://santiliving.com)
 
@@ -83,7 +83,7 @@ Kami percaya kenyamanan tidur tidak harus mahal. Dengan Rp35.000/hari, Anda suda
 A: Ya, Santi Living adalah divisi sewa kasur dari Santi Mebel.
 
 **Q: Bisa datang langsung ke workshop?**
-A: Bisa! Alamatnya di Jl. Godean KM4, Sleman. Tapi untuk sewa, cukup via WhatsApp saja, kasur langsung diantar.
+A: Bisa! Alamatnya di Jl. Godean KM10, Sleman. Tapi untuk sewa, cukup via WhatsApp saja, kasur langsung diantar.
 
 **Q: Apakah hanya melayani sewa kasur?**
 A: Selain kasur, kami juga menyewakan bantal, selimut, TV, kipas angin, dan air cooler.

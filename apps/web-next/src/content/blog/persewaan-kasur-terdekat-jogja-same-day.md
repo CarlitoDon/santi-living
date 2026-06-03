@@ -18,7 +18,7 @@ Ketika tamu sudah di depan pintu atau keluarga besar tiba mendadak, Anda butuh k
 - **Biaya ongkir lebih murah** — Semakin dekat, semakin hemat
 - **Bisa antar jemput fleksibel** — Mau pagi, siang, atau malam, kami atur
 
-Santi Living berpusat di **Jl. Godean KM4, Sleman** — lokasi strategis yang menjangkau seluruh wilayah DIY.
+Santi Living berpusat di **Jl. Godean KM10, Sleman** — lokasi strategis yang menjangkau seluruh wilayah DIY.
 
 ## Area Jangkauan Persewaan Kasur Santi Living
 
@@ -74,7 +74,7 @@ Prosesnya semudah itu. Tidak perlu datang ke toko, tidak perlu angkut sendiri.
 Jangan tunggu sampai tamu sudah di depan pintu. Hubungi Santi Living sekarang dan dapatkan kasur bersih berkualitas dengan harga terjangkau.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
 💰 **[Lihat Daftar Harga Lengkap →](/harga-sewa-kasur)**
 
 > *Santi Living — Persewaan kasur terdekat di Jogja dengan jaminan kebersihan 7 tahap dan pengiriman same day.*

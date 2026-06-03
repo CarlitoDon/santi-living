@@ -67,4 +67,4 @@ Santi Living menawarkan **kerjasama sewa kasur jangka panjang** untuk pemilik ko
 
 Khusus kerjasama pemilik kos, dapatkan harga spesial dan layanan prioritas.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

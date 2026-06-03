@@ -71,7 +71,7 @@ Seturan dan Babarsari adalah wilayah yang sibuk, namun layanan sewa kasur kami m
 
 - **Sterilisasi Kebersihan 7 Tahap**: Kebersihan adalah prioritas kami. Semua kasur yang kembali dari penyewa dibersihkan melalui 7 tahapan sterilisasi, mulai dari vacuum debu mikro, cuci antiseptik sprei, hingga penyinaran lampu UV-C untuk membasmi tungau dan kutu busuk (bed bugs).
 - **Kasur Busa High Density Berkualitas**: Kami tidak menyewakan kasur busa tipis murahan. Unit kasur kami menggunakan busa berkualitas tinggi anti-kempes yang menyangga tulang belakang dengan nyaman sehingga terhindar dari sakit punggung saat bangun tidur.
-- **Pengiriman Tercepat dari Workshop**: Workshop kami berlokasi di Jl. Godean KM4, Sleman, Yogyakarta. Letaknya yang strategis memungkinkan pengiriman cepat ke area Seturan dan Babarsari. Jika stok tersedia dan pesanan terkonfirmasi sebelum siang hari, kurir kami siap mengantarkan di hari yang sama!
+- **Pengiriman Tercepat dari Workshop**: Workshop kami berlokasi di Jl. Godean KM10, Sleman, Yogyakarta. Letaknya yang strategis memungkinkan pengiriman cepat ke area Seturan dan Babarsari. Jika stok tersedia dan pesanan terkonfirmasi sebelum siang hari, kurir kami siap mengantarkan di hari yang sama!
 - **Pemesanan Mudah Tanpa Jaminan Ribet**: Kami tidak menuntut jaminan fisik yang rentan disalahgunakan seperti KTP asli. Anda cukup memesan via chat WhatsApp, mengisi detail alamat kos, dan memesan jadwal antar. Untuk cara lengkap pemesanan, silakan baca [cara memesan kasur sewaan lewat WhatsApp](/artikel/cara-pesan-rental-kasur-whatsapp).
 
 ---

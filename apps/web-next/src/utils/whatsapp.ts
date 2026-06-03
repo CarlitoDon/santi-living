@@ -6,14 +6,18 @@ import { config } from '@/data/config';
  * improving lead quality and reducing back-and-forth.
  */
 export const WA_PRESET_ORDER = `Halo Admin Santi Living by Santi Mebel Jogja,
-Saya ingin sewa kasur. Mohon info ketersediaan, harga sewa, dan ongkirnya.
+Saya ingin menyewa kasur.
 
-Rencana sewa:
-Paket/ukuran kasur:
-Jumlah unit:
-Tanggal mulai:
-Durasi sewa:
-Area/alamat pengiriman:
+Detail rencana sewa saya:
+Paket: {Paket Single / Paket Double}
+Jumlah unit: {jumlah}
+Tanggal mulai sewa: {tanggal}
+Durasi sewa: {jumlah hari}
+
+Alamat pengiriman:
+{alamat lengkap}
+
+Mohon info ketersediaan, harga sewa, dan ongkirnya.
 Terima kasih.`;
 
 /** Short inquiry preset for header/nav buttons */

@@ -56,4 +56,4 @@ Sleman, Bantul, Kota Yogyakarta, Kulonprogo, dan Gunung Kidul.
 
 Pesan H-3 sebelum hari H untuk memastikan ketersediaan stok. Sertakan jumlah kasur yang dibutuhkan dan lokasi pengiriman.
 
-📍 **Workshop:** Jl. Godean KM 4, Sleman, Yogyakarta
+📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta

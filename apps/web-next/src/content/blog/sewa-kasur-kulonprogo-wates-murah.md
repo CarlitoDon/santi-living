@@ -78,4 +78,4 @@ A: Untuk area tertentu di Kulonprogo mungkin ada biaya antar. Chat kami untuk es
 > **Santi Living** melayani **sewa kasur Kulonprogo** dan seluruh Yogyakarta. Kasur bersih, harga terjangkau, antar jemput fleksibel.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+> 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**

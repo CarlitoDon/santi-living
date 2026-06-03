@@ -11,7 +11,7 @@ Jika Anda tinggal di area **Gamping, Sleman**, dan tiba-tiba kedatangan keluarga
 **Santi Living** hadir sebagai solusi tercepat untuk kebutuhan perlengkapan tidur ekstra di area Yogyakarta bagian barat dan Sleman.
 
 ## Kenapa Memilih Sewa Kasur Terdekat?
-Kecepatan pengantaran adalah alasan utama. Dengan lokasi workshop kami yang strategis di area Godean KM 4, kami bisa menjangkau area Gamping, Nogotirto, Kwarasan, hingga Banyuraden dalam waktu kurang dari 2 jam.
+Kecepatan pengantaran adalah alasan utama. Dengan lokasi workshop kami yang strategis di area Godean KM 10, kami bisa menjangkau area Gamping, Nogotirto, Kwarasan, hingga Banyuraden dalam waktu kurang dari 2 jam.
 
 ## Layanan Same Day Delivery
 Kami memahami bahwa tamu seringkali datang tanpa pemberitahuan jauh hari. Itulah sebabnya layanan **rental kasur Jogja** kami mendukung *Same Day Delivery*. Pesan sebelum jam 3 sore, dan kasur akan sampai di depan pintu Anda sebelum malam tiba.

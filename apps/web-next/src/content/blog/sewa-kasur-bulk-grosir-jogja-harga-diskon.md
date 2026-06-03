@@ -102,4 +102,4 @@ A: Kami ganti langsung tanpa biaya tambahan.
 > **Santi Living** — solusi **sewa kasur bulk / grosir di Jogja** untuk kos, asrama, hajatan, dan event. Stok 50+ unit, harga diskon, antar jemput gratis.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-> 📍 **Workshop: Jl. Godean KM4, Sleman, Yogyakarta**
+> 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**

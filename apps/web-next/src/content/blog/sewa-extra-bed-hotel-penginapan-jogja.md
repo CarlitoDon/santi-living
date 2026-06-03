@@ -82,6 +82,6 @@ Untuk penginapan di area Kaliurang, Parangtritis, atau pantai selatan, tetap bis
 Jangan tunggu sampai peak season tiba dan stok menipis. Hubungi Santi Living sekarang untuk memastikan kebutuhan extra bed penginapan Anda terpenuhi.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
-📍 **Workshop: Jl. Godean KM4, Sleman**
+📍 **Workshop: Jl. Godean KM10, Sleman**
 
 > *Santi Living — Partner terpercaya untuk kebutuhan extra bed hotel dan penginapan di Jogja. Harga khusus untuk kerja sama jangka panjang.*
