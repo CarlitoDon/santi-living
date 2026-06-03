@@ -38,13 +38,19 @@ TV bisa dipakai untuk slideshow keluarga, nobar, presentasi kecil, display booth
 
 Karpet merah untuk jalur tamu, permadani untuk area keluarga, kasur untuk keluarga luar kota, kipas atau air cooler untuk ruang tunggu, dan TV untuk dokumentasi atau rundown.
 
+Jika fokus utama adalah alas area wedding, baca [sewa karpet pernikahan Jogja](/artikel/sewa-karpet-pernikahan-jogja) supaya kebutuhan karpet merah, permadani, dan perlengkapan tamu bisa dipetakan lebih rapi.
+
 ### Pengajian dan Tahlilan
 
 Permadani untuk area duduk, kipas untuk sirkulasi udara, bantal untuk lansia, dan kasur jika ada keluarga yang menginap.
 
+Untuk acara keagamaan di rumah atau musala kecil, lihat juga [sewa karpet pengajian dan tahlilan Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+
 ### Seminar dan Workshop
 
 Karpet booth atau panggung, TV display, air cooler, serta kasur untuk peserta atau panitia jika acara berlangsung beberapa hari.
+
+Jika kebutuhan utama adalah event kampus, booth, atau expo, lanjutkan ke [sewa karpet seminar dan pameran Jogja](/artikel/sewa-karpet-seminar-pameran-jogja).
 
 ### Pameran dan Bazar
 

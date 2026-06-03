@@ -41,11 +41,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: 'Artikel Tidak Ditemukan' };
+  const url = `https://santiliving.com/artikel/${slug}`;
+  const image = post.frontmatter.image || 'https://santiliving.com/logo.png';
+
   return {
     title: post.frontmatter.title,
     description: post.frontmatter.description,
     alternates: {
-      canonical: `https://santiliving.com/artikel/${slug}`,
+      canonical: url,
+    },
+    openGraph: {
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      url,
+      type: 'article',
+      publishedTime: post.frontmatter.pubDate.toISOString(),
+      authors: [post.frontmatter.author],
+      images: [
+        {
+          url: image,
+          alt: post.frontmatter.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      images: [image],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

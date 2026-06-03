@@ -177,6 +177,7 @@ export const sewaKarpetJogja: LandingPageConfig = {
           <li><strong>Karpet pameran:</strong> booth, expo, bazar UMKM, seminar, dan layout area custom.</li>
           <li><strong>Paket acara:</strong> karpet digabung dengan kasur tamu, kipas, air cooler, TV, bantal, atau selimut.</li>
         </ul>
+        <p><strong>Panduan pendukung:</strong> baca <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">harga sewa karpet Jogja</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">karpet merah vs karpet permadani</a>, <a href="https://santiliving.com/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv">paket sewa perlengkapan acara</a>, <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">sewa karpet pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">sewa karpet pernikahan</a>, dan <a href="https://santiliving.com/artikel/sewa-karpet-seminar-pameran-jogja">sewa karpet seminar/pameran</a>.</p>
       `,
     },
     {
@@ -256,6 +257,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
           <li>Foto area masuk, panggung, atau titik akad.</li>
           <li>Kebutuhan tambahan: kasur keluarga, kipas, air cooler, TV, atau bantal.</li>
         </ul>
+        <p>Untuk menentukan jenis karpet, baca <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">perbandingan karpet merah vs karpet permadani</a>. Jika karpet merah dipakai untuk wedding, lanjutkan ke <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">panduan sewa karpet pernikahan Jogja</a>.</p>
       `,
     },
   ],
@@ -316,6 +318,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
           <li>Kebutuhan bantal, selimut, kipas, atau kasur tamu keluarga.</li>
           <li>Jam kirim dan jam penjemputan setelah acara selesai.</li>
         </ul>
+        <p>Untuk konteks pemilihan, lihat <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">karpet merah vs permadani</a>, <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">sewa karpet pengajian/tahlilan</a>, atau <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">sewa karpet pernikahan Jogja</a>.</p>
       `,
     },
   ],

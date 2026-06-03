@@ -51,6 +51,8 @@ Bisa. Dalam satu acara pernikahan, karpet merah bisa dipakai di jalur masuk, sem
 
 Jika acara juga membutuhkan kasur untuk keluarga luar kota, cek [sewa kasur untuk pernikahan di Jogja](/artikel/sewa-kasur-acara-pernikahan-jogja-hemat).
 
+Untuk kebutuhan wedding yang lebih detail, lanjutkan ke [panduan sewa karpet pernikahan Jogja](/artikel/sewa-karpet-pernikahan-jogja). Jika panitia juga ingin memahami faktor biaya sebelum chat admin, baca [harga sewa karpet Jogja 2026](/artikel/harga-sewa-karpet-jogja-2026).
+
 ## Cara Meminta Rekomendasi
 
 Kirim informasi berikut ke admin:
