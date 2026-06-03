@@ -37,7 +37,12 @@ export function Navigation() {
 
   const navLinks = [
     { href: '/', label: 'Beranda' },
-    { href: '/produk', label: 'Produk' },
+    { href: '/produk', label: 'Produk', children: [
+      { href: '/produk', label: 'Semua Produk' },
+      { href: '/sewa-kasur-terdekat', label: 'Kasur' },
+      { href: '/sewa-karpet', label: 'Karpet' },
+      { href: '/sewa-perlengkapan-event', label: 'Perlengkapan Event' },
+    ] },
     { href: '/harga-sewa-kasur', label: 'Harga Sewa' },
     { href: '/#calculator', label: 'Hitung Biaya' },
     { href: '/artikel', label: 'Artikel & Tips' },
@@ -95,6 +100,24 @@ export function Navigation() {
                     >
                       {link.label}
                     </Link>
+
+                    {link.children && (
+                      <ul className="pl-4 mt-2">
+                        {link.children.map((sub) => {
+                          const isSubActive = pathname === sub.href || (sub.href !== '/' && pathname.startsWith(sub.href));
+                          return (
+                            <li key={sub.href} className="mb-1">
+                              <Link
+                                href={sub.href}
+                                className={`block px-3 py-2 rounded-md text-sm transition-colors ${isSubActive ? 'text-blue-600 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'}`}
+                              >
+                                {sub.label}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
                   </li>
                 );
               })}

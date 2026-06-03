@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [
+        { "type": "host", "value": "acara.santiliving.com" }
+      ],
+      "destination": "/sewa-perlengkapan-event"
+    }
+  ]
+}

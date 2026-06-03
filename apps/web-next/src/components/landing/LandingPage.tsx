@@ -57,11 +57,40 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   return (
     <main className="pt-[80px]">
       {/* Hero */}
-      <section className={`${gradientClass} py-12 md:py-16 pb-14 text-center text-white relative overflow-hidden`}>
+      <section
+        className={`${gradientClass} py-12 md:py-16 pb-14 text-center text-white relative overflow-hidden`}
+      >
+        {cfg.hero.bgImage && (
+          <div className="absolute inset-0 -z-10">
+            <img src={cfg.hero.bgImage} alt="hero background" className="w-full h-full object-cover opacity-30" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(99,102,241,0.12))' }} />
+          </div>
+        )}
         <div className="absolute top-[10%] left-[5%] w-[150px] h-[150px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
         <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
         
         <div className="container relative z-10">
+          {cfg.hero.badges && cfg.hero.badges.length > 0 && (
+            <div className="flex items-center justify-center gap-2 mb-3">
+              {cfg.hero.badges.map((b, bi) => (
+                <div key={bi} className="inline-block bg-white/10 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wide">
+                  {b}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {cfg.hero.features && cfg.hero.features.length > 0 && (
+            <div className="flex items-center justify-center gap-3 mb-3">
+              {cfg.hero.features.map((f, fi) => (
+                <div key={fi} className="inline-flex items-center gap-2 bg-white/10 text-white text-sm px-3 py-1 rounded-full font-medium shadow-sm">
+                  {f.icon && <span className="text-base">{f.icon}</span>}
+                  <span>{f.text}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md">
             {cfg.hero.title}
           </h1>
@@ -71,6 +100,44 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           {cfg.hero.badge && (
             <div className="mx-auto inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-white border border-white/20 backdrop-blur-sm shadow-sm">
               {cfg.hero.badge}
+            </div>
+          )}
+          {cfg.hero.actions && cfg.hero.actions.length > 0 && (
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+              {cfg.hero.actions.map((a, i) => {
+                if (a.type === 'link') {
+                  return (
+                    <Link
+                      href={a.href || '/#calculator'}
+                      key={i}
+                      className="btn btn-lg bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14 shadow"
+                    >
+                      {a.label}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <a
+                    key={i}
+                    href={getWhatsAppUrl(a.waText || cfg.cta.waText, a.waSource || cfg.cta.waSource)}
+                    className="btn btn-lg btn-whatsapp shadow-md border-0 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-emerald-600 transition-colors text-center inline-flex justify-center items-center h-14"
+                    target="_blank"
+                    rel="noopener"
+                    data-wa-source={a.waSource || cfg.cta.waSource}
+                    data-wa-location="hero"
+                  >
+                    <span className="mr-3">💬</span>
+                    {a.label}
+                  </a>
+                );
+              })}
+            </div>
+          )}
+
+          {cfg.hero.phone && (
+            <div className="mt-3 text-white/80 text-sm">
+              Atau hubungi langsung: <span className="font-semibold">{cfg.hero.phone}</span>
             </div>
           )}
         </div>

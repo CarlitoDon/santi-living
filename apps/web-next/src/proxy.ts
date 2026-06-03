@@ -7,12 +7,12 @@ export default function proxy(request: NextRequest) {
 
   // Host-based routing for acara.santiliving.com
   // If the host starts with acara.santiliving.com (e.g. acara.santiliving.com or local testing with acara.localhost:3000)
-  // and the pathname is the root `/`, rewrite to `/sewa-acara`
+  // and the pathname is the root `/`, rewrite to `/sewa-perlengkapan-event`
   if (
     (hostname.startsWith('acara.santiliving.com') || hostname.startsWith('acara.localhost')) &&
     url.pathname === '/'
   ) {
-    url.pathname = '/sewa-acara';
+    url.pathname = '/sewa-perlengkapan-event';
     return NextResponse.rewrite(url);
   }
 

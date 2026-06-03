@@ -6,7 +6,7 @@
  */
 import { createTRPCClient, httpBatchLink, type TRPCClient } from "@trpc/client";
 import superjson from "superjson";
-import type { AppRouter } from "@santi-living/proxy";
+import type { AppRouter } from "@/types/proxy-router-contract";
 import { getProxyApiSecret, getProxyTrpcUrl } from "./proxy-config";
 
 type ProxyClientRequestHeaders = {

@@ -9,6 +9,18 @@ export const sewaKarpet: LandingPageConfig = {
     title: 'Sewa Karpet Jogja',
     subtitle: 'Solusi rental karpet bersih untuk event, booth pameran, panggung, akad nikah, pengajian, dan pertemuan keluarga harian terpercaya di Yogyakarta.',
     badge: 'Mulai Rp 10.000 / Meter',
+    features: [
+      { icon: '🚚', text: 'Antar Jemput Gratis' },
+      { icon: '🧼', text: 'Karpet Bersih & Terawat' },
+      { icon: '⚡️', text: 'Fast Response via WA' },
+    ],
+    actions: [
+      { type: 'link', label: 'Sewa Sekarang', href: '/#calculator', variant: 'primary' },
+      { type: 'wa', label: 'Pesan via WhatsApp', waText: 'Halo Santi Living, saya mau tanya/booking rental karpet Jogja untuk acara kami', waSource: 'sewa_karpet_page' },
+    ],
+    badges: ['🏆 #1 RENTAL KARPET DI YOGYAKARTA'],
+    phone: '0895-1911-9092',
+    bgImage: '/images/karpet-hero.webp',
   },
   color: 'indigo',
   benefits: [
