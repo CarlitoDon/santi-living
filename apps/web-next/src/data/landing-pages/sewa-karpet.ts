@@ -15,7 +15,7 @@ export const sewaKarpetJogja: LandingPageConfig = {
   meta: {
     title: 'Sewa Karpet Jogja untuk Acara, Hajatan & Event',
     description:
-      'Cek ketersediaan sewa karpet Jogja untuk pernikahan, pengajian, seminar, pameran, booth, dan hajatan. Konsultasi ukuran, jenis karpet, area layanan, ongkir, dan estimasi biaya via WhatsApp Santi Living.',
+      'Sewa karpet Jogja untuk pernikahan, pengajian, seminar, booth, dan pameran. Konsultasi ukuran serta estimasi biaya via WhatsApp Santi Living.',
   },
   hero: {
     title: 'Sewa Karpet Jogja',

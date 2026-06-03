@@ -34,7 +34,9 @@ const config = {
     alternateRefs: config.alternateRefs ?? [],
   }),
   robotsTxtOptions: {
-    additionalSitemaps: [],
+    additionalSitemaps: [`${KARPET_SITE_URL}/sitemap.xml`],
+    transformRobotsTxt: async (_config, robotsTxt) =>
+      robotsTxt.replace(/\n# Host\nHost: https:\/\/santiliving\.com\n/, '\n'),
     policies: [
       {
         userAgent: '*',
