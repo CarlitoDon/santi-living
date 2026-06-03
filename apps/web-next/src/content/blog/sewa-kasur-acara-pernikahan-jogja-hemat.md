@@ -84,4 +84,8 @@ Santi Living memahami bahwa pernikahan butuh penanganan khusus:
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
+## Tambahan Karpet untuk Area Pernikahan
+
+Jika acara juga membutuhkan jalur tamu, area akad, atau ruang keluarga yang lebih rapi, lihat panduan [sewa karpet untuk pernikahan di Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan halaman [sewa karpet merah Jogja](/sewa-karpet-merah-jogja). Untuk kebutuhan umum, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).
+
 > *Santi Living — Sewa kasur untuk pernikahan di Jogja. Hemat jutaan rupiah, tamu tetap nyaman.*

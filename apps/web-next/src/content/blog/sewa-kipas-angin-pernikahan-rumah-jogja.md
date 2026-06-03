@@ -25,3 +25,7 @@ Kami menyediakan layanan **sewa kipas angin massal** dengan harga spesial untuk 
 Berikan senyuman termanis di hari bahagia Anda, dan biarkan tamu Anda menikmati kesejukannya.
 
 [**Booking Kipas Angin untuk Acara Anda Jauh-Jauh Hari!**](/sewa-kipas-angin)
+
+## Tambahan Karpet untuk Hajatan Rumah
+
+Selain kipas, area jalur tamu dan akad sering membutuhkan alas yang lebih rapi. Lihat [sewa karpet merah Jogja](/sewa-karpet-merah-jogja), [sewa karpet untuk pernikahan](/artikel/sewa-karpet-pernikahan-jogja), atau halaman utama [sewa karpet Jogja](/sewa-karpet-jogja).

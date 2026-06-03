@@ -118,3 +118,7 @@ Sewa air cooler untuk acara outdoor di Jogja adalah pilihan praktis ketika Anda 
 Daripada acara terasa panas dan membuat tamu cepat lelah, siapkan pendingin yang fleksibel sejak awal. Hubungi Santi Living untuk konsultasi kebutuhan air cooler dan perlengkapan pendukung acara Anda.
 
 > **Santi Living membantu kebutuhan sewa air cooler dan perlengkapan tidur di Jogja agar acara keluarga, kos, kontrakan, homestay, maupun kegiatan komunitas terasa lebih nyaman dan praktis.**
+
+## Tambahan Karpet untuk Acara Outdoor
+
+Untuk tenda, bazar, pengajian, atau area tunggu tamu, kebutuhan pendingin sering berjalan bersama kebutuhan alas area. Lihat [sewa karpet Jogja](/sewa-karpet-jogja), [sewa karpet pengajian dan tahlilan](/artikel/sewa-karpet-pengajian-tahlilan-jogja), atau [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
-import { CartBar } from '@/components/home/CartBar';
-import { KarpetCalculatorSection } from '@/components/landing/KarpetCalculatorSection';
+import {
+  KarpetCalculatorSection,
+  KarpetCartBar,
+} from '@/components/landing/KarpetCalculatorSection';
 import { LandingPage } from '@/components/landing/LandingPage';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { sewaKarpetPermadani } from '@/data/landing-pages/sewa-karpet';
@@ -36,7 +38,7 @@ export default function SewaKarpetPermadaniJogjaPage() {
       <LandingPage config={sewaKarpetPermadani}>
         <KarpetCalculatorSection />
       </LandingPage>
-      <CartBar />
+      <KarpetCartBar />
     </>
   );
 }

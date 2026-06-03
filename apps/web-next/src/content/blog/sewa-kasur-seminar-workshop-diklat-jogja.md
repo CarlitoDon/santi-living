@@ -67,3 +67,7 @@ Dengan menyewa kasur massal, panitia bisa menyediakan akomodasi di aula, gedung 
 Sertakan: nama event, jumlah peserta, tanggal, lokasi venue, dan durasi sewa.
 
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
+
+## Tambahan Karpet untuk Seminar dan Workshop
+
+Jika venue juga membutuhkan alas booth, panggung kecil, atau area registrasi, baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). Untuk konsultasi layanan utama, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).

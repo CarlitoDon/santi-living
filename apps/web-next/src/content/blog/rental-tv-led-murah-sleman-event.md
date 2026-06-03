@@ -24,3 +24,7 @@ Berikut adalah alasan kenapa para Event Organizer (EO) dan mahasiswa mempercayak
 Jangan biarkan *stand* pameran atau presentasi Anda terlihat tidak profesional karena kekurangan layar *display*.
 
 [**Hubungi Kami untuk Sewa TV LED Murah di Sleman Hari Ini!**](/sewa-tv)
+
+## Tambahan Karpet untuk Event Sleman
+
+Untuk event kampus, pameran, dan presentasi di Sleman, karpet dapat membantu merapikan booth, panggung kecil, atau area registrasi. Lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan panduan [sewa karpet seminar pameran](/artikel/sewa-karpet-seminar-pameran-jogja).

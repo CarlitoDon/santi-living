@@ -38,6 +38,9 @@ export interface LeadExportRow {
   content: string | null;
   cta_source: string | null;
   cta_location: string | null;
+  product_category: string | null;
+  page_type: string | null;
+  intent: string | null;
   landing_page: string | null;
   city: string | null;
   city_classification: string;
@@ -144,6 +147,9 @@ export async function persistLeadEvent(
         content,
         cta_source,
         cta_location,
+        product_category,
+        page_type,
+        intent,
         landing_page,
         city,
         city_classification,
@@ -178,6 +184,9 @@ export async function persistLeadEvent(
         ${nullableText(enriched.content)},
         ${nullableText(enriched.cta_source)},
         ${nullableText(enriched.cta_location)},
+        ${nullableText(enriched.product_category)},
+        ${nullableText(enriched.page_type)},
+        ${nullableText(enriched.intent)},
         ${nullableText(enriched.landing_page)},
         ${nullableText(enriched.city)},
         ${record.city_classification},
@@ -211,6 +220,9 @@ export async function persistLeadEvent(
         content = COALESCE(NULLIF(EXCLUDED.content, ''), lead_events.content),
         cta_source = COALESCE(NULLIF(EXCLUDED.cta_source, ''), lead_events.cta_source),
         cta_location = COALESCE(NULLIF(EXCLUDED.cta_location, ''), lead_events.cta_location),
+        product_category = COALESCE(NULLIF(EXCLUDED.product_category, ''), lead_events.product_category),
+        page_type = COALESCE(NULLIF(EXCLUDED.page_type, ''), lead_events.page_type),
+        intent = COALESCE(NULLIF(EXCLUDED.intent, ''), lead_events.intent),
         landing_page = COALESCE(NULLIF(EXCLUDED.landing_page, ''), lead_events.landing_page),
         city = COALESCE(NULLIF(EXCLUDED.city, ''), lead_events.city),
         city_classification = CASE
@@ -270,6 +282,9 @@ export async function queryLeadEvents(filters: LeadExportFilters): Promise<LeadE
       content,
       cta_source,
       cta_location,
+      product_category,
+      page_type,
+      intent,
       landing_page,
       city,
       city_classification,

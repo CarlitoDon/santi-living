@@ -51,3 +51,7 @@ Santi Living menyediakan **sewa kasur dalam jumlah besar** untuk berbagai acara 
 Pesan H-2 sebelum acara untuk memastikan ketersediaan. Sertakan jumlah kasur dan durasi sewa.
 
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
+
+## Tambahan Karpet untuk Pengajian dan Tahlilan
+
+Untuk area duduk tamu yang lebih rapi, baca panduan [sewa karpet pengajian dan tahlilan di Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) atau langsung cek [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja).

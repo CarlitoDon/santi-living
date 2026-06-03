@@ -25,3 +25,7 @@ Persiapan acara syukuran sudah cukup merepotkan. Jangan tambah beban pikiran And
 Anda pesan hari ini, barang akan tiba sebelum tamu pertama Anda datang.
 
 [**Booking Kipas Angin untuk Acara Anda Sekarang!**](/sewa-kipas-angin)
+
+## Tambahan Karpet untuk Syukuran dan Pengajian
+
+Jika tamu duduk lesehan, kipas sering lebih efektif ketika area duduk sudah tertata. Lihat [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) dan panduan [sewa karpet pengajian Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).

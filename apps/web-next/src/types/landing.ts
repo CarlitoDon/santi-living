@@ -74,6 +74,7 @@ export const LandingPageConfigSchema = z.object({
     badges: z.array(z.string()).optional(),
     phone: z.string().optional(),
     bgImage: z.string().optional(),
+    bgImageAlt: z.string().optional(),
   }),
   color: ThemeColorSchema,
   tracking: z.object({

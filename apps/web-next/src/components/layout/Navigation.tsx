@@ -40,7 +40,7 @@ export function Navigation() {
     { href: '/produk', label: 'Produk', children: [
       { href: '/produk', label: 'Semua Produk' },
       { href: '/sewa-kasur-terdekat', label: 'Kasur' },
-      { href: '/sewa-karpet', label: 'Karpet' },
+      { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: 'Karpet' },
       { href: '/sewa-perlengkapan-event', label: 'Perlengkapan Event' },
     ] },
     { href: '/harga-sewa-kasur', label: 'Harga Sewa' },

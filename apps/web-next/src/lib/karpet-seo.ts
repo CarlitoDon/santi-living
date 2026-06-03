@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
 
-const SITE_URL = 'https://santiliving.com';
+const SITE_URL = 'https://karpet.santiliving.com';
 const DEFAULT_IMAGE = `${SITE_URL}/images/karpet-hero.webp`;
 
 const SERVICE_AREAS = [

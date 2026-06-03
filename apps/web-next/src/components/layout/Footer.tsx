@@ -73,6 +73,7 @@ export function Footer() {
               <li className="mb-2"><Link href="/sewa-kasur-terdekat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Terdekat</Link></li>
               <li className="mb-2"><Link href="/sewa-kasur-lipat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Lipat</Link></li>
               <li className="mb-2"><Link href="/sewa-kasur-bulanan" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Bulanan</Link></li>
+              <li className="mb-2"><a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Karpet Jogja</a></li>
               <li className="mb-2"><Link href="/artikel" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Artikel &amp; Tips</Link></li>
               <li className="mb-2"><Link href="/about" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Tentang Kami</Link></li>
             </ul>

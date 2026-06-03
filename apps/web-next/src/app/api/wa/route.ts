@@ -23,6 +23,9 @@ function sanitizeWhatsAppText(text: string): string {
     .replace(/\{jumlah\}/g, '')
     .replace(/\{tanggal\}/g, '')
     .replace(/\{alamat lengkap\}/g, '')
+    .replace(/\{pernikahan \/ pengajian \/ seminar \/ pameran \/ lainnya\}/g, '')
+    .replace(/\{panjang x lebar \/ estimasi jumlah tamu\}/g, '')
+    .replace(/\{karpet merah \/ permadani \/ lesehan \/ by request\}/g, '')
     .replace(/[ \t]+\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
@@ -45,6 +48,9 @@ export async function GET(request: NextRequest) {
       content: normalizeLeadText(params.get('content')),
       cta_source: normalizeLeadText(params.get('cta_source')) ?? 'unknown',
       cta_location: normalizeLeadText(params.get('cta_location')),
+      product_category: normalizeLeadText(params.get('product_category')),
+      page_type: normalizeLeadText(params.get('page_type')),
+      intent: normalizeLeadText(params.get('intent')),
       landing_page: normalizeLeadText(params.get('landing_page')) ?? request.headers.get('referer') ?? '',
       city: normalizeLeadText(params.get('city')),
       device: normalizeLeadText(params.get('device')),

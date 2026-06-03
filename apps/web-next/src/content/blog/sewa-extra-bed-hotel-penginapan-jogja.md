@@ -85,3 +85,7 @@ Jangan tunggu sampai peak season tiba dan stok menipis. Hubungi Santi Living sek
 📍 **Workshop: Jl. Godean KM10, Sleman**
 
 > *Santi Living — Partner terpercaya untuk kebutuhan extra bed hotel dan penginapan di Jogja. Harga khusus untuk kerja sama jangka panjang.*
+
+## Tambahan Karpet untuk Venue dan Homestay
+
+Untuk penginapan, villa, atau venue keluarga yang membutuhkan area tamu sementara, baca [sewa karpet Jogja](/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja). Karpet bisa dikonsultasikan bersama kebutuhan extra bed, bantal, selimut, kipas, atau TV.

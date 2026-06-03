@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { neon } from '@neondatabase/serverless';
@@ -12,15 +12,22 @@ if (!databaseUrl) {
 }
 
 const sql = neon(databaseUrl);
-const migrationPath = join(__dirname, '..', 'db', 'migrations', '001_lead_events.sql');
-const migrationSql = await readFile(migrationPath, 'utf8');
-const statements = migrationSql
-  .split(';')
-  .map((statement) => statement.trim())
-  .filter(Boolean);
+const migrationsDir = join(__dirname, '..', 'db', 'migrations');
+const migrationFiles = (await readdir(migrationsDir))
+  .filter((filename) => filename.endsWith('.sql'))
+  .sort();
 
-for (const statement of statements) {
-  await sql.query(statement);
+for (const filename of migrationFiles) {
+  const migrationPath = join(migrationsDir, filename);
+  const migrationSql = await readFile(migrationPath, 'utf8');
+  const statements = migrationSql
+    .split(';')
+    .map((statement) => statement.trim())
+    .filter(Boolean);
+
+  for (const statement of statements) {
+    await sql.query(statement);
+  }
 }
 
-console.log('lead_events migration applied');
+console.log(`lead_events migrations applied: ${migrationFiles.join(', ')}`);
