@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import type { LandingPageConfig, ThemeColor } from '@/types/landing';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
@@ -8,6 +9,7 @@ import Link from 'next/link';
 
 interface LandingPageProps {
   config: LandingPageConfig;
+  children?: ReactNode;
 }
 
 const GRADIENT_MAP: Record<ThemeColor, string> = {
@@ -46,7 +48,7 @@ const BG_MAP: Record<ThemeColor, string> = {
   indigo: 'bg-indigo-600',
 };
 
-export function LandingPage({ config: cfg }: LandingPageProps) {
+export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const gradientClass = GRADIENT_MAP[cfg.color] || GRADIENT_MAP.blue;
   const textClass = TEXT_MAP[cfg.color] || TEXT_MAP.blue;
   const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
@@ -73,6 +75,8 @@ export function LandingPage({ config: cfg }: LandingPageProps) {
           )}
         </div>
       </section>
+
+      {children}
 
       {/* Benefits */}
       {cfg.benefits && cfg.benefits.length > 0 && (
