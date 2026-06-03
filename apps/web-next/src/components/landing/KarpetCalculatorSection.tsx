@@ -101,7 +101,7 @@ export function KarpetCalculatorSection() {
   return (
     <section id="calculator" className="relative z-[10] -mt-6 bg-slate-50 pb-10 md:-mt-10 md:pb-14">
       <div className="container">
-        <div className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-xl shadow-indigo-950/10 md:p-7">
+        <div className="w-full max-w-full rounded-[28px] border border-slate-200 bg-white p-5 shadow-xl shadow-indigo-950/10 md:p-7">
           <div className="mx-auto mb-6 max-w-2xl text-center">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
               Opsi Sewa Karpet
@@ -117,7 +117,7 @@ export function KarpetCalculatorSection() {
           <div className="space-y-6">
             {carpetCategories.map((category) => (
               <div key={category.id} className="space-y-4">
-                <div className="text-left">
+                <div className="text-center">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
                     {category.title}
                   </p>
@@ -128,11 +128,11 @@ export function KarpetCalculatorSection() {
                   )}
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid gap-4 w-full min-w-0 md:grid-cols-2 xl:grid-cols-3">
                   {category.items.map((product) => (
                     <article
                       key={product.id}
-                      className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-indigo-300 hover:bg-white hover:shadow-md"
+                      className="flex h-full flex-col min-w-0 rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-indigo-300 hover:bg-white hover:shadow-md"
                       data-product-id={product.id}
                     >
                       <div className="mb-3 flex items-start justify-between gap-3">
