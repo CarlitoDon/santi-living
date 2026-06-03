@@ -36,7 +36,7 @@ export const sewaKarpetJogja: LandingPageConfig = {
         waSource: 'sewa_karpet_jogja_page',
       },
     ],
-    badges: ['SEO-first demand capture karpet acara Jogja'],
+    badges: ['Sewa karpet acara Jogja — konsultasi ukuran & stok'],
     phone: '0895-1911-9092',
     bgImage: '/images/karpet-hero.webp',
     bgImageAlt: 'Ilustrasi karpet merah untuk layanan sewa karpet Jogja Santi Living',
