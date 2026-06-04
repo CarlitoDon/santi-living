@@ -36,7 +36,7 @@ export default function SewaKarpetPermadaniJogjaPage() {
         ])}
       />
       <LandingPage config={sewaKarpetPermadani}>
-        <KarpetCalculatorSection />
+        <KarpetCalculatorSection scope="permadani" />
       </LandingPage>
       <KarpetCartBar />
     </>

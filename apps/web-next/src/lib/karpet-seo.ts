@@ -16,8 +16,18 @@ const SERVICE_AREAS = [
   'Sekitar UGM',
 ];
 
+function getImageUrl(config: LandingPageConfig): string {
+  const image = config.hero.bgImage;
+
+  if (!image) return DEFAULT_IMAGE;
+  if (image.startsWith('http://') || image.startsWith('https://')) return image;
+
+  return `${SITE_URL}${image.startsWith('/') ? image : `/${image}`}`;
+}
+
 export function buildKarpetMetadata(config: LandingPageConfig, path: string): Metadata {
   const url = `${SITE_URL}${path}`;
+  const image = getImageUrl(config);
 
   return {
     title: config.meta.title,
@@ -46,10 +56,10 @@ export function buildKarpetMetadata(config: LandingPageConfig, path: string): Me
       siteName: 'Santi Living',
       images: [
         {
-          url: DEFAULT_IMAGE,
+          url: image,
           width: 1200,
           height: 630,
-          alt: config.hero.title,
+          alt: config.hero.bgImageAlt || config.hero.title,
         },
       ],
     },
@@ -57,7 +67,7 @@ export function buildKarpetMetadata(config: LandingPageConfig, path: string): Me
       card: 'summary_large_image',
       title: config.meta.title,
       description: config.meta.description,
-      images: [DEFAULT_IMAGE],
+      images: [image],
     },
     robots: {
       index: true,
@@ -72,6 +82,7 @@ export function buildKarpetServiceSchema(
   serviceType: string,
 ) {
   const url = `${SITE_URL}${path}`;
+  const image = getImageUrl(config);
 
   return {
     '@context': 'https://schema.org',
@@ -80,7 +91,7 @@ export function buildKarpetServiceSchema(
     serviceType,
     description: config.meta.description,
     url,
-    image: DEFAULT_IMAGE,
+    image,
     provider: {
       '@type': 'LocalBusiness',
       name: 'Santi Living',

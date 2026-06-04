@@ -26,6 +26,7 @@ function sanitizeWhatsAppText(text: string): string {
     .replace(/\{pernikahan \/ pengajian \/ seminar \/ pameran \/ lainnya\}/g, '')
     .replace(/\{panjang x lebar \/ estimasi jumlah tamu\}/g, '')
     .replace(/\{karpet merah \/ permadani \/ lesehan \/ by request\}/g, '')
+    .replace(/\{permadani merah \/ permadani emas \/ runner acara \/ by request\}/g, '')
     .replace(/[ \t]+\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();

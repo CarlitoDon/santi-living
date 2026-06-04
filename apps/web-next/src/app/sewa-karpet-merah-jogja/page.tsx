@@ -20,17 +20,17 @@ export const metadata: Metadata = buildKarpetMetadata(sewaKarpetMerah, path);
 export default function SewaKarpetMerahJogjaPage() {
   return (
     <>
-      <JsonLd data={buildKarpetServiceSchema(sewaKarpetMerah, path, 'Sewa karpet merah Jogja')} />
+      <JsonLd data={buildKarpetServiceSchema(sewaKarpetMerah, path, 'Sewa permadani merah Jogja')} />
       <JsonLd data={buildKarpetFaqSchema(sewaKarpetMerah)} />
       <JsonLd
         data={buildKarpetBreadcrumbSchema([
           { name: 'Beranda', path: '/' },
           { name: 'Sewa Karpet Jogja', path: '/sewa-karpet-jogja' },
-          { name: 'Sewa Karpet Merah Jogja', path },
+          { name: 'Sewa Permadani Merah Jogja', path },
         ])}
       />
       <LandingPage config={sewaKarpetMerah}>
-        <KarpetCalculatorSection />
+        <KarpetCalculatorSection scope="permadani" />
       </LandingPage>
       <KarpetCartBar />
     </>

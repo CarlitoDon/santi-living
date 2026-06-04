@@ -62,14 +62,14 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
         className={`${gradientClass} py-12 md:py-16 pb-14 text-center text-white relative overflow-hidden`}
       >
         {cfg.hero.bgImage && (
-          <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 z-0">
             <Image
               src={cfg.hero.bgImage}
               alt={cfg.hero.bgImageAlt || `${cfg.hero.title} - visual layanan Santi Living`}
               fill
               priority
               sizes="100vw"
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover opacity-35"
             />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(99,102,241,0.12))' }} />
           </div>

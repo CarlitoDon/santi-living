@@ -382,8 +382,14 @@ export function GtagScript() {
 
           function inferKarpetIntent(path, ctaSource, text) {
             var combined = [path, ctaSource, text].join(' ').toLowerCase();
-            if (combined.indexOf('karpet merah') !== -1 || combined.indexOf('karpet-merah') !== -1 || combined.indexOf('red carpet') !== -1) {
-              return 'sewa_karpet_merah';
+            if (combined.indexOf('permadani emas') !== -1 || combined.indexOf('permadani-emas') !== -1) {
+              return 'sewa_karpet_permadani_emas';
+            }
+            if (combined.indexOf('permadani merah') !== -1 || combined.indexOf('permadani-merah') !== -1 || combined.indexOf('karpet merah') !== -1 || combined.indexOf('karpet-merah') !== -1) {
+              return 'sewa_karpet_permadani_merah';
+            }
+            if (combined.indexOf('red carpet') !== -1 || combined.indexOf('runner') !== -1 || combined.indexOf('lembar panjang') !== -1) {
+              return 'sewa_karpet_runner_acara';
             }
             if (combined.indexOf('permadani') !== -1 || combined.indexOf('pengajian') !== -1 || combined.indexOf('tahlilan') !== -1) {
               return 'sewa_karpet_permadani';

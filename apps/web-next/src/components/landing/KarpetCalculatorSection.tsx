@@ -23,21 +23,23 @@ type CarpetCategory = {
   items: CarpetProduct[];
 };
 
+type KarpetCalculatorScope = 'all' | 'permadani';
+
 const carpetCategories: CarpetCategory[] = [
   {
     id: 'acara',
-    title: 'Karpet Acara',
-    description: 'Untuk event, panggung, booth, akad, hajatan, dan jalur tamu.',
+    title: 'Karpet Runner / Alas Acara',
+    description: 'Untuk lembar panjang jalur tamu, panggung, booth, dan layout event.',
     items: [
       {
-        id: 'karpet-merah-runner',
-        name: 'Karpet Merah / Red Carpet',
-        shortName: 'Karpet Merah',
-        size: 'Runner, jalur VIP, wedding, grand opening',
+        id: 'karpet-runner-acara',
+        name: 'Karpet Runner Acara',
+        shortName: 'Runner Acara',
+        size: 'Lembar panjang untuk jalur tamu, panggung, expo',
         statusLabel: 'Cek ukuran & stok',
-        note: 'Kirim panjang jalur, lebar area, tanggal, jam kirim, dan lokasi venue.',
+        note: 'Ini berbeda dari permadani motif ukuran persegi panjang untuk area duduk.',
         includes: ['Jalur tamu formal', 'Indoor atau outdoor by request', 'Estimasi setelah ukuran jelas'],
-        intent: 'sewa_karpet_merah',
+        intent: 'sewa_karpet_runner_acara',
         badge: 'High intent',
       },
       {
@@ -68,10 +70,32 @@ const carpetCategories: CarpetCategory[] = [
     description: 'Untuk pengajian, tahlilan, syukuran, dan acara keluarga lesehan.',
     items: [
       {
+        id: 'permadani-merah',
+        name: 'Permadani Merah',
+        shortName: 'Permadani Merah',
+        size: 'Motif merah, ukuran relatif persegi panjang',
+        statusLabel: 'Cek stok merah',
+        note: 'Karpet merah di sini adalah permadani motif, bukan runner/lembar panjang acara.',
+        includes: ['Area duduk tamu', 'Pengajian dan tahlilan', 'Ruang keluarga sementara'],
+        intent: 'sewa_karpet_permadani_merah',
+        badge: 'Warna merah',
+      },
+      {
+        id: 'permadani-emas',
+        name: 'Permadani Emas',
+        shortName: 'Permadani Emas',
+        size: 'Motif emas/cokelat, ukuran relatif persegi panjang',
+        statusLabel: 'Cek stok emas',
+        note: 'Cocok untuk ruang tamu, musala kecil, dan acara keluarga lesehan.',
+        includes: ['Area duduk lesehan', 'Tampilan hangat', 'Bisa disusun beberapa lembar'],
+        intent: 'sewa_karpet_permadani_emas',
+        badge: 'Warna emas',
+      },
+      {
         id: 'karpet-permadani-lesehan',
-        name: 'Karpet Permadani Lesehan',
+        name: 'Permadani Lesehan by Request',
         shortName: 'Permadani Lesehan',
-        size: 'Area tamu, ruang keluarga, musala kecil',
+        size: 'Motif/ukuran disesuaikan stok',
         statusLabel: 'Cek motif & ukuran',
         note: 'Sertakan jumlah tamu atau ukuran ruang agar estimasi tidak meleset.',
         includes: ['Pengajian dan tahlilan', 'Acara keluarga', 'Duduk lesehan rapi'],
@@ -94,6 +118,14 @@ const carpetCategories: CarpetCategory[] = [
 
 const allCarpetProducts = carpetCategories.flatMap((category) => category.items);
 const carpetProductIds = new Set(allCarpetProducts.map((product) => product.id));
+
+function getCarpetCategories(scope: KarpetCalculatorScope): CarpetCategory[] {
+  if (scope === 'permadani') {
+    return carpetCategories.filter((category) => category.id === 'permadani');
+  }
+
+  return carpetCategories;
+}
 
 function buildKarpetWaText(items: Array<{ name: string; quantity: number }>): string {
   const selected = items
@@ -197,25 +229,36 @@ function ProductStepper({ product }: { product: CarpetProduct }) {
   );
 }
 
-export function KarpetCalculatorSection() {
+export function KarpetCalculatorSection({ scope = 'all' }: { scope?: KarpetCalculatorScope }) {
+  const visibleCategories = getCarpetCategories(scope);
+  const isPermadani = scope === 'permadani';
+
   return (
     <section id="calculator" className="relative z-[10] -mt-6 bg-slate-50 pb-10 md:-mt-10 md:pb-14">
       <div className="container">
         <div className="w-full max-w-full rounded-[28px] border border-slate-200 bg-white p-5 shadow-xl shadow-indigo-950/10 md:p-7">
           <div className="mx-auto mb-6 max-w-2xl text-center">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
-              Kalkulator / Selector Sewa Karpet
+              {isPermadani ? 'Selector Sewa Permadani' : 'Kalkulator / Selector Sewa Karpet'}
             </p>
             <h2 className="text-2xl font-extrabold text-slate-900 md:text-3xl">
-              Pilih Karpet untuk dihitung admin
+              {isPermadani ? 'Pilih Permadani untuk Dicek Admin' : 'Pilih Karpet untuk dihitung admin'}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
-              Klik <strong>+ Tambah</strong> pada opsi karpet yang dibutuhkan. Bar pilihan akan muncul di bawah, lalu kirim ringkasan ke WhatsApp agar admin bisa menghitung stok, ukuran, ongkir, cleaning, dan estimasi biaya yang valid.
+              {isPermadani ? (
+                <>
+                  Klik <strong>+ Tambah</strong> pada varian permadani yang dibutuhkan. Permadani merah dan emas adalah karpet motif ukuran relatif persegi panjang untuk area duduk, bukan runner/lembar panjang acara.
+                </>
+              ) : (
+                <>
+                  Klik <strong>+ Tambah</strong> pada opsi karpet yang dibutuhkan. Bar pilihan akan muncul di bawah, lalu kirim ringkasan ke WhatsApp agar admin bisa menghitung stok, ukuran, ongkir, cleaning, dan estimasi biaya yang valid.
+                </>
+              )}
             </p>
           </div>
 
           <div className="space-y-6">
-            {carpetCategories.map((category) => (
+            {visibleCategories.map((category) => (
               <div key={category.id} className="space-y-4">
                 <div className="text-center">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
