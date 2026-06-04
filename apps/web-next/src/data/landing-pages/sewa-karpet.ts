@@ -338,7 +338,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
   meta: {
     title: 'Sewa Karpet Permadani Jogja untuk Pengajian & Tamu',
     description:
-      'Cek ketersediaan sewa karpet permadani Jogja untuk pengajian, tahlilan, tamu keluarga, ruang tamu sementara, dan acara lesehan. Konsultasi ukuran area dan estimasi via WhatsApp.',
+      'Cek ketersediaan sewa karpet permadani Jogja untuk pengajian, tahlilan, tamu keluarga, dan acara lesehan. Konsultasi ukuran serta estimasi via WhatsApp.',
   },
   hero: {
     ...sewaKarpetJogja.hero,
