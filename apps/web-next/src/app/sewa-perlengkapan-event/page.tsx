@@ -5,6 +5,7 @@ import { sewaAcara } from '@/data/landing-pages/sewa-acara';
 import {
   buildAcaraBreadcrumbSchema,
   buildAcaraFaqSchema,
+  buildAcaraItemListSchema,
   buildAcaraMetadata,
   buildAcaraServiceSchema,
 } from '@/lib/acara-seo';
@@ -17,6 +18,7 @@ export default function SewaPerlengkapanEventPage() {
       <JsonLd data={buildAcaraServiceSchema(sewaAcara)} />
       <JsonLd data={buildAcaraFaqSchema(sewaAcara)} />
       <JsonLd data={buildAcaraBreadcrumbSchema()} />
+      <JsonLd data={buildAcaraItemListSchema(sewaAcara)} />
       <LandingPage config={sewaAcara} />
     </>
   );

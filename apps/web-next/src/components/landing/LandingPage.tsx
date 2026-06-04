@@ -54,6 +54,14 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const textClass = TEXT_MAP[cfg.color] || TEXT_MAP.blue;
   const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
   const bgClass = BG_MAP[cfg.color] || BG_MAP.blue;
+  const isEventPage = cfg.tracking?.productCategory === 'event';
+  const priceGuideHref = isEventPage
+    ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
+    : '/harga-sewa-kasur';
+  const priceGuideLabel = isEventPage
+    ? 'Cek opsi karpet dan item by-request →'
+    : 'Lihat daftar harga lengkap semua ukuran →';
+  const priceSectionTitle = isEventPage ? 'Estimasi Paket & Item Konsultatif' : 'Harga Sewa';
 
   return (
     <main className="pt-[80px]">
@@ -176,7 +184,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       {cfg.priceCards && cfg.priceCards.length > 0 && (
         <section className="py-12 md:py-16 bg-slate-50">
           <div className="container">
-            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">Harga Sewa</h2>
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
+              {priceSectionTitle}
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {cfg.priceCards.map((card, i) => (
                 <div 
@@ -199,8 +209,8 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               ))}
             </div>
             <div className="text-center mt-8 text-sm">
-              <Link href="/harga-sewa-kasur" className={`font-semibold ${textClass} hover:opacity-80`}>
-                Lihat daftar harga lengkap semua ukuran →
+              <Link href={priceGuideHref} className={`font-semibold ${textClass} hover:opacity-80`}>
+                {priceGuideLabel}
               </Link>
             </div>
           </div>

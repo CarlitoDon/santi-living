@@ -109,6 +109,37 @@ export function buildAcaraServiceSchema(config: LandingPageConfig) {
   };
 }
 
+export function buildAcaraItemListSchema(config: LandingPageConfig) {
+  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
+  const items = config.priceCards ?? [];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Rekomendasi paket perlengkapan event Santi Living',
+    description:
+      'Daftar opsi konsultasi yang membedakan item inti Santi Living dan item by-request untuk kebutuhan event di Yogyakarta.',
+    url,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: items.length,
+    itemListElement: items.map((card, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: card.name,
+        description: `${card.size}. ${card.note}. ${card.daily}`,
+        serviceType: 'Konsultasi perlengkapan event',
+        provider: {
+          '@type': 'LocalBusiness',
+          name: 'Santi Living',
+          url: ACARA_SITE_URL,
+        },
+      },
+    })),
+  };
+}
+
 export function buildAcaraFaqSchema(config: LandingPageConfig) {
   return {
     '@context': 'https://schema.org',
