@@ -1,4 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
+
 const SITE_URL = 'https://santiliving.com';
 const KARPET_SITE_URL = 'https://karpet.santiliving.com';
 const PERMADANI_SITE_URL = 'https://permadani.santiliving.com';
@@ -26,12 +27,40 @@ function toPreferredLoc(loc) {
   return `${host}${url.pathname}${url.search}`;
 }
 
+async function getBlogArticlePaths() {
+  const fs = await import('node:fs');
+  const blogDir = `${__dirname}/src/content/blog`;
+  if (!fs.existsSync(blogDir)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(blogDir)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => `/artikel/${file.replace(/\.md$/, '')}`)
+    .sort();
+}
+
 const config = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
   exclude: ['/cart', '/checkout', '/thank-you', '/pesanan/*', '/sewa-karpet'],
+  additionalPaths: async (config) => {
+    const seen = new Set();
+    const paths = [];
+
+    for (const loc of await getBlogArticlePaths()) {
+      if (seen.has(loc)) {
+        continue;
+      }
+      seen.add(loc);
+      paths.push(await config.transform(config, loc));
+    }
+
+    return paths;
+  },
   transform: async (config, loc) => {
     const preferredHost = getPreferredHost(loc);
     const isSpecialHostRoute = preferredHost !== SITE_URL;
