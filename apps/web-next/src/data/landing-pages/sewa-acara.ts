@@ -181,7 +181,7 @@ export const sewaAcara: LandingPageConfig = {
             <tbody>
               <tr><td><strong>Item inti</strong></td><td>Kasur rest area, sprei, bantal, selimut, air cooler/cooling fan, TV display</td><td>Cek stok, jumlah unit, durasi, lokasi, dan rute pengantaran via WA.</td></tr>
               <tr><td><strong>By-request</strong></td><td>Karpet merah, permadani, runner, meja lipat, kursi, backdrop ringan, sound portable, lighting sederhana</td><td>Kirim foto/ukuran area dan kebutuhan acara; admin bantu cari opsi realistis.</td></tr>
-              <tr><td><strong>Di luar klaim</strong></td><td>Paket produksi panggung besar, vendor sound besar, dekorasi penuh, atau coverage semua wilayah DIY</td><td>Perlu konfirmasi terpisah; area jauh dan kebutuhan teknis besar tidak dijanjikan otomatis.</td></tr>
+              <tr><td><strong>Di luar klaim</strong></td><td>Paket produksi panggung besar, vendor sound besar, dekorasi penuh, atau coverage wilayah yang belum dikonfirmasi</td><td>Perlu konfirmasi terpisah; area jauh dan kebutuhan teknis besar tidak dijanjikan otomatis.</td></tr>
             </tbody>
           </table>
         </div>
