@@ -372,7 +372,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
           <li>Foto area ruang tamu, musala kecil, atau lokasi acara.</li>
           <li>Kebutuhan tambahan: kasur keluarga, kipas, air cooler, TV, atau bantal.</li>
         </ul>
-        <p>Jika yang dibutuhkan justru jalur panjang untuk tamu, panggung, atau booth, sebutkan sebagai runner/alas acara agar admin tidak mengira Anda mencari permadani merah.</p>
+        <p>Jika yang dibutuhkan justru jalur panjang untuk tamu, panggung, atau booth, sebutkan sebagai runner/alas acara agar admin tidak mengira Anda mencari permadani merah. Untuk navigasi intent, mulai dari <a href="https://karpet.santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a>, bandingkan dengan <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">sewa permadani Jogja</a>, atau buka <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a> bila butuh item tambahan.</p>
       `,
     },
   ],
@@ -557,7 +557,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
           <li>Kebutuhan tambahan seperti bantal duduk, kipas, air cooler, TV, atau kasur tamu keluarga.</li>
           <li>Jam kirim dan jam penjemputan setelah acara selesai.</li>
         </ul>
-        <p>Untuk konteks pemilihan, baca <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">panduan sewa karpet untuk pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, dan <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja</a>.</p>
+        <p>Untuk konteks pemilihan, baca <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">panduan sewa karpet untuk pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, dan <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja</a>. Jika ternyata kebutuhan Anda adalah runner/jalur tamu, buka <a href="https://karpet.santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a> atau <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">sewa karpet merah Jogja</a>; untuk bundle dengan kasur/pendingin/TV, gunakan <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a>.</p>
       `,
     },
     {

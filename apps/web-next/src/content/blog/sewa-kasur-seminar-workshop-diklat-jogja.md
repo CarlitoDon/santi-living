@@ -8,6 +8,8 @@ tags: ["seminar", "workshop", "diklat", "sewa kasur", "event", "jogja"]
 
 **Mengadakan seminar atau workshop multi-hari di Jogja?** Peserta dari luar kota butuh tempat menginap yang nyaman dan terjangkau. Sewa kasur adalah solusi logistik yang efisien.
 
+Untuk seminar, workshop, atau diklat yang membutuhkan lebih dari kasur rest area, halaman [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) membantu memetakan item inti seperti kasur dan pendingin serta item by-request seperti karpet, meja, atau TV display.
+
 ## Tantangan Logistik Seminar & Workshop
 
 Event multi-hari seperti seminar nasional, workshop pelatihan, atau diklat sering menghadapi masalah:
@@ -70,4 +72,4 @@ Sertakan: nama event, jumlah peserta, tanggal, lokasi venue, dan durasi sewa.
 
 ## Tambahan Karpet untuk Seminar dan Workshop
 
-Jika venue juga membutuhkan alas booth, panggung kecil, atau area registrasi, baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). Untuk konsultasi layanan utama, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).
+Jika venue juga membutuhkan alas booth, panggung kecil, atau area registrasi, baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). Untuk konsultasi layanan utama, mulai dari [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).

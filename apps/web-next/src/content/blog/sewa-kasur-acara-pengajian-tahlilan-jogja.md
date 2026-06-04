@@ -54,4 +54,4 @@ Pesan H-2 sebelum acara untuk memastikan ketersediaan. Sertakan jumlah kasur dan
 
 ## Tambahan Karpet untuk Pengajian dan Tahlilan
 
-Untuk area duduk tamu yang lebih rapi, baca panduan [sewa karpet pengajian dan tahlilan di Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) atau langsung cek [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja).
+Untuk area duduk tamu yang lebih rapi, baca panduan [sewa karpet pengajian dan tahlilan di Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) atau langsung cek [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).

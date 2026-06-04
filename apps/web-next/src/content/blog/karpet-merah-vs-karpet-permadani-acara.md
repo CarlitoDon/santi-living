@@ -8,7 +8,7 @@ tags: ["karpet merah", "karpet permadani", "sewa karpet jogja", "wedding", "peng
 
 Saat mencari **sewa karpet Jogja**, banyak panitia bingung memilih antara karpet merah dan karpet permadani. Keduanya sama-sama bisa membuat acara lebih rapi, tetapi fungsi dan kesannya berbeda.
 
-Untuk kebutuhan formal, lihat [sewa karpet merah Jogja](/sewa-karpet-merah-jogja). Untuk acara keluarga atau lesehan, lihat [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja).
+Untuk kebutuhan formal, lihat [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja). Untuk acara keluarga atau lesehan, lihat [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
 
 ## Kapan Memilih Karpet Merah?
 
@@ -71,4 +71,4 @@ Masih ragu memilih karpet merah atau karpet permadani? Kirim foto area, ukuran, 
 
 ## Penutup
 
-Karpet merah lebih tepat untuk jalur formal dan momen seremoni. Karpet permadani lebih tepat untuk area duduk dan acara keluarga. Jika masih ragu, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) dan kirim detail acara lewat [WhatsApp Santi Living](https://wa.me/6289519119092) agar rekomendasi lebih akurat.
+Karpet merah lebih tepat untuk jalur formal dan momen seremoni. Karpet permadani lebih tepat untuk area duduk dan acara keluarga. Jika masih ragu, mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan kirim detail acara lewat [WhatsApp Santi Living](https://wa.me/6289519119092) agar rekomendasi lebih akurat.

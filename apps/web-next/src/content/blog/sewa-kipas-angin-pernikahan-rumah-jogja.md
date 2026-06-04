@@ -8,6 +8,8 @@ tags: ["sewa kipas angin", "acara pernikahan", "hajatan rumah", "jogja"]
 
 Mengadakan resepsi atau syukuran pernikahan di rumah sendiri (tanpa menyewa gedung) adalah tradisi yang masih sangat kental di Yogyakarta. Selain lebih menghemat anggaran, acara di rumah terasa lebih intim dan membaur dengan tetangga sekitar.
 
+Jika kipas untuk pernikahan rumah dipakai bersama kasur transit, karpet merah, atau TV display, halaman [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) membantu menyusun kebutuhan yang realistis sebelum estimasi harga.
+
 Namun, tantangan terbesar menggelar *hajatan* di rumah adalah **sirkulasi udara**. Jika ruang tamu dan teras Anda dijejali oleh puluhan tamu undangan pada siang hari yang terik, udara akan cepat menjadi pengap dan panas. Solusi paling praktis? Tentu saja **sewa kipas angin Jogja** dalam jumlah yang memadai.
 
 ## Kenapa Stand Fan Lebih Baik dari Kipas Kabut (Misty Fan)?
@@ -28,4 +30,4 @@ Berikan senyuman termanis di hari bahagia Anda, dan biarkan tamu Anda menikmati 
 
 ## Tambahan Karpet untuk Hajatan Rumah
 
-Selain kipas, area jalur tamu dan akad sering membutuhkan alas yang lebih rapi. Lihat [sewa karpet merah Jogja](/sewa-karpet-merah-jogja), [sewa karpet untuk pernikahan](/artikel/sewa-karpet-pernikahan-jogja), atau halaman utama [sewa karpet Jogja](/sewa-karpet-jogja).
+Selain kipas, area jalur tamu dan akad sering membutuhkan alas yang lebih rapi. Lihat [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja), [sewa karpet untuk pernikahan](/artikel/sewa-karpet-pernikahan-jogja), atau halaman utama [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).

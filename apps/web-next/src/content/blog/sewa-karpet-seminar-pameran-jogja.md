@@ -8,7 +8,7 @@ tags: ["sewa karpet seminar jogja", "sewa karpet pameran jogja", "karpet booth",
 
 Seminar, workshop, expo, bazar, dan pameran memiliki kebutuhan karpet yang berbeda dari acara keluarga. **Sewa karpet seminar dan pameran di Jogja** biasanya berhubungan dengan layout booth, panggung kecil, area registrasi, atau jalur pengunjung.
 
-Jika kebutuhan Anda masih umum, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja). Untuk paket lintas perlengkapan, baca juga [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
+Jika kebutuhan Anda masih umum, mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja). Untuk paket lintas perlengkapan, baca juga [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
 
 ## Area yang Sering Membutuhkan Karpet
 

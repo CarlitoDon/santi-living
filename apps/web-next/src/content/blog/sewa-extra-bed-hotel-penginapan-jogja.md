@@ -88,4 +88,4 @@ Jangan tunggu sampai peak season tiba dan stok menipis. Hubungi Santi Living sek
 
 ## Tambahan Karpet untuk Venue dan Homestay
 
-Untuk penginapan, villa, atau venue keluarga yang membutuhkan area tamu sementara, baca [sewa karpet Jogja](/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja). Karpet bisa dikonsultasikan bersama kebutuhan extra bed, bantal, selimut, kipas, atau TV.
+Untuk penginapan, villa, atau venue keluarga yang membutuhkan area tamu sementara, baca [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Karpet bisa dikonsultasikan bersama kebutuhan extra bed, bantal, selimut, kipas, atau TV.

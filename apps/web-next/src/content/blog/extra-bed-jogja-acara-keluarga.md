@@ -8,12 +8,14 @@ tags: ["extra bed jogja", "acara keluarga", "sewa kasur massal"]
 
 Mengadakan hajatan, reuni, atau syukuran di rumah seringkali membuat Anda harus menjamu tamu dari luar kota dalam jumlah banyak. Masalah klasik yang muncul selalu sama: **kekurangan tempat tidur**.
 
+Untuk acara keluarga yang butuh extra bed, pendingin, TV, dan alas duduk sekaligus, gunakan [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) agar admin bisa memisahkan item inti, item by-request, dan estimasi rute pengiriman.
+
 Layanan **extra bed Jogja** dari **Santi Living** hadir khusus untuk membantu kelancaran acara spesial Anda tanpa harus membuat tamu Anda tidur di atas lantai yang dingin.
 
 ## Kenapa Memilih Layanan Extra Bed Kami?
-- **Stok Melimpah**: Kami memiliki ratusan unit kasur **Royal Grand Exclusive** yang siap dikirim dalam satu waktu.
-- **Paket Lengkap**: Setiap unit sudah termasuk bantal dan sprei bersih, sehingga rumah Anda tetap terlihat rapi dan profesional seperti hotel.
-- **Tarif Flat & Transparan**: Kami memberikan harga spesial untuk penyewaan dalam jumlah banyak (bulk order).
+- **Ketersediaan dicek sesuai tanggal**: Admin akan mengecek jumlah unit kasur yang memungkinkan untuk jadwal acara, durasi sewa, dan rute pengiriman Anda.
+- **Paket dapat dikonsultasikan**: Bantal dan sprei bersih bisa disiapkan sesuai kebutuhan agar rumah tetap tertata rapi seperti ruang tamu penginapan.
+- **Estimasi transparan**: Untuk penyewaan jumlah banyak, admin menghitung estimasi setelah jumlah unit, tanggal, lokasi, dan durasi jelas.
 
 ## Solusi untuk Berbagai Acara
 Layanan ini sangat cocok bagi Anda yang sedang mengadakan:
@@ -26,4 +28,4 @@ Jangan biarkan tamu Anda kurang istirahat. Jadikan acara Anda lebih berkesan den
 
 ## Tambahan Karpet untuk Acara Keluarga
 
-Untuk area tamu, pengajian keluarga, atau ruang lesehan sementara, baca [sewa karpet Jogja](/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja). Kebutuhan ini bisa dikonsultasikan bersama extra bed.
+Untuk area tamu, pengajian keluarga, atau ruang lesehan sementara, baca [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Kebutuhan ini bisa dikonsultasikan bersama extra bed.

@@ -8,6 +8,8 @@ tags: ["sewa tv pameran", "bazar jogja", "rental tv", "booth promosi"]
 
 Yogyakarta adalah kota festival. Setiap minggunya, hampir selalu ada acara *bazar* kuliner, pameran UMKM di mall (seperti JCM atau Pakuwon), hingga pameran pendidikan dan teknologi di gedung-gedung konvensi (JEC).
 
+Jika booth pameran atau bazar juga membutuhkan pendingin, kasur crew, atau alas area, mulai dari [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) lalu pilih [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) bila ukuran booth perlu dihitung khusus.
+
 Bagi para *tenant* (peserta pameran), persaingan untuk menarik perhatian pengunjung sangatlah ketat. Memasang *banner* atau spanduk saja seringkali tidak cukup. Anda membutuhkan **visual yang bergerak** untuk menghentikan langkah orang yang lalu lalang. Di sinilah **sewa TV LED untuk pameran di Jogja** menjadi senjata rahasia *marketing* Anda.
 
 ## Tingkatkan Penjualan Booth Anda dengan TV LED
@@ -25,4 +27,4 @@ Buat *booth* Anda tampil paling profesional dan modern di antara *tenant* lainny
 
 ## Tambahan Karpet untuk Booth Pameran
 
-Booth yang memakai TV display biasanya juga membutuhkan alas area yang rapi. Baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja) atau cek [sewa karpet Jogja](/sewa-karpet-jogja).
+Booth yang memakai TV display biasanya juga membutuhkan alas area yang rapi. Baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja) atau cek [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).

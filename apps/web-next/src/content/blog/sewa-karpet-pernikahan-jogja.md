@@ -8,7 +8,7 @@ tags: ["sewa karpet pernikahan jogja", "karpet merah jogja", "wedding jogja", "h
 
 Pernikahan di Jogja sering melibatkan banyak titik kegiatan: jalur masuk tamu, area akad, ruang keluarga, meja penerima tamu, panggung kecil, dan tempat istirahat keluarga. Karena itu, **sewa karpet untuk pernikahan di Jogja** tidak hanya soal memilih warna, tetapi juga soal layout dan logistik.
 
-Untuk jalur formal, Anda bisa mulai dari [sewa karpet merah Jogja](/sewa-karpet-merah-jogja). Untuk kebutuhan keseluruhan acara, lihat halaman utama [sewa karpet Jogja](/sewa-karpet-jogja).
+Untuk jalur formal, Anda bisa mulai dari [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja). Untuk kebutuhan keseluruhan acara, lihat halaman utama [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
 
 ## Titik Pernikahan yang Biasanya Membutuhkan Karpet
 

@@ -8,6 +8,8 @@ tags: ["sewa air cooler", "acara outdoor jogja", "pendingin ruangan", "hajatan j
 
 Acara outdoor di Jogja sering terlihat sederhana di awal: pasang tenda, atur kursi, siapkan konsumsi, lalu tamu datang. Namun begitu siang mulai panas atau ruangan semi-tertutup dipenuhi banyak orang, kenyamanan tamu bisa cepat turun. Kipas angin membantu menggerakkan udara, tetapi untuk area tertentu seperti sudut tenda, ruang keluarga yang dipakai hajatan, atau booth bazar yang padat, banyak penyelenggara membutuhkan hembusan yang lebih sejuk.
 
+Jika air cooler dipakai bersama perlengkapan lain seperti kasur rest area, TV display, atau alas area, buka dulu [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) agar kebutuhan inti dan by-request dipisahkan sebelum admin memberi estimasi.
+
 Di situ **sewa air cooler untuk acara outdoor di Jogja** bisa menjadi solusi praktis. Anda tidak perlu membeli unit pendingin sendiri, tidak perlu instalasi seperti AC, dan bisa menyesuaikan jumlah unit dengan kebutuhan acara. Santi Living menyediakan layanan rental perlengkapan hunian dan acara di Yogyakarta, termasuk air cooler untuk kebutuhan harian maupun bulanan.
 
 ## Kenapa Air Cooler Cocok untuk Acara Outdoor dan Semi-Outdoor?
@@ -121,4 +123,4 @@ Daripada acara terasa panas dan membuat tamu cepat lelah, siapkan pendingin yang
 
 ## Tambahan Karpet untuk Acara Outdoor
 
-Untuk tenda, bazar, pengajian, atau area tunggu tamu, kebutuhan pendingin sering berjalan bersama kebutuhan alas area. Lihat [sewa karpet Jogja](/sewa-karpet-jogja), [sewa karpet pengajian dan tahlilan](/artikel/sewa-karpet-pengajian-tahlilan-jogja), atau [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
+Untuk tenda, bazar, pengajian, atau area tunggu tamu, kebutuhan pendingin sering berjalan bersama kebutuhan alas area. Lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja), [sewa karpet pengajian dan tahlilan](/artikel/sewa-karpet-pengajian-tahlilan-jogja), atau [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).

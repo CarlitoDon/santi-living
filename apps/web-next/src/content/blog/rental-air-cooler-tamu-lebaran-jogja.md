@@ -28,4 +28,4 @@ Kami akan mengirimkan unit Air Cooler yang sudah bersih beserta *Blue Ice Pack* 
 
 ## Tambahan Karpet untuk Tamu Keluarga
 
-Jika ruang tamu atau area keluarga dipakai lesehan saat liburan, pertimbangkan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) bersama kebutuhan air cooler dan kasur tamu. Untuk paket lintas perlengkapan, baca [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
+Jika ruang tamu atau area keluarga dipakai lesehan saat liburan, pertimbangkan [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) bersama kebutuhan air cooler dan kasur tamu. Untuk paket lintas perlengkapan, baca [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).

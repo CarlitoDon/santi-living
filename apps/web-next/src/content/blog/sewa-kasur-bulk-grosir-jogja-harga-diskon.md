@@ -106,4 +106,4 @@ A: Kami ganti langsung tanpa biaya tambahan.
 
 ## Tambahan Karpet untuk Order Bulk dan Event
 
-Untuk order kasur grosir yang dipakai pada hajatan, asrama acara, seminar, atau gathering, panitia sering juga membutuhkan alas area. Lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
+Untuk order kasur grosir yang dipakai pada hajatan, asrama acara, seminar, atau gathering, panitia sering juga membutuhkan alas area. Lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).

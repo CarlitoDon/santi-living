@@ -96,4 +96,4 @@ Kami memiliki pengalaman melayani berbagai skala acara, dari riunio keluarga kec
 
 ## Tambahan Karpet untuk Perlengkapan Acara
 
-Jika acara keluarga juga membutuhkan alas ruang tamu, pengajian, atau jalur tamu, lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Karpet dapat dikonsultasikan bersama kasur, bantal, selimut, kipas, air cooler, dan TV.
+Jika acara keluarga juga membutuhkan alas ruang tamu, pengajian, atau jalur tamu, lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Karpet dapat dikonsultasikan bersama kasur, bantal, selimut, kipas, air cooler, dan TV.

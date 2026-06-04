@@ -8,6 +8,8 @@ tags: ["pernikahan", "sewa kasur jogja", "acara", "tamu keluarga", "penginapan h
 
 Momen **pernikahan** adalah hari paling spesial dalam hidup. Tapi di balik kebahagiaan, ada satu masalah logistik yang sering terlupakan: di mana keluarga besar dari luar kota akan tidur? Sewa kasur untuk acara pernikahan di Jogja adalah solusi yang sudah dipercaya ratusan keluarga.
 
+Untuk wedding preparation yang perlu kasur transit, pendingin, TV, dan alas area dalam satu rute, cek [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event); jika fokusnya jalur seremoni, buka [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja).
+
 ## Tantangan Logistik Tamu Pernikahan
 
 Pernikahan di Jogja biasanya melibatkan:
@@ -86,6 +88,6 @@ Santi Living memahami bahwa pernikahan butuh penanganan khusus:
 
 ## Tambahan Karpet untuk Area Pernikahan
 
-Jika acara juga membutuhkan jalur tamu, area akad, atau ruang keluarga yang lebih rapi, lihat panduan [sewa karpet untuk pernikahan di Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan halaman [sewa karpet merah Jogja](/sewa-karpet-merah-jogja). Untuk kebutuhan umum, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).
+Jika acara juga membutuhkan jalur tamu, area akad, atau ruang keluarga yang lebih rapi, lihat panduan [sewa karpet untuk pernikahan di Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan halaman [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja). Untuk kebutuhan umum, mulai dari [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
 
 > *Santi Living — Sewa kasur untuk pernikahan di Jogja. Hemat jutaan rupiah, tamu tetap nyaman.*

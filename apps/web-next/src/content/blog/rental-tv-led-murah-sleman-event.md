@@ -8,6 +8,8 @@ tags: ["rental tv sleman", "sewa tv murah", "event jogja", "presentasi"]
 
 Kabupaten **Sleman** merupakan pusat pendidikan dan bisnis yang sibuk di Yogyakarta. Setiap harinya, ada ratusan *event*, mulai dari bazar UMKM di mall, pameran pendidikan di kampus (UGM, UNY, UPN), hingga rapat bisnis di *co-working space*.
 
+Untuk event yang butuh TV display sekaligus pendingin, kasur rest area, atau karpet by request, gunakan jalur [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) supaya rundown, listrik, akses venue, dan jadwal antar-jemput dihitung bersama.
+
 Seringkali, penyelenggara acara membutuhkan layar *display* yang memadai untuk menampilkan video promosi atau materi presentasi. Membawa TV sendiri dari rumah sangat berisiko rusak. Di sinilah layanan **rental TV LED Sleman** dari Santi Living menjadi solusi yang paling dicari.
 
 ## Rental TV Praktis untuk Segala Acara
@@ -27,4 +29,4 @@ Jangan biarkan *stand* pameran atau presentasi Anda terlihat tidak profesional k
 
 ## Tambahan Karpet untuk Event Sleman
 
-Untuk event kampus, pameran, dan presentasi di Sleman, karpet dapat membantu merapikan booth, panggung kecil, atau area registrasi. Lihat [sewa karpet Jogja](/sewa-karpet-jogja) dan panduan [sewa karpet seminar pameran](/artikel/sewa-karpet-seminar-pameran-jogja).
+Untuk event kampus, pameran, dan presentasi di Sleman, karpet dapat membantu merapikan booth, panggung kecil, atau area registrasi. Lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan panduan [sewa karpet seminar pameran](/artikel/sewa-karpet-seminar-pameran-jogja).

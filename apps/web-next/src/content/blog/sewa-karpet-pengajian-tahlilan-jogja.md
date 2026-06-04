@@ -8,7 +8,7 @@ tags: ["sewa karpet pengajian jogja", "sewa karpet tahlilan", "karpet permadani 
 
 Pengajian, tahlilan, syukuran, dan acara keluarga sering membutuhkan area duduk lesehan yang rapi. Jika karpet rumah tidak cukup, **sewa karpet untuk pengajian di Jogja** bisa menjadi solusi praktis tanpa harus membeli permadani baru.
 
-Untuk kebutuhan seperti ini, halaman [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) adalah titik awal yang paling relevan.
+Untuk kebutuhan seperti ini, halaman [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) adalah titik awal yang paling relevan.
 
 ## Kenapa Pengajian Membutuhkan Karpet Khusus?
 
@@ -58,6 +58,6 @@ Belum. Estimasi mengikuti ukuran area, jenis karpet, durasi, lokasi, cleaning, d
 
 ## Cara Pesan
 
-Kirim detail acara melalui WhatsApp: tanggal, lokasi, jumlah tamu, ukuran area, dan foto ruangan. Mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) atau langsung chat admin.
+Kirim detail acara melalui WhatsApp: tanggal, lokasi, jumlah tamu, ukuran area, dan foto ruangan. Mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) atau langsung chat admin.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**

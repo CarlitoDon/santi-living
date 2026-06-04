@@ -8,13 +8,15 @@ tags: ["paket sewa perlengkapan acara jogja", "sewa karpet jogja", "sewa kasur a
 
 Panitia acara sering menghubungi banyak vendor untuk kebutuhan yang sebenarnya saling berhubungan: karpet, kasur tamu, bantal, selimut, kipas, air cooler, dan TV. Dengan **paket sewa perlengkapan acara Jogja**, koordinasi bisa dibuat lebih sederhana.
 
-Santi Living sudah kuat di rental kasur dan perlengkapan hunian sementara. Untuk kategori karpet, prosesnya masih konsultatif: cek ketersediaan, jenis karpet, ukuran, dan partner jika diperlukan melalui halaman [sewa karpet Jogja](/sewa-karpet-jogja).
+Untuk rute konsultasi satu pintu, mulai dari halaman [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event); dari sana panitia bisa dipandu memilih [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja), [sewa permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), atau [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) sesuai fungsi alasnya.
+
+Santi Living sudah kuat di rental kasur dan perlengkapan hunian sementara. Untuk kategori karpet, prosesnya masih konsultatif: cek ketersediaan, jenis karpet, ukuran, dan partner jika diperlukan melalui halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
 
 ## Perlengkapan yang Sering Dibutuhkan dalam Satu Acara
 
 ### Karpet
 
-Karpet dipakai untuk jalur tamu, area lesehan, booth pameran, panggung kecil, atau ruang keluarga sementara. Pilih [karpet merah](/sewa-karpet-merah-jogja) untuk jalur formal, atau [karpet permadani](/sewa-karpet-permadani-jogja) untuk pengajian dan lesehan.
+Karpet dipakai untuk jalur tamu, area lesehan, booth pameran, panggung kecil, atau ruang keluarga sementara. Pilih [karpet merah](https://karpet.santiliving.com/sewa-karpet-merah-jogja) untuk jalur formal, atau [karpet permadani](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) untuk pengajian dan lesehan.
 
 ### Kasur Tamu
 
@@ -74,7 +76,7 @@ Paket tidak selalu berarti harga langsung final. Paket berarti koordinasi kebutu
 
 ## Mulai dari Kebutuhan Utama
 
-Jika prioritas Anda karpet, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja). Jika prioritas Anda tidur tamu, baca [sewa kasur untuk gathering acara keluarga](/artikel/sewa-kasur-gathering-acara-keluarga-jogja). Jika ruangan panas, baca [sewa air cooler untuk acara outdoor](/artikel/sewa-air-cooler-acara-outdoor-jogja).
+Jika prioritas Anda karpet, mulai dari [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja). Jika prioritas Anda tidur tamu, baca [sewa kasur untuk gathering acara keluarga](/artikel/sewa-kasur-gathering-acara-keluarga-jogja). Jika ruangan panas, baca [sewa air cooler untuk acara outdoor](/artikel/sewa-air-cooler-acara-outdoor-jogja).
 
 ## Penutup
 

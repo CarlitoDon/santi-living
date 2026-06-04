@@ -8,7 +8,7 @@ tags: ["harga sewa karpet jogja", "sewa karpet jogja", "rental karpet", "perleng
 
 Mencari **harga sewa karpet Jogja 2026** biasanya dimulai dari satu pertanyaan sederhana: berapa biaya untuk acara saya? Jawabannya tidak bisa selalu dipukul rata, karena kebutuhan karpet untuk jalur tamu pernikahan berbeda dengan pengajian lesehan, booth pameran, atau panggung seminar.
 
-Di Santi Living, halaman [sewa karpet Jogja](/sewa-karpet-jogja) dibuat sebagai layanan konsultatif. Artinya, admin akan mengecek jenis karpet, ukuran, tanggal acara, area pengiriman, dan ketersediaan stok atau partner sebelum memberi estimasi yang bisa dipakai panitia.
+Di Santi Living, halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dibuat sebagai layanan konsultatif. Artinya, admin akan mengecek jenis karpet, ukuran, tanggal acara, area pengiriman, dan ketersediaan stok atau partner sebelum memberi estimasi yang bisa dipakai panitia.
 
 ## Kenapa Harga Sewa Karpet Tidak Selalu Sama?
 
@@ -28,11 +28,11 @@ Karena itulah harga final sebaiknya dikonfirmasi melalui WhatsApp setelah detail
 
 ### Karpet Merah
 
-[Sewa karpet merah Jogja](/sewa-karpet-merah-jogja) cocok untuk wedding, VIP entrance, grand opening, akad, panggung kecil, dan jalur tamu. Estimasi biasanya bergantung pada panjang jalur dan lebar area.
+[Sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) cocok untuk wedding, VIP entrance, grand opening, akad, panggung kecil, dan jalur tamu. Estimasi biasanya bergantung pada panjang jalur dan lebar area.
 
 ### Karpet Permadani
 
-[Sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja) cocok untuk pengajian, tahlilan, syukuran, ruang tamu sementara, dan acara keluarga lesehan. Estimasi lebih mudah jika Anda mengirim jumlah tamu atau ukuran ruang.
+[Sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) cocok untuk pengajian, tahlilan, syukuran, ruang tamu sementara, dan acara keluarga lesehan. Estimasi lebih mudah jika Anda mengirim jumlah tamu atau ukuran ruang.
 
 ### Karpet Pameran atau Booth
 
@@ -84,4 +84,4 @@ Untuk estimasi cepat, kirim jenis acara, ukuran area, tanggal, lokasi, foto venu
 
 ## Penutup
 
-Harga sewa karpet Jogja yang akurat hanya bisa dihitung setelah jenis acara, ukuran area, tanggal, dan lokasi jelas. Untuk kebutuhan event, hajatan, pengajian, wedding, atau pameran, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) lalu kirim detail acara via [WhatsApp Santi Living](https://wa.me/6289519119092) agar estimasi lebih tepat.
+Harga sewa karpet Jogja yang akurat hanya bisa dihitung setelah jenis acara, ukuran area, tanggal, dan lokasi jelas. Untuk kebutuhan event, hajatan, pengajian, wedding, atau pameran, mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) lalu kirim detail acara via [WhatsApp Santi Living](https://wa.me/6289519119092) agar estimasi lebih tepat.
