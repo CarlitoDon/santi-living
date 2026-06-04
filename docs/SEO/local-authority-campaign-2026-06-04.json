@@ -87,7 +87,7 @@
       "note": "Existing live karpet post already covers sewa karpet Jogja for wedding, pengajian, seminar, booth, pameran and links to karpet money page; no duplicate posted in this task."
     },
     {
-      "category": "ADDITIONAL",
+      "category": "permadani_media",
       "action": "uploaded_gbp_media",
       "resource_name": "accounts/116188520419140679581/locations/10488080858214395605/media/AF1QipNrd4KLhQWy59F3uzstIiS8B5LvcSKdXt4lIN9R",
       "state_readback": "present_in_media_list",
@@ -99,7 +99,8 @@
         "source image HTTP 200 image/jpeg",
         "existing media dupes empty before apply",
         "GBP media count increased/read-back count 8 and matching resource present"
-      ]
+      ],
+      "location_association_category": "ADDITIONAL"
     }
   ],
   "gbp_post_queue_next_30_days": [
