@@ -54,11 +54,12 @@ Implemented donor links as of this update:
 ## Sitemap Host Governance
 
 - `apps/web-next/next-sitemap.config.js` maps money-page route paths to preferred subdomain hosts.
-- `robots.txt` must advertise all relevant sitemap indexes:
+- `robots.txt` must advertise the main sitemap index plus host-specific sitemap payloads:
   - `https://santiliving.com/sitemap.xml`
-  - `https://karpet.santiliving.com/sitemap.xml`
-  - `https://permadani.santiliving.com/sitemap.xml`
-  - `https://acara.santiliving.com/sitemap.xml`
+  - `https://karpet.santiliving.com/sitemap-0.xml`
+  - `https://permadani.santiliving.com/sitemap-0.xml`
+  - `https://acara.santiliving.com/sitemap-0.xml`
+- `sitemap.xml` should not list recursive subdomain `sitemap.xml` URLs. It should point to `sitemap-0.xml` payloads so GSC can crawl the preferred host locs without a loop.
 - `sitemap-0.xml` should include preferred subdomain locs for all four money pages and should not include main-domain duplicates for those same money paths.
 
 ## Crawl Budget Hygiene

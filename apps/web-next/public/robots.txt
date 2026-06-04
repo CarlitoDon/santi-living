@@ -9,6 +9,6 @@ Disallow: /api/
 
 # Sitemaps
 Sitemap: https://santiliving.com/sitemap.xml
-Sitemap: https://karpet.santiliving.com/sitemap.xml
-Sitemap: https://permadani.santiliving.com/sitemap.xml
-Sitemap: https://acara.santiliving.com/sitemap.xml
+Sitemap: https://karpet.santiliving.com/sitemap-0.xml
+Sitemap: https://permadani.santiliving.com/sitemap-0.xml
+Sitemap: https://acara.santiliving.com/sitemap-0.xml
