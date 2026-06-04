@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
+import { useHostCta } from '@/hooks/useHostCta';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
 
 export function StickyWhatsApp() {
   const [visible, setVisible] = useState(false);
+  const hostCta = useHostCta();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,11 +35,11 @@ export function StickyWhatsApp() {
 
   return (
     <a
-      href={getWhatsAppUrl(WA_PRESET_ORDER, 'sticky_button')}
+      href={getWhatsAppUrl(hostCta.waText, 'sticky_button')}
       className="sticky-wa"
       target="_blank"
       rel="noopener"
-      aria-label="Chat WhatsApp"
+      aria-label={hostCta.stickyAriaLabel}
       data-wa-source="sticky_button"
       data-wa-location="floating"
     >

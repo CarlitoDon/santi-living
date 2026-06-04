@@ -156,7 +156,6 @@ export default function RootLayout({
       <head>
         <GtagScript />
         <ClarityScript />
-        <link rel="preload" href="/images/stok-kasur.webp" as="image" type="image/webp" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}

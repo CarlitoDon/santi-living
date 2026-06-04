@@ -91,6 +91,8 @@ export const LandingPageConfigSchema = z.object({
     description: z.string(),
     waText: z.string(),
     waSource: z.string(),
+    secondaryLabel: z.string().optional(),
+    secondaryHref: z.string().optional(),
   }),
   /** Extra content sections rendered between benefits and FAQ */
   sections: z.array(z.object({

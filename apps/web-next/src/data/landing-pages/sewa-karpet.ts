@@ -163,6 +163,8 @@ export const sewaKarpetJogja: LandingPageConfig = {
       'Kirim tanggal, lokasi, ukuran area, dan jenis acara. Admin akan bantu cek ketersediaan serta estimasi karpet yang paling masuk akal.',
     waText: KARPET_WA_TEXT,
     waSource: 'sewa_karpet_jogja_page',
+    secondaryLabel: 'Pilih opsi karpet',
+    secondaryHref: '#calculator',
   },
   sections: [
     {
@@ -308,6 +310,8 @@ export const sewaKarpetMerah: LandingPageConfig = {
       'permadani merah'
     ),
     waSource: 'sewa_karpet_merah_page',
+    secondaryLabel: 'Pilih opsi permadani',
+    secondaryHref: '#calculator',
   },
   sections: [
     {
@@ -351,7 +355,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
           '{permadani merah / permadani emas / runner acara / by request}',
           'permadani merah / permadani emas'
         ),
-        waSource: 'sewa_karpet_permadani_page',
+        waSource: 'permadani_page',
       },
     ],
     badges: ['Permadani untuk pengajian dan acara keluarga'],
@@ -441,7 +445,9 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       '{permadani merah / permadani emas / runner acara / by request}',
       'permadani merah / permadani emas'
     ),
-    waSource: 'sewa_karpet_permadani_page',
+    waSource: 'permadani_page',
+    secondaryLabel: 'Pilih opsi permadani',
+    secondaryHref: '#calculator',
   },
   sections: [
     {

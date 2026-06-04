@@ -74,6 +74,8 @@ export function Footer() {
               <li className="mb-2"><Link href="/sewa-kasur-lipat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Lipat</Link></li>
               <li className="mb-2"><Link href="/sewa-kasur-bulanan" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Kasur Bulanan</Link></li>
               <li className="mb-2"><a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Karpet Jogja</a></li>
+              <li className="mb-2"><a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Sewa Permadani Jogja</a></li>
+              <li className="mb-2"><a href="https://acara.santiliving.com/sewa-perlengkapan-event" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Perlengkapan Event</a></li>
               <li className="mb-2"><Link href="/artikel" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Artikel &amp; Tips</Link></li>
               <li className="mb-2"><Link href="/about" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">Tentang Kami</Link></li>
             </ul>
@@ -98,7 +100,7 @@ export function Footer() {
 
         <div className="border-t border-slate-800 pt-6 text-center text-slate-500 text-sm">
           <p className="mb-1">&copy; {currentYear} {config.businessName}. Semua hak dilindungi.</p>
-          <p className="text-xs">Layanan Sewa Kasur Busa Terpercaya di Yogyakarta</p>
+          <p className="text-xs">Layanan sewa kasur, karpet, permadani, dan perlengkapan acara di Yogyakarta</p>
         </div>
       </div>
     </footer>

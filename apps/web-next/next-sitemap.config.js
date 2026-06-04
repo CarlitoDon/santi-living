@@ -1,40 +1,55 @@
 /** @type {import('next-sitemap').IConfig} */
+const SITE_URL = 'https://santiliving.com';
 const KARPET_SITE_URL = 'https://karpet.santiliving.com';
-const KARPET_ROUTES = new Set([
-  '/sewa-karpet-jogja',
-  '/sewa-karpet-merah-jogja',
-  '/sewa-karpet-permadani-jogja',
+const PERMADANI_SITE_URL = 'https://permadani.santiliving.com';
+const ACARA_SITE_URL = 'https://acara.santiliving.com';
+
+const ROUTE_HOSTS = new Map([
+  ['/sewa-karpet-jogja', KARPET_SITE_URL],
+  ['/sewa-karpet-merah-jogja', KARPET_SITE_URL],
+  ['/sewa-karpet-permadani-jogja', PERMADANI_SITE_URL],
+  ['/sewa-perlengkapan-event', ACARA_SITE_URL],
 ]);
 
-function isKarpetRoute(loc) {
+function getPreferredHost(loc) {
   try {
-    const url = new URL(loc, 'https://santiliving.com');
-    return KARPET_ROUTES.has(url.pathname);
+    const url = new URL(loc, SITE_URL);
+    return ROUTE_HOSTS.get(url.pathname) || SITE_URL;
   } catch {
-    return false;
+    return SITE_URL;
   }
 }
 
-function toKarpetLoc(loc) {
-  const url = new URL(loc, 'https://santiliving.com');
-  return `${KARPET_SITE_URL}${url.pathname}${url.search}`;
+function toPreferredLoc(loc) {
+  const url = new URL(loc, SITE_URL);
+  const host = getPreferredHost(loc);
+  return `${host}${url.pathname}${url.search}`;
 }
 
 const config = {
-  siteUrl: 'https://santiliving.com',
+  siteUrl: SITE_URL,
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
   exclude: ['/cart', '/checkout', '/thank-you', '/pesanan/*', '/sewa-karpet'],
-  transform: async (config, loc) => ({
-    loc: isKarpetRoute(loc) ? toKarpetLoc(loc) : loc,
-    changefreq: config.changefreq,
-    priority: isKarpetRoute(loc) ? 0.9 : config.priority,
-    lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
-    alternateRefs: config.alternateRefs ?? [],
-  }),
+  transform: async (config, loc) => {
+    const preferredHost = getPreferredHost(loc);
+    const isSpecialHostRoute = preferredHost !== SITE_URL;
+
+    return {
+      loc: toPreferredLoc(loc),
+      changefreq: config.changefreq,
+      priority: isSpecialHostRoute ? 0.9 : config.priority,
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      alternateRefs: config.alternateRefs ?? [],
+    };
+  },
   robotsTxtOptions: {
-    additionalSitemaps: [`${KARPET_SITE_URL}/sitemap.xml`],
+    additionalSitemaps: [
+      `${KARPET_SITE_URL}/sitemap.xml`,
+      `${PERMADANI_SITE_URL}/sitemap.xml`,
+      `${ACARA_SITE_URL}/sitemap.xml`,
+    ],
     transformRobotsTxt: async (_config, robotsTxt) =>
       robotsTxt.replace(/\n# Host\nHost: https:\/\/santiliving\.com\n/, '\n'),
     policies: [

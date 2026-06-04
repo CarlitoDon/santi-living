@@ -4,12 +4,20 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
+import { useHostCta } from '@/hooks/useHostCta';
+import { getWhatsAppUrl } from '@/utils/whatsapp';
+
+type NavLink = {
+  href: string;
+  label: string;
+  children?: Array<{ href: string; label: string }>;
+};
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const hostCta = useHostCta();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -35,16 +43,28 @@ export function Navigation() {
     };
   }, [isOpen]);
 
-  const navLinks = [
+  const contextNavLink: NavLink =
+    hostCta.context === 'karpet' || hostCta.context === 'permadani'
+      ? { href: '#calculator', label: 'Cek Opsi' }
+      : hostCta.context === 'acara'
+        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: 'Paket Event' }
+        : { href: '/#calculator', label: 'Hitung Biaya' };
+
+  const navLinks: NavLink[] = [
     { href: '/', label: 'Beranda' },
-    { href: '/produk', label: 'Produk', children: [
-      { href: '/produk', label: 'Semua Produk' },
-      { href: '/sewa-kasur-terdekat', label: 'Kasur' },
-      { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: 'Karpet' },
-      { href: '/sewa-perlengkapan-event', label: 'Perlengkapan Event' },
-    ] },
+    {
+      href: '/produk',
+      label: 'Produk',
+      children: [
+        { href: '/produk', label: 'Semua Produk' },
+        { href: '/sewa-kasur-terdekat', label: 'Kasur' },
+        { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: 'Karpet' },
+        { href: 'https://permadani.santiliving.com/sewa-karpet-permadani-jogja', label: 'Permadani' },
+        { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: 'Perlengkapan Event' },
+      ],
+    },
     { href: '/harga-sewa-kasur', label: 'Harga Sewa' },
-    { href: '/#calculator', label: 'Hitung Biaya' },
+    contextNavLink,
     { href: '/artikel', label: 'Artikel & Tips' },
     { href: '/about', label: 'Tentang Kami' },
     { href: '/#service-area', label: 'Area Layanan' },
@@ -123,14 +143,14 @@ export function Navigation() {
               })}
               <li>
                 <a
-                  href={getWhatsAppUrl(WA_PRESET_ORDER, 'nav_sidebar')}
+                  href={getWhatsAppUrl(hostCta.waText, 'nav_sidebar')}
                   className="mt-6 bg-blue-600 text-white text-center block w-full p-4 rounded-xl font-bold shadow-[0_4px_12px_rgba(37,99,235,0.25)] hover:bg-blue-700 hover:-translate-y-[1px] hover:shadow-[0_6px_16px_rgba(37,99,235,0.3)] transition-all no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   data-wa-source="nav_sidebar"
                   data-wa-location="sidebar"
                 >
-                  Hubungi WhatsApp
+                  {hostCta.navLabel}
                 </a>
               </li>
             </ul>

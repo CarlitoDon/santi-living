@@ -254,10 +254,10 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Link 
-              href="/#calculator" 
+              href={cfg.cta.secondaryHref || '/#calculator'} 
               className="bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14"
             >
-              Hitung Biaya Sewa
+              {cfg.cta.secondaryLabel || 'Hitung Biaya Sewa'}
             </Link>
             <a
               href={getWhatsAppUrl(cfg.cta.waText, cfg.cta.waSource)}

@@ -1,53 +1,25 @@
 import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
 
-export const KARPET_SITE_URL = 'https://karpet.santiliving.com';
-export const PERMADANI_SITE_URL = 'https://permadani.santiliving.com';
-const DEFAULT_IMAGE = `${KARPET_SITE_URL}/images/karpet-hero.webp`;
+export const ACARA_SITE_URL = 'https://acara.santiliving.com';
+const ACARA_PATH = '/sewa-perlengkapan-event';
+const DEFAULT_IMAGE = `${ACARA_SITE_URL}/logo.png`;
 
-const SERVICE_AREAS = [
-  'Sleman',
-  'Kota Yogyakarta',
-  'Bantul',
-  'Godean',
-  'Mlati',
-  'Gamping',
-  'Depok',
-  'Malioboro',
-  'Sekitar UGM',
-];
+const SERVICE_AREAS = ['Sleman', 'Kota Yogyakarta', 'Bantul', 'Kulon Progo'];
 
-function getImageUrl(config: LandingPageConfig, siteUrl = KARPET_SITE_URL): string {
-  const image = config.hero.bgImage;
-
-  if (!image) return DEFAULT_IMAGE;
-  if (image.startsWith('http://') || image.startsWith('https://')) return image;
-
-  return `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`;
-}
-
-export function buildKarpetMetadata(
-  config: LandingPageConfig,
-  path: string,
-  siteUrl = KARPET_SITE_URL,
-): Metadata {
-  const url = `${siteUrl}${path}`;
-  const image = getImageUrl(config, siteUrl);
+export function buildAcaraMetadata(config: LandingPageConfig): Metadata {
+  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
 
   return {
     title: config.meta.title,
     description: config.meta.description,
     keywords: [
-      'sewa karpet jogja',
-      'rental karpet jogja',
-      'persewaan karpet jogja',
-      'jasa sewa karpet jogja',
-      'sewa karpet merah jogja',
-      'sewa karpet permadani jogja',
-      'sewa karpet pernikahan jogja',
-      'sewa karpet pengajian jogja',
-      'sewa karpet seminar jogja',
-      'sewa karpet pameran jogja',
+      'sewa perlengkapan event jogja',
+      'rental perlengkapan event yogyakarta',
+      'sewa kasur rest area event jogja',
+      'sewa air cooler event jogja',
+      'sewa tv display event jogja',
+      'paket perlengkapan acara jogja',
     ],
     alternates: {
       canonical: url,
@@ -61,10 +33,10 @@ export function buildKarpetMetadata(
       siteName: 'Santi Living',
       images: [
         {
-          url: image,
+          url: DEFAULT_IMAGE,
           width: 1200,
           height: 630,
-          alt: config.hero.bgImageAlt || config.hero.title,
+          alt: 'Santi Living - sewa perlengkapan event Jogja',
         },
       ],
     },
@@ -72,7 +44,7 @@ export function buildKarpetMetadata(
       card: 'summary_large_image',
       title: config.meta.title,
       description: config.meta.description,
-      images: [image],
+      images: [DEFAULT_IMAGE],
     },
     robots: {
       index: true,
@@ -81,28 +53,22 @@ export function buildKarpetMetadata(
   };
 }
 
-export function buildKarpetServiceSchema(
-  config: LandingPageConfig,
-  path: string,
-  serviceType: string,
-  siteUrl = KARPET_SITE_URL,
-) {
-  const url = `${siteUrl}${path}`;
-  const image = getImageUrl(config, siteUrl);
+export function buildAcaraServiceSchema(config: LandingPageConfig) {
+  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: config.hero.title,
-    serviceType,
+    serviceType: 'Sewa perlengkapan event Jogja',
     description: config.meta.description,
     url,
-    image,
+    image: DEFAULT_IMAGE,
     provider: {
       '@type': 'LocalBusiness',
       name: 'Santi Living',
-      url: siteUrl,
-      telephone: '+6289519119092',
+      url: ACARA_SITE_URL,
+      telephone: '+628****9092',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Kec. Godean',
@@ -121,14 +87,14 @@ export function buildKarpetServiceSchema(
       serviceUrl: url,
       servicePhone: {
         '@type': 'ContactPoint',
-        telephone: '+6289519119092',
+        telephone: '+628****9092',
         contactType: 'customer service',
         availableLanguage: 'Indonesian',
       },
     },
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: `${config.hero.title} - opsi konsultasi`,
+      name: 'Opsi perlengkapan event Santi Living',
       itemListElement: config.priceCards?.map((card) => ({
         '@type': 'Offer',
         name: card.name,
@@ -143,7 +109,7 @@ export function buildKarpetServiceSchema(
   };
 }
 
-export function buildKarpetFaqSchema(config: LandingPageConfig) {
+export function buildAcaraFaqSchema(config: LandingPageConfig) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -158,18 +124,23 @@ export function buildKarpetFaqSchema(config: LandingPageConfig) {
   };
 }
 
-export function buildKarpetBreadcrumbSchema(
-  items: Array<{ name: string; path: string }>,
-  siteUrl = KARPET_SITE_URL,
-) {
+export function buildAcaraBreadcrumbSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: `${siteUrl}${item.path}`,
-    })),
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Beranda',
+        item: ACARA_SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Sewa Perlengkapan Event Jogja',
+        item: `${ACARA_SITE_URL}${ACARA_PATH}`,
+      },
+    ],
   };
 }
