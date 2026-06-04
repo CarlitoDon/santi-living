@@ -1,0 +1,294 @@
+{
+  "generated_at_utc": "2026-06-04T05:13:08.802548+00:00",
+  "property": "sc-domain:santiliving.com",
+  "token_scopes": "https://www.googleapis.com/auth/webmasters https://www.googleapis.com/auth/analytics.readonly https://www.googleapis.com/auth/indexing https://www.googleapis.com/auth/adwords https://www.googleapis.com/auth/business.manage",
+  "sitemap_submissions": [
+    {
+      "sitemap": "https://santiliving.com/sitemap.xml",
+      "endpoint": "webmasters.v3.sitemaps.submit",
+      "ok": true,
+      "status": 204,
+      "body": null
+    },
+    {
+      "sitemap": "https://santiliving.com/sitemap-0.xml",
+      "endpoint": "webmasters.v3.sitemaps.submit",
+      "ok": true,
+      "status": 204,
+      "body": null
+    },
+    {
+      "sitemap": "https://karpet.santiliving.com/sitemap-0.xml",
+      "endpoint": "webmasters.v3.sitemaps.submit",
+      "ok": true,
+      "status": 204,
+      "body": null
+    },
+    {
+      "sitemap": "https://permadani.santiliving.com/sitemap-0.xml",
+      "endpoint": "webmasters.v3.sitemaps.submit",
+      "ok": true,
+      "status": 204,
+      "body": null
+    },
+    {
+      "sitemap": "https://acara.santiliving.com/sitemap-0.xml",
+      "endpoint": "webmasters.v3.sitemaps.submit",
+      "ok": true,
+      "status": 204,
+      "body": null
+    }
+  ],
+  "indexing_api_submissions": [
+    {
+      "url": "https://karpet.santiliving.com/sewa-karpet-jogja",
+      "type": "URL_UPDATED",
+      "endpoint": "indexing.v3.urlNotifications.publish",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "urlNotificationMetadata": {
+          "url": "https://karpet.santiliving.com/sewa-karpet-jogja"
+        }
+      }
+    },
+    {
+      "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja",
+      "type": "URL_UPDATED",
+      "endpoint": "indexing.v3.urlNotifications.publish",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "urlNotificationMetadata": {
+          "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja"
+        }
+      }
+    },
+    {
+      "url": "https://acara.santiliving.com/sewa-perlengkapan-event",
+      "type": "URL_UPDATED",
+      "endpoint": "indexing.v3.urlNotifications.publish",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "urlNotificationMetadata": {
+          "url": "https://acara.santiliving.com/sewa-perlengkapan-event"
+        }
+      }
+    }
+  ],
+  "url_inspections": [
+    {
+      "url": "https://karpet.santiliving.com/sewa-karpet-jogja",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=tk3QkvgXtNU7R_U4JWZJ6g&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Ditemukan - saat ini tidak diindeks",
+            "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+            "indexingState": "INDEXING_STATE_UNSPECIFIED",
+            "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+            "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=X9TNBjGbQfFB6--_wX9whg&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Ditemukan - saat ini tidak diindeks",
+            "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+            "indexingState": "INDEXING_STATE_UNSPECIFIED",
+            "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+            "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://acara.santiliving.com/sewa-perlengkapan-event",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=7G_Y_RoXiXy2TjatNLf9aA&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Ditemukan - saat ini tidak diindeks",
+            "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+            "indexingState": "INDEXING_STATE_UNSPECIFIED",
+            "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+            "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://karpet.santiliving.com/",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=D-2YdMDtqDtd7LYvjRiG2Q&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "URL tidak dikenali oleh Google",
+            "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+            "indexingState": "INDEXING_STATE_UNSPECIFIED",
+            "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://permadani.santiliving.com/",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=R4nesv3TZI-0qrtsJAzZCg&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "URL tidak dikenali oleh Google",
+            "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+            "indexingState": "INDEXING_STATE_UNSPECIFIED",
+            "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    },
+    {
+      "url": "https://acara.santiliving.com/",
+      "endpoint": "urlInspection.index.inspect",
+      "ok": true,
+      "status": 200,
+      "body": {
+        "inspectionResult": {
+          "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:santiliving.com&id=X1pZc6vloJgIHOVVjukk6w&utm_medium=link&utm_source=api",
+          "indexStatusResult": {
+            "verdict": "NEUTRAL",
+            "coverageState": "Halaman alternatif dengan tag kanonis yang tepat",
+            "robotsTxtState": "ALLOWED",
+            "indexingState": "INDEXING_ALLOWED",
+            "lastCrawlTime": "2026-06-01T13:49:49Z",
+            "pageFetchState": "SUCCESSFUL",
+            "googleCanonical": "https://santiliving.com/",
+            "userCanonical": "https://santiliving.com/",
+            "referringUrls": [
+              "https://santiliving.com/"
+            ],
+            "crawledAs": "MOBILE"
+          },
+          "mobileUsabilityResult": {
+            "verdict": "VERDICT_UNSPECIFIED"
+          }
+        }
+      }
+    }
+  ],
+  "sitemap_list_after_submit": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "sitemap": [
+        {
+          "path": "https://acara.santiliving.com/sitemap-0.xml",
+          "lastSubmitted": "2026-06-04T05:13:12.764Z",
+          "isPending": true,
+          "isSitemapsIndex": false,
+          "warnings": "0",
+          "errors": "0"
+        },
+        {
+          "path": "https://permadani.santiliving.com/sitemap-0.xml",
+          "lastSubmitted": "2026-06-04T05:13:12.039Z",
+          "isPending": true,
+          "isSitemapsIndex": false,
+          "warnings": "0",
+          "errors": "0"
+        },
+        {
+          "path": "https://karpet.santiliving.com/sitemap-0.xml",
+          "lastSubmitted": "2026-06-04T05:13:11.155Z",
+          "isPending": true,
+          "isSitemapsIndex": false,
+          "warnings": "0",
+          "errors": "0"
+        },
+        {
+          "path": "https://santiliving.com/sitemap-0.xml",
+          "lastSubmitted": "2026-06-04T05:13:10.036Z",
+          "isPending": false,
+          "isSitemapsIndex": false,
+          "type": "sitemap",
+          "lastDownloaded": "2026-06-04T05:13:11.120Z",
+          "warnings": "0",
+          "errors": "0",
+          "contents": [
+            {
+              "type": "web",
+              "submitted": "189",
+              "indexed": "0"
+            }
+          ]
+        },
+        {
+          "path": "https://santiliving.com/sitemap.xml",
+          "lastSubmitted": "2026-06-04T05:13:09.088Z",
+          "isPending": false,
+          "isSitemapsIndex": true,
+          "lastDownloaded": "2026-06-04T05:13:09.888Z",
+          "warnings": "0",
+          "errors": "0"
+        },
+        {
+          "path": "https://www.santiliving.com/sitemap-index.xml",
+          "lastSubmitted": "2026-01-26T06:52:47.893Z",
+          "isPending": false,
+          "isSitemapsIndex": true,
+          "lastDownloaded": "2026-04-11T11:41:30.424Z",
+          "warnings": "0",
+          "errors": "1"
+        },
+        {
+          "path": "https://santiliving.com/sitemap-index.xml",
+          "lastSubmitted": "2026-01-26T03:52:38.382Z",
+          "isPending": false,
+          "isSitemapsIndex": true,
+          "lastDownloaded": "2026-04-08T13:50:44.329Z",
+          "warnings": "0",
+          "errors": "1"
+        }
+      ]
+    }
+  }
+}
