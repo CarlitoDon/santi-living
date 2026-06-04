@@ -25,6 +25,15 @@ export default function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  // Host-based routing for permadani.santiliving.com
+  if (
+    (hostname.startsWith('permadani.santiliving.com') || hostname.startsWith('permadani.localhost')) &&
+    url.pathname === '/'
+  ) {
+    url.pathname = '/sewa-karpet-permadani-jogja';
+    return NextResponse.rewrite(url);
+  }
+
   // Host-based routing for kipas-angin.santiliving.com
   if (
     (hostname.startsWith('kipas-angin.santiliving.com') ||
