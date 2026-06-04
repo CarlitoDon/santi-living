@@ -118,6 +118,11 @@ const carpetCategories: CarpetCategory[] = [
 
 const allCarpetProducts = carpetCategories.flatMap((category) => category.items);
 const carpetProductIds = new Set(allCarpetProducts.map((product) => product.id));
+const permadaniProductIds = new Set(
+  carpetCategories
+    .find((category) => category.id === 'permadani')
+    ?.items.map((product) => product.id) || [],
+);
 
 function getCarpetCategories(scope: KarpetCalculatorScope): CarpetCategory[] {
   if (scope === 'permadani') {
@@ -127,10 +132,28 @@ function getCarpetCategories(scope: KarpetCalculatorScope): CarpetCategory[] {
   return carpetCategories;
 }
 
-function buildKarpetWaText(items: Array<{ name: string; quantity: number }>): string {
+function buildKarpetWaText(items: Array<{ id: string; name: string; quantity: number }>): string {
   const selected = items
     .map((item) => `- ${item.name} x${item.quantity}`)
     .join('\n');
+
+  const isPermadaniOnly = items.length > 0 && items.every((item) => permadaniProductIds.has(item.id));
+
+  if (isPermadaniOnly) {
+    return `Halo Santi Living, saya ingin cek ketersediaan sewa permadani Jogja.
+
+Pilihan permadani:
+${selected}
+
+Detail acara:
+Jenis kebutuhan: {pengajian / tahlilan / syukuran / tamu keluarga / ruang tamu sementara / lainnya}
+Tanggal acara: {tanggal}
+Lokasi acara: {alamat lengkap}
+Ukuran area atau jumlah tamu lesehan: {panjang x lebar / estimasi jumlah tamu}
+Catatan motif: {merah / emas / by request}
+
+Mohon info ketersediaan motif, rekomendasi jumlah lembar, estimasi harga, ongkir, cleaning, dan depositnya.`;
+  }
 
   return `Halo Santi Living, saya ingin cek ketersediaan sewa karpet Jogja.
 

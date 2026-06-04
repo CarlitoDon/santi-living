@@ -336,35 +336,43 @@ export const sewaKarpetMerah: LandingPageConfig = {
 export const sewaKarpetPermadani: LandingPageConfig = {
   ...sewaKarpetJogja,
   meta: {
-    title: 'Sewa Karpet Permadani Jogja untuk Pengajian & Tamu',
+    title: 'Sewa Permadani Jogja untuk Pengajian & Tahlilan',
     description:
-      'Cek ketersediaan sewa karpet permadani Jogja untuk pengajian, tahlilan, tamu keluarga, dan acara lesehan. Konsultasi ukuran serta estimasi via WhatsApp.',
+      'Sewa permadani Jogja untuk pengajian, tahlilan, tamu keluarga, dan lesehan. Cek motif, ukuran, delivery, cleaning, deposit via WhatsApp.',
   },
   hero: {
     ...sewaKarpetJogja.hero,
-    title: 'Sewa Karpet Permadani Jogja',
+    title: 'Sewa Permadani Jogja untuk Pengajian & Tahlilan',
     subtitle:
-      'Permadani merah dan emas untuk pengajian, tahlilan, tamu keluarga, acara rumah, musala kecil, dan ruang sementara.',
-    badge: 'Permadani merah/emas, bukan runner acara',
+      'Permadani merah atau emas untuk area duduk lesehan, ruang tamu sementara, musala kecil, tamu keluarga, syukuran, dan acara rumah di Yogyakarta.',
+    badge: 'Fokus lesehan dan ruang tamu sementara',
+    features: [
+      { icon: '🕌', text: 'Pengajian & tahlilan' },
+      { icon: '🏡', text: 'Tamu keluarga' },
+      { icon: '📐', text: 'Bantu hitung area' },
+    ],
     actions: [
-      { type: 'link', label: 'Lihat opsi permadani', href: '#calculator', variant: 'primary' },
+      { type: 'link', label: 'Pilih permadani', href: '#calculator', variant: 'primary' },
       {
         type: 'wa',
-        label: 'Cek permadani',
-        waText: KARPET_WA_TEXT.replace(
-          '{permadani merah / permadani emas / runner acara / by request}',
-          'permadani merah / permadani emas'
-        ),
+        label: 'Cek motif & estimasi',
+        waText: KARPET_WA_TEXT
+          .replace('sewa karpet Jogja', 'sewa permadani Jogja untuk pengajian/tahlilan/tamu keluarga')
+          .replace('Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}', 'Jenis kebutuhan: {pengajian / tahlilan / syukuran / tamu keluarga / ruang tamu sementara / lainnya}')
+          .replace(
+            '{permadani merah / permadani emas / runner acara / by request}',
+            'permadani merah / permadani emas'
+          ),
         waSource: 'permadani_page',
       },
     ],
-    badges: ['Permadani untuk pengajian dan acara keluarga'],
+    badges: ['Permadani pengajian, tahlilan, dan tamu keluarga'],
     bgImage: '/images/permadani-emas.jpg',
-    bgImageAlt: 'Permadani emas untuk pengajian dan area duduk keluarga Santi Living',
+    bgImageAlt: 'Permadani emas untuk pengajian tahlilan dan area duduk keluarga Santi Living',
   },
   tracking: {
     productCategory: 'karpet',
-    pageType: 'subcategory_page',
+    pageType: 'money_page',
     intent: 'sewa_karpet_permadani',
   },
   benefits: [
@@ -372,31 +380,36 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       icon: '🕌',
       title: 'Fokus area duduk lesehan',
       description:
-        'Permadani cocok untuk pengajian, tahlilan, syukuran, ruang tamu sementara, dan musala kecil.',
+        'Copy dan selector halaman ini khusus permadani untuk pengajian, tahlilan, syukuran, ruang tamu sementara, dan musala kecil.',
     },
     {
       icon: '🟫',
       title: 'Varian merah dan emas',
       description:
-        'Karpet merah dan karpet emas di sini sama-sama permadani motif ukuran relatif persegi panjang.',
+        'Motif merah/emas dicek berdasarkan stok dan ukuran; tidak mengklaim semua motif selalu ready.',
     },
     {
       icon: '📐',
-      title: 'Ukuran dikonsultasikan',
+      title: 'Panduan area dan tamu',
       description:
-        'Kirim ukuran ruangan, jumlah tamu, atau foto area agar admin bisa cek jumlah lembar dan stok motif.',
+        'Kirim panjang x lebar, jumlah tamu lesehan, dan foto ruangan agar admin bisa bantu estimasi jumlah lembar.',
     },
     {
       icon: '🚚',
-      title: 'Delivery sesuai rute',
+      title: 'Delivery, cleaning, deposit jelas',
       description:
-        'Estimasi mengikuti lokasi, akses kendaraan, jam kirim, jam jemput, durasi, dan kondisi stok.',
+        'Estimasi mengikuti lokasi, akses kendaraan, durasi, risiko noda, cleaning, deposit, dan jadwal jemput.',
     },
   ],
+  priceSection: {
+    title: 'Opsi Sewa Permadani',
+    linkLabel: 'Baca panduan harga sewa karpet/permadani →',
+    linkHref: 'https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026',
+  },
   priceCards: [
     {
       name: 'Permadani merah',
-      size: 'Motif merah untuk area duduk, pengajian, dan ruang tamu',
+      size: 'Motif merah untuk pengajian, tahlilan, area duduk, dan ruang tamu',
       price: 'Cek via WA',
       daily: 'Harga final setelah ukuran dan stok tervalidasi',
       note: 'Bukan runner acara; kirim ukuran ruang, jumlah tamu, lokasi, dan tanggal.',
@@ -406,15 +419,15 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       name: 'Permadani emas',
       size: 'Motif emas/cokelat untuk pengajian dan acara keluarga',
       price: 'By request',
-      daily: 'Disesuaikan ukuran, motif, durasi, dan lokasi',
-      note: 'Cocok untuk duduk lesehan dan area tamu yang ingin terlihat rapi.',
+      daily: 'Disesuaikan ukuran, motif, durasi, lokasi, cleaning, dan deposit',
+      note: 'Cocok untuk duduk lesehan, musala kecil, dan area tamu yang ingin terlihat rapi.',
     },
     {
       name: 'Permadani by request',
       size: 'Motif dan ukuran disesuaikan stok',
       price: 'Konsultasi',
       daily: 'Admin cek opsi yang tersedia',
-      note: 'Sertakan foto ruangan agar rekomendasi warna dan jumlah lembar lebih tepat.',
+      note: 'Sertakan foto ruangan agar rekomendasi warna, ukuran, dan jumlah lembar lebih tepat.',
     },
   ],
   audience: [
@@ -422,13 +435,13 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       icon: '🕌',
       title: 'Pengajian dan tahlilan',
       description:
-        'Permadani merah atau emas untuk membuat area duduk tamu lebih rapi dan nyaman.',
+        'Permadani merah atau emas untuk membuat area duduk jamaah dan tamu lebih rapi serta nyaman.',
     },
     {
       icon: '🏡',
       title: 'Tamu keluarga dan ruang sementara',
       description:
-        'Tambahan alas untuk rumah, homestay, villa, dan gathering keluarga di Jogja.',
+        'Tambahan alas ruang tamu sementara saat keluarga besar, tamu luar kota, homestay, atau villa membutuhkan area kumpul.',
     },
     {
       icon: '👥',
@@ -437,33 +450,90 @@ export const sewaKarpetPermadani: LandingPageConfig = {
         'Area lesehan lebih tertata saat tamu datang banyak dan kursi tidak cukup.',
     },
   ],
+  faqs: [
+    {
+      question: 'Apakah halaman ini khusus sewa permadani untuk pengajian dan tahlilan?',
+      answer:
+        'Ya. Fokus halaman ini adalah permadani merah/emas untuk duduk lesehan, ruang tamu sementara, musala kecil, pengajian, tahlilan, syukuran, dan tamu keluarga. Jika kebutuhan Anda jalur panjang, booth, atau panggung, admin akan mengarahkannya ke kategori runner/alas acara yang berbeda.',
+    },
+    {
+      question: 'Bagaimana cara memperkirakan kebutuhan permadani dari luas area atau jumlah tamu?',
+      answer:
+        'Patokan awalnya adalah ukuran area yang akan dialasi dan jumlah tamu yang duduk lesehan. Kirim panjang x lebar ruangan, foto area, serta estimasi jumlah tamu; admin akan cek ukuran lembar yang tersedia dan memberi rekomendasi jumlah permadani tanpa mengunci harga final sebelum stok serta lokasi tervalidasi.',
+    },
+    {
+      question: 'Apakah motif merah atau emas selalu tersedia?',
+      answer:
+        'Tidak diklaim selalu ready. Motif merah, emas, cokelat, atau motif lain perlu dicek berdasarkan tanggal, durasi, ukuran area, dan kondisi stok/partner. Jika motif pilihan tidak cocok, admin bisa menyarankan opsi paling dekat.',
+    },
+    {
+      question: 'Apakah ada biaya cleaning atau deposit?',
+      answer:
+        'Cleaning dan deposit bisa berbeda untuk tiap acara karena dipengaruhi durasi, lokasi, risiko noda, penggunaan indoor/outdoor, jumlah lembar, dan kondisi pengembalian. Admin akan menyebutkan estimasi serta ketentuan sebelum konfirmasi pesanan.',
+    },
+    {
+      question: 'Area pengiriman permadani Santi Living ke mana saja?',
+      answer:
+        'Prioritas rute adalah Godean, Sleman, Kota Yogyakarta, Bantul, Depok, Mlati, Gamping, sekitar UGM/Malioboro, dan sebagian Kulon Progo. Untuk Gunungkidul atau area jauh/akses sulit, konfirmasi dulu karena belum tentu bisa dilayani pada tanggal tertentu.',
+    },
+    {
+      question: 'Data apa yang perlu dikirim supaya estimasi cepat?',
+      answer:
+        'Kirim jenis acara, tanggal, alamat lengkap, ukuran area atau jumlah tamu, pilihan motif merah/emas/by request, foto ruangan, kebutuhan delivery/jemput, serta apakah perlu tambahan bantal, kipas, air cooler, TV, atau kasur tamu keluarga.',
+    },
+  ],
   cta: {
-    title: 'Butuh permadani untuk pengajian atau tamu keluarga?',
+    title: 'Butuh permadani untuk pengajian, tahlilan, atau tamu keluarga?',
     description:
-      'Kirim ukuran area, jumlah tamu, tanggal acara, dan foto ruangan agar admin bisa cek pilihan permadani merah atau emas yang sesuai.',
-    waText: KARPET_WA_TEXT.replace(
-      '{permadani merah / permadani emas / runner acara / by request}',
-      'permadani merah / permadani emas'
-    ),
+      'Kirim ukuran area, jumlah tamu, tanggal acara, foto ruangan, dan pilihan motif. Admin akan cek ketersediaan, jumlah lembar, delivery, cleaning, serta deposit.',
+    waText: KARPET_WA_TEXT
+      .replace('sewa karpet Jogja', 'sewa permadani Jogja untuk pengajian/tahlilan/tamu keluarga')
+      .replace('Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}', 'Jenis kebutuhan: {pengajian / tahlilan / syukuran / tamu keluarga / ruang tamu sementara / lainnya}')
+      .replace(
+        '{permadani merah / permadani emas / runner acara / by request}',
+        'permadani merah / permadani emas'
+      ),
     waSource: 'permadani_page',
-    secondaryLabel: 'Pilih opsi permadani',
+    secondaryLabel: 'Pilih permadani dulu',
     secondaryHref: '#calculator',
   },
   sections: [
     {
-      title: 'Karpet Permadani untuk Pengajian, Tahlilan, dan Acara Keluarga',
+      title: 'Permadani untuk Pengajian, Tahlilan, Lesehan, dan Ruang Tamu Sementara',
       content: `
-        <p><strong>Sewa karpet permadani Jogja</strong> biasanya dicari untuk acara yang membutuhkan area duduk rapi: pengajian, tahlilan, syukuran, arisan keluarga, tamu luar kota, atau ruang tamu sementara saat rumah sedang penuh.</p>
-        <p>Karpet merah dan karpet emas termasuk permadani jika bentuknya motif ukuran relatif persegi panjang seperti karpet ruang. Yang bukan permadani adalah runner/lembar panjang untuk jalur tamu, panggung, booth, atau alas acara.</p>
-        <p>Jenis dan jumlah permadani perlu disesuaikan dengan jumlah tamu, luas ruangan, durasi acara, dan akses lokasi. Untuk hasil paling akurat, kirim foto ruangan atau ukuran kasar panjang x lebar saat menghubungi admin.</p>
-        <h3>Informasi yang membantu estimasi</h3>
+        <p><strong>Sewa permadani Jogja</strong> biasanya dibutuhkan saat rumah atau musala kecil perlu area duduk yang rapi tanpa membeli karpet permanen. Intent utama halaman ini adalah permadani untuk <strong>pengajian, tahlilan, syukuran, tamu keluarga, lesehan, dan ruang tamu sementara</strong>.</p>
+        <p>Permadani merah dan emas di sini berarti karpet motif ukuran relatif persegi panjang untuk area duduk. Ini dipisahkan dari runner atau lembar panjang untuk jalur tamu, booth, panggung, dan kebutuhan event lain agar calon penyewa tidak salah pesan.</p>
+        <p>Jenis dan jumlah permadani perlu disesuaikan dengan jumlah tamu, luas ruangan, durasi, motif yang tersedia, risiko noda, cleaning, deposit, dan akses lokasi. Untuk hasil paling akurat, kirim foto ruangan atau ukuran kasar panjang x lebar saat menghubungi admin.</p>
+        <h3>Informasi yang membantu estimasi permadani</h3>
         <ul>
           <li>Jumlah tamu yang duduk lesehan.</li>
-          <li>Ukuran ruang atau halaman yang akan dialasi.</li>
-          <li>Kebutuhan bantal, selimut, kipas, atau kasur tamu keluarga.</li>
+          <li>Ukuran ruang, teras, musala kecil, atau area yang akan dialasi.</li>
+          <li>Pilihan motif: merah, emas/cokelat, atau by request.</li>
+          <li>Kebutuhan tambahan seperti bantal duduk, kipas, air cooler, TV, atau kasur tamu keluarga.</li>
           <li>Jam kirim dan jam penjemputan setelah acara selesai.</li>
         </ul>
-        <p>Untuk konteks pemilihan, lihat <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">sewa karpet pengajian/tahlilan</a> atau <a href="https://santiliving.com/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv">paket sewa perlengkapan acara</a>.</p>
+        <p>Untuk konteks pemilihan, baca <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">panduan sewa karpet untuk pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, dan <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja</a>.</p>
+      `,
+    },
+    {
+      title: 'Panduan Cepat Hitung Area dan Jumlah Tamu Lesehan',
+      content: `
+        <p>Jika belum punya denah, mulai dari tiga data sederhana: <strong>berapa tamu yang duduk lesehan</strong>, <strong>berapa panjang x lebar area</strong>, dan <strong>apakah area indoor atau outdoor</strong>. Admin akan mencocokkan data tersebut dengan ukuran lembar yang tersedia, bukan langsung mengunci jumlah atau harga.</p>
+        <ul>
+          <li><strong>Ruang tamu kecil:</strong> kirim foto dari dua sudut ruangan dan sebutkan jumlah tamu inti.</li>
+          <li><strong>Pengajian/tahlilan rumah:</strong> sebutkan estimasi jamaah, area duduk utama, dan apakah perlu jalur kosong untuk lalu lintas tamu.</li>
+          <li><strong>Homestay/villa:</strong> sebutkan ruangan mana yang dipakai sebagai ruang kumpul sementara dan durasi sewanya.</li>
+          <li><strong>Area luar/teras:</strong> konfirmasi kondisi lantai, risiko hujan, dan jam penjemputan agar cleaning/deposit bisa dihitung aman.</li>
+        </ul>
+        <p>Bahasa aman untuk estimasi: admin akan memberi rekomendasi jumlah lembar setelah ukuran, motif, tanggal, dan rute delivery tervalidasi.</p>
+      `,
+    },
+    {
+      title: 'Rute Lokal: Godean, Sleman, Kota Jogja, Bantul, dan Kulon Progo',
+      content: `
+        <p>Workshop resmi Santi Living berada di <strong>Jl. Godean KM 10, Sleman, Yogyakarta</strong>. Karena permadani butuh pengiriman dan penjemputan, lokasi acara menentukan ongkir, jadwal, dan kemungkinan layanan.</p>
+        <p>Rute prioritas mencakup Godean, Sleman, Kota Yogyakarta, Bantul, Depok, Mlati, Gamping, sekitar UGM/Malioboro, serta sebagian Kulon Progo. Area jauh atau akses sulit perlu dicek dulu; tidak semua tanggal bisa dilayani.</p>
+        <p>Untuk gambaran rute pengantaran Santi Living, lihat cluster lokal: <a href="https://santiliving.com/artikel/sewa-kasur-godean-sleman-terdekat-workshop">Godean/Sleman</a>, <a href="https://santiliving.com/artikel/sewa-kasur-bantul-terdekat-antar-jemput">Bantul</a>, <a href="https://santiliving.com/artikel/sewa-kasur-depok-sleman-terdekat">Depok Sleman</a>, <a href="https://santiliving.com/artikel/sewa-kasur-terdekat-gamping">Gamping</a>, dan <a href="https://santiliving.com/artikel/sewa-kasur-kulonprogo-wates-murah">Kulon Progo/Wates</a>. Link tersebut adalah referensi rute layanan Santi Living, bukan klaim stok permadani di setiap area.</p>
       `,
     },
   ],

@@ -83,6 +83,11 @@ export const LandingPageConfigSchema = z.object({
     intent: z.string().optional(),
   }).optional(),
   benefits: z.array(BenefitSchema).optional(),
+  priceSection: z.object({
+    title: z.string().optional(),
+    linkLabel: z.string().optional(),
+    linkHref: z.string().optional(),
+  }).optional(),
   priceCards: z.array(PriceCardSchema).optional(),
   audience: z.array(AudienceItemSchema).optional(),
   faqs: z.array(FAQItemSchema),

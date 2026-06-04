@@ -55,13 +55,16 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
   const bgClass = BG_MAP[cfg.color] || BG_MAP.blue;
   const isEventPage = cfg.tracking?.productCategory === 'event';
-  const priceGuideHref = isEventPage
+  const defaultPriceGuideHref = isEventPage
     ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
     : '/harga-sewa-kasur';
-  const priceGuideLabel = isEventPage
+  const defaultPriceGuideLabel = isEventPage
     ? 'Cek opsi karpet dan item by-request →'
     : 'Lihat daftar harga lengkap semua ukuran →';
-  const priceSectionTitle = isEventPage ? 'Estimasi Paket & Item Konsultatif' : 'Harga Sewa';
+  const defaultPriceSectionTitle = isEventPage ? 'Estimasi Paket & Item Konsultatif' : 'Harga Sewa';
+  const priceGuideHref = cfg.priceSection?.linkHref || defaultPriceGuideHref;
+  const priceGuideLabel = cfg.priceSection?.linkLabel || defaultPriceGuideLabel;
+  const priceSectionTitle = cfg.priceSection?.title || defaultPriceSectionTitle;
 
   return (
     <main className="pt-[80px]">
