@@ -56,7 +56,7 @@ Faktor yang paling menentukan estimasi:
 4. **Durasi dan jam setup**: pemasangan H-1, acara malam, atau jemput setelah acara memengaruhi logistik.
 5. **Risiko cleaning**: makanan, hujan, tanah, dan area outdoor perlu dipertimbangkan sebelum estimasi.
 
-Jika Anda butuh permadani berwarna atau motif tertentu, baca juga [sewa permadani emas Jogja](/artikel/sewa-permadani-emas-jogja). Untuk permadani pengajian dan tahlilan, panduan [sewa permadani pengajian Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) menjelaskan cara menyiapkan data tamu dan ukuran area.
+Jika Anda butuh permadani berwarna atau motif tertentu, baca juga [sewa permadani emas Jogja](/artikel/sewa-permadani-emas-jogja). Untuk kebutuhan keluarga besar, panduan [permadani untuk tamu keluarga Jogja](/artikel/permadani-tamu-keluarga-jogja) membantu menyiapkan data ruang tamu dan teras. Untuk permadani pengajian dan tahlilan, panduan [sewa permadani pengajian Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) menjelaskan cara menyiapkan data tamu dan ukuran area.
 
 ## Cara Membuat Simulasi Biaya Awal
 
@@ -90,18 +90,53 @@ Area prioritas biasanya meliputi Sleman, Kota Yogyakarta, Bantul, Godean, Mlati,
 
 Workshop Santi Living berada di **Jl. Godean KM 10, Sleman, Yogyakarta**. Rute pengiriman, jam jemput, dan ongkir akan lebih mudah diperkirakan setelah lokasi lengkap dikirim.
 
+## Faktor Harga yang Perlu Dicek Sebelum Pesan
+
+Beberapa orang mencari satu angka final, padahal **faktor harga sewa karpet** bisa berubah dari satu acara ke acara lain. Luas area, durasi, jenis karpet, warna atau motif, lokasi, cleaning, deposit, dan jam setup semuanya bisa mempengaruhi estimasi.
+
+Untuk acara pengajian atau tahlilan, admin biasanya perlu tahu apakah karpet dipakai untuk duduk lesehan, jalur masuk, atau area keluarga. Untuk wedding dan event formal, warna karpet serta panjang jalur tamu perlu lebih jelas. Untuk booth dan pameran, denah area sering lebih berguna daripada jumlah pengunjung.
+
+> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+
+> 📖 **[Sewa karpet permadani Jogja →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+
+> 📖 **[Sewa karpet merah Jogja →](https://karpet.santiliving.com/sewa-karpet-merah-jogja)**
+
+> 📦 **[Sewa perlengkapan event Jogja →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+
+## Cara Kirim Ukuran Area ke Admin
+
+Agar estimasi tidak bolak-balik, gunakan format berikut saat menghubungi admin:
+
+- Tanggal acara dan jenis acara.
+- Alamat lengkap, titik patokan, dan area layanan.
+- Ukuran panjang x lebar atau foto area dari beberapa sudut.
+- Indoor, semi-outdoor, atau outdoor.
+- Jenis karpet yang diinginkan: merah, permadani, booth, atau alas lesehan.
+- Jam kirim, jam pasang, jam bongkar, dan jam jemput.
+- Akses loading: parkir, tangga, lift, gang sempit, atau aturan venue.
+- Kebutuhan tambahan: kasur tamu, bantal, kipas, air cooler, TV, atau perlengkapan lain.
+
+Jika belum punya ukuran pasti, kirim foto area dan perkiraan panjang-lebar. Admin bisa membantu menanyakan data tambahan yang paling penting terlebih dahulu. Lihat juga [checklist sewa karpet acara Jogja](/artikel/checklist-sewa-karpet-acara-jogja) dan [sewa karpet seminar pameran Jogja](/artikel/sewa-karpet-seminar-pameran-jogja) untuk contoh kebutuhan event.
+
+## Deposit dan Cleaning Sewa Karpet
+
+Deposit atau biaya cleaning bukan angka yang bisa digeneralisasi dari artikel. Kebijakan ini perlu dikonfirmasi sesuai jenis acara, lokasi, risiko noda, dan durasi pemakaian. Acara dengan konsumsi, hujan, tanah, atau lalu lintas tamu tinggi biasanya perlu penjelasan lebih detail agar tidak ada salah paham.
+
+Saat chat, sampaikan apakah karpet akan dipakai di area makan, area outdoor, dekat dapur, atau jalur tamu ramai. Semakin jujur kondisi area, semakin mudah admin memberi aturan pemakaian yang aman. Untuk panduan persiapan sebelum chat, buka [checklist sewa karpet acara Jogja](/artikel/checklist-sewa-karpet-acara-jogja).
+
 ## FAQ Harga Sewa Karpet Jogja
 
-**Apakah ada daftar harga final?**  
+**Apakah ada daftar harga final?**
 Estimasi perlu dikonfirmasi karena bergantung pada jenis karpet, ukuran area, durasi, lokasi, cleaning, deposit, dan ketersediaan.
 
-**Apakah bisa pesan mendadak?**  
+**Apakah bisa pesan mendadak?**
 Bisa ditanyakan, tetapi peluang tersedia lebih besar jika panitia menghubungi lebih awal dan memberi detail ukuran.
 
-**Apakah warna merah atau emas selalu ada?**  
+**Apakah warna merah atau emas selalu ada?**
 Tidak boleh diasumsikan. Warna dan motif perlu dicek sesuai tanggal, ukuran, dan kebutuhan acara.
 
-**Apakah karpet bisa dipaketkan dengan perlengkapan lain?**  
+**Apakah karpet bisa dipaketkan dengan perlengkapan lain?**
 Bisa konsultasikan paket karpet dengan kasur, kipas, air cooler, TV, bantal, atau selimut.
 
 ## Konsultasi Harga via WhatsApp
