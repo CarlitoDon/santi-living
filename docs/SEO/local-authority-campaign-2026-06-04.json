@@ -1,0 +1,333 @@
+{
+  "generated_at": "2026-06-04 12:16:41 WIB",
+  "kanban_task": "t_6d11a193",
+  "source_reference": {
+    "pdf": "/Users/wecik/.hermes/kanban/references/implementasi-massive-seo-plan-2026-06-04/massive-seo-plan-fixed.pdf",
+    "html": "/Users/wecik/.hermes/kanban/references/implementasi-massive-seo-plan-2026-06-04/massive-seo-plan.html",
+    "section": "10. Local SEO & Authority",
+    "extracted_scope": [
+      "GBP posts terjadwal untuk permadani pengajian, karpet acara, paket event",
+      "Foto asli/operasional untuk permadani, karpet, setup acara, kasur rest area, air cooler, TV display",
+      "GBP Q&A: sewa karpet, pengajian/tahlilan, area, harga final",
+      "NAP konsisten: Santi Living, Jl. Godean KM 10, WA +62 895-1911-9092",
+      "Review request template spesifik produk",
+      "Citation targets, social posts, backlinks dari root/articles ke money pages"
+    ]
+  },
+  "nap_contract": {
+    "business_name_for_citations": "Santi Living",
+    "gbp_title_readback": "Sewa Kasur Jogja – Santi Living | by Santi Mebel Jogja",
+    "address_short": "Jl. Godean KM 10, Sleman, Yogyakarta",
+    "address_readback": {
+      "addressLines": [
+        "Jl. Godean KM10",
+        "Geneng RT05/RW04, Sidoagung, Godean"
+      ],
+      "locality": "Sleman",
+      "administrativeArea": "Daerah Istimewa Yogyakarta",
+      "postalCode": "55264",
+      "regionCode": "ID"
+    },
+    "phone": "+62 895-1911-9092",
+    "phone_readback": "0895-1911-9092",
+    "website_readback": "https://www.santiliving.com/",
+    "category_readback": "Layanan Sewa Mebel",
+    "guardrails": [
+      "Jangan tulis alamat KM4/KM 4; official active workshop adalah KM10.",
+      "Jangan overclaim stok ready semua motif, harga final, atau cakupan se-DIY.",
+      "Gunakan bahasa: cek ketersediaan via WA, estimasi setelah ukuran/lokasi/durasi, by request untuk item event tambahan."
+    ]
+  },
+  "live_gbp_actions": [
+    {
+      "category": "permadani_pengajian",
+      "action": "created_gbp_post",
+      "resource_name": "accounts/116188520419140679581/locations/10488080858214395605/localPosts/66158617781365441",
+      "state_readback": "LIVE",
+      "create_time": "2026-06-04T05:14:40.371285Z",
+      "cta_type": "LEARN_MORE",
+      "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja",
+      "media_count": 1,
+      "media_url": "https://santiliving.com/images/permadani-merah.jpg",
+      "validation_evidence": [
+        "summary length 412 <= 1500",
+        "CTA type LEARN_MORE uses HTTPS URL; not CALL-with-URL",
+        "URL HTTP 200, content-type text/html; charset=utf-8",
+        "media HTTP 200, content-type image/jpeg",
+        "duplicateCandidates empty before apply",
+        "gbp getPosts read-back found same post ID with state LIVE"
+      ]
+    },
+    {
+      "category": "paket_event",
+      "action": "created_gbp_post",
+      "resource_name": "accounts/116188520419140679581/locations/10488080858214395605/localPosts/1192071002816075474",
+      "state_readback": "LIVE",
+      "create_time": "2026-06-04T05:14:41.806133Z",
+      "cta_type": "LEARN_MORE",
+      "url": "https://acara.santiliving.com/sewa-perlengkapan-event",
+      "media_count": 0,
+      "validation_evidence": [
+        "summary length 470 <= 1500",
+        "CTA type LEARN_MORE uses HTTPS URL; not CALL-with-URL",
+        "URL HTTP 200, content-type text/html; charset=utf-8",
+        "duplicateCandidates empty before apply",
+        "gbp getPosts read-back found same post ID with state LIVE"
+      ]
+    },
+    {
+      "category": "karpet_acara",
+      "action": "verified_existing_live_gbp_post_not_duplicated",
+      "resource_name": "accounts/116188520419140679581/locations/10488080858214395605/localPosts/4494884349845400104",
+      "state_readback": "LIVE",
+      "create_time": "2026-06-03T12:34:15.346262Z",
+      "cta_type": "LEARN_MORE",
+      "url": "https://karpet.santiliving.com/sewa-karpet-jogja",
+      "media_count": 0,
+      "note": "Existing live karpet post already covers sewa karpet Jogja for wedding, pengajian, seminar, booth, pameran and links to karpet money page; no duplicate posted in this task."
+    },
+    {
+      "category": "ADDITIONAL",
+      "action": "uploaded_gbp_media",
+      "resource_name": "accounts/116188520419140679581/locations/10488080858214395605/media/AF1QipNrd4KLhQWy59F3uzstIiS8B5LvcSKdXt4lIN9R",
+      "state_readback": "present_in_media_list",
+      "create_time": "2026-06-04T05:16:21Z",
+      "source_url": "https://santiliving.com/images/permadani-emas.jpg",
+      "google_url_readback": "https://lh3.googleusercontent.com/2wZTsXXAHGjDeGOm9il8bf7GqRXW3ywT8lRYzTgiQYOuJdx5CtimXpAAOHPoQLnx85ZL8oV7JbeVhBuo=s0",
+      "description": "Permadani motif emas untuk kebutuhan sewa permadani Jogja, pengajian, tahlilan, dan tamu keluarga Santi Living",
+      "validation_evidence": [
+        "source image HTTP 200 image/jpeg",
+        "existing media dupes empty before apply",
+        "GBP media count increased/read-back count 8 and matching resource present"
+      ]
+    }
+  ],
+  "gbp_post_queue_next_30_days": [
+    {
+      "week": "W1 live now",
+      "category": "permadani_pengajian",
+      "status": "published_live",
+      "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja"
+    },
+    {
+      "week": "W1 live now",
+      "category": "karpet_acara",
+      "status": "existing_live_no_duplicate",
+      "url": "https://karpet.santiliving.com/sewa-karpet-jogja"
+    },
+    {
+      "week": "W1 live now",
+      "category": "paket_event",
+      "status": "published_live",
+      "url": "https://acara.santiliving.com/sewa-perlengkapan-event"
+    },
+    {
+      "week": "W2 draft",
+      "category": "karpet_merah_runner",
+      "summary": "Sewa karpet merah Jogja untuk jalur tamu, akad, launching, booth, atau panggung kecil? Kirim panjang jalur, lebar area, indoor/outdoor, dan jam setup. Admin Santi Living bantu estimasi kebutuhan dan jadwal antar-jemput; harga final setelah ukuran dan lokasi dicek via WA.",
+      "cta_type": "LEARN_MORE",
+      "url": "https://karpet.santiliving.com/sewa-karpet-merah-jogja",
+      "status": "draft_only_need_photo_or_no_media"
+    },
+    {
+      "week": "W3 draft",
+      "category": "review_social_proof",
+      "summary": "Pernah sewa permadani, karpet acara, atau perlengkapan event dari Santi Living? Review yang menyebut produk dan jenis acara membantu panitia lain di Jogja memilih layanan yang tepat. Terima kasih sudah mempercayakan kebutuhan acara ke tim kami.",
+      "cta_type": "CALL",
+      "status": "draft_only_use_CALL_without_url"
+    }
+  ],
+  "gbp_qna_copy": [
+    {
+      "question": "Apakah Santi Living menyewakan karpet di Jogja?",
+      "answer": "Ya, Santi Living melayani sewa karpet Jogja untuk kebutuhan acara seperti pengajian, tahlilan, seminar, pameran, booth, hajatan, dan tamu keluarga. Jenis karpet, ukuran area, durasi, dan jadwal antar-jemput dicek dulu via WhatsApp agar estimasinya tepat."
+    },
+    {
+      "question": "Bisa sewa permadani untuk pengajian atau tahlilan?",
+      "answer": "Bisa. Untuk pengajian, tahlilan, arisan, atau lesehan keluarga, minta admin cek permadani merah/emas dan ukuran area duduk. Ketersediaan motif, jumlah, delivery, cleaning, dan deposit dikonfirmasi dulu sebelum jadwal dikunci."
+    },
+    {
+      "question": "Area layanan Santi Living sampai mana saja?",
+      "answer": "Prioritas layanan ada di Sleman, Kota Yogyakarta, Bantul, dan Kulon Progo dari workshop Jl. Godean KM 10. Area jauh atau akses khusus perlu konfirmasi dulu via WhatsApp agar ongkir dan jadwal realistis."
+    },
+    {
+      "question": "Berapa harga sewa karpet atau permadani?",
+      "answer": "Harga final mengikuti jenis karpet/permadani, ukuran area, jumlah item, durasi, lokasi, akses venue, serta jadwal antar-jemput. Kirim foto/ukuran area dan tanggal acara ke WhatsApp; admin akan bantu estimasi tanpa mengunci harga sebelum data lengkap."
+    },
+    {
+      "question": "Apakah ada paket perlengkapan event selain karpet?",
+      "answer": "Ada opsi konsultatif untuk kebutuhan event seperti kasur rest area, air cooler, TV display, dan item by request seperti karpet, meja, kursi, atau sound sesuai ketersediaan. Sebutkan jenis acara, jumlah peserta, lokasi, dan jam setup agar admin bisa bantu cek."
+    },
+    {
+      "question": "Apa bedanya permadani, karpet merah runner, dan paket event?",
+      "answer": "Permadani biasanya untuk duduk lesehan/pengajian/tamu keluarga. Karpet merah runner cocok untuk jalur tamu atau area seremoni. Paket event adalah kombinasi item acara seperti kasur rest area, air cooler, TV display, dan kebutuhan tambahan by request."
+    }
+  ],
+  "review_request_templates": [
+    {
+      "category": "permadani_pengajian_tahlilan",
+      "message": "Kak, terima kasih sudah sewa permadani Santi Living untuk pengajian/tahlilan/acara keluarga. Kalau berkenan, boleh bantu review di Google dengan menyebut: permadani yang dipakai, jenis acara, area lokasi, kebersihan, dan pengalaman antar-jemput. Review Kakak membantu warga Jogja lain menemukan sewa permadani yang sesuai."
+    },
+    {
+      "category": "karpet_acara",
+      "message": "Kak, terima kasih sudah memakai layanan sewa karpet acara Santi Living. Jika berkenan, mohon tulis review Google singkat: jenis karpet/area yang dipasang, acara apa, lokasi Jogja/Sleman/Bantul/Kulon Progo, dan apakah admin membantu hitung ukuran serta jadwal setup."
+    },
+    {
+      "category": "paket_event",
+      "message": "Kak, terima kasih sudah konsultasi/pakai paket perlengkapan event Santi Living. Review Google akan sangat membantu kalau menyebut item yang dipakai (mis. kasur rest area, air cooler, TV display, karpet by request), jenis acara, lokasi, dan pengalaman koordinasi admin."
+    },
+    {
+      "category": "repeat_or_referral",
+      "message": "Kak, kalau ada teman/panitia lain yang butuh sewa permadani, karpet acara, atau perlengkapan event di Jogja, boleh simpan kontak Santi Living dan rekomendasikan ke mereka. Setelah review terbit, kirim screenshot ke admin agar bisa dicatat untuk benefit/referral yang berlaku."
+    }
+  ],
+  "citation_and_backlink_outreach": [
+    {
+      "priority": 1,
+      "target": "Dodolan Jogja / katalog usaha Kota Jogja",
+      "url_or_query": "https://dodolan.jogjakota.go.id/",
+      "type": "local_directory",
+      "action": "Buat/ajukan listing Santi Living kategori sewa/rental perlengkapan acara dengan NAP KM10 dan link ke karpet/acara landing.",
+      "anchor_or_pitch": "Sewa karpet Jogja dan paket perlengkapan event by request dari Santi Living.",
+      "status": "prospect_need_account_submission"
+    },
+    {
+      "priority": 2,
+      "target": "Bridestory vendor Yogyakarta",
+      "url_or_query": "Bridestory vendor Yogyakarta sewa karpet / event rental",
+      "type": "wedding_vendor_directory",
+      "action": "Cek opsi vendor/service listing; gunakan kategori dekorasi/perlengkapan event jika tersedia.",
+      "anchor_or_pitch": "Sewa karpet merah dan permadani untuk pernikahan, akad, serta area tamu keluarga di Jogja.",
+      "status": "prospect_verify_terms"
+    },
+    {
+      "priority": 3,
+      "target": "WeddingMarket / Weddingku vendor Jogja",
+      "url_or_query": "WeddingMarket Weddingku vendor Jogja karpet dekorasi",
+      "type": "wedding_vendor_directory",
+      "action": "Ajukan vendor profile atau advertorial ringan bila ada opsi gratis/low-cost.",
+      "anchor_or_pitch": "Karpet merah runner dan permadani untuk acara keluarga/pernikahan di Yogyakarta.",
+      "status": "prospect_verify_terms"
+    },
+    {
+      "priority": 4,
+      "target": "Venue/homestay partner existing customers",
+      "url_or_query": "Daftar customer venue/homestay dari CRM/WA admin; minta Carla hanya bila butuh data invoice/ERP.",
+      "type": "collaboration_backlink",
+      "action": "Minta 3 partner membuat artikel/halaman rekomendasi vendor: kasur tamu, permadani pengajian, dan paket event; beri backlink ke money page relevan.",
+      "anchor_or_pitch": "Vendor sewa kasur rest area dan karpet acara Jogja untuk tamu venue/homestay.",
+      "status": "needs_owner_partner_selection"
+    },
+    {
+      "priority": 5,
+      "target": "Komunitas kampus/event: UGM, UNY, UMY, UPN Veteran, AMIKOM, ISI, UII",
+      "url_or_query": "kontak BEM/UKM/event organizer kampus Jogja",
+      "type": "campus_community_outreach",
+      "action": "Kirim pitch sponsor/vendor support untuk seminar, pameran, bazar, ospek, dan event komunitas; target backlink dari page event atau mention IG dengan URL subdomain.",
+      "anchor_or_pitch": "Sewa perlengkapan event Jogja untuk kampus: karpet, TV display, air cooler, dan kasur rest area by request.",
+      "status": "prospect_manual_contact"
+    },
+    {
+      "priority": 6,
+      "target": "Event organizer lokal dari SERP competitor set",
+      "url_or_query": "Kreasi Hebat, DBeventequipment, Bumi Kreasi, Dekorasi Jogja, Indeojogja, Sound Jogja, Eventara",
+      "type": "partner_or_competitor_gap_research",
+      "action": "Jangan outreach kompetitor langsung tanpa owner approval; gunakan sebagai SERP/citation benchmark dan cari EO non-competitor untuk collab package.",
+      "anchor_or_pitch": "Santi Living sebagai support item: kasur rest area, permadani lesehan, dan karpet by request untuk EO.",
+      "status": "benchmark_first"
+    },
+    {
+      "priority": 7,
+      "target": "Artikel root Santi Living existing",
+      "url_or_query": "apps/web-next/src/content/blog/* karpet/permadani/event articles",
+      "type": "owned_backlink_internal",
+      "action": "Pastikan artikel root menaut ke subdomain money pages. Evidence saat ini: sewa-tv-led-pameran-bazar-jogja -> acara + karpet; sewa-karpet-pengajian-tahlilan-jogja -> permadani; sewa-karpet-pernikahan-jogja -> karpet/karpet merah.",
+      "anchor_or_pitch": "sewa karpet Jogja, sewa permadani Jogja, paket perlengkapan event Jogja",
+      "status": "implemented_existing_links_verified_by_search"
+    },
+    {
+      "priority": 8,
+      "target": "Social profile/link-in-bio citations",
+      "url_or_query": "Instagram, TikTok, Facebook Page, YouTube description, Google posts",
+      "type": "social_citation",
+      "action": "Tambahkan URL per-subdomain pada bio/highlight/caption bergilir agar Google melihat entity-service association.",
+      "anchor_or_pitch": "permadani.santiliving.com, karpet.santiliving.com, acara.santiliving.com",
+      "status": "copy_prepared_need_social_login"
+    }
+  ],
+  "social_posts": [
+    {
+      "channel": "Instagram/Facebook caption",
+      "category": "permadani_pengajian",
+      "copy": "Pengajian atau tahlilan butuh area lesehan rapi? Santi Living bantu cek sewa permadani Jogja: motif merah/emas, ukuran area, jadwal antar-jemput, dan estimasi biaya setelah detail acara masuk. Mulai dari halaman: https://permadani.santiliving.com/sewa-karpet-permadani-jogja"
+    },
+    {
+      "channel": "Instagram/Facebook caption",
+      "category": "karpet_acara",
+      "copy": "Butuh sewa karpet Jogja untuk seminar, wedding, booth, pameran, atau hajatan? Kirim ukuran area, tanggal, lokasi, dan jenis karpet yang dibutuhkan. Admin Santi Living bantu estimasi tanpa overclaim harga final. Detail: https://karpet.santiliving.com/sewa-karpet-jogja"
+    },
+    {
+      "channel": "Instagram/Facebook caption",
+      "category": "paket_event",
+      "copy": "Panitia event butuh kasur rest area, air cooler, TV display, atau karpet by request? Cek paket perlengkapan event Jogja dari Santi Living. Item tambahan mengikuti ketersediaan dan jadwal setup. Detail: https://acara.santiliving.com/sewa-perlengkapan-event"
+    }
+  ],
+  "photo_plan": {
+    "uploaded_or_attached": [
+      "permadani-merah JPEG attached to live permadani GBP post 66158617781365441",
+      "permadani-emas JPEG uploaded to GBP media AF1QipNrd4KLhQWy59F3uzstIiS8B5LvcSKdXt4lIN9R"
+    ],
+    "not_uploaded_yet": [
+      "karpet-hero asset is WebP; convert to public JPEG or shoot original setup photo before GBP media upload",
+      "setup acara / kasur rest area / air cooler / TV display photos are not present as verified public JPEG/PNG assets in repo; request ops/admin photos before upload"
+    ],
+    "filename_and_alt_guidance": [
+      "permadani-pengajian-jogja-santi-living.jpg",
+      "karpet-acara-jogja-santi-living.jpg",
+      "paket-event-kasur-rest-area-air-cooler-tv-jogja.jpg"
+    ]
+  },
+  "verification_commands": [
+    {
+      "command": "GBP direct read getLocation/getPosts via first-seo-mcp clients with .env.mcp",
+      "exit_code": 0,
+      "evidence": "location title/phone/address read; total posts 172 before writes"
+    },
+    {
+      "command": "npx tsx /tmp/gbp-local-authority-posts.mts preview",
+      "exit_code": 0,
+      "evidence": "both new GBP post drafts safeToApply=true; URLs and JPEG media checked; no duplicateCandidates"
+    },
+    {
+      "command": "npx tsx /tmp/gbp-local-authority-posts.mts apply",
+      "exit_code": 0,
+      "evidence": "created permadani and acara localPosts"
+    },
+    {
+      "command": "npx tsx /tmp/gbp-local-authority-posts.mts verify",
+      "exit_code": 0,
+      "evidence": "read-back found both post IDs with state LIVE"
+    },
+    {
+      "command": "npx tsx /tmp/gbp-upload-permadani-media.mts preview && apply && verify",
+      "exit_code": 0,
+      "evidence": "permadani-emas image HTTP 200 image/jpeg; uploaded and read-back in GBP media list count 8"
+    },
+    {
+      "command": "python urllib live URL check",
+      "exit_code": 0,
+      "evidence": "permadani/acara/karpet money URLs returned HTTP 200 with x-matched-path expected"
+    },
+    {
+      "command": "search_files internal backlink search",
+      "exit_code": 0,
+      "evidence": "Navigation/Footer and blog content include links to karpet, permadani, and acara money pages"
+    }
+  ],
+  "risks_or_followups": [
+    "Google may take time to surface new GBP posts/media publicly beyond API read-back, but API state is LIVE.",
+    "GBP Q&A publishing is prepared as copy only; no supported write tool for public Q&A was exposed in this session.",
+    "Karpet/acara original photo uploads still need verified JPEG/PNG assets from operations; no kasur-only visual was reused for those categories.",
+    "External citation submissions require owner/social/login access and sometimes paid/vendor approval; list is prioritized for outreach."
+  ]
+}
