@@ -7,7 +7,7 @@ Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}
 Tanggal acara: {tanggal}
 Lokasi acara: {alamat lengkap}
 Ukuran area: {panjang x lebar / estimasi jumlah tamu}
-Jenis karpet yang dibutuhkan: {permadani merah / permadani emas / runner acara / by request}
+Jenis karpet yang dibutuhkan: {karpet merah runner / permadani merah-emas / karpet booth-pameran / paket acara / by request}
 
 Mohon info ketersediaan, rekomendasi ukuran, estimasi harga, dan ongkirnya.`;
 
@@ -15,20 +15,22 @@ export const sewaKarpetJogja: LandingPageConfig = {
   meta: {
     title: 'Sewa Karpet Jogja untuk Acara, Hajatan & Event',
     description:
-      'Sewa karpet Jogja untuk pernikahan, pengajian, seminar, booth, dan pameran. Konsultasi ukuran serta estimasi biaya via WhatsApp Santi Living.',
+      'Sewa karpet Jogja untuk karpet merah, permadani, runner, booth, seminar, pameran, dan hajatan. Cek ukuran serta estimasi via WhatsApp.',
   },
   hero: {
-    title: 'Sewa Karpet Jogja',
+    title: 'Sewa Karpet Jogja untuk Acara',
     subtitle:
-      'Solusi cek ketersediaan rental permadani merah/emas, karpet runner acara, alas booth, dan kebutuhan venue di Yogyakarta.',
-    badge: 'Cek ketersediaan dan estimasi via WhatsApp',
+      'Pilih jalur karpet merah, karpet permadani, runner acara, booth pameran, atau paket karpet + perlengkapan event. Admin bantu cek ketersediaan, ukuran area, rute antar-jemput, dan estimasi biaya.',
+    badge: 'Pusat pilihan karpet acara: jenis jelas, estimasi setelah ukuran',
     features: [
-      { icon: '📏', text: 'Bantu hitung ukuran area' },
-      { icon: '🧼', text: 'Prioritas karpet bersih' },
-      { icon: '🚚', text: 'Antar jemput sesuai area' },
+      { icon: '🟥', text: 'Karpet merah & runner' },
+      { icon: '🟫', text: 'Permadani lesehan' },
+      { icon: '🎪', text: 'Booth, pameran, seminar' },
+      { icon: '📦', text: 'Paket acara by request' },
     ],
     actions: [
-      { type: 'link', label: 'Cek opsi karpet', href: '#calculator', variant: 'primary' },
+      { type: 'link', label: 'Pilih jenis karpet', href: '#pilih-jenis-karpet', variant: 'primary' },
+      { type: 'link', label: 'Bandingkan opsi', href: '#perbandingan-karpet', variant: 'ghost' },
       {
         type: 'wa',
         label: 'Konsultasi via WhatsApp',
@@ -36,10 +38,10 @@ export const sewaKarpetJogja: LandingPageConfig = {
         waSource: 'sewa_karpet_jogja_page',
       },
     ],
-    badges: ['Sewa karpet acara Jogja — konsultasi ukuran & stok'],
+    badges: ['Karpet merah', 'Permadani', 'Runner & booth', 'Paket acara'],
     phone: '0895-1911-9092',
-    bgImage: '/images/permadani-emas.jpg',
-    bgImageAlt: 'Permadani emas untuk layanan sewa karpet Jogja Santi Living',
+    bgImage: '/images/karpet-hero.webp',
+    bgImageAlt: 'Karpet acara dan permadani untuk pilar sewa karpet Jogja Santi Living',
   },
   tracking: {
     productCategory: 'karpet',
@@ -49,92 +51,97 @@ export const sewaKarpetJogja: LandingPageConfig = {
   color: 'indigo',
   benefits: [
     {
-      icon: '🎪',
-      title: 'Permadani dan event dipisahkan jelas',
+      icon: '🧭',
+      title: 'Jenis karpet dipisahkan sejak awal',
       description:
-        'Permadani merah/emas dipakai untuk area duduk dan ruang keluarga. Runner/lembar panjang dipakai untuk jalur acara dan booth.',
+        'Karpet merah runner, permadani merah/emas, karpet booth, dan paket acara punya fungsi berbeda sehingga admin tidak salah menghitung kebutuhan venue.',
     },
     {
       icon: '📐',
-      title: 'Ukuran dikonsultasikan',
+      title: 'Estimasi berdasarkan ukuran area',
       description:
-        'Kirim panjang, lebar, jumlah tamu, atau foto area agar admin bisa bantu rekomendasikan jenis dan jumlah karpet.',
+        'Kirim panjang-lebar, jumlah tamu, denah, atau foto lokasi. Estimasi mengikuti ukuran, durasi, akses lokasi, cleaning, dan ketersediaan stok/partner.',
     },
     {
-      icon: '📍',
-      title: 'Area layanan jelas',
+      icon: '🎓',
+      title: 'Cocok untuk event formal dan keluarga',
       description:
-        'Prioritas pengiriman ke Sleman, Kota Jogja, Bantul, Godean, Mlati, Gamping, Depok, dan area DIY yang masih aman dijangkau.',
+        'Satu halaman untuk seminar, pameran, booth UMKM, hajatan, pernikahan, pengajian, tahlilan, dan acara kampus di Jogja.',
     },
     {
-      icon: '🧾',
-      title: 'Estimasi transparan',
+      icon: '📦',
+      title: 'Bisa dikonsultasikan sebagai paket acara',
       description:
-        'Harga final mengikuti jenis karpet, ukuran, durasi, lokasi, delivery, cleaning, deposit, dan ketersediaan stok atau partner.',
+        'Jika butuh karpet plus kasur tamu, kipas, air cooler, TV, bantal, atau selimut, admin akan cek opsi yang tersedia tanpa mengklaim semua item selalu ready.',
     },
   ],
   priceCards: [
     {
-      name: 'Permadani merah',
-      size: 'Motif merah untuk ruang tamu, pengajian, dan area lesehan',
+      name: 'Karpet merah / runner acara',
+      size: 'Lembar panjang untuk jalur tamu, panggung, booth, dan area seremoni',
       price: 'Cek via WA',
-      daily: 'Harga final setelah ukuran dan stok tervalidasi',
-      note: 'Bukan runner acara; kirim ukuran ruang, jumlah tamu, lokasi, dan tanggal.',
+      daily: 'Estimasi setelah panjang-lebar, durasi, dan lokasi jelas',
+      note: 'Berbeda dari permadani merah bermotif untuk duduk lesehan.',
       popular: true,
     },
     {
-      name: 'Permadani emas',
-      size: 'Motif emas/cokelat untuk area duduk dan ruang sementara',
+      name: 'Karpet permadani merah / emas',
+      size: 'Motif merah atau emas untuk pengajian, tahlilan, dan area duduk tamu',
       price: 'By request',
-      daily: 'Disesuaikan ukuran, motif, durasi, dan lokasi',
-      note: 'Cocok untuk duduk lesehan dan area tamu yang ingin terlihat rapi.',
+      daily: 'Disesuaikan jumlah lembar, motif, durasi, dan stok',
+      note: 'Cocok untuk area lesehan, ruang tamu sementara, dan acara keluarga.',
     },
     {
-      name: 'Runner / alas acara',
-      size: 'Lembar panjang untuk jalur tamu, booth, expo, atau panggung',
+      name: 'Karpet booth / pameran / seminar',
+      size: 'Alas area custom untuk stand, expo, bazar, panggung kecil, atau kelas',
       price: 'Estimasi dulu',
-      daily: 'Admin bantu hitung dari luas area',
-      note: 'Kategori ini berbeda dari permadani motif ukuran persegi panjang.',
+      daily: 'Admin bantu hitung dari denah, foto, atau ukuran area',
+      note: 'Sebutkan layout, akses loading, dan jam setup agar rute pengiriman realistis.',
     },
     {
-      name: 'Paket acara Santi Living',
-      size: 'Karpet + kasur tamu + kipas / air cooler + TV',
+      name: 'Paket karpet + perlengkapan acara',
+      size: 'Karpet by request + kasur tamu + kipas / air cooler + TV bila tersedia',
       price: 'Konsultasi',
-      daily: 'Bundle sesuai kebutuhan acara',
-      note: 'Untuk panitia yang butuh satu pintu logistik perlengkapan acara.',
+      daily: 'Bundle mengikuti kebutuhan dan ketersediaan',
+      note: 'Untuk panitia yang ingin satu pintu logistik acara; stok dan jadwal tetap dicek dulu.',
     },
   ],
   audience: [
     {
       icon: '👰',
-      title: 'Pengajian, tahlilan, dan syukuran',
+      title: 'Pernikahan, hajatan, dan jalur tamu',
       description:
-        'Permadani merah atau emas untuk area duduk tamu, ruang keluarga, musala kecil, dan acara rumah.',
-    },
-    {
-      icon: '🕌',
-      title: 'Tamu keluarga dan homestay',
-      description:
-        'Tambahan permadani untuk ruang tamu sementara, villa, guest house, atau keluarga yang menginap.',
+        'Karpet merah atau runner membantu jalur masuk, panggung kecil, dan area seremoni terlihat lebih rapi.',
     },
     {
       icon: '🎓',
-      title: 'Event dan booth',
+      title: 'Seminar, acara kampus, dan panggung kecil',
       description:
-        'Jika butuh lembar panjang, jalur tamu, atau alas booth, admin akan arahkan ke kategori runner/alas acara.',
+        'Runner atau alas acara bisa dikonsultasikan untuk panggung, meja registrasi, area foto, dan ruang kelas sementara.',
     },
     {
-      icon: '🏡',
-      title: 'Venue, homestay, dan acara keluarga',
+      icon: '🏪',
+      title: 'Pameran, booth, bazar, dan UMKM',
       description:
-        'Tambahan alas sementara untuk ruang tamu, villa, guest house, dan gathering keluarga di Jogja.',
+        'Kirim denah booth atau ukuran stand agar admin bisa membantu estimasi luas karpet dan jadwal setup.',
+    },
+    {
+      icon: '🕌',
+      title: 'Pengajian, tahlilan, dan acara keluarga',
+      description:
+        'Permadani merah atau emas diposisikan sebagai area duduk lesehan, bukan sebagai runner jalur tamu.',
     },
   ],
   faqs: [
     {
+      question: 'Apa bedanya karpet merah, permadani, runner, dan paket acara?',
+      answer:
+        'Karpet merah biasanya untuk jalur tamu atau area seremoni jika bentuknya runner panjang. Permadani merah/emas adalah karpet motif untuk duduk lesehan. Runner/booth dipakai untuk pameran, panggung, atau layout custom. Paket acara menggabungkan karpet dengan perlengkapan lain yang dicek by request.',
+    },
+    {
       question: 'Apakah sewa karpet Santi Living sudah ready stock?',
       answer:
-        'Ketersediaan karpet wajib dicek dulu melalui WhatsApp karena jenis, ukuran, warna, kapasitas, dan partner supplier perlu divalidasi sesuai tanggal acara.',
+        'Ketersediaan karpet wajib dicek dulu melalui WhatsApp karena jenis, ukuran, warna, kapasitas, jadwal, dan partner supplier perlu divalidasi sesuai tanggal acara.',
     },
     {
       question: 'Kenapa harga sewa karpet tidak ditulis final?',
@@ -144,7 +151,7 @@ export const sewaKarpetJogja: LandingPageConfig = {
     {
       question: 'Data apa yang perlu dikirim saat chat WhatsApp?',
       answer:
-        'Kirim jenis acara, tanggal, lokasi, ukuran area atau jumlah tamu, jenis karpet yang diinginkan, foto area bila ada, dan apakah membutuhkan kasur, kipas, air cooler, atau TV juga.',
+        'Kirim jenis acara, tanggal, lokasi, ukuran area atau jumlah tamu, jenis karpet yang diinginkan, foto area bila ada, jam setup, jam jemput, dan apakah membutuhkan kasur, kipas, air cooler, atau TV juga.',
     },
     {
       question: 'Area mana saja yang dilayani?',
@@ -154,13 +161,13 @@ export const sewaKarpetJogja: LandingPageConfig = {
     {
       question: 'Apakah bisa sekalian pesan kasur, kipas, air cooler, atau TV?',
       answer:
-        'Bisa. Santi Living kuat di perlengkapan acara seperti kasur tamu, bantal, selimut, kipas, air cooler, dan TV display, sehingga kebutuhan karpet bisa dikonsultasikan sebagai bagian dari paket acara.',
+        'Bisa dikonsultasikan. Santi Living kuat di perlengkapan acara seperti kasur tamu, bantal, selimut, kipas, air cooler, dan TV display. Kebutuhan tambahan tetap dicek sesuai stok, jadwal, dan rute pengiriman.',
     },
   ],
   cta: {
     title: 'Butuh sewa karpet untuk acara di Jogja?',
     description:
-      'Kirim tanggal, lokasi, ukuran area, dan jenis acara. Admin akan bantu cek ketersediaan serta estimasi karpet yang paling masuk akal.',
+      'Kirim tanggal, lokasi, ukuran area, jenis acara, dan pilihan karpet. Admin akan bantu cek ketersediaan serta estimasi yang paling masuk akal.',
     waText: KARPET_WA_TEXT,
     waSource: 'sewa_karpet_jogja_page',
     secondaryLabel: 'Pilih opsi karpet',
@@ -168,36 +175,74 @@ export const sewaKarpetJogja: LandingPageConfig = {
   },
   sections: [
     {
-      title: 'Rental Karpet Jogja untuk Event, Hajatan, dan Venue',
+      title: 'Pilih Jenis Karpet Acara di Santi Living',
       content: `
-        <p><strong>Sewa karpet Jogja</strong> biasanya dibutuhkan ketika acara harus terlihat rapi tanpa membeli perlengkapan yang hanya dipakai satu atau dua hari. Kebutuhan paling umum datang dari pernikahan, pengajian, tahlilan, seminar, pameran, bazar, grand opening, acara kampus, homestay, dan venue keluarga.</p>
-        <p>Santi Living menjalankan kategori karpet sebagai layanan konsultatif: pelanggan mengirim detail acara terlebih dahulu, lalu admin mengecek ketersediaan stok atau partner, jenis karpet, ukuran, area layanan, estimasi delivery, dan biaya cleaning. Dengan cara ini, halaman tidak menjanjikan harga final sebelum operasional karpet benar-benar tervalidasi.</p>
-        <h3>Jenis kebutuhan karpet yang bisa dikonsultasikan</h3>
+        <div id="pilih-jenis-karpet"></div>
+        <p><strong>Sewa karpet Jogja</strong> di Santi Living dibuat sebagai hub untuk semua kebutuhan karpet acara: karpet merah, permadani, runner, booth pameran, seminar, hajatan, dan paket perlengkapan event. Karena setiap jenis punya fungsi berbeda, halaman ini memecah pilihan sejak awal supaya panitia tidak salah menyebut kebutuhan.</p>
+        <p><strong>Navigasi cepat:</strong> <a href="#karpet-merah-runner">karpet merah runner</a> · <a href="#permadani-lesehan">permadani lesehan</a> · <a href="#runner-booth-pameran">runner booth/pameran</a> · <a href="#paket-karpet-acara">paket karpet acara</a> · <a href="#perbandingan-karpet">tabel perbandingan</a>.</p>
+        <h3 id="karpet-merah-runner">Karpet merah untuk jalur tamu dan seremoni</h3>
+        <p>Jika yang dicari adalah jalur merah panjang untuk pintu masuk, panggung, akad, launching, atau booth formal, sebutkan sebagai <strong>karpet merah runner</strong>. Admin perlu panjang jalur, lebar area, indoor/outdoor, dan jam setup. Kalau yang dimaksud karpet merah bermotif untuk duduk, lihat <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">halaman permadani merah Jogja</a>.</p>
+        <h3 id="permadani-lesehan">Permadani merah/emas untuk duduk lesehan</h3>
+        <p>Jika acara berupa pengajian, tahlilan, arisan, ruang tamu keluarga, atau musala kecil, pilih <strong>karpet permadani</strong>. Permadani adalah karpet motif ukuran relatif persegi panjang, bukan runner acara. Lihat juga <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">halaman khusus sewa permadani Jogja</a>.</p>
+        <h3 id="runner-booth-pameran">Runner, booth, pameran, seminar, dan bazar</h3>
+        <p>Untuk seminar, pameran, stand UMKM, panggung kecil, atau layout custom, kirim denah, foto, atau ukuran panjang x lebar. Admin akan bantu menghitung kebutuhan karpet dan waktu pengiriman yang realistis.</p>
+        <h3 id="paket-karpet-acara">Paket karpet acara by request</h3>
+        <p>Jika panitia juga butuh kasur tamu, kipas, air cooler, TV, bantal, atau selimut, cek <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Santi Living</a>. Semua item tambahan tetap divalidasi by request sesuai stok dan jadwal.</p>
+      `,
+    },
+    {
+      title: 'Perbandingan Permadani vs Runner vs Karpet Merah vs Paket Acara',
+      content: `
+        <div id="perbandingan-karpet"></div>
+        <p>Gunakan tabel ini sebelum chat agar istilah yang dikirim ke admin tepat. Kalau masih ragu, kirim foto referensi dan ukuran area; admin akan bantu mengarahkan.</p>
+        <table>
+          <thead>
+            <tr><th>Opsi</th><th>Paling cocok untuk</th><th>Data yang perlu dikirim</th><th>Catatan aman</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Karpet merah runner</strong></td><td>Jalur tamu, panggung, akad, launching, seremoni.</td><td>Panjang-lebar jalur, lokasi, indoor/outdoor, jam setup.</td><td>Jangan disamakan dengan permadani merah motif.</td></tr>
+            <tr><td><strong>Permadani merah/emas</strong></td><td>Pengajian, tahlilan, syukuran, ruang tamu, lesehan keluarga.</td><td>Jumlah tamu, ukuran ruangan, foto area, kebutuhan bantal/kasur tambahan.</td><td>Cek stok motif dan jumlah lembar dulu via WA.</td></tr>
+            <tr><td><strong>Runner / booth / pameran</strong></td><td>Seminar, pameran, expo, bazar UMKM, stand, panggung kecil.</td><td>Denah booth, luas area, akses loading, jadwal kirim-jemput.</td><td>Estimasi mengikuti ukuran dan koordinasi venue.</td></tr>
+            <tr><td><strong>Paket karpet acara</strong></td><td>Panitia yang ingin karpet plus kasur, kipas, air cooler, TV, atau item event lain.</td><td>Daftar item, jumlah orang, durasi, lokasi, dan prioritas kebutuhan.</td><td>Semua item tambahan by request; admin cek stok sebelum memberi estimasi.</td></tr>
+          </tbody>
+        </table>
+      `,
+    },
+    {
+      title: 'Panduan Cepat Harga, Jenis Acara, Area, dan Cara Pesan',
+      content: `
+        <div id="harga-sewa-karpet"></div>
+        <p>Biaya sewa karpet tidak ditulis sebagai harga final karena karpet mengikuti luas area, jenis karpet, tanggal acara, durasi sewa, akses venue, delivery, cleaning, deposit, dan ketersediaan stok. Untuk memahami faktor biayanya, baca <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja 2026</a>.</p>
+        <h3 id="jenis-acara-karpet">Jenis acara yang sering membutuhkan karpet</h3>
         <ul>
-          <li><strong>Permadani merah:</strong> karpet motif ukuran relatif persegi panjang untuk area duduk, ruang tamu, pengajian, dan acara keluarga.</li>
-          <li><strong>Permadani emas:</strong> karpet motif emas/cokelat untuk pengajian, tahlilan, ruang tamu sementara, dan acara lesehan.</li>
-          <li><strong>Runner / alas acara:</strong> lembar panjang untuk jalur tamu, panggung, booth, expo, bazar UMKM, dan layout area custom.</li>
-          <li><strong>Paket acara:</strong> karpet digabung dengan kasur tamu, kipas, air cooler, TV, bantal, atau selimut.</li>
+          <li><strong>Pernikahan dan hajatan:</strong> jalur tamu, panggung, area foto, atau ruang keluarga. Referensi: <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">sewa karpet pernikahan Jogja</a>.</li>
+          <li><strong>Pengajian dan tahlilan:</strong> permadani untuk duduk lesehan. Referensi: <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">sewa karpet pengajian/tahlilan Jogja</a>.</li>
+          <li><strong>Seminar dan pameran:</strong> runner, booth, expo, bazar, atau panggung kecil. Referensi: <a href="https://santiliving.com/artikel/sewa-karpet-seminar-pameran-jogja">sewa karpet seminar/pameran Jogja</a>.</li>
+          <li><strong>Butuh beberapa item sekaligus:</strong> karpet bisa dikonsultasikan bersama kasur, kipas, air cooler, dan TV. Referensi: <a href="https://santiliving.com/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv">paket sewa perlengkapan acara Jogja</a>.</li>
         </ul>
-        <p><strong>Panduan pendukung:</strong> baca <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">harga sewa karpet Jogja</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, <a href="https://santiliving.com/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv">paket sewa perlengkapan acara</a>, <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">sewa karpet pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">sewa karpet pernikahan</a>, dan <a href="https://santiliving.com/artikel/sewa-karpet-seminar-pameran-jogja">sewa karpet seminar/pameran</a>.</p>
+        <p>Jika ragu memilih antara karpet merah dan permadani, baca juga <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">karpet merah vs karpet permadani acara</a>.</p>
       `,
     },
     {
       title: 'Area Layanan Sewa Karpet di Yogyakarta',
       content: `
+        <div id="area-sewa-karpet"></div>
         <p>Area prioritas mencakup Sleman, Kota Jogja, Bantul, Godean, Mlati, Gamping, Depok, sekitar kampus UGM, Malioboro, dan titik acara yang masih aman untuk rute pengantaran. Detail ongkir tetap mengikuti alamat lengkap, akses kendaraan, jam acara, durasi sewa, dan jadwal penjemputan.</p>
         <p>Untuk area jauh seperti Gunungkidul atau lokasi dengan akses sulit, tim perlu melakukan pengecekan terlebih dahulu. Jika tidak memungkinkan, admin akan memberi tahu sejak awal agar panitia bisa mencari opsi lokal yang lebih aman.</p>
+        <p>Workshop resmi Santi Living berada di <strong>Jl. Godean KM 10, Sleman, Yogyakarta</strong>, sehingga informasi alamat kirim dan titik patokan sangat membantu estimasi rute.</p>
       `,
     },
     {
       title: 'Cara Pesan Karpet agar Estimasi Cepat',
       content: `
+        <div id="cara-pesan-karpet"></div>
         <ol>
           <li>Siapkan jenis acara, tanggal, jam kirim, dan jam jemput.</li>
           <li>Kirim alamat lengkap serta titik patokan venue.</li>
           <li>Ukur panjang dan lebar area, atau kirim foto/video lokasi.</li>
-          <li>Pilih kebutuhan: permadani merah, permadani emas, runner acara, pameran, atau paket acara.</li>
+          <li>Pilih kebutuhan: karpet merah runner, permadani merah/emas, runner booth/pameran, atau paket acara.</li>
           <li>Sebutkan apakah butuh perlengkapan tambahan seperti kasur, kipas, air cooler, TV, bantal, atau selimut.</li>
+          <li>Tunggu admin mengecek ketersediaan, rekomendasi ukuran, ongkir, cleaning, deposit bila ada, dan estimasi biaya.</li>
         </ol>
       `,
     },
@@ -223,7 +268,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
         type: 'wa',
         label: 'Cek permadani merah',
         waText: KARPET_WA_TEXT.replace(
-          '{permadani merah / permadani emas / runner acara / by request}',
+          '{karpet merah runner / permadani merah-emas / karpet booth-pameran / paket acara / by request}',
           'permadani merah'
         ),
         waSource: 'sewa_karpet_merah_page',
@@ -306,7 +351,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
     description:
       'Kirim ukuran ruang, jumlah tamu, lokasi, dan tanggal acara agar admin bisa cek stok permadani merah yang tersedia.',
     waText: KARPET_WA_TEXT.replace(
-      '{permadani merah / permadani emas / runner acara / by request}',
+      '{karpet merah runner / permadani merah-emas / karpet booth-pameran / paket acara / by request}',
       'permadani merah'
     ),
     waSource: 'sewa_karpet_merah_page',
@@ -360,7 +405,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
           .replace('sewa karpet Jogja', 'sewa permadani Jogja untuk pengajian/tahlilan/tamu keluarga')
           .replace('Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}', 'Jenis kebutuhan: {pengajian / tahlilan / syukuran / tamu keluarga / ruang tamu sementara / lainnya}')
           .replace(
-            '{permadani merah / permadani emas / runner acara / by request}',
+            '{karpet merah runner / permadani merah-emas / karpet booth-pameran / paket acara / by request}',
             'permadani merah / permadani emas'
           ),
         waSource: 'permadani_page',
@@ -490,7 +535,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       .replace('sewa karpet Jogja', 'sewa permadani Jogja untuk pengajian/tahlilan/tamu keluarga')
       .replace('Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}', 'Jenis kebutuhan: {pengajian / tahlilan / syukuran / tamu keluarga / ruang tamu sementara / lainnya}')
       .replace(
-        '{permadani merah / permadani emas / runner acara / by request}',
+        '{karpet merah runner / permadani merah-emas / karpet booth-pameran / paket acara / by request}',
         'permadani merah / permadani emas'
       ),
     waSource: 'permadani_page',

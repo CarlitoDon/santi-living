@@ -54,14 +54,23 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const textClass = TEXT_MAP[cfg.color] || TEXT_MAP.blue;
   const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
   const bgClass = BG_MAP[cfg.color] || BG_MAP.blue;
+  const isKarpetPage = cfg.tracking?.productCategory === 'karpet';
   const isEventPage = cfg.tracking?.productCategory === 'event';
-  const defaultPriceGuideHref = isEventPage
-    ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
-    : '/harga-sewa-kasur';
-  const defaultPriceGuideLabel = isEventPage
-    ? 'Cek opsi karpet dan item by-request →'
-    : 'Lihat daftar harga lengkap semua ukuran →';
-  const defaultPriceSectionTitle = isEventPage ? 'Estimasi Paket & Item Konsultatif' : 'Harga Sewa';
+  const defaultPriceGuideHref = isKarpetPage
+    ? 'https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026'
+    : isEventPage
+      ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
+      : '/harga-sewa-kasur';
+  const defaultPriceGuideLabel = isKarpetPage
+    ? 'Baca panduan harga sewa karpet →'
+    : isEventPage
+      ? 'Cek opsi karpet dan item by-request →'
+      : 'Lihat daftar harga lengkap semua ukuran →';
+  const defaultPriceSectionTitle = isKarpetPage
+    ? 'Opsi Sewa Karpet'
+    : isEventPage
+      ? 'Estimasi Paket & Item Konsultatif'
+      : 'Harga Sewa';
   const priceGuideHref = cfg.priceSection?.linkHref || defaultPriceGuideHref;
   const priceGuideLabel = cfg.priceSection?.linkLabel || defaultPriceGuideLabel;
   const priceSectionTitle = cfg.priceSection?.title || defaultPriceSectionTitle;
