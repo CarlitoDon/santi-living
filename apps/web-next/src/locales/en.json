@@ -36,7 +36,7 @@
     "feature_free_pickup": "✅ Free pickup",
     "feature_clean": "✅ Clean & fresh mattress",
     "cta_sewa": "Rent Now",
-    "cta_chat": "💬 Chat WhatsApp",
+    "cta_chat": "Chat WhatsApp",
     "or_contact": "Or contact directly:",
     "pick_title": "⚡️ Choose Your Mattress"
   },
@@ -159,7 +159,7 @@
     "title": "Ready to Rent a Mattress Today?",
     "desc": "Order now and your mattress can arrive today! Our team is ready to deliver a clean mattress to your location.",
     "cta_pesan": "Order Now",
-    "cta_chat": "💬 Chat WhatsApp"
+    "cta_chat": "Chat WhatsApp"
   },
   "produk": {
     "title": "Product Catalog",
@@ -217,7 +217,7 @@
     "cta_title": "Ready to rent a mattress?",
     "cta_desc": "Contact us via WhatsApp to order or ask questions",
     "cta_hitung": "Calculate Rental Cost",
-    "cta_chat": "💬 Chat WhatsApp"
+    "cta_chat": "Chat WhatsApp"
   },
   "pricing": {
     "table_size": "Size",

@@ -28,7 +28,7 @@ export default async function TerimakasihPage() {
               data-wa-source="thank_you"
               data-wa-location="thank_you"
             >
-              💬 Chat WhatsApp
+              Chat WhatsApp
             </a>
             <Link href="/" className="btn btn-primary" style={{ width: '100%', maxWidth: '280px', textDecoration: 'none' }}>
               Kembali ke Beranda

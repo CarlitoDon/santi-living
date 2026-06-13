@@ -180,7 +180,7 @@ export default async function PesananPage({ params }: PageProps) {
               data-wa-source="order_page"
               data-wa-location="order"
             >
-              💬 Hubungi Kami
+              Hubungi Kami
             </a>
             <Link href="/" className="btn" style={{ textDecoration: 'none', textAlign: 'center', padding: 'var(--space-3)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
               Kembali ke Beranda

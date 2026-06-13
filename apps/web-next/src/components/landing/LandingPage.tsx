@@ -158,7 +158,6 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                     data-page-type={cfg.tracking?.pageType}
                     data-wa-intent={cfg.tracking?.intent}
                   >
-                    <span className="mr-3">💬</span>
                     {a.label}
                   </a>
                 );
@@ -292,7 +291,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               data-page-type={cfg.tracking?.pageType}
               data-wa-intent={cfg.tracking?.intent}
             >
-              💬 Chat WhatsApp
+              Chat WhatsApp
             </a>
           </div>
         </div>
