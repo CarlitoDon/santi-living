@@ -179,7 +179,7 @@ Required weekly metrics:
 | `karpet.santiliving.com` | `sewa_karpet_jogja_page` | `karpet` | `money_page` | `sewa_karpet_jogja` |
 | `acara.santiliving.com` | `acara_santiliving_page` | `event` | `money_page` | `sewa_perlengkapan_event_jogja` |
 
-Current GA4 reporting gap: Data API returned `400` for `customEvent:cta_source`, meaning `cta_source` is not registered/queryable as a GA4 custom dimension yet. Until GA4 Admin write access or manual GA4 admin setup is completed, use `/api/lead/export`/lead DB as the `cta_source` source of truth, and use GA4 page-path/event counts as a fallback.
+Current GA4 reporting gap: Data API returned `400` for `customEvent:cta_source`, meaning `cta_source` is not registered/queryable as a GA4 custom dimension yet. The weekly dashboard now uses `/api/lead/export` as the `cta_source` source of truth when `LEAD_EVENTS_ADMIN_TOKEN` is available, so the cron should only mark this as `BLOCKED` if both GA4 custom dimensions and the lead-export fallback are unavailable.
 
 ### D. Content and internal linking
 
@@ -257,4 +257,4 @@ Use this only if API access fails.
 
 ## BLOCKED
 
-- GA4 `customEvent:cta_source` is not queryable via GA4 Data API yet. Required next action: register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`, or use `/api/lead/export` as the canonical cta_source report source until GA4 Admin write access is available.
+- `BLOCKED: none` when `/api/lead/export` succeeds. Remaining non-blocking admin cleanup: register GA4 event-scoped custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent` so GA4 Data API can mirror the lead DB attribution directly.

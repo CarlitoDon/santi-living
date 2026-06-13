@@ -30,6 +30,7 @@ PROPERTY = "sc-domain:santiliving.com"
 GA4_PROPERTY = "properties/519253158"
 GBP_ACCOUNT = "accounts/116188520419140679581"
 GBP_LOCATION = "locations/10488080858214395605"
+LEAD_EXPORT_URL = "https://santiliving.com/api/lead/export"
 
 MONEY_PAGES = [
     {
@@ -495,6 +496,79 @@ def ga4_snapshot(token: str) -> dict[str, Any]:
     }
 
 
+def top_counts(rows: list[dict[str, Any]], field: str, *, limit: int = 12) -> list[dict[str, Any]]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        value = row.get(field)
+        key = str(value).strip() if value not in (None, "") else "(not set)"
+        if field == "landing_page":
+            key = redact_url_to_path(key)
+        counts[key] = counts.get(key, 0) + 1
+    return [
+        {field: key, "event_count": count}
+        for key, count in sorted(counts.items(), key=lambda item: (-item[1], item[0]))[:limit]
+    ]
+
+
+def source_medium_counts(rows: list[dict[str, Any]], *, limit: int = 12) -> list[dict[str, Any]]:
+    counts: dict[tuple[str, str], int] = {}
+    for row in rows:
+        source = str(row.get("source") or "(not set)").strip() or "(not set)"
+        medium = str(row.get("medium") or "(not set)").strip() or "(not set)"
+        key = (source, medium)
+        counts[key] = counts.get(key, 0) + 1
+    return [
+        {"source": source, "medium": medium, "event_count": count}
+        for (source, medium), count in sorted(counts.items(), key=lambda item: (-item[1], item[0][0], item[0][1]))[:limit]
+    ]
+
+
+def lead_export_snapshot(start_date: str, end_date: str) -> dict[str, Any]:
+    """Read sanitized lead attribution aggregates from the website export endpoint.
+
+    The endpoint returns row-level lead data; this function deliberately stores only
+    aggregate counts so cron artifacts never contain event IDs, coordinates, raw click
+    IDs, user agents, referrers, or other customer-level data.
+    """
+    token = os.environ.get("LEAD_EVENTS_ADMIN_TOKEN")
+    if not token:
+        return {"ok": False, "reason": "missing LEAD_EVENTS_ADMIN_TOKEN"}
+
+    query = urllib.parse.urlencode(
+        {
+            "from": start_date,
+            "to": end_date,
+            "event_type": "whatsapp_click",
+            "limit": "1000",
+            "format": "json",
+        }
+    )
+    response = request_json("GET", f"{LEAD_EXPORT_URL}?{query}", token)
+    if not response.get("ok"):
+        body = response.get("body")
+        message = ((body or {}).get("error") or {}).get("message") if isinstance(body, dict) else body
+        return {"ok": False, "status": response.get("status"), "message": message}
+
+    body_obj = response.get("body")
+    body: dict[str, Any] = {}
+    if isinstance(body_obj, dict):
+        body = body_obj
+    rows = [row for row in body.get("rows", []) if isinstance(row, dict)]
+    return {
+        "ok": True,
+        "status": response.get("status"),
+        "event_name": "whatsapp_click",
+        "rows_returned": len(rows),
+        "reported_count": body.get("count"),
+        "by_cta_source": top_counts(rows, "cta_source"),
+        "by_landing_page": top_counts(rows, "landing_page"),
+        "by_city_classification": top_counts(rows, "city_classification"),
+        "by_product_category": top_counts(rows, "product_category"),
+        "by_page_type": top_counts(rows, "page_type"),
+        "by_source_medium": source_medium_counts(rows),
+    }
+
+
 def gbp_snapshot(token: str) -> dict[str, Any]:
     location_url = (
         f"https://mybusinessbusinessinformation.googleapis.com/v1/{GBP_ACCOUNT}/locations"
@@ -600,8 +674,20 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lines.append("")
     lines.append("## GA4 and lead attribution")
     probe = (snapshot.get("ga4") or {}).get("cta_source_custom_dimension_probe", {})
+    lead_export = snapshot.get("lead_export") or {}
     lines.append(f"- GA4 custom dimension probe for `customEvent:cta_source`: ok={probe.get('ok')} status={probe.get('status')}")
     lines.append("- GA4 page URLs in this markdown are redacted to path only; full JSON also avoids raw gclid/gbraid/wbraid values.")
+    if lead_export.get("ok"):
+        lines.append(
+            f"- Lead export fallback `/api/lead/export`: ok=True; "
+            f"whatsapp_click rows={lead_export.get('rows_returned', 0)}; "
+            "used as the `cta_source` source of truth while GA4 custom dimensions are absent."
+        )
+        for item in (lead_export.get("by_cta_source") or [])[:6]:
+            lines.append(f"  - cta_source `{item.get('cta_source')}`: {item.get('event_count')} events")
+    else:
+        reason = lead_export.get("reason") or lead_export.get("message") or "unavailable"
+        lines.append(f"- Lead export fallback `/api/lead/export`: ok=False status={lead_export.get('status')} reason={reason}")
     lines.append("")
     lines.append("## GBP coverage")
     gbp = snapshot.get("gbp") or {}
@@ -621,8 +707,9 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lines.append("")
     lines.append("## BLOCKED")
     blockers = []
-    if probe.get("ok") is False:
-        blockers.append("GA4 `customEvent:cta_source` is not queryable yet; register event-scoped custom dimensions for cta_source, cta_location, product_category, page_type, and intent, or use `/api/lead/export` as the cta_source source of truth.")
+    lead_export_ok = (snapshot.get("lead_export") or {}).get("ok") is True
+    if probe.get("ok") is False and not lead_export_ok:
+        blockers.append("GA4 `customEvent:cta_source` is not queryable yet and `/api/lead/export` fallback is unavailable; register event-scoped custom dimensions for cta_source, cta_location, product_category, page_type, and intent, or restore the lead export endpoint/token.")
     if blockers:
         lines.extend(f"- {item}" for item in blockers)
     else:
@@ -646,6 +733,7 @@ def main() -> int:
     args = parse_args()
     repo_root = Path.cwd()
     load_env_file(Path(args.env_file).expanduser())
+    load_env_file(repo_root / "apps/web-next/.env.local")
     today = dt.datetime.now(dt.timezone.utc).date()
     end = dt.date.fromisoformat(args.end_date) if args.end_date else today - dt.timedelta(days=1)
     start = dt.date.fromisoformat(args.start_date) if args.start_date else end - dt.timedelta(days=27)
@@ -689,6 +777,8 @@ def main() -> int:
         snapshot["ga4"] = ga4_snapshot(token)
         snapshot["gbp"] = gbp_snapshot(token)
 
+    snapshot["lead_export"] = lead_export_snapshot(start.isoformat(), end.isoformat())
+
     out_dir = (repo_root / args.output_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
@@ -706,6 +796,10 @@ def main() -> int:
                 "date_range": snapshot["date_range"],
                 "gsc_clusters": (snapshot.get("gsc") or {}).get("cluster_summary"),
                 "ga4_cta_source_probe": (snapshot.get("ga4") or {}).get("cta_source_custom_dimension_probe"),
+                "lead_export_summary": {
+                    "ok": (snapshot.get("lead_export") or {}).get("ok"),
+                    "rows_returned": (snapshot.get("lead_export") or {}).get("rows_returned"),
+                },
                 "gbp_summary": snapshot.get("gbp"),
             },
             ensure_ascii=False,
