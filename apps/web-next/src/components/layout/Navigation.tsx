@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
+import { LanguageToggle } from '@/components/ui/LanguageToggle';
 
 type NavLink = {
   href: string;
@@ -98,13 +99,16 @@ export function Navigation() {
           <aside className={`fixed top-0 w-[280px] h-screen bg-white shadow-[2px_0_10px_rgba(0,0,0,0.2)] transition-[left] duration-300 ease-in-out z-[1002] p-6 flex flex-col overflow-y-auto ${isOpen ? 'left-0' : '-left-[300px]'}`}>
             <div className="flex justify-between items-center mb-8">
               <span className="text-xl font-bold text-blue-600">{t('header.menu')}</span>
-              <button 
+              <div className="flex items-center gap-3">
+                <LanguageToggle />
+                <button 
                 className="bg-transparent border-none text-3xl leading-none cursor-pointer text-slate-400 hover:text-slate-600 focus:outline-none" 
                 onClick={() => setIsOpen(false)}
                 aria-label={t('header.close_menu')}
               >
                 &times;
               </button>
+              </div>
             </div>
 
             <ul className="list-none p-0 m-0">

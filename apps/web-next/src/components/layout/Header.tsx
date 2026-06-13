@@ -7,6 +7,7 @@ import { Navigation } from './Navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
+import { LanguageToggle } from '@/components/ui/LanguageToggle';
 
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
@@ -75,8 +76,12 @@ export function Header() {
             </div>
           </div>
 
-          {/* Right: CTA WhatsApp */}
-          <div className="flex-1 flex justify-end">
+          {/* Right: Language Toggle + CTA WhatsApp */}
+          <div className="flex-1 flex justify-end items-center gap-1">
+            {/* desktop toggle */}
+            <div className="hidden sm:flex items-center">
+              <LanguageToggle />
+            </div>
             <a
               href={getWhatsAppUrl(hostCta.waText, 'header_desktop')}
               target="_blank"
