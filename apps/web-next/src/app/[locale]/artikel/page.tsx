@@ -1,29 +1,47 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog';
+import { getDictionary, type Locale } from '@/locales/dictionary';
+import { localeHref } from '@/utils/localeHref';
 
-export const metadata: Metadata = {
-  title: 'Artikel & Tips Sewa Kasur | Santi Living',
-  description:
-    'Panduan lengkap seputar sewa kasur, tips memilih kasur busa berkualitas, dan informasi layanan rental kasur harian/bulanan di Jogja.',
-  alternates: {
-    canonical: 'https://santiliving.com/artikel',
-  },
-  openGraph: {
-    title: 'Artikel & Tips Sewa Kasur Jogja - Santi Living',
-    description: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman di Yogyakarta.',
-    url: 'https://santiliving.com/artikel',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Artikel & Tips Sewa Kasur Jogja',
-    description: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman.',
-  },
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
 
-export default function ArtikelIndexPage() {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const dict = await getDictionary(locale as Locale);
+  
+  return {
+    title: `${dict.blog?.page_title || 'Artikel & Tips'} | Santi Living`,
+    description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman.',
+    alternates: {
+      canonical: `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel`,
+    },
+    openGraph: {
+      title: `${dict.blog?.page_title || 'Artikel & Tips'} - Santi Living`,
+      description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur.',
+      url: `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel`,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${dict.blog?.page_title || 'Artikel & Tips'} - Santi Living`,
+      description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur.',
+    },
+  };
+}
+
+export default async function ArtikelIndexPage({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = (await getDictionary(locale as Locale)) as any;
   const posts = getAllPosts();
+
+  const blogDict = dict.blog || {
+    page_title: 'Artikel & Tips',
+    page_desc: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman',
+    empty: 'Belum ada artikel.',
+  };
 
   return (
     <main style={{ paddingTop: '70px' }}>
@@ -34,21 +52,21 @@ export default function ArtikelIndexPage() {
         color: 'white',
       }}>
         <div className="container">
-          <h1 style={{ color: 'white', marginBottom: 'var(--space-2)' }}>Artikel &amp; Tips</h1>
-          <p style={{ opacity: 0.9 }}>Panduan lengkap seputar sewa kasur dan tips tidur nyaman</p>
+          <h1 style={{ color: 'white', marginBottom: 'var(--space-2)' }}>{blogDict.page_title}</h1>
+          <p style={{ opacity: 0.9 }}>{blogDict.page_desc}</p>
         </div>
       </section>
 
       <section style={{ padding: 'var(--space-10) 0' }}>
         <div className="container" style={{ maxWidth: '720px' }}>
           {posts.length === 0 ? (
-            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>Belum ada artikel.</p>
+            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>{blogDict.empty}</p>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
               {posts.map((post) => (
                 <Link
                   key={post.slug}
-                  href={`/artikel/${post.slug}`}
+                  href={localeHref(`/artikel/${post.slug}`, locale)}
                   style={{
                     display: 'block',
                     padding: 'var(--space-5)',
@@ -66,7 +84,13 @@ export default function ArtikelIndexPage() {
                     {post.frontmatter.description}
                   </p>
                   <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-                    <span>{post.frontmatter.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span>
+                      {post.frontmatter.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </span>
                     <span>• {post.frontmatter.author}</span>
                   </div>
                 </Link>

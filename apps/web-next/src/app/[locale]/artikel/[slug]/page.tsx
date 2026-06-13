@@ -5,17 +5,17 @@ import { remark } from 'remark';
 import html from 'remark-html';
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
-function rewriteWhatsappLinks(htmlContent: string, slug: string): string {
+function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string): string {
   return htmlContent.replace(/href="https:\/\/wa\.me\/(\d+)(\?[^"]*)?"/g, (match, phone: string, query = '') => {
     try {
       const sourceUrl = new URL(`https://wa.me/${phone}${query}`);
       const params = new URLSearchParams({
         to: phone,
         cta_source: 'blog_cta',
-        landing_page: `/artikel/${slug}`,
+        landing_page: `${locale === 'en' ? '/en' : ''}/artikel/${slug}`,
         source: 'blog',
         medium: 'organic',
         campaign: slug,
@@ -34,14 +34,22 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string): string {
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  const locales = ['id', 'en'];
+  const params: { locale: string; slug: string }[] = [];
+  for (const locale of locales) {
+    for (const post of posts) {
+      params.push({ locale, slug: post.slug });
+    }
+  }
+  return params;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: 'Artikel Tidak Ditemukan' };
-  const url = `https://santiliving.com/artikel/${slug}`;
+  if (!post) return { title: locale === 'en' ? 'Article Not Found' : 'Artikel Tidak Ditemukan' };
+  
+  const url = `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel/${slug}`;
   const image = post.frontmatter.image || 'https://santiliving.com/logo.png';
 
   return {
@@ -78,12 +86,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ArtikelSlugPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
   const processedContent = await remark().use(html).process(post.content);
-  const htmlContent = rewriteWhatsappLinks(processedContent.toString(), slug);
+  const htmlContent = rewriteWhatsappLinks(processedContent.toString(), slug, locale);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -106,7 +114,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://santiliving.com/artikel/${slug}`
+      "@id": `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel/${slug}`
     }
   };
 
@@ -124,7 +132,11 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
             </h1>
             <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
               <span>
-                {post.frontmatter.pubDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                {post.frontmatter.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
               </span>
               <span>• {post.frontmatter.author}</span>
             </div>
