@@ -17,15 +17,15 @@ export function LocaleProvider({
   children,
 }: {
   locale: Locale;
-  dictionary: Record<string, any>;
+  dictionary: Record<string, unknown>;
   children: React.ReactNode;
 }) {
   function t(path: string): string {
     const keys = path.split('.');
-    let value: any = dictionary;
+    let value: unknown = dictionary;
     for (const key of keys) {
-      if (value == null) return path;
-      value = value[key];
+      if (value == null || typeof value !== 'object') return path;
+      value = (value as Record<string, unknown>)[key];
     }
     return typeof value === 'string' ? value : path;
   }

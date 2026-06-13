@@ -12,7 +12,7 @@ export function Providers({
 }: {
   children: ReactNode;
   locale: Locale;
-  dictionary: Record<string, any>;
+  dictionary: Record<string, unknown>;
 }) {
   return (
     <LocaleProvider locale={locale} dictionary={dictionary}>

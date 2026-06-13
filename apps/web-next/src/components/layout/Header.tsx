@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Navigation } from './Navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
-import { useT } from '@/contexts/locale';
 import { useLocale } from '@/contexts/locale';
 import { localeHref } from '@/utils/localeHref';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
@@ -14,7 +13,6 @@ import { LanguageToggle } from '@/components/ui/LanguageToggle';
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const hostCta = useHostCta();
-  const t = useT();
   const { locale } = useLocale();
 
   useEffect(() => {
