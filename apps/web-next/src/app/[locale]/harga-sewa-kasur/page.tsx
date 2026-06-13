@@ -57,12 +57,15 @@ export default function HargaSewaKasurPage() {
           <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">{hs('ekstra_title')}</h2>
           <p className="text-center text-slate-500 mb-6">{hs('ekstra_desc')}</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-[640px] mx-auto">
-            {products.accessories.map((item) => (
+            {products.accessories.map((item) => {
+              const accName = locale === 'en' && item.name_en ? item.name_en : item.name;
+              return (
               <div className="bg-white border border-slate-200 rounded-md p-4 text-center" key={item.id}>
-                <div className="font-semibold mb-1 text-slate-900">{item.name}</div>
-                <div className="text-blue-600 font-bold text-lg">{formatPrice(item.pricePerDay)}<span className="text-sm font-normal text-slate-500">{pr('per_day')}</span></div>
+                <div className="font-semibold mb-1 text-slate-900">{accName}</div>
+                <div className="text-blue-600 font-bold text-lg">{formatPrice(item.pricePerDay, locale)}<span className="text-sm font-normal text-slate-500">{pr('per_day')}</span></div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

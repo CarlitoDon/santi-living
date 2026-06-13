@@ -169,7 +169,12 @@
     "kasur_only_title": "🛏️ Kasur Saja",
     "kasur_only_desc": "Tanpa sprei & bantal (harga lebih hemat)",
     "aksesoris_title": "✨ Aksesoris",
-    "aksesoris_desc": "Bantal, guling, sprei, dan perlengkapan tidur lainnya"
+    "aksesoris_desc": "Bantal, guling, sprei, dan perlengkapan tidur lainnya",
+    "modal_termasuk": "Yang didapatkan:",
+    "modal_sewa": "Sewa Sekarang"
+  },
+  "common": {
+    "close": "Tutup"
   },
   "footer": {
     "buka_di_google_maps": "Buka di Google Maps →",

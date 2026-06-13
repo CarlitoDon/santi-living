@@ -169,7 +169,12 @@
     "kasur_only_title": "🛏️ Mattress Only",
     "kasur_only_desc": "Without bedsheet & pillow (more affordable)",
     "aksesoris_title": "✨ Accessories",
-    "aksesoris_desc": "Pillows, bolsters, bedsheets, and other bedding items"
+    "aksesoris_desc": "Pillows, bolsters, bedsheets, and other bedding items",
+    "modal_termasuk": "Includes:",
+    "modal_sewa": "Rent Now"
+  },
+  "common": {
+    "close": "Close"
   },
   "footer": {
     "buka_di_google_maps": "Open in Google Maps →",
