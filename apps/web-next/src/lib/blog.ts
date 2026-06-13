@@ -5,13 +5,16 @@ import { BlogFrontmatterSchema, type BlogPost } from '@/types/blog';
 
 const BLOG_DIR = path.join(process.cwd(), 'src/content/blog');
 
-export function getAllPosts(): BlogPost[] {
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith('.md'));
+export function getAllPosts(locale: string = 'id'): BlogPost[] {
+  const targetDir = path.join(BLOG_DIR, locale === 'en' ? 'en' : 'id');
+  if (!fs.existsSync(targetDir)) return [];
+
+  const files = fs.readdirSync(targetDir).filter((f) => f.endsWith('.md'));
 
   const posts = files
     .map((filename) => {
       const slug = filename.replace(/\.md$/, '');
-      const filePath = path.join(BLOG_DIR, filename);
+      const filePath = path.join(targetDir, filename);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
       const { data, content } = matter(fileContent);
       const parsed = BlogFrontmatterSchema.safeParse(data);
@@ -25,10 +28,9 @@ export function getAllPosts(): BlogPost[] {
     })
     .filter((post): post is BlogPost => post !== null);
 
-  // Sort by date descending
   return posts.sort((a, b) => b.frontmatter.pubDate.getTime() - a.frontmatter.pubDate.getTime());
 }
 
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return getAllPosts().find((p) => p.slug === slug);
+export function getPostBySlug(slug: string, locale: string = 'id'): BlogPost | undefined {
+  return getAllPosts(locale).find((p) => p.slug === slug);
 }

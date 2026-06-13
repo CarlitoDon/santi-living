@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ArtikelIndexPage({ params }: PageProps) {
   const { locale } = await params;
   const dict = (await getDictionary(locale as Locale)) as any;
-  const posts = getAllPosts();
+  const posts = getAllPosts(locale);
 
   const blogDict = dict.blog || {
     page_title: 'Artikel & Tips',

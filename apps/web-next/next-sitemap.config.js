@@ -30,15 +30,27 @@ function toPreferredLoc(loc) {
 async function getBlogArticlePaths() {
   const fs = await import('node:fs');
   const blogDir = `${__dirname}/src/content/blog`;
-  if (!fs.existsSync(blogDir)) {
-    return [];
+  const paths = [];
+
+  const idDir = `${blogDir}/id`;
+  if (fs.existsSync(idDir)) {
+    fs.readdirSync(idDir)
+      .filter((file) => file.endsWith('.md'))
+      .forEach((file) => {
+        paths.push(`/artikel/${file.replace(/\.md$/, '')}`);
+      });
   }
 
-  return fs
-    .readdirSync(blogDir)
-    .filter((file) => file.endsWith('.md'))
-    .map((file) => `/artikel/${file.replace(/\.md$/, '')}`)
-    .sort();
+  const enDir = `${blogDir}/en`;
+  if (fs.existsSync(enDir)) {
+    fs.readdirSync(enDir)
+      .filter((file) => file.endsWith('.md'))
+      .forEach((file) => {
+        paths.push(`/en/artikel/${file.replace(/\.md$/, '')}`);
+      });
+  }
+
+  return paths.sort();
 }
 
 const config = {

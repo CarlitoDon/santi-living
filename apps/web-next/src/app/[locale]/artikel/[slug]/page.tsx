@@ -33,10 +33,10 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string)
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
   const locales = ['id', 'en'];
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
+    const posts = getAllPosts(locale);
     for (const post of posts) {
       params.push({ locale, slug: post.slug });
     }
@@ -46,7 +46,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(slug, locale);
   if (!post) return { title: locale === 'en' ? 'Article Not Found' : 'Artikel Tidak Ditemukan' };
   
   const url = `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel/${slug}`;
@@ -87,7 +87,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtikelSlugPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(slug, locale);
   if (!post) notFound();
 
   const processedContent = await remark().use(html).process(post.content);
