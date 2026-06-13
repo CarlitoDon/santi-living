@@ -48,8 +48,8 @@ export default function HargaSewaKasurPage() {
       />
 
       {/* Prices */}
-      <PriceTable title={`📦 ${t('produk.paket_lengkap_title')}`} desc={t('produk.paket_lengkap_desc')} items={products.mattressPackages} type="package" />
-      <PriceTable title={`🛏️ ${t('produk.kasur_only_title')}`} desc={t('produk.kasur_only_desc')} items={products.mattressOnly} type="mattress" />
+      <PriceTable title={t('produk.paket_lengkap_title')} desc={t('produk.paket_lengkap_desc')} items={products.mattressPackages} type="package" />
+      <PriceTable title={t('produk.kasur_only_title')} desc={t('produk.kasur_only_desc')} items={products.mattressOnly} type="mattress" />
 
       {/* Ekstra Tambahan */}
       <section className="py-10" id="ekstra">
@@ -76,7 +76,7 @@ export default function HargaSewaKasurPage() {
             {config.volumeDiscounts.filter((d) => d.discount > 0).map((d, i) => (
               <div className="bg-white border-2 border-blue-600 rounded-lg py-4 px-6 text-center min-w-[140px]" key={i}>
                 <div className="text-sm text-slate-500 mb-1">{d.minQty}-{d.maxQty > 100 ? '∞' : d.maxQty} unit</div>
-                <div className="text-lg font-bold text-blue-600">{d.label}</div>
+                <div className="text-lg font-bold text-blue-600">{pr('save')} {d.discount * 100}%</div>
               </div>
             ))}
           </div>
@@ -105,7 +105,7 @@ export default function HargaSewaKasurPage() {
                 ))}
                 <tr className="hover:bg-blue-50/50 transition-colors">
                   <td className="p-3 px-4 text-slate-800">&gt; {config.deliveryZones[config.deliveryZones.length - 1].maxDistance} km</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(config.deliveryPricePerKm)}{pr('per_km') || '/km'}</td>
+                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(config.deliveryPricePerKm)}{pr('per_km')}</td>
                 </tr>
               </tbody>
             </table>
