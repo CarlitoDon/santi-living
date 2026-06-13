@@ -53,48 +53,91 @@ export const DEFAULT_HOST_CTA: HostCtaCopy = {
   waText: WA_PRESET_ORDER,
 };
 
-const HOST_CTA_BY_CONTEXT: Record<Exclude<HostCtaContext, 'default'>, HostCtaCopy> = {
+const HOST_CTA_BY_CONTEXT: Record<Exclude<HostCtaContext, 'default'>, { id: HostCtaCopy; en: HostCtaCopy }> = {
   karpet: {
-    context: 'karpet',
-    desktopLabel: 'Cek karpet acara',
-    mobileAriaLabel: 'Cek karpet acara via WhatsApp',
-    navLabel: 'Cek karpet via WhatsApp',
-    stickyAriaLabel: 'Cek karpet acara via WhatsApp',
-    waText: KARPET_WA_PRESET,
+    id: {
+      context: 'karpet',
+      desktopLabel: 'Cek karpet acara',
+      mobileAriaLabel: 'Cek karpet acara via WhatsApp',
+      navLabel: 'Cek karpet via WhatsApp',
+      stickyAriaLabel: 'Cek karpet acara via WhatsApp',
+      waText: KARPET_WA_PRESET,
+    },
+    en: {
+      context: 'karpet',
+      desktopLabel: 'Check event carpet',
+      mobileAriaLabel: 'Check event carpet via WhatsApp',
+      navLabel: 'Check carpet via WhatsApp',
+      stickyAriaLabel: 'Check event carpet via WhatsApp',
+      waText: KARPET_WA_PRESET,
+    },
   },
   permadani: {
-    context: 'permadani',
-    desktopLabel: 'Cek permadani',
-    mobileAriaLabel: 'Cek permadani via WhatsApp',
-    navLabel: 'Cek permadani via WhatsApp',
-    stickyAriaLabel: 'Cek permadani via WhatsApp',
-    waText: PERMADANI_WA_PRESET,
+    id: {
+      context: 'permadani',
+      desktopLabel: 'Cek permadani',
+      mobileAriaLabel: 'Cek permadani via WhatsApp',
+      navLabel: 'Cek permadani via WhatsApp',
+      stickyAriaLabel: 'Cek permadani via WhatsApp',
+      waText: PERMADANI_WA_PRESET,
+    },
+    en: {
+      context: 'permadani',
+      desktopLabel: 'Check rug',
+      mobileAriaLabel: 'Check rug via WhatsApp',
+      navLabel: 'Check rug via WhatsApp',
+      stickyAriaLabel: 'Check rug via WhatsApp',
+      waText: PERMADANI_WA_PRESET,
+    },
   },
   acara: {
-    context: 'acara',
-    desktopLabel: 'Cek paket event',
-    mobileAriaLabel: 'Cek paket event via WhatsApp',
-    navLabel: 'Cek paket event via WhatsApp',
-    stickyAriaLabel: 'Cek paket event via WhatsApp',
-    waText: ACARA_WA_PRESET,
+    id: {
+      context: 'acara',
+      desktopLabel: 'Cek paket event',
+      mobileAriaLabel: 'Cek paket event via WhatsApp',
+      navLabel: 'Cek paket event via WhatsApp',
+      stickyAriaLabel: 'Cek paket event via WhatsApp',
+      waText: ACARA_WA_PRESET,
+    },
+    en: {
+      context: 'acara',
+      desktopLabel: 'Check event package',
+      mobileAriaLabel: 'Check event package via WhatsApp',
+      navLabel: 'Check event package via WhatsApp',
+      stickyAriaLabel: 'Check event package via WhatsApp',
+      waText: ACARA_WA_PRESET,
+    },
   },
 };
 
-export function getHostCta(hostname = '', pathname = ''): HostCtaCopy {
+const DEFAULT_CTA_BY_LOCALE: Record<'id' | 'en', HostCtaCopy> = {
+  id: DEFAULT_HOST_CTA,
+  en: {
+    context: 'default',
+    desktopLabel: 'Order',
+    mobileAriaLabel: 'Order via WhatsApp',
+    navLabel: 'Contact WhatsApp',
+    stickyAriaLabel: 'Chat WhatsApp',
+    waText: WA_PRESET_ORDER,
+  },
+};
+
+export function getHostCta(hostname = '', pathname = '', locale = 'id'): HostCtaCopy {
   const host = hostname.toLowerCase();
   const path = pathname.toLowerCase();
+  const l = (locale === 'en' ? 'en' : 'id') as 'id' | 'en';
 
   if (host.startsWith('permadani.') || path.includes('permadani')) {
-    return HOST_CTA_BY_CONTEXT.permadani;
+    return HOST_CTA_BY_CONTEXT.permadani[l];
   }
 
   if (host.startsWith('karpet.') || path.startsWith('/sewa-karpet')) {
-    return HOST_CTA_BY_CONTEXT.karpet;
+    return HOST_CTA_BY_CONTEXT.karpet[l];
   }
 
   if (host.startsWith('acara.') || path.startsWith('/sewa-perlengkapan-event')) {
-    return HOST_CTA_BY_CONTEXT.acara;
+    return HOST_CTA_BY_CONTEXT.acara[l];
   }
 
-  return DEFAULT_HOST_CTA;
+  return DEFAULT_CTA_BY_LOCALE[l];
 }
