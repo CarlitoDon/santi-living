@@ -17,15 +17,7 @@ const HOST_REWRITES = new Map([
 ]);
 
 function getLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get('accept-language');
-  if (!acceptLanguage) return defaultLocale;
-
-  const matched = acceptLanguage
-    .split(',')
-    .map((lang) => lang.split(';')[0].trim().toLowerCase())
-    .find((lang) => locales.includes(lang));
-
-  return matched || defaultLocale;
+  return defaultLocale;
 }
 
 export function middleware(request: NextRequest) {
