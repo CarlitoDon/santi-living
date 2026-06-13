@@ -1,0 +1,14 @@
+{
+  "common": {
+    "pesan": "Book Now",
+    "whatsapp_cta": "Order via WhatsApp",
+    "back": "Back",
+    "next": "Next"
+  },
+  "hero": {
+    "badge": "🏆 #1 Mattress Rental in Yogyakarta",
+    "title_part1": "Yogyakarta Mattress Rental",
+    "title_part2": "Best & Most Trusted",
+    "price_tag": "Starting at Rp25,000/day"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "common": {
+    "pesan": "Pesan",
+    "whatsapp_cta": "Pesan via WhatsApp",
+    "back": "Kembali",
+    "next": "Lanjut"
+  },
+  "hero": {
+    "badge": "🏆 #1 Rental Kasur di Yogyakarta",
+    "title_part1": "Sewa Kasur Jogja",
+    "title_part2": "Terbaik & Terpercaya",
+    "price_tag": "Mulai Rp25.000/hari"
+  }
+}
