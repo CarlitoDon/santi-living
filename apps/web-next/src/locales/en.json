@@ -189,6 +189,43 @@
     "copyright": "All rights reserved.",
     "tagline": "Mattress, carpet, rug, and event equipment rental services in Yogyakarta"
   },
+  "harga_sewa": {
+    "hero_title": "Mattress Rental Prices in Jogja — 2026 Update",
+    "hero_subtitle": "Transparent, affordable, and complete. Choose what suits your needs.",
+    "ekstra_title": "✨ Extra Add-ons",
+    "ekstra_desc": "Need extras? You can order individually too",
+    "diskon_title": "🎉 Volume Discount",
+    "diskon_desc": "The more mattresses you rent, the more you save!",
+    "ongkir_title": "🚚 Delivery Fee",
+    "ongkir_desc": "Delivery & pickup to your location in Jogja area",
+    "table_distance": "Distance from Store",
+    "table_fee": "Delivery Fee",
+    "location_label": "📍 Store location:",
+    "faq_title": "❓ Frequently Asked Questions About Pricing",
+    "faq_items": [
+      {"q": "How much does mattress rental cost in Jogja?", "a": "Our mattress rental prices start from Rp25,000/day for a single foam mattress only (Single Standard 90x200). For a complete package (mattress + bedsheet + pillow) it starts from Rp35,000/day."},
+      {"q": "Is there a discount for renting multiple units?", "a": "Yes! Rent 3-5 units and get a 10% discount. Rent 6+ units and get a 15% discount. Great for events, boarding houses, or accommodations."},
+      {"q": "Is delivery free?", "a": "Yes! FREE delivery within a 3 km radius from our store in Godean. For other areas, delivery fees start from Rp15,000."},
+      {"q": "What is the minimum rental period?", "a": "Minimum rental is 1 day. Daily rental is perfect for sudden guests or short events."},
+      {"q": "Does the price include delivery and pickup?", "a": "The mattress price does not include delivery fees. However, for the Godean area (3 km radius), delivery is FREE!"}
+    ],
+    "cta_title": "Ready to rent a mattress?",
+    "cta_desc": "Contact us via WhatsApp to order or ask questions",
+    "cta_hitung": "Calculate Rental Cost",
+    "cta_chat": "💬 Chat WhatsApp"
+  },
+  "pricing": {
+    "table_size": "Size",
+    "table_dimensions": "Dimensions",
+    "table_capacity": "Capacity",
+    "table_price_day": "Price/Day",
+    "table_price_week": "Price/Week",
+    "table_price_month": "Price/Month",
+    "per_day": "/day",
+    "per_week": "/week",
+    "per_month": "/month",
+    "free": "🎉 FREE"
+  },
   "seo": {
     "home_title": "Best Mattress Rental in Jogja - Same Day Delivery | Santi Living",
     "home_desc": "Clean mattress rental in Jogja from Rp25,000/day. ✅ Same day delivery ✅ Free delivery in certain areas ✅ Premium & sterilized ✅ Order via WhatsApp. Santi Living Yogyakarta.",

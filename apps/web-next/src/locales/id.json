@@ -189,6 +189,43 @@
     "copyright": "Semua hak dilindungi.",
     "tagline": "Layanan sewa kasur, karpet, permadani, dan perlengkapan acara di Yogyakarta"
   },
+  "harga_sewa": {
+    "hero_title": "Harga Sewa Kasur di Jogja — Update 2026",
+    "hero_subtitle": "Transparan, terjangkau, dan lengkap. Pilih sesuai kebutuhan kamu.",
+    "ekstra_title": "✨ Ekstra Tambahan",
+    "ekstra_desc": "Butuh tambahan? Pesan satuan juga bisa",
+    "diskon_title": "🎉 Diskon Sewa Banyak",
+    "diskon_desc": "Semakin banyak kasur yang disewa, semakin hemat!",
+    "ongkir_title": "🚚 Biaya Pengiriman",
+    "ongkir_desc": "Antar jemput ke lokasi kamu di area Jogja",
+    "table_distance": "Jarak dari Toko",
+    "table_fee": "Biaya Ongkir",
+    "location_label": "📍 Lokasi toko:",
+    "faq_title": "❓ Pertanyaan Umum Tentang Harga",
+    "faq_items": [
+      {"q": "Berapa harga sewa kasur di Jogja?", "a": "Harga sewa kasur di Santi Living mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal) mulai dari Rp35.000/hari."},
+      {"q": "Apakah ada diskon untuk sewa banyak?", "a": "Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%. Cocok untuk acara, kos-kosan, atau penginapan."},
+      {"q": "Apakah ada ongkir gratis?", "a": "Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko di Godean. Untuk area lain, ongkir mulai dari Rp15.000."},
+      {"q": "Minimal sewa berapa hari?", "a": "Minimal sewa 1 hari. Bisa sewa harian, cocok untuk tamu dadakan atau acara singkat."},
+      {"q": "Apakah harga sudah termasuk antar jemput?", "a": "Harga kasur belum termasuk ongkir. Tapi untuk area Godean (radius 3 km), pengiriman GRATIS!"}
+    ],
+    "cta_title": "Mau sewa kasur sekarang?",
+    "cta_desc": "Hubungi kami via WhatsApp untuk order atau tanya-tanya",
+    "cta_hitung": "Hitung Biaya Sewa",
+    "cta_chat": "💬 Chat WhatsApp"
+  },
+  "pricing": {
+    "table_size": "Ukuran",
+    "table_dimensions": "Dimensi",
+    "table_capacity": "Kapasitas",
+    "table_price_day": "Harga/Hari",
+    "table_price_week": "Harga/Minggu",
+    "table_price_month": "Harga/Bulan",
+    "per_day": "/hari",
+    "per_week": "/minggu",
+    "per_month": "/bulan",
+    "free": "🎉 GRATIS"
+  },
   "seo": {
     "home_title": "Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living",
     "home_desc": "Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Gratis ongkir area tertentu ✅ Kasur premium & steril ✅ Order via WhatsApp. Santi Living Yogyakarta.",

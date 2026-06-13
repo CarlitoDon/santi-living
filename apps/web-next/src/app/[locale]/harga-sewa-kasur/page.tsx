@@ -9,10 +9,25 @@ import { PageHero } from '@/components/layout/PageHero';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { generateProductSchemaList, generateFAQSchema } from '@/utils/seo';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
-
 import { formatPrice } from '@/utils/currency';
+import { useT, useDictionary, useLocale } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 
 export default function HargaSewaKasurPage() {
+  const t = useT();
+  const dict = useDictionary();
+  const { locale } = useLocale();
+
+  const hs = (key: string) => t(`harga_sewa.${key}`);
+  const pr = (key: string) => t(`pricing.${key}`);
+
+  const hargaSewaRaw = dict.harga_sewa;
+  const faqItems = hargaSewaRaw && typeof hargaSewaRaw === 'object'
+    ? ((hargaSewaRaw as Record<string, unknown>).faq_items as Array<{ q: string; a: string }>) || []
+    : [];
+
+  const faqSchema = generateFAQSchema(faqItems);
+
   const itemListSchema = {
     '@context': 'https://schema.org' as const,
     '@type': 'OfferCatalog' as const,
@@ -22,55 +37,30 @@ export default function HargaSewaKasurPage() {
     itemListElement: generateProductSchemaList([...products.mattressPackages, ...products.mattressOnly], 1)
   };
 
-  const faqData = [
-      {
-        question: 'Berapa harga sewa kasur di Jogja?',
-        answer: 'Harga sewa kasur di Santi Living mulai dari Rp25.000/hari untuk kasur busa saja (ukuran Single Standard 90x200). Untuk paket lengkap (kasur + sprei + bantal) mulai dari Rp35.000/hari.',
-      },
-      {
-        question: 'Apakah ada diskon untuk sewa banyak?',
-        answer: 'Ya! Sewa 3-5 unit dapat diskon 10%, dan sewa 6 unit ke atas dapat diskon 15%. Cocok untuk acara, kos-kosan, atau penginapan.',
-      },
-      {
-        question: 'Apakah ada ongkir gratis?',
-        answer: 'Ya! Pengiriman GRATIS untuk area dalam radius 3 km dari toko di Godean. Untuk area lain, ongkir mulai dari Rp15.000.',
-      },
-      {
-        question: 'Minimal sewa berapa hari?',
-        answer: 'Minimal sewa 1 hari. Bisa sewa harian, cocok untuk tamu dadakan atau acara singkat.',
-      },
-      {
-        question: 'Apakah harga sudah termasuk antar jemput?',
-        answer: 'Harga kasur belum termasuk ongkir. Tapi untuk area Godean (radius 3 km), pengiriman GRATIS!',
-      }
-  ];
-
-  const faqSchema = generateFAQSchema(faqData);
-
   return (
     <main style={{ paddingTop: '80px', paddingBottom: 0 }}>
       <JsonLd data={itemListSchema} />
       <JsonLd data={faqSchema} />
 
       <PageHero 
-        title="Harga Sewa Kasur di Jogja — Update 2026" 
-        subtitle="Transparan, terjangkau, dan lengkap. Pilih sesuai kebutuhan kamu." 
+        title={hs('hero_title')}
+        subtitle={hs('hero_subtitle')}
       />
 
       {/* Prices */}
-      <PriceTable title="📦 Paket Kasur Lengkap" desc="Kasur Busa + Sprei + Bantal — tinggal tidur!" items={products.mattressPackages} type="package" />
-      <PriceTable title="🛏️ Kasur Busa Saja" desc="Tanpa sprei dan bantal — cocok buat yang sudah punya perlengkapan sendiri" items={products.mattressOnly} type="mattress" />
+      <PriceTable title={`📦 ${t('produk.paket_lengkap_title')}`} desc={t('produk.paket_lengkap_desc')} items={products.mattressPackages} type="package" />
+      <PriceTable title={`🛏️ ${t('produk.kasur_only_title')}`} desc={t('produk.kasur_only_desc')} items={products.mattressOnly} type="mattress" />
 
       {/* Ekstra Tambahan */}
       <section className="py-10" id="ekstra">
         <div className="container">
-          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">✨ Ekstra Tambahan</h2>
-          <p className="text-center text-slate-500 mb-6">Butuh tambahan? Pesan satuan juga bisa</p>
+          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">{hs('ekstra_title')}</h2>
+          <p className="text-center text-slate-500 mb-6">{hs('ekstra_desc')}</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-[640px] mx-auto">
             {products.accessories.map((item) => (
               <div className="bg-white border border-slate-200 rounded-md p-4 text-center" key={item.id}>
                 <div className="font-semibold mb-1 text-slate-900">{item.name}</div>
-                <div className="text-blue-600 font-bold text-lg">Rp {formatPrice(item.pricePerDay)}<span className="text-sm font-normal text-slate-500">/hari</span></div>
+                <div className="text-blue-600 font-bold text-lg">{formatPrice(item.pricePerDay)}<span className="text-sm font-normal text-slate-500">{pr('per_day')}</span></div>
               </div>
             ))}
           </div>
@@ -80,8 +70,8 @@ export default function HargaSewaKasurPage() {
       {/* Diskon Sewa Banyak */}
       <section className="py-10 bg-slate-50" id="diskon">
         <div className="container">
-          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">🎉 Diskon Sewa Banyak</h2>
-          <p className="text-center text-slate-500 mb-6">Semakin banyak kasur yang disewa, semakin hemat!</p>
+          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">{hs('diskon_title')}</h2>
+          <p className="text-center text-slate-500 mb-6">{hs('diskon_desc')}</p>
           <div className="flex gap-4 justify-center flex-wrap">
             {config.volumeDiscounts.filter((d) => d.discount > 0).map((d, i) => (
               <div className="bg-white border-2 border-blue-600 rounded-lg py-4 px-6 text-center min-w-[140px]" key={i}>
@@ -96,31 +86,31 @@ export default function HargaSewaKasurPage() {
       {/* Ongkir */}
       <section className="py-10" id="ongkir">
         <div className="container">
-          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">🚚 Biaya Pengiriman</h2>
-          <p className="text-center text-slate-500 mb-6">Antar jemput ke lokasi kamu di area Jogja</p>
+          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">{hs('ongkir_title')}</h2>
+          <p className="text-center text-slate-500 mb-6">{hs('ongkir_desc')}</p>
           <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white max-w-[640px] mx-auto">
             <table className="w-full border-collapse text-sm text-left">
               <thead className="bg-blue-600 text-white">
                 <tr>
-                  <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Jarak dari Toko</th>
-                  <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Biaya Ongkir</th>
+                  <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{hs('table_distance')}</th>
+                  <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{hs('table_fee')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">
                 {config.deliveryZones.map((zone, i) => (
                   <tr key={i} className="hover:bg-blue-50/50 transition-colors">
                     <td className="p-3 px-4 text-slate-800">≤ {zone.maxDistance} km</td>
-                    <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{zone.price === 0 ? '🎉 GRATIS' : `Rp ${formatPrice(zone.price)}`}</td>
+                    <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{zone.price === 0 ? pr('free') : formatPrice(zone.price)}</td>
                   </tr>
                 ))}
                 <tr className="hover:bg-blue-50/50 transition-colors">
                   <td className="p-3 px-4 text-slate-800">&gt; {config.deliveryZones[config.deliveryZones.length - 1].maxDistance} km</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">Rp {formatPrice(config.deliveryPricePerKm)}/km</td>
+                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(config.deliveryPricePerKm)}{pr('per_km') || '/km'}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-center mt-4 text-slate-500 text-sm">📍 Lokasi toko: {config.storeLocation.name} (Jl. Godean KM 10)</p>
+          <p className="text-center mt-4 text-slate-500 text-sm">{hs('location_label')} {config.storeLocation.name} (Jl. Godean KM 10)</p>
         </div>
       </section>
 
@@ -128,7 +118,7 @@ export default function HargaSewaKasurPage() {
       <section className="py-10 bg-slate-50" id="faq-harga">
         <div className="container">
           <div className="max-w-[640px] mx-auto">
-            <FAQAccordion items={faqData} title="❓ Pertanyaan Umum Tentang Harga" />
+            <FAQAccordion items={faqItems} title={hs('faq_title')} />
           </div>
         </div>
       </section>
@@ -136,11 +126,11 @@ export default function HargaSewaKasurPage() {
       {/* CTA */}
       <section className="bg-gradient-to-br from-blue-600 to-[#1a4ea0] py-10 text-center text-white">
         <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl text-white mb-2 font-bold text-center">Mau sewa kasur sekarang?</h2>
-          <p className="text-white/85 mb-8 max-w-xl mx-auto text-center">Hubungi kami via WhatsApp untuk order atau tanya-tanya</p>
+          <h2 className="text-2xl md:text-3xl text-white mb-2 font-bold text-center">{hs('cta_title')}</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto text-center">{hs('cta_desc')}</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/#calculator" className="bg-white text-blue-600 max-w-[280px] w-full border-none py-3 px-6 rounded-md font-semibold hover:bg-slate-50 transition-colors text-center no-underline">
-              Hitung Biaya Sewa
+            <Link href={localeHref("/#calculator", locale)} className="bg-white text-blue-600 max-w-[280px] w-full border-none py-3 px-6 rounded-md font-semibold hover:bg-slate-50 transition-colors text-center no-underline">
+              {hs('cta_hitung')}
             </Link>
             <a
               href={getWhatsAppUrl('Halo Santi Living, saya mau tanya harga sewa kasur', 'harga_page')}
@@ -150,7 +140,7 @@ export default function HargaSewaKasurPage() {
               data-wa-source="harga_page"
               data-wa-location="harga_page"
             >
-              💬 Chat WhatsApp
+              {hs('cta_chat')}
             </a>
           </div>
         </div>

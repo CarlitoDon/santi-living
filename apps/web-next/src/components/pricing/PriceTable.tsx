@@ -1,8 +1,13 @@
-import type { Product } from '@/types/product';
+'use client';
 
+import type { Product } from '@/types/product';
 import { formatPrice } from '@/utils/currency';
+import { useT } from '@/contexts/locale';
 
 export function PriceTable({ title, desc, items, type }: { title: string; desc: string; items: Product[]; type: string }) {
+  const t = useT();
+  const p = t;
+
   return (
     <section className={`py-10 ${type === 'mattress' ? 'bg-slate-50' : ''}`} id={type === 'package' ? 'paket-lengkap' : 'kasur-saja'}>
       <div className="container">
@@ -12,12 +17,12 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
           <table className="w-full border-collapse text-sm text-left">
             <thead className="bg-blue-600 text-white">
               <tr>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Ukuran</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Dimensi</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Kapasitas</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Harga/Hari</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Harga/Minggu</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">Harga/Bulan</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_size')}</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_dimensions')}</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_capacity')}</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_day')}</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_week')}</th>
+                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_month')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
@@ -26,9 +31,9 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                   <td className="p-3 px-4 font-semibold whitespace-nowrap text-slate-900">{item.name}</td>
                   <td className="p-3 px-4 text-slate-700">{item.dimensions}</td>
                   <td className="p-3 px-4 text-slate-700">{item.capacity}</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">Rp {formatPrice(item.pricePerDay)}</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">Rp {formatPrice(item.pricePerDay * 7)}</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">Rp {formatPrice(item.pricePerDay * 30)}</td>
+                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay)}</td>
+                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 7)}</td>
+                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 30)}</td>
                 </tr>
               ))}
             </tbody>
