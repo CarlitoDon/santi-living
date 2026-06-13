@@ -259,7 +259,7 @@ export default async function HomePage({ params }: PageProps) {
       </section>
 
       {/* ===== LOCATION ===== */}
-      <section id="location" className="py-12 md:py-16 bg-white">
+      <section id="service-area" className="py-12 md:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
