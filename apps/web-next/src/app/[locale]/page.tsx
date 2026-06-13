@@ -58,10 +58,10 @@ export default async function HomePage({ params }: PageProps) {
     telephone: `+${config.whatsappNumber}`,
     address: {
       '@type': 'PostalAddress' as const,
-      streetAddress: 'Jl. Godean KM 10, Kwarasan, Nogotirto, Gamping',
+      streetAddress: 'Jl. Godean KM10, Geneng, Sidoagung, Godean',
       addressLocality: 'Sleman',
       addressRegion: 'DI Yogyakarta',
-      postalCode: '55292',
+      postalCode: '55264',
       addressCountry: 'ID',
     },
     geo: {
@@ -270,9 +270,9 @@ export default async function HomePage({ params }: PageProps) {
               <address className="not-italic bg-surface p-5 rounded-xl border border-border mb-4">
                 <p className="font-bold text-primary mb-1">{dict.location.workshop_name}</p>
                 <p className="text-sm text-text-secondary mb-3">
-                  Jl. Godean KM 10, Kwarasan, Nogotirto,<br />
-                  Kec. Gamping, Kabupaten Sleman,<br />
-                  DI Yogyakarta 55292
+                  Jl. Godean KM10, Geneng, Sidoagung,<br />
+                  Kec. Godean, Kabupaten Sleman,<br />
+                  DI Yogyakarta 55264
                 </p>
                 <a 
                   href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" 
