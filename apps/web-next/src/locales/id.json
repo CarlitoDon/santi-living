@@ -5,10 +5,195 @@
     "back": "Kembali",
     "next": "Lanjut"
   },
+  "header": {
+    "menu": "Menu",
+    "open_menu": "Buka Menu",
+    "close_menu": "Tutup Menu"
+  },
+  "nav": {
+    "beranda": "Beranda",
+    "produk": "Produk",
+    "semua_produk": "Semua Produk",
+    "kasur": "Kasur",
+    "karpet": "Karpet",
+    "permadani": "Permadani",
+    "perlengkapan_event": "Perlengkapan Event",
+    "harga_sewa": "Harga Sewa",
+    "hitung_biaya": "Hitung Biaya",
+    "artikel_tips": "Artikel & Tips",
+    "tentang_kami": "Tentang Kami",
+    "area_layanan": "Area Layanan",
+    "hubungi_whatsapp": "Hubungi WhatsApp",
+    "cek_opsi": "Cek Opsi",
+    "paket_event": "Paket Event"
+  },
   "hero": {
     "badge": "🏆 #1 Rental Kasur di Yogyakarta",
     "title_part1": "Sewa Kasur Jogja",
     "title_part2": "Terbaik & Terpercaya",
-    "price_tag": "Mulai Rp25.000/hari"
+    "price_tag": "Mulai Rp25.000/hari",
+    "feature_sameday": "✅ Antar hari ini",
+    "feature_free_pickup": "✅ Gratis jemput",
+    "feature_clean": "✅ Kasur bersih & wangi",
+    "cta_sewa": "Sewa Sekarang",
+    "cta_chat": "💬 Chat WhatsApp",
+    "or_contact": "Atau hubungi langsung:",
+    "pick_title": "⚡️ Pilih Kasur"
+  },
+  "benefits": {
+    "title": "Kenapa Sewa Kasur di Santi Living?",
+    "subtitle": "Kami memberikan jaminan kenyamanan, kesehatan, dan kecepatan layanan untuk setiap pelanggan di Yogyakarta.",
+    "items": [
+      {
+        "icon": "✨",
+        "title": "7 Tahap Higienitas",
+        "desc": "Di-vacuum industri, steril UV-C, dan dibungkus plastik kedap udara."
+      },
+      {
+        "icon": "🏅",
+        "title": "Royal Grand Exclusive",
+        "desc": "Kasur busa High Density anti kempes untuk support tulang belakang."
+      },
+      {
+        "icon": "🚀",
+        "title": "Same Day Delivery",
+        "desc": "Layanan antar jemput kilat 2-4 jam untuk area Jogja, Sleman, Bantul."
+      },
+      {
+        "icon": "💰",
+        "title": "Harga Transparan",
+        "desc": "Tanpa biaya tersembunyi, harga sewa paket sudah termasuk sprei bersih & bantal."
+      },
+      {
+        "icon": "📦",
+        "title": "Stok Selalu Ready",
+        "desc": "Ratusan unit kasur selalu siap dikirim kapanpun Anda butuhkan."
+      },
+      {
+        "icon": "📍",
+        "title": "Gratis Jemput",
+        "desc": "Bebas biaya pengambilan unit kasur saat masa sewa Anda berakhir."
+      }
+    ]
+  },
+  "karpet_internal": {
+    "label": "Perlengkapan acara tambahan",
+    "title": "Butuh sewa karpet Jogja untuk hajatan, pengajian, atau event?",
+    "desc": "Selain sewa kasur, Santi Living juga membuka selector konsultasi untuk karpet merah, karpet permadani, dan paket perlengkapan acara. Cek opsi karpet dari subdomain khusus agar kebutuhan venue bisa dihitung admin.",
+    "cta": "Sewa Karpet Jogja →"
+  },
+  "steps": {
+    "title": "Cara Sewa Kasur",
+    "items": [
+      {
+        "icon": "📱",
+        "title": "Pilih Kasur",
+        "desc": "Pilih ukuran dan jumlah kasur yang dibutuhkan"
+      },
+      {
+        "icon": "📝",
+        "title": "Isi Formulir",
+        "desc": "Lengkapi data diri dan alamat pengiriman"
+      },
+      {
+        "icon": "💳",
+        "title": "Bayar",
+        "desc": "Bayar via QRIS, Transfer, atau GoPay"
+      },
+      {
+        "icon": "🚚",
+        "title": "Kasur Diantar",
+        "desc": "Tim kami antar kasur ke lokasi Anda"
+      },
+      {
+        "icon": "📞",
+        "title": "Selesai",
+        "desc": "Hubungi kami saat masa sewa berakhir untuk penjemputan"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Pertanyaan Umum",
+    "items": [
+      {
+        "q": "Berapa harga sewa kasur di Jogja?",
+        "a": "Mulai dari Rp25.000/hari untuk kasur busa single. Paket lengkap (kasur + sprei + bantal) mulai Rp35.000/hari."
+      },
+      {
+        "q": "Apakah bisa antar hari ini?",
+        "a": "Ya! Pesan sebelum jam 15:00 WIB dan kasur bisa sampai di hari yang sama untuk area Jogja, Sleman, dan Bantul."
+      },
+      {
+        "q": "Bagaimana cara memesan?",
+        "a": "Sangat mudah — pilih kasur, isi formulir pemesanan, dan lakukan pembayaran. Tim kami akan langsung mengantar kasur ke lokasi Anda."
+      },
+      {
+        "q": "Apakah kasur sewaan bersih?",
+        "a": "Ya, setiap kasur kami cuci dan sterilkan sebelum dikirim. Kami juga menyediakan sprei bersih dan bantal baru untuk setiap pelanggan."
+      },
+      {
+        "q": "Apa saja area jangkauan pengiriman?",
+        "a": "Area layanan aktif kami: Sleman, Bantul, Kota Jogja, dan Kulonprogo. Area terdekat dari Godean mendapat gratis ongkir!"
+      },
+      {
+        "q": "Berapa lama minimal sewa?",
+        "a": "Minimal sewa 1 hari. Anda bisa sewa harian, mingguan, atau bulanan sesuai kebutuhan."
+      }
+    ]
+  },
+  "promo": {
+    "badge": "🔥 PROMO TERBATAS",
+    "title": "Diskon Ongkir up to 70%!",
+    "desc": "Cukup berikan review bintang 5 di Google Maps Santi Living dan dapatkan potongan biaya pengiriman hingga 70% untuk penyewaan hari ini.",
+    "cta": "Tulis Review Sekarang ⭐"
+  },
+  "location": {
+    "title": "Lokasi Kami",
+    "desc": "Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke area layanan aktif Yogyakarta.",
+    "workshop_name": "Workshop Santi Living",
+    "maps_link": "📍 Lihat di Google Maps",
+    "service_areas_label": "Area Layanan (Delivery)",
+    "service_areas": ["Kota Yogyakarta", "Sleman", "Bantul", "Kulonprogo"]
+  },
+  "cta_final": {
+    "title": "Siap Sewa Kasur Hari Ini?",
+    "desc": "Pesan sekarang dan kasur bisa sampai hari ini! Tim kami siap mengantarkan kasur bersih ke lokasi Anda.",
+    "cta_pesan": "Pesan Sekarang",
+    "cta_chat": "💬 Chat WhatsApp"
+  },
+  "produk": {
+    "title": "Katalog Produk",
+    "subtitle": "Semua ukuran kasur busa & aksesoris untuk kebutuhan Anda",
+    "paket_lengkap_title": "📦 Paket Lengkap",
+    "paket_lengkap_desc": "Kasur Busa + Sprei + Bantal",
+    "kasur_only_title": "🛏️ Kasur Saja",
+    "kasur_only_desc": "Tanpa sprei & bantal (harga lebih hemat)",
+    "aksesoris_title": "✨ Aksesoris",
+    "aksesoris_desc": "Bantal, guling, sprei, dan perlengkapan tidur lainnya"
+  },
+  "footer": {
+    "buka_di_google_maps": "Buka di Google Maps →",
+    "jam_operasional": "Senin - Minggu: 07:00 - 21:00 WIB",
+    "layanan_kami": "Layanan Kami",
+    "katalog_produk": "Katalog Produk",
+    "harga_sewa_busa": "Harga Sewa Busa",
+    "sewa_kasur_terdekat": "Sewa Kasur Terdekat",
+    "sewa_kasur_lipat": "Sewa Kasur Lipat",
+    "sewa_kasur_bulanan": "Sewa Kasur Bulanan",
+    "sewa_karpet_jogja": "Sewa Karpet Jogja",
+    "sewa_permadani_jogja": "Sewa Permadani Jogja",
+    "perlengkapan_event": "Perlengkapan Event",
+    "artikel_tips": "Artikel & Tips",
+    "tentang_kami": "Tentang Kami",
+    "ikuti_kami": "Ikuti Kami",
+    "copyright": "Semua hak dilindungi.",
+    "tagline": "Layanan sewa kasur, karpet, permadani, dan perlengkapan acara di Yogyakarta"
+  },
+  "seo": {
+    "home_title": "Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living",
+    "home_desc": "Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Gratis ongkir area tertentu ✅ Kasur premium & steril ✅ Order via WhatsApp. Santi Living Yogyakarta.",
+    "site_name": "Santi Living",
+    "og_title": "Sewa Kasur Jogja Terbaik - Antar Jemput Same Day",
+    "og_desc": "Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Kasur premium & steril."
   }
 }

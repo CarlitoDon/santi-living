@@ -5,10 +5,195 @@
     "back": "Back",
     "next": "Next"
   },
+  "header": {
+    "menu": "Menu",
+    "open_menu": "Open Menu",
+    "close_menu": "Close Menu"
+  },
+  "nav": {
+    "beranda": "Home",
+    "produk": "Products",
+    "semua_produk": "All Products",
+    "kasur": "Mattress",
+    "karpet": "Carpet",
+    "permadani": "Rug",
+    "perlengkapan_event": "Event Equipment",
+    "harga_sewa": "Rental Price",
+    "hitung_biaya": "Calculate Cost",
+    "artikel_tips": "Articles & Tips",
+    "tentang_kami": "About Us",
+    "area_layanan": "Service Area",
+    "hubungi_whatsapp": "Contact WhatsApp",
+    "cek_opsi": "Check Options",
+    "paket_event": "Event Package"
+  },
   "hero": {
     "badge": "🏆 #1 Mattress Rental in Yogyakarta",
     "title_part1": "Yogyakarta Mattress Rental",
     "title_part2": "Best & Most Trusted",
-    "price_tag": "Starting at Rp25,000/day"
+    "price_tag": "Starting at Rp25,000/day",
+    "feature_sameday": "✅ Same day delivery",
+    "feature_free_pickup": "✅ Free pickup",
+    "feature_clean": "✅ Clean & fresh mattress",
+    "cta_sewa": "Rent Now",
+    "cta_chat": "💬 Chat WhatsApp",
+    "or_contact": "Or contact directly:",
+    "pick_title": "⚡️ Choose Your Mattress"
+  },
+  "benefits": {
+    "title": "Why Rent Mattresses from Santi Living?",
+    "subtitle": "We guarantee comfort, hygiene, and fast service for every customer in Yogyakarta.",
+    "items": [
+      {
+        "icon": "✨",
+        "title": "7-Step Hygiene",
+        "desc": "Industrial vacuum, UV-C sterilized, and sealed in airtight plastic."
+      },
+      {
+        "icon": "🏅",
+        "title": "Royal Grand Exclusive",
+        "desc": "High Density foam mattress with spine support that won't sag."
+      },
+      {
+        "icon": "🚀",
+        "title": "Same Day Delivery",
+        "desc": "Express 2-4 hour delivery for Jogja, Sleman, Bantul areas."
+      },
+      {
+        "icon": "💰",
+        "title": "Transparent Pricing",
+        "desc": "No hidden fees, package price includes clean bedsheet & pillow."
+      },
+      {
+        "icon": "📦",
+        "title": "Always in Stock",
+        "desc": "Hundreds of mattress units ready to deliver whenever you need them."
+      },
+      {
+        "icon": "📍",
+        "title": "Free Pickup",
+        "desc": "No charge for mattress retrieval when your rental period ends."
+      }
+    ]
+  },
+  "karpet_internal": {
+    "label": "Additional event equipment",
+    "title": "Need a carpet rental in Jogja for your event?",
+    "desc": "Besides mattresses, Santi Living offers red carpets, rugs, and event equipment packages. Check our carpet options from our dedicated subdomain.",
+    "cta": "Rent Carpet Jogja →"
+  },
+  "steps": {
+    "title": "How to Rent",
+    "items": [
+      {
+        "icon": "📱",
+        "title": "Choose Mattress",
+        "desc": "Select size and quantity needed"
+      },
+      {
+        "icon": "📝",
+        "title": "Fill Form",
+        "desc": "Complete your details and delivery address"
+      },
+      {
+        "icon": "💳",
+        "title": "Pay",
+        "desc": "Pay via QRIS, Bank Transfer, or GoPay"
+      },
+      {
+        "icon": "🚚",
+        "title": "Mattress Delivered",
+        "desc": "Our team delivers the mattress to your location"
+      },
+      {
+        "icon": "📞",
+        "title": "Done",
+        "desc": "Contact us when rental ends for pickup"
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "q": "How much does mattress rental cost in Jogja?",
+        "a": "Starting from Rp25,000/day for a single foam mattress. Complete package (mattress + sheet + pillow) from Rp35,000/day."
+      },
+      {
+        "q": "Can I get same-day delivery?",
+        "a": "Yes! Order before 3:00 PM WIB and the mattress arrives the same day for Jogja, Sleman, and Bantul areas."
+      },
+      {
+        "q": "How do I order?",
+        "a": "It's easy — choose your mattress, fill the order form, and make payment. Our team will deliver the mattress to your location."
+      },
+      {
+        "q": "Are rental mattresses clean?",
+        "a": "Yes, every mattress is washed and sterilized before delivery. We also provide clean sheets and new pillows for every customer."
+      },
+      {
+        "q": "What are the delivery areas?",
+        "a": "Our active service areas: Sleman, Bantul, Jogja City, and Kulonprogo. Areas near Godean get free delivery!"
+      },
+      {
+        "q": "What is the minimum rental period?",
+        "a": "Minimum rental is 1 day. You can rent daily, weekly, or monthly."
+      }
+    ]
+  },
+  "promo": {
+    "badge": "🔥 LIMITED PROMO",
+    "title": "Discounted Delivery up to 70%!",
+    "desc": "Leave a 5-star review on Google Maps for Santi Living and get up to 70% off delivery fees for today's rental.",
+    "cta": "Write a Review Now ⭐"
+  },
+  "location": {
+    "title": "Our Location",
+    "desc": "Visit our workshop in Godean to see our mattress units in person. We're ready to deliver to active service areas in Yogyakarta.",
+    "workshop_name": "Santi Living Workshop",
+    "maps_link": "📍 View on Google Maps",
+    "service_areas_label": "Delivery Service Areas",
+    "service_areas": ["Yogyakarta City", "Sleman", "Bantul", "Kulonprogo"]
+  },
+  "cta_final": {
+    "title": "Ready to Rent a Mattress Today?",
+    "desc": "Order now and your mattress can arrive today! Our team is ready to deliver a clean mattress to your location.",
+    "cta_pesan": "Order Now",
+    "cta_chat": "💬 Chat WhatsApp"
+  },
+  "produk": {
+    "title": "Product Catalog",
+    "subtitle": "All mattress sizes & accessories for your needs",
+    "paket_lengkap_title": "📦 Complete Package",
+    "paket_lengkap_desc": "Foam Mattress + Bedsheet + Pillow",
+    "kasur_only_title": "🛏️ Mattress Only",
+    "kasur_only_desc": "Without bedsheet & pillow (more affordable)",
+    "aksesoris_title": "✨ Accessories",
+    "aksesoris_desc": "Pillows, bolsters, bedsheets, and other bedding items"
+  },
+  "footer": {
+    "buka_di_google_maps": "Open in Google Maps →",
+    "jam_operasional": "Mon - Sun: 07:00 - 21:00 WIB",
+    "layanan_kami": "Our Services",
+    "katalog_produk": "Product Catalog",
+    "harga_sewa_busa": "Foam Rental Price",
+    "sewa_kasur_terdekat": "Nearest Mattress Rental",
+    "sewa_kasur_lipat": "Folding Mattress Rental",
+    "sewa_kasur_bulanan": "Monthly Mattress Rental",
+    "sewa_karpet_jogja": "Carpet Rental Jogja",
+    "sewa_permadani_jogja": "Rug Rental Jogja",
+    "perlengkapan_event": "Event Equipment",
+    "artikel_tips": "Articles & Tips",
+    "tentang_kami": "About Us",
+    "ikuti_kami": "Follow Us",
+    "copyright": "All rights reserved.",
+    "tagline": "Mattress, carpet, rug, and event equipment rental services in Yogyakarta"
+  },
+  "seo": {
+    "home_title": "Best Mattress Rental in Jogja - Same Day Delivery | Santi Living",
+    "home_desc": "Clean mattress rental in Jogja from Rp25,000/day. ✅ Same day delivery ✅ Free delivery in certain areas ✅ Premium & sterilized ✅ Order via WhatsApp. Santi Living Yogyakarta.",
+    "site_name": "Santi Living",
+    "og_title": "Best Mattress Rental in Jogja - Same Day Delivery",
+    "og_desc": "Clean mattress rental in Jogja from Rp25,000/day. ✅ Same day delivery ✅ Premium sterilized mattresses."
   }
 }

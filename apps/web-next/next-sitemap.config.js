@@ -46,6 +46,16 @@ const config = {
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
+  alternateRefs: [
+    {
+      href: 'https://santiliving.com/id',
+      hreflang: 'id',
+    },
+    {
+      href: 'https://santiliving.com/en',
+      hreflang: 'en',
+    },
+  ],
   exclude: ['/cart', '/checkout', '/thank-you', '/pesanan/*', '/sewa-karpet'],
   additionalPaths: async (config) => {
     const seen = new Set();

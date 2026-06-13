@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { useT } from '@/contexts/locale';
 
 type NavLink = {
   href: string;
@@ -18,6 +19,7 @@ export function Navigation() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const hostCta = useHostCta();
+  const t = useT();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -45,37 +47,37 @@ export function Navigation() {
 
   const contextNavLink: NavLink =
     hostCta.context === 'karpet' || hostCta.context === 'permadani'
-      ? { href: '#calculator', label: 'Cek Opsi' }
+      ? { href: '#calculator', label: t('nav.cek_opsi') }
       : hostCta.context === 'acara'
-        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: 'Paket Event' }
-        : { href: '/#calculator', label: 'Hitung Biaya' };
+        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.paket_event') }
+        : { href: '/#calculator', label: t('nav.hitung_biaya') };
 
   const navLinks: NavLink[] = [
-    { href: '/', label: 'Beranda' },
+    { href: '/', label: t('nav.beranda') },
     {
       href: '/produk',
-      label: 'Produk',
+      label: t('nav.produk'),
       children: [
-        { href: '/produk', label: 'Semua Produk' },
-        { href: '/sewa-kasur-terdekat', label: 'Kasur' },
-        { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: 'Karpet' },
-        { href: 'https://permadani.santiliving.com/sewa-karpet-permadani-jogja', label: 'Permadani' },
-        { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: 'Perlengkapan Event' },
+        { href: '/produk', label: t('nav.semua_produk') },
+        { href: '/sewa-kasur-terdekat', label: t('nav.kasur') },
+        { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: t('nav.karpet') },
+        { href: 'https://permadani.santiliving.com/sewa-karpet-permadani-jogja', label: t('nav.permadani') },
+        { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.perlengkapan_event') },
       ],
     },
-    { href: '/harga-sewa-kasur', label: 'Harga Sewa' },
+    { href: '/harga-sewa-kasur', label: t('nav.harga_sewa') },
     contextNavLink,
-    { href: '/artikel', label: 'Artikel & Tips' },
-    { href: '/about', label: 'Tentang Kami' },
-    { href: '/#service-area', label: 'Area Layanan' },
+    { href: '/artikel', label: t('nav.artikel_tips') },
+    { href: '/about', label: t('nav.tentang_kami') },
+    { href: '/#service-area', label: t('nav.area_layanan') },
   ];
 
   return (
     <>
       <button 
-        className="bg-transparent border-none cursor-pointer p-2 block z-[1001] relative shrink-0 hover:bg-slate-50 rounded-md transition-colors" 
-        onClick={() => setIsOpen(true)}
-        aria-label="Open Menu"
+      className="bg-transparent border-none cursor-pointer p-2 block z-[1001] relative shrink-0 hover:bg-slate-50 rounded-md transition-colors" 
+      onClick={() => setIsOpen(true)}
+      aria-label={t('header.open_menu')}
         aria-expanded={isOpen}
       >
         <div className="w-6 h-[18px] flex flex-col justify-between">
@@ -95,11 +97,11 @@ export function Navigation() {
 
           <aside className={`fixed top-0 w-[280px] h-screen bg-white shadow-[2px_0_10px_rgba(0,0,0,0.2)] transition-[left] duration-300 ease-in-out z-[1002] p-6 flex flex-col overflow-y-auto ${isOpen ? 'left-0' : '-left-[300px]'}`}>
             <div className="flex justify-between items-center mb-8">
-              <span className="text-xl font-bold text-blue-600">Menu</span>
+              <span className="text-xl font-bold text-blue-600">{t('header.menu')}</span>
               <button 
                 className="bg-transparent border-none text-3xl leading-none cursor-pointer text-slate-400 hover:text-slate-600 focus:outline-none" 
                 onClick={() => setIsOpen(false)}
-                aria-label="Close Menu"
+                aria-label={t('header.close_menu')}
               >
                 &times;
               </button>

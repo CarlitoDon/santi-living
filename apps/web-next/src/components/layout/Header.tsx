@@ -6,10 +6,12 @@ import Image from 'next/image';
 import { Navigation } from './Navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { useT } from '@/contexts/locale';
 
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const hostCta = useHostCta();
+  const t = useT();
 
   useEffect(() => {
     const header = headerRef.current;
