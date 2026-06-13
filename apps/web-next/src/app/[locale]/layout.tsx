@@ -190,9 +190,9 @@ export default async function RootLayout({
           <ConditionalLayout header={<Header />} footer={<Footer />}>
             {children}
           </ConditionalLayout>
+          <StickyWhatsApp />
+          <AlertModal />
         </Providers>
-        <StickyWhatsApp />
-        <AlertModal />
       </body>
     </html>
   );
