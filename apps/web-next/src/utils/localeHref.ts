@@ -14,8 +14,16 @@ export function localeHref(path: string, locale: string): string {
     return path;
   }
 
-  // Normalize: remove trailing slash (except root)
-  const normalized = path === '/' ? '/' : path.replace(/\/$/, '');
+  // Prepend locale and clean up slashes
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  let result = `/${locale}${cleanPath}`;
 
-  return `/${locale}${normalized}`;
+  // Clean trailing slashes
+  result = result.replace(/\/+$/, '');
+  // Clean /# target structures (e.g. /en/#calculator -> /en#calculator)
+  result = result.replace(/\/+#/, '#');
+
+  if (result === '') return '/';
+
+  return result;
 }

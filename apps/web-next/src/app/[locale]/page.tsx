@@ -145,6 +145,7 @@ export default async function HomePage({ params }: PageProps) {
         {/* Product Picker */}
         <div className="relative z-[10] -mt-10 md:-mt-20">
           <div
+            id="calculator"
             style={{
               background: '#f8fafc',
               paddingTop: '2rem',

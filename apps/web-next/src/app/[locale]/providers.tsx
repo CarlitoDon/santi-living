@@ -2,6 +2,7 @@
 
 import { CalculatorProvider } from '@/contexts/CalculatorContext';
 import { LocaleProvider } from '@/contexts/locale';
+import { HashScrollHandler } from '@/components/ui/HashScrollHandler';
 import type { ReactNode } from 'react';
 import type { Locale } from '@/contexts/locale';
 
@@ -16,7 +17,10 @@ export function Providers({
 }) {
   return (
     <LocaleProvider locale={locale} dictionary={dictionary}>
-      <CalculatorProvider>{children}</CalculatorProvider>
+      <CalculatorProvider>
+        <HashScrollHandler />
+        {children}
+      </CalculatorProvider>
     </LocaleProvider>
   );
 }
