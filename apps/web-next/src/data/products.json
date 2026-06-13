@@ -11,8 +11,12 @@
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
       "capacity_en": "1 person",
-      "image": "/images/products/single-standard.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive", "Sprei bersih", "Bantal"],
+      "image": "/images/paket-90.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive",
+        "Sprei bersih",
+        "Bantal"
+      ],
       "category": "package"
     },
     {
@@ -26,8 +30,12 @@
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
       "capacity_en": "1 person",
-      "image": "/images/products/single-super.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive", "Sprei bersih", "Bantal"],
+      "image": "/images/paket-100.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive",
+        "Sprei bersih",
+        "Bantal"
+      ],
       "category": "package"
     },
     {
@@ -41,8 +49,12 @@
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
       "capacity_en": "1-2 persons",
-      "image": "/images/products/double.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive", "Sprei bersih", "1 Bantal"],
+      "image": "/images/paket-120.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive",
+        "Sprei bersih",
+        "1 Bantal"
+      ],
       "category": "package"
     },
     {
@@ -56,8 +68,12 @@
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
       "capacity_en": "2 persons",
-      "image": "/images/products/queen.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive", "Sprei bersih", "2 Bantal"],
+      "image": "/images/paket-160.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive",
+        "Sprei bersih",
+        "2 Bantal"
+      ],
       "category": "package"
     },
     {
@@ -71,8 +87,12 @@
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
       "capacity_en": "2-3 persons",
-      "image": "/images/products/king.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive", "Sprei bersih", "2 Bantal"],
+      "image": "/images/paket-180.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive",
+        "Sprei bersih",
+        "2 Bantal"
+      ],
       "category": "package"
     }
   ],
@@ -88,8 +108,10 @@
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
       "capacity_en": "1 person",
-      "image": "/images/products/single-standard.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive"],
+      "image": "/images/saja-90.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive"
+      ],
       "category": "mattress"
     },
     {
@@ -103,8 +125,10 @@
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
       "capacity_en": "1 person",
-      "image": "/images/products/single-super.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive"],
+      "image": "/images/saja-100.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive"
+      ],
       "category": "mattress"
     },
     {
@@ -118,8 +142,10 @@
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
       "capacity_en": "1-2 persons",
-      "image": "/images/products/double.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive"],
+      "image": "/images/saja-120.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive"
+      ],
       "category": "mattress"
     },
     {
@@ -133,8 +159,10 @@
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
       "capacity_en": "2 persons",
-      "image": "/images/products/queen.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive"],
+      "image": "/images/saja-160.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive"
+      ],
       "category": "mattress"
     },
     {
@@ -148,8 +176,10 @@
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
       "capacity_en": "2-3 persons",
-      "image": "/images/products/king.jpg",
-      "includes": ["Kasur busa Royal Grand Exclusive"],
+      "image": "/images/saja-180.webp",
+      "includes": [
+        "Kasur busa Royal Grand Exclusive"
+      ],
       "category": "mattress"
     }
   ],
@@ -162,7 +192,7 @@
       "description": "Bantal tambahan untuk kenyamanan tidur Anda. Lembut dan bersih.",
       "pricePerDay": 10000,
       "costPrice": 5000,
-      "image": "/images/products/extra-bantal.jpg",
+      "image": "/images/ekstra-bantal.webp",
       "includes": [],
       "category": "accessory"
     },
@@ -174,7 +204,7 @@
       "description": "Sprei bersih tambahan. Cocok untuk yang suka stok cadangan atau ganti-ganti.",
       "pricePerDay": 10000,
       "costPrice": 5000,
-      "image": "/images/products/extra-sprei.jpg",
+      "image": "/images/ekstra-sprei.webp",
       "includes": [],
       "category": "accessory"
     },
@@ -186,7 +216,7 @@
       "description": "Selimut hangat dan nyaman untuk menemani tidur Anda di Yogyakarta yang dingin.",
       "pricePerDay": 10000,
       "costPrice": 5000,
-      "image": "/images/products/extra-selimut.jpg",
+      "image": "/images/ekstra-selimut.webp",
       "includes": [],
       "category": "accessory"
     },
@@ -198,7 +228,7 @@
       "description": "Guling tambahan. Cocok untuk dipeluk atau ganjal tidur.",
       "pricePerDay": 10000,
       "costPrice": 5000,
-      "image": "/images/products/extra-guling.jpg",
+      "image": "/images/ekstra-guling.webp",
       "includes": [],
       "category": "accessory"
     },
@@ -210,8 +240,11 @@
       "description": "Sewa TV LED 32 inch untuk hiburan di kos, kontrakan, atau acara.",
       "pricePerDay": 50000,
       "costPrice": 30000,
-      "image": "/images/products/tv-32.jpg",
-      "includes": ["TV LED 32 inch", "Remote control"],
+      "image": "/images/kasur-default.jpg",
+      "includes": [
+        "TV LED 32 inch",
+        "Remote control"
+      ],
       "category": "accessory"
     },
     {
@@ -222,8 +255,10 @@
       "description": "Sewa kipas angin berdiri untuk kenyamanan ruangan Anda.",
       "pricePerDay": 29000,
       "costPrice": 15000,
-      "image": "/images/products/fan-standing.jpg",
-      "includes": ["Kipas angin berdiri"],
+      "image": "/images/kasur-default.jpg",
+      "includes": [
+        "Kipas angin berdiri"
+      ],
       "category": "accessory"
     },
     {
@@ -234,8 +269,11 @@
       "description": "Sewa air cooler untuk ruangan lebih sejuk. Hemat listrik dan mudah dipindah.",
       "pricePerDay": 35000,
       "costPrice": 20000,
-      "image": "/images/products/air-cooler.jpg",
-      "includes": ["Air cooler", "Remote control"],
+      "image": "/images/kasur-default.jpg",
+      "includes": [
+        "Air cooler",
+        "Remote control"
+      ],
       "category": "accessory"
     }
   ]
