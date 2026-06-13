@@ -4,11 +4,22 @@ import type { NextRequest } from 'next/server';
 const locales = ['id', 'en'];
 const defaultLocale = 'id';
 
+/** Hostname → pathname rewrite for subdomain routing */
+const HOST_REWRITES = new Map([
+  ['acara.santiliving.com', '/sewa-perlengkapan-event'],
+  ['acara.localhost', '/sewa-perlengkapan-event'],
+  ['karpet.santiliving.com', '/sewa-karpet-jogja'],
+  ['karpet.localhost', '/sewa-karpet-jogja'],
+  ['permadani.santiliving.com', '/sewa-karpet-permadani-jogja'],
+  ['permadani.localhost', '/sewa-karpet-permadani-jogja'],
+  ['kipas-angin.santiliving.com', '/sewa-kipas-angin'],
+  ['kipas-angin.localhost', '/sewa-kipas-angin'],
+]);
+
 function getLocale(request: NextRequest): string {
   const acceptLanguage = request.headers.get('accept-language');
   if (!acceptLanguage) return defaultLocale;
 
-  // Simple locale parser matching 'id' or 'en'
   const matched = acceptLanguage
     .split(',')
     .map((lang) => lang.split(';')[0].trim().toLowerCase())
@@ -18,9 +29,18 @@ function getLocale(request: NextRequest): string {
 }
 
 export function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  let { pathname } = request.nextUrl;
+  const hostname = request.headers.get('host') || '';
 
-  // Skip api, public files, and verification scripts
+  // --- Step 1: Host-based subdomain rewrite ---
+  for (const [host, target] of HOST_REWRITES) {
+    if (hostname.startsWith(host) && pathname === '/') {
+      pathname = target;
+      break;
+    }
+  }
+
+  // --- Step 2: Skip api, static files ---
   if (
     pathname.startsWith('/api') ||
     pathname.startsWith('/images') ||
@@ -30,14 +50,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Check if pathname already starts with dynamic locale
+  // --- Step 3: Locale prefix detection ---
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
   if (pathnameHasLocale) return NextResponse.next();
 
-  // Redirect prefix-less access to best matched locale prefix
+  // --- Step 4: Redirect to locale-prefixed path ---
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(request.nextUrl);
