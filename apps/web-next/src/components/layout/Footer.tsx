@@ -5,10 +5,13 @@ import Image from 'next/image';
 import { config } from '@/data/config';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
+import { useLocale } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const t = useT();
+  const { locale } = useLocale();
 
   return (
     <footer className="bg-slate-900 text-white pt-12 pb-6">
@@ -16,7 +19,7 @@ export function Footer() {
         <div className="grid gap-8 mb-8 md:grid-cols-[2fr_1fr_1fr]">
           {/* NAP Section for Local SEO */}
           <div>
-            <Link href="/" className="inline-flex flex-row items-end gap-1.5 md:gap-2 group mb-6 no-underline text-inherit">
+            <Link href={localeHref("/", locale)} className="inline-flex flex-row items-end gap-1.5 md:gap-2 group mb-6 no-underline text-inherit">
               <span className="block font-serif text-2xl font-extrabold text-white tracking-tight leading-none group-hover:text-blue-400 transition-colors">Santi Living</span>
               <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
                 <span className="text-[10px] font-medium italic text-slate-400">by</span>
@@ -70,16 +73,16 @@ export function Footer() {
           <div>
             <h4 className="text-base font-semibold mb-4 text-white">{t('footer.layanan_kami')}</h4>
             <ul className="list-none p-0 m-0">
-              <li className="mb-2"><Link href="/produk" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.katalog_produk')}</Link></li>
-              <li className="mb-2"><Link href="/harga-sewa-kasur" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.harga_sewa_busa')}</Link></li>
-              <li className="mb-2"><Link href="/sewa-kasur-terdekat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_terdekat')}</Link></li>
-              <li className="mb-2"><Link href="/sewa-kasur-lipat" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_lipat')}</Link></li>
-              <li className="mb-2"><Link href="/sewa-kasur-bulanan" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_bulanan')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/produk", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.katalog_produk')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/harga-sewa-kasur", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.harga_sewa_busa')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/sewa-kasur-terdekat", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_terdekat')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/sewa-kasur-lipat", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_lipat')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/sewa-kasur-bulanan", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_bulanan')}</Link></li>
               <li className="mb-2"><a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_karpet_jogja')}</a></li>
               <li className="mb-2"><a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_permadani_jogja')}</a></li>
               <li className="mb-2"><a href="https://acara.santiliving.com/sewa-perlengkapan-event" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.perlengkapan_event')}</a></li>
-              <li className="mb-2"><Link href="/artikel" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.artikel_tips')}</Link></li>
-              <li className="mb-2"><Link href="/about" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.tentang_kami')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/artikel", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.artikel_tips')}</Link></li>
+              <li className="mb-2"><Link href={localeHref("/about", locale)} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.tentang_kami')}</Link></li>
             </ul>
           </div>
 

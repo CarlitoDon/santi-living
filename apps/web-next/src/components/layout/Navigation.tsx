@@ -8,6 +8,8 @@ import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { useLocale } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 
 type NavLink = {
   href: string;
@@ -21,6 +23,7 @@ export function Navigation() {
   const [mounted, setMounted] = useState(false);
   const hostCta = useHostCta();
   const t = useT();
+  const { locale } = useLocale();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -113,11 +116,12 @@ export function Navigation() {
 
             <ul className="list-none p-0 m-0">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                const linkHref = localeHref(link.href, locale);
+                const isActive = pathname === linkHref || (linkHref !== '/' + locale && pathname.startsWith(linkHref));
                 return (
                   <li key={link.href} className="mb-2">
                     <Link 
-                      href={link.href} 
+                      href={typeof link.href === 'string' ? localeHref(link.href, locale) : link.href} 
                       className={`block px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-200 ease-in-out ${
                         isActive 
                           ? 'text-blue-600 bg-blue-50 font-bold shadow-[inset_0_0_0_1px_#dbeafe]' 
@@ -130,11 +134,12 @@ export function Navigation() {
                     {link.children && (
                       <ul className="pl-4 mt-2">
                         {link.children.map((sub) => {
-                          const isSubActive = pathname === sub.href || (sub.href !== '/' && pathname.startsWith(sub.href));
+                          const subHref = localeHref(sub.href, locale);
+                          const isSubActive = pathname === subHref || (subHref !== '/' + locale && pathname.startsWith(subHref));
                           return (
                             <li key={sub.href} className="mb-1">
                               <Link
-                                href={sub.href}
+                                href={subHref}
                                 className={`block px-3 py-2 rounded-md text-sm transition-colors ${isSubActive ? 'text-blue-600 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'}`}
                               >
                                 {sub.label}

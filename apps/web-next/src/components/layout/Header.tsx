@@ -7,12 +7,15 @@ import { Navigation } from './Navigation';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
+import { useLocale } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 
 export function Header() {
   const headerRef = useRef<HTMLElement>(null);
   const hostCta = useHostCta();
   const t = useT();
+  const { locale } = useLocale();
 
   useEffect(() => {
     const header = headerRef.current;
@@ -53,7 +56,7 @@ export function Header() {
           {/* Center: Brand Logo */}
           <div className="flex-shrink-0 flex items-center justify-center">
             <div className="m-0 leading-none">
-              <Link href="/" className="no-underline text-inherit flex flex-row items-end gap-1.5 md:gap-2 group">
+              <Link href={localeHref("/", locale)} className="no-underline text-inherit flex flex-row items-end gap-1.5 md:gap-2 group">
                 <span className="block font-serif text-[22px] md:text-3xl font-extrabold text-slate-900 tracking-tight leading-none group-hover:text-blue-600 transition-colors">Santi Living</span>
                 <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
                   <span className="text-[10px] md:text-[11px] font-medium italic text-slate-400">by</span>
