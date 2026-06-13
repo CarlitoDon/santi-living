@@ -297,7 +297,7 @@ export default async function HomePage({ params }: PageProps) {
             </div>
             <div className="rounded-2xl overflow-hidden shadow-card h-[300px] md:h-[350px] border border-border">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.072!2d110.334!3d-7.771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713400000000!5m2!1sen!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.1119565576723!2d110.2917015!3d-7.7673015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33378aaa99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZyB8IGJ5IFNhbnRpIE1lYmVsIEpvZ2ph!5e0!3m2!1sen!2sid!4v1713400000000!5m2!1sen!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
