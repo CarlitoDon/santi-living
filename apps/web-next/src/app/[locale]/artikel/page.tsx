@@ -8,6 +8,12 @@ interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
+interface BlogDict {
+  page_title: string;
+  page_desc: string;
+  empty: string;
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
@@ -38,7 +44,7 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
   const dict = rawDict as Record<string, unknown>;
   const posts = getAllPosts(locale);
 
-  const blogDict = dict.blog || {
+  const blogDict = (dict.blog as BlogDict) || {
     page_title: 'Artikel & Tips',
     page_desc: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman',
     empty: 'Belum ada artikel.',
