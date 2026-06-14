@@ -60,10 +60,13 @@ export interface CustomerData {
 export interface Product {
   id: string;
   name: string;
+  name_en?: string;
   shortName: string;
   description: string;
+  description_en?: string;
   dimensions?: string;
   capacity?: string;
+  capacity_en?: string;
   pricePerDay: number;
   costPrice: number;
   category: "package" | "mattress" | "accessory";

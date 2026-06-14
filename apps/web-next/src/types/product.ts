@@ -8,6 +8,7 @@ export const ProductSchema = z.object({
   name_en: z.string().optional(),
   shortName: z.string(),
   description: z.string(),
+  description_en: z.string().optional(),
   pricePerDay: z.number(),
   costPrice: z.number(),
   dimensions: z.string().optional(),

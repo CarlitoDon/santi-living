@@ -15,6 +15,9 @@ function pn(item: Product, l: string): string {
 function pcap(item: Product, l: string): string | undefined {
   return l === 'en' && item.capacity_en ? item.capacity_en : item.capacity;
 }
+function pd(item: Product, l: string): string {
+  return l === 'en' && item.description_en ? item.description_en : item.description;
+}
 
 export function ProductCard({ product, onClick }: { product: Product; onClick: () => void }) {
   const { locale, t } = useLocale();
@@ -35,7 +38,7 @@ export function ProductCard({ product, onClick }: { product: Product; onClick: (
 
       <div className="p-4 flex-1 flex flex-col">
         <h3 className="text-base font-bold mb-1 text-slate-900">{pn(product, locale)}</h3>
-        <p className="text-[0.85rem] text-slate-500 mb-3 flex-1 line-clamp-2 overflow-hidden">{product.description}</p>
+        <p className="text-[0.85rem] text-slate-500 mb-3 flex-1 line-clamp-2 overflow-hidden">{pd(product, locale)}</p>
 
         <div className="flex gap-2 text-xs text-slate-400 mb-3">
           {product.dimensions && <span className="bg-slate-100 px-1.5 py-0.5 rounded-sm">{product.dimensions}</span>}
@@ -203,7 +206,7 @@ export function ProductModal({
               </div>
               
               <div className="text-[0.95rem] text-slate-700 leading-[1.6]">
-                <p>{product.description}</p>
+                <p>{pd(product, locale)}</p>
                 {product.includes && product.includes.length > 0 && (
                   <div className="mt-4 bg-green-50 p-4 rounded-lg border border-green-200">
                     <h4 className="text-green-800 mb-2 text-[0.95rem] font-semibold">{t('produk.modal_termasuk')}</h4>

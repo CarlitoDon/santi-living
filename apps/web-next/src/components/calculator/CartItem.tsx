@@ -31,10 +31,13 @@ export function CartItem({
     const modalProduct: Product = {
       id: product.id,
       name: product.name,
+      name_en: product.name_en,
       shortName: product.shortName,
       description: product.description || "",
+      description_en: product.description_en,
       dimensions: product.dimensions,
       capacity: product.capacity,
+      capacity_en: product.capacity_en,
       pricePerDay: product.pricePerDay,
       costPrice: product.costPrice || 0,
       image: largeImage || optimizedImage || product.image,
