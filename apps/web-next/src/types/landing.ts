@@ -106,4 +106,27 @@ export const LandingPageConfigSchema = z.object({
   })).optional(),
 });
 
-export type LandingPageConfig = z.infer<typeof LandingPageConfigSchema>;
+export type LandingPageConfig = z.infer<typeof LandingPageConfigSchema> & {
+  /** English overrides for all text fields */
+  en?: {
+    meta?: { title?: string; description?: string };
+    hero?: {
+      title?: string; subtitle?: string; badge?: string;
+      bgImage?: string; bgImageAlt?: string;
+      features?: { icon?: string; text?: string }[];
+      actions?: {
+        type?: string; label?: string; href?: string;
+        waText?: string; waSource?: string; variant?: string
+      }[];
+      badges?: string[];
+      phone?: string;
+    };
+    benefits?: { icon?: string; title?: string; description?: string }[];
+    priceCards?: { name?: string; size?: string; price?: string; daily?: string; note?: string; popular?: boolean }[];
+    priceSection?: { title?: string; linkLabel?: string };
+    audience?: { icon?: string; title?: string; description?: string }[];
+    faqs?: { question?: string; answer?: string }[];
+    cta?: { title?: string; description?: string; secondaryLabel?: string; waText?: string; waSource?: string };
+    sections?: { title?: string; content?: string }[];
+  };
+};

@@ -12,6 +12,7 @@ export const sewaKasurBulanan: LandingPageConfig = {
     badge: 'Mulai Rp750.000/bulan',
   },
   color: 'cyan',
+
   benefits: [
     { icon: '💸', title: 'Hemat vs Beli Baru', description: 'Kasur baru mulai Rp1-3 juta. Sewa bulanan cuma Rp750rb — hemat sampai 75%!' },
     { icon: '🎓', title: 'Cocok untuk Mahasiswa', description: 'Baru pindah kos? Sewa dulu, nanti kalau sudah settle baru beli.' },
@@ -41,4 +42,45 @@ export const sewaKasurBulanan: LandingPageConfig = {
     waText: 'Halo Santi Living, saya mau sewa kasur bulanan untuk [durasi] bulan',
     waSource: 'bulanan_page',
   },
+en: {
+  meta: {
+    title: 'Nearest Monthly Mattress Rental in Jogja | Save Rp750k',
+    description:
+      'Nearest monthly mattress rental center in Jogja starting from Rp750,000/month. Perfect for boarding houses, rentals, or students. Clean mattresses, free delivery & pickup, no large deposit.',
+  },
+  hero: {
+    title: 'Monthly Mattress Rental in Jogja',
+    subtitle: 'The budget-friendly solution for boarding houses, rentals, or students who need the nearest mattress rental without buying',
+    badge: 'Starting from Rp750,000/month',
+  },
+  benefits: [
+    { icon: '💸', title: 'Save vs Buying New', description: 'New mattresses start at Rp1–3 million. Monthly rental is only Rp750k — save up to 75%!' },
+    { icon: '🎓', title: 'Perfect for Students', description: 'Just moved into a boarding house? Rent first, then buy once you\'re settled.' },
+    { icon: '🧹', title: 'Always Clean Mattresses', description: 'Every mattress is professionally washed before delivery. Clean, fresh, and sanitized.' },
+    { icon: '📦', title: 'Hassle-Free', description: 'Done renting? We\'ll pick it up. No need to worry about what to do with the mattress.' },
+  ],
+  priceCards: [
+    { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 750,000', daily: '≈ Rp 25,000/day', note: '1 person • foam mattress only', popular: false },
+    { name: 'Complete Single Package', size: 'Mattress + Bedsheet + Pillow', price: 'Rp 1,050,000', daily: '≈ Rp 35,000/day', note: '1 person • ready to use immediately', popular: true },
+    { name: 'Double', size: '120 × 200 cm', price: 'Rp 1,050,000', daily: '≈ Rp 35,000/day', note: '1–2 people • foam mattress only', popular: false },
+  ],
+  audience: [
+    { icon: '🎓', title: 'New Students', description: 'Just moved into a boarding house in Jogja and haven\'t had time to buy a mattress yet. Rent first while you settle in.' },
+    { icon: '🏠', title: 'Rental Tenants', description: 'On a 3–6 month lease? Buying a mattress is too expensive — renting is far more affordable.' },
+    { icon: '💼', title: 'Project Workers', description: 'Employees temporarily assigned to Jogja. Need a mattress without buying furniture.' },
+    { icon: '🏢', title: 'Boarding House Owners', description: 'Need extra mattresses for new rooms? Rent multiple units and get a 10–15% discount!' },
+  ],
+  faqs: [
+    { question: 'Is monthly rental cheaper than daily rental?', answer: 'Yes! Monthly rental pricing is calculated from the daily rate × 30 days with no markup. Compared to buying a new mattress, monthly rental is far more affordable.' },
+    { question: 'Can I extend my monthly mattress rental?', answer: 'Of course! Just contact us via WhatsApp before your rental period ends. Extensions come with no additional admin fees.' },
+    { question: 'Is there a deposit or security bond?', answer: 'No large deposit required. Just pay the rental fee + delivery cost upfront.' },
+    { question: 'What if the mattress gets damaged during the rental?', answer: 'Normal wear and tear from regular use is not charged. For major damage, a reasonable replacement fee applies.' },
+  ],
+  cta: {
+    title: 'Need a mattress for monthly rental?',
+    description: 'Contact us — we can deliver today!',
+    waText: 'Hello Santi Living, I would like to rent a mattress monthly for [duration] month(s)',
+    waSource: 'bulanan_page',
+  },
+},
 };

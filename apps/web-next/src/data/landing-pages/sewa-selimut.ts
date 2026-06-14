@@ -11,6 +11,7 @@ export const sewaSelimut: LandingPageConfig = {
     badge: 'Mulai Rp10.000/hari',
   },
   color: 'indigo',
+
   benefits: [
     { icon: '🔥', title: 'Sangat Hangat', description: 'Bahan tebal (Fleece/Microfiber) yang sangat efektif menahan suhu dingin malam hari.' },
     { icon: '🌸', title: 'Wangi Laundry', description: 'Selimut dicuci dengan pewangi linen premium. Tidak ada bau apek atau lembab.' },
@@ -40,4 +41,44 @@ export const sewaSelimut: LandingPageConfig = {
     waText: 'Halo Santi Living, saya mau sewa selimut tebal',
     waSource: 'sewa_selimut_page',
   },
+en: {
+  meta: {
+    title: 'Nearest Blanket Rental in Jogja | Hotel Quality',
+    description: 'Nearest thick blanket rental service in Jogja. Soft fleece blankets, laundry-fresh scent, super warm for cold nights or camping.',
+  },
+  hero: {
+    title: 'Blanket Rental in Jogja',
+    subtitle: 'Need an extra blanket nearby? Rent hotel-quality thick blankets that are soft, warm, and guaranteed 100% clean.',
+    badge: 'Starting from Rp10,000/day',
+  },
+  benefits: [
+    { icon: '🔥', title: 'Super Warm', description: 'Thick fleece/microfiber material that is highly effective at keeping out the cold at night.' },
+    { icon: '🌸', title: 'Laundry Fresh', description: 'Blankets are washed with premium linen fragrance. No musty or damp smell.' },
+    { icon: '🧼', title: 'Total Hygiene', description: 'Washed at high temperatures to ensure all germs and dust mites are completely eliminated.' },
+    { icon: '🚚', title: 'Door-to-Door Delivery', description: 'No hassle — we deliver clean blankets straight to your home or boarding house.' },
+  ],
+  priceCards: [
+    { name: 'Daily Blanket', size: 'Single / Double', price: 'Rp 10,000', daily: 'Per Day', note: 'Soft fleece material', popular: true },
+    { name: 'Weekly Blanket', size: 'Single / Double', price: 'Rp 60,000', daily: 'Per Week', note: 'Better value', popular: false },
+    { name: 'Monthly Blanket', size: 'Single / Double', price: 'Rp 150,000', daily: 'Per Month', note: 'Perfect for the cold season', popular: false },
+  ],
+  audience: [
+    { icon: '🏔️', title: 'Events in Kaliurang', description: 'Complete your retreat or group gathering needs in the cold mountain area.' },
+    { icon: '👨‍👩-👧‍👦', title: 'Family Stays', description: 'Make sure your guests stay warm when spending the night at your home.' },
+    { icon: '🏢', title: 'Dormitories & Boarding Schools', description: 'Monthly blanket solution for dormitory students without the hassle of washing themselves.' },
+    { icon: '⛺', title: 'Glamping / Camping', description: 'Sleep in the great outdoors feeling like a hotel with our thick blankets.' },
+  ],
+  faqs: [
+    { question: 'What material are they made of?', answer: 'We use thick fleece or microfiber blankets that are soft and non-irritating to the skin.' },
+    { question: 'Are the blankets wide enough?', answer: 'Yes, our blanket size is large enough to fully cover an adult body.' },
+    { question: 'Can I rent just a blanket without a mattress?', answer: 'Absolutely. We offer blanket-only rentals as well as complete packages with a mattress.' },
+    { question: 'Is a deposit required?', answer: 'Our system is trust-based (no large deposit) exclusively for the Yogyakarta area.' },
+  ],
+  cta: {
+    title: 'Starting to feel the chill?',
+    description: 'Order your warm blanket now and enjoy a good night\'s sleep tonight.',
+    waText: 'Hello Santi Living, I would like to rent a thick blanket',
+    waSource: 'sewa_selimut_page',
+  },
+},
 };

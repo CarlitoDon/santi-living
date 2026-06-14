@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { useLocale } from '@/contexts/locale';
 
 type CarpetProduct = {
   id: string;
@@ -116,6 +117,29 @@ const carpetCategories: CarpetCategory[] = [
   },
 ];
 
+// English translations
+const karpetEn = {
+  acara: {
+    title: 'Carpet Runner / Event Flooring',
+    description: 'Long pathway for guest aisles, stages, booths, and event layouts.',
+    items: [
+      { name: 'Event Carpet Runner', shortName: 'Event Runner', statusLabel: 'Check size & stock', note: 'Different from patterned rugs for seating areas.', includes: ['Formal guest aisle', 'Indoor or outdoor by request', 'Estimation after size confirmed'], badge: 'High intent' },
+      { name: 'Expo / Booth Carpet', shortName: 'Booth Carpet', statusLabel: 'Estimate area size', note: 'Admin can calculate needs from floor plan, booth photos, or length x width measurements.', includes: ['UMKM and expo booths', 'Small stage', 'Venue delivery coordination'] },
+      { name: 'Event Equipment Package', shortName: 'Event Package', statusLabel: 'Bundle consultation', note: 'For committees needing one-stop event equipment logistics in Jogja.', includes: ['Carpet by request', 'Family mattress', 'Cooling and TV based on stock'] },
+    ],
+  },
+  permadani: {
+    title: 'Carpet Rugs',
+    description: 'For pengajian (Quran recitation), tahlilan, thanksgiving, and family floor-seating events.',
+    items: [
+      { name: 'Red Carpet Rug', shortName: 'Red Rug', statusLabel: 'Check red stock', note: 'Red carpet here means patterned rug, not long runner/aisle carpet.', includes: ['Guest seating area', 'Pengajian and tahlilan', 'Temporary family room'], badge: 'Red color' },
+      { name: 'Gold Carpet Rug', shortName: 'Gold Rug', statusLabel: 'Check gold stock', note: 'Perfect for living rooms, small prayer rooms, and family floor-seating events.', includes: ['Floor seating area', 'Warm appearance', 'Can be arranged in multiple sheets'], badge: 'Gold color' },
+      { name: 'Floor Seating Rug by Request', shortName: 'Floor Rug', statusLabel: 'Check motif & size', note: 'Include number of guests or room size for accurate estimation.', includes: ['Pengajian and tahlilan', 'Family events', 'Neat floor seating'], badge: 'Prayer gathering' },
+      { name: 'Temporary Living Room Carpet', shortName: 'Living Room Carpet', statusLabel: 'By request', note: 'Perfect when hosting out-of-town guests or creating temporary gathering spaces.', includes: ['Temporary living room', 'Homestay and villa', 'Can bundle guest mattresses'] },
+    ],
+  },
+};
+
 const allCarpetProducts = carpetCategories.flatMap((category) => category.items);
 const carpetProductIds = new Set(allCarpetProducts.map((product) => product.id));
 const permadaniProductIds = new Set(
@@ -128,17 +152,48 @@ function getCarpetCategories(scope: KarpetCalculatorScope): CarpetCategory[] {
   if (scope === 'permadani') {
     return carpetCategories.filter((category) => category.id === 'permadani');
   }
-
   return carpetCategories;
 }
 
-function buildKarpetWaText(items: Array<{ id: string; name: string; quantity: number }>): string {
+function buildKarpetWaText(items: Array<{ id: string; name: string; quantity: number }>, locale: string): string {
   const selected = items
     .map((item) => `- ${item.name} x${item.quantity}`)
     .join('\n');
 
   const isPermadaniOnly = items.length > 0 && items.every((item) => permadaniProductIds.has(item.id));
 
+  if (locale === 'en') {
+    if (isPermadaniOnly) {
+      return `Hello Santi Living, I'd like to check the availability of carpet rug rentals in Jogja.
+
+Selected rugs:
+${selected}
+
+Event details:
+Type of need: {pengajian / tahlilan / syukuran / family guests / temporary living room / other}
+Event date: {date}
+Event location: {full address}
+Area size or estimated number of floor-seating guests: {length x width / estimated guest count}
+Color preference: {red / gold / by request}
+
+Please advise on motif availability, recommended number of sheets, estimated price, delivery fee, cleaning fee, and deposit.`;
+    }
+
+    return `Hello Santi Living, I'd like to check the availability of carpet rentals in Jogja.
+
+Selected carpets:
+${selected}
+
+Event details:
+Event type: {wedding / pengajian / seminar / exhibition / other}
+Event date: {date}
+Event location: {full address}
+Area size: {length x width / estimated guest count}
+
+Please advise on availability, recommended size, estimated price, and delivery fee.`;
+  }
+
+  // Indonesian (default)
   if (isPermadaniOnly) {
     return `Halo Santi Living, saya ingin cek ketersediaan sewa permadani Jogja.
 
@@ -169,9 +224,14 @@ Ukuran area: {panjang x lebar / estimasi jumlah tamu}
 Mohon info ketersediaan, rekomendasi ukuran, estimasi harga, dan ongkirnya.`;
 }
 
-function ProductStepper({ product }: { product: CarpetProduct }) {
+function ProductStepper({ product, catId }: { product: CarpetProduct; catId: string }) {
   const { actions } = useCalculatorContext();
+  const { locale } = useLocale();
+  const enCat = karpetEn[catId as keyof typeof karpetEn];
+  const enItem = enCat?.items.find((_, i) => carpetCategories.find(c => c.id === catId)?.items[i]?.id === product.id);
   const quantity = actions.getItemQuantity(product.id);
+
+  const n = (idVal: string, enVal?: string) => locale === 'en' && enVal ? enVal : idVal;
 
   const handleAdd = () => {
     actions.addItem({
@@ -192,21 +252,21 @@ function ProductStepper({ product }: { product: CarpetProduct }) {
     >
       <div className="mb-3 flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-base font-bold text-slate-900">{product.name}</h3>
+          <h3 className="text-base font-bold text-slate-900">{n(product.name, enItem?.name)}</h3>
           <p className="mt-1 text-sm text-slate-500">{product.size}</p>
         </div>
         {product.badge && (
           <span className="shrink-0 rounded-full bg-indigo-100 px-2.5 py-1 text-[11px] font-bold text-indigo-700">
-            {product.badge}
+            {n(product.badge, enItem?.badge)}
           </span>
         )}
       </div>
 
-      <p className="mb-2 text-xl font-extrabold text-indigo-700">{product.statusLabel}</p>
-      <p className="mb-4 text-sm leading-relaxed text-slate-600">{product.note}</p>
+      <p className="mb-2 text-xl font-extrabold text-indigo-700">{n(product.statusLabel, enItem?.statusLabel)}</p>
+      <p className="mb-4 text-sm leading-relaxed text-slate-600">{n(product.note, enItem?.note)}</p>
 
       <ul className="mb-5 mt-auto space-y-1.5 text-xs text-slate-500">
-        {product.includes.map((item) => (
+        {(enItem?.includes || product.includes).map((item: string) => (
           <li key={item} className="flex gap-2">
             <span className="text-indigo-500">✓</span>
             <span>{item}</span>
@@ -221,18 +281,18 @@ function ProductStepper({ product }: { product: CarpetProduct }) {
               type="button"
               onClick={() => actions.removeItem(product.id)}
               className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-lg font-bold text-slate-600 hover:border-red-300 hover:text-red-500"
-              aria-label={`Kurangi ${product.name}`}
+              aria-label={locale === 'en' ? `Remove ${n(product.name, enItem?.name)}` : `Kurangi ${product.name}`}
             >
               −
             </button>
             <span className="text-sm font-extrabold text-slate-900">
-              {quantity} dipilih
+              {quantity} {locale === 'en' ? 'selected' : 'dipilih'}
             </span>
             <button
               type="button"
               onClick={handleAdd}
               className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-lg font-bold text-white hover:bg-indigo-700"
-              aria-label={`Tambah ${product.name}`}
+              aria-label={locale === 'en' ? `Add ${n(product.name, enItem?.name)}` : `Tambah ${product.name}`}
             >
               +
             </button>
@@ -242,9 +302,9 @@ function ProductStepper({ product }: { product: CarpetProduct }) {
             type="button"
             onClick={handleAdd}
             className="inline-flex h-11 w-full items-center justify-center rounded-full bg-indigo-600 px-4 text-sm font-bold text-white shadow-sm hover:bg-indigo-700"
-            aria-label={`Tambah ${product.name} ke pilihan karpet`}
+            aria-label={locale === 'en' ? `Add ${n(product.name, enItem?.name)} to carpet selection` : `Tambah ${product.name} ke pilihan karpet`}
           >
-            + Tambah
+            {locale === 'en' ? '+ Add' : '+ Tambah'}
           </button>
         )}
       </div>
@@ -253,6 +313,7 @@ function ProductStepper({ product }: { product: CarpetProduct }) {
 }
 
 export function KarpetCalculatorSection({ scope = 'all' }: { scope?: KarpetCalculatorScope }) {
+  const { locale } = useLocale();
   const visibleCategories = getCarpetCategories(scope);
   const isPermadani = scope === 'permadani';
 
@@ -262,45 +323,52 @@ export function KarpetCalculatorSection({ scope = 'all' }: { scope?: KarpetCalcu
         <div className="w-full max-w-full rounded-[28px] border border-slate-200 bg-white p-5 shadow-xl shadow-indigo-950/10 md:p-7">
           <div className="mx-auto mb-6 max-w-2xl text-center">
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
-              {isPermadani ? 'Selector Sewa Permadani' : 'Kalkulator / Selector Sewa Karpet'}
+              {locale === 'en' ? (isPermadani ? 'Rug Rental Selector' : 'Carpet Rental Calculator / Selector') : (isPermadani ? 'Selector Sewa Permadani' : 'Kalkulator / Selector Sewa Karpet')}
             </p>
             <h2 className="text-2xl font-extrabold text-slate-900 md:text-3xl">
-              {isPermadani ? 'Pilih Permadani untuk Dicek Admin' : 'Pilih Karpet untuk dihitung admin'}
+              {locale === 'en' ? (isPermadani ? 'Select Rugs for Admin Review' : 'Select Carpets for Admin Calculation') : (isPermadani ? 'Pilih Permadani untuk Dicek Admin' : 'Pilih Karpet untuk dihitung admin')}
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
-              {isPermadani ? (
-                <>
-                  Klik <strong>+ Tambah</strong> pada varian permadani yang dibutuhkan. Permadani merah dan emas adalah karpet motif ukuran relatif persegi panjang untuk area duduk, bukan runner/lembar panjang acara.
-                </>
+              {locale === 'en' ? (
+                isPermadani ? (
+                  <>Click <strong>+ Add</strong> on the rug variants you need. Red and gold rugs are patterned rectangular rugs for seating areas, not runner/aisle type.</>
+                ) : (
+                  <>Click <strong>+ Add</strong> on the carpet options you need. A selection bar will appear below; send the summary to WhatsApp so admin can calculate stock, size, delivery, cleaning, and valid cost estimates.</>
+                )
               ) : (
-                <>
-                  Klik <strong>+ Tambah</strong> pada opsi karpet yang dibutuhkan. Bar pilihan akan muncul di bawah, lalu kirim ringkasan ke WhatsApp agar admin bisa menghitung stok, ukuran, ongkir, cleaning, dan estimasi biaya yang valid.
-                </>
+                isPermadani ? (
+                  <>Klik <strong>+ Tambah</strong> pada varian permadani yang dibutuhkan. Permadani merah dan emas adalah karpet motif ukuran relatif persegi panjang untuk area duduk, bukan runner/lembar panjang acara.</>
+                ) : (
+                  <>Klik <strong>+ Tambah</strong> pada opsi karpet yang dibutuhkan. Bar pilihan akan muncul di bawah, lalu kirim ringkasan ke WhatsApp agar admin bisa menghitung stok, ukuran, ongkir, cleaning, dan estimasi biaya yang valid.</>
+                )
               )}
             </p>
           </div>
 
           <div className="space-y-6">
-            {visibleCategories.map((category) => (
-              <div key={category.id} className="space-y-4">
-                <div className="text-center">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
-                    {category.title}
-                  </p>
-                  {category.description && (
-                    <p className="mt-1 text-xs text-slate-500">
-                      {category.description}
+            {visibleCategories.map((category) => {
+              const enCat = karpetEn[category.id as keyof typeof karpetEn];
+              return (
+                <div key={category.id} className="space-y-4">
+                  <div className="text-center">
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                      {locale === 'en' && enCat?.title ? enCat.title : category.title}
                     </p>
-                  )}
-                </div>
+                    {(category.description) && (
+                      <p className="mt-1 text-xs text-slate-500">
+                        {locale === 'en' && enCat?.description ? enCat.description : category.description}
+                      </p>
+                    )}
+                  </div>
 
-                <div className="grid w-full min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
-                  {category.items.map((product) => (
-                    <ProductStepper key={product.id} product={product} />
-                  ))}
+                  <div className="grid w-full min-w-0 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {category.items.map((product) => (
+                      <ProductStepper key={product.id} product={product} catId={category.id} />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -310,6 +378,7 @@ export function KarpetCalculatorSection({ scope = 'all' }: { scope?: KarpetCalcu
 
 export function KarpetCartBar() {
   const { actions } = useCalculatorContext();
+  const { locale } = useLocale();
   const selectedItems = useMemo(
     () => actions.state.items.filter((item) => carpetProductIds.has(item.id)),
     [actions.state.items],
@@ -326,13 +395,13 @@ export function KarpetCartBar() {
     <div className="cart-bar">
       <div className="cart-bar-inner">
         <div className="cart-bar-info">
-          <span className="cart-bar-count">{totalQuantity} opsi karpet</span>
+          <span className="cart-bar-count">{totalQuantity} {locale === 'en' ? 'carpet options' : 'opsi karpet'}</span>
           <span className="cart-bar-price text-sm leading-tight">
             {summary}
           </span>
         </div>
         <a
-          href={getWhatsAppUrl(buildKarpetWaText(selectedItems), 'karpet_cart_bar')}
+          href={getWhatsAppUrl(buildKarpetWaText(selectedItems, locale), 'karpet_cart_bar')}
           className="cart-bar-btn text-center no-underline"
           target="_blank"
           rel="noopener noreferrer"
@@ -342,7 +411,7 @@ export function KarpetCartBar() {
           data-page-type="calculator"
           data-wa-intent="karpet_cart_checkout"
         >
-          Kirim WA →
+          {locale === 'en' ? 'Send via WA →' : 'Kirim WA →'}
         </a>
       </div>
     </div>

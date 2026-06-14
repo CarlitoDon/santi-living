@@ -11,6 +11,7 @@ export const sewaKipasAngin: LandingPageConfig = {
     badge: 'Mulai Rp29.000/hari',
   },
   color: 'emerald',
+
   benefits: [
     { icon: '💨', title: 'Angin Super Kencang', description: 'Kipas angin berdiri 16 inch dengan motor tangguh, sirkulasi udara maksimal.' },
     { icon: '🔄', title: 'Fleksibel Harian/Bulanan', description: 'Butuh sehari untuk acara? Atau bulanan untuk kos? Kami siap melayani.' },
@@ -40,4 +41,44 @@ export const sewaKipasAngin: LandingPageConfig = {
     waText: 'Halo Santi Living, saya mau sewa kipas angin berdiri',
     waSource: 'sewa_kipas_page',
   },
+en: {
+  meta: {
+    title: 'Fan Rental Jogja Nearest Location | Daily & Monthly',
+    description: 'Nearest stand fan rental service in Jogja. Practical & affordable solution for boarding house students or events. Same day delivery & pickup.',
+  },
+  hero: {
+    title: 'Fan Rental Jogja',
+    subtitle: 'Looking for the nearest fan rental? Rent daily or monthly, stay cool instantly!',
+    badge: 'Starting from Rp29.000/day',
+  },
+  benefits: [
+    { icon: '💨', title: 'Super Strong Airflow', description: '16 inch stand fan with a powerful motor for maximum air circulation.' },
+    { icon: '🔄', title: 'Flexible Daily/Monthly', description: 'Need it for just one day for an event? Or monthly for a boarding room? We\'ve got you covered.' },
+    { icon: '🧹', title: 'Clean Condition', description: 'Units are always cleaned and dust-free before being delivered to your place.' },
+    { icon: '🚚', title: 'Delivery & Pickup Service', description: 'No need to carry it yourself. Our team delivers directly to your door.' },
+  ],
+  priceCards: [
+    { name: 'Stand Fan (Daily)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Day', note: 'Great for events / guests', popular: false },
+    { name: 'Stand Fan (Weekly)', size: '16 Inch Stand Fan', price: 'Rp 145.000', daily: 'Per Week', note: 'More savings', popular: true },
+    { name: 'Stand Fan (Monthly)', size: '16 Inch Stand Fan', price: 'Rp 290.000', daily: 'Per Month', note: 'Best value for boarding house residents', popular: false },
+  ],
+  audience: [
+    { icon: '🎓', title: 'Boarding House Residents', description: 'Room too hot but budget too tight for an AC? Monthly fan rental is the solution.' },
+    { icon: '🎉', title: 'Gatherings / Events', description: 'Need extra fans for a family get-together or a hangout at your place?' },
+    { icon: '🎒', title: 'Overnight Guests', description: 'Give extra comfort to family or friends staying overnight at your home.' },
+    { icon: '🏢', title: 'Event Organizers', description: 'Rent in bulk to support air circulation at your indoor events.' },
+  ],
+  faqs: [
+    { question: 'What size is the fan?', answer: 'We rent out standard 16 Inch stand fans, sufficient to cool a single boarding room.' },
+    { question: 'Can it be delivered?', answer: 'Yes, we offer delivery service for fan rentals across Jogja and surrounding areas.' },
+    { question: 'What if the fan breaks down?', answer: 'If the unit experiences a mechanical failure during the rental period (not due to dropping/water damage), we will replace it with a new unit free of charge.' },
+    { question: 'Is there a minimum rental period?', answer: 'There is no minimum number of days. You can rent for as little as 1 day.' },
+  ],
+  cta: {
+    title: 'Feeling stuffy in your room?',
+    description: 'Order a fan now and enjoy cool air today.',
+    waText: 'Hello Santi Living, I would like to rent a stand fan',
+    waSource: 'sewa_kipas_page',
+  },
+},
 };

@@ -13,11 +13,7 @@ export const sewaAcara: LandingPageConfig = {
     badge: 'Item inti + by-request, area jauh konfirmasi dulu',
   },
   color: 'indigo',
-  tracking: {
-    productCategory: 'event',
-    pageType: 'money_page',
-    intent: 'sewa_perlengkapan_event_jogja',
-  },
+
   benefits: [
     {
       icon: '🛏️',
@@ -166,7 +162,7 @@ export const sewaAcara: LandingPageConfig = {
       'Halo Santi Living, saya ingin konsultasi paket perlengkapan event. Tanggal acara: ... Lokasi/venue: ... Durasi sewa: ... Jumlah tamu/crew: ... Kebutuhan inti: kasur/air cooler/TV. By-request: karpet/meja/kursi/sound/lighting. Mohon info ketersediaan, rekomendasi paket, estimasi, dan ongkir.',
     waSource: 'acara_santiliving_page',
     secondaryLabel: 'Cek opsi karpet acara',
-    secondaryHref: 'https://karpet.santiliving.com/sewa-karpet-jogja',
+
   },
   sections: [
     {
@@ -217,4 +213,215 @@ export const sewaAcara: LandingPageConfig = {
       `,
     },
   ],
+en: {
+  meta: {
+    title: 'Event Equipment Package Rental Jogja',
+    description:
+      'Event equipment package rental Jogja: rest area mattresses, air coolers, display TVs, carpet by request, tables/chairs/sound consultative via WA.',
+  },
+  hero: {
+    title: 'Event Equipment Package Rental Jogja',
+    subtitle:
+      'One-stop consultation for Santi Living core items and by-request event needs, with estimates provided after date, duration, area size, and location are confirmed.',
+    badge: 'Core items + by-request, distant areas confirm first',
+  },
+  benefits: [
+    {
+      icon: '🛏️',
+      title: 'Core: Rest Area Mattress',
+      description:
+        'Foam mattress, bed sheet, pillow, and blanket for crew transit rooms, family, committee, or VIP room at events.',
+    },
+    {
+      icon: '❄️',
+      title: 'Core: Cooling & Display',
+      description:
+        'Air cooler/cooling fan and display TV consulted based on stock, duration, venue access, and power requirements.',
+    },
+    {
+      icon: '🟦',
+      title: 'By Request: Event Flooring',
+      description:
+        'Red carpet, rug, runner, or circulation flooring directed to the dedicated carpet option so the admin can calculate the area size.',
+    },
+    {
+      icon: '🪑',
+      title: 'By Request: Committee Operations',
+      description:
+        'Folding tables, chairs, lightweight backdrop, portable sound, and simple lighting assisted consultatively — not a claim that all items are always available.',
+    },
+    {
+      icon: '🚚',
+      title: 'Route & Setup According to Rundown',
+      description:
+        'Priority areas: Sleman, Yogyakarta City, Bantul, and Kulon Progo; distant areas require route, unloading time, and vehicle access confirmation first.',
+    },
+  ],
+  priceCards: [
+    {
+      name: 'Core Rest Area Crew',
+      size: 'Mattress + bed sheet + pillow/blanket',
+      price: 'WA Estimate',
+      daily: 'After date, duration, number of units, and location are confirmed',
+      note: 'For VIP rooms, artist transit rooms, committee, or large families',
+      popular: true,
+    },
+    {
+      name: 'Core Cooling & Display',
+      size: 'Air cooler/cooling fan + display TV',
+      price: 'Check via WA',
+      daily: 'Validate stock, duration, power requirements, and venue access',
+      note: 'For exhibition booths, waiting rooms, guide maps, or small screenings',
+      popular: false,
+    },
+    {
+      name: 'Budget Committee Bundle',
+      size: 'Rest area mattress + fan/air cooler + small equipment',
+      price: 'Consultation',
+      daily: 'Admin calculates after rundown and location are submitted',
+      note: 'Suitable for orientation camps, training, gatherings, and campus events',
+      popular: false,
+    },
+    {
+      name: 'By Request Carpet & Runner',
+      size: 'Red carpet, rug, or area flooring',
+      price: 'By request',
+      daily: 'Area size/venue photo required for estimate',
+      note: 'Will be directed to the most suitable carpet/rug option',
+      popular: false,
+    },
+    {
+      name: 'By Request Tables & Chairs',
+      size: 'Folding tables, chairs, or operational layout',
+      price: 'By request',
+      daily: 'Availability and number of units confirmed via WA',
+      note: 'For registration areas, catering, crew desks, or briefing rooms',
+      popular: false,
+    },
+    {
+      name: 'By Request Sound & Lighting',
+      size: 'Portable sound / simple spot lighting',
+      price: 'By request',
+      daily: 'Not a large technical package; check event needs first',
+      note: 'Support for small events, not a claim of full stage production',
+      popular: false,
+    },
+  ],
+  audience: [
+    {
+      icon: '🎓',
+      title: 'Campus Committees & Students',
+      description:
+        'Orientation camps, training, art exhibitions, or outbound events that need rest areas, cooling, display TVs, and basic operational items.',
+    },
+    {
+      icon: '💼',
+      title: 'Event Organizers & Local Vendors',
+      description:
+        'EOs that need a rental partner for transit mattresses, cooling, display, and additional procurement with clearly defined service boundaries.',
+    },
+    {
+      icon: '👰',
+      title: 'Wedding Preparation / Family Celebrations',
+      description:
+        'Large families preparing temporary rest areas, carpet/flooring for guest areas, and committee needs at home or a homestay.',
+    },
+    {
+      icon: '⛺',
+      title: 'Bazaars, Communities, and Gatherings',
+      description:
+        'Semi-outdoor or small indoor events that need portable cooling, display screens, area flooring, and light logistics.',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What are the core Santi Living items for events?',
+      answer:
+        'The strongest core items are rest area mattresses, bed sheets, pillows, blankets, air coolers/cooling fans, and display TVs. Unit quantities must still be checked via WhatsApp based on date, duration, location, and delivery route.',
+    },
+    {
+      question: 'What is the difference between core items and by-request items?',
+      answer:
+        'Core items are equipment that Santi Living typically handles directly. By-request items such as carpets, tables, chairs, lightweight backdrops, portable sound, and simple lighting require earlier consultation as they depend on event needs, area size, and available procurement options.',
+    },
+    {
+      question: 'Can a package recommendation be made for my event?',
+      answer:
+        'Yes. Send the date, duration, venue, number of people, area size/location photos, and items needed. The admin will help put together a realistic package recommendation without locking in a final price before the event details are clear.',
+    },
+    {
+      question: 'Can same-day delivery be arranged for urgent needs?',
+      answer:
+        'We can check for same-day slots if the order comes in before peak operational hours and stock/route is still available. For event packages with many items, it is best to consult early to ensure safe delivery and unloading.',
+    },
+    {
+      question: 'What about delivery and pickup fees?',
+      answer:
+        'Our official workshop is located at Jl. Godean KM 10, Sleman, Yogyakarta. Priority areas include Sleman, Yogyakarta City, Bantul, and Kulon Progo; delivery fees and schedules follow distance, rental duration, quantity of items, and venue access.',
+    },
+    {
+      question: 'Does Santi Living deliver to Gunungkidul?',
+      answer:
+        'We apologize, but we currently do not serve the Gunungkidul area such as Wonosari and Semanu due to travel distance and courier safety considerations. For distant areas outside the priority route, please confirm first via WhatsApp.',
+    },
+  ],
+  cta: {
+    title: 'Need a consultation for an event equipment bundle?',
+    description:
+      'Send the rundown, date, duration, location, number of guests/crew, area size, and list of desired items. The admin will help separate which are core items and which need to be by-request.',
+    waText:
+      'Hello Santi Living, I would like to consult about an event equipment package. Event date: ... Location/venue: ... Rental duration: ... Number of guests/crew: ... Core needs: mattress/air cooler/TV. By-request: carpet/tables/chairs/sound/lighting. Please provide availability info, package recommendations, estimates, and delivery costs.',
+    waSource: 'acara_santiliving_page',
+    secondaryLabel: 'Check event carpet options',
+      },
+  sections: [
+    {
+      title: 'Service Boundaries: Core Items vs By-Request',
+      content: `
+        <p><strong>acara.santiliving.com</strong> is positioned as an event equipment bundle consultation page, not a claim that all event tools are always available. Its purpose is to help committees distinguish between needs that can be handled directly and needs that require earlier confirmation.</p>
+        <div class="overflow-x-auto">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Example items</th><th>Safe estimation method</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Core items</strong></td><td>Rest area mattress, bed sheet, pillow, blanket, air cooler/cooling fan, display TV</td><td>Check stock, number of units, duration, location, and delivery route via WA.</td></tr>
+              <tr><td><strong>By-request</strong></td><td>Red carpet, rug, runner, folding table, chairs, lightweight backdrop, portable sound, simple lighting</td><td>Send area photos/dimensions and event needs; admin helps find realistic options.</td></tr>
+              <tr><td><strong>Outside claims</strong></td><td>Large stage production packages, major sound vendors, full decoration, or coverage of unconfirmed areas</td><td>Requires separate confirmation; distant areas and large technical needs are not automatically promised.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+    },
+    {
+      title: 'Event Use Cases and Package Recommendations',
+      content: `
+        <p>Every event has a different pattern of needs. Here are examples of initial recommendation directions before the admin calculates the final estimate.</p>
+        <ul>
+          <li><strong>Orientation camp / campus training:</strong> start with committee rest area mattresses, pillows/blankets, cooling fan, and display TV for briefings. Carpet or tables/chairs are processed by-request if the venue requires them.</li>
+          <li><strong>Wedding preparation / family celebration:</strong> focus on family transit mattresses, clean bedding, room cooling, and carpet/guest flooring options if a floor-seating area needs to be tidied up.</li>
+          <li><strong>Exhibition / bazaar / booth:</strong> prioritize display TV, booth cooling, operational tables by-request, and area flooring such as red carpet or runner after booth dimensions are submitted.</li>
+          <li><strong>Community gathering / small screening:</strong> choose display TV, cooling fan, seating mat/carpet by-request, and rest area mattresses if crew stays overnight or the venue is used for many hours.</li>
+        </ul>
+        <p><strong>Data to send to admin:</strong> date, delivery/pickup time, venue address, unloading access, number of people, area size, location photos, and priority items that must be present.</p>
+      `,
+    },
+    {
+      title: 'Consultative EO & Event Equipment Solutions in Yogyakarta',
+      content: `
+        <p>Organizing an exhibition, wedding preparation, community festival, student orientation camp, or office gathering requires thorough logistical preparation. Common needs include crew rest areas, portable cooling, display screens, area flooring, and light operational equipment.</p>
+        <p><strong>Santi Living</strong> assists committees and EOs in Jogja with a one-stop consultation model: core items are handled according to stock and route, while additional items are processed as by-request to avoid overclaiming availability or final pricing.</p>
+        <p>For more specific event flooring needs, visit the dedicated <a href="https://karpet.santiliving.com/sewa-karpet-jogja"><strong>Jogja carpet rental</strong></a> page so committees can choose red carpet, rug, runner, or event carpet packages before chatting with admin.</p>
+        <p>If the intent is already clear, go directly to the right money page: <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">red carpet rental Jogja</a> for guest walkways/ceremonies, or <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">rug rental Jogja</a> for prayer gatherings, tahlilan, and family floor-seating areas.</p>
+        <h3>Why Do EOs & Event Committees Choose Santi Living?</h3>
+        <ul>
+          <li><strong>Mattress hygiene SOP:</strong> bedding is prepared clean, neat, and delivered according to Santi Living's operational standards.</li>
+          <li><strong>Flexible ordering:</strong> suitable for daily, multi-day, or bulk needs; estimates adjust to number of units, duration, and route.</li>
+          <li><strong>Route-appropriate delivery fleet:</strong> the logistics team prioritizes Sleman, Yogyakarta City, Bantul, and Kulon Progo. Distant areas still require confirmation first.</li>
+          <li><strong>Clear boundaries:</strong> this page distinguishes core items from by-request items so committees do not assume all items or all areas are automatically available.</li>
+        </ul>
+      `,
+    },
+  ],
+},
 };

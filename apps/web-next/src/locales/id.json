@@ -254,6 +254,21 @@
     "transparent_price_desc": "Tidak ada biaya tersembunyi. Harga sewa harian murah dengan durasi fleksibel.",
     "stock_ready": "Stok kasur busa kami selalu ready dan terjaga kebersihannya."
   },
+  "landing": {
+    "read_karpet_guide": "Baca panduan harga sewa karpet →",
+    "check_event_options": "Cek opsi karpet dan item by-request →",
+    "see_full_prices": "Lihat daftar harga lengkap semua ukuran →",
+    "karpet_options": "Opsi Sewa Karpet",
+    "event_estimate": "Estimasi Paket & Item Konsultatif",
+    "prices": "Harga Sewa",
+    "why_choose_prefix": "Kenapa Pilih",
+    "who_rents": "Siapa yang Biasanya Menyewa?",
+    "faq_title": "Pertanyaan Umum",
+    "calculate_cost": "Hitung Biaya Sewa",
+    "chat_wa": "Chat WhatsApp",
+    "call_directly": "Atau hubungi langsung:",
+    "best_value": "Best Value"
+  },
   "seo": {
     "home_title": "Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living",
     "home_desc": "Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Gratis ongkir area tertentu ✅ Kasur premium & steril ✅ Order via WhatsApp. Santi Living Yogyakarta.",

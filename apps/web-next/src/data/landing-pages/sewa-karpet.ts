@@ -40,15 +40,12 @@ export const sewaKarpetJogja: LandingPageConfig = {
     ],
     badges: ['Karpet merah', 'Permadani', 'Runner & booth', 'Paket acara'],
     phone: '0895-1911-9092',
-    bgImage: '/images/karpet-hero.webp',
+
     bgImageAlt: 'Karpet acara dan permadani untuk pilar sewa karpet Jogja Santi Living',
   },
-  tracking: {
-    productCategory: 'karpet',
-    pageType: 'money_page',
-    intent: 'sewa_karpet_jogja',
-  },
   color: 'indigo',
+
+
   benefits: [
     {
       icon: '🧭',
@@ -171,7 +168,7 @@ export const sewaKarpetJogja: LandingPageConfig = {
     waText: KARPET_WA_TEXT,
     waSource: 'sewa_karpet_jogja_page',
     secondaryLabel: 'Pilih opsi karpet',
-    secondaryHref: '#calculator',
+
   },
   sections: [
     {
@@ -275,14 +272,10 @@ export const sewaKarpetMerah: LandingPageConfig = {
       },
     ],
     badges: ['Permadani merah untuk area duduk dan ruang tamu'],
-    bgImage: '/images/permadani-merah.jpg',
+
     bgImageAlt: 'Permadani merah untuk ruang tamu dan acara lesehan Santi Living',
   },
-  tracking: {
-    productCategory: 'karpet',
-    pageType: 'subcategory_page',
-    intent: 'sewa_karpet_permadani_merah',
-  },
+
   benefits: [
     {
       icon: '🟥',
@@ -356,7 +349,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
     ),
     waSource: 'sewa_karpet_merah_page',
     secondaryLabel: 'Pilih opsi permadani',
-    secondaryHref: '#calculator',
+
   },
   sections: [
     {
@@ -412,14 +405,10 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       },
     ],
     badges: ['Permadani pengajian, tahlilan, dan tamu keluarga'],
-    bgImage: '/images/permadani-emas.jpg',
+
     bgImageAlt: 'Permadani emas untuk pengajian tahlilan dan area duduk keluarga Santi Living',
   },
-  tracking: {
-    productCategory: 'karpet',
-    pageType: 'money_page',
-    intent: 'sewa_karpet_permadani',
-  },
+
   benefits: [
     {
       icon: '🕌',
@@ -540,7 +529,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       ),
     waSource: 'permadani_page',
     secondaryLabel: 'Pilih permadani dulu',
-    secondaryHref: '#calculator',
+
   },
   sections: [
     {
@@ -582,6 +571,219 @@ export const sewaKarpetPermadani: LandingPageConfig = {
       `,
     },
   ],
-};
+en: {
+  meta: {
+    title: 'Carpet Rental Jogja for Events, Celebrations & Functions',
+    description:
+      'Carpet rental Jogja for red carpet, rugs, runners, booths, seminars, exhibitions, and celebrations. Check sizes and estimates via WhatsApp.',
+  },
+  hero: {
+    title: 'Carpet Rental Jogja for Events',
+    subtitle:
+      'Choose from red carpet runners, decorative rugs, event runners, exhibition booths, or carpet + event equipment packages. Admin helps check availability, area size, delivery routes, and cost estimates.',
+    badge: 'Central hub for event carpets: clear types, estimates after sizing',
+    features: [
+      { icon: '🟥', text: 'Red carpet & runners' },
+      { icon: '🟫', text: 'Floor-seating rugs' },
+      { icon: '🎪', text: 'Booths, exhibitions, seminars' },
+      { icon: '📦', text: 'Event packages by request' },
+    ],
+    actions: [
+      { type: 'link', label: 'Choose carpet type', href: '#pilih-jenis-karpet', variant: 'primary' },
+      { type: 'link', label: 'Compare options', href: '#perbandingan-karpet', variant: 'ghost' },
+      {
+        type: 'wa',
+        label: 'Consult via WhatsApp',
+        waText: KARPET_WA_TEXT,
+        waSource: 'sewa_karpet_jogja_page',
+      },
+    ],
+    badges: ['Red carpet', 'Decorative rug', 'Runner & booth', 'Event package'],
+    phone: '0895-1911-9092',
+        bgImageAlt: 'Event carpets and decorative rugs for Santi Living Jogja carpet rental',
+  },
+
+    benefits: [
+    {
+      icon: '🧭',
+      title: 'Carpet types separated from the start',
+      description:
+        'Red carpet runners, red/gold decorative rugs, booth carpets, and event packages each serve different purposes so admin won\'t miscalculate your venue needs.',
+    },
+    {
+      icon: '📐',
+      title: 'Estimates based on area size',
+      description:
+        'Send length and width, guest count, floor plan, or venue photos. Estimates follow size, duration, venue access, cleaning, and stock/partner availability.',
+    },
+    {
+      icon: '🎓',
+      title: 'Suitable for formal and family events',
+      description:
+        'One page for seminars, exhibitions, UMKM booths, celebrations, weddings, religious gatherings, memorial prayers, and campus events in Jogja.',
+    },
+    {
+      icon: '📦',
+      title: 'Can be bundled as an event package',
+      description:
+        'If you need carpet plus guest mattresses, fans, air coolers, TVs, pillows, or blankets, admin will check available options without claiming all items are always in stock.',
+    },
+  ],
+  priceCards: [
+    {
+      name: 'Red carpet / event runner',
+      size: 'Long strip for guest walkways, stages, booths, and ceremony areas',
+      price: 'Check via WA',
+      daily: 'Estimate after length, width, duration, and location are confirmed',
+      note: 'Different from patterned red decorative rugs used for floor seating.',
+      popular: true,
+    },
+    {
+      name: 'Red / gold decorative rug',
+      size: 'Red or gold patterned rug for religious gatherings, memorial prayers, and guest seating areas',
+      price: 'By request',
+      daily: 'Adjusted by number of pieces, pattern, duration, and stock',
+      note: 'Suitable for floor-seating areas, temporary guest rooms, and family events.',
+    },
+    {
+      name: 'Booth / exhibition / seminar carpet',
+      size: 'Custom area base for stands, expos, bazaars, small stages, or classrooms',
+      price: 'Estimate first',
+      daily: 'Admin helps calculate from floor plan, photos, or area dimensions',
+      note: 'Specify layout, loading access, and setup time so delivery routing is realistic.',
+    },
+    {
+      name: 'Carpet + event equipment package',
+      size: 'Carpet by request + guest mattresses + fans / air coolers + TV if available',
+      price: 'Consult',
+      daily: 'Bundle follows needs and availability',
+      note: 'For committees wanting a single logistics point for the event; stock and schedule still checked first.',
+    },
+  ],
+  audience: [
+    {
+      icon: '👰',
+      title: 'Weddings, celebrations, and guest walkways',
+      description:
+        'Red carpet or runner helps make entrances, small stages, and ceremony areas look more polished.',
+    },
+    {
+      icon: '🎓',
+      title: 'Seminars, campus events, and small stages',
+      description:
+        'Runners or event bases can be arranged for stages, registration tables, photo areas, and temporary classrooms.',
+    },
+    {
+      icon: '🏪',
+      title: 'Exhibitions, booths, bazaars, and UMKM',
+      description:
+        'Send a booth floor plan or stand dimensions so admin can help estimate carpet area and setup schedule.',
+    },
+    {
+      icon: '🕌',
+      title: 'Religious gatherings, memorial prayers, and family events',
+      description:
+        'Red or gold decorative rugs are positioned as floor-seating areas, not as guest walkway runners.',
+    },
+  ],
+  faqs: [
+    {
+      question: 'What is the difference between red carpet, decorative rug, runner, and event package?',
+      answer:
+        'Red carpet is typically for guest walkways or ceremony areas when it\'s a long runner. Red/gold decorative rugs are patterned carpets for floor seating. Runners/booths are used for exhibitions, stages, or custom layouts. Event packages combine carpet with other equipment checked by request.',
+    },
+    {
+      question: 'Is Santi Living\'s carpet rental always in stock?',
+      answer:
+        'Carpet availability must be checked first via WhatsApp because type, size, color, capacity, schedule, and supplier partners need to be validated against your event date.',
+    },
+    {
+      question: 'Why isn\'t the carpet rental price listed as final?',
+      answer:
+        'Carpet pricing is heavily influenced by area size, carpet type, rental duration, delivery location, shipping cost, cleaning, deposit, and risk of stains or damage. Admin will provide an estimate once event details are clear.',
+    },
+    {
+      question: 'What information should I send when chatting on WhatsApp?',
+      answer:
+        'Send event type, date, location, area size or guest count, desired carpet type, area photos if available, setup time, pickup time, and whether you also need mattresses, fans, air coolers, or TVs.',
+    },
+    {
+      question: 'Which areas are served?',
+      answer:
+        'Priority areas are Sleman, Yogyakarta City, Bantul, Godean, Mlati, Gamping, Depok, around UGM, Malioboro, and parts of Kulon Progo. For Gunungkidul or distant areas, please confirm first as service is not always available.',
+    },
+    {
+      question: 'Can I also order mattresses, fans, air coolers, or TVs?',
+      answer:
+        'Yes, it can be arranged. Santi Living is strong in event equipment such as guest mattresses, pillows, blankets, fans, air coolers, and display TVs. Additional needs are still checked against stock, schedule, and delivery route.',
+    },
+  ],
+  cta: {
+    title: 'Need carpet rental for an event in Jogja?',
+    description:
+      'Send the date, location, area size, event type, and carpet preference. Admin will help check availability and the most reasonable estimate.',
+    waText: KARPET_WA_TEXT,
+    waSource: 'sewa_karpet_jogja_page',
+    secondaryLabel: 'Choose carpet option',
+      },
+  sections: [
+    {
+      title: 'Choose Your Event Carpet Type at Santi Living',
+      content: `
+        <div id="pilih-jenis-karpet"></div>
+        <p><strong>Carpet rental Jogja</strong> at Santi Living is built as a hub for all event carpet needs: red carpet, decorative rugs, runners, exhibition booths, seminars, celebrations, and event equipment packages. Because each type serves a different purpose, this page breaks down the options from the start so committees don't misstate their needs.</p>
+        <p><strong>Quick navigation:</strong> <a href="#karpet-merah-runner">red carpet runner</a> · <a href="#permadani-lesehan">floor-seating rug</a> · <a href="#runner-booth-pameran">runner booth/exhibition</a> · <a href="#paket-karpet-acara">event carpet package</a> · <a href="#perbandingan-karpet">comparison table</a>.</p>
+        <h3 id="karpet-merah-runner">Red carpet for guest walkways and ceremonies</h3>
+        <p>If you're looking for a long red strip for an entrance, stage, wedding ceremony, product launch, or formal booth, refer to it as a <strong>red carpet runner</strong>. Admin needs the walkway length, area width, indoor/outdoor setting, and setup time. If you mean a patterned red rug for seating, see <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">the Jogja red decorative rug page</a>.</p>
+        <h3 id="permadani-lesehan">Red/gold decorative rug for floor seating</h3>
+        <p>If your event is a religious gathering, memorial prayer, family gathering, temporary guest room, or small prayer room, choose a <strong>decorative rug</strong>. A decorative rug is a patterned carpet that is relatively rectangular, not an event runner. See also the <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">dedicated Jogja decorative rug rental page</a>.</p>
+        <h3 id="runner-booth-pameran">Runner, booth, exhibition, seminar, and bazaar</h3>
+        <p>For seminars, exhibitions, UMKM stands, small stages, or custom layouts, send a floor plan, photos, or length x width dimensions. Admin will help calculate carpet needs and a realistic delivery schedule.</p>
+        <h3 id="paket-karpet-acara">Event carpet package by request</h3>
+        <p>If the committee also needs guest mattresses, fans, air coolers, TVs, pillows, or blankets, check the <a href="https://acara.santiliving.com/sewa-perlengkapan-event">Santi Living event equipment package</a>. All additional items are still validated by request based on stock and schedule.</p>
+      `,
+    },
+    {
+      title: 'Comparison: Decorative Rug vs Runner vs Red Carpet vs Event Package',
+      content: `
+        <div id="perbandingan-karpet"></div>
+        <p>Use this table before chatting so the terms you send admin are accurate. If still unsure, send a reference photo and area dimensions; admin will help guide you.</p>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Best for</th><th>Data to send</th><th>Safe note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Red carpet runner</strong></td><td>Guest walkways, stages, wedding ceremonies, product launches, formal ceremonies.</td><td>Walkway length and width, location, indoor/outdoor, setup time.</td><td>Do not confuse with patterned red decorative rugs.</td></tr>
+            <tr><td><strong>Red/gold decorative rug</strong></td><td>Religious gatherings, memorial prayers, thanksgiving events, guest rooms, family floor seating.</td><td>Guest count, room dimensions, area photos, additional pillow/mattress needs.</td><td>Check pattern stock and number of pieces first via WA.</td></tr>
+            <tr><td><strong>Runner / booth / exhibition</strong></td><td>Seminars, exhibitions, expos, UMKM bazaars, stands, small stages.</td><td>Booth floor plan, area size, loading access, delivery and pickup schedule.</td><td>Estimate follows dimensions and venue coordination.</td></tr>
+            <tr><td><strong>Event carpet package</strong></td><td>Committees wanting carpet plus mattresses, fans, air coolers, TVs, or other event items.</td><td>Item list, number of people, duration, location, and priority needs.</td><td>All additional items by request; admin checks stock before providing estimate.</td></tr>
+          </tbody>
+        </table>
+      `,
+    },
+    {
+      title: 'Quick Guide to Pricing, Event Types, Service Areas, and How to Order',
+      content: `
+        <div id="harga-sewa-karpet"></div>
+        <p>Carpet rental costs are not listed as final prices because carpets depend on area size, carpet type, event date, rental duration, venue access, delivery, cleaning, deposit, and stock availability. To understand the cost factors, read the <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">Jogja carpet rental price guide 2026</a>.</p>
+        <h3 id="jenis-acara-karpet">Event types that commonly require carpets</h3>
+        <ul>
+          <li><strong>Weddings and celebrations:</strong> guest walkways, stages, photo areas, or family rooms. Reference: <a href="https://santiliving.com/artikel/sewa-karpet-pernikahan-jogja">wedding carpet rental Jogja</a>.</li>
+          <li><strong>Religious gatherings and memorial prayers:</strong> decorative rugs for floor seating. Reference: <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">carpet rental for religious gatherings/memorial prayers Jogja</a>.</li>
+          <li><strong>Seminars and exhibitions:</strong> runners, booths, expos, bazaars, or small stages. Reference: <a href="https://santiliving.com/artikel/sewa-karpet-seminar-pameran-jogja">carpet rental for seminars/exhibitions Jogja</a>.</li>
+          <li><strong>Need multiple items at once:</strong> carpet can be arranged together with mattresses, fans, air coolers, and TVs. Reference: <a href="https://santiliving.com/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv">Jogja event equipment rental package</a>.</li>
+        </ul>
+        <p>If unsure whether to choose red carpet or decorative rug, also read <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">red carpet vs decorative rug for events</a>.</p>
+      `,
+    },
+    {
+      title: 'Carpet Rental Service Areas in Yogyakarta',
+      content: `
+        <div id="area-sewa-karpet"></div>
+        <p>Priority areas include Sleman, Yogyakarta City, Bantul, and Kulonprogo. Delivery fees apply for areas outside the 3 km free radius from our Godean workshop.</p>
+      `,
+    },
+  ],
+}};
 
 export const sewaKarpet = sewaKarpetJogja;

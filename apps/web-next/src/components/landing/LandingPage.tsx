@@ -5,6 +5,7 @@ import type { LandingPageConfig, ThemeColor } from '@/types/landing';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { useLocale, useT } from '@/contexts/locale';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -49,31 +50,47 @@ const BG_MAP: Record<ThemeColor, string> = {
   indigo: 'bg-indigo-600',
 };
 
+function le<T>(val: T, enVal: T | undefined, locale: string): T {
+  return locale === 'en' && enVal !== undefined ? enVal : val;
+}
+
 export function LandingPage({ config: cfg, children }: LandingPageProps) {
+  const { locale } = useLocale();
+  const t = useT();
+  const en = locale === 'en' ? cfg.en : undefined;
   const gradientClass = GRADIENT_MAP[cfg.color] || GRADIENT_MAP.blue;
   const textClass = TEXT_MAP[cfg.color] || TEXT_MAP.blue;
   const borderClass = BORDER_MAP[cfg.color] || BORDER_MAP.blue;
   const bgClass = BG_MAP[cfg.color] || BG_MAP.blue;
   const isKarpetPage = cfg.tracking?.productCategory === 'karpet';
   const isEventPage = cfg.tracking?.productCategory === 'event';
-  const defaultPriceGuideHref = isKarpetPage
+
+  const defaultPriceGuideLabel = isKarpetPage
+    ? t('landing.read_karpet_guide')
+    : isEventPage
+      ? t('landing.check_event_options')
+      : t('landing.see_full_prices');
+  const defaultPriceSectionTitle = isKarpetPage
+    ? t('landing.karpet_options')
+    : isEventPage
+      ? t('landing.event_estimate')
+      : t('landing.prices');
+  const priceGuideHref = cfg.priceSection?.linkHref || (isKarpetPage
     ? 'https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026'
     : isEventPage
       ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
-      : '/harga-sewa-kasur';
-  const defaultPriceGuideLabel = isKarpetPage
-    ? 'Baca panduan harga sewa karpet →'
-    : isEventPage
-      ? 'Cek opsi karpet dan item by-request →'
-      : 'Lihat daftar harga lengkap semua ukuran →';
-  const defaultPriceSectionTitle = isKarpetPage
-    ? 'Opsi Sewa Karpet'
-    : isEventPage
-      ? 'Estimasi Paket & Item Konsultatif'
-      : 'Harga Sewa';
-  const priceGuideHref = cfg.priceSection?.linkHref || defaultPriceGuideHref;
-  const priceGuideLabel = cfg.priceSection?.linkLabel || defaultPriceGuideLabel;
-  const priceSectionTitle = cfg.priceSection?.title || defaultPriceSectionTitle;
+      : '/harga-sewa-kasur');
+  const priceGuideLabel = le(cfg.priceSection?.linkLabel, en?.priceSection?.linkLabel, locale) || defaultPriceGuideLabel;
+  const priceSectionTitle = le(cfg.priceSection?.title, en?.priceSection?.title, locale) || defaultPriceSectionTitle;
+
+  const hero = en?.hero;
+  const actions = le(cfg.hero.actions, en?.hero?.actions, locale);
+  const benefits = le(cfg.benefits, en?.benefits, locale);
+  const audience = le(cfg.audience, en?.audience, locale);
+  const priceCards = le(cfg.priceCards, en?.priceCards, locale);
+  const sections = en?.sections || cfg.sections;
+  const faqs = en?.faqs || cfg.faqs;
+  const badge = le(cfg.hero.badge, hero?.badge, locale);
 
   return (
     <main className="pt-[80px]">
@@ -85,7 +102,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           <div className="absolute inset-0 z-0">
             <Image
               src={cfg.hero.bgImage}
-              alt={cfg.hero.bgImageAlt || `${cfg.hero.title} - visual layanan Santi Living`}
+              alt={le(cfg.hero.bgImageAlt || `${cfg.hero.title} - visual layanan Santi Living`, hero?.bgImageAlt || `${le(cfg.hero.title, hero?.title, locale)} - Santi Living visual`, locale)}
               fill
               priority
               sizes="100vw"
@@ -98,9 +115,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
         <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
         
         <div className="container relative z-10 text-center">
-          {cfg.hero.badges && cfg.hero.badges.length > 0 && (
+          {(en?.hero?.badges || cfg.hero.badges) && (en?.hero?.badges || cfg.hero.badges)!.length > 0 && (
             <div className="flex items-center justify-center gap-2 mb-3">
-              {cfg.hero.badges.map((b, bi) => (
+              {(en?.hero?.badges || cfg.hero.badges)!.map((b, bi) => (
                 <div key={bi} className="inline-block bg-white/10 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wide">
                   {b}
                 </div>
@@ -108,9 +125,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
             </div>
           )}
 
-          {cfg.hero.features && cfg.hero.features.length > 0 && (
+          {(en?.hero?.features || cfg.hero.features) && (en?.hero?.features || cfg.hero.features)!.length > 0 && (
             <div className="flex items-center justify-center gap-3 mb-3">
-              {cfg.hero.features.map((f, fi) => (
+              {(en?.hero?.features || cfg.hero.features)!.map((f, fi) => (
                 <div key={fi} className="inline-flex items-center gap-2 bg-white/10 text-white text-sm px-3 py-1 rounded-full font-medium shadow-sm">
                   {f.icon && <span className="text-base">{f.icon}</span>}
                   <span>{f.text}</span>
@@ -120,19 +137,19 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           )}
 
           <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md text-center">
-            {cfg.hero.title}
+            {le(cfg.hero.title, hero?.title, locale)}
           </h1>
           <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium mb-4 text-center">
-            {cfg.hero.subtitle}
+            {le(cfg.hero.subtitle, hero?.subtitle, locale)}
           </p>
-          {cfg.hero.badge && (
+          {badge && (
             <div className="mx-auto inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-white border border-white/20 backdrop-blur-sm shadow-sm">
-              {cfg.hero.badge}
+              {badge}
             </div>
           )}
-          {cfg.hero.actions && cfg.hero.actions.length > 0 && (
+          {(actions && actions.length > 0) ? (
             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-              {cfg.hero.actions.map((a, i) => {
+              {actions.map((a, i) => {
                 if (a.type === 'link') {
                   return (
                     <Link
@@ -144,7 +161,6 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                     </Link>
                   );
                 }
-
                 return (
                   <a
                     key={i}
@@ -163,11 +179,11 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                 );
               })}
             </div>
-          )}
+          ) : null}
 
-          {cfg.hero.phone && (
+          {(en?.hero?.phone || cfg.hero.phone) && (
             <div className="mt-3 text-white/80 text-sm">
-              Atau hubungi langsung: <span className="font-semibold">{cfg.hero.phone}</span>
+              {t('landing.call_directly')} <span className="font-semibold">{le(cfg.hero.phone, hero?.phone, locale)}</span>
             </div>
           )}
         </div>
@@ -176,15 +192,15 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       {children}
 
       {/* Benefits */}
-      {cfg.benefits && cfg.benefits.length > 0 && (
+      {benefits && benefits.length > 0 && (
         <section className="py-12 md:py-16">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
-              {`Kenapa Pilih ${cfg.hero.title.replace('Jogja', '').trim()}?`}
+              {t('landing.why_choose_prefix')} {le(cfg.hero.title, hero?.title, locale).replace(/Jogja|Yogyakarta/g, '').trim()}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
-              {cfg.benefits.map((b, i) => (
-                <FeatureCard key={i} icon={b.icon} title={b.title} description={b.description} />
+              {benefits.map((b, i) => (
+                <FeatureCard key={i} icon={b.icon ?? ''} title={b.title ?? ''} description={b.description ?? ''} />
               ))}
             </div>
           </div>
@@ -192,21 +208,21 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       )}
 
       {/* Price Cards */}
-      {cfg.priceCards && cfg.priceCards.length > 0 && (
+      {priceCards && priceCards.length > 0 && (
         <section className="py-12 md:py-16 bg-slate-50">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
               {priceSectionTitle}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {cfg.priceCards.map((card, i) => (
+              {priceCards.map((card, i) => (
                 <div 
                   key={i} 
                   className={`bg-white rounded-xl p-6 text-center shadow-sm relative border ${card.popular ? `border-2 ${borderClass} shadow-md scale-105 z-10` : 'border-slate-200'}`}
                 >
                   {card.popular && (
                     <div className={`absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full ${bgClass}`}>
-                      Best Value
+                      {t('landing.best_value')}
                     </div>
                   )}
                   <h3 className="font-bold text-slate-900 mb-1 text-lg">{card.name}</h3>
@@ -229,12 +245,12 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       )}
 
       {/* Audience */}
-      {cfg.audience && cfg.audience.length > 0 && (
+      {audience && audience.length > 0 && (
         <section className="py-12 md:py-16">
           <div className="container">
-            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">Siapa yang Biasanya Menyewa?</h2>
+            <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{t('landing.who_rents')}</h2>
             <div className="flex flex-col gap-6 max-w-xl mx-auto">
-              {cfg.audience.map((item, i) => (
+              {audience.map((item, i) => (
                 <div key={i} className="flex gap-4 items-start bg-slate-50 p-4 rounded-lg border border-slate-200">
                   <div className="text-3xl flex-shrink-0 mt-1">{item.icon}</div>
                   <div>
@@ -249,11 +265,11 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       )}
 
       {/* Extra HTML sections */}
-      {cfg.sections?.map((section, i) => (
+      {sections?.map((section, i) => (
         <section key={i} className={`py-12 md:py-16 ${i % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`}>
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{section.title}</h2>
-            <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: section.content }} />
+            <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: section.content! }} />
           </div>
         </section>
       ))}
@@ -262,7 +278,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       <section className="py-12 md:py-16 bg-white">
         <div className="container">
           <div className="max-w-2xl mx-auto">
-            <FAQAccordion items={cfg.faqs} title="Pertanyaan Umum" />
+            <FAQAccordion items={faqs} title={t('landing.faq_title')} />
           </div>
         </div>
       </section>
@@ -270,15 +286,15 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       {/* CTA */}
       <section className={`${gradientClass} py-12 md:py-16 text-center text-white`}>
         <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white text-center">{cfg.cta.title}</h2>
-          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed text-center">{cfg.cta.description}</p>
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white text-center">{le(cfg.cta.title, en?.cta?.title, locale)}</h2>
+          <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed text-center">{le(cfg.cta.description, en?.cta?.description, locale)}</p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Link 
               href={cfg.cta.secondaryHref || '/#calculator'} 
               className="bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14"
             >
-              {cfg.cta.secondaryLabel || 'Hitung Biaya Sewa'}
+              {le(cfg.cta.secondaryLabel, en?.cta?.secondaryLabel, locale) || t('landing.calculate_cost')}
             </Link>
             <a
               href={getWhatsAppUrl(cfg.cta.waText, cfg.cta.waSource)}
@@ -291,7 +307,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               data-page-type={cfg.tracking?.pageType}
               data-wa-intent={cfg.tracking?.intent}
             >
-              Chat WhatsApp
+              {t('landing.chat_wa')}
             </a>
           </div>
         </div>
