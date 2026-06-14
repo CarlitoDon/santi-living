@@ -8,6 +8,7 @@ export function useHostCta(): HostCtaCopy {
   const { locale } = useLocale();
 
   const cta = useMemo(() => {
+    if (typeof window === 'undefined') return DEFAULT_HOST_CTA;
     return getHostCta(window.location.hostname, window.location.pathname, locale);
   }, [locale]);
 
