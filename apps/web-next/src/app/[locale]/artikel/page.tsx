@@ -34,7 +34,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtikelIndexPage({ params }: PageProps) {
   const { locale } = await params;
-  const dict = (await getDictionary(locale as Locale)) as any;
+  const rawDict = await getDictionary(locale as Locale);
+  const dict = rawDict as Record<string, unknown>;
   const posts = getAllPosts(locale);
 
   const blogDict = dict.blog || {
