@@ -1,37 +1,16 @@
 import type { Metadata } from 'next';
-import {
-  KarpetCalculatorSection,
-  KarpetCartBar,
-} from '@/components/landing/KarpetCalculatorSection';
-import { LandingPage } from '@/components/landing/LandingPage';
-import { JsonLd } from '@/components/seo/JsonLd';
 import { sewaKarpetJogja } from '@/data/landing-pages/sewa-karpet';
-import {
-  buildKarpetBreadcrumbSchema,
-  buildKarpetFaqSchema,
-  buildKarpetMetadata,
-  buildKarpetServiceSchema,
-} from '@/lib/karpet-seo';
+import { LandingPage } from '@/components/landing/LandingPage';
 
-const path = '/sewa-karpet-jogja';
-
-export const metadata: Metadata = buildKarpetMetadata(sewaKarpetJogja, path);
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const en = sewaKarpetJogja.en;
+  if (locale === 'en' && en?.meta?.title) {
+    return { title: en.meta.title, description: en.meta.description };
+  }
+  return { title: sewaKarpetJogja.meta.title, description: sewaKarpetJogja.meta.description };
+}
 
 export default function SewaKarpetJogjaPage() {
-  return (
-    <>
-      <JsonLd data={buildKarpetServiceSchema(sewaKarpetJogja, path, 'Sewa karpet Jogja')} />
-      <JsonLd data={buildKarpetFaqSchema(sewaKarpetJogja)} />
-      <JsonLd
-        data={buildKarpetBreadcrumbSchema([
-          { name: 'Beranda', path: '/' },
-          { name: 'Sewa Karpet Jogja', path },
-        ])}
-      />
-      <LandingPage config={sewaKarpetJogja}>
-        <KarpetCalculatorSection />
-      </LandingPage>
-      <KarpetCartBar />
-    </>
-  );
+  return <LandingPage config={ sewaKarpetJogja } />;
 }
