@@ -169,6 +169,7 @@ export function Navigation() {
                         } else {
                           setActiveHash('');
                         }
+                        setIsOpen(false);
                       }}
                     >
                       {link.label}
@@ -184,6 +185,7 @@ export function Navigation() {
                               <Link
                                 href={subHref}
                                 className={`block px-3 py-2 rounded-md text-sm transition-colors ${isSubActive ? 'text-blue-600 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'}`}
+                                onClick={() => setIsOpen(false)}
                               >
                                 {sub.label}
                               </Link>
