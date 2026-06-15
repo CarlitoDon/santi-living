@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 import { localeHref } from '@/utils/localeHref';
+import { getTranslatedAuthor } from '@/utils/author';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -98,7 +99,7 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
                         day: 'numeric' 
                       })}
                     </span>
-                    <span>• {post.frontmatter.author}</span>
+                    <span>• {getTranslatedAuthor(post.frontmatter.author, locale)}</span>
                   </div>
                 </Link>
               ))}

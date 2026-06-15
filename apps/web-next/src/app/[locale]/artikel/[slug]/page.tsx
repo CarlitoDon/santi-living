@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { remark } from 'remark';
 import html from 'remark-html';
+import { getTranslatedAuthor } from '@/utils/author';
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -64,7 +65,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       type: 'article',
       publishedTime: post.frontmatter.pubDate.toISOString(),
-      authors: [post.frontmatter.author],
+      authors: [getTranslatedAuthor(post.frontmatter.author, locale)],
       images: [
         {
           url: image,
@@ -100,7 +101,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
     "description": post.frontmatter.description,
     "author": {
       "@type": "Person",
-      "name": post.frontmatter.author
+      "name": getTranslatedAuthor(post.frontmatter.author, locale)
     },
     "datePublished": post.frontmatter.pubDate.toISOString(),
     "image": post.frontmatter.image || "https://santiliving.com/logo.png",
@@ -138,7 +139,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
                   day: 'numeric' 
                 })}
               </span>
-              <span>• {post.frontmatter.author}</span>
+              <span>• {getTranslatedAuthor(post.frontmatter.author, locale)}</span>
             </div>
             {post.frontmatter.tags.length > 0 && (
               <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap', marginTop: 'var(--space-3)' }}>
