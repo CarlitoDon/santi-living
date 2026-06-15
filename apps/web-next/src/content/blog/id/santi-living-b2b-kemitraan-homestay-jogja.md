@@ -1,14 +1,6 @@
 ---
 title: "Santi Living Rambah Pasar B2B: Kemitraan Sewa Kasur Harian Homestay & Guest House Jogja"
 description: "Santi Living (divisi sewa kasur dari Santi Mebel) merambah pasar B2B Jogja dengan komisi referral 10% untuk 40 prospek homestay/guest house di Sleman & Bantul."
-pubDate: 2026-05-30
-author: "Tim Santi Mebel"
-tags: ["santi living", "b2b jogja", "homestay jogja", "sewa kasur jogja", "extra bed jogja", "referral 10%", "santi mebel"]
----
-
----
-title: "Santi Living Rambah Pasar B2B: Kemitraan Sewa Kasur Harian Homestay & Guest House Jogja"
-description: "Santi Living (divisi sewa kasur dari Santi Mebel) merambah pasar B2B Jogja dengan komisi referral 10% untuk 40 prospek homestay/guest house di Sleman & Bantul."
 pubDate: "2026-05-30"
 author: "Tim Santi Living"
 tags: ["kemitraan b2b", "sewa kasur homestay", "guest house jogja", "referral sewa kasur", "santi living", "extra bed jogja", "santi mebel"]

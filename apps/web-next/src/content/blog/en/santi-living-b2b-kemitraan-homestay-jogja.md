@@ -1,13 +1,4 @@
 ---
----
-title: "Santi Living Enters B2B Market: Daily Mattress Rental Partnership for Jogja Homestays & Guest Houses"
-description: "Santi Living (the mattress rental division of Santi Mebel) enters the Jogja B2B market with a 10% referral commission for 40 prospective homestays/guest houses in Sleman & Bantul."
-pubDate: 2026-05-30
-author: "Tim Santi Mebel"
-tags: ["santi living", "b2b jogja", "homestay jogja", "sewa kasur jogja", "extra bed jogja", "referral 10%", "santi mebel"]
----
-
----
 title: "Santi Living Enters B2B Market: Daily Mattress Rental Partnership for Jogja Homestays & Guest Houses"
 description: "Santi Living (the mattress rental division of Santi Mebel) enters the Jogja B2B market with a 10% referral commission for 40 prospective homestays/guest houses in Sleman & Bantul."
 pubDate: "2026-05-30"
@@ -72,4 +63,3 @@ Let's collaborate to provide the best sleep experience for Yogyakarta's tourists
 * **WhatsApp Business**: [WhatsApp Chat: 0895-1911-9092](https://wa.me/6289519119092)
 * **Official Website**: [santiliving.com](https://santiliving.com)
 
----

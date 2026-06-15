@@ -21,6 +21,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [activeHash, setActiveHash] = useState('');
   const hostCta = useHostCta();
   const t = useT();
   const { locale } = useLocale();
@@ -28,12 +29,34 @@ export function Navigation() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
+    
+    // Set initial hash
+    if (typeof window !== 'undefined') {
+      setActiveHash(window.location.hash);
+    }
+
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    // Also listen to popstate to catch back/forward hash changes
+    window.addEventListener('popstate', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('popstate', handleHashChange);
+    };
   }, []);
 
   // Close sidebar on route change
   useEffect(() => {
     setTimeout(() => {
       setIsOpen(false);
+      // Reset hash on actual page/pathname change if no hash present
+      if (typeof window !== 'undefined') {
+        setActiveHash(window.location.hash);
+      }
     }, 0);
   }, [pathname]);
 
@@ -117,7 +140,20 @@ export function Navigation() {
             <ul className="list-none p-0 m-0">
               {navLinks.map((link) => {
                 const linkHref = localeHref(link.href, locale);
-                const isActive = pathname === linkHref || (linkHref !== '/' + locale && pathname.startsWith(linkHref));
+                
+                let isActive = false;
+                const hasHash = link.href.includes('#');
+                
+                if (hasHash) {
+                  const targetHash = link.href.substring(link.href.indexOf('#'));
+                  isActive = activeHash === targetHash;
+                } else if (link.href === '/' || link.href === '') {
+                  const isHomePath = pathname === '/' || pathname === '/id' || pathname === '/en';
+                  isActive = isHomePath && !activeHash;
+                } else {
+                  isActive = pathname === linkHref || (linkHref !== '/' + locale && pathname.startsWith(linkHref));
+                }
+
                 return (
                   <li key={link.href} className="mb-2">
                     <Link 
@@ -127,6 +163,13 @@ export function Navigation() {
                           ? 'text-blue-600 bg-blue-50 font-bold shadow-[inset_0_0_0_1px_#dbeafe]' 
                           : 'text-slate-800 no-underline hover:text-blue-600 hover:bg-slate-50'
                       }`}
+                      onClick={() => {
+                        if (hasHash) {
+                          setActiveHash(link.href.substring(link.href.indexOf('#')));
+                        } else {
+                          setActiveHash('');
+                        }
+                      }}
                     >
                       {link.label}
                     </Link>
