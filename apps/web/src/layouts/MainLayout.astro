@@ -1,258 +1,259 @@
----
-import SpeedInsights from "@vercel/speed-insights/astro";
-import "@/styles/global.css";
-import "@/styles/utilities.css";
-import config from "@/data/config.json";
-import Footer from "@/components/Footer.astro";
-
-interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-}
-
-const {
-  title = "Sewa Kasur Jogja Terdekat - Antar Jemput Same Day | Santi Mebel",
-  description = "Sewa kasur bersih di Jogja. Antar jemput sama hari. Harga mulai Rp 25.000/hari. Kasur premium & steril. Order via WhatsApp sekarang!",
-  image = "/images/og-cover.jpg",
-} = Astro.props;
-
-const siteUrl = config.siteUrl;
-// Ensure image is absolute
-const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
----
-
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-MLNE098NSZ"
-      is:inline></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-
-      function getOrCreateGaUserId() {
-        var storageKey = "sl_ga_user_id";
-        var existing = localStorage.getItem(storageKey);
-        if (existing) return existing;
-
-        var generated;
-        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-          generated = crypto.randomUUID();
-        } else {
-          generated = "sl-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
-        }
-
-        localStorage.setItem(storageKey, generated);
-        return generated;
-      }
-
-      gtag("js", new Date());
-      var gaUserId = getOrCreateGaUserId();
-
-      // Primary ACTIVE GA4 Property (Linked to Google Ads)
-      gtag("config", "G-MLNE098NSZ", {
-        user_id: gaUserId,
-        allow_google_signals: true,
-        allow_ad_personalization_signals: true,
-        page_path: window.location.pathname,
-      });
-
-      // Native Google Ads Tag
-      gtag("config", "AW-17865321955", {
-        user_id: gaUserId
-      });
-    </script>
-
-    <!-- Microsoft Clarity -->
-    <script>
-      import Clarity from "@microsoft/clarity";
-      const projectId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID;
-
-      if (projectId) {
-        Clarity.init(projectId);
-      } else {
-        console.warn("Microsoft Clarity Project ID not found");
-      }
-    </script>
-
-    <!-- Primary Meta Tags -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="sewa kasur jogja, sewa kasur terdekat, harga sewa kasur di jogja, rental kasur jogja, persewaan kasur terdekat, sewa kasur murah jogja, sewa kasur lipat jogja, sewa kasur busa terdekat, sewa kasur harian jogja, sewa kasur bulanan, kasur antar jemput jogja, sewa extra bed jogja, santi mebel jogja, santi mebel terdekat"
-    />
-    <meta name="author" content="Sewa Kasur Jogja by Santi Mebel" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={new URL(Astro.url.pathname, siteUrl).href} />
-
-    <!-- Favicon & PWA -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#2563eb" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="id_ID" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={siteUrl} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={ogImage} />
-
-    <!-- Google Fonts - Inter & Noto Serif -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Leaflet CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
-
-    <!-- Structured Data - LocalBusiness -->
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        name: config.businessName,
-        description: description,
-        url: siteUrl,
-        telephone: `+${config.whatsappNumber}`,
-        image: ogImage,
-        sameAs: config.socialLinks,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Jl. Godean KM 10",
-          addressLocality: config.city,
-          postalCode: "55264",
-          addressRegion: "DI Yogyakarta",
-          addressCountry: "ID",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: -7.7956,
-          longitude: 110.3695,
-        },
-        areaServed: {
-          "@type": "City",
-          name: config.city,
-        },
-        priceRange: config.priceRange,
-        openingHoursSpecification: {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-          ],
-          opens: "08:00",
-          closes: "21:00",
-        },
-      })}
-    />
-  </head>
-  <body>
-    <slot />
-    <Footer />
-    <SpeedInsights />
-
-    <!-- WhatsApp & Phone Click Tracking (GA4 + Google Ads Conversion) -->
-    <script>
-      import {
-        captureAttributionOnPageLoad,
-        getAttributionEventParams,
-      } from "@/lib/attribution";
-
-      captureAttributionOnPageLoad();
-
-      document.addEventListener('click', function(e) {
-        var target = e.target as Element | null;
-        if (!target) return;
-
-        var gtagFn = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
-        if (typeof gtagFn !== 'function') return;
-
-        // === WhatsApp Click ===
-        var waLink = target.closest('a[href*="wa.me"]');
-        if (waLink) {
-          var source = waLink.getAttribute('data-wa-source') || 'unknown';
-          if (waLink.closest('.sticky-whatsapp')) source = 'sticky_button';
-          else if (waLink.closest('.final-cta')) source = 'final_cta';
-          else if (waLink.closest('.sidebar')) source = 'sidebar';
-          else if (waLink.closest('footer')) source = 'footer';
-          else if (waLink.closest('.calculator-section')) source = 'calculator';
-          var attributionParams = getAttributionEventParams();
-
-          // GA4 Custom Event
-          gtagFn('event', 'whatsapp_click', {
-            event_category: 'conversion',
-            event_label: source,
-            page_path: window.location.pathname,
-            ...attributionParams
-          });
-
-          // Google Ads Conversion Event (tracks actual leads)
-          gtagFn('event', 'conversion', {
-            send_to: 'AW-17865321955/whatsapp_lead',
-            value: 25000,
-            currency: 'IDR',
-            event_callback: function() {},
-          });
-          return;
-        }
-
-        // === Phone/Tel Click ===
-        var telLink = target.closest('a[href^="tel:"]');
-        if (telLink) {
-          gtagFn('event', 'phone_click', {
-            event_category: 'conversion',
-            event_label: 'phone_call',
-            page_path: window.location.pathname,
-          });
-
-          gtagFn('event', 'conversion', {
-            send_to: 'AW-17865321955/phone_lead',
-            value: 25000,
-            currency: 'IDR',
-          });
-        }
-      });
-    </script>
-  </body>
-</html>
+1|---
+2|import SpeedInsights from "@vercel/speed-insights/astro";
+3|import "@/styles/global.css";
+4|import "@/styles/utilities.css";
+5|import config from "@/data/config.json";
+6|import Footer from "@/components/Footer.astro";
+7|
+8|interface Props {
+9|  title?: string;
+10|  description?: string;
+11|  image?: string;
+12|}
+13|
+14|const {
+15|  title = "Sewa Kasur Jogja Terdekat - Antar Jemput Same Day | Santi Mebel",
+16|  description = "Sewa kasur bersih di Jogja. Antar jemput sama hari. Harga mulai Rp 30.000/hari. Kasur premium & steril. Order via WhatsApp sekarang!",
+17|  image = "/images/og-cover.jpg",
+18|} = Astro.props;
+19|
+20|const siteUrl = config.siteUrl;
+21|// Ensure image is absolute
+22|const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
+23|---
+24|
+25|<!doctype html>
+26|<html lang="id">
+27|  <head>
+28|    <meta charset="UTF-8" />
+29|    <meta
+30|      name="viewport"
+31|      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+32|    />
+33|    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+34|
+35|    <!-- Google tag (gtag.js) -->
+36|    <script
+37|      async
+38|      src="https://www.googletagmanager.com/gtag/js?id=G-MLNE098NSZ"
+39|      is:inline></script>
+40|    <script is:inline>
+41|      window.dataLayer = window.dataLayer || [];
+42|      function gtag() {
+43|        dataLayer.push(arguments);
+44|      }
+45|
+46|      function getOrCreateGaUserId() {
+47|        var storageKey = "sl_ga_user_id";
+48|        var existing = localStorage.getItem(storageKey);
+49|        if (existing) return existing;
+50|
+51|        var generated;
+52|        if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+53|          generated = crypto.randomUUID();
+54|        } else {
+55|          generated = "sl-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+56|        }
+57|
+58|        localStorage.setItem(storageKey, generated);
+59|        return generated;
+60|      }
+61|
+62|      gtag("js", new Date());
+63|      var gaUserId = getOrCreateGaUserId();
+64|
+65|      // Primary ACTIVE GA4 Property (Linked to Google Ads)
+66|      gtag("config", "G-MLNE098NSZ", {
+67|        user_id: gaUserId,
+68|        allow_google_signals: true,
+69|        allow_ad_personalization_signals: true,
+70|        page_path: window.location.pathname,
+71|      });
+72|
+73|      // Native Google Ads Tag
+74|      gtag("config", "AW-17865321955", {
+75|        user_id: gaUserId
+76|      });
+77|    </script>
+78|
+79|    <!-- Microsoft Clarity -->
+80|    <script>
+81|      import Clarity from "@microsoft/clarity";
+82|      const projectId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID;
+83|
+84|      if (projectId) {
+85|        Clarity.init(projectId);
+86|      } else {
+87|        console.warn("Microsoft Clarity Project ID not found");
+88|      }
+89|    </script>
+90|
+91|    <!-- Primary Meta Tags -->
+92|    <title>{title}</title>
+93|    <meta name="title" content={title} />
+94|    <meta name="description" content={description} />
+95|    <meta
+96|      name="keywords"
+97|      content="sewa kasur jogja, sewa kasur terdekat, harga sewa kasur di jogja, rental kasur jogja, persewaan kasur terdekat, sewa kasur murah jogja, sewa kasur lipat jogja, sewa kasur busa terdekat, sewa kasur harian jogja, sewa kasur bulanan, kasur antar jemput jogja, sewa extra bed jogja, santi mebel jogja, santi mebel terdekat"
+98|    />
+99|    <meta name="author" content="Sewa Kasur Jogja by Santi Mebel" />
+100|    <meta name="robots" content="index, follow" />
+101|    <link rel="canonical" href={new URL(Astro.url.pathname, siteUrl).href} />
+102|
+103|    <!-- Favicon & PWA -->
+104|    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+105|    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+106|    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+107|    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+108|    <link rel="manifest" href="/site.webmanifest" />
+109|    <meta name="theme-color" content="#2563eb" />
+110|
+111|    <!-- Open Graph / Facebook -->
+112|    <meta property="og:type" content="website" />
+113|    <meta property="og:url" content={siteUrl} />
+114|    <meta property="og:title" content={title} />
+115|    <meta property="og:description" content={description} />
+116|    <meta property="og:image" content={ogImage} />
+117|    <meta property="og:locale" content="id_ID" />
+118|
+119|    <!-- Twitter -->
+120|    <meta property="twitter:card" content="summary_large_image" />
+121|    <meta property="twitter:url" content={siteUrl} />
+122|    <meta property="twitter:title" content={title} />
+123|    <meta property="twitter:description" content={description} />
+124|    <meta property="twitter:image" content={ogImage} />
+125|
+126|    <!-- Google Fonts - Inter & Noto Serif -->
+127|    <link rel="preconnect" href="https://fonts.googleapis.com" />
+128|    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+129|    <link
+130|      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600;700&display=swap"
+131|      rel="stylesheet"
+132|    />
+133|
+134|    <!-- Leaflet CSS -->
+135|    <link
+136|      rel="stylesheet"
+137|      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+138|      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+139|      crossorigin=""
+140|    />
+141|
+142|    <!-- Structured Data - LocalBusiness -->
+143|    <script
+144|      type="application/ld+json"
+145|      is:inline
+146|      set:html={JSON.stringify({
+147|        "@context": "https://schema.org",
+148|        "@type": "LocalBusiness",
+149|        name: config.businessName,
+150|        description: description,
+151|        url: siteUrl,
+152|        telephone: `+${config.whatsappNumber}`,
+153|        image: ogImage,
+154|        sameAs: config.socialLinks,
+155|        address: {
+156|          "@type": "PostalAddress",
+157|          streetAddress: "Jl. Godean KM 10",
+158|          addressLocality: config.city,
+159|          postalCode: "55264",
+160|          addressRegion: "DI Yogyakarta",
+161|          addressCountry: "ID",
+162|        },
+163|        geo: {
+164|          "@type": "GeoCoordinates",
+165|          latitude: -7.7956,
+166|          longitude: 110.3695,
+167|        },
+168|        areaServed: {
+169|          "@type": "City",
+170|          name: config.city,
+171|        },
+172|        priceRange: config.priceRange,
+173|        openingHoursSpecification: {
+174|          "@type": "OpeningHoursSpecification",
+175|          dayOfWeek: [
+176|            "Monday",
+177|            "Tuesday",
+178|            "Wednesday",
+179|            "Thursday",
+180|            "Friday",
+181|            "Saturday",
+182|            "Sunday",
+183|          ],
+184|          opens: "08:00",
+185|          closes: "21:00",
+186|        },
+187|      })}
+188|    />
+189|  </head>
+190|  <body>
+191|    <slot />
+192|    <Footer />
+193|    <SpeedInsights />
+194|
+195|    <!-- WhatsApp & Phone Click Tracking (GA4 + Google Ads Conversion) -->
+196|    <script>
+197|      import {
+198|        captureAttributionOnPageLoad,
+199|        getAttributionEventParams,
+200|      } from "@/lib/attribution";
+201|
+202|      captureAttributionOnPageLoad();
+203|
+204|      document.addEventListener('click', function(e) {
+205|        var target = e.target as Element | null;
+206|        if (!target) return;
+207|
+208|        var gtagFn = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+209|        if (typeof gtagFn !== 'function') return;
+210|
+211|        // === WhatsApp Click ===
+212|        var waLink = target.closest('a[href*="wa.me"]');
+213|        if (waLink) {
+214|          var source = waLink.getAttribute('data-wa-source') || 'unknown';
+215|          if (waLink.closest('.sticky-whatsapp')) source = 'sticky_button';
+216|          else if (waLink.closest('.final-cta')) source = 'final_cta';
+217|          else if (waLink.closest('.sidebar')) source = 'sidebar';
+218|          else if (waLink.closest('footer')) source = 'footer';
+219|          else if (waLink.closest('.calculator-section')) source = 'calculator';
+220|          var attributionParams = getAttributionEventParams();
+221|
+222|          // GA4 Custom Event
+223|          gtagFn('event', 'whatsapp_click', {
+224|            event_category: 'conversion',
+225|            event_label: source,
+226|            page_path: window.location.pathname,
+227|            ...attributionParams
+228|          });
+229|
+230|          // Google Ads Conversion Event (tracks actual leads)
+231|          gtagFn('event', 'conversion', {
+232|            send_to: 'AW-17865321955/whatsapp_lead',
+233|            value: 25000,
+234|            currency: 'IDR',
+235|            event_callback: function() {},
+236|          });
+237|          return;
+238|        }
+239|
+240|        // === Phone/Tel Click ===
+241|        var telLink = target.closest('a[href^="tel:"]');
+242|        if (telLink) {
+243|          gtagFn('event', 'phone_click', {
+244|            event_category: 'conversion',
+245|            event_label: 'phone_call',
+246|            page_path: window.location.pathname,
+247|          });
+248|
+249|          gtagFn('event', 'conversion', {
+250|            send_to: 'AW-17865321955/phone_lead',
+251|            value: 25000,
+252|            currency: 'IDR',
+253|          });
+254|        }
+255|      });
+256|    </script>
+257|  </body>
+258|</html>
+259|

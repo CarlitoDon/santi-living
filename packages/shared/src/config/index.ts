@@ -15,7 +15,7 @@ export const BUSINESS_CONFIG = {
   minBookingDays: 0,
   operatingHours: "08:00 - 21:00",
   cutoffHour: 15,
-  priceRange: "Rp 25.000 - Rp 50.000",
+  priceRange: "Rp 30.000 - Rp 55.000",
 } as const;
 
 /**

@@ -1,524 +1,501 @@
----
-export const prerender = true;
-
-import MainLayout from "@/layouts/MainLayout.astro";
-import Header from "@/components/Header.astro";
-import Sidebar from "@/components/Sidebar.astro";
-import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
-import config from "@/data/config.json";
----
-
-<MainLayout
-  title="Sewa Kasur Bulanan Jogja | Hemat Mulai Rp750rb/Bulan - Santi Living"
-  description="Sewa kasur bulanan di Jogja mulai Rp750.000/bulan. Cocok untuk kos, kontrakan, atau mahasiswa. Kasur bersih, antar jemput gratis, tanpa deposit besar. Diskon 10-15% sewa banyak."
->
-  <Header />
-  <Sidebar />
-
-  <main class="bulanan-page" style="padding-top: 70px;">
-    <!-- Hero -->
-    <section class="bulanan-hero">
-      <div class="container">
-        <h1 class="bulanan-hero-title">Sewa Kasur Bulanan Jogja</h1>
-        <p class="bulanan-hero-subtitle">
-          Solusi hemat untuk kos, kontrakan, atau mahasiswa yang butuh kasur tanpa beli
-        </p>
-        <div class="bulanan-hero-price">Mulai Rp750.000/bulan</div>
-      </div>
-    </section>
-
-    <!-- Kenapa Sewa Bulanan -->
-    <section class="bulanan-section">
-      <div class="container">
-        <h2 class="bulanan-section-title">Kenapa Pilih Sewa Kasur Bulanan?</h2>
-        <div class="benefit-grid">
-          <div class="benefit-card">
-            <div class="benefit-icon">💸</div>
-            <h3>Hemat vs Beli Baru</h3>
-            <p>Kasur baru mulai Rp1-3 juta. Sewa bulanan cuma Rp750rb — hemat sampai 75% untuk kebutuhan sementara!</p>
-          </div>
-          <div class="benefit-card">
-            <div class="benefit-icon">🎓</div>
-            <h3>Cocok untuk Mahasiswa</h3>
-            <p>Baru pindah kos atau kontrakan? Sewa dulu, nanti kalau sudah settle baru beli. Tanpa ribet pindahan kasur.</p>
-          </div>
-          <div class="benefit-card">
-            <div class="benefit-icon">🧹</div>
-            <h3>Kasur Selalu Bersih</h3>
-            <p>Setiap kasur dicuci profesional sebelum diantar. Bersih, wangi, dan dibungkus plastik steril.</p>
-          </div>
-          <div class="benefit-card">
-            <div class="benefit-icon">📦</div>
-            <h3>Bebas Repot</h3>
-            <p>Selesai sewa? Kami jemput. Tidak perlu mikir mau diapakan kasurnya setelah kontrak habis.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Harga Bulanan -->
-    <section class="bulanan-section bulanan-section-alt">
-      <div class="container">
-        <h2 class="bulanan-section-title">Harga Sewa Kasur Bulanan</h2>
-        <p class="bulanan-section-desc">Semua harga sudah termasuk kasur busa berkualitas</p>
-
-        <div class="price-cards">
-          <div class="price-card">
-            <div class="price-card-header">Single Standard</div>
-            <div class="price-card-size">90 × 200 cm</div>
-            <div class="price-card-price">Rp 750.000<span>/bulan</span></div>
-            <div class="price-card-daily">≈ Rp 25.000/hari</div>
-            <div class="price-card-note">1 orang • kasur busa saja</div>
-          </div>
-          <div class="price-card price-card-popular">
-            <div class="price-card-badge">Best Value</div>
-            <div class="price-card-header">Paket Lengkap Single</div>
-            <div class="price-card-size">Kasur + Sprei + Bantal + Selimut</div>
-            <div class="price-card-price">Rp 1.050.000<span>/bulan</span></div>
-            <div class="price-card-daily">≈ Rp 35.000/hari</div>
-            <div class="price-card-note">1 orang • siap pakai langsung</div>
-          </div>
-          <div class="price-card">
-            <div class="price-card-header">Double</div>
-            <div class="price-card-size">120 × 200 cm</div>
-            <div class="price-card-price">Rp 1.050.000<span>/bulan</span></div>
-            <div class="price-card-daily">≈ Rp 35.000/hari</div>
-            <div class="price-card-note">1-2 orang • kasur busa saja</div>
-          </div>
-        </div>
-
-        <p class="bulanan-section-note">
-          <a href="/harga-sewa-kasur">Lihat daftar harga lengkap semua ukuran →</a>
-        </p>
-      </div>
-    </section>
-
-    <!-- Siapa yang Sewa Bulanan -->
-    <section class="bulanan-section">
-      <div class="container">
-        <h2 class="bulanan-section-title">Siapa yang Biasanya Sewa Kasur Bulanan?</h2>
-        <div class="audience-grid">
-          <div class="audience-item">
-            <span class="audience-icon">🎓</span>
-            <div>
-              <strong>Mahasiswa Baru</strong>
-              <p>Baru pindah kos di Jogja, belum sempat beli kasur. Sewa dulu 1-3 bulan sambil settle.</p>
-            </div>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon">🏠</span>
-            <div>
-              <strong>Penghuni Kontrakan Sementara</strong>
-              <p>Kontrak 3-6 bulan? Beli kasur terlalu mahal, sewa jauh lebih hemat dan praktis.</p>
-            </div>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon">💼</span>
-            <div>
-              <strong>Pekerja Project</strong>
-              <p>Karyawan yang ditugaskan ke Jogja sementara. Butuh kasur tanpa harus beli furniture.</p>
-            </div>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon">🏢</span>
-            <div>
-              <strong>Pemilik Kos/Penginapan</strong>
-              <p>Perlu kasur tambahan untuk kamar baru? Sewa banyak unit, dapat diskon 10-15%!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="bulanan-section bulanan-section-alt">
-      <div class="container">
-        <h2 class="bulanan-section-title">Pertanyaan tentang Sewa Bulanan</h2>
-        <div class="faq-list">
-          <details class="faq-item">
-            <summary class="faq-question">Apakah sewa bulanan lebih murah dari harian?</summary>
-            <p class="faq-answer">Ya! Harga sewa bulanan dihitung dari tarif harian × 30 hari tanpa markup. Dibanding beli kasur baru (Rp1-3 juta), sewa bulanan jauh lebih hemat untuk kebutuhan sementara.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Bisa perpanjang sewa kasur bulanan?</summary>
-            <p class="faq-answer">Tentu! Cukup hubungi kami via WhatsApp sebelum masa sewa habis. Perpanjangan tanpa biaya administrasi tambahan.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Apakah ada deposit atau jaminan?</summary>
-            <p class="faq-answer">Tidak ada deposit besar. Cukup bayar biaya sewa + ongkir di awal. Kami percaya pada pelanggan kami.</p>
-          </details>
-          <details class="faq-item">
-            <summary class="faq-question">Bagaimana kalau kasur rusak saat disewa?</summary>
-            <p class="faq-answer">Kerusakan normal akibat pemakaian wajar tidak dikenakan biaya. Untuk kerusakan besar (robek, terkena air berlebih), akan ada biaya penggantian yang wajar sesuai kondisi.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="bulanan-cta">
-      <div class="container">
-        <h2 class="bulanan-cta-title">Butuh kasur untuk sewa bulanan?</h2>
-        <p class="bulanan-cta-desc">Hubungi kami — bisa antar hari ini!</p>
-        <div class="bulanan-cta-buttons">
-          <a href="/#calculator" class="btn btn-primary btn-lg">Hitung Biaya Sewa</a>
-          <a
-            href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Living,%20saya%20mau%20sewa%20kasur%20bulanan%20untuk%20[durasi]%20bulan`}
-            class="btn btn-outline btn-lg bulanan-cta-wa"
-            target="_blank"
-            rel="noopener"
-            data-wa-source="bulanan_page"
-          >
-            💬 Chat WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Schema -->
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Apakah sewa kasur bulanan lebih murah dari harian?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Ya! Harga sewa bulanan dihitung dari tarif harian × 30 hari tanpa markup. Dibanding beli kasur baru (Rp1-3 juta), sewa bulanan jauh lebih hemat untuk kebutuhan sementara."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Bisa perpanjang sewa kasur bulanan?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Tentu! Cukup hubungi kami via WhatsApp sebelum masa sewa habis. Perpanjangan tanpa biaya administrasi tambahan."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Apakah ada deposit atau jaminan untuk sewa kasur?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Tidak ada deposit besar. Cukup bayar biaya sewa + ongkir di awal."
-            }
-          }
-        ]
-      })}
-    />
-  </main>
-
-  <StickyWhatsApp />
-</MainLayout>
-
-<style>
-  .bulanan-hero {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
-    padding: var(--space-10) 0 var(--space-8);
-    text-align: center;
-    color: white;
-  }
-
-  .bulanan-hero-title {
-    font-size: var(--font-size-2xl);
-    margin-bottom: var(--space-2);
-    color: white;
-  }
-
-  .bulanan-hero-subtitle {
-    font-size: var(--font-size-base);
-    opacity: 0.9;
-    margin-bottom: var(--space-3);
-  }
-
-  .bulanan-hero-price {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: var(--space-1) var(--space-4);
-    border-radius: var(--radius-full);
-    font-weight: var(--font-weight-bold);
-  }
-
-  .bulanan-section {
-    padding: var(--space-10) 0;
-  }
-
-  .bulanan-section-alt {
-    background: var(--color-surface);
-  }
-
-  .bulanan-section-title {
-    text-align: center;
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--space-2);
-  }
-
-  .bulanan-section-desc {
-    text-align: center;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-6);
-  }
-
-  .bulanan-section-note {
-    text-align: center;
-    margin-top: var(--space-4);
-    font-size: var(--font-size-sm);
-  }
-
-  .bulanan-section-note a {
-    color: var(--color-primary);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  /* Benefits */
-  .benefit-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-4);
-    max-width: 640px;
-    margin: var(--space-6) auto 0;
-  }
-
-  .benefit-card {
-    text-align: center;
-    padding: var(--space-5);
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
-  }
-
-  .benefit-icon {
-    font-size: 2rem;
-    margin-bottom: var(--space-2);
-  }
-
-  .benefit-card h3 {
-    font-size: var(--font-size-base);
-    margin-bottom: var(--space-1);
-  }
-
-  .benefit-card p {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-
-  /* Price Cards */
-  .price-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
-    max-width: 720px;
-    margin: 0 auto;
-  }
-
-  .price-card {
-    background: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-5);
-    text-align: center;
-    position: relative;
-  }
-
-  .price-card-popular {
-    border-color: #0891b2;
-    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
-  }
-
-  .price-card-badge {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0891b2;
-    color: white;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
-    padding: 2px var(--space-3);
-    border-radius: var(--radius-full);
-  }
-
-  .price-card-header {
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-base);
-    margin-bottom: var(--space-1);
-  }
-
-  .price-card-size {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-3);
-  }
-
-  .price-card-price {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: #0891b2;
-  }
-
-  .price-card-price span {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    color: var(--color-text-secondary);
-  }
-
-  .price-card-daily {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-secondary);
-    margin-top: var(--space-1);
-  }
-
-  .price-card-note {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-secondary);
-    margin-top: var(--space-2);
-  }
-
-  /* Audience */
-  .audience-grid {
-    max-width: 560px;
-    margin: var(--space-6) auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .audience-item {
-    display: flex;
-    gap: var(--space-3);
-    align-items: flex-start;
-  }
-
-  .audience-icon {
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    margin-top: 2px;
-  }
-
-  .audience-item strong {
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .audience-item p {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-    margin: 0;
-  }
-
-  /* FAQ */
-  .faq-list {
-    max-width: 640px;
-    margin: var(--space-6) auto 0;
-  }
-
-  .faq-item {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-3);
-    background: white;
-    overflow: hidden;
-  }
-
-  .faq-question {
-    padding: var(--space-4);
-    cursor: pointer;
-    font-weight: var(--font-weight-semibold);
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .faq-question::after {
-    content: "+";
-    font-size: var(--font-size-xl);
-    color: #0891b2;
-    transition: transform 0.2s;
-  }
-
-  .faq-item[open] .faq-question::after {
-    content: "−";
-  }
-
-  .faq-answer {
-    padding: 0 var(--space-4) var(--space-4);
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* CTA */
-  .bulanan-cta {
-    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
-    padding: var(--space-10) 0;
-    text-align: center;
-    color: white;
-  }
-
-  .bulanan-cta-title {
-    font-size: var(--font-size-2xl);
-    color: white;
-    margin-bottom: var(--space-2);
-  }
-
-  .bulanan-cta-desc {
-    color: rgba(255, 255, 255, 0.85);
-    margin-bottom: var(--space-6);
-  }
-
-  .bulanan-cta-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .bulanan-cta-buttons .btn-primary {
-    background: white;
-    color: #0891b2;
-    max-width: 280px;
-    width: 100%;
-  }
-
-  .bulanan-cta-wa {
-    max-width: 280px;
-    width: 100%;
-    background: transparent;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .bulanan-cta-wa:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: white;
-  }
-
-  @media (min-width: 640px) {
-    .bulanan-hero-title {
-      font-size: var(--font-size-3xl);
-    }
-    .bulanan-cta-buttons {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
-
-  @media (max-width: 639px) {
-    .price-cards {
-      grid-template-columns: 1fr;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-  }
-</style>
+1|---
+2|export const prerender = true;
+3|
+4|import MainLayout from "@/layouts/MainLayout.astro";
+5|import Header from "@/components/Header.astro";
+6|import Sidebar from "@/components/Sidebar.astro";
+7|import StickyWhatsApp from "@/components/StickyWhatsApp.astro";
+8|import config from "@/data/config.json";
+9|---
+10|
+11|<MainLayout
+12|  title="Sewa Kasur Bulanan Jogja | Hemat Mulai Rp750rb/Bulan - Santi Living"
+13|  description="Sewa kasur bulanan di Jogja mulai Rp750.000/bulan. Cocok untuk kos, kontrakan, atau mahasiswa. Kasur bersih, antar jemput gratis, tanpa deposit besar. Diskon 10-15% sewa banyak."
+14|>
+15|  <Header />
+16|  <Sidebar />
+17|
+18|  <main class="bulanan-page" style="padding-top: 70px;">
+19|    <!-- Hero -->
+20|    <section class="bulanan-hero">
+21|      <div class="container">
+22|        <h1 class="bulanan-hero-title">Sewa Kasur Bulanan Jogja</h1>
+23|        <p class="bulanan-hero-subtitle">
+24|          Solusi hemat untuk kos, kontrakan, atau mahasiswa yang butuh kasur tanpa beli
+25|        </p>
+26|        <div class="bulanan-hero-price">Mulai Rp750.000/bulan</div>
+27|      </div>
+28|    </section>
+29|
+30|    <!-- Kenapa Sewa Bulanan -->
+31|    <section class="bulanan-section">
+32|      <div class="container">
+33|        <h2 class="bulanan-section-title">Kenapa Pilih Sewa Kasur Bulanan?</h2>
+34|        <div class="benefit-grid">
+35|          <div class="benefit-card">
+36|            <div class="benefit-icon">💸</div>
+37|            <h3>Hemat vs Beli Baru</h3>
+38|            <p>Kasur baru mulai Rp1-3 juta. Sewa bulanan cuma Rp750rb — hemat sampai 75% untuk kebutuhan sementara!</p>
+39|          </div>
+40|          <div class="benefit-card">
+41|            <div class="benefit-icon">🎓</div>
+42|            <h3>Cocok untuk Mahasiswa</h3>
+43|            <p>Baru pindah kos atau kontrakan? Sewa dulu, nanti kalau sudah settle baru beli. Tanpa ribet pindahan kasur.</p>
+44|          </div>
+45|          <div class="benefit-card">
+46|            <div class="benefit-icon">🧹</div>
+47|            <h3>Kasur Selalu Bersih</h3>
+48|            <p>Setiap kasur dicuci profesional sebelum diantar. Bersih, wangi, dan dibungkus plastik steril.</p>
+49|          </div>
+50|          <div class="benefit-card">
+51|            <div class="benefit-icon">📦</div>
+52|            <h3>Bebas Repot</h3>
+53|            <p>Selesai sewa? Kami jemput. Tidak perlu mikir mau diapakan kasurnya setelah kontrak habis.</p>
+54|          </div>
+55|        </div>
+56|      </div>
+57|    </section>
+58|
+59|    <!-- Harga Bulanan -->
+60|    <section class="bulanan-section bulanan-section-alt">
+61|      <div class="container">
+62|        <h2 class="bulanan-section-title">Harga Sewa Kasur Bulanan</h2>
+63|        <p class="bulanan-section-desc">Semua harga sudah termasuk kasur busa berkualitas</p>
+64|
+65|        <div class="price-cards">
+66|          <div class="price-card">
+67|            <div class="price-card-header">Single Standard</div>
+68|            <div class="price-card-size">90 × 200 cm</div>
+69|            <div class="price-card-price">Rp 900.000<span>/bulan</span></div>
+70|            <div class="price-card-daily">≈ Rp 30.000/hari</div>
+71|            <div class="price-card-note">1 orang • kasur busa saja</div>
+72|          </div>
+73|          <div class="price-card price-card-popular">
+74|            <div class="price-card-badge">Best Value</div>
+75|            <div class="price-card-header">Paket Lengkap Single</div>
+76|            <div class="price-card-size">Kasur + Sprei + Bantal + Selimut</div>
+77|            <div class="price-card-price">Rp 1.200.000<span>/bulan</span></div>
+78|            <div class="price-card-daily">≈ Rp 40.000/hari</div>
+79|            <div class="price-card-note">1 orang • siap pakai langsung</div>
+80|          </div>
+81|          <div class="price-card">
+82|            <div class="price-card-header">Double</div>
+83|            <div class="price-card-size">120 × 200 cm</div>
+84|            <div class="price-card-price">Rp 1.200.000<span>/bulan</span></div>
+85|            <div class="price-card-daily">≈ Rp 40.000/hari</div>
+86|            <div class="price-card-note">1-2 orang • kasur busa saja</div>
+87|          </div>
+88|        </div>
+89|
+90|        <p class="bulanan-section-note">
+91|          <a href="/harga-sewa-kasur">Lihat daftar harga lengkap semua ukuran →</a>
+92|        </p>
+93|      </div>
+94|    </section>
+95|
+96|    <!-- Siapa yang Sewa Bulanan -->
+97|    <section class="bulanan-section">
+98|      <div class="container">
+99|        <h2 class="bulanan-section-title">Siapa yang Biasanya Sewa Kasur Bulanan?</h2>
+100|        <div class="audience-grid">
+101|          <div class="audience-item">
+102|            <span class="audience-icon">🎓</span>
+103|            <div>
+104|              <strong>Mahasiswa Baru</strong>
+105|              <p>Baru pindah kos di Jogja, belum sempat beli kasur. Sewa dulu 1-3 bulan sambil settle.</p>
+106|            </div>
+107|          </div>
+108|          <div class="audience-item">
+109|            <span class="audience-icon">🏠</span>
+110|            <div>
+111|              <strong>Penghuni Kontrakan Sementara</strong>
+112|              <p>Kontrak 3-6 bulan? Beli kasur terlalu mahal, sewa jauh lebih hemat dan praktis.</p>
+113|            </div>
+114|          </div>
+115|          <div class="audience-item">
+116|            <span class="audience-icon">💼</span>
+117|            <div>
+118|              <strong>Pekerja Project</strong>
+119|              <p>Karyawan yang ditugaskan ke Jogja sementara. Butuh kasur tanpa harus beli furniture.</p>
+120|            </div>
+121|          </div>
+122|          <div class="audience-item">
+123|            <span class="audience-icon">🏢</span>
+124|            <div>
+125|              <strong>Pemilik Kos/Penginapan</strong>
+126|              <p>Perlu kasur tambahan untuk kamar baru? Sewa banyak unit, dapat diskon 10-15%!</p>
+127|            </div>
+128|          </div>
+129|        </div>
+130|      </div>
+131|    </section>
+132|
+133|    <!-- FAQ -->
+134|    <section class="bulanan-section bulanan-section-alt">
+135|      <div class="container">
+136|        <h2 class="bulanan-section-title">Pertanyaan tentang Sewa Bulanan</h2>
+137|        <div class="faq-list">
+138|          <details class="faq-item">
+139|            <summary class="faq-question">Apakah sewa bulanan lebih murah dari harian?</summary>
+140|            <p class="faq-answer">Ya! Harga sewa bulanan dihitung dari tarif harian × 30 hari tanpa markup. Dibanding beli kasur baru (Rp1-3 juta), sewa bulanan jauh lebih hemat untuk kebutuhan sementara.</p>
+141|          </details>
+142|          <details class="faq-item">
+143|            <summary class="faq-question">Bisa perpanjang sewa kasur bulanan?</summary>
+144|            <p class="faq-answer">Tentu! Cukup hubungi kami via WhatsApp sebelum masa sewa habis. Perpanjangan tanpa biaya administrasi tambahan.</p>
+145|          </details>
+146|          <details class="faq-item">
+147|            <summary class="faq-question">Apakah ada deposit atau jaminan?</summary>
+148|            <p class="faq-answer">Tidak ada deposit besar. Cukup bayar biaya sewa + ongkir di awal. Kami percaya pada pelanggan kami.</p>
+149|          </details>
+150|          <details class="faq-item">
+151|            <summary class="faq-question">Bagaimana kalau kasur rusak saat disewa?</summary>
+152|            <p class="faq-answer">Kerusakan normal akibat pemakaian wajar tidak dikenakan biaya. Untuk kerusakan besar (robek, terkena air berlebih), akan ada biaya penggantian yang wajar sesuai kondisi.</p>
+153|          </details>
+154|        </div>
+155|      </div>
+156|    </section>
+157|
+158|    <!-- CTA -->
+159|    <section class="bulanan-cta">
+160|      <div class="container">
+161|        <h2 class="bulanan-cta-title">Butuh kasur untuk sewa bulanan?</h2>
+162|        <p class="bulanan-cta-desc">Hubungi kami — bisa antar hari ini!</p>
+163|        <div class="bulanan-cta-buttons">
+164|          <a href="/#calculator" class="btn btn-primary btn-lg">Hitung Biaya Sewa</a>
+165|          <a
+166|            href={`https://wa.me/${config.whatsappNumber}?text=Halo%20Santi%20Living,%20saya%20mau%20sewa%20kasur%20bulanan%20untuk%20[durasi]%20bulan`}
+167|            class="btn btn-outline btn-lg bulanan-cta-wa"
+168|            target="_blank"
+169|            rel="noopener"
+170|            data-wa-source="bulanan_page"
+171|          >
+172|            💬 Chat WhatsApp
+173|          </a>
+174|        </div>
+175|      </div>
+176|    </section>
+177|
+178|    <!-- FAQ Schema -->
+179|    <script
+180|      type="application/ld+json"
+181|      is:inline
+182|      set:html={JSON.stringify({
+183|        "@context": "https://schema.org",
+184|        "@type": "FAQPage",
+185|        "mainEntity": [
+186|          {
+187|            "@type": "Question",
+188|            "name": "Apakah sewa kasur bulanan lebih murah dari harian?",
+189|            "acceptedAnswer": {
+190|              "@type": "Answer",
+191|              "text": "Ya! Harga sewa bulanan dihitung dari tarif harian × 30 hari tanpa markup. Dibanding beli kasur baru (Rp1-3 juta), sewa bulanan jauh lebih hemat untuk kebutuhan sementara."
+192|            }
+193|          },
+194|          {
+195|            "@type": "Question",
+196|            "name": "Bisa perpanjang sewa kasur bulanan?",
+197|            "acceptedAnswer": {
+198|              "@type": "Answer",
+199|              "text": "Tentu! Cukup hubungi kami via WhatsApp sebelum masa sewa habis. Perpanjangan tanpa biaya administrasi tambahan."
+200|            }
+201|          },
+202|          {
+203|            "@type": "Question",
+204|            "name": "Apakah ada deposit atau jaminan untuk sewa kasur?",
+205|            "acceptedAnswer": {
+206|              "@type": "Answer",
+207|              "text": "Tidak ada deposit besar. Cukup bayar biaya sewa + ongkir di awal."
+208|            }
+209|          }
+210|        ]
+211|      })}
+212|    />
+213|  </main>
+214|
+215|  <StickyWhatsApp />
+216|</MainLayout>
+217|
+218|<style>
+219|  .bulanan-hero {
+220|    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+221|    padding: var(--space-10) 0 var(--space-8);
+222|    text-align: center;
+223|    color: white;
+224|  }
+225|
+226|  .bulanan-hero-title {
+227|    font-size: var(--font-size-2xl);
+228|    margin-bottom: var(--space-2);
+229|    color: white;
+230|  }
+231|
+232|  .bulanan-hero-subtitle {
+233|    font-size: var(--font-size-base);
+234|    opacity: 0.9;
+235|    margin-bottom: var(--space-3);
+236|  }
+237|
+238|  .bulanan-hero-price {
+239|    display: inline-block;
+240|    background: rgba(255, 255, 255, 0.2);
+241|    border: 1px solid rgba(255, 255, 255, 0.4);
+242|    padding: var(--space-1) var(--space-4);
+243|    border-radius: var(--radius-full);
+244|    font-weight: var(--font-weight-bold);
+245|  }
+246|
+247|  .bulanan-section {
+248|    padding: var(--space-10) 0;
+249|  }
+250|
+251|  .bulanan-section-alt {
+252|    background: var(--color-surface);
+253|  }
+254|
+255|  .bulanan-section-title {
+256|    text-align: center;
+257|    font-size: var(--font-size-xl);
+258|    margin-bottom: var(--space-2);
+259|  }
+260|
+261|  .bulanan-section-desc {
+262|    text-align: center;
+263|    color: var(--color-text-secondary);
+264|    margin-bottom: var(--space-6);
+265|  }
+266|
+267|  .bulanan-section-note {
+268|    text-align: center;
+269|    margin-top: var(--space-4);
+270|    font-size: var(--font-size-sm);
+271|  }
+272|
+273|  .bulanan-section-note a {
+274|    color: var(--color-primary);
+275|    font-weight: var(--font-weight-semibold);
+276|  }
+277|
+278|  /* Benefits */
+279|  .benefit-grid {
+280|    display: grid;
+281|    grid-template-columns: repeat(2, 1fr);
+282|    gap: var(--space-4);
+283|    max-width: 640px;
+284|    margin: var(--space-6) auto 0;
+285|  }
+286|
+287|  .benefit-card {
+288|    text-align: center;
+289|    padding: var(--space-5);
+290|    background: var(--color-surface);
+291|    border-radius: var(--radius-lg);
+292|    border: 1px solid var(--color-border);
+293|  }
+294|
+295|  .benefit-icon {
+296|    font-size: 2rem;
+297|    margin-bottom: var(--space-2);
+298|  }
+299|
+300|  .benefit-card h3 {
+301|    font-size: var(--font-size-base);
+302|    margin-bottom: var(--space-1);
+303|  }
+304|
+305|  .benefit-card p {
+306|    font-size: var(--font-size-sm);
+307|    color: var(--color-text-secondary);
+308|    margin: 0;
+309|  }
+310|
+311|  /* Price Cards */
+312|  .price-cards {
+313|    display: grid;
+314|    grid-template-columns: repeat(3, 1fr);
+315|    gap: var(--space-4);
+316|    max-width: 720px;
+317|    margin: 0 auto;
+318|  }
+319|
+320|  .price-card {
+321|    background: white;
+322|    border: 1px solid var(--color-border);
+323|    border-radius: var(--radius-lg);
+324|    padding: var(--space-5);
+325|    text-align: center;
+326|    position: relative;
+327|  }
+328|
+329|  .price-card-popular {
+330|    border-color: #0891b2;
+331|    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
+332|  }
+333|
+334|  .price-card-badge {
+335|    position: absolute;
+336|    top: -10px;
+337|    left: 50%;
+338|    transform: translateX(-50%);
+339|    background: #0891b2;
+340|    color: white;
+341|    font-size: var(--font-size-xs);
+342|    font-weight: var(--font-weight-bold);
+343|    padding: 2px var(--space-3);
+344|    border-radius: var(--radius-full);
+345|  }
+346|
+347|  .price-card-header {
+348|    font-weight: var(--font-weight-bold);
+349|    font-size: var(--font-size-base);
+350|    margin-bottom: var(--space-1);
+351|  }
+352|
+353|  .price-card-size {
+354|    font-size: var(--font-size-sm);
+355|    color: var(--color-text-secondary);
+356|    margin-bottom: var(--space-3);
+357|  }
+358|
+359|  .price-card-price {
+360|    font-size: var(--font-size-xl);
+361|    font-weight: var(--font-weight-bold);
+362|    color: #0891b2;
+363|  }
+364|
+365|  .price-card-price span {
+366|    font-size: var(--font-size-sm);
+367|    font-weight: var(--font-weight-normal);
+368|    color: var(--color-text-secondary);
+369|  }
+370|
+371|  .price-card-daily {
+372|    font-size: var(--font-size-xs);
+373|    color: var(--color-text-secondary);
+374|    margin-top: var(--space-1);
+375|  }
+376|
+377|  .price-card-note {
+378|    font-size: var(--font-size-xs);
+379|    color: var(--color-text-secondary);
+380|    margin-top: var(--space-2);
+381|  }
+382|
+383|  /* Audience */
+384|  .audience-grid {
+385|    max-width: 560px;
+386|    margin: var(--space-6) auto 0;
+387|    display: flex;
+388|    flex-direction: column;
+389|    gap: var(--space-4);
+390|  }
+391|
+392|  .audience-item {
+393|    display: flex;
+394|    gap: var(--space-3);
+395|    align-items: flex-start;
+396|  }
+397|
+398|  .audience-icon {
+399|    flex-shrink: 0;
+400|    font-size: 1.5rem;
+401|    margin-top: 2px;
+402|  }
+403|
+404|  .audience-item strong {
+405|    display: block;
+406|    margin-bottom: 2px;
+407|  }
+408|
+409|  .audience-item p {
+410|    font-size: var(--font-size-sm);
+411|    color: var(--color-text-secondary);
+412|    margin: 0;
+413|  }
+414|
+415|  /* FAQ */
+416|  .faq-list {
+417|    max-width: 640px;
+418|    margin: var(--space-6) auto 0;
+419|  }
+420|
+421|  .faq-item {
+422|    border: 1px solid var(--color-border);
+423|    border-radius: var(--radius-md);
+424|    margin-bottom: var(--space-3);
+425|    background: white;
+426|    overflow: hidden;
+427|  }
+428|
+429|  .faq-question {
+430|    padding: var(--space-4);
+431|    cursor: pointer;
+432|    font-weight: var(--font-weight-semibold);
+433|    list-style: none;
+434|    display: flex;
+435|    align-items: center;
+436|    justify-content: space-between;
+437|  }
+438|
+439|  .faq-question::after {
+440|    content: "+";
+441|    font-size: var(--font-size-xl);
+442|    color: #0891b2;
+443|    transition: transform 0.2s;
+444|  }
+445|
+446|  .faq-item[open] .faq-question::after {
+447|    content: "−";
+448|  }
+449|
+450|  .faq-answer {
+451|    padding: 0 var(--space-4) var(--space-4);
+452|    color: var(--color-text-secondary);
+453|    line-height: 1.6;
+454|    margin: 0;
+455|  }
+456|
+457|  /* CTA */
+458|  .bulanan-cta {
+459|    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+460|    padding: var(--space-10) 0;
+461|    text-align: center;
+462|    color: white;
+463|  }
+464|
+465|  .bulanan-cta-title {
+466|    font-size: var(--font-size-2xl);
+467|    color: white;
+468|    margin-bottom: var(--space-2);
+469|  }
+470|
+471|  .bulanan-cta-desc {
+472|    color: rgba(255, 255, 255, 0.85);
+473|    margin-bottom: var(--space-6);
+474|  }
+475|
+476|  .bulanan-cta-buttons {
+477|    display: flex;
+478|    flex-direction: column;
+479|    align-items: center;
+480|    gap: var(--space-3);
+481|  }
+482|
+483|  .bulanan-cta-buttons .btn-primary {
+484|    background: white;
+485|    color: #0891b2;
+486|    max-width: 280px;
+487|    width: 100%;
+488|  }
+489|
+490|  .bulanan-cta-wa {
+491|    max-width: 280px;
+492|    width: 100%;
+493|    background: transparent;
+494|    color: white;
+495|    border: 2px solid rgba(255, 255, 255, 0.5);
+496|    text-decoration: none;
+497|    padding: var(--space-2) var(--space-4);
+498|    border-radius: var(--radius-md);
+499|    font-weight: var(--font-weight-semibold);
+500|  }
+501|

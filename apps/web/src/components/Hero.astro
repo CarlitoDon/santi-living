@@ -1,281 +1,282 @@
----
-import { Image } from "astro:assets";
-import config from "@/data/config.json";
-import stokKasurImg from "@/assets/images/stok-kasur.png";
-import gudangImg from "@/assets/images/gudang.webp";
----
-
-<section class="hero">
-  <!-- Background Carousel -->
-  <div class="hero-carousel" id="heroCarousel">
-    <div class="hero-slide active">
-      <Image
-        src={stokKasurImg}
-        alt="Stok kasur sewa Jogja"
-        class="hero-bg-image"
-        loading="eager"
-      />
-    </div>
-    <div class="hero-slide">
-      <Image
-        src={gudangImg}
-        alt="Gudang kasur Santi Living"
-        class="hero-bg-image"
-        loading="lazy"
-      />
-    </div>
-  </div>
-  <div class="hero-overlay"></div>
-
-  <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        Sewa Kasur Jogja<br />
-        Terbaik & Terpercaya
-      </h1>
-      <p class="hero-price-badge">Mulai Rp25.000/hari</p>
-      <p class="hero-tagline">
-        Rental kasur bersih & murah di Yogyakarta — Antar jemput same day, tanpa ribet
-      </p>
-
-      <div class="hero-features">
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✅</span>
-          <span>Bisa antar hari ini</span>
-        </div>
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✅</span>
-          <span>Gratis jemput</span>
-        </div>
-        <div class="hero-feature">
-          <span class="hero-feature-icon">✅</span>
-          <span>Kasur bersih & wangi</span>
-        </div>
-      </div>
-
-      <div class="hero-cta-group">
-        <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
-          Sewa Sekarang
-        </a>
-        <a href="/produk" class="btn btn-outline btn-lg hero-cta-secondary">
-          Lihat Katalog & Harga →
-        </a>
-      </div>
-
-      <p class="hero-contact">
-        Atau hubungi langsung:
-        <a href={`https://wa.me/${config.whatsappNumber}`} class="hero-phone">
-          {config.whatsappDisplay}
-        </a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<style>
-  .hero {
-    position: relative;
-    min-height: auto;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    padding: var(--space-8) 0 var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .hero {
-      min-height: 55vh;
-      padding: 0;
-    }
-  }
-
-  .hero-carousel {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
-
-  .hero-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      opacity 0.8s ease,
-      visibility 0.8s;
-  }
-
-  .hero-slide.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .hero-bg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      135deg,
-      rgba(59, 130, 246, 0.85) 0%,
-      rgba(30, 64, 175, 0.9) 100%
-    );
-    z-index: 1;
-  }
-
-  .hero > .container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
-
-  .hero-content {
-    text-align: center;
-    max-width: 650px;
-    margin: 0 auto;
-    padding: var(--space-8) var(--space-4);
-  }
-
-  @media (min-width: 768px) {
-    .hero-content {
-      padding: var(--space-16) var(--space-4);
-    }
-  }
-
-  .hero-title {
-    font-size: var(--font-size-2xl);
-    color: white;
-    margin-bottom: var(--space-2);
-    line-height: 1.2;
-  }
-
-  .hero-tagline {
-    font-size: var(--font-size-base);
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--space-4);
-  }
-
-  .hero-price-badge {
-    display: inline-block;
-    background: rgba(74, 222, 128, 0.2);
-    border: 1px solid rgba(74, 222, 128, 0.5);
-    color: #4ade80;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    padding: var(--space-1) var(--space-4);
-    border-radius: var(--radius-full);
-    margin-bottom: var(--space-3);
-  }
-
-  .hero-features {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    margin-bottom: var(--space-12);
-  }
-
-  .hero-feature {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .hero-feature-icon {
-    color: #4ade80;
-    font-weight: var(--font-weight-bold);
-  }
-
-  .hero-cta-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    align-items: center;
-    margin-bottom: var(--space-6);
-  }
-
-  .hero-cta,
-  .hero-cta-secondary {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  .hero-cta {
-    background: white;
-    color: var(--color-primary);
-  }
-
-  .hero-cta:hover {
-    background: rgba(255, 255, 255, 0.9);
-  }
-
-  .btn-outline {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-  }
-
-  .btn-outline:hover {
-    background: white;
-    color: var(--color-primary);
-  }
-
-  .hero-contact {
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 0;
-  }
-
-  .hero-phone {
-    color: white;
-    font-weight: var(--font-weight-semibold);
-  }
-
-  .hero-phone:hover {
-    text-decoration: underline;
-  }
-
-  @media (min-width: 640px) {
-    .hero-title {
-      font-size: var(--font-size-4xl);
-    }
-
-    .hero-tagline {
-      font-size: var(--font-size-lg);
-    }
-
-    .hero-cta-group {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
-</style>
-
-<script>
-  const heroSlides = document.querySelectorAll(".hero-slide");
-  let currentHeroSlide = 0;
-
-  function nextHeroSlide() {
-    heroSlides[currentHeroSlide].classList.remove("active");
-    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-    heroSlides[currentHeroSlide].classList.add("active");
-  }
-
-  setInterval(nextHeroSlide, 10000);
-</script>
+1|---
+2|import { Image } from "astro:assets";
+3|import config from "@/data/config.json";
+4|import stokKasurImg from "@/assets/images/stok-kasur.png";
+5|import gudangImg from "@/assets/images/gudang.webp";
+6|---
+7|
+8|<section class="hero">
+9|  <!-- Background Carousel -->
+10|  <div class="hero-carousel" id="heroCarousel">
+11|    <div class="hero-slide active">
+12|      <Image
+13|        src={stokKasurImg}
+14|        alt="Stok kasur sewa Jogja"
+15|        class="hero-bg-image"
+16|        loading="eager"
+17|      />
+18|    </div>
+19|    <div class="hero-slide">
+20|      <Image
+21|        src={gudangImg}
+22|        alt="Gudang kasur Santi Living"
+23|        class="hero-bg-image"
+24|        loading="lazy"
+25|      />
+26|    </div>
+27|  </div>
+28|  <div class="hero-overlay"></div>
+29|
+30|  <div class="container">
+31|    <div class="hero-content">
+32|      <h1 class="hero-title">
+33|        Sewa Kasur Jogja<br />
+34|        Terbaik & Terpercaya
+35|      </h1>
+36|      <p class="hero-price-badge">Mulai Rp30.000/hari</p>
+37|      <p class="hero-tagline">
+38|        Rental kasur bersih & murah di Yogyakarta — Antar jemput same day, tanpa ribet
+39|      </p>
+40|
+41|      <div class="hero-features">
+42|        <div class="hero-feature">
+43|          <span class="hero-feature-icon">✅</span>
+44|          <span>Bisa antar hari ini</span>
+45|        </div>
+46|        <div class="hero-feature">
+47|          <span class="hero-feature-icon">✅</span>
+48|          <span>Gratis jemput</span>
+49|        </div>
+50|        <div class="hero-feature">
+51|          <span class="hero-feature-icon">✅</span>
+52|          <span>Kasur bersih & wangi</span>
+53|        </div>
+54|      </div>
+55|
+56|      <div class="hero-cta-group">
+57|        <a href="#calculator" class="btn btn-primary btn-lg hero-cta">
+58|          Sewa Sekarang
+59|        </a>
+60|        <a href="/produk" class="btn btn-outline btn-lg hero-cta-secondary">
+61|          Lihat Katalog & Harga →
+62|        </a>
+63|      </div>
+64|
+65|      <p class="hero-contact">
+66|        Atau hubungi langsung:
+67|        <a href={`https://wa.me/${config.whatsappNumber}`} class="hero-phone">
+68|          {config.whatsappDisplay}
+69|        </a>
+70|      </p>
+71|    </div>
+72|  </div>
+73|</section>
+74|
+75|<style>
+76|  .hero {
+77|    position: relative;
+78|    min-height: auto;
+79|    display: flex;
+80|    align-items: center;
+81|    overflow: hidden;
+82|    padding: var(--space-8) 0 var(--space-6);
+83|  }
+84|
+85|  @media (min-width: 768px) {
+86|    .hero {
+87|      min-height: 55vh;
+88|      padding: 0;
+89|    }
+90|  }
+91|
+92|  .hero-carousel {
+93|    position: absolute;
+94|    top: 0;
+95|    left: 0;
+96|    width: 100%;
+97|    height: 100%;
+98|    z-index: 0;
+99|  }
+100|
+101|  .hero-slide {
+102|    position: absolute;
+103|    top: 0;
+104|    left: 0;
+105|    width: 100%;
+106|    height: 100%;
+107|    opacity: 0;
+108|    visibility: hidden;
+109|    transition:
+110|      opacity 0.8s ease,
+111|      visibility 0.8s;
+112|  }
+113|
+114|  .hero-slide.active {
+115|    opacity: 1;
+116|    visibility: visible;
+117|  }
+118|
+119|  .hero-bg-image {
+120|    width: 100%;
+121|    height: 100%;
+122|    object-fit: cover;
+123|  }
+124|
+125|  .hero-overlay {
+126|    position: absolute;
+127|    top: 0;
+128|    left: 0;
+129|    width: 100%;
+130|    height: 100%;
+131|    background: linear-gradient(
+132|      135deg,
+133|      rgba(59, 130, 246, 0.85) 0%,
+134|      rgba(30, 64, 175, 0.9) 100%
+135|    );
+136|    z-index: 1;
+137|  }
+138|
+139|  .hero > .container {
+140|    position: relative;
+141|    z-index: 2;
+142|    width: 100%;
+143|  }
+144|
+145|  .hero-content {
+146|    text-align: center;
+147|    max-width: 650px;
+148|    margin: 0 auto;
+149|    padding: var(--space-8) var(--space-4);
+150|  }
+151|
+152|  @media (min-width: 768px) {
+153|    .hero-content {
+154|      padding: var(--space-16) var(--space-4);
+155|    }
+156|  }
+157|
+158|  .hero-title {
+159|    font-size: var(--font-size-2xl);
+160|    color: white;
+161|    margin-bottom: var(--space-2);
+162|    line-height: 1.2;
+163|  }
+164|
+165|  .hero-tagline {
+166|    font-size: var(--font-size-base);
+167|    color: rgba(255, 255, 255, 0.9);
+168|    font-weight: var(--font-weight-medium);
+169|    margin-bottom: var(--space-4);
+170|  }
+171|
+172|  .hero-price-badge {
+173|    display: inline-block;
+174|    background: rgba(74, 222, 128, 0.2);
+175|    border: 1px solid rgba(74, 222, 128, 0.5);
+176|    color: #4ade80;
+177|    font-size: var(--font-size-lg);
+178|    font-weight: var(--font-weight-bold);
+179|    padding: var(--space-1) var(--space-4);
+180|    border-radius: var(--radius-full);
+181|    margin-bottom: var(--space-3);
+182|  }
+183|
+184|  .hero-features {
+185|    display: flex;
+186|    flex-direction: column;
+187|    gap: var(--space-2);
+188|    margin-bottom: var(--space-12);
+189|  }
+190|
+191|  .hero-feature {
+192|    display: flex;
+193|    align-items: center;
+194|    justify-content: center;
+195|    gap: var(--space-2);
+196|    font-size: var(--font-size-sm);
+197|    color: rgba(255, 255, 255, 0.9);
+198|  }
+199|
+200|  .hero-feature-icon {
+201|    color: #4ade80;
+202|    font-weight: var(--font-weight-bold);
+203|  }
+204|
+205|  .hero-cta-group {
+206|    display: flex;
+207|    flex-direction: column;
+208|    gap: var(--space-3);
+209|    align-items: center;
+210|    margin-bottom: var(--space-6);
+211|  }
+212|
+213|  .hero-cta,
+214|  .hero-cta-secondary {
+215|    width: 100%;
+216|    max-width: 280px;
+217|  }
+218|
+219|  .hero-cta {
+220|    background: white;
+221|    color: var(--color-primary);
+222|  }
+223|
+224|  .hero-cta:hover {
+225|    background: rgba(255, 255, 255, 0.9);
+226|  }
+227|
+228|  .btn-outline {
+229|    background: transparent;
+230|    border: 2px solid white;
+231|    color: white;
+232|  }
+233|
+234|  .btn-outline:hover {
+235|    background: white;
+236|    color: var(--color-primary);
+237|  }
+238|
+239|  .hero-contact {
+240|    font-size: var(--font-size-sm);
+241|    color: rgba(255, 255, 255, 0.7);
+242|    margin-bottom: 0;
+243|  }
+244|
+245|  .hero-phone {
+246|    color: white;
+247|    font-weight: var(--font-weight-semibold);
+248|  }
+249|
+250|  .hero-phone:hover {
+251|    text-decoration: underline;
+252|  }
+253|
+254|  @media (min-width: 640px) {
+255|    .hero-title {
+256|      font-size: var(--font-size-4xl);
+257|    }
+258|
+259|    .hero-tagline {
+260|      font-size: var(--font-size-lg);
+261|    }
+262|
+263|    .hero-cta-group {
+264|      flex-direction: row;
+265|      justify-content: center;
+266|    }
+267|  }
+268|</style>
+269|
+270|<script>
+271|  const heroSlides = document.querySelectorAll(".hero-slide");
+272|  let currentHeroSlide = 0;
+273|
+274|  function nextHeroSlide() {
+275|    heroSlides[currentHeroSlide].classList.remove("active");
+276|    currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+277|    heroSlides[currentHeroSlide].classList.add("active");
+278|  }
+279|
+280|  setInterval(nextHeroSlide, 10000);
+281|</script>
+282|

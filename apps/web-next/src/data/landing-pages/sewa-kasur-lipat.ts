@@ -4,12 +4,12 @@ export const sewaKasurLipat: LandingPageConfig = {
   meta: {
     title: 'Sewa & Rental Kasur Lipat Jogja Terdekat | Praktis untuk Tamu',
     description:
-      'Layanan sewa dan rental kasur lipat terdekat di Jogja mulai Rp25.000/hari. Praktis dilipat, mudah disimpan, cocok untuk tamu mendadak atau acara keluarga. Antar jemput same day.',
+      'Layanan sewa dan rental kasur lipat terdekat di Jogja mulai Rp30.000/hari. Praktis dilipat, mudah disimpan, cocok untuk tamu mendadak atau acara keluarga. Antar jemput same day.',
   },
   hero: {
     title: 'Sewa & Rental Kasur Lipat Jogja',
     subtitle: 'Penyewaan rental kasur lipat terdekat, solusi praktis untuk tamu mendadak dan event — mudah disimpan!',
-    badge: 'Mulai Rp25.000/hari',
+    badge: 'Mulai Rp30.000/hari',
   },
   color: 'purple',
 
@@ -41,12 +41,12 @@ en: {
   meta: {
     title: 'Nearest Foldable Mattress Rental in Jogja | Practical for Guests',
     description:
-      'Nearest foldable mattress rental service in Jogja starting from Rp25,000/day. Easy to fold, simple to store, perfect for unexpected guests or family events. Same day delivery and pickup.',
+      'Nearest foldable mattress rental service in Jogja starting from Rp30,000/day. Easy to fold, simple to store, perfect for unexpected guests or family events. Same day delivery and pickup.',
   },
   hero: {
     title: 'Foldable Mattress Rental in Jogja',
     subtitle: 'Nearest foldable mattress rental, a practical solution for unexpected guests and events — easy to store!',
-    badge: 'Starting from Rp25,000/day',
+    badge: 'Starting from Rp30,000/day',
   },
     benefits: [
     { icon: '📐', title: 'Easy to Fold & Store', description: 'Foam mattress folds into 3 sections. Takes up no space when not in use.' },

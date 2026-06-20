@@ -4,12 +4,12 @@ export const sewaKasurBulanan: LandingPageConfig = {
   meta: {
     title: 'Sewa & Rental Kasur Bulanan Jogja Terdekat | Hemat Rp750rb',
     description:
-      'Pusat sewa dan rental kasur bulanan terdekat di Jogja mulai Rp750.000/bulan. Cocok untuk kos, kontrakan, atau mahasiswa. Kasur bersih, antar jemput gratis, tanpa deposit besar.',
+      'Pusat sewa dan rental kasur bulanan terdekat di Jogja mulai Rp900.000/bulan. Cocok untuk kos, kontrakan, atau mahasiswa. Kasur bersih, antar jemput gratis, tanpa deposit besar.',
   },
   hero: {
     title: 'Sewa & Rental Kasur Bulanan Jogja',
     subtitle: 'Solusi hemat untuk kos, kontrakan, atau mahasiswa yang butuh rental kasur terdekat tanpa beli',
-    badge: 'Mulai Rp750.000/bulan',
+    badge: 'Mulai Rp900.000/bulan',
   },
   color: 'cyan',
 
@@ -20,9 +20,9 @@ export const sewaKasurBulanan: LandingPageConfig = {
     { icon: '📦', title: 'Bebas Repot', description: 'Selesai sewa? Kami jemput. Tidak perlu mikir mau diapakan kasurnya.' },
   ],
   priceCards: [
-    { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 750.000', daily: '≈ Rp 25.000/hari', note: '1 orang • kasur busa saja', popular: false },
-    { name: 'Paket Lengkap Single', size: 'Kasur + Sprei + Bantal', price: 'Rp 1.050.000', daily: '≈ Rp 35.000/hari', note: '1 orang • siap pakai langsung', popular: true },
-    { name: 'Double', size: '120 × 200 cm', price: 'Rp 1.050.000', daily: '≈ Rp 35.000/hari', note: '1-2 orang • kasur busa saja', popular: false },
+    { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 900.000', daily: '≈ Rp 30.000/hari', note: '1 orang • kasur busa saja', popular: false },
+    { name: 'Paket Lengkap Single', size: 'Kasur + Sprei + Bantal', price: 'Rp 1.200.000', daily: '≈ Rp 40.000/hari', note: '1 orang • siap pakai langsung', popular: true },
+    { name: 'Double', size: '120 × 200 cm', price: 'Rp 1.200.000', daily: '≈ Rp 40.000/hari', note: '1-2 orang • kasur busa saja', popular: false },
   ],
   audience: [
     { icon: '🎓', title: 'Mahasiswa Baru', description: 'Baru pindah kos di Jogja, belum sempat beli kasur. Sewa dulu sambil settle.' },
@@ -46,12 +46,12 @@ en: {
   meta: {
     title: 'Nearest Monthly Mattress Rental in Jogja | Save Rp750k',
     description:
-      'Nearest monthly mattress rental center in Jogja starting from Rp750,000/month. Perfect for boarding houses, rentals, or students. Clean mattresses, free delivery & pickup, no large deposit.',
+      'Nearest monthly mattress rental center in Jogja starting from Rp900,000/month. Perfect for boarding houses, rentals, or students. Clean mattresses, free delivery & pickup, no large deposit.',
   },
   hero: {
     title: 'Monthly Mattress Rental in Jogja',
     subtitle: 'The budget-friendly solution for boarding houses, rentals, or students who need the nearest mattress rental without buying',
-    badge: 'Starting from Rp750,000/month',
+    badge: 'Starting from Rp900,000/month',
   },
   benefits: [
     { icon: '💸', title: 'Save vs Buying New', description: 'New mattresses start at Rp1–3 million. Monthly rental is only Rp750k — save up to 75%!' },
@@ -60,9 +60,9 @@ en: {
     { icon: '📦', title: 'Hassle-Free', description: 'Done renting? We\'ll pick it up. No need to worry about what to do with the mattress.' },
   ],
   priceCards: [
-    { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 750,000', daily: '≈ Rp 25,000/day', note: '1 person • foam mattress only', popular: false },
-    { name: 'Complete Single Package', size: 'Mattress + Bedsheet + Pillow', price: 'Rp 1,050,000', daily: '≈ Rp 35,000/day', note: '1 person • ready to use immediately', popular: true },
-    { name: 'Double', size: '120 × 200 cm', price: 'Rp 1,050,000', daily: '≈ Rp 35,000/day', note: '1–2 people • foam mattress only', popular: false },
+    { name: 'Single Standard', size: '90 × 200 cm', price: 'Rp 900,000', daily: '≈ Rp 30,000/day', note: '1 person • foam mattress only', popular: false },
+    { name: 'Complete Single Package', size: 'Mattress + Bedsheet + Pillow', price: 'Rp 1,200,000', daily: '≈ Rp 40,000/day', note: '1 person • ready to use immediately', popular: true },
+    { name: 'Double', size: '120 × 200 cm', price: 'Rp 1,200,000', daily: '≈ Rp 40,000/day', note: '1–2 people • foam mattress only', popular: false },
   ],
   audience: [
     { icon: '🎓', title: 'New Students', description: 'Just moved into a boarding house in Jogja and haven\'t had time to buy a mattress yet. Rent first while you settle in.' },

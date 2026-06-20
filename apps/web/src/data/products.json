@@ -5,60 +5,80 @@
       "name": "Single Standard (Paket)",
       "shortName": "Single Standard (Pkt)",
       "description": "Kasur + Sprei + Bantal",
-      "pricePerDay": 35000,
+      "pricePerDay": 40000,
       "costPrice": 735256,
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
       "image": "/images/paket-90.webp",
-      "includes": ["kasur busa 90x200", "sprei 90x200", "bantal"]
+      "includes": [
+        "kasur busa 90x200",
+        "sprei 90x200",
+        "bantal"
+      ]
     },
     {
       "id": "package-single-super",
       "name": "Single Super (Paket)",
       "shortName": "Single Super (Pkt)",
       "description": "Kasur + Sprei + Bantal",
-      "pricePerDay": 40000,
+      "pricePerDay": 45000,
       "costPrice": 809566,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
       "image": "/images/paket-100.webp",
-      "includes": ["kasur busa 100x200", "sprei 100x200", "bantal"]
+      "includes": [
+        "kasur busa 100x200",
+        "sprei 100x200",
+        "bantal"
+      ]
     },
     {
       "id": "package-double",
       "name": "Double (Paket)",
       "shortName": "Double (Pkt)",
       "description": "Kasur + Sprei + Bantal",
-      "pricePerDay": 45000,
+      "pricePerDay": 50000,
       "costPrice": 949741,
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
       "image": "/images/paket-120.webp",
-      "includes": ["kasur busa 120x200", "sprei 120x200", "bantal"]
+      "includes": [
+        "kasur busa 120x200",
+        "sprei 120x200",
+        "bantal"
+      ]
     },
     {
       "id": "package-queen",
       "name": "Queen (Paket)",
       "shortName": "Queen (Pkt)",
       "description": "Kasur + Sprei + 2 Bantal",
-      "pricePerDay": 55000,
+      "pricePerDay": 60000,
       "costPrice": 1215294,
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
       "image": "/images/paket-160.webp",
-      "includes": ["kasur busa 160x200", "sprei 160x200", "2 bantal"]
+      "includes": [
+        "kasur busa 160x200",
+        "sprei 160x200",
+        "2 bantal"
+      ]
     },
     {
       "id": "package-king",
       "name": "King (Paket)",
       "shortName": "King (Pkt)",
       "description": "Kasur + Sprei + 2 Bantal",
-      "pricePerDay": 65000,
+      "pricePerDay": 70000,
       "costPrice": 1340833,
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
       "image": "/images/paket-180.webp",
-      "includes": ["kasur busa 180x200", "sprei 180x200", "2 bantal"]
+      "includes": [
+        "kasur busa 180x200",
+        "sprei 180x200",
+        "2 bantal"
+      ]
     }
   ],
   "mattressOnly": [
@@ -67,60 +87,70 @@
       "name": "Single Standard (Kasur)",
       "shortName": "Single Standard",
       "description": "Hanya kasur (Tanpa sprei/bantal)",
-      "pricePerDay": 25000,
+      "pricePerDay": 30000,
       "costPrice": 735256,
       "dimensions": "90 x 200 cm",
       "capacity": "1 orang",
       "image": "/images/saja-90.webp",
-      "includes": ["kasur busa 90x200"]
+      "includes": [
+        "kasur busa 90x200"
+      ]
     },
     {
       "id": "mattress-single-super",
       "name": "Single Super (Kasur)",
       "shortName": "Single Super",
       "description": "Hanya kasur (Tanpa sprei/bantal)",
-      "pricePerDay": 30000,
+      "pricePerDay": 35000,
       "costPrice": 809566,
       "dimensions": "100 x 200 cm",
       "capacity": "1 orang",
       "image": "/images/saja-100-alt.webp",
-      "includes": ["kasur busa 100x200"]
+      "includes": [
+        "kasur busa 100x200"
+      ]
     },
     {
       "id": "mattress-double",
       "name": "Double (Kasur)",
       "shortName": "Double",
       "description": "Hanya kasur (Tanpa sprei/bantal)",
-      "pricePerDay": 35000,
+      "pricePerDay": 40000,
       "costPrice": 949741,
       "dimensions": "120 x 200 cm",
       "capacity": "1-2 orang",
       "image": "/images/saja-120.webp",
-      "includes": ["kasur busa 120x200"]
+      "includes": [
+        "kasur busa 120x200"
+      ]
     },
     {
       "id": "mattress-queen",
       "name": "Queen (Kasur)",
       "shortName": "Queen",
       "description": "Hanya kasur (Tanpa sprei/bantal)",
-      "pricePerDay": 45000,
+      "pricePerDay": 50000,
       "costPrice": 1215294,
       "dimensions": "160 x 200 cm",
       "capacity": "2 orang",
       "image": "/images/saja-160.webp",
-      "includes": ["kasur busa 160x200"]
+      "includes": [
+        "kasur busa 160x200"
+      ]
     },
     {
       "id": "mattress-king",
       "name": "King (Kasur)",
       "shortName": "King",
       "description": "Hanya kasur (Tanpa sprei/bantal)",
-      "pricePerDay": 55000,
+      "pricePerDay": 60000,
       "costPrice": 1340833,
       "dimensions": "180 x 200 cm",
       "capacity": "2-3 orang",
       "image": "/images/saja-180.webp",
-      "includes": ["kasur busa 180x200"]
+      "includes": [
+        "kasur busa 180x200"
+      ]
     }
   ],
   "accessories": [
@@ -132,7 +162,9 @@
       "pricePerDay": 10000,
       "costPrice": 25000,
       "image": "/images/ekstra-bantal.webp",
-      "includes": ["bantal"]
+      "includes": [
+        "bantal"
+      ]
     },
     {
       "id": "acc-sprei",
@@ -142,7 +174,9 @@
       "pricePerDay": 10000,
       "costPrice": 50000,
       "image": "/images/ekstra-sprei.webp",
-      "includes": ["sprei"]
+      "includes": [
+        "sprei"
+      ]
     },
     {
       "id": "acc-blanket",
@@ -152,7 +186,9 @@
       "pricePerDay": 10000,
       "costPrice": 75000,
       "image": "/images/ekstra-selimut.webp",
-      "includes": ["selimut"]
+      "includes": [
+        "selimut"
+      ]
     },
     {
       "id": "acc-bolster",
@@ -162,7 +198,9 @@
       "pricePerDay": 10000,
       "costPrice": 35000,
       "image": "/images/ekstra-guling.webp",
-      "includes": ["guling"]
+      "includes": [
+        "guling"
+      ]
     }
   ]
 }

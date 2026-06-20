@@ -1,202 +1,203 @@
----
-/**
- * FAQ Component with FAQ Schema markup for SEO
- * Targeting: "sewa kasur jogja" keyword
- */
-
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-const faqs: FAQItem[] = [
-  {
-    question: "Berapa harga sewa kasur di Jogja?",
-    answer:
-      "Harga sewa kasur di Jogja mulai dari Rp25.000/hari untuk kasur single dan Rp35.000/hari untuk kasur double. Kami juga memberikan diskon 10-15% untuk penyewaan lebih dari 3 unit atau durasi lebih dari 1 minggu.",
-  },
-  {
-    question: "Bagaimana cara menyewa kasur?",
-    answer:
-      "Sangat mudah! Cukup pilih jenis kasur dan durasi sewa di website kami, lalu lanjutkan ke checkout. Anda juga bisa langsung hubungi WhatsApp kami di 0895-1911-9092 untuk pemesanan cepat.",
-  },
-  {
-    question: "Apakah bisa antar kasur hari ini?",
-    answer:
-      "Ya, kami melayani pengantaran same day untuk pemesanan sebelum jam 15:00. Untuk area Kota Yogyakarta, Sleman, dan Bantul, kasur bisa sampai dalam hitungan jam setelah konfirmasi pembayaran.",
-  },
-  {
-    question: "Area mana saja yang dilayani untuk sewa kasur?",
-    answer:
-      "Kami melayani seluruh wilayah Yogyakarta meliputi Kota Yogyakarta, Kabupaten Sleman, Kabupaten Bantul, dan sekitarnya. Untuk area di luar jangkauan, silakan hubungi kami untuk informasi ongkir.",
-  },
-  {
-    question: "Apakah kasur yang disewakan bersih dan higienis?",
-    answer:
-      "Tentu! Semua kasur kami dicuci profesional dan didisinfektan setelah setiap pemakaian. Kasur diantar dalam kondisi bersih, wangi, dan dibungkus plastik untuk menjaga kebersihan.",
-  },
-  {
-    question: "Berapa lama minimal durasi sewa kasur?",
-    answer:
-      "Minimal sewa kasur adalah 1 hari. Anda bisa menyewa kasur harian, mingguan, atau bulanan sesuai kebutuhan. Semakin lama durasi sewa, semakin hemat biayanya.",
-  },
-  {
-    question: "Bagaimana proses pengembalian kasur?",
-    answer:
-      "Anda tidak perlu repot mengembalikan kasur. Cukup hubungi kami via WhatsApp, dan tim kami akan menjemput kasur di lokasi Anda sesuai jadwal yang disepakati. Gratis jemput untuk area Jogja!",
-  },
-  {
-    question: "Apakah ada ongkir untuk pengantaran kasur?",
-    answer:
-      "Untuk area dalam radius 3 km dari lokasi kami, pengantaran GRATIS. Untuk area yang lebih jauh, ongkir dihitung berdasarkan jarak dengan tarif Rp1.500/km. Anda bisa cek estimasi ongkir di kalkulator kami.",
-  },
-];
-
-// Generate FAQ Schema
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
-};
----
-
-<section class="faq-section" id="faq">
-  <div class="container">
-    <h2 class="section-title">Pertanyaan Seputar Sewa Kasur Jogja</h2>
-    <p class="section-subtitle">
-      Temukan jawaban untuk pertanyaan yang sering diajukan
-    </p>
-
-    <div class="faq-list">
-      {
-        faqs.map((faq, index) => (
-          <details class="faq-item" data-index={index}>
-            <summary class="faq-question">
-              <span class="faq-icon">+</span>
-              {faq.question}
-            </summary>
-            <div class="faq-answer">
-              <p>{faq.answer}</p>
-            </div>
-          </details>
-        ))
-      }
-    </div>
-  </div>
-</section>
-
-<!-- FAQ Schema for SEO -->
-<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-
-<style>
-  .faq-section {
-    padding: var(--space-16) 0;
-    background: var(--color-gray-50);
-  }
-
-  .section-title {
-    text-align: center;
-    font-size: var(--font-size-2xl);
-    color: var(--color-gray-900);
-    margin-bottom: var(--space-2);
-  }
-
-  .section-subtitle {
-    text-align: center;
-    color: var(--color-gray-600);
-    margin-bottom: var(--space-8);
-  }
-
-  .faq-list {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .faq-item {
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-  }
-
-  .faq-question {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-5);
-    cursor: pointer;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-gray-800);
-    list-style: none;
-    transition: background 0.2s;
-  }
-
-  .faq-question::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq-question:hover {
-    background: var(--color-gray-50);
-  }
-
-  .faq-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: var(--color-primary);
-    color: white;
-    border-radius: 50%;
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-
-  .faq-item[open] .faq-icon {
-    transform: rotate(45deg);
-  }
-
-  .faq-answer {
-    padding: 0 var(--space-5) var(--space-4);
-    padding-left: calc(var(--space-5) + 24px + var(--space-3));
-    color: var(--color-gray-600);
-    line-height: 1.7;
-  }
-
-  .faq-answer p {
-    margin: 0;
-  }
-
-  @media (min-width: 640px) {
-    .section-title {
-      font-size: var(--font-size-3xl);
-    }
-  }
-</style>
-
-<script>
-  // Accordion behavior - close other items when one opens
-  document.querySelectorAll(".faq-item").forEach((item) => {
-    item.addEventListener("toggle", (e) => {
-      if ((e.target as HTMLDetailsElement).open) {
-        document.querySelectorAll(".faq-item").forEach((other) => {
-          if (other !== e.target && (other as HTMLDetailsElement).open) {
-            (other as HTMLDetailsElement).open = false;
-          }
-        });
-      }
-    });
-  });
-</script>
+1|---
+2|/**
+3| * FAQ Component with FAQ Schema markup for SEO
+4| * Targeting: "sewa kasur jogja" keyword
+5| */
+6|
+7|interface FAQItem {
+8|  question: string;
+9|  answer: string;
+10|}
+11|
+12|const faqs: FAQItem[] = [
+13|  {
+14|    question: "Berapa harga sewa kasur di Jogja?",
+15|    answer:
+16|      "Harga sewa kasur di Jogja mulai dari Rp30.000/hari untuk kasur single dan Rp40.000/hari untuk kasur double. Kami juga memberikan diskon 10-15% untuk penyewaan lebih dari 3 unit atau durasi lebih dari 1 minggu.",
+17|  },
+18|  {
+19|    question: "Bagaimana cara menyewa kasur?",
+20|    answer:
+21|      "Sangat mudah! Cukup pilih jenis kasur dan durasi sewa di website kami, lalu lanjutkan ke checkout. Anda juga bisa langsung hubungi WhatsApp kami di 0895-1911-9092 untuk pemesanan cepat.",
+22|  },
+23|  {
+24|    question: "Apakah bisa antar kasur hari ini?",
+25|    answer:
+26|      "Ya, kami melayani pengantaran same day untuk pemesanan sebelum jam 15:00. Untuk area Kota Yogyakarta, Sleman, dan Bantul, kasur bisa sampai dalam hitungan jam setelah konfirmasi pembayaran.",
+27|  },
+28|  {
+29|    question: "Area mana saja yang dilayani untuk sewa kasur?",
+30|    answer:
+31|      "Kami melayani seluruh wilayah Yogyakarta meliputi Kota Yogyakarta, Kabupaten Sleman, Kabupaten Bantul, dan sekitarnya. Untuk area di luar jangkauan, silakan hubungi kami untuk informasi ongkir.",
+32|  },
+33|  {
+34|    question: "Apakah kasur yang disewakan bersih dan higienis?",
+35|    answer:
+36|      "Tentu! Semua kasur kami dicuci profesional dan didisinfektan setelah setiap pemakaian. Kasur diantar dalam kondisi bersih, wangi, dan dibungkus plastik untuk menjaga kebersihan.",
+37|  },
+38|  {
+39|    question: "Berapa lama minimal durasi sewa kasur?",
+40|    answer:
+41|      "Minimal sewa kasur adalah 1 hari. Anda bisa menyewa kasur harian, mingguan, atau bulanan sesuai kebutuhan. Semakin lama durasi sewa, semakin hemat biayanya.",
+42|  },
+43|  {
+44|    question: "Bagaimana proses pengembalian kasur?",
+45|    answer:
+46|      "Anda tidak perlu repot mengembalikan kasur. Cukup hubungi kami via WhatsApp, dan tim kami akan menjemput kasur di lokasi Anda sesuai jadwal yang disepakati. Gratis jemput untuk area Jogja!",
+47|  },
+48|  {
+49|    question: "Apakah ada ongkir untuk pengantaran kasur?",
+50|    answer:
+51|      "Untuk area dalam radius 3 km dari lokasi kami, pengantaran GRATIS. Untuk area yang lebih jauh, ongkir dihitung berdasarkan jarak dengan tarif Rp1.500/km. Anda bisa cek estimasi ongkir di kalkulator kami.",
+52|  },
+53|];
+54|
+55|// Generate FAQ Schema
+56|const faqSchema = {
+57|  "@context": "https://schema.org",
+58|  "@type": "FAQPage",
+59|  mainEntity: faqs.map((faq) => ({
+60|    "@type": "Question",
+61|    name: faq.question,
+62|    acceptedAnswer: {
+63|      "@type": "Answer",
+64|      text: faq.answer,
+65|    },
+66|  })),
+67|};
+68|---
+69|
+70|<section class="faq-section" id="faq">
+71|  <div class="container">
+72|    <h2 class="section-title">Pertanyaan Seputar Sewa Kasur Jogja</h2>
+73|    <p class="section-subtitle">
+74|      Temukan jawaban untuk pertanyaan yang sering diajukan
+75|    </p>
+76|
+77|    <div class="faq-list">
+78|      {
+79|        faqs.map((faq, index) => (
+80|          <details class="faq-item" data-index={index}>
+81|            <summary class="faq-question">
+82|              <span class="faq-icon">+</span>
+83|              {faq.question}
+84|            </summary>
+85|            <div class="faq-answer">
+86|              <p>{faq.answer}</p>
+87|            </div>
+88|          </details>
+89|        ))
+90|      }
+91|    </div>
+92|  </div>
+93|</section>
+94|
+95|<!-- FAQ Schema for SEO -->
+96|<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+97|
+98|<style>
+99|  .faq-section {
+100|    padding: var(--space-16) 0;
+101|    background: var(--color-gray-50);
+102|  }
+103|
+104|  .section-title {
+105|    text-align: center;
+106|    font-size: var(--font-size-2xl);
+107|    color: var(--color-gray-900);
+108|    margin-bottom: var(--space-2);
+109|  }
+110|
+111|  .section-subtitle {
+112|    text-align: center;
+113|    color: var(--color-gray-600);
+114|    margin-bottom: var(--space-8);
+115|  }
+116|
+117|  .faq-list {
+118|    max-width: 800px;
+119|    margin: 0 auto;
+120|    display: flex;
+121|    flex-direction: column;
+122|    gap: var(--space-3);
+123|  }
+124|
+125|  .faq-item {
+126|    background: white;
+127|    border-radius: var(--radius-lg);
+128|    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+129|    overflow: hidden;
+130|  }
+131|
+132|  .faq-question {
+133|    display: flex;
+134|    align-items: center;
+135|    gap: var(--space-3);
+136|    padding: var(--space-4) var(--space-5);
+137|    cursor: pointer;
+138|    font-weight: var(--font-weight-semibold);
+139|    color: var(--color-gray-800);
+140|    list-style: none;
+141|    transition: background 0.2s;
+142|  }
+143|
+144|  .faq-question::-webkit-details-marker {
+145|    display: none;
+146|  }
+147|
+148|  .faq-question:hover {
+149|    background: var(--color-gray-50);
+150|  }
+151|
+152|  .faq-icon {
+153|    display: flex;
+154|    align-items: center;
+155|    justify-content: center;
+156|    width: 24px;
+157|    height: 24px;
+158|    background: var(--color-primary);
+159|    color: white;
+160|    border-radius: 50%;
+161|    font-size: var(--font-size-lg);
+162|    font-weight: var(--font-weight-bold);
+163|    flex-shrink: 0;
+164|    transition: transform 0.2s;
+165|  }
+166|
+167|  .faq-item[open] .faq-icon {
+168|    transform: rotate(45deg);
+169|  }
+170|
+171|  .faq-answer {
+172|    padding: 0 var(--space-5) var(--space-4);
+173|    padding-left: calc(var(--space-5) + 24px + var(--space-3));
+174|    color: var(--color-gray-600);
+175|    line-height: 1.7;
+176|  }
+177|
+178|  .faq-answer p {
+179|    margin: 0;
+180|  }
+181|
+182|  @media (min-width: 640px) {
+183|    .section-title {
+184|      font-size: var(--font-size-3xl);
+185|    }
+186|  }
+187|</style>
+188|
+189|<script>
+190|  // Accordion behavior - close other items when one opens
+191|  document.querySelectorAll(".faq-item").forEach((item) => {
+192|    item.addEventListener("toggle", (e) => {
+193|      if ((e.target as HTMLDetailsElement).open) {
+194|        document.querySelectorAll(".faq-item").forEach((other) => {
+195|          if (other !== e.target && (other as HTMLDetailsElement).open) {
+196|            (other as HTMLDetailsElement).open = false;
+197|          }
+198|        });
+199|      }
+200|    });
+201|  });
+202|</script>
+203|
