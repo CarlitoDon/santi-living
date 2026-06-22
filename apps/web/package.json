@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "echo \"VERCEL_ENV=$VERCEL_ENV\" && astro build",
+    "build": "echo \"VERCEL_ENV=$VERCEL_ENV\" && echo \"[SKIP] Astro app deprecated — using Next.js (web-next)\" && exit 0",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint src --ext .ts,.tsx,.astro",
