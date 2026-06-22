@@ -8,12 +8,12 @@
     "build": "echo \"VERCEL_ENV=$VERCEL_ENV\" && echo \"[SKIP] Astro app deprecated — using Next.js (web-next)\" && exit 0",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint src --ext .ts,.tsx,.astro",
-    "typecheck": "astro check",
+    "lint": "echo \"[SKIP] Astro app deprecated\" && exit 0",
+    "typecheck": "echo \"[SKIP] Astro app deprecated\" && exit 0",
     "typecheck:watch": "astro check --watch",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "echo \"[SKIP] Astro app deprecated\" && exit 0",
+    "test:watch": "echo \"[SKIP] Astro app deprecated\" && exit 0",
+    "test:coverage": "echo \"[SKIP] Astro app deprecated\" && exit 0"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
