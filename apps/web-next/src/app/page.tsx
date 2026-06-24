@@ -144,7 +144,7 @@ export default function HomePage() {
         </section>
 
         {/* Product Picker — lightweight grid replaces the old Calculator form */}
-        <div className="relative z-[10] -mt-10 md:-mt-20">
+        <div className="relative z-[10] -mt-10 md:-mt-12">
           <div
             style={{
               background: '#f8fafc',
