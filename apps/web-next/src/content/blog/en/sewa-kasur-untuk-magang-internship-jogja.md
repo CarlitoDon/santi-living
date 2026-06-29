@@ -27,17 +27,21 @@ Interns typically stay for only 1–6 months. Buying a brand-new mattress is cle
 
 ## Recommended Boarding House Areas for Interns
 
-- **UGM / Seturan** — close to campus and business centers
-- **Gejayan / Colombo** — easy access to malls and dining spots
-- **Kaliurang KM 5–7** — many new boarding houses, competitive prices
-- **Timoho / Demangan** — close to the city center
+Choosing the right area is critical for your daily commute and lifestyle:
+- **UGM / Seturan** — close to campus and business centers, with lots of workspaces and cafes.
+- **Gejayan / Colombo** — easy access to malls, dining spots, and central Jogja.
+- **Kaliurang KM 5–7** — many new boarding houses, competitive prices, and cool weather.
+- **Timoho / Demangan** — close to the city center and government offices.
+- **Jalan Solo (Adisutjipto)** — perfect for interns working near the airport or East Jogja industries.
 
 ## Why Choose Santi Living for Your Internship
 
-1. **Flexible rental** — daily, weekly, or monthly
-2. **Free delivery and pickup** — at check-in and check-out
-3. **Clean mattresses** — quality spring beds and dastina mattresses
-4. **Size upgrades available** — switch to a double if needed
+Choosing a reliable vendor will save you from sleepless nights and hidden delivery costs:
+1. **Flexible rental** — daily, weekly, or monthly plans to fit short-term internship contracts.
+2. **Free delivery and pickup** — at check-in and check-out, saving your transportation budget.
+3. **Clean mattresses** — quality spring beds, folding beds, and premium dastina mattresses sanitized after every use.
+4. **Size upgrades available** — switch to a double or queen size if you need more sleeping space later.
+5. **No deposit needed** — simple booking process via WhatsApp without complex administrative forms.
 
 ## How to Order
 
