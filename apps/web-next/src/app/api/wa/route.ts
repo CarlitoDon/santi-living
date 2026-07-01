@@ -82,8 +82,16 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    // Build Google Maps link from auto-location coordinates
+    const rawLat = params.get('latitude');
+    const rawLng = params.get('longitude');
+    const mapsLink =
+      rawLat && rawLng
+        ? `\n\n📍 *Lokasi:* https://www.google.com/maps?q=${rawLat},${rawLng}`
+        : '';
+
     const to = sanitizedPhone(params.get('to'));
-    const text = sanitizeWhatsAppText(params.get('text') ?? '');
+    const text = sanitizeWhatsAppText(params.get('text') ?? '') + mapsLink;
     const redirectUrl = new URL(`https://wa.me/${to}`);
     if (text) {
       redirectUrl.searchParams.set('text', text);
