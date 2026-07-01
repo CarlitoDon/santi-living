@@ -27,7 +27,7 @@ function getLocale(request: NextRequest): string {
 }
 
 export function middleware(request: NextRequest) {
-  let { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl;
   const hostname = request.headers.get('host') || '';
 
   // --- Step 1: Skip api, static files ---
