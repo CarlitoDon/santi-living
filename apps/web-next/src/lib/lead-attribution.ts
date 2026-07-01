@@ -51,6 +51,7 @@ const LocationPermissionSchema = z.preprocess((value) => {
   'unavailable',
   'unsupported',
   'error',
+  'cached',
 ]).optional());
 
 const GeocodeStatusSchema = z.preprocess((value) => {
