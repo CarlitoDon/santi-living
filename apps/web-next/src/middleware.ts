@@ -27,18 +27,10 @@ function getLocale(request: NextRequest): string {
 }
 
 export function middleware(request: NextRequest) {
-  let { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl;
   const hostname = request.headers.get('host') || '';
 
-  // --- Step 1: Host-based subdomain rewrite ---
-  for (const [host, target] of HOST_REWRITES) {
-    if (hostname.startsWith(host) && pathname === '/') {
-      pathname = target;
-      break;
-    }
-  }
-
-  // --- Step 2: Skip api, static files ---
+  // --- Step 1: Skip api, static files ---
   if (
     pathname.startsWith('/api') ||
     pathname.startsWith('/images') ||
@@ -46,6 +38,17 @@ export function middleware(request: NextRequest) {
     pathname.includes('.')
   ) {
     return NextResponse.next();
+  }
+
+  // --- Step 2: Host-based subdomain rewrite ---
+  for (const [host, target] of HOST_REWRITES) {
+    if (hostname.startsWith(host)) {
+      const url = request.nextUrl.clone();
+      const localeMatch = pathname.match(/^\/(id|en)/);
+      const locale = localeMatch ? localeMatch[1] : getLocale(request);
+      url.pathname = `/${locale}${target}`;
+      return NextResponse.rewrite(url);
+    }
   }
 
   // --- Step 3: Locale prefix detection ---

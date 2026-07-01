@@ -110,11 +110,6 @@ const config = {
     };
   },
   robotsTxtOptions: {
-    additionalSitemaps: [
-      `${KARPET_SITE_URL}/sitemap-0.xml`,
-      `${PERMADANI_SITE_URL}/sitemap-0.xml`,
-      `${ACARA_SITE_URL}/sitemap-0.xml`,
-    ],
     transformRobotsTxt: async (_config, robotsTxt) =>
       robotsTxt.replace(/\n# Host\nHost: https:\/\/santiliving\.com\n/, '\n'),
     policies: [

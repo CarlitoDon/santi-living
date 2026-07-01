@@ -1,14 +1,15 @@
 import type { Metadata } from 'next';
 import { sewaKarpetJogja } from '@/data/landing-pages/sewa-karpet';
 import { LandingPage } from '@/components/landing/LandingPage';
+import { buildKarpetMetadata } from '@/lib/karpet-seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const en = sewaKarpetJogja.en;
-  if (locale === 'en' && en?.meta?.title) {
-    return { title: en.meta.title, description: en.meta.description };
+  const baseMeta = buildKarpetMetadata(sewaKarpetJogja, '/sewa-karpet-jogja');
+  if (locale === 'en' && sewaKarpetJogja.en?.meta?.title) {
+    return { ...baseMeta, title: sewaKarpetJogja.en.meta.title, description: sewaKarpetJogja.en.meta.description };
   }
-  return { title: sewaKarpetJogja.meta.title, description: sewaKarpetJogja.meta.description };
+  return baseMeta;
 }
 
 export default function SewaKarpetJogjaPage() {
