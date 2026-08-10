@@ -18,7 +18,7 @@ import {
   calculateRelevanceScore,
   isDuplicate,
   runIntelligencePipeline,
-} from "/Users/wecik/.hermes/profiles/don-santo/scripts/santi-blog-topic-intelligence.mjs";
+} from "../../santi-blog-topic-intelligence.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const TEST_DB = path.join(SCRIPT_DIR, "__test_wave2__.db");

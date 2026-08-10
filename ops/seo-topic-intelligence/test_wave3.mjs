@@ -19,7 +19,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SCRIPT_DIR = "/Users/wecik/.hermes/profiles/don-santo/scripts";
+const SCRIPT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../");
 const WORKER_CLI = path.join(SCRIPT_DIR, "santi-blog-topic-intelligence-cli.mjs");
 const TEST_DB = path.join(__dirname, "__test_wave3__.db");
 

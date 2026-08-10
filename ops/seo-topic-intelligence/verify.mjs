@@ -1,4 +1,4 @@
-import { ensureSchema, recordCandidate, acceptCandidate, queueCounts } from '/Users/wecik/.hermes/profiles/don-santo/scripts/santi-blog-topic-queue.mjs';
+import { ensureSchema, recordCandidate, acceptCandidate, queueCounts } from '../../santi-blog-topic-queue.mjs';
 
 async function verify() {
   console.log('Running verification...');

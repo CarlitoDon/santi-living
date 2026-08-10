@@ -8,7 +8,7 @@ const args = parseArgs({
   },
 });
 
-const DB_PATH = args.values.db || '/Users/wecik/.hermes/profiles/don-santo/scripts/blog_topics.db';
+const DB_PATH = args.values.db || process.env.SANTI_BLOG_DB || path.resolve(process.env.HOME || '.', '.hermes/profiles/don-santo/scripts/blog_topics.db');
 const LOW_WATER = parseInt(args.values['low-water'], 10);
 
 function runSql(dbPath, sql) {
