@@ -79,17 +79,53 @@ try {
   assert.deepEqual(dry.after, {});
   const applied = refreshModule.refreshTopics(db);
   assert.equal(applied.after.ready, 24, "refresh should add 24 ready topics to an empty queue");
-  const usedSlug = refreshModule.TOPIC_DEFINITIONS[0].slug;
-  sqlite(db, `UPDATE topics SET status='used', used_at='test' WHERE slug='${usedSlug}';`);
-  const rerun = refreshModule.refreshTopics(db);
-  assert.equal(rerun.after.used, 1, "refresh must preserve used topics");
-  assert.equal(rerun.after.ready, 23, "refresh must remain idempotent");
+  const metadataColumns = JSON.parse(sqlite(db, "PRAGMA table_info(topics);", true)).map((column) => column.name);
+  assert.deepEqual(
+    metadataColumns.filter((column) => column.startsWith("en_")),
+    ["en_title", "en_description", "en_audience", "en_scenario", "en_item_focus"],
+    "refresh should add all English metadata columns to a legacy schema"
+  );
+  assert.equal(refreshModule.TOPIC_DEFINITIONS.length, 24);
+  for (const definition of refreshModule.TOPIC_DEFINITIONS) {
+    for (const field of ["en_title", "en_description", "en_audience", "en_scenario", "en_item_focus"]) {
+      assert.equal(typeof definition[field], "string");
+      assert.notEqual(definition[field].trim(), "", `${definition.slug} should define ${field}`);
+    }
+  }
+
+  const firstDefinition = refreshModule.TOPIC_DEFINITIONS[0];
+  const firstRow = JSON.parse(sqlite(db, `SELECT slug, title, description, en_title, en_description, en_audience, en_scenario, en_item_focus FROM topics WHERE slug='${firstDefinition.slug}';`, true))[0];
+  assert.equal(firstRow.en_title, firstDefinition.en_title);
+  assert.equal(firstRow.en_description, firstDefinition.en_description);
+  assert.equal(firstRow.en_audience, firstDefinition.en_audience);
+  assert.equal(firstRow.en_scenario, firstDefinition.en_scenario);
+  assert.equal(firstRow.en_item_focus, firstDefinition.en_item_focus);
+
   const writerRun = expectCommand("node", [WRITER, "--dry-run"], {
     env: { ...process.env, SANTI_BLOG_DB_PATH: db, SANTI_BLOG_DRY_RUN: "1", SANTI_BLOG_TEST: "1" },
   });
   assert.equal(writerRun.status, 0, writerRun.output);
   assert.match(writerRun.output, /status=dry_run/);
   assert.match(writerRun.output, /mcp=not_called/);
+
+  const validator = await import(`${pathToFile(PROFILE_SCRIPTS)}/santi-blog-article-validator.mjs`);
+  const date = "2026-08-10";
+  const firstTopic = { ...firstDefinition };
+  const firstIdBody = writerModule.buildBody(firstTopic, { today: date });
+  const firstEnBody = writerModule.buildBodyEn(firstTopic, { today: date });
+  const firstEnTitle = writerModule.englishTitle(firstTopic);
+  const firstEnDescription = writerModule.englishDescription(firstTopic);
+  const firstEnText = `${firstEnTitle}\n${firstEnDescription}\n${firstEnBody}`;
+  assert.equal(firstEnTitle, "How to Calculate the Total Cost of Daily Mattress Rental in Yogyakarta");
+  assert.match(firstEnDescription, /estimating daily mattress rental costs/i);
+  assert.match(firstIdBody, /Diperbarui|Kapan Sewa Menjadi Pilihan Praktis|Membeli barang baru/);
+  assert.doesNotMatch(firstEnText, /\b(?:cara|panduan|di|untuk|dan|sewa|kasur|membutuhkan|perlengkapan)\b/i, "English first topic must not leak Indonesian metadata");
+  const firstPair = validator.validatePair(
+    validator.parseFrontmatter(articleRaw({ title: firstDefinition.title, description: firstDefinition.description, date, tags: firstDefinition.tags, body: firstIdBody })),
+    validator.parseFrontmatter(articleRaw({ title: firstEnTitle, description: firstEnDescription, date, tags: ["mattress rental", "yogyakarta"], body: firstEnBody })),
+    { cutoffDate: date }
+  );
+  assert.equal(firstPair.valid, true, firstPair.issues.join("; "));
 
   const topic = {
     title: "Tes Sewa Kasur",
@@ -99,10 +135,10 @@ try {
     scenario: "membutuhkan kasur sementara untuk tamu",
     item_focus: "kasur dan perlengkapan tidur",
   };
-  const date = "2026-08-10";
   const idBody = writerModule.buildBody(topic, { today: date });
   const enBody = writerModule.buildBodyEn(topic, { today: date });
-  const validator = await import(`${pathToFile(PROFILE_SCRIPTS)}/santi-blog-article-validator.mjs`);
+  assert.equal(writerModule.englishTitle(topic), "Practical Rental Guide for Yogyakarta");
+  assert.equal(writerModule.englishDescription(topic), "A practical guide to planning a temporary rental request, including quantity, dates, location, and package details.");
   const bodyResult = validator.validatePair(
     validator.parseFrontmatter(articleRaw({ title: topic.title, description: topic.description, date, body: idBody })),
     validator.parseFrontmatter(articleRaw({ title: "Test Mattress Rental", description: "Test guide.", date, body: enBody })),
@@ -112,6 +148,16 @@ try {
   assert.equal(idBody.includes("|"), false, "generated ID body must not contain pipe tables");
   assert.equal(enBody.includes("|"), false, "generated EN body must not contain pipe tables");
   assert.equal(/Gunung Kidul|free delivery|gratis ongkir/i.test(`${idBody}\n${enBody}`), false);
+
+  sqlite(db, "INSERT INTO topics (slug, title, status, used_at) VALUES ('unrelated-legacy-topic', 'Unrelated Legacy Topic', 'used', 'keep');");
+  sqlite(db, `UPDATE topics SET status='used', used_at='test', en_scenario='' WHERE slug='${firstDefinition.slug}';`);
+  const rerun = refreshModule.refreshTopics(db);
+  assert.equal(rerun.after.used, 2, "refresh must preserve used topics, including unrelated rows");
+  assert.equal(rerun.after.ready, 23, "refresh must remain idempotent after the first topic is used");
+  const preservedFirst = JSON.parse(sqlite(db, `SELECT status, used_at, en_scenario FROM topics WHERE slug='${firstDefinition.slug}';`, true))[0];
+  assert.deepEqual(preservedFirst, { status: "used", used_at: "test", en_scenario: firstDefinition.en_scenario });
+  const unrelated = JSON.parse(sqlite(db, "SELECT en_title, en_description, en_audience, en_scenario, en_item_focus FROM topics WHERE slug='unrelated-legacy-topic';", true))[0];
+  assert.deepEqual(unrelated, { en_title: "", en_description: "", en_audience: "", en_scenario: "", en_item_focus: "" }, "refresh must not fill metadata outside its topic pack");
 
   const currentId = validator.parseFrontmatter(articleRaw({ title: "Current ID", description: "Current test", date, body: idBody }));
   const currentEn = validator.parseFrontmatter(articleRaw({ title: "Current EN", description: "Current test", date, body: enBody }));
