@@ -1,18 +1,18 @@
 ---
-title: "How to Menghitung Total Biaya Sewa Kasur Harian in Jogja"
-description: "Guide menyusun estimasi biaya sewa kasur harian berdasarkan jumlah unit, durasi, paket, and detail keNeedan."
+title: "How to Calculate the Total Cost of Daily Mattress Rental in Yogyakarta"
+description: "A practical guide to estimating daily mattress rental costs based on the number of units, rental duration, package choice, and other requirements."
 pubDate: 2026-08-10
 author: "Santi Living Team"
-tags: ["harga", "mattress rental", "durasi", "jogja"]
+tags: ["price", "mattress rental", "duration", "Yogyakarta"]
 ---
 
-**Updated 2026-08-10** — butuh memperkirakan anggaran kasur untuk beberapa hari. This practical guide focuses on kasur dan paket perlengkapan tidur for calon penyewa kasur di Yogyakarta in the Yogyakarta service area.
+**Updated 2026-08-10** — you need to estimate a mattress budget for several days. This practical guide focuses on mattresses and sleep equipment packages for prospective mattress renters planning a stay in Yogyakarta in the Yogyakarta service area.
 
 ## When Is Renting Practical?
 
-butuh memperkirakan anggaran kasur untuk beberapa hari. Buying new items may not be worthwhile when the need lasts only a few days, covers one event, or fills a temporary gap in sleeping capacity. Renting lets you match the quantity and type of equipment to the need you have confirmed.
+you need to estimate a mattress budget for several days. Buying new items may not be worthwhile when the need lasts only a few days, covers one event, or fills a temporary gap in sleeping capacity. Renting lets you match the quantity and type of equipment to the need you have confirmed.
 
-For calon penyewa kasur di Yogyakarta, consider the number of people, room size, dates, site access, and rental duration. List essential items first, then separate optional items so the booking conversation stays clear.
+For prospective mattress renters planning a stay in Yogyakarta, consider the number of people, room size, dates, site access, and rental duration. List essential items first, then separate optional items so the booking conversation stays clear.
 
 ## Approximate Price Guide
 
@@ -25,7 +25,7 @@ These ranges are a budgeting starting point, not a price guarantee for every dat
 ## Booking Checklist
 
 1. Write the rental start and end dates.
-2. Describe the kasur dan paket perlengkapan tidur needed, including quantity and size if known.
+2. Describe the mattresses and sleep equipment packages needed, including quantity and size if known.
 3. Send the complete address and a location landmark through WhatsApp.
 4. Ask about availability, delivery and pickup schedule, related costs, and package options.
 5. Keep the written confirmation for the day of use.
