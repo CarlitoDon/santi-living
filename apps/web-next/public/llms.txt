@@ -1,0 +1,62 @@
+# Santi Living
+
+> Santi Living adalah divisi sewa kasur & perlengkapan acara resmi Santi Mebel Godean di Yogyakarta. Menyewakan kasur busa berkualitas, extra bed hotel/apartemen, dan paket kasur lengkap (kasur + sprei + bantal + selimut) dengan pengantaran antar-jemput sendiri di Kota Yogyakarta, Sleman, Bantul, dan Kulonprogo. Harga mulai Rp 30.000/hari (kasur saja) dan Rp 40.000/hari (paket lengkap). Pemesanan via WhatsApp: 0895-1911-9092.
+
+Fakta penting:
+- Workshop & showroom: Jl. Godean KM 10, Kwarasan, Nogotirto, Kec. Gamping, Kab. Sleman, DI Yogyakarta 55292. Jam operasional Senin–Minggu 07.00–21.00 WIB.
+- Harga kasur saja: Rp 30.000 – Rp 60.000/hari. Paket lengkap (kasur + sprei + bantal): Rp 40.000 – Rp 70.000/hari. Tambahan bantal/sprei/selimut/guling Rp 10.000/hari, TV 32" Rp 50.000/hari, kipas Rp 29.000/hari, air cooler Rp 35.000/hari.
+- Ukuran tersedia: Single Std 90x200, Single Super 100x200, Double 120x200, Queen 160x200, King 180x200 cm. Minimal sewa 1 hari (harian, mingguan, bulanan).
+- Area antar-jemput: Kota Yogyakarta, Sleman, Bantul, Kulonprogo (tidak melayani Gunungkidul). Gratis ongkir radius ±3 km dari Godean; diskon ongkir hingga 70% untuk review bintang 5 di Google Maps.
+- USP: kasur bersih dibungkus plastik kedap udara (di-vacuum, steril UV-C), sprei dicuci laundry higienis & wangi, same-day delivery 2–4 jam (pesan sebelum 15.00 WIB), armada sendiri, fast response WhatsApp.
+- Pembayaran: QRIS, transfer bank, GoPay.
+- Bahasa: konten tersedia dalam Bahasa Indonesia (ID) dan English (EN) dengan prefix `/id/` dan `/en/`.
+
+## Halaman Utama (Landing Pages)
+
+- [ Beranda – Sewa Kasur Jogja ](https://santiliving.com/id) : Halaman utama; daftar harga kasur, paket kasur, ekstra, FAQ, dan area layanan
+- [ Harga Sewa Kasur ](https://santiliving.com/id/harga-sewa-kasur) : Daftar harga sewa kasur lengkap per ukuran dan paket
+- [ Sewa Kasur Bulanan ](https://santiliving.com/id/sewa-kasur-bulanan) : Rental kasur bulanan mulai Rp 900.000/bulan, hemat hingga 75% vs beli baru
+- [ Sewa Kasur Lipat ](https://santiliving.com/id/sewa-kasur-lipat) : Kasur lipat 3 bagian, mulai Rp 30.000/hari
+- [ Sewa Kasur Terdekat ](https://santiliving.com/id/sewa-kasur-terdekat) : Sewa kasur terdekat area Sleman, Bantul, Kota Jogja; gratis ongkir 3 km
+- [ Sewa Selimut Jogja ](https://santiliving.com/id/sewa-selimut-jogja) : Selimut tebal kualitas hotel, mulai Rp 10.000/hari
+- [ Sewa Bantal Jogja ](https://santiliving.com/id/sewa-bantal-jogja) : Bantal & guling steril UV-C, mulai Rp 10.000/hari
+- [ Sewa Kipas Angin ](https://santiliving.com/id/sewa-kipas-angin) : Kipas stand fan 16 inch, mulai Rp 29.000/hari
+- [ Sewa Air Cooler ](https://santiliving.com/id/sewa-cooling) : Air cooler portable hemat listrik, mulai Rp 40.000/hari
+- [ Sewa TV Jogja ](https://santiliving.com/id/sewa-tv) : TV LED 32 inch HD, Rp 50.000/hari
+- [ Sewa Karpet Jogja ](https://karpet.santiliving.com/id/sewa-karpet-jogja) : Karpet merah, runner, booth & paket acara (subdomain karpet)
+- [ Sewa Permadani Jogja ](https://permadani.santiliving.com/id/sewa-karpet-permadani-jogja) : Permadani merah/emas untuk pengajian, tahlilan, lesehan (subdomain permadani)
+- [ Sewa Perlengkapan Event ](https://acara.santiliving.com/id/sewa-perlengkapan-event) : Paket perlengkapan acara satu atap — kasur, karpet, kipas, TV (subdomain acara)
+
+## Artikel (Blog)
+
+- [ Area Layanan Sewa Kasur Santi Living Jogja ](https://santiliving.com/id/artikel/area-layanan-sewa-kasur-santi-living-jogja) : Wilayah antar-jemput: Kota Jogja, Sleman, Bantul, Kulonprogo; exclude Gunungkidul
+- [ Daftar Harga Sewa Kasur Jogja 2026 ](https://santiliving.com/id/artikel/daftar-harga-sewa-kasur-jogja-2026-terbaru) : Harga sewa kasur terbaru per ukuran dan durasi
+- [ Harga Sewa Kasur Bulanan Jogja 2026 ](https://santiliving.com/id/artikel/harga-sewa-kasur-bulanan-jogja-2026) : Tarif sewa bulanan dan perbandingan hemat
+- [ Sewa Extra Bed Hotel & Penginapan ](https://santiliving.com/id/artikel/sewa-extra-bed-jogja-hotel-homestay-acara) : Extra bed untuk hotel, homestay, dan acara
+- [ Sewa Kasur Homestay & Guest House Jogja ](https://santiliving.com/id/artikel/sewa-kasur-homestay-guest-house-jogja) : Kerjasama rutin pemilik homestay/penginapan
+- [ Kerjasama Sewa Kasur untuk Hotel & Villa ](https://santiliving.com/id/artikel/kerjasama-sewa-kasur-untuk-hotel-villa-jogja) : Skema kemitraan hotel, villa, dan penginapan
+- [ Proses Sterilisasi Kasur ](https://santiliving.com/id/artikel/proses-sterilisasi-kasur-santi-living-jogja) : 7 tahap higienitas: vacuum, steril UV-C, plastik kedap udara
+- [ Spesifikasi Kasur High Density ](https://santiliving.com/id/artikel/spesifikasi-kasur-santi-living-hd-foam-jogja) : Spesifikasi kasur busa Royal Grand Exclusive HD foam
+- [ Syarat & Ketentuan Sewa Kasur ](https://santiliving.com/id/artikel/syarat-dan-ketentuan-sewa-kasur-jogja) : Ketentuan sewa, deposit, dan pengantaran
+- [ Cara Pesan Rental Kasur via WhatsApp ](https://santiliving.com/id/artikel/cara-pesan-rental-kasur-whatsapp) : Alur pemesanan: pilih kasur, isi formulir, bayar, diantar
+- [ Sewa Kasur untuk Acara Pengajian & Tahlilan ](https://santiliving.com/id/artikel/sewa-kasur-acara-pengajian-tahlilan-jogja) : Kebutuhan kasur untuk pengajian, tahlilan, haul
+- [ Sewa Kasur untuk Acara Pernikahan ](https://santiliving.com/id/artikel/sewa-kasur-acara-pernikahan-jogja) : Paket kasur tamu pernikahan & resepsi
+- [ Sewa Kasur untuk Wisuda ](https://santiliving.com/id/artikel/sewa-kasur-untuk-acara-wisuda-jogja) : Kasur untuk keluarga & tamu saat wisuda
+- [ Sewa Kasur untuk Seminar & Diklat ](https://santiliving.com/id/artikel/sewa-kasur-seminar-workshop-diklat-jogja) : Kasur untuk peserta seminar, workshop, diklat
+- [ Tips Memilih Ukuran Kasur Sewa ](https://santiliving.com/id/artikel/tips-memilih-ukuran-kasur-sewa-jogja) : Panduan pilih ukuran Single hingga King
+- [ Sewa Kasur untuk Kos-Kosan ](https://santiliving.com/id/artikel/sewa-kasur-pemilik-kos-kosan-jogja) : Solusi kasur untuk pemilik kos, diskon multi unit
+- [ Sewa Kasur Mahasiswa Jogja ](https://santiliving.com/id/artikel/sewa-kasur-mahasiswa-jogja-hemat) : Sewa kasur hemat untuk mahasiswa UGM, UII, UNY
+- [ Harga Sewa Karpet Jogja 2026 ](https://santiliving.com/id/artikel/harga-sewa-karpet-jogja-2026) : Harga sewa karpet merah & permadani
+- [ Testimoni Pelanggan Santi Living ](https://santiliving.com/id/artikel/testimoni-pelanggan-santi-living-jogja) : Ulasan pelanggan sewa kasur
+- [ Paket Sewa Perlengkapan Acara Jogja ](https://santiliving.com/id/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv) : Paket satu atap: karpet, kasur, kipas, TV untuk acara
+
+## Kontak & Pemesanan
+
+- [ WhatsApp CS / Pemesanan ](https://wa.me/6289519119092) : Fast response 07.00–21.00 WIB, 7 hari
+- [ Google Maps – Workshop Santi Living ](https://www.google.com/maps/search/?api=1&query=Jl.+Godean+KM+10+Kwarasan+Nogotirto+Gamping+Sleman+Yogyakarta) : Workshop Jl. Godean KM 10, Gamping, Sleman, DI Yogyakarta
+
+## Optional
+
+- [ Sitemap XML ](https://santiliving.com/sitemap.xml) : Daftar lengkap 1.174 URL halaman & artikel (ID/EN)
+- [ Versi English – Sewa Kasur ](https://santiliving.com/en) : Santi Living mattress rental landing page (English)
+- [ Artikel versi English ](https://santiliving.com/en/artikel/area-layanan-sewa-kasur-santi-living-jogja) : Contoh artikel blog dalam Bahasa Inggris
