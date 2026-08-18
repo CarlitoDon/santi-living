@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   // Allow ngrok for mobile testing
   allowedDevOrigins: ['tracie-proindustry-cohesively.ngrok-free.dev'],
   images: {
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [],
   },
 

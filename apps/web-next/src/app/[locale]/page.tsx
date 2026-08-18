@@ -68,6 +68,38 @@ export default function HomePage() {
       longitude: config.storeLocation.lng,
     },
     areaServed: serviceAreas.map((a) => ({ '@type': 'City' as const, name: a })),
+    aggregateRating: {
+      '@type': 'AggregateRating' as const,
+      ratingValue: 5.0,
+      reviewCount: 69,
+      bestRating: 5,
+    },
+  };
+
+  const productSchema = {
+    '@context': 'https://schema.org' as const,
+    '@type': 'Product' as const,
+    name: 'Sewa Kasur Busa Jogja Santi Living',
+    description:
+      'Persewaan kasur busa tebal 15cm bersih higienis di Yogyakarta. Antar jemput same day area Sleman, Bantul, Kota Jogja dan Kulonprogo.',
+    image: 'https://santiliving.com/logo.png',
+    brand: {
+      '@type': 'Brand' as const,
+      name: 'Santi Living',
+    },
+    offers: {
+      '@type': 'AggregateOffer' as const,
+      lowPrice: 30000,
+      highPrice: 70000,
+      priceCurrency: 'IDR',
+      availability: 'https://schema.org/InStock' as const,
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating' as const,
+      ratingValue: 5.0,
+      reviewCount: 69,
+      bestRating: 5,
+    },
   };
 
   const faqSchema = generateFAQSchema(faqItems);
@@ -76,6 +108,7 @@ export default function HomePage() {
     <main className="pt-[80px]">
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
+      <JsonLd data={productSchema} />
       <JsonLd data={faqSchema} />
 
       {/* ===== HERO + CALCULATOR unified block (Bottom Sheet Rising pattern) ===== */}
@@ -93,7 +126,7 @@ export default function HomePage() {
               🏆 #1 Rental Kasur di Yogyakarta
             </div>
             <h1 className="text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.15] font-extrabold mb-2 text-center">
-              Sewa Kasur Jogja<br />Terbaik &amp; Terpercaya
+              Jasa Sewa Kasur Jogja No. 1<br />Bersih, Nyaman &amp; Siap Antar Same-Day
             </h1>
             <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-base font-bold mb-4">
               Mulai Rp25.000/hari
