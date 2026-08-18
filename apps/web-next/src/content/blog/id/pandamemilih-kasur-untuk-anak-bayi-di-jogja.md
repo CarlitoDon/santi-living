@@ -122,3 +122,8 @@ Memilih tempat tidur yang tepat untuk anak dan bayi adalah investasi dalam kesej
 Kami memiliki pengalaman melayani keluarga dengan bayi dan anak kecil di Jogja dengan berbagai kebutuhan spesifik—dari kardus bayi standar hingga tempat tidur anak dengan perlindungan sisi. Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang pilihan tempat tidur sewa yang paling sesuai dengan usaha, berat badan, dan kebutuhan spesifik anak Anda di Jogja.
 
 *Catatan: Selalu ikuti rekomendasi akademi pediatriam tempat tidur bayi (letak bayi dalam posisi punggung, kardus yang kaku dan rata, serta hindari bantal, guling, atau mainan berlebihan di tempat tidur bayi untuk mengurangi risiko SIDS.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

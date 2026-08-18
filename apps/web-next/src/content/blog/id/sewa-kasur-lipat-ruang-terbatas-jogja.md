@@ -31,3 +31,8 @@ Tinggal di kost atau apartemen mungil di Jogja? Kasur lipat bisa jadi solusi cer
 3. Cek material cover — anti-air lebih awet
 
 Hubungi Santi Living untuk pilihan kasur lipat yang bisa disewa di Jogja.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

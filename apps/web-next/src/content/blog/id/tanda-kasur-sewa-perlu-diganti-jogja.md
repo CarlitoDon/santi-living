@@ -19,3 +19,8 @@ Kasur Santi Living selalu prima saat dikirim. Tapi setelah pemakaian, kenali kap
 7. Sudah lebih dari 2 tahun pemakaian
 
 Cara request: Hubungi WhatsApp Santi Living, sebutkan nomor order, tim kami jadwalkan penggantian 1-2 hari kerja.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

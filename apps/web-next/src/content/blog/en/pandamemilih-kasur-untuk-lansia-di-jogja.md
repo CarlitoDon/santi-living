@@ -122,3 +122,7 @@ Choosing the right mattress is not just about comfort, but also part of maintain
 We have experience serving the elderly in Jogja with various specific needs—from mattresses for arthritis to mattresses with extra support for osteoporosis. Contact us via WhatsApp for a free consultation on the most suitable rental mattress options for your elderly relative's health condition, weight, and sleep preferences in Jogja.
 
 *Note: Always consult a doctor or physiotherapist if you have specific health conditions that affect your sleep needs.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

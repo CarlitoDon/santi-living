@@ -80,3 +80,8 @@ A: 100%. Setiap kasur melalui 7 tahap sterilisasi sebelum dikirim.
 >
 > 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 > 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

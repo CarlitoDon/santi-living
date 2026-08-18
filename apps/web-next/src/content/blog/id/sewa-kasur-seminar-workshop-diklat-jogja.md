@@ -71,3 +71,8 @@ Sertakan: nama event, jumlah peserta, tanggal, lokasi venue, dan durasi sewa.
 ## Tambahan Karpet untuk Seminar dan Workshop
 
 Jika venue juga membutuhkan alas booth, panggung kecil, atau area registrasi, baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). Untuk konsultasi layanan utama, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -23,3 +23,8 @@ Kami ingin menjadi tetangga yang baik bagi warga Yogyakarta bagian barat. Dengan
 Cukup sebutkan lokasi detail Anda saat melakukan pemesanan via WhatsApp. Admin kami akan langsung memverifikasi apakah lokasi Anda masuk dalam zona bebas biaya kirim kami.
 
 [**Pesan Kasur Bebas Ongkir Sekarang**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

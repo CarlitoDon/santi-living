@@ -102,3 +102,7 @@ KKN is a valuable experience that should not be disrupted by uncomfortable sleep
 Affordable wholesale prices, clean and sanitised mattresses, and a delivery and pick-up service to KKN locations make Santi Living the right choice for students' temporary accommodation needs.
 
 **Ready to rent a mattress for KKN?** Chat directly on WhatsApp **0895-1911-9092** or visit our workshop at **Jl. Godean KM10, Sleman**. Stock is ready, prepared for delivery to your KKN location!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

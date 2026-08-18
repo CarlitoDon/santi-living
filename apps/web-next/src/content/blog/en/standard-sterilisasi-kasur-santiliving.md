@@ -21,3 +21,7 @@ At **Santi Living**, we place **Hygiene** as our number one priority, above pric
 Sleep soundly and peacefully without any worries. Your health is our responsibility.
 
 [**See Our Cleaning Process on Instagram**](https://www.instagram.com/santi.mebel/)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

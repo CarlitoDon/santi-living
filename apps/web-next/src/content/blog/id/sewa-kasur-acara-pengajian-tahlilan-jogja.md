@@ -55,3 +55,8 @@ Pesan H-2 sebelum acara untuk memastikan ketersediaan. Sertakan jumlah kasur dan
 ## Tambahan Karpet untuk Pengajian dan Tahlilan
 
 Untuk area duduk tamu yang lebih rapi, baca panduan [sewa karpet pengajian dan tahlilan di Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) atau langsung cek [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

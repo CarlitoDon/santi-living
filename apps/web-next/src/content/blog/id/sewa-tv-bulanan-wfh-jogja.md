@@ -24,3 +24,8 @@ TV LED yang kami sewakan sangat mudah dihubungkan (Plug & Play) dengan resolusi 
 Tingkatkan *setup* kerja Anda sekarang tanpa harus merogoh kocek jutaan rupiah. 
 
 [**Hubungi Admin Kami untuk Harga Khusus Sewa Bulanan TV!**](/sewa-tv)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

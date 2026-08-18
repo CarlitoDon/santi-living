@@ -21,3 +21,7 @@ Santi Living mattresses are always in prime condition when delivered. But after 
 How to request: Contact Santi Living on WhatsApp, state your order number, and our team will schedule a replacement within 1-2 working days.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

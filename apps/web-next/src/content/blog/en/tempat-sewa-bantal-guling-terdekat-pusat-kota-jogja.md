@@ -25,3 +25,7 @@ Our rental prices are highly affordable, starting from just over ten thousand ru
 Ensure your holiday group gets a quality night's sleep. [**Order Your Extra Pillows & Bolsters Now!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

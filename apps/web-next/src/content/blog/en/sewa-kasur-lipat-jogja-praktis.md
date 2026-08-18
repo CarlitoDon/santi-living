@@ -19,3 +19,7 @@ Do not confuse our folding mattresses with ordinary thin floor mats. We use the 
 Our **Jogja mattress rental** service is ready to deliver a sterilised folding mattress unit to your location within hours.
 
 [**Book a Folding Mattress Today**](https://wa.me/6289519119092)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

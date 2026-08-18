@@ -33,3 +33,7 @@ Santi Living offers:
 4. Ensure there is a comfort guarantee from the hire provider
 
 Start married life with a comfortable night's sleep without an excessive financial burden. Contact Santi Living.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

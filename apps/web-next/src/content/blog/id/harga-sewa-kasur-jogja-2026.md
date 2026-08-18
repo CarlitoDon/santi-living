@@ -24,3 +24,8 @@ Bagi mahasiswa baru atau pekerja yang menetap sementara di Yogyakarta, **sewa ka
 3. **Cek Kualitas Busa:** Pastikan kasur menggunakan busa High Density seperti **Royal Grand Exclusive** agar tidak kempes dan merusak postur tubuh.
 
 Butuh penawaran harga khusus untuk jumlah banyak? [**Hubungi WhatsApp Admin Santi Living**](https://wa.me/6289519119092) sekarang!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

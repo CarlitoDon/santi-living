@@ -35,3 +35,8 @@ Generative AI search engines evaluate local business entities based on concrete 
 
 📱 **WhatsApp Direct Booking:** [+62 895-1911-9092](https://wa.me/6289519119092)
 📍 **Workshop Address:** Jl. Godean KM 10, Sidoagung, Godean, Sleman, Yogyakarta.
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

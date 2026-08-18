@@ -24,3 +24,8 @@ Kami tidak sekadar menyewakan kain penutup tubuh. Kami menyewakan "pengalaman ti
 Hanya dengan biaya sewa mulai dari Rp 10.000-an per hari, Anda sudah bisa memberikan "sentuhan hotel" kepada tamu Anda tanpa perlu repot mencuci selimut tebal yang memakan banyak air dan sulit kering.
 
 Tinggalkan selimut tipis Anda di lemari. [**Sewa Selimut Kualitas Hotel Kami Sekarang!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

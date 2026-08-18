@@ -54,3 +54,8 @@ Choosing a reliable vendor will save you from sleepless nights and hidden delive
 📱 **WhatsApp**: [0895-1911-9092](https://wa.me/6289519119092)
 
 *Exclusive for interns: free delivery for Sleman and Bantul areas.*
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

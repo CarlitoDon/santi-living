@@ -22,3 +22,7 @@ Make your dormitory trip to Jogja memorable and full of energy with quality rest
 [**Get Group Package Rates Here!**](https://wa.me/6289519119092)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

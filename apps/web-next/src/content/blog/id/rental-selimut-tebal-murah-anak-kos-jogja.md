@@ -24,3 +24,8 @@ Santi Living menawarkan solusi penyewaan selimut bulanan yang dirancang khusus u
 Jangan korbankan kesehatan dan kualitas kuliah Anda keesokan harinya hanya karena kedinginan semalaman.
 
 [**Booking Selimut Tebal Anda Hari Ini!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

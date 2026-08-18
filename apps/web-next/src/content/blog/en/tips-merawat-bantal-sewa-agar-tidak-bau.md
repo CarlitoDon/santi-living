@@ -28,3 +28,7 @@ Washing a Dacron pillow in a standard washing machine often ruins its structure,
 With these 3 super easy care tips, you will always enjoy a quality sleep experience throughout your rental period.
 
 [**Need Extra Clean Pillows? Check Our Catalogue**](/produk)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

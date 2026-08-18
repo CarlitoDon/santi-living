@@ -45,3 +45,7 @@ We deliver to active areas in Yogyakarta, including:
 > *Santi Living — Jogja Mattress Rental, A Good Night's Sleep Solution for Everyone.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -147,3 +147,7 @@ A: Yes! The minimum hire period is 1 day (24 hours). For needs of just a few hou
 > *Santi Living — The most transparent mattress hire prices in Jogja. Starting from Rp25,000/day, with no hidden fees. A dedicated mattress rental division of Santi Mebel.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

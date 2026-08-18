@@ -27,3 +27,7 @@ We offer highly affordable prices, especially friendly to student budgets:
 Don't let your screening or presentation fail just because a laptop screen is too small. [**Check Our TV Rental Prices and Availability Here!**](/sewa-tv)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

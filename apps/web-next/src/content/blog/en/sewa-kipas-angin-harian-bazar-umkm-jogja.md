@@ -26,3 +26,7 @@ Make bazaar visitors choose your stall over the neighbouring ones.
 [**Secure Your Fan Rental for This Week's Bazaar!**](/sewa-kipas-angin)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

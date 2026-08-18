@@ -13,3 +13,8 @@ tags: ["extra-bed-homestay", "b2b-mattress-rental", "santi-living", "yogyakarta"
 
 📱 **WhatsApp:** [+62 895-1911-9092](https://wa.me/6289519119092)
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta.
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

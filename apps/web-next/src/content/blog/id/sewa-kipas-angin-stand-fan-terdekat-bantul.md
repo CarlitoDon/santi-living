@@ -25,3 +25,8 @@ Kami bermarkas di Godean, yang berbatasan langsung dengan wilayah Kabupaten Bant
 Anda tidak perlu lagi repot membongkar pasang dan membawa kipas menggunakan motor sendiri. Tim kurir kami akan memastikan kipas sampai dalam kondisi bersih, sudah dirakit, dan siap dicolokkan ke listrik.
 
 [**Booking Kipas Angin untuk Acara Anda Disini!**](/sewa-kipas-angin)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

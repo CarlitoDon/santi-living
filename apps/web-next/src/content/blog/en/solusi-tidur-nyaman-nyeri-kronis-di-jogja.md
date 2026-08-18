@@ -77,3 +77,7 @@ The right mattress can make a significant difference in managing chronic pain an
 We provide a variety of high-quality mattress options from trusted brands, all maintained to the highest hygiene standards. Contact us via WhatsApp for a free consultation on the most suitable mattress choice for your specific pain condition in Jogja.
 
 *Note: This information does not replace medical advice. Always consult your healthcare professional or physiotherapist regarding a comprehensive pain management strategy.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

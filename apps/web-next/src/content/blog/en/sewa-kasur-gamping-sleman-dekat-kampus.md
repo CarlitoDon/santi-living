@@ -84,3 +84,7 @@ A: Our mattresses are maintained with a 7-stage sterilisation process. Every uni
 > 📍 **Workshop: Jl. Godean KM10, Sleman**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

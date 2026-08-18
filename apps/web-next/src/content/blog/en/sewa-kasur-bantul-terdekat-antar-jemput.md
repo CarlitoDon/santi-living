@@ -91,3 +91,7 @@ A: 2-4 hours after order confirmation.
 > 📍 **Workshop: Jl. Godean KM10, Sleman, Yogyakarta**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

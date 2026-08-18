@@ -148,3 +148,7 @@ For a quick estimate, send the event type, area size, date, location, venue phot
 Accurate Jogja carpet rental prices can only be calculated once the event type, area size, date, and location are clear. For event, celebration, religious gathering, wedding, or exhibition needs, start from the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) or [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page, then send the event details via [WhatsApp Santi Living](https://wa.me/6289519119092) for a more precise estimate.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

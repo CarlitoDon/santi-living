@@ -20,3 +20,8 @@ Saat cuaca Yogyakarta sedang memasuki masa *El Nino* atau puncak panas, mencari 
 Jangan biarkan acara spesial Anda atau waktu istirahat Anda terganggu oleh suhu yang gerah. Percayakan pada vendor yang memiliki kapasitas stok besar dan layanan profesional.
 
 [**Cek Ketersediaan Air Cooler Hari Ini!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

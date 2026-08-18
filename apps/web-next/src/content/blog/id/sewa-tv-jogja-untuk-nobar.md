@@ -25,3 +25,8 @@ Harga yang kami tawarkan sangat bersahabat, terutama untuk kantong mahasiswa:
 *   **Sewa Mingguan/Bulanan**: Diskon khusus untuk penggunaan jangka panjang di kos atau kontrakan.
 
 Jangan biarkan acara nobar atau presentasi Anda gagal hanya karena ukuran layar laptop yang terlalu kecil. [**Cek Harga dan Ketersediaan Sewa TV Kami Disini!**](/sewa-tv)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -28,3 +28,8 @@ Sebagai aturan aman, pastikan Anda **memesan maksimal jam 15.00 WIB** jika kasur
 Untuk pesanan masuk di atas jam 17.00, biasanya akan kami jadwalkan pengantaran untuk **keesokan paginya** di rute jalur utama (*first trip*).
 
 Namun, admin kami selalu terbuka untuk diskusi! Jika lokasi Anda terhitung dekat dan operasional memungkinkan, pesanan malam pun akan dilayani. Jangan biarkan keluarga Anda kesakitan tidur di ubin dingin. Kontak kami secepatnya di momen "kritis" tersebut!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -61,3 +61,7 @@ Jogja is quite humid, especially during the rainy season. An extra tip: use a de
 > *Santi Living — We Deliver Clean, You Keep It Comfortable. Jogja Mattress Rental.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

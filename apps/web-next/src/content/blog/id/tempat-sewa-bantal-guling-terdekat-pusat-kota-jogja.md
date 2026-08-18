@@ -23,3 +23,8 @@ Mengapa para pelancong dan keluarga memilih kami?
 Harga sewa yang kami tawarkan sangat terjangkau, mulai dari belasan ribu rupiah per harinya. 
 
 Pastikan tidur rombongan liburan Anda berkualitas. [**Pesan Bantal & Guling Ekstra Anda Sekarang!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

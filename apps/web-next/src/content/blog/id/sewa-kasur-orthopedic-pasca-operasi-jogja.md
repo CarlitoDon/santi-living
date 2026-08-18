@@ -34,3 +34,8 @@ Pemulihan biasanya hanya 2-8 minggu. Membeli kasur orthopedic seharga jutaan unt
 4. Pertimbangkan tambahan bantal wedge atau penyangga
 
 Santi Living menyediakan kasur orthopedic untuk berbagai kebutuhan pemulihan di Jogja. Hubungi kami untuk konsultasi gratis.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

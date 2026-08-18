@@ -28,3 +28,7 @@ As a rule of thumb, make sure you **order by 3:00 PM WIB at the latest** if the 
 For orders received after 5:00 PM, we will usually schedule delivery for **the following morning** on the first trip.
 
 However, our admin is always open to discussion! If your location is relatively close and operations permit, we will even accommodate evening orders. Don't let your family suffer sleeping on a cold tiled floor. Contact us as soon as possible in those "critical" moments!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

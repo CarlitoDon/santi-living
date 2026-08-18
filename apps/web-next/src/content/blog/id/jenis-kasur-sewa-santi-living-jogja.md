@@ -29,3 +29,8 @@ Praktis untuk ruang terbatas. Bisa disimpan saat tidak dipakai. Ideal untuk tamu
 Ukuran kecil, material aman, cover anti-air. Untuk newborn hingga balita.
 
 Semua tipe tersedia dalam berbagai ukuran (single, double, queen, king). Hubungi Santi Living untuk konsultasi pilihan terbaik.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

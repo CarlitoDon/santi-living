@@ -36,3 +36,7 @@ Recovery usually only takes 2–8 weeks. Buying an orthopaedic mattress costing 
 Santi Living provides orthopaedic mattresses for various recovery needs in Jogja. Contact us for a free consultation.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

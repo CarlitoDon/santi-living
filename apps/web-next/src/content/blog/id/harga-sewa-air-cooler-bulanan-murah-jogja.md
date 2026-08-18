@@ -25,3 +25,8 @@ Kami memahami mahasiswa butuh solusi jangka panjang yang murah. Jika Anda menyew
 Anda mendapatkan unit Air Cooler yang sudah dibersihkan total (termasuk filternya), lengkap dengan *Ice Pack* tambahan, dan layanan penjemputan gratis saat semester berakhir.
 
 Hentikan penyiksaan dari udara panas. [**Cek Harga Paket Sewa Bulanan Air Cooler Kami Sekarang!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

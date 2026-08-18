@@ -58,3 +58,8 @@ Kami menghadirkan paket sewa khusus:
 **Butuh kasur tambahan untuk Lebaran?** Pesan sekarang via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Gratis antar jemput se-Jogja!
 
 > *Santi Living — Sewa Kasur Lebaran Jogja, Sambut Tamu dengan Kenyamanan Terbaik.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

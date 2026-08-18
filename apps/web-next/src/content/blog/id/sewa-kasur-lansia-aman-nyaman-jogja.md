@@ -31,3 +31,8 @@ Orang tua atau lansia butuh kasur yang berbeda. Bukan sekadar empuk, tapi harus 
 - Tidak perlu investasi besar di usia senja
 
 Santi Living menyediakan konsultasi gratis untuk memilih kasur yang tepat bagi orang tua Anda.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

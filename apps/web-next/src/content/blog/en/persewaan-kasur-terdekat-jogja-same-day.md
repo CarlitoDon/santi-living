@@ -78,3 +78,7 @@ Don't wait until your guests are already at the door. Contact Santi Living now a
 💰 **[See Full Price List →](/harga-sewa-kasur)**
 
 > *Santi Living — The nearest mattress hire in Jogja with a 7-stage cleanliness guarantee and same-day delivery.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

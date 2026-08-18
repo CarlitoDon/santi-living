@@ -58,3 +58,8 @@ That said, if a need arises suddenly, still share the details. The team can help
 Renting home and event equipment in Jogja works best when needs are clearly written out from the start. For families in Umbulharjo, the focus isn't just on getting items — it's about ensuring those items fit the space, the schedule, and the people who will be using them. With the checklist above, coordinating with Santi Living can be quicker and decisions more precise.
 
 To check availability for mattress, pillow, bolster, and blanket rentals, contact WhatsApp at 0895-1911-9092 and include the date, location, quantity, and duration of use.
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

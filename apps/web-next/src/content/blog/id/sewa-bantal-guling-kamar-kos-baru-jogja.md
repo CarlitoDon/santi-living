@@ -24,3 +24,8 @@ Daripada Anda harus menghabiskan uang ratusan ribu, mencari pinjaman motor/mobil
 Selamat datang di Kota Pelajar! Mulailah hari pertama perkuliahan Anda dengan energi yang penuh setelah malam yang nyenyak.
 
 [**Bereskan Urusan Kamar Kos Anda Hari Ini, Klik Disini!**](/harga-sewa-kasur)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

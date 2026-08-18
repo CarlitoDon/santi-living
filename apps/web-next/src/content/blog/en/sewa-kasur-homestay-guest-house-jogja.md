@@ -27,3 +27,7 @@ Own a homestay or guest house in Jogja? Manage your operational costs with mattr
 ## Special Business Packages
 
 Santi Living offers multi-unit rental packages at special rates for homestay and guest house businesses in Jogja. Contact us for a quote.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -72,3 +72,7 @@ For long-term mattress rental needs in Jogja, foam mattresses offer an unmatched
 At Santi Living, we have a stock of high-quality foam mattresses ready for your long-term rental needs, whether for construction projects, contractors, or specialised boarding house facilities. Contact us via WhatsApp for a consultation on the choice of foam types and firmness levels that best suit your specific needs in Jogja.
 
 *Note: It is important to choose a foam mattress with a density and quality that matches the user's weight and duration of use. Consulting with our team will help you avoid mattresses that are too soft or too firm for your specific needs.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

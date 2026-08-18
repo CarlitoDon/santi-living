@@ -26,3 +26,7 @@ With rental rates starting from just around Rp 10,000 per day, you can give your
 Leave your thin blankets in the wardrobe. [**Rent Our Hotel-Quality Blankets Now!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

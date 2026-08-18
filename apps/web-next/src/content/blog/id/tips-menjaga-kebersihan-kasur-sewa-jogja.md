@@ -17,3 +17,8 @@ Kasur sewaan Santi Living dikirim bersih dan steril. Tapi Anda juga bisa menjaga
 5. Laporkan segera jika ada noda atau bau — kami siap bantu solusi
 
 Dengan perawatan sederhana, kasur sewaan tetap nyaman sepanjang kontrak.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

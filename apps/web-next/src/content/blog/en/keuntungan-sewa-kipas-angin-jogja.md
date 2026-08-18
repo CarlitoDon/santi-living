@@ -26,3 +26,7 @@ We rent out pedestal fans (16-inch) with specifications designed to cool your ro
 *   **Rental Flexibility**: We offer **daily rentals** (perfect for extra events/gatherings) as well as **monthly rentals** (specially for students in rented rooms).
 
 Keep comfortable and productive. [**Order Your Fan Now, We Deliver Today!**](/sewa-kipas-angin)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

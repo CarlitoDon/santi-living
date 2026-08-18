@@ -89,3 +89,8 @@ Santi Living memahami bahwa pernikahan butuh penanganan khusus:
 Jika acara juga membutuhkan jalur tamu, area akad, atau ruang keluarga yang lebih rapi, lihat panduan [sewa karpet untuk pernikahan di Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan halaman [sewa karpet merah Jogja](/sewa-karpet-merah-jogja). Untuk kebutuhan umum, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja).
 
 > *Santi Living — Sewa kasur untuk pernikahan di Jogja. Hemat jutaan rupiah, tamu tetap nyaman.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

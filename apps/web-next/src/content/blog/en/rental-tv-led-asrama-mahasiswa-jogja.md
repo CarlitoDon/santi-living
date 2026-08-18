@@ -20,3 +20,7 @@ Managing student accommodation, staff quarters, or education and training centre
 Provide the best facilities for your residents or training participants. Contact our B2B team to get the best price proposal.
 
 [**Enquire About Wholesale TV Rental Now!**](https://wa.me/6289519119092)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

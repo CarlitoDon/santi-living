@@ -118,3 +118,7 @@ Santi Living is the mattress rental division of Santi Mebel, located at Jl. Gode
 School holidays should be a fun time for the family, not a source of stress due to accommodation issues. By renting a mattress from Santi Living, you can focus on enjoying your time together without worrying about sleeping arrangements.
 
 Contact us now via WhatsApp **0895-1911-9092** to reserve your holiday mattress rental. Our team is ready to help you choose the best package for your family's needs!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

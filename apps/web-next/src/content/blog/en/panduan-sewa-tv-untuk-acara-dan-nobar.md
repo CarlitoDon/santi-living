@@ -86,3 +86,8 @@ Perfect for family events, reunions, seminars, and gatherings.
 ⭐ **Rating**: 5/5 from 51+ customers
 
 *Guide updated 2026-07-02. Prices may change, contact us for current info.*
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

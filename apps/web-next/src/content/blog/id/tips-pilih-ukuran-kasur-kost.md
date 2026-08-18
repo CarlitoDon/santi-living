@@ -27,3 +27,8 @@ Biasanya dikenal sebagai ukuran "No. 3".
 Sebelum memesan, ukurlah lantai kamar Anda menggunakan meteran atau ubin sebagai patokan. Pastikan masih ada sisa ruang untuk pintu terbuka sempurna.
 
 Butuh saran ukuran yang tepat? **Admin Santi Living siap membantu Anda berkonsultasi via WhatsApp!**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

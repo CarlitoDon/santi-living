@@ -28,3 +28,7 @@ Got a room with poor ventilation? To freshen up the foam, occasionally tilt the 
 By applying these 4 tips, we guarantee your holiday or stay will be healthier. The mattress will remain clean and white until the final day of the *rental* period. 
 
 If you want to rent a mattress that is guaranteed to be 100% hygienic, vacuumed, and disinfected: **Santi Mebel** is the premier choice in Yogyakarta! Please click [View Products](/produk) right now.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

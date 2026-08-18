@@ -145,3 +145,8 @@ A: Bisa! Minimum sewa 1 hari (24 jam). Untuk kebutuhan beberapa jam saja, tetap 
 📱 **Chat sekarang untuk harga terbaru: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > *Santi Living — Harga sewa kasur Jogja paling transparan. Mulai Rp25.000/hari, tanpa biaya tersembunyi. Divisi khusus persewaan kasur dari Santi Mebel.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

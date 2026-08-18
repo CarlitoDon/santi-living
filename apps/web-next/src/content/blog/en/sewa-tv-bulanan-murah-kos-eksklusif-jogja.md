@@ -24,3 +24,7 @@ Make your boarding room the cosiest place to unwind after a long day at universi
 [**Book Your Monthly TV Rental Package Now!**](/sewa-tv)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

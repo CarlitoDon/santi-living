@@ -27,3 +27,8 @@ Kami melayani *bulk order* (penyewaan jumlah banyak) dengan layanan pengantaran 
 Pastikan tamu Anda mendapatkan istirahat terbaik, dan biarkan rating *homestay* Anda melonjak naik!
 
 [**Cek Harga Sewa Ekstra Bantal Guling Disini!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -110,3 +110,8 @@ A: Bisa! Kami melayani seluruh wilayah DIY termasuk Kulonprogo dan Gunung Kidul.
 📱 **Hubungi untuk penawaran grosir: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > *Santi Living — Partner pengadaan kasur untuk pesantren dan boarding school di Jogja. Harga grosir, layanan profesional.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

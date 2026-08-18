@@ -28,3 +28,8 @@ Unit standar yang kami sewakan adalah TV LED 32 Inch. Ukuran ini paling ideal ka
 Daripada panik mencari toko fisik yang buka, lebih baik percayakan kebutuhan visual acara Anda pada layanan rental *online* kami.
 
 [**Chat Admin Kami untuk Pengiriman TV Hari Ini!**](/sewa-tv)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

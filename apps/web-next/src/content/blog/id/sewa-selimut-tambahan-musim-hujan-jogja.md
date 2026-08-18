@@ -20,3 +20,8 @@ Bagi pengelola penginapan (*homestay/guest house*) atau warga Jogja yang sedang 
 Beri kesan terbaik untuk tamu Anda dengan fasilitas tidur yang hangat dan bersih sempurna. Kami melayani pengantaran cepat ke area Kota Jogja, Sleman, hingga Bantul.
 
 [**Pesan Selimut Tambahan Anda Hari Ini!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

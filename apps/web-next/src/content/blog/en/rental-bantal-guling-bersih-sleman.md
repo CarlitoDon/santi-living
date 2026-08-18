@@ -29,3 +29,7 @@ Ensure your guests get the best rest possible, and watch your homestay ratings s
 [**Check Extra Pillow & Bolster Hire Prices Here!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

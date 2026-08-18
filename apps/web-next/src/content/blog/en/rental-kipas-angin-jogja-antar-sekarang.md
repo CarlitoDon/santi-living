@@ -24,3 +24,7 @@ Don't let the heat ruin your mood and productivity today. Contact us, and let us
 [**Chat on our WhatsApp for Express Fan Rental!**](https://wa.me/6289519119092)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

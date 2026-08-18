@@ -19,3 +19,8 @@ Mencari **persewaan kasur terdekat** di area kampus Sleman kini semakin mudah be
 Anda cukup mengirimkan lokasi kost Anda via WhatsApp, dan tim kurir motor kami akan segera meluncur membawa kasur pesanan Anda. Pindah kost atau kedatangan tamu jadi tidak bikin stres lagi!
 
 [**Cek Promo Mahasiswa Disini**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -32,3 +32,7 @@ Tempted by a cheap mattress on an online marketplace? Think again. Renting from 
 Renting a mattress from Santi Living is safer, cleaner, and stress-free.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

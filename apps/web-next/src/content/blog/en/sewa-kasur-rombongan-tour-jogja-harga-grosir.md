@@ -67,3 +67,7 @@ By renting mattresses in bulk, tour groups can stay in homestays, villas, or hal
 Please include: number of guests, dates of stay, accommodation location, and rental duration.
 
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

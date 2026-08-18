@@ -32,3 +32,8 @@ Setelah bersih putih dan dikeringkan, kasur akan di-*spay* dengan mist disinfekt
 Hal favorit klien kami: kasur diantarkan di-<em>wrap</em> ketat menawan dengan segel plastik besar besar untuk memastikannya tidak kotor lumpur/debu jalanan cipratan hujan menempel dari mobil atau motor kurir. Plastik dirobek di lokasi Anda!
 
 Kepercayaan higienis bernilai mahal dan kami menjamin kulit Anda tenang damai semalaman tanpa garuk-garuk! Segera order paket [Hemat Plus Sprei](/produk) kami!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

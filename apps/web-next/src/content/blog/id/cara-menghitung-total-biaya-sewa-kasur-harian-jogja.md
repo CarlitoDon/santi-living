@@ -47,3 +47,8 @@ Workshop Santi Living berada di **Jl. Godean KM 10, Sleman, Yogyakarta**. Fokus 
 Hubungi **WhatsApp 0895-1911-9092** dengan menyebutkan topik kebutuhan, tanggal, durasi, jumlah, dan lokasi. Tim dapat membantu menjelaskan opsi yang tersedia dan langkah berikutnya berdasarkan informasi tersebut.
 
 Artikel ini dibuat sebagai panduan umum dan diperbarui pada 2026-08-10. Detail layanan dapat berubah, jadi konfirmasi melalui WhatsApp sebelum mengambil keputusan.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

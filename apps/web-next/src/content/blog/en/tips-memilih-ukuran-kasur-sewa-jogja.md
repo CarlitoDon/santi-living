@@ -27,3 +27,7 @@ Choosing the wrong mattress size can lead to an uncomfortable night's sleep. Her
 ## Free Consultation Available
 
 The Santi Living team is ready to help you measure and recommend the right size for your room. Contact us.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

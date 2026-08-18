@@ -25,3 +25,8 @@ Bayi tumbuh cepat. Kasur bayi yang dibeli mungkin tidak muat dalam 6-12 bulan. S
 4. Bebas bahan kimia berbahaya
 
 Santi Living menyediakan berbagai ukuran kasur bayi dan perlengkapan tidur. Hubungi kami untuk konsultasi.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

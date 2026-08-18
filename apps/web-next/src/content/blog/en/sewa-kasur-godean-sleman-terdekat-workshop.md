@@ -87,3 +87,7 @@ Santi Living serves deliveries to the entire Godean area and its surroundings, i
 Don't delay your sleeping comfort. As the workshop owner in Godean, Santi Living guarantees the fastest delivery and the best service for local residents. Chat now on **WhatsApp 0895-1911-9092** to check stock and the latest prices.
 
 Santi Living — the nearest mattress rental solution in Godean, Sleman. Clean, comfortable, and delivered directly from the workshop to your home.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

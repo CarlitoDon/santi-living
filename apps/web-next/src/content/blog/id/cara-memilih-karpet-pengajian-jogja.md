@@ -71,3 +71,8 @@ Kebijakan deposit atau cleaning perlu dikonfirmasi via WA, terutama jika risiko 
 Kirim foto ruangan, jumlah tamu, ukuran area, dan tanggal acara ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**. Admin Santi Living akan membantu memilih opsi karpet pengajian yang rapi, nyaman, dan realistis untuk lokasi Anda.
 
 > Karpet pengajian yang tepat membuat tamu lebih nyaman, ruangan terlihat tertata, dan panitia tidak perlu menebak kebutuhan dari ukuran yang belum jelas.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

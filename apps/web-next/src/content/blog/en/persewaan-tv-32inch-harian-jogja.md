@@ -25,3 +25,7 @@ Many TV rental places charge too much for daily durations. At Santi Living, we u
 Whether you are brainstorming, pitching to clients, or just having a small viewing party at the weekend, don't let poor visuals ruin your moment.
 
 [**Book Your 32-Inch TV Now via WhatsApp!**](https://wa.me/6289519119092)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

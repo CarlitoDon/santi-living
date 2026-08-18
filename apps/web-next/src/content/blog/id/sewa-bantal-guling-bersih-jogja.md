@@ -22,3 +22,8 @@ Kami memahami bahwa kenyamanan tamu adalah prioritas Anda. Oleh karena itu, laya
 Baik disewa terpisah maupun sebagai tambahan (*add-on*) saat Anda menyewa kasur busa kami, menyewa bantal dan guling adalah cara paling cerdas untuk menjamu tamu tanpa ribet.
 
 [**Lengkapi Kebutuhan Tidur Tamu Anda Sekarang!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

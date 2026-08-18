@@ -40,3 +40,7 @@ At Santi Mebel, we maintain full transparency:
 * For locations further away (East Sleman, Jogja City, Bantul), a flat rate per zone applies, paid only once (which *covers* both delivery AND collection).
 
 Curious to see the price calculation for your ideal mattress? Check the total cost simulation directly on our **[Mattress Rental Price List](/harga-sewa-kasur)** page. You can also chat directly with our admin to have a detailed order breakdown created for you. Accurate, transparent, and definitely budget-friendly!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -28,3 +28,7 @@ Be a host who provides maximum comfort for relatives staying at your Bantul home
 [**Order Your Warm Blanket Now via WhatsApp!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

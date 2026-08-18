@@ -30,3 +30,7 @@ Make your favourite team's victory moment even more memorable with the best visu
 If the watch party is held with floor seating in a basecamp, garage, or community room, you might also want to consider [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) or check out the general options for [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) to make the seating area neater.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

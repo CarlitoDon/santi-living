@@ -34,3 +34,7 @@ Our clients' favourite part: the mattress is delivered tightly <em>wrapped</em> 
 Hygiene trust is highly valuable, and we guarantee your skin will be at peace all night long without any scratching! Order our [Value Plus Sheets](/produk) package today!
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

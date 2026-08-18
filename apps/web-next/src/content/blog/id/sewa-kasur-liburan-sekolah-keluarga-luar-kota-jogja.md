@@ -118,3 +118,8 @@ Santi Living adalah divisi penyewaan kasur dari Santi Mebel yang berlokasi di Jl
 Libur sekolah seharusnya menjadi waktu yang menyenangkan untuk keluarga, bukan sumber stres karena urusan akomodasi. Dengan menyewa kasur dari Santi Living, Anda bisa fokus menikmati momen kebersamaan tanpa khawatir soal tempat tidur.
 
 Hubungi kami sekarang via WhatsApp **0895-1911-9092** untuk reservasi sewa kasur liburan Anda. Tim kami siap membantu memilihkan paket terbaik sesuai kebutuhan keluarga Anda!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

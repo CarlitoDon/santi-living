@@ -133,3 +133,7 @@ Working from home does not have to mean sacrificing your sleep quality. By creat
 At Santi Living, we are ready to help you find the right mattress solution for your work-from-home setup in Jogja. Contact us via WhatsApp for a free consultation on mattress options that suit your weight, sleep preferences, and specific work ergonomics.
 
 *Note: If you experience chronic pain that has worsened since working from home, consulting an ergonomist or physiotherapist is recommended, along with workspace adjustments and choosing the right mattress.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

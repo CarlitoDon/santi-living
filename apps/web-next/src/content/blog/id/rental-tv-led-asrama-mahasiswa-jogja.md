@@ -20,3 +20,8 @@ Pengelolaan asrama mahasiswa, mess karyawan, atau pusat pendidikan dan pelatihan
 Berikan fasilitas terbaik bagi penghuni asrama atau peserta diklat Anda. Hubungi tim B2B kami untuk mendapatkan proposal penawaran harga terbaik.
 
 [**Konsultasi Sewa TV Grosir Sekarang!**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

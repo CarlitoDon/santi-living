@@ -29,3 +29,7 @@ If you live in a rented room with limited electricity and are looking for a prac
 [**Book Your Air Cooler Rental at Santi Living Now!**](/sewa-cooling)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

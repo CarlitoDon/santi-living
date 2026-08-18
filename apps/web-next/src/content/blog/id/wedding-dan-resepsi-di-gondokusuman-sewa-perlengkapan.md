@@ -58,3 +58,8 @@ Namun, jika kebutuhan muncul mendadak, tetap sampaikan detailnya. Tim bisa memba
 Sewa perlengkapan rumah dan acara di Jogja paling efektif ketika kebutuhan ditulis jelas sejak awal. Untuk keluarga yang menyiapkan acara pernikahan, fokusnya bukan sekadar mendapatkan barang, tetapi memastikan barang sesuai ruang, jadwal, dan orang yang akan memakai. Dengan checklist di atas, proses koordinasi dengan Santi Living bisa lebih singkat dan keputusan lebih tepat.
 
 Jika ingin mengecek ketersediaan kasur, extra bed, karpet, kipas angin, air cooler, bantal, dan guling, hubungi WhatsApp 0895-1911-9092 dan sertakan tanggal, lokasi, jumlah, serta durasi pemakaian.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

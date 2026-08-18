@@ -70,3 +70,7 @@ This can be discussed. Send your requirements for mattresses, pillows, fans, air
 Send a brief format: event type, date, location, area size, venue photos, delivery time, collection time, and additional requirements to 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**.
 
 > Santi Living helps with **Kulon Progo event equipment hire** needs using a consultative approach: check the size, check availability, check delivery fees, and then prepare the safest options for your event.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

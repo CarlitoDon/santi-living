@@ -20,3 +20,7 @@ One of the advantages of renting from Santi Living is the guarantee of cleanline
 When your studies or work contract in Sleman come to an end, you won't have to worry about finding a buyer for a second-hand mattress or paying expensive shipping fees to take it back to your hometown. Our team will collect the mattress unit right from your boarding room doorstep.
 
 Stay productive and sleep soundly without the burden of owning bulky items. [**View Our Monthly Rental Packages Here**](/sewa-kasur-bulanan).
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

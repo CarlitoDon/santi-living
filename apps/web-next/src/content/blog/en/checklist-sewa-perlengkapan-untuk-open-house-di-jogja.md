@@ -58,3 +58,7 @@ However, if the need arises suddenly, still provide the details. The team can he
 Renting home and event equipment in Jogja is most effective when requirements are clearly written down from the start. For families, communities, and small teams hosting an open house with guests coming and going, the focus is not just on getting the items, but ensuring they fit the space, schedule, and the people who will use them. With the checklist above, the co-ordination process with Santi Living can be shorter and decisions more accurate.
 
 If you would like to check the availability of carpets, fans, air coolers, spare mattresses, and supporting equipment, contact WhatsApp on 0895-1911-9092 and include the dates, location, quantity, and duration of use.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

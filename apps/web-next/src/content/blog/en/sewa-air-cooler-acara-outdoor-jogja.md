@@ -85,3 +85,7 @@ Yes, you can enquire via WA. Send the number of crew and the duration so the adm
 > **Jogja event air cooler hire from Santi Living helps organisers make tents, booths, waiting areas, and rest areas more comfortable, provided that availability, electricity, and circulation are confirmed beforehand.**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

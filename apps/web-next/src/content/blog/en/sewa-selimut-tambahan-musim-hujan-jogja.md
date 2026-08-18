@@ -22,3 +22,7 @@ Make the best impression on your guests with perfectly warm and clean sleeping f
 [**Book Your Extra Blankets Today!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -21,3 +21,7 @@ Simply send your student room location via WhatsApp, and our motorcycle courier 
 [**Check Student Promos Here**](https://wa.me/6289519119092)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -98,3 +98,7 @@ Send your event details via WhatsApp: date, location, number of guests, area siz
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > For your **Jogja pengajian rug rental**, tahlilan carpet, or home event floor carpet needs, start from the [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page and then send your event details for a more accurate estimate.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

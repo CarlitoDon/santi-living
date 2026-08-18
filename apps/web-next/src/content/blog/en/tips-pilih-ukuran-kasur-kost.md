@@ -29,3 +29,7 @@ Before ordering, measure your room's floor space using a tape measure or the flo
 Need advice on the right size? **Santi Living Admin is ready to help you consult via WhatsApp!**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

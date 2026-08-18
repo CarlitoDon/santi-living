@@ -92,3 +92,7 @@ Priority areas include Sleman, Yogyakarta City, Bantul, and Kulonprogo. For dist
 Exhibition and seminar carpet rental must start with the layout. Send your floor plan, venue photos, and other equipment requirements via [Santi Living's WhatsApp](https://wa.me/6289519119092) so our admin team can prepare a realistic estimate for your event in Jogja.
 
 > **Santi Living assists with seminar carpet rental in Jogja, exhibition carpet rental in Jogja, booth carpet rental in Jogja, and stage carpet rental in Jogja with a consultative approach: measure the area, send the layout, and check availability via WhatsApp.**
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

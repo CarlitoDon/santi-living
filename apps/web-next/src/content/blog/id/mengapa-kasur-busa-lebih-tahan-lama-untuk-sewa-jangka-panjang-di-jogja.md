@@ -72,3 +72,8 @@ Untuk kebutuhan sewa kasur jangka panjang di Jogja, kasur busa menawarkan kombin
 Di Santi Living, kami memiliki stok kasur busa berkualitas tinggi yang siap untuk kebutuhan sewa jangka panjang Anda, baik untuk proyek konstrukti, kontraktor, maupun fasilitas kost khusus. Hubungi kami melalui WhatsApp untuk konsultasi tentang pilihan tipe busa dan tingkat kekasatan yang paling sesuai dengan kebutuhan spesifik Anda di Jogja.
 
 *Catatan: Penting untuk memilih kasur busa dengan densitas dan kualitas yang sesuai dengan beban pengguna dan durasi penggunaan. Konsultasi dengan tim kami akan membantu Anda menghindari kasur yang terlalu lembap atau terlalu kassat untuk kebutuhan spesifik Anda.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

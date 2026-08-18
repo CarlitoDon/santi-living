@@ -25,3 +25,7 @@ We understand that students need a cheap, long-term solution. If you rent on a d
 You get an Air Cooler unit that has been thoroughly cleaned (including its filter), complete with extra *Ice Packs*, and a free collection service when the semester ends.
 
 Stop the torture of the hot air. [**Check Our Monthly Air Cooler Rental Package Prices Now!**](/sewa-cooling)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -66,3 +66,7 @@ Send your event details to 📱 **WhatsApp: [0895-1911-9092](https://wa.me/62895
 > Avoiding event carpet ordering mistakes gives the organisers peace of mind, ensures the vendor is better prepared, and makes the event look neat from the moment the first guest arrives.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

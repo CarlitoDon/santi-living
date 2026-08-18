@@ -51,3 +51,7 @@ No need to worry about leaving the house with a baby. The Santi Living team deli
 > *Santi Living — Baby Mattress & Equipment Rental in Jogja. Because Your Little One Deserves a Good Night's Sleep.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

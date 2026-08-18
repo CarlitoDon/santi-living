@@ -30,3 +30,8 @@ Beli: Rp 1-3jt di awal. Biaya 3 tahun: harga beli + perawatan + ongkos pindah Rp
 - Budget investasi jangka panjang
 
 Hubungi Santi Living untuk konsultasi gratis. Kami bantu hitungkan opsi terbaik untuk Anda.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

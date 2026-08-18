@@ -28,3 +28,8 @@ Tidak perlu khawatir prosedur yang rumit. Jika Anda ingin menyewa:
 3. Saat *checkout*, letakkan kasur kembali di lobi atau pos satpam untuk kami jemput.
 
 Bikin liburan keluarga di Jogja tetap hemat dan nyaman. Jika butuh kasur mendadak, silakan cek [Katalog Produk Sewa Kasur kami](/produk) atau langsung order via WhatsApp!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

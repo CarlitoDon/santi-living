@@ -23,3 +23,8 @@ Inilah bintang utama dalam dunia **persewaan kipas angin Jogja**.
 Itulah sebabnya **Santi Living** memfokuskan layanan rental pada *Stand Fan* berukuran 16 Inch. Ini adalah perpaduan sempurna antara tenaga angin yang kencang dan kepraktisan penggunaan, baik untuk anak kos maupun untuk acara *hajatan*.
 
 [**Amankan Kipas Angin Berdiri Anda Hari Ini!**](/sewa-kipas-angin)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

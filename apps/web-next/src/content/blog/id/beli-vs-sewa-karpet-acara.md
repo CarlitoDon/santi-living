@@ -63,3 +63,8 @@ Bisa dikonsultasikan melalui paket perlengkapan event, terutama untuk acara kelu
 Kirim jenis acara, ukuran area, foto venue, tanggal, dan kebutuhan tambahan ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**. Admin akan membantu membandingkan opsi sewa yang realistis tanpa memaksa Anda mengambil paket yang tidak dibutuhkan.
 
 > Untuk banyak panitia, **sewa karpet acara** adalah cara paling praktis menjaga venue tetap rapi tanpa urusan penyimpanan dan cleaning setelah acara.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

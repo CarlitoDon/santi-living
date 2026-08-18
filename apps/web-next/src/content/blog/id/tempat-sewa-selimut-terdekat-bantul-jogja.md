@@ -26,3 +26,8 @@ Mengapa warga Bantul mempercayakan sewa selimut harian dan bulanannya pada kami?
 Jadilah tuan rumah yang memberikan kenyamanan maksimal bagi kerabat yang menginap di rumah Bantul Anda.
 
 [**Pesan Selimut Hangat Anda Sekarang via WhatsApp!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

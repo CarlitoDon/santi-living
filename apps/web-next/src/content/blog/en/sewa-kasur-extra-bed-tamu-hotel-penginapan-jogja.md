@@ -28,3 +28,7 @@ No need to worry about complicated procedures. If you want to rent:
 3. Upon *check-out*, place the mattress back in the lobby or security post for us to collect.
 
 Keep your family holiday in Jogja budget-friendly and comfortable. If you need a mattress at the last minute, please check our [Mattress Rental Product Catalogue](/produk) or order directly via WhatsApp!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

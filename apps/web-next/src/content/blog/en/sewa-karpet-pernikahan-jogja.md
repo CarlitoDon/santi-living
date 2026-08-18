@@ -77,3 +77,7 @@ The Santi Living workshop is located at **Jl. Godean KM 10, Sleman, Yogyakarta**
 Renting a wedding carpet in Jogja is safest when started with a dimensions and layout checklist. With clear details, organisers can avoid incorrect sizing, setup delays, and overly rough cost estimates.
 
 > **Santi Living assists with wedding carpet rentals in Jogja, event carpet runners, and supporting equipment on a consultative basis: check availability via WhatsApp, send your dimensions, and the admin will help with a realistic estimate.**
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

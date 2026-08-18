@@ -109,3 +109,7 @@ A: We will replace it immediately at no extra cost.
 For wholesale mattress orders used for celebrations, event accommodation, seminars, or gatherings, organisers often also need floor coverings. See [carpet hire Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) and [event equipment hire packages Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

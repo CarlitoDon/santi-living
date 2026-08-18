@@ -49,3 +49,7 @@ An old and worn-out mattress tends to absorb more odours and dirt. Consider repl
 With the right care, your mattress can remain fresh and free from musty smells. At Santi Living, we provide high-quality mattress rental services with routine maintenance to ensure our customers' comfort.
 
 If you need more information about mattress care or would like to rent a high-quality mattress in Jogja, contact us via WhatsApp at [nomor] or visit our website at [website].
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

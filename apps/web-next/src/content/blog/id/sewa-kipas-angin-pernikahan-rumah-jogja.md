@@ -31,3 +31,8 @@ Berikan senyuman termanis di hari bahagia Anda, dan biarkan tamu Anda menikmati 
 ## Tambahan Karpet untuk Hajatan Rumah
 
 Selain kipas, area jalur tamu dan akad sering membutuhkan alas yang lebih rapi. Lihat [sewa karpet merah Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja), [sewa karpet untuk pernikahan](/artikel/sewa-karpet-pernikahan-jogja), atau halaman utama [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

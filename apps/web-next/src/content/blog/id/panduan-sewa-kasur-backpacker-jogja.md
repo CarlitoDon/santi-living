@@ -18,3 +18,8 @@ Alih-alih menyewa kamar tambahan yang mahal, **sewa kasur harian Jogja** adalah 
 Jadikan liburan Anda di Jogja tetap nyaman tanpa harus menguras kantong. Pelayanan kami tersedia 24/7 untuk konsultasi dan pemesanan.
 
 [**Pesan Kasur Rombongan Sekarang**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

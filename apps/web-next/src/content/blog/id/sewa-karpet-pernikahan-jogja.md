@@ -61,3 +61,8 @@ Kirim pesan WhatsApp berisi jenis acara, tanggal, lokasi, ukuran area, dan foto 
 ## Penutup
 
 Sewa karpet pernikahan Jogja paling aman dimulai dari checklist ukuran dan layout. Dengan data yang jelas, panitia bisa menghindari salah ukuran, keterlambatan setup, dan estimasi biaya yang terlalu kasar.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -28,3 +28,7 @@ Instead of buying five folding mattresses only to let them gather dust in storag
 Santi Mebel offers a hassle-free [Folding Mattress Rental in Jogja](/sewa-kasur-lipat). We offer a **Volume Discount** — if you rent more than 3 or 6 units at once, there is a special discount of up to 15% to help ease your event budget. 
 
 We hope your family gathering goes smoothly, with no one complaining of a sore back the next morning!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

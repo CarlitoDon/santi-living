@@ -77,3 +77,7 @@ Yes, by request. Send the area dimensions and photos of the location so that the
 📍 Santi Living Workshop: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **The Jogja event rest area package from Santi Living helps organisers set up a crew rest area in a more organised, consultative, and realistic manner according to the event date and location.**
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

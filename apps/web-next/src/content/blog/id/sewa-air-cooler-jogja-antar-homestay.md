@@ -25,3 +25,8 @@ Ada tamu VIP yang *check-in* hari ini dan komplain kepanasan? Tenang. Santi Livi
 Tingkatkan standar kenyamanan penginapan Anda tanpa menguras modal bisnis.
 
 [**Pesan Air Cooler untuk Homestay Anda Hari Ini!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

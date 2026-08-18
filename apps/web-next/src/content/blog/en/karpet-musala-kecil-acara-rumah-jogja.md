@@ -99,3 +99,7 @@ Send the event date, address, photos of the area, room size, number of guests, f
 > For **small prayer room carpets for Jogja home events**, just provide simple details: photos of the area, dimensions, date, and number of guests. The Santi Living admin team will help check reasonable options for floor mats or rugs.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

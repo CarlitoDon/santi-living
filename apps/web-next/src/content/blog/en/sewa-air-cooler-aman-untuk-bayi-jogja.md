@@ -22,3 +22,7 @@ Unlike ACs that use chemical freon, Air Coolers work naturally (mimicking a bree
 Don't let your baby cry from the heat. Provide natural coolness with very affordable monthly rental rates.
 
 [**Book Your Air Cooler Before Stock Runs Out!**](/sewa-cooling)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

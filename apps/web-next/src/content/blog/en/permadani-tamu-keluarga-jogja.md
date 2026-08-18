@@ -106,3 +106,7 @@ Send the event date, address, number of guests, room photos, area size, colour p
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > For your **rug needs for family guests in Jogja**, start with [carpet and rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), then send your home details and guest numbers for a more accurate estimate.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

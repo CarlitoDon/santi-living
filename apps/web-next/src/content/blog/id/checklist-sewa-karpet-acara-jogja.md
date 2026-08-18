@@ -72,3 +72,8 @@ Ya. Untuk pengajian atau tahlilan, tambahkan jumlah tamu dan kebutuhan area dudu
 Kirim template tersebut ke 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)** agar percakapan langsung masuk ke data yang dibutuhkan.
 
 > Checklist yang rapi membantu panitia mendapatkan estimasi **sewa karpet acara Jogja** tanpa bolak-balik menanyakan detail dasar.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

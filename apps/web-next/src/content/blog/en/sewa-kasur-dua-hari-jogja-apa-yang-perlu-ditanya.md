@@ -47,3 +47,8 @@ The Santi Living workshop is at **Jl. Godean KM 10, Sleman, Yogyakarta**. The se
 Contact **WhatsApp 0895-1911-9092** and include the request, dates, duration, quantity, and location. The team can explain available options and the next step based on those details.
 
 This article is general guidance updated on 2026-08-11. Service details can change, so confirm them through WhatsApp before deciding.
+
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

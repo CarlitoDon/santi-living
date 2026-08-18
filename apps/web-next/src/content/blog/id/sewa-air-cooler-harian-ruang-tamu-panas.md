@@ -20,3 +20,8 @@ Menyalakan semua kipas angin yang ada di rumah seringkali tidak cukup membantu k
 Tamu Anda akan menghargai usaha ekstra Anda dalam memberikan kenyamanan. Jadilah tuan rumah yang sempurna tanpa harus berinvestasi membeli AC baru untuk ruang tamu.
 
 [**Amankan Air Cooler Anda untuk Acara Mendatang!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .
