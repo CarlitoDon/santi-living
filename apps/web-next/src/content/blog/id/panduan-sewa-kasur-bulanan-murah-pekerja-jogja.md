@@ -32,3 +32,8 @@ Sebagai pekerja, waktu santai Anda sangat terbatas. Berikut cara praktis menyewa
 - Atur jam pengiriman menjadi sepulang kerja (sore / malam). Kami akan mengantar kasur tepat waktu!
 
 Lupakan tidur di atas tikar tipis yang bikin masuk angin. Jaga produktivitas kerja Anda di Jogja dengan tidur berkualitas dari kasur kami!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

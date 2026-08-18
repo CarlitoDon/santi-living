@@ -25,3 +25,7 @@ That is why **Santi Living** focuses its rental service on 16-inch *Stand Fans*.
 [**Secure Your Pedestal Fan Today!**](/sewa-kipas-angin)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -24,3 +24,7 @@ Santi Living offers a monthly blanket rental solution specifically designed to s
 Don't sacrifice your health and the quality of your lectures the next day just because you were freezing all night.
 
 [**Book Your Thick Blanket Today!**](/produk)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

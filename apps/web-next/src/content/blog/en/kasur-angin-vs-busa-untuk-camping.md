@@ -24,3 +24,7 @@ If your campsite is accessible by car (glamping), we highly recommend renting a 
 Ready for your next adventure? We are ready to equip you with a clean and comfortable mattress.
 
 [**Check Daily Rental Prices Here**](/harga-sewa-kasur)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

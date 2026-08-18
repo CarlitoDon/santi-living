@@ -27,3 +27,8 @@ Pernah bertanya bagaimana kasur sewaan bisa selalu bersih seperti baru? Ini pros
 Kasur adalah tempat Anda menghabiskan 6-8 jam setiap hari. Kebersihan bukan sekadar kenyamanan, tapi kesehatan.
 
 Percayakan kebutuhan tidur Anda pada Santi Living — setiap kasur melewati proses yang sama sebelum sampai ke Anda.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

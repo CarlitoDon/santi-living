@@ -26,3 +26,7 @@ Enjoy quality me-time in your student room. Contact us to check the availability
 [**Check Monthly TV Rental Promos Here!**](/sewa-tv)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

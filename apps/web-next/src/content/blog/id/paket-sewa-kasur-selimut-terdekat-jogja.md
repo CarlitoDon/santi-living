@@ -25,3 +25,8 @@ Berpusat di area strategis Godean, armada kami memiliki jangkauan yang luas dan 
 Jangan biarkan tamu Anda menggigil kedinginan malam ini. Dapatkan paket tidur nyaman dengan harga terbaik dari kami.
 
 [**Pilih Paket Sewa Kasur + Selimut Anda Sekarang!**](/harga-sewa-kasur)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

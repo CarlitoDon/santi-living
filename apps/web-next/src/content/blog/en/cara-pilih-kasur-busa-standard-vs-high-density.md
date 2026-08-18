@@ -31,3 +31,7 @@ We specifically choose high-quality foam mattresses from well-known brands such 
 The minimum thickness of our standard mattresses is strictly monitored at a minimum of 15cm–20cm to guarantee that none of your guests' or family's bones end up resting against the hard tiled floor.
 
 You can [view the full price list of all these sag-resistant mattresses on our product pricing page](/harga-sewa-kasur). (Looking for a mattress for a boarding house? Also check out [Tips for Choosing a Rental Mattress for Boarding Houses](/artikel/tips-sewa-kasur-untuk-kos)). Prioritise your posture health starting tonight!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

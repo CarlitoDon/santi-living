@@ -74,3 +74,7 @@ Send this template to 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119
 > A neat checklist helps the organising committee get an estimate for **Jogja event carpet rental** without going back and forth asking for basic details.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

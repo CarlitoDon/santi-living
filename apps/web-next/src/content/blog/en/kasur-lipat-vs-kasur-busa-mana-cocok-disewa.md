@@ -69,3 +69,7 @@ Consult your needs with us, and our team will help you choose the right mattress
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

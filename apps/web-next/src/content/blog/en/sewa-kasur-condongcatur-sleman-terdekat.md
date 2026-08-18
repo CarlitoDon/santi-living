@@ -81,3 +81,7 @@ No, you do not. We highly value our customers' privacy and identity security. We
 Provide the best extra sleeping comfort for your extended family, group peers, or guests in the Condongcatur Sleman area without having to spend a large budget on purchasing furniture. Save on your accommodation expenses and experience a sound sleep on a quality, sag-resistant, sterile HD Foam mattress from Santi Living.
 
 Get in touch with our customer service admin team right away via **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)** or you can visit our central workshop at Jl. Godean KM 10 Sleman Yogyakarta. Get a special discount promo for graduation group bookings this week!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

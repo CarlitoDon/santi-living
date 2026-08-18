@@ -31,3 +31,7 @@ You get a housing allowance, but you don't know how long you will be in Jogja. B
 Santi Living is ready to serve the sleeping needs of professionals and expats in Jogja with flexible services.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

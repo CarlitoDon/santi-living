@@ -85,3 +85,8 @@ Untuk estimasi cepat, kirim jenis acara, ukuran area, tanggal, lokasi, foto venu
 ## Penutup
 
 Harga sewa karpet Jogja yang akurat hanya bisa dihitung setelah jenis acara, ukuran area, tanggal, dan lokasi jelas. Untuk kebutuhan event, hajatan, pengajian, wedding, atau pameran, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) lalu kirim detail acara via [WhatsApp Santi Living](https://wa.me/6289519119092) agar estimasi lebih tepat.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

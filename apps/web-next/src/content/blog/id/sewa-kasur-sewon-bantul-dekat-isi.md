@@ -88,3 +88,8 @@ Jangan biarkan kebutuhan kasur tambahan mengganggu kenyamanan Anda atau tamu And
 Hubungi sekarang juga lewat WhatsApp di **0895-1911-9092** untuk konsultasi dan pemesanan. Tim Santi Living akan merespons dengan cepat dan memastikan kasur sampai di lokasi Anda tepat waktu.
 
 Santi Living — solusi tidur nyaman untuk warga Sewon, Bantul, dan seluruh Yogyakarta.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

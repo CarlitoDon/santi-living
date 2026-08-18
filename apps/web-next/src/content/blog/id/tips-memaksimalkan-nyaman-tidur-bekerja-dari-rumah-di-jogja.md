@@ -133,3 +133,8 @@ Bekerja dari rumah tidak harus berarti mengorbankan kualitas tidur Anda. Dengan 
 Di Santi Living, kami siap membantu Anda menemukan solusi kasur yang tepat untuk konfigurasi kerja dari rumah Anda di Jogja. Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang pilihan kasur yang sesuai dengan berat badan, preferensi tidur, dan spesifik ergonomi pekerjaan Anda.
 
 *Catatan: Jika Anda mengalami nyeri kronis yang memperburuk sejak bekerja dari rumah, konsultasi dengan ahli ergonomi atau fisioterapis disarankan bersama dengan penyesuaian tempat kerja dan pilihan kasur yang tepat.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

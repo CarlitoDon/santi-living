@@ -31,3 +31,8 @@ Meskipun tarif sewa yang kami tawarkan sangat murah, kami **tidak pernah berkomp
 Kami siap mengirimkan pesanan bantal tambahan Anda (berapapun jumlahnya) ke seluruh area Sleman, mulai dari Depok, Mlati, Ngaglik, hingga Godean.
 
 [**Pesan Bantal Tambahan Sekarang Sebelum Kehabisan Stok!**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

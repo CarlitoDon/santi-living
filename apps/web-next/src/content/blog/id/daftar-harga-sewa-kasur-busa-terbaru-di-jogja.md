@@ -40,3 +40,8 @@ Di Santi Mebel, kami menjaga transparansi penuh:
 * Untuk lokasi yang lebih jauh (Sleman Timur, Kota Jogja, Bantul), berlaku tarif flat per zona yang dibayar satu kali saja (sudah *cover* antar DAN jemput).
 
 Penasaran ingin melihat kalkulasi harga kasur idaman Anda? Cek langsung simulasi total biayanya di halaman **[Daftar Harga Sewa Kasur](/harga-sewa-kasur)** kami. Anda juga bisa langsung chat admin kami agar dibuatkan rincian pesanan. Tepat, transparan, dan pastinya hemat!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

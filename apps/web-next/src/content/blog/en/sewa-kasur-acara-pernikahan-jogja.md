@@ -31,3 +31,7 @@ Weddings in Jogja often last for several days, with guests coming from out of to
 3. Coordinate the delivery schedule with the wedding organisers or family
 
 Make your special day perfect by ensuring your guests' comfort. Contact Santi Living.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

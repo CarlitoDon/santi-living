@@ -25,3 +25,7 @@ We chose this brand because of its outstanding durability. This allows us to alw
 Renting a hotel-quality mattress doesn't have to be expensive now. With the **Royal Grand Exclusive** from Santi Living, you get a guarantee of quality sleep every night.
 
 [**Check Unit Availability Here**](/produk)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

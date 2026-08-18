@@ -31,3 +31,7 @@ Order today, and the items will arrive before your first guest does.
 If guests are sitting on the floor, fans are often more effective once the seating area is already set up. See [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) and the guide for [Jogja prayer gathering carpet rental](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

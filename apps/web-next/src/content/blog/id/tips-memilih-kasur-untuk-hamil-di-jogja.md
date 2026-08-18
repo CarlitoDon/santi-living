@@ -47,3 +47,8 @@ Memilih kasur yang tepat selama kehamilan bukan hanya masalah kenyamanan, tetapi
 Di Santi Living, kami siap membantu Anda menemukan solusi sewa kasur yang tepat untuk masa kehamilan Anda di Jogja. Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang pilihan kasur yang sesuai dengan kebutuhan dan budget Anda.
 
 *Catatan: Konsultasi dengan ahli kesehatan tentang posisi tidur dan kebutuhan spesifik selama kehamilan tetap disarankan.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -57,3 +57,7 @@ Book 2 days in advance to ensure availability. Please include the number of matt
 For a neater guest seating area, read our guide on [carpet rental for pengajian and tahlilan in Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) or check out [rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) directly.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

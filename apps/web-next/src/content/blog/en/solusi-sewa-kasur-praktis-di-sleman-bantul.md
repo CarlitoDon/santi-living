@@ -29,3 +29,7 @@ How do we keep our delivery rates low despite rising petrol prices? Because we i
 - **Affordable Flat Rates**: We map delivery fees based on the subdistrict. You only pay once upfront, and the mattress collection is *free* of charge when your rental period ends. There are no hidden fees later on.
 
 So, don't let distance prevent you from getting quality sleep facilities. Order via your mobile now, share your accurate location with our admin, and sit back and wait for your ordered mattress to arrive!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -57,3 +57,7 @@ Memilih akomodasi tepat bisa menghemat biaya hingga 30%. Dengan memahami opsi ya
 ⭐ **Review**: 5/5 dari 51+ pelanggan
 
 *Panduan diperbarui berkala. Hubungi kami untuk info harga terbaru.*
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

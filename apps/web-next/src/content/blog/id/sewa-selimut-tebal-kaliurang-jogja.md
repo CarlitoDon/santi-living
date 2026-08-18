@@ -29,3 +29,8 @@ Seluruh stok selimut kami wajib masuk ke fasilitas pencucian (laundry) suhu ting
 Jangan biarkan acara seru di Kaliurang berujung dengan puluhan peserta yang sakit flu keesokan harinya. Amankan selimut hangat Anda dari sekarang.
 
 [**Hubungi Kami untuk Sewa Selimut Rombongan (Harga Khusus)!**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

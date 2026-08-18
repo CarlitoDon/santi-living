@@ -61,3 +61,8 @@ Terlalu keras membuat bahu dan pinggul sakit. Terlalu empuk membuat punggung tid
 Konsultasikan kebutuhan kasur yang tepat untuk punggung Anda.
 
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

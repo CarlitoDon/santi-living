@@ -27,3 +27,7 @@ We offer daily air cooler rentals for events (such as family gatherings in a hot
 Say goodbye to the sweltering heat. [**Check Out Our Air Cooler Rental Service Details Here!**](/sewa-cooling)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

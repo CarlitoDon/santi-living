@@ -26,3 +26,8 @@ Buat *booth* Anda tampil paling profesional dan modern di antara *tenant* lainny
 ## Tambahan Karpet untuk Booth Pameran
 
 Booth yang memakai TV display biasanya juga membutuhkan alas area yang rapi. Baca panduan [sewa karpet seminar dan pameran di Jogja](/artikel/sewa-karpet-seminar-pameran-jogja) atau cek [sewa karpet Jogja](/sewa-karpet-jogja).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -30,3 +30,8 @@ Jangan biarkan *stand* pameran atau presentasi Anda terlihat tidak profesional k
 ## Tambahan Karpet untuk Event Sleman
 
 Untuk event kampus, pameran, dan presentasi di Sleman, karpet dapat membantu merapikan booth, panggung kecil, atau area registrasi. Lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan panduan [sewa karpet seminar pameran](/artikel/sewa-karpet-seminar-pameran-jogja).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

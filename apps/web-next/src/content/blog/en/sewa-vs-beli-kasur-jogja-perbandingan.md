@@ -30,3 +30,7 @@ Buying: Rp 1m–3m upfront. 3-year cost: purchase price + maintenance + moving c
 - Budget for a long-term investment
 
 Contact Santi Living for a free consultation. We will help you calculate the best option for you.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

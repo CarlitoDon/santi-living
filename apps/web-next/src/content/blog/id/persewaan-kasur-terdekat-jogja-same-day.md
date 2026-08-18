@@ -78,3 +78,8 @@ Jangan tunggu sampai tamu sudah di depan pintu. Hubungi Santi Living sekarang da
 💰 **[Lihat Daftar Harga Lengkap →](/harga-sewa-kasur)**
 
 > *Santi Living — Persewaan kasur terdekat di Jogja dengan jaminan kebersihan 7 tahap dan pengiriman same day.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

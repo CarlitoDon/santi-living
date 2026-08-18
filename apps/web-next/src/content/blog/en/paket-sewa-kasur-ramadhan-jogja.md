@@ -60,3 +60,7 @@ We offer special rental packages:
 > *Santi Living — Eid Mattress Rental Jogja, Welcoming Guests with the Best Comfort.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

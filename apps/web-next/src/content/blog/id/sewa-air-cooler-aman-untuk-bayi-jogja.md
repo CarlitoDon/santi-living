@@ -22,3 +22,8 @@ Berbeda dengan AC yang menggunakan freon kimiawi, Air Cooler bekerja secara natu
 Jangan biarkan bayi Anda menangis karena kegerahan. Berikan kesejukan alami dengan biaya sewa bulanan yang sangat terjangkau.
 
 [**Pesan Air Cooler Anda Sebelum Stok Habis!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

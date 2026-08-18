@@ -26,3 +26,8 @@ Kami menyewakan kipas angin berdiri (16 inch) dengan spesifikasi yang dirancang 
 *   **Fleksibilitas Sewa**: Kami melayani **sewa harian** (cocok untuk tambahan acara/hajatan) maupun **sewa bulanan** (spesial untuk anak kos).
 
 Jaga kenyamanan dan produktivitas Anda. [**Pesan Kipas Angin Anda Sekarang, Kami Antar Hari Ini Juga!**](/sewa-kipas-angin)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

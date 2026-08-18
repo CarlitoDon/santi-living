@@ -26,3 +26,7 @@ For new students or workers staying temporarily in Yogyakarta, **monthly Jogja m
 Need a special price quote for bulk orders? [**Contact Santi Living Admin on WhatsApp**](https://wa.me/6289519119092) now!
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

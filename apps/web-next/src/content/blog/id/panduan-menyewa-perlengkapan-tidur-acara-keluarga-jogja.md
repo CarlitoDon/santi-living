@@ -97,3 +97,8 @@ Kami memiliki pengalaman melayani berbagai skala acara, dari riunio keluarga kec
 ## Tambahan Karpet untuk Perlengkapan Acara
 
 Jika acara keluarga juga membutuhkan alas ruang tamu, pengajian, atau jalur tamu, lihat [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [paket sewa perlengkapan acara Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Karpet dapat dikonsultasikan bersama kasur, bantal, selimut, kipas, air cooler, dan TV.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

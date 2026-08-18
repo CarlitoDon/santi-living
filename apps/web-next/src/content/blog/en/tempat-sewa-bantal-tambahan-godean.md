@@ -29,3 +29,7 @@ For an extra cost of just ten thousand rupiah, your guests can sleep soundly and
 Happy guests, relaxed hosts. [**Order Your Extra Pillows Here via WhatsApp**](https://wa.me/6289519119092)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

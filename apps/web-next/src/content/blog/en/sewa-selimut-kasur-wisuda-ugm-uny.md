@@ -28,3 +28,7 @@ Graduation is a happy day for you and your family. Make sure they get a very com
 [**Secure Your Mattress & Blanket Stock Before They Run Out!**](/harga-sewa-kasur)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -88,3 +88,7 @@ Do not let the need for an extra mattress disrupt your comfort or that of your g
 Contact us today via WhatsApp on **0895-1911-9092** for consultations and bookings. The Santi Living team will respond quickly and ensure the mattress arrives at your location on time.
 
 Santi Living — the comfortable sleep solution for residents of Sewon, Bantul, and the whole of Yogyakarta.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

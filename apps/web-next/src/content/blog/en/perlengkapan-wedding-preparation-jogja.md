@@ -77,3 +77,7 @@ Yes, by request. Send the area dimensions, photos of the location, and the purpo
 📍 Santi Living Workshop: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Jogja wedding preparation equipment from Santi Living helps families and committees prepare practical needs from D-1 to D+1, with availability checks via WA and custom requests for non-core items.**
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

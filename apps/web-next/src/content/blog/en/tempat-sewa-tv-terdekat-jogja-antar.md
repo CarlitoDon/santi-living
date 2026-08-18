@@ -28,3 +28,7 @@ Our standard rental unit is a 32-inch LED TV. This size is ideal because:
 Instead of panicking to find an open physical shop, trust your event's visual needs to our online rental service.
 
 [**Chat with Our Admin for TV Delivery Today!**](/sewa-tv)
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

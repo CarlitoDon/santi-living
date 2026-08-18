@@ -27,3 +27,7 @@ Ever wondered how rental mattresses can always be as clean as new? Here is the p
 A mattress is where you spend 6-8 hours every day. Cleanliness is not just about comfort, but health.
 
 Trust your sleep needs to Santi Living — every mattress goes through the same process before reaching you.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

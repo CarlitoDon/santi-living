@@ -33,3 +33,8 @@ Dengan sewa dari Santi Living:
 4. Jadwalkan pengiriman kasur sehari sebelum renovasi dimulai
 
 Tidur nyaman tidak harus berhenti saat renovasi. Hubungi Santi Living untuk solusi tempat tidur sementara di Jogja.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

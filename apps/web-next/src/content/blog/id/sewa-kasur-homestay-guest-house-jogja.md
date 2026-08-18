@@ -27,3 +27,8 @@ Punya homestay atau guest house di Jogja? Kelola biaya operasional dengan sewa k
 ## Paket Khusus Bisnis
 
 Santi Living menawarkan paket sewa multi-unit dengan harga khusus untuk pelaku usaha homestay dan guest house di Jogja. Hubungi kami untuk penawaran.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

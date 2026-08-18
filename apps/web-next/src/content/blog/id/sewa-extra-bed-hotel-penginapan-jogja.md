@@ -89,3 +89,8 @@ Jangan tunggu sampai peak season tiba dan stok menipis. Hubungi Santi Living sek
 ## Tambahan Karpet untuk Venue dan Homestay
 
 Untuk penginapan, villa, atau venue keluarga yang membutuhkan area tamu sementara, baca [sewa karpet Jogja](/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](/sewa-karpet-permadani-jogja). Karpet bisa dikonsultasikan bersama kebutuhan extra bed, bantal, selimut, kipas, atau TV.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -75,3 +75,7 @@ Include: event name, number of participants, dates, venue location, and hire dur
 If the venue also requires flooring for booths, a small stage, or registration areas, read the guide [seminar and exhibition carpet hire in Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). For main service consultations, start with [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja).
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

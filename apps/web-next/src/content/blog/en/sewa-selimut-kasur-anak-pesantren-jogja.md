@@ -24,3 +24,7 @@ Focus on helping your child adapt to their new learning environment. Leave their
 [**Choose Your Boarding School Equipment Rental Package Here!**](/harga-sewa-kasur)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

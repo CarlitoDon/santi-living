@@ -101,3 +101,7 @@ Don't let your event be disrupted by a lack of beds. Santi Living is ready to pr
 📍 **Workshop: Jl. Godean KM10, Sleman**
 
 > *Santi Living — Trusted extra bed hire in Jogja. Prices start from Rp35,000/day, same-day delivery, 50+ units in stock.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

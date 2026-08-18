@@ -91,3 +91,7 @@ Santi Living understands that weddings require special handling:
 If the event also requires a guest pathway, a solemnisation (akad) area, or a tidier living room, see the guide for [carpet rental for weddings in Jogja](/artikel/sewa-karpet-pernikahan-jogja) and the [red carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) page. For general needs, start with [carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
 
 > *Santi Living — Mattress rental for weddings in Jogja. Save millions of rupiah, guests stay comfortable.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -20,3 +20,8 @@ Kami memahami bahwa tamu seringkali datang tanpa pemberitahuan jauh hari. Itulah
 Walaupun dekat, kualitas tetap nomor satu. Setiap unit kasur **Royal Grand Exclusive** yang kami kirimkan telah melalui proses sterilisasi UV-C untuk memastikan bebas dari bakteri dan kutu busa.
 
 [**Lihat Lokasi Kami di Google Maps**](https://maps.app.goo.gl/DiUP3REYVqYBHtuA8) atau langsung klik tombol WhatsApp di pojok kanan bawah website ini untuk pemesanan instan!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

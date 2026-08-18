@@ -122,3 +122,8 @@ Memilih kasur yang tepat bukan hanya soal kenyamanan, tetapi juga bagian dari me
 Kami memiliki pengalaman melayani lansia di Jogja dengan berbagai kebutuhan spesifik—dari kasur untuk arthritis hingga kasur dengan dukungan ekstra untuk osteoporosis. Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang pilihan kasur sewa yang paling sesuai dengan kondisi kesehatan, berat badan, dan preferensi tidur lansia Anda di Jogja.
 
 *Catatan: Selalu konsultasikan dengan dokter atau ahli fisioterapis jika Anda memiliki kondisi kesehatan spesifik yang memengaruhi kebutuhan tidur Anda.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -71,3 +71,8 @@ Bisa by request. Ketersediaan dan kebutuhan teknis seperti listrik perlu dicek s
 📍 Workshop Santi Living: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Perlengkapan makrab kampus Jogja dari Santi Living membantu panitia menyiapkan kebutuhan tidur, pendingin, dan item event secara fleksibel tanpa klaim stok yang belum diverifikasi.**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

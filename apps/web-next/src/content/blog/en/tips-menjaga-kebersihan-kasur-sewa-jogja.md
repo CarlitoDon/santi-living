@@ -17,3 +17,7 @@ Santi Living rental mattresses are delivered clean and sterilised. However, you 
 5. Report any stains or odours immediately — we are ready to help with a solution
 
 With simple care, your rented mattress will remain comfortable throughout the contract.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

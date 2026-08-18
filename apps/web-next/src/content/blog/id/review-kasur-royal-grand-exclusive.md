@@ -25,3 +25,8 @@ Kami memilih brand ini karena daya tahannya yang luar biasa. Hal ini memungkinka
 Menyewa kasur berkualitas hotel kini tidak perlu mahal. Dengan **Royal Grand Exclusive** dari Santi Living, Anda mendapatkan jaminan tidur berkualitas setiap malam.
 
 [**Cek Ketersediaan Unit Disini**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

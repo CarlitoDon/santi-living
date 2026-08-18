@@ -20,3 +20,8 @@ Salah satu keunggulan menyewa di Santi Living adalah jaminan kebersihan. Jika An
 Ketika masa studi atau kontrak kerja Anda di Sleman berakhir, Anda tidak perlu bingung mencari pembeli kasur bekas atau membayar ongkir mahal untuk membawanya pulang ke kampung halaman. Tim kami akan menjemput unit kasur tersebut tepat di depan pintu kost Anda.
 
 Tetap produktif dan tidur nyenyak tanpa terbebani kepemilikan barang besar. [**Lihat Paket Sewa Bulanan Kami Disini**](/sewa-kasur-bulanan).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

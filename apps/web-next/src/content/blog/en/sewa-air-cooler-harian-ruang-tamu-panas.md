@@ -22,3 +22,7 @@ Your guests will appreciate your extra effort in providing comfort. Be the perfe
 [**Secure Your Air Cooler for Your Upcoming Event!**](/sewa-cooling)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

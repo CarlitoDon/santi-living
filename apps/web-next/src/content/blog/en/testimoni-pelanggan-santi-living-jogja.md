@@ -20,3 +20,7 @@ Thinking about renting a mattress? Read our customers' real-life stories.
 "Last Lebaran, our house was full of guests from Sumatra. We rented 5 extra mattresses for 2 weeks. The process was easy, the mattresses were like new, and everything was sorted once the guests left."
 
 Want a similar experience? Contact Santi Living today.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

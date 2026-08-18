@@ -25,3 +25,7 @@ Simply state your detailed location when placing an order via WhatsApp. Our admi
 [**Book Your Mattress with Free Delivery Now**](https://wa.me/6289519119092)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

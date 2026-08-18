@@ -71,3 +71,7 @@ Available on request. Availability and technical requirements such as electricit
 📍 Workshop Santi Living: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Jogja campus gathering equipment from Santi Living helps the committee prepare sleeping needs, cooling, and event items flexibly without claiming unverified stock.**
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

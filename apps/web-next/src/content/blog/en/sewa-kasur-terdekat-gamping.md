@@ -22,3 +22,7 @@ Even though it's local, quality remains our top priority. Every **Royal Grand Ex
 [**View Our Location on Google Maps**](https://maps.app.goo.gl/DiUP3REYVqYBHtuA8) or click the WhatsApp button in the bottom right corner of this website for instant booking!
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

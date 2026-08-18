@@ -27,3 +27,8 @@ Anda tidak akan menemukan bantal yang berbau apek, kempes, atau bernoda kekuning
 Hanya dengan biaya tambahan sepuluh ribu rupiah, tamu Anda bisa tidur dengan nyenyak dan bangun dengan segar keesokan harinya.
 
 Tamu senang, tuan rumah pun tenang. [**Order Bantal Tambahan Anda Disini via WhatsApp**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

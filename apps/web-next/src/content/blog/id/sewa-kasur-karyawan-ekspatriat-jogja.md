@@ -29,3 +29,8 @@ Anda dapat tunjangan housing, tapi tidak tahu berapa lama akan di Jogja. Beli fu
 4. Cek apakah bisa include dalam paket relokasi perusahaan
 
 Santi Living siap melayani kebutuhan tidur profesional dan ekspatriat di Jogja dengan layanan fleksibel.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

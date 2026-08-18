@@ -81,3 +81,8 @@ Tidak perlu. Kami sangat menghargai privasi dan keamanan identitas pelanggan. Ka
 Sediakan kenyamanan tempat tidur tambahan terbaik bagi keluarga besar, rekan kelompok, maupun tamu Anda di kawasan Condongcatur Sleman tanpa perlu mengeluarkan anggaran pembelian furnitur yang mahal. Hemat pengeluaran akomodasi Anda dan rasakan sensasi tidur yang pulas di atas kasur busa steril anti-kempes HD Foam berkualitas persembahan Santi Living.
 
 Segera hubungi tim admin layanan customer service kami sekarang juga melalui **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)** atau Anda dapat mengunjungi workshop pusat kami di Jl. Godean KM 10 Sleman Yogyakarta. Dapatkan promo potongan harga khusus pemesanan rombongan wisuda minggu ini!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

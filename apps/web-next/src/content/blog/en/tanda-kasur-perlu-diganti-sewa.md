@@ -54,3 +54,7 @@ Santi Living is committed to maintaining our customers' sleep quality. Do not he
 **Having issues with your rented mattress?** Request a replacement via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Quick response, free delivery for replacements!
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

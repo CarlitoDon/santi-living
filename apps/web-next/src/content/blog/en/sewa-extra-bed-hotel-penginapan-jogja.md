@@ -89,3 +89,7 @@ Don't wait until the peak season arrives and stock runs low. Contact Santi Livin
 ## Additional Carpets for Venues and Homestays
 
 For accommodation, villas, or family venues requiring temporary guest areas, read [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Carpets can be discussed alongside your needs for extra beds, pillows, blankets, fans, or TVs.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

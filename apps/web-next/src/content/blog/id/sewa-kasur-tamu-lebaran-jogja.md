@@ -29,3 +29,8 @@ Layanan ini cocok untuk tamu mudik, keluarga besar, atau acara halal bihalal yan
 ## Cara Pesan
 
 Hubungi Santi Living via WhatsApp, sebutkan jumlah dan tanggal, kami atur pengiriman ke rumah Anda di Jogja dan sekitarnya.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

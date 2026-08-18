@@ -28,3 +28,8 @@ Jadikan momen kemenangan jagoan Anda lebih berkesan dengan visual yang maksimal.
 ## Tambahan Karpet untuk Area Nobar
 
 Jika nobar dilakukan lesehan di basecamp, garasi, atau ruang komunitas, pertimbangkan juga [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) atau cek opsi umum [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) agar area duduk lebih rapi.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -25,3 +25,8 @@ Air Cooler adalah perangkat pendingin ruangan yang menggunakan medium air (atau 
 Kami melayani penyewaan Air Cooler harian untuk acara (seperti arisan keluarga di ruang tamu yang panas) maupun bulanan untuk kenyamanan di kos.
 
 Ucapkan selamat tinggal pada kegerahan. [**Cek Detail Layanan Sewa Air Cooler Kami Disini!**](/sewa-cooling)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

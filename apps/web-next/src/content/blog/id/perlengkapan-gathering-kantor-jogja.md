@@ -73,3 +73,8 @@ Karpet atau permadani perlu dikonfirmasi by request berdasarkan ukuran, jenis ac
 📍 Workshop Santi Living: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Perlengkapan gathering kantor Jogja dari Santi Living membantu HR, GA, dan panitia internal menyiapkan acara yang nyaman tanpa membuat klaim ketersediaan sebelum dicek via WA.**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

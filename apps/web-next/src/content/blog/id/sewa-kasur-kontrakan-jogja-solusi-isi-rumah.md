@@ -104,3 +104,8 @@ Santi Living (divisi Santi Mebel) sudah melayani ratusan pelanggan di seluruh wi
 Tidak perlu menunggu punya budget jutaan untuk punya tempat tidur yang nyaman di kontrakan. Mulai dari Rp25.000 per hari, Anda sudah bisa tidur nyenyak di kasur bersih dan berkualitas.
 
 Hubungi Santi Living sekarang via **WhatsApp 0895-1911-9092** untuk konsultasi dan pemesanan. Sampaikan kebutuhan kontrakan Anda, dan kami bantu pilihkan solusi terbaik sesuai budget.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

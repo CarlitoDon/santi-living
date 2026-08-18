@@ -83,3 +83,7 @@ We expect customers to take reasonable care of the mattress. However, if acciden
 Don't let your family visit be ruined or your homestay guests disappointed due to poor sleep quality. Enjoy the extra convenience without the burden of buying expensive mattresses that will only gather dust in your warehouse after use. Enjoy the serene, cool air of Jalan Kaliurang with a sound sleep on a soft, germ-free, sterilised HD foam mattress from Santi Living.
 
 Contact our customer service admin now via **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)** or visit our central workshop at Jl. Godean KM 10 Sleman Yogyakarta. Get a special promo discount price this week for graduation group bookings!
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

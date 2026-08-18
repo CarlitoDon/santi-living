@@ -26,3 +26,8 @@ Kenapa paket ini sangat populer di kalangan wisudawan?
 Momen wisuda adalah hari bahagia Anda bersama keluarga. Pastikan mereka beristirahat dengan sangat nyaman sebelum mendampingi Anda di gedung Grha Sabha Pramana.
 
 [**Amankan Stok Kasur & Selimut Anda Sebelum Kehabisan!**](/harga-sewa-kasur)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

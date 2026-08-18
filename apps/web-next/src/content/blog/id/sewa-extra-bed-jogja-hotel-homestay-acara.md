@@ -101,3 +101,8 @@ Jangan sampai acara Anda terganggu karena kekurangan tempat tidur. Santi Living 
 📍 **Workshop: Jl. Godean KM10, Sleman**
 
 > *Santi Living — Sewa extra bed Jogja terpercaya. Harga mulai Rp35.000/hari, pengiriman same day, stok ready 50+ unit.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

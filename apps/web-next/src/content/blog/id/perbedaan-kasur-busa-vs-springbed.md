@@ -32,3 +32,8 @@ Jika Anda butuh solusi cepat, murah, dan higienis untuk kamar kost atau rumah mi
 Di Santi Living, kami fokus menyediakan kasur busa berkualitas tinggi yang mampu memberikan kenyamanan setara springbed namun tetap praktis bagi pelanggan.
 
 [**Lihat Spesifikasi Kasur Kami Disini**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

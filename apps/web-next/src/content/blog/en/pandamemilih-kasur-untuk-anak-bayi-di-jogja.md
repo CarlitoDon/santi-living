@@ -122,3 +122,7 @@ Choosing the right bed for children and babies is an investment in their well-be
 We have experience serving families with babies and young children in Jogja with various specific needs—from standard baby cots to children's beds with side protection. Contact us via WhatsApp for a free consultation on the rental bed options that best suit your child's age, weight, and specific needs in Jogja.
 
 *Note: Always follow paediatric recommendations for baby sleep safety (place babies on their backs, on a firm and flat mattress, and avoid excess pillows, bolsters, or toys in the cot to reduce the risk of SIDS).*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -31,3 +31,7 @@ Don't let your guests go without proper rest. Make your event more memorable wit
 For guest areas, family prayer gatherings, or temporary floor-seating spaces, read about [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). These requirements can be discussed alongside the extra beds.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

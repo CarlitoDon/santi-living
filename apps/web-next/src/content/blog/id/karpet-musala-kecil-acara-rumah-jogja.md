@@ -97,3 +97,8 @@ Kirim tanggal acara, alamat, foto area, ukuran ruang, jumlah tamu, fungsi area, 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > Untuk kebutuhan **karpet musala kecil acara rumah Jogja**, gunakan data sederhana: foto area, ukuran, tanggal, dan jumlah tamu. Admin Santi Living akan membantu mengecek opsi karpet lesehan atau permadani yang masuk akal.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

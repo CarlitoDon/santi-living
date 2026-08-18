@@ -27,3 +27,8 @@ Salah ukuran kasur bikin tidur tidak nyaman. Panduan memilih ukuran yang pas unt
 ## Bisa Konsultasi Gratis
 
 Tim Santi Living siap membantu mengukur dan merekomendasikan ukuran yang tepat untuk ruangan Anda. Hubungi kami.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

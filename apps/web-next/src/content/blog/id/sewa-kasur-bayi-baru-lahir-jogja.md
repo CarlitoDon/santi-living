@@ -49,3 +49,8 @@ Tidak perlu repot keluar rumah dengan bayi. Tim Santi Living mengantar pesanan l
 **Siap menyambut buah hati?** Pesan perlengkapan tidur bayi via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Gratis antar jemput se-Jogja!
 
 > *Santi Living — Sewa Kasur & Perlengkapan Bayi di Jogja. Karena Si Kecil Berhak Tidur Nyenyak.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -104,3 +104,7 @@ Santi Living (a division of Santi Mebel) has served hundreds of customers across
 You don't need to wait until you have a budget of millions to have a comfortable bed in your rented home. Starting from just Rp25,000 per day, you can sleep soundly on a clean, high-quality mattress.
 
 Contact Santi Living now via **WhatsApp 0895-1911-9092** for a consultation and to order. Let us know your rental needs, and we will help you choose the best solution to fit your budget.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

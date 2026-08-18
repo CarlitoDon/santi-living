@@ -52,3 +52,7 @@ We provide mattress rental packages specifically designed for renovation situati
 > *Santi Living — Smooth Renovation, Comfortable Sleep. Temporary Mattress Rental in Jogja.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

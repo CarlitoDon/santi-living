@@ -24,3 +24,7 @@ Say goodbye to stuffy air. Get a clean fan at the best price in Jogja today.
 [**Book Your Cheap Fan Now!**](/sewa-kipas-angin)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

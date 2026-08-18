@@ -66,3 +66,7 @@ Send photos of the room, the number of guests, the size of the area, and the eve
 > The right pengajian carpet makes guests more comfortable, keeps the room looking organised, and saves the organisers from having to guess requirements based on unclear measurements.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

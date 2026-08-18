@@ -34,3 +34,7 @@ As a worker, your free time is very limited. Here is a practical way to rent wit
 Forget sleeping on a thin mat that gives you a chill. Maintain your work productivity in Jogja with a quality night's sleep on our mattresses!
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

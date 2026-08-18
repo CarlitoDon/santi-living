@@ -47,3 +47,7 @@ Choosing the right mattress during pregnancy is not just a matter of comfort, bu
 At Santi Living, we are ready to help you find the right mattress rental solution for your pregnancy in Jogja. Contact us via WhatsApp for a free consultation on mattress options that suit your needs and budget.
 
 *Note: Consulting with a healthcare professional about sleeping positions and specific needs during pregnancy is still recommended.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

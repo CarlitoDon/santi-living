@@ -33,3 +33,8 @@ Santi Living menawarkan:
 4. Pastikan ada garansi kenyamanan dari penyedia sewa
 
 Mulai kehidupan pernikahan dengan tidur nyaman tanpa beban finansial berlebih. Hubungi Santi Living.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

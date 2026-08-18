@@ -78,3 +78,8 @@ Skenario: Mahasiswa baru, semester 1, butuh kasur untuk 6 bulan
 Konsultasikan durasi sewa yang tepat untuk kebutuhan Anda.
 
 📍 **Workshop:** Jl. Godean KM 10, Sleman, Yogyakarta
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

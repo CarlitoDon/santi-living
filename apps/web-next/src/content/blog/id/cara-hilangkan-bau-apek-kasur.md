@@ -49,3 +49,8 @@ Kasur yang sudah tua dan aus cenderung menyerap lebih banyak bau dan kotoran. Pe
 Dengan perawatan yang tepat, kasur Anda dapat tetap segar dan bebas bau apek. Di Santi Living, kami menyediakan layanan sewa kasur berkualitas dengan perawatan rutin untuk memastikan kenyamanan pelanggan kami.
 
 Jika Anda membutuhkan informasi lebih lanjut tentang perawatan kasur atau ingin menyewa kasur berkualitas di Jogja, hubungi kami melalui WhatsApp di [nomor] atau kunjungi website kami di [website].
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

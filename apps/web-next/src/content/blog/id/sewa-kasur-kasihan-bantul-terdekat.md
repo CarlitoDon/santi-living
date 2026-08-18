@@ -75,3 +75,8 @@ Prosedur pemesanan sangatlah mudah dan ringkas:
 Jangan biarkan tamu Anda kekurangan alas tidur yang nyaman. Hubungi admin kami sekarang di WhatsApp **[0895-1911-9092](https://wa.me/6289519119092)** untuk booking kasur steril terdekat di Kasihan Bantul secara aman dan cepat.
 
 Santi Living — Tidur bersih, lelap berkah, hemat tanpa ribet di seluruh wilayah Yogyakarta.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -89,3 +89,8 @@ Cocok untuk acara keluarga, reuni, seminar, dan gathering.
 ⭐ **Rating**: 5/5 dari 51+ pelanggan
 
 *Panduan ini diperbarui 2026-06-30. Harga dapat berubah, hubungi kami untuk info terkini.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

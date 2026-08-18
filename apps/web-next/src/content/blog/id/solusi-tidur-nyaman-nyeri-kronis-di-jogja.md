@@ -77,3 +77,8 @@ Kasur yang tepat bisa membuat perbedaan signifikan dalam mengelola nyeri kronis 
 Kami menyediakan berbagai opsi kasur berkualitas tinggi dari brands terpercaya, semua dengan standar kebersihan maksimum. Hubungi kami melalui WhatsApp untuk konsultasi gratis tentang pilihan kasur yang paling sesuai dengan kondisi nyeri spesifik Anda di Jogja.
 
 *Catatan: Informasi ini tidak mengganti nasihat medis. Selalu konsultasikan dengan ahli kesehatan atau fisioterapis Anda tentang strategi manajemen nyeri lengkap.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

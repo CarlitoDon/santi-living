@@ -106,3 +106,8 @@ Kirim tanggal acara, alamat, jumlah tamu, foto ruang, ukuran area, preferensi wa
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > Untuk kebutuhan **permadani untuk tamu keluarga Jogja**, mulai dari [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), lalu kirim detail rumah dan jumlah tamu agar estimasi lebih tepat.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

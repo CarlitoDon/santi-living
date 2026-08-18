@@ -110,3 +110,7 @@ A: Yes! We serve the entire DIY (Yogyakarta) region, including Kulonprogo and Gu
 📱 **Contact us for wholesale quotes: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > *Santi Living — Mattress procurement partner for pesantrens and boarding schools in Jogja. Wholesale prices, professional service.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

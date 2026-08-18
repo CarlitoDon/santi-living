@@ -29,3 +29,8 @@ Jangan biarkan tamu Anda kurang istirahat. Jadikan acara Anda lebih berkesan den
 ## Tambahan Karpet untuk Acara Keluarga
 
 Untuk area tamu, pengajian keluarga, atau ruang lesehan sementara, baca [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) dan [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Kebutuhan ini bisa dikonsultasikan bersama extra bed.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -28,3 +28,8 @@ Mencuci bantal dakron ke dalam mesin cuci biasa seringkali merusak strukturnya m
 Dengan 3 perawatan super mudah di atas, pengalaman tidur Anda akan selalu berkualitas sepanjang masa sewa.
 
 [**Butuh Tambahan Bantal Bersih? Cek Katalog Kami**](/produk)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

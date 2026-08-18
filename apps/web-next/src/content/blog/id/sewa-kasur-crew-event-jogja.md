@@ -80,3 +80,8 @@ Bisa. Jika perlu pendingin, TV display, atau alas area, tulis semua kebutuhan se
 📍 Workshop Santi Living: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Sewa kasur crew event Jogja dari Santi Living membantu EO dan panitia menyiapkan rest area yang manusiawi, fleksibel, dan tetap realistis sesuai ketersediaan.**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

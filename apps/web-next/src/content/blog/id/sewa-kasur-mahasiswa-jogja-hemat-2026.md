@@ -22,3 +22,8 @@ Mahasiswa tinggal di Jogja hanya 3-4 tahun. Saat lulus, kasur harus dijual murah
 Setiap kasur Santi Living melalui sterilisasi profesional sebelum dikirim. Dijamin bersih seperti baru.
 
 Hubungi via WhatsApp, pilih kasur, kami antar ke kost Anda di seluruh Jogja.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

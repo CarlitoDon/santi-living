@@ -20,3 +20,8 @@ Untuk menjamin para peserta tetap fit dan nyaman selama berwisata di Jogja, meny
 Jadikan perjalanan wisata asrama Anda di Jogja berkesan dan penuh energi dengan istirahat yang berkualitas.
 
 [**Dapatkan Penawaran Harga Paket Rombongan Disini!**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

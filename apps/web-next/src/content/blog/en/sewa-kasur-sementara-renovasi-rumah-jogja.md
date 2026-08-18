@@ -35,3 +35,7 @@ By renting from Santi Living:
 A comfortable night's sleep doesn't have to stop during renovations. Contact Santi Living for temporary bedding solutions in Jogja.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

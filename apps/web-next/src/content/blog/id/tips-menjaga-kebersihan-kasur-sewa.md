@@ -28,3 +28,8 @@ Punya kamar yang tidak banyak ventilasi udaranya? Untuk menyegarkan busanya, ses
 Dengan menerapkan 4 tips ini, kami jamin durasi liburan atau masa inap kamu akan lebih sehat. Kasur tetap putih bersih sampai hari akhir masa *rental*. 
 
 Jika Anda mau menyewa kasur yang dijamin 100% selalu dalam keadaan Higienis, Divakum, dan Ter-Disinfektan: **Santi Mebel** adalah pilihan unggul di ranah Yogyakarta! Silakan klik [Lihat Produk](/produk) sekarang juga.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

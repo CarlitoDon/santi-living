@@ -19,3 +19,7 @@ Managing dormitory or Islamic boarding school facilities often requires a sudden
 We use durable **Royal Grand Exclusive** foam, so dormitory management does not have to worry about complaints from residents regarding sagging mattresses.
 
 Upgrade your dormitory facilities now without the burden of permanent inventory. [**Contact Our B2B Sales Team**](https://wa.me/6289519119092).
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

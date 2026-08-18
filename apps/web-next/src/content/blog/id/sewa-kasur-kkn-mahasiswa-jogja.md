@@ -102,3 +102,8 @@ KKN adalah pengalaman berharga yang seharusnya tidak terganggu oleh masalah tidu
 Harga grosir yang terjangkau, kasur bersih yang tersanitasi, serta layanan antar jemput ke lokasi KKN menjadikan Santi Living pilihan tepat untuk kebutuhan akomodasi sementara mahasiswa.
 
 **Siap sewa kasur untuk KKN?** Langsung chat WhatsApp **0895-1911-9092** atau kunjungi workshop kami di **Jl. Godean KM10, Sleman**. Stok ready, siap kirim ke lokasi KKN Anda!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

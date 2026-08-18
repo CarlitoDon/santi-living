@@ -24,3 +24,8 @@ Jika lokasi camping Anda bisa dijangkau mobil (glamping), kami sangat menyaranka
 Siap untuk petualangan berikutnya? Kami siap membekali Anda dengan kasur yang bersih dan nyaman.
 
 [**Cek Harga Sewa Harian Disini**](/harga-sewa-kasur)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

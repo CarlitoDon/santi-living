@@ -52,3 +52,8 @@ Kami siap mengantar ke rumah pasien atau fasilitas kesehatan di:
 **Butuh kasur orthopedic untuk pemulihan?** Hubungi kami via WhatsApp: [0895-1911-9092](https://wa.me/6289519119092) — Antar ke rumah Anda hari ini, gratis ongkir!
 
 > *Santi Living — Dukung Pemulihan Anda dengan Kasur yang Tepat di Jogja.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

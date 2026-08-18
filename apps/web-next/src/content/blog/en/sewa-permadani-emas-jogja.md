@@ -97,3 +97,7 @@ Send the event date, address, number of guests, area size, room photos, preferen
 > For **gold rug rental Jogja** requirements, use request phrasing: gold colour preferred, alternative patterns allowed/not allowed, area size, and event date. The Santi Living admin will check availability before providing an estimate.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

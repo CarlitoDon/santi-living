@@ -26,3 +26,8 @@ Selain bantal, kami juga menyediakan sewa **kasur busa** dan **selimut** tebal j
 Fokus saja pada agenda *study tour* Anda, biarkan urusan kenyamanan tidur menjadi tanggung jawab kami!
 
 [**Hubungi Kami untuk Penawaran Harga Rombongan!**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

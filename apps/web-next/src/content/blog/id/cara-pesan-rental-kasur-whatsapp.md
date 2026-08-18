@@ -26,3 +26,8 @@ Anda bisa membayar secara tunai saat kasur sampai (COD), via Transfer Bank, atau
 Banyak tempat persewaan meminta jaminan KTP asli atau deposit jutaan rupiah. Di Santi Living, kami mengutamakan kepercayaan. Proses verifikasi cukup melalui WhatsApp tanpa perlu menahan dokumen identitas asli Anda.
 
 Pesan sekarang, rebahan kemudian! [**Chat Admin Sekarang**](https://wa.me/6289519119092).
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -33,3 +33,7 @@ Wear your sweetest smile on your happy day, and let your guests enjoy the cool c
 In addition to fans, guest pathways and solemnisation areas often require a neater floor covering. See [Jogja red carpet hire](https://karpet.santiliving.com/sewa-karpet-merah-jogja), [carpet hire for weddings](/artikel/sewa-karpet-pernikahan-jogja), or the main [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) page.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

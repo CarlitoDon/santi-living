@@ -31,3 +31,7 @@ Small size, safe materials, and waterproof cover. For newborns to toddlers.
 All types are available in various sizes (single, double, queen, king). Contact Santi Living to consult on the best choice for you.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

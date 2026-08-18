@@ -20,3 +20,8 @@ Bingung mau sewa kasur? Simak cerita nyata pelanggan kami.
 "Lebaran kemarin rumah penuh tamu dari Sumatra. Kami sewa 5 kasur tambahan untuk 2 minggu. Prosesnya gampang, kasurnya seperti baru, dan semua beres setelah tamu pulang."
 
 Ingin pengalaman serupa? Hubungi Santi Living sekarang.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

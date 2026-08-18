@@ -81,3 +81,8 @@ Jika prioritas Anda karpet, mulai dari [sewa karpet Jogja](/sewa-karpet-jogja). 
 Paket sewa perlengkapan acara Jogja paling efektif ketika panitia sudah punya gambaran tanggal, lokasi, jumlah tamu, dan layout. Kirim detail tersebut ke Santi Living agar admin bisa membantu cek karpet, kasur, pendingin, dan TV dalam satu alur konsultasi.
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -33,3 +33,7 @@ Older people or the elderly need a different kind of mattress. It is not just ab
 Santi Living provides free consultations to help choose the right mattress for your parents.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

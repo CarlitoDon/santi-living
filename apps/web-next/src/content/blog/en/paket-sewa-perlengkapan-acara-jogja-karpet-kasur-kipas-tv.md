@@ -94,3 +94,7 @@ For now, these are best described as on-request/consultative. Our admin will hel
 > **Santi Living helps with Jogja event equipment hire using a consultative approach: check availability via WA, prioritise items, and ensure the organisers' requirements remain realistic.**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

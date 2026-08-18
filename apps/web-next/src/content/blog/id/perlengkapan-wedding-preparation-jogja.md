@@ -77,3 +77,8 @@ Bisa by request. Kirim ukuran area, foto lokasi, dan fungsi alas agar opsinya le
 📍 Workshop Santi Living: Jl. Godean KM 10, Sleman, Yogyakarta
 
 > **Perlengkapan wedding preparation Jogja dari Santi Living membantu keluarga dan panitia menyiapkan kebutuhan praktis H-1 sampai H+1 dengan cek ketersediaan via WA dan bahasa by request untuk item non-core.**
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

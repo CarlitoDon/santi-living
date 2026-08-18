@@ -20,3 +20,8 @@ Bagi anak kos dengan *budget* pas-pasan, membeli AC (*Air Conditioner*) bukanlah
 Tingkatkan kenyamanan belajar dan istirahat Anda di kamar kos. Kami melayani pengantaran kipas angin langsung ke depan pintu kamar Anda di seluruh area Sleman dan sekitarnya.
 
 [**Cek Harga Sewa Kipas Angin Bulanan Disini!**](/sewa-kipas-angin)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -31,3 +31,8 @@ Pernikahan di Jogja sering berlangsung beberapa hari dengan tamu dari luar kota.
 3. Koordinasikan jadwal pengiriman dengan WO atau keluarga
 
 Buat hari bahagia Anda sempurna dengan kenyamanan tamu. Hubungi Santi Living.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

@@ -27,3 +27,7 @@ Babies grow quickly. A purchased baby mattress may no longer fit within 6–12 m
 Santi Living provides various sizes of baby mattresses and bedding. Contact us for a consultation.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

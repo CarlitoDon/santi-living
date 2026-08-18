@@ -82,3 +82,7 @@ Yes. If you need cooling units, TV displays, or floor coverings, list all your r
 > **Jogja event crew mattress rental from Santi Living helps EOs and committees set up a decent, flexible, and realistic rest area based on availability.**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

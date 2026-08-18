@@ -50,3 +50,8 @@ Anak magang biasanya tinggal 1-6 bulan saja. Membeli kasur baru jelas tidak efis
 📱 **WhatsApp**: [0895-1911-9092](https://wa.me/6289519119092)
 
 *Khusus anak magang: free ongkir untuk area Sleman dan Bantul.*
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

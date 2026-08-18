@@ -31,3 +31,7 @@ Living in a boarding house or a tiny apartment in Jogja? A folding mattress coul
 3. Check the cover material — waterproof is more durable
 
 Contact Santi Living for a selection of folding mattresses available for rent in Jogja.
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

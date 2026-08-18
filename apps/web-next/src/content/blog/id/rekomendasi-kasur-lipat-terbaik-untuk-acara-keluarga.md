@@ -28,3 +28,8 @@ Alih-alih membeli 5 buah kasur lipat dan membiarkannya nongkrong berdebu di guda
 Santi Mebel menyediakan kemudahan [Sewa Kasur Lipat di Jogja](/sewa-kasur-lipat). Kami menawarkan **Diskon Volume** — jika Anda menyewa lebih dari 3 atau 6 unit sekaligus, ada diskon spesial hingga 15% untuk meringankan anggaran acara Anda. 
 
 Semoga acara keluarga Anda berjalan lancar tanpa ada yang mengeluh sakit pinggang pagi esoknya!
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

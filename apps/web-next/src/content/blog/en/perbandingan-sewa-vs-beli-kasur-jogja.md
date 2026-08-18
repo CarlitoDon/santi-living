@@ -67,3 +67,7 @@ For short-to-medium term needs (1-3 years), renting a mattress from Santi Living
 > *Santi Living — The Smart Choice for a Good Night's Sleep in Jogja.*
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

@@ -24,3 +24,8 @@ Keuntungan menyewa TV dari kami:
 Nikmati *me-time* berkualitas di kamar kos Anda. Hubungi kami untuk mengecek ketersediaan unit TV LED bulan ini!
 
 [**Cek Promo Sewa TV Bulanan Disini!**](/sewa-tv)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

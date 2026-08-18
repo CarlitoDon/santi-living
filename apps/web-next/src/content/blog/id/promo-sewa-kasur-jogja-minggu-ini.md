@@ -20,3 +20,8 @@ Stok unit kasur **Royal Grand Exclusive** kami sangat terbatas, terutama saat me
 Cukup screenshot artikel ini dan kirimkan ke admin kami saat melakukan pemesanan via WhatsApp. Sangat mudah, bukan?
 
 [**Ambil Promo Minggu Ini Sekarang!**](https://wa.me/6289519119092)
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

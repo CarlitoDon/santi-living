@@ -28,3 +28,7 @@ Many rental places require an original ID card (KTP) as collateral or a deposit 
 Book now, relax later! [**Chat with Admin Now**](https://wa.me/6289519119092).
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

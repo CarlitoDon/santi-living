@@ -112,3 +112,7 @@ Sleman & Jogja City areas: 30–60 minutes. Other areas: 1–2 hours. We underst
 📱 **Order your mattress now: [0895-1911-9092](https://wa.me/6289519119092)**
 
 > *Santi Living — Clean, comfortable, and affordable mattress solutions in Jogja. Daily rental starting from Rp25,000.*
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

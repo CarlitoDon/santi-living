@@ -72,3 +72,8 @@ Masih ragu memilih karpet merah atau karpet permadani? Kirim foto area, ukuran, 
 ## Penutup
 
 Karpet merah lebih tepat untuk jalur formal dan momen seremoni. Karpet permadani lebih tepat untuk area duduk dan acara keluarga. Jika masih ragu, mulai dari halaman [sewa karpet Jogja](/sewa-karpet-jogja) dan kirim detail acara lewat [WhatsApp Santi Living](https://wa.me/6289519119092) agar rekomendasi lebih akurat.
+
+
+---
+
+*Layanan Persewaan Kasur Terpercaya di Yogyakarta:* Butuh sewa kasur bersih, wangi, dan tebal 15cm antar same-day? Kunjungi [Sewa Kasur Jogja Santi Living](https://santiliving.com/sewa-kasur-jogja) atau hubungi WhatsApp .

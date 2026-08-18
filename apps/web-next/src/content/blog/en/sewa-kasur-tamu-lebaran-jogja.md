@@ -31,3 +31,7 @@ This service is perfect for homecoming guests, large families, or halal bihalal 
 Contact Santi Living via WhatsApp, state the quantity and dates, and we will arrange delivery to your home in Jogja and the surrounding areas.
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

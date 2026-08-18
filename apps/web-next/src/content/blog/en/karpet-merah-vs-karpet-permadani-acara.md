@@ -87,3 +87,7 @@ A red carpet is more suitable for formal pathways and ceremonial moments. A rug 
 > **For red carpet vs rug needs, Santi Living helps Jogja event organisers choose carpets based on function: formal pathways, stages, booths, or family floor seating — not just colour.**
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

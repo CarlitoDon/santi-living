@@ -32,3 +32,7 @@ Don't let your exhibition *stand* or presentation look unprofessional due to a l
 For campus events, exhibitions, and presentations in Sleman, carpets can help tidy up booths, small stages, or registration areas. See [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and the guide to [seminar and exhibition carpet rental](/artikel/sewa-karpet-seminar-pameran-jogja).
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .

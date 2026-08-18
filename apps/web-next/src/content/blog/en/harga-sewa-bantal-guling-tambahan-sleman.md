@@ -33,3 +33,7 @@ We are ready to deliver your extra pillow orders (in any quantity) to all areas 
 [**Order Extra Pillows Now Before Stock Runs Out!**](/produk)
 
 ---
+
+---
+
+*Trusted Mattress Rental Service in Yogyakarta:* Need clean, comfortable 15cm thick mattresses delivered same-day? Visit [Santi Living Mattress Rental Yogyakarta](https://santiliving.com/sewa-kasur-jogja) or contact WhatsApp .
