@@ -1,12 +1,19 @@
 ---
-title: "Cara Memilih Karpet Pengajian: Ukuran, Motif, dan Kebersihan"
-description: "Cara memilih karpet pengajian untuk acara lesehan: ukuran ruang, jumlah tamu, motif, kebersihan, durasi, dan data yang perlu dikirim ke admin."
+title: "Sewa Karpet Pengajian & Tahlilan Jogja: Panduan Ukuran, Motif, dan Kebersihan"
+description: "Sewa karpet pengajian dan tahlilan Jogja bersih wangi. Panduan ukuran ruang, motif permadani, tarif transparan, dan gratis konsultasi via WhatsApp."
 pubDate: 2026-06-04
 author: "Tim Santi Living"
-tags: ["cara memilih karpet pengajian", "sewa permadani jogja", "karpet pengajian", "sewa karpet tahlilan", "jogja"]
+tags: ["cara memilih karpet pengajian", "sewa permadani jogja", "karpet pengajian", "sewa karpet tahlilan", "jogja", "sewa karpet terdekat"]
 ---
 
-Memilih karpet untuk pengajian tidak cukup hanya bertanya “ada karpet berapa meter?”. Acara pengajian biasanya membutuhkan alas yang nyaman untuk duduk lesehan, rapi di foto, mudah dibersihkan, dan sesuai dengan jumlah tamu. Karena itu, **cara memilih karpet pengajian** sebaiknya dimulai dari layout ruangan.
+> 💡 **Quick-Answer Box (TL;DR — Update 18 Agustus 2026):**
+> * **Kebutuhan:** Karpet pengajian & tahlilan keluarga di Jogja/Sleman/Bantul.
+> * **Pilihan Ukuran:** Permadani standar (160x210 cm) & jumbo (200x300 cm), tebal empuk dan wangi bebas debu.
+> * **Kapasitas:** 1 lembar karpet jumbo muat 6–8 orang duduk lesehan.
+> * **Layanan:** Antar-jemput tepat waktu langsung ke lokasi acara oleh tim Santi Living (divisi Santi Mebel sejak 2005, KM10 Godean).
+> * **Pemesanan Cepat:** Hubungi WhatsApp resmi `0895-1911-9092`.
+
+Memilih karpet untuk pengajian dan tahlilan tidak cukup hanya bertanya “ada karpet berapa meter?”. Acara pengajian biasanya membutuhkan alas yang nyaman untuk duduk lesehan, rapi di foto, mudah dibersihkan, dan sesuai dengan jumlah tamu. Karena itu, **cara memilih karpet pengajian dan tahlilan di Jogja** sebaiknya dimulai dari layout ruangan.
 
 Untuk kebutuhan permadani, buka dulu halaman [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Jika acaranya pengajian atau tahlilan, baca juga [panduan sewa karpet pengajian dan tahlilan Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
