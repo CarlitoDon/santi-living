@@ -92,11 +92,16 @@ export async function getNotionPost(slug: string): Promise<NotionPost | null> {
   const postInfo = posts.find(p => p.slug === slug);
   if (!postInfo) return null;
 
-  const mdblocks = await n2m.pageToMarkdown(postInfo.id);
-  const mdString = n2m.toMarkdownString(mdblocks);
+  try {
+    const mdblocks = await n2m.pageToMarkdown(postInfo.id);
+    const mdString = n2m.toMarkdownString(mdblocks);
 
-  return {
-    ...postInfo,
-    content: mdString.parent || '',
-  };
+    return {
+      ...postInfo,
+      content: mdString.parent || '',
+    };
+  } catch (err) {
+    console.error('Error fetching Notion markdown for page:', postInfo.id, err);
+    return postInfo;
+  }
 }

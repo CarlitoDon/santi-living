@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { type BlogPost as MarkdownPost } from '@/types/blog';
-import { getNotionPost, type NotionPost } from '@/lib/notion';
+import { getNotionPost, getNotionPosts, type NotionPost } from '@/lib/notion';
 import { remark } from 'remark';
 import html from 'remark-html';
 import { getTranslatedAuthor } from '@/utils/author';
@@ -77,11 +77,16 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string)
 
 export async function generateStaticParams() {
   const locales = ['id', 'en'];
+  const notionPosts = await getNotionPosts();
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
     const posts = getAllPosts(locale);
-    for (const post of posts) {
-      params.push({ locale, slug: post.slug });
+    const allSlugs = new Set<string>();
+    posts.forEach(p => allSlugs.add(p.slug));
+    notionPosts.forEach(p => allSlugs.add(p.slug));
+
+    for (const slug of allSlugs) {
+      params.push({ locale, slug });
     }
   }
   return params;
