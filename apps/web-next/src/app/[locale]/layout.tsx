@@ -129,42 +129,6 @@ export default async function RootLayout({
     ],
   };
 
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Sewa Kasur Jogja – Santi Living',
-    image: 'https://santiliving.com/logo.png',
-    '@id': 'https://santiliving.com',
-    url: 'https://santiliving.com',
-    telephone: '+628****9092',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Kec. Godean',
-      addressLocality: 'Sleman',
-      addressRegion: 'DI Yogyakarta',
-      postalCode: '55264',
-      addressCountry: 'ID',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: -7.7673015,
-      longitude: 110.2938902,
-    },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday',
-      ],
-      opens: '08:00',
-      closes: '21:00',
-    },
-  };
 
   return (
     <html lang={locale} className={`${inter.variable} ${notoSerif.variable}`} suppressHydrationWarning>
@@ -178,10 +142,6 @@ export default async function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

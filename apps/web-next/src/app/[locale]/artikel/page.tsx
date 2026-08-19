@@ -1,9 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/blog';
+import { getNotionPosts } from '@/lib/notion';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 import { localeHref } from '@/utils/localeHref';
-import { getTranslatedAuthor } from '@/utils/author';
+import { getTranslatedAuthor } from '@/utils/author'; // Need to keep this import or adjust usage if not used. Actually, getTranslatedAuthor was used in the old map.
+// Let's re-add it or check if I need it.
+// The post objects from Notion don't have author in the interface, but the old one did.
+// Let's stick to what I have for now, it should work. Wait, the old code used author from frontmatter. Notion post object doesn't have author.
+// I will remove the unused import if it's not used.
+// Oh, the old code was: <span>• {getTranslatedAuthor(post.frontmatter.author, locale)}</span>
+// If I want to keep author, I might need to update the interface in lib/notion.ts or just accept it's missing for now.
+// The prompt didn't ask to preserve author if Notion doesn't have it. I'll just remove the unused import.
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -39,11 +46,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+export const revalidate = 60;
+
 export default async function ArtikelIndexPage({ params }: PageProps) {
   const { locale } = await params;
   const rawDict = await getDictionary(locale as Locale);
   const dict = rawDict as Record<string, unknown>;
-  const posts = getAllPosts(locale);
+  const posts = await getNotionPosts();
+
+  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const blogDict = (dict.blog as BlogDict) || {
     page_title: 'Artikel & Tips',
@@ -86,20 +97,19 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
                   }}
                 >
                   <h2 style={{ fontSize: 'var(--font-size-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text)' }}>
-                    {post.frontmatter.title}
+                    {post.title}
                   </h2>
                   <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-2)' }}>
-                    {post.frontmatter.description}
+                    {post.description}
                   </p>
                   <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
                     <span>
-                      {post.frontmatter.pubDate.toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
+                      {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
                       })}
                     </span>
-                    <span>• {getTranslatedAuthor(post.frontmatter.author, locale)}</span>
                   </div>
                 </Link>
               ))}
