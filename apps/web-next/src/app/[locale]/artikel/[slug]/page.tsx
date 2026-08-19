@@ -213,7 +213,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
             )}
           </header>
 
-          {post.frontmatter.description && (
+          {post.description && (
             <aside
               aria-label={locale === 'en' ? 'Quick Summary' : 'Ringkasan Cepat'}
               style={{
@@ -265,7 +265,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
                   margin: 0,
                 }}
               >
-                {post.frontmatter.description}
+                {post.description}
               </p>
             </aside>
           )}
