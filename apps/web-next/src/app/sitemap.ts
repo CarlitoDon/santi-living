@@ -52,8 +52,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         seenSlugs.add(post.slug);
         return true;
       })
-      .map((post: any) => {
-        const rawDate = post.date || post.frontmatter?.date;
+      .map((post) => {
+        const rawDate =
+          'date' in post && typeof post.date === 'string'
+            ? post.date
+            : 'frontmatter' in post && post.frontmatter && typeof (post.frontmatter as { date?: string }).date === 'string'
+              ? (post.frontmatter as { date?: string }).date
+              : undefined;
         return {
           url: `${baseUrl}/id/artikel/${post.slug}`,
           lastModified: rawDate ? new Date(rawDate) : new Date(),
