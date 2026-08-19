@@ -161,6 +161,63 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
             )}
           </header>
 
+          {post.frontmatter.description && (
+            <aside
+              aria-label={locale === 'en' ? 'Quick Summary' : 'Ringkasan Cepat'}
+              style={{
+                marginBottom: 'var(--space-8)',
+                padding: 'var(--space-5) var(--space-6)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderLeft: '4px solid var(--color-primary)',
+                borderRadius: 'var(--radius-lg)',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-2)',
+                  fontSize: 'var(--font-size-xs)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em',
+                  color: 'var(--color-primary)',
+                  marginBottom: 'var(--space-2)',
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="16" x2="12" y2="12" />
+                  <line x1="12" y1="8" x2="12.01" y2="8" />
+                </svg>
+                <span>{locale === 'en' ? 'Quick Answer / Summary' : 'Ringkasan Jawaban'}</span>
+              </div>
+              <p
+                style={{
+                  fontSize: 'var(--font-size-base)',
+                  lineHeight: 'var(--line-height-relaxed)',
+                  color: 'var(--color-text)',
+                  fontWeight: 'var(--font-weight-medium)',
+                  margin: 0,
+                }}
+              >
+                {post.frontmatter.description}
+              </p>
+            </aside>
+          )}
+
           <div
             className="prose"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
