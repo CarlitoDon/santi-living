@@ -43,15 +43,12 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
     return [];
   }
 
-  // notion.databases.query moved to notion.dataSources or fetch API in SDK v5+
-  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
-      'Notion-Version': '2022-06-28',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
+  const allResults: any[] = [];
+  let hasMore = true;
+  let startCursor: string | undefined = undefined;
+
+  while (hasMore) {
+    const payload: any = {
       filter: {
         property: 'Status',
         status: {
@@ -64,18 +61,39 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
           direction: 'descending',
         },
       ],
-    }),
-    next: { revalidate: 60 }
-  });
+      page_size: 100,
+    };
 
-  if (!response.ok) {
-    console.error('Failed to query Notion DB', await response.text());
-    return [];
+    if (startCursor) {
+      payload.start_cursor = startCursor;
+    }
+
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+      next: { revalidate: 60 }
+    });
+
+    if (!response.ok) {
+      console.error('Failed to query Notion DB', await response.text());
+      break;
+    }
+
+    const data = await response.json();
+    if (data.results) {
+      allResults.push(...data.results);
+    }
+
+    hasMore = data.has_more;
+    startCursor = data.next_cursor;
   }
 
-  const data = await response.json();
-
-  return (data.results || []).map((page: any) => {
+  return allResults.map((page: any) => {
     return {
       id: page.id,
       title: getPropertyText(page.properties.Name),
