@@ -276,6 +276,22 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
             </aside>
           )}
 
+          {post.image && !post.image.includes('logo.png') && (
+            <div style={{ marginBottom: 'var(--space-8)', overflow: 'hidden', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-sm)' }}>
+              <img
+                src={post.image}
+                alt={title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '450px',
+                  objectFit: 'cover',
+                  display: 'block'
+                }}
+              />
+            </div>
+          )}
+
           <div
             className="prose"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
