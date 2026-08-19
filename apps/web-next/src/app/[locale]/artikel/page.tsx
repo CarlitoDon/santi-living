@@ -3,14 +3,6 @@ import Link from 'next/link';
 import { getNotionPosts } from '@/lib/notion';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 import { localeHref } from '@/utils/localeHref';
-import { getTranslatedAuthor } from '@/utils/author'; // Need to keep this import or adjust usage if not used. Actually, getTranslatedAuthor was used in the old map.
-// Let's re-add it or check if I need it.
-// The post objects from Notion don't have author in the interface, but the old one did.
-// Let's stick to what I have for now, it should work. Wait, the old code used author from frontmatter. Notion post object doesn't have author.
-// I will remove the unused import if it's not used.
-// Oh, the old code was: <span>• {getTranslatedAuthor(post.frontmatter.author, locale)}</span>
-// If I want to keep author, I might need to update the interface in lib/notion.ts or just accept it's missing for now.
-// The prompt didn't ask to preserve author if Notion doesn't have it. I'll just remove the unused import.
 
 interface PageProps {
   params: Promise<{ locale: string }>;
