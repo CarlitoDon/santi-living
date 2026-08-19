@@ -7,6 +7,7 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import { getTranslatedAuthor } from '@/utils/author';
 
+export const dynamicParams = true;
 export const revalidate = 60;
 
 interface PageProps {
