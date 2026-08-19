@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['tracie-proindustry-cohesively.ngrok-free.dev'],
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [],
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+      { protocol: 'http', hostname: '**' },
+    ],
   },
 
   async headers() {
