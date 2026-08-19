@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+export const dynamicParams = true;
 export const revalidate = 60;
 
 export default async function ArtikelIndexPage({ params }: PageProps) {
