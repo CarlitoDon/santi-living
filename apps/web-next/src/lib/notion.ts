@@ -17,6 +17,7 @@ export interface NotionPost {
   content?: string;
   category: string;
   featuredImage?: string;
+  image?: string;
 }
 
 function getPropertyText(property: any): string {
@@ -94,6 +95,8 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
   }
 
   return allResults.map((page: any) => {
+    const coverUrl = page.cover?.external?.url || page.cover?.file?.url || getPropertyText(page.properties['Featured Image']) || getPropertyText(page.properties['Image']) || undefined;
+
     return {
       id: page.id,
       title: getPropertyText(page.properties.Name),
@@ -101,6 +104,7 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
       date: getPropertyText(page.properties['Published Date']) || page.created_time,
       description: getPropertyText(page.properties['Meta Description']),
       category: getPropertyText(page.properties.Category) || 'Tips',
+      image: coverUrl,
     };
   });
 }

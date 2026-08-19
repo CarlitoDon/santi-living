@@ -45,7 +45,7 @@ function normalizePost(post: NotionPost | MarkdownPost | null | undefined): Arti
     description: post.description,
     date: post.date ? new Date(post.date) : undefined,
     author: 'Santi Living',
-    image: post.featuredImage || 'https://santiliving.com/logo.png',
+    image: post.image || post.featuredImage || 'https://santiliving.com/logo.png',
     tags: post.category ? [post.category] : [],
     content: post.content || '',
   };
