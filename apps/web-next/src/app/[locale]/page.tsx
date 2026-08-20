@@ -11,9 +11,9 @@ import { generateFAQSchema } from '@/utils/seo';
 import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
 
 export const metadata: Metadata = {
-  title: 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living',
+  title: 'Sewa Kasur Jogja Mulai 30rb/Hari - Antar Cepat 2 Jam | Santi Living',
   description:
-    'Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Gratis ongkir area tertentu ✅ Kasur premium & steril ✅ Order via WhatsApp. Santi Living Yogyakarta.',
+    'Layanan sewa kasur busa steril & rental extra bed Jogja terdekat. Mulai 30rb/hari gratis antar 2 jam, include sprei bersih & bantal empuk.',
 };
 
 const faqItems = [

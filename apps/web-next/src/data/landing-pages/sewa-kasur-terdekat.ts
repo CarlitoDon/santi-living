@@ -2,10 +2,10 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaKasurTerdekat: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Kasur Terdekat di Jogja | Pengiriman 2 Jam',
+    title: 'Sewa Kasur Terdekat Jogja Mulai 30rb - Antar Cepat 2 Jam',
     description:
-      'Cari sewa atau rental kasur terdekat di Jogja? Santi Living melayani area Sleman, Bantul, Kota Jogja. Pengiriman cepat 2 jam, kasur bersih, mulai Rp30.000/hari.',
-    },
+      'Penyewaan kasur busa terdekat di Jogja, Sleman, Bantul. Mulai 30rb/hari, siap antar 2 jam, steril, include sprei & bantal.',
+  },
     hero: {
     title: 'Sewa & Rental Kasur Terdekat di Jogja',
     subtitle: 'Layanan sewa dan rental kasur terdekat — pengiriman cepat ke area Sleman, Bantul, dan Kota Yogyakarta',

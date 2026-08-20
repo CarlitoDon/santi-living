@@ -16,6 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/id/sewa-kasur-terdekat',
     '/id/sewa-kasur-lipat',
     '/id/sewa-kasur-bulanan',
+    '/id/sewa-extra-bed-jogja',
     '/id/sewa-karpet',
     '/id/sewa-karpet-jogja',
     '/id/sewa-karpet-merah-jogja',
