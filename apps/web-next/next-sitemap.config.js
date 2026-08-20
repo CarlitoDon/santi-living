@@ -15,6 +15,7 @@ const ROUTE_HOSTS = new Map([
 const LANDING_SLUGS = [
   'sewa-bantal-jogja',
   'sewa-cooling',
+  'sewa-extra-bed-jogja',
   'sewa-karpet-jogja',
   'sewa-karpet-merah-jogja',
   'sewa-karpet-permadani-jogja',

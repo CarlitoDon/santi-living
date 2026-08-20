@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useT } from '@/contexts/locale';
+import Link from 'next/link';
+import { useLocale, useT } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 
 const slides = [
   { src: '/images/stok-kasur.png', alt: 'Stok Kasur Busa Santi Mebel Jogja' },
@@ -11,6 +13,7 @@ const slides = [
 
 export default function AboutPage() {
   const t = useT();
+  const { locale } = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -29,6 +32,26 @@ export default function AboutPage() {
               <h2 className="text-2xl md:text-3xl font-bold mb-6 text-left text-slate-900">{t('about.title')}</h2>
               <p className="text-lg leading-[1.6] text-slate-600 mb-4">{t('about.desc_1')}</p>
               <p className="text-lg leading-[1.6] text-slate-600 mb-4">{t('about.desc_2')}</p>
+              <div className="flex flex-wrap gap-3 my-6">
+                <Link
+                  href={localeHref('/', locale)}
+                  className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200/80 px-3.5 py-1.5 rounded-full transition-colors"
+                >
+                  Lihat Katalog Layanan Sewa Kasur Jogja Utama
+                </Link>
+                <Link
+                  href={localeHref('/sewa-extra-bed-jogja', locale)}
+                  className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200/80 px-3.5 py-1.5 rounded-full transition-colors"
+                >
+                  Rental & Sewa Extra Bed Jogja
+                </Link>
+                <Link
+                  href={localeHref('/sewa-kasur-terdekat', locale)}
+                  className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200/80 px-3.5 py-1.5 rounded-full transition-colors"
+                >
+                  Sewa Kasur Terdekat
+                </Link>
+              </div>
               <div className="grid grid-cols-3 gap-4 mt-8 bg-blue-50 p-6 rounded-lg text-center">
                 <div>
                   <span className="block text-2xl font-bold text-blue-600 mb-1">100+</span>
