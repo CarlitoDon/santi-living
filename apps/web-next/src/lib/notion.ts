@@ -34,6 +34,9 @@ function getPropertyText(property: any): string {
   if (property.type === 'date') {
     return property.date?.start || '';
   }
+  if (property.type === 'url') {
+    return property.url || '';
+  }
   return '';
 }
 
