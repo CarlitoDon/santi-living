@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { config } from '@/data/config';
+import { products } from '@/data/products';
 import { ProductPicker } from '@/components/home/ProductPicker';
 import { CartBar } from '@/components/home/CartBar';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -91,6 +92,7 @@ export default function HomePage() {
       '@type': 'AggregateOffer' as const,
       lowPrice: 30000,
       highPrice: 70000,
+      offerCount: products.mattressPackages.length + products.mattressOnly.length,
       priceCurrency: 'IDR',
       availability: 'https://schema.org/InStock' as const,
     },
