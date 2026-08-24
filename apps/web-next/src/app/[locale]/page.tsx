@@ -11,6 +11,7 @@ import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { generateFAQSchema } from '@/utils/seo';
 import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
+import { getStoreMapEmbedUrl } from '@/lib/store-location';
 
 export const metadata: Metadata = {
   title: 'Sewa Kasur Jogja Mulai 30rb/Hari - Antar Cepat 2 Jam | Santi Living',
@@ -252,7 +253,7 @@ export default function HomePage() {
             <h2>Hemat ongkir hingga 70%.</h2>
             <p>Berikan ulasan di Google Maps setelah menggunakan layanan kami dan dapatkan potongan ongkir sesuai ketentuan promo.</p>
           </div>
-          <a href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" target="_blank" rel="noopener noreferrer" className="home-text-link motion-interactive motion-lift" data-reveal="right">
+          <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="home-text-link motion-interactive motion-lift" data-reveal="right">
             Buka Google Maps <ArrowRightIcon />
           </a>
         </div>
@@ -269,7 +270,7 @@ export default function HomePage() {
             <address className="home-address">
               <strong>Workshop Santi Living</strong>
               <p>Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung,<br />Kec. Godean, Kabupaten Sleman, DI Yogyakarta 55264</p>
-              <a href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" target="_blank" rel="noopener noreferrer" className="text-primary font-bold text-sm hover:underline">
+              <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-bold text-sm hover:underline">
                 Lihat arah di Google Maps
               </a>
             </address>
@@ -279,7 +280,7 @@ export default function HomePage() {
           </div>
           <div className="home-map" data-reveal="right">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.072!2d110.334!3d-7.771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713400000000!5m2!1sen!2sid"
+              src={getStoreMapEmbedUrl()}
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 'inherit' }}

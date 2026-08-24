@@ -3,7 +3,7 @@ title: "Sewa Kasur Godean Sleman Terdekat: Lokasi Workshop Santi Living, Antar K
 description: "Sewa kasur terdekat di Godean Sleman — workshop Santi Living ada di Jl. Godean KM10! Pengiriman kilat, gratis jemput, kasur HD Foam bersih mulai Rp25.000/hari. WA 0895-1911-9092!"
 pubDate: 2026-05-26
 author: "Tim Santi Living"
-tags: ["sewa kasur godean", "sewa kasur sleman", "sewa kasur terdekat", "workshop santi living", "jl godean km4", "sewa kasur jogja"]
+tags: ["sewa kasur godean", "sewa kasur sleman", "sewa kasur terdekat", "workshop santi living", "jl godean km10", "geneng sidoagung", "sewa kasur jogja"]
 ---
 
 Anda tinggal di Godean, Sleman, dan butuh kasur tambahan? Kabar baiknya, workshop Santi Living berlokasi tepat di Jl. Godean KM10 — artinya pengiriman ke seluruh area Godean bisa dilakukan lebih cepat dibanding kecamatan lain di Jogja. Sewa kasur di Godean kini semudah chat WhatsApp, dan kasur bersih HD Foam siap diantar ke rumah Anda.

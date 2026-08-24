@@ -2,19 +2,14 @@
 
 import { useEffect, useRef } from 'react';
 import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
+import {
+  LOCATION_SELECTION_CACHE_KEY,
+  publishLocationSelection,
+  type LocationSelection,
+} from '@/lib/location-selection';
 
 // Zod-less but safe: we own this exact shape, stored and read by us
-interface LocationDetail {
-  coords: { lat: number; lng: number };
-  address: {
-    street?: string;
-    kelurahan?: string;
-    kecamatan?: string;
-    kota?: string;
-    provinsi?: string;
-    postcode?: string;
-  };
-}
+type LocationDetail = LocationSelection;
 
 function parseStoredLocation(raw: string): LocationDetail | null {
   try {
@@ -42,6 +37,7 @@ function parseStoredLocation(raw: string): LocationDetail | null {
         provinsi: typeof address?.['provinsi'] === 'string' ? address['provinsi'] : undefined,
         postcode: typeof address?.['postcode'] === 'string' ? address['postcode'] : undefined,
       },
+      source: p['source'] === 'manual' ? 'manual' : 'automatic',
     };
   } catch {
     return null;
@@ -49,7 +45,11 @@ function parseStoredLocation(raw: string): LocationDetail | null {
 }
 
 function dispatchLocation(detail: LocationDetail): void {
-  window.dispatchEvent(new CustomEvent('location-selected', { detail }));
+  const published = publishLocationSelection(detail, detail.source ?? 'automatic');
+  if (!published) {
+    console.debug('[auto-location] Ignored late GPS result after manual selection.');
+    return;
+  }
   console.debug('[auto-location] ✅ Dispatched location to Calculator.');
 }
 
@@ -68,7 +68,7 @@ export function useAutoLocation({ enabled = true }: { enabled?: boolean } = {}) 
     if (!enabled) return;
 
     // ── Case 1: Cached result from a previous GPS request this session ──
-    const cached = sessionStorage.getItem('sl_auto_location_result');
+    const cached = sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
     if (cached) {
       const detail = parseStoredLocation(cached);
       if (detail) {
@@ -117,12 +117,8 @@ async function requestLocation(): Promise<void> {
       },
     };
 
-    // Cache for future page loads in this session (no re-prompt)
-    sessionStorage.setItem('sl_auto_location_result', JSON.stringify(detail));
-
     dispatchLocation(detail);
   } catch (error) {
     console.debug('[auto-location] Geolocation unavailable:', (error as Error).message);
   }
 }
-

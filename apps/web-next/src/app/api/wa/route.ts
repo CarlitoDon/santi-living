@@ -8,6 +8,9 @@ import {
   normalizeLeadText,
 } from '@/lib/lead-attribution';
 import { persistLeadEvent } from '@/lib/lead-db';
+import { getGoogleDrivingQuote, GoogleRoutesError } from '@/lib/google-routes';
+import { buildWhatsAppLocationText } from '@/lib/whatsapp-location';
+import { guardDeliveryQuoteRequest } from '@/lib/delivery-quote-guard';
 
 function sanitizedPhone(value: string | null): string {
   const digits = (value || config.whatsappNumber).replace(/\D/g, '');
@@ -67,7 +70,27 @@ export async function GET(request: NextRequest) {
       referrer: request.headers.get('referer') ?? undefined,
       timestamp: receivedAt,
     });
-    const persistence = await persistLeadEvent(eventId, parsed, receivedAt, { geocode: false });
+    const hasCoordinates = typeof parsed.latitude === 'number' && typeof parsed.longitude === 'number';
+    const quoteGuard = hasCoordinates
+      ? guardDeliveryQuoteRequest(request, parsed.latitude as number, parsed.longitude as number)
+      : null;
+    if (quoteGuard && !quoteGuard.allowed) {
+      console.warn('[santi_delivery_quote] Quote blocked:', {
+        event_id: eventId,
+        code: quoteGuard.code,
+      });
+    }
+    const quotePromise = hasCoordinates && quoteGuard?.allowed
+      ? getGoogleDrivingQuote(parsed.latitude as number, parsed.longitude as number).catch((error: unknown) => {
+          const code = error instanceof GoogleRoutesError ? error.code : 'UNKNOWN';
+          console.warn('[santi_delivery_quote] Quote unavailable:', { event_id: eventId, code });
+          return null;
+        })
+      : Promise.resolve(null);
+    const [persistence, quote] = await Promise.all([
+      persistLeadEvent(eventId, parsed, receivedAt, { geocode: false }),
+      quotePromise,
+    ]);
     const record = persistence.record ?? buildLeadLogRecord(eventId, parsed, receivedAt);
 
     console.info('[santi_lead_event]', JSON.stringify({
@@ -83,7 +106,13 @@ export async function GET(request: NextRequest) {
     }
 
     const to = sanitizedPhone(params.get('to'));
-    const text = sanitizeWhatsAppText(params.get('text') ?? '');
+    const enrichedText = buildWhatsAppLocationText(params.get('text') ?? '', {
+      addressText: normalizeLeadText(params.get('address_text')),
+      latitude: parsed.latitude,
+      longitude: parsed.longitude,
+      quote,
+    });
+    const text = sanitizeWhatsAppText(enrichedText);
     const redirectUrl = new URL(`https://wa.me/${to}`);
     if (text) {
       redirectUrl.searchParams.set('text', text);

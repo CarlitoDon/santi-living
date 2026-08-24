@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { reverseGeocode } from "@/scripts/geolocation";
+import { publishLocationSelection } from "@/lib/location-selection";
 import { showAlert } from "@/utils/alert";
 import type L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -172,14 +173,10 @@ export function MapPicker() {
         longitude: selectedCoords.lng,
       });
 
-      window.dispatchEvent(
-        new CustomEvent("location-selected", {
-          detail: {
-            coords: selectedCoords,
-            address,
-          },
-        })
-      );
+      publishLocationSelection({
+        coords: selectedCoords,
+        address,
+      }, 'manual');
       
       handleClose();
     } catch {

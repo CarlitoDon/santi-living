@@ -68,7 +68,7 @@ Kami melayani pengantaran dan penjemputan di seluruh kawasan Kaliurang dan leren
 - ✅ **Koridor Jl. Kaliurang** — Dari KM 7 (Seturan, Gejayan) sampai KM 23 (Kaliurang), termasuk Ngaglik, Sleman kota, dan Turi.
 - ✅ **Area lain** — Seluruh Sleman dan Kota Yogyakarta juga kami layani; konfirmasi via WhatsApp untuk estimasi.
 
-Logistik pengantaran dimulai dari workshop kami di **Jl. Godean KM 10, Sidokarto, Godean** — armada melintasi Ring Road Utara lalu naik Jl. Kaliurang hingga ke titik penginapan Anda. Selama alamat homestay atau villa terjangkau armada kami, kasur akan kami antar ke depan pintu.
+Logistik pengantaran dimulai dari workshop kami di **Jl. Godean KM 10 Geneng, Sidoagung, Godean** — armada melintasi Ring Road Utara lalu naik Jl. Kaliurang hingga ke titik penginapan Anda. Selama alamat homestay atau villa terjangkau armada kami, kasur akan kami antar ke depan pintu.
 
 ## Cara Pesan untuk Booking Homestay atau Villa
 
@@ -98,7 +98,7 @@ Prosesnya sederhana, bisa diselesaikan dalam 5 langkah:
 
 Jangan biarkan booking penuh menolak tamu hanya karena kasur kurang. Sewa kasur area Kaliurang dari Santi Living: diantar cepat sampai lereng Merapi, steril, dan harga mulai Rp30.000/hari. Chat sekarang untuk cek ketersediaan dan estimasi pengantaran ke homestay atau villa Anda.
 
-📍 **Workshop**: Jl. Godean KM 10, Sidokarto, Godean, Sleman, Yogyakarta
+📍 **Workshop**: Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Godean, Sleman, Yogyakarta 55264
 📱 **WhatsApp**: [0895-1911-9092](https://wa.me/6289519119092)
 
 > Santi Living — divisi persewaan kasur dari Santi Mebel. Sewa kasur area Kaliurang untuk homestay & villa: antar cepat, steril, dan harga jujur. Rating 5/5 dari 51+ pelanggan.

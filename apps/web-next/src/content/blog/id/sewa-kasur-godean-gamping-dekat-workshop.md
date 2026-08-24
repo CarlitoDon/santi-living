@@ -6,7 +6,7 @@ author: "Tim Santi Living"
 tags: ["sewa kasur godean", "sewa kasur gamping", "sewa kasur dekat workshop", "santi living"]
 ---
 
-**Update 19 Agustus 2026** — Butuh kasur tambahan mendadak di koridor Godean–Gamping? Undangan pernikahan besok pagi, tamu keluarga datang malam ini, atau kamar kos kosong menunggu penghuni baru? Kabar baiknya: workshop Santi Living berada tepat di Jl. Godean KM 10, Sidokarto, Godean — artinya warga Godean dan Gamping adalah pelanggan dengan jarak terdekat ke gudang kasur. Sewa kasur di Godean atau Gamping bisa diantar **di hari yang sama**, lebih cepat dari area Jogja mana pun.
+**Update 19 Agustus 2026** — Butuh kasur tambahan mendadak di koridor Godean–Gamping? Undangan pernikahan besok pagi, tamu keluarga datang malam ini, atau kamar kos kosong menunggu penghuni baru? Kabar baiknya: workshop Santi Living berada tepat di Jl. Godean KM 10 Geneng, Sidoagung, Godean — artinya warga Godean dan Gamping adalah pelanggan dengan jarak terdekat ke gudang kasur. Sewa kasur di Godean atau Gamping bisa diantar **di hari yang sama**, lebih cepat dari area Jogja mana pun.
 
 ## Kenapa Sewa Kasur di Koridor Godean–Gamping Paling Cepat?
 
@@ -112,7 +112,7 @@ Selama alamat Anda terjangkau armada kami, kasur akan kami antar ke depan rumah,
 
 Tidak perlu panik cari kasur mendadak. Sewa kasur Godean & Gamping dari Santi Living: antar paling cepat karena workshop ada di Jl. Godean KM 10, steril, dan harga mulai Rp30.000/hari untuk kasur saja. Chat sekarang untuk cek stok dan estimasi pengantaran.
 
-📍 **Workshop**: Jl. Godean KM 10, Sidokarto, Godean, Sleman, Yogyakarta
+📍 **Workshop**: Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Godean, Sleman, Yogyakarta 55264
 📱 **WhatsApp**: [0895-1911-9092](https://wa.me/6289519119092)
 
 > Santi Living — divisi persewaan kasur dari Santi Mebel. Sewa kasur Godean & Gamping, antar same-day, steril, dan harga jujur. Rating 5/5 dari 51+ pelanggan. Butuh panduan fokus area Godean? Baca [Sewa Kasur Godean Sleman Terdekat](/artikel/sewa-kasur-godean-sleman-terdekat-workshop).

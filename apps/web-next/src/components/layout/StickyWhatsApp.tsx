@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
-import { usePresence } from '@/hooks/usePresence';
 
 export function StickyWhatsApp() {
   const [visible, setVisible] = useState(false);
+  const [bottomOffset, setBottomOffset] = useState(20);
   const hostCta = useHostCta();
-  const presence = usePresence(visible, 240);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,22 +17,22 @@ export function StickyWhatsApp() {
         return;
       }
       const isAtTop = window.scrollY <= 30;
-      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200;
-      // Check if CartBar is present (items in cart)
-      const cartBarPresent = !!document.querySelector('.cart-bar');
-      const calculator = document.getElementById('calculator');
-      const calculatorRect = calculator?.getBoundingClientRect();
-      const calculatorInView = Boolean(
-        calculatorRect &&
-        calculatorRect.bottom > 0 &&
-        calculatorRect.top < window.innerHeight,
+      const activeCartBar = document.querySelector<HTMLElement>(
+        '.cart-bar:not([aria-hidden="true"])',
       );
-      setVisible(!isAtTop && !isAtBottom && !cartBarPresent && !calculatorInView);
+      const cartBarHeight = activeCartBar?.getBoundingClientRect().height ?? 0;
+      setBottomOffset(cartBarHeight > 0 ? Math.ceil(cartBarHeight) + 12 : 20);
+      setVisible(!isAtTop);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
     const cartObserver = new MutationObserver(handleScroll);
-    cartObserver.observe(document.body, { childList: true, subtree: true });
+    cartObserver.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['aria-hidden', 'data-state'],
+      childList: true,
+      subtree: true,
+    });
     handleScroll();
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -42,13 +41,12 @@ export function StickyWhatsApp() {
     };
   }, []);
 
-  if (!presence.shouldRender) return null;
-
   return (
     <a
       href={getWhatsAppUrl(hostCta.waText, 'sticky_button')}
       className="sticky-wa"
-      data-state={presence.state}
+      style={{ '--sticky-wa-bottom': `${bottomOffset}px` } as CSSProperties}
+      data-state={visible ? 'entered' : 'exiting'}
       aria-hidden={!visible}
       inert={!visible}
       target="_blank"
@@ -64,7 +62,7 @@ export function StickyWhatsApp() {
       <style jsx>{`
         .sticky-wa {
           position: fixed;
-          bottom: 20px;
+          bottom: var(--sticky-wa-bottom, 20px);
           right: 20px;
           width: 56px;
           height: 56px;
@@ -77,7 +75,7 @@ export function StickyWhatsApp() {
           z-index: 90;
           opacity: 1;
           transform: translateY(0) scale(1);
-          transition: opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+          transition: bottom 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
         }
         .sticky-wa[data-state='entering'],
         .sticky-wa[data-state='exiting'] {

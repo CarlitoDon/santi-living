@@ -45,7 +45,7 @@ export function Footer() {
               </p>
               <p className="mb-2">
                 <a 
-                  href="https://maps.google.com/maps?cid=5972418444444444444" 
+                  href={config.storeLocation.googleMapsUrl}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary-light font-medium hover:underline text-sm"

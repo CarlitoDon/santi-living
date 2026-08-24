@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Copy the local environment file and configure the services used by the app. Delivery quotes in WhatsApp messages require a server-only Google Maps Platform key with the Routes API enabled:
+
+```bash
+GOOGLE_MAPS_API_KEY=your_server_only_key
+```
+
+Do not expose this key through a `NEXT_PUBLIC_` variable. Restrict it to the Routes API and set a Google Cloud quota before production use. The app also limits quotes per client, rejects destinations outside the service radius, and caches nearby coordinate quotes for six hours. If the Routes API is unavailable, the WhatsApp message still includes the customer's precise Google Maps link, but intentionally omits an automatic delivery-fee amount.
+
 First, run the development server:
 
 ```bash

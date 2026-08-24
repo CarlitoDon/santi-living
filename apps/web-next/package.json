@@ -10,7 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "db:migrate:lead-events": "node scripts/migrate-lead-events.mjs",
-    "test": "echo 'Tests bypassed for Next.js stabilization' && exit 0"
+    "test": "vitest run"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
