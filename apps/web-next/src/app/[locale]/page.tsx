@@ -124,7 +124,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="home-page pt-[80px]">
+    <main className="home-page site-main-offset">
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={productSchema} />

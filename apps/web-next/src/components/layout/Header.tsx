@@ -53,7 +53,7 @@ export function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-xl border-b border-slate-200/80 py-2 will-change-transform shadow-[0_8px_25px_-22px_rgba(15,23,42,0.45)] transition-transform duration-300 ease-out">
+    <header ref={headerRef} className="site-header fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-xl border-b border-slate-200/80 py-2 will-change-transform shadow-[0_8px_25px_-22px_rgba(15,23,42,0.45)] transition-transform duration-300 ease-out">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center h-[54px] md:h-[58px]">
           

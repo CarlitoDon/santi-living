@@ -93,7 +93,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const badge = le(cfg.hero.badge, hero?.badge, locale);
 
   return (
-    <main className="pt-[80px]">
+    <main className="site-main-offset">
       {/* Hero */}
       <section
         className={`${gradientClass} relative overflow-hidden py-14 text-center text-white md:py-20`}

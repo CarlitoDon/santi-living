@@ -28,7 +28,7 @@ export default function ProdukPage() {
   const closeModal = () => setSelectedProduct(null);
 
   return (
-    <main className="pt-[80px]">
+    <main className="site-main-offset">
       <JsonLd data={productSchema} />
       <PageHero 
         title={t('produk.title')} 

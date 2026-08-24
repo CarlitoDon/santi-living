@@ -57,7 +57,7 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
   };
 
   return (
-    <main className="pt-[80px]">
+    <main className="site-main-offset">
       <PageHero title={blogDict.page_title} subtitle={blogDict.page_desc} />
 
       <section className="bg-slate-50 py-12 md:py-16">

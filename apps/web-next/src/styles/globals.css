@@ -118,6 +118,23 @@
   /* Container */
   --container-max: 1100px; /* narrowed slightly */
   --container-padding: var(--space-4);
+
+  /* Fixed header offset */
+  --site-header-height: 71px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --site-header-height: 75px;
+  }
+}
+
+.site-header {
+  height: var(--site-header-height);
+}
+
+.site-main-offset {
+  padding-top: var(--site-header-height);
 }
 
 /* --------------------------------------------------------------------------
