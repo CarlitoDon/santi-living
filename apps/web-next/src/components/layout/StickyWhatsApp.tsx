@@ -3,15 +3,17 @@
 import { useEffect, useState } from 'react';
 import { useHostCta } from '@/hooks/useHostCta';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { usePresence } from '@/hooks/usePresence';
 
 export function StickyWhatsApp() {
   const [visible, setVisible] = useState(false);
   const hostCta = useHostCta();
+  const presence = usePresence(visible, 240);
 
   useEffect(() => {
     const handleScroll = () => {
       // Hide on /pesan (wizard has its own flow)
-      if (window.location.pathname.startsWith('/pesan')) {
+      if (/\/pesan(?:\/|$)/.test(window.location.pathname)) {
         setVisible(false);
         return;
       }
@@ -19,26 +21,38 @@ export function StickyWhatsApp() {
       const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 200;
       // Check if CartBar is present (items in cart)
       const cartBarPresent = !!document.querySelector('.cart-bar');
-      setVisible(!isAtTop && !isAtBottom && !cartBarPresent);
+      const calculator = document.getElementById('calculator');
+      const calculatorRect = calculator?.getBoundingClientRect();
+      const calculatorInView = Boolean(
+        calculatorRect &&
+        calculatorRect.bottom > 0 &&
+        calculatorRect.top < window.innerHeight,
+      );
+      setVisible(!isAtTop && !isAtBottom && !cartBarPresent && !calculatorInView);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    const cartObserver = new MutationObserver(handleScroll);
+    cartObserver.observe(document.body, { childList: true, subtree: true });
     handleScroll();
-    // Re-check periodically for CartBar appearance
-    const interval = setInterval(handleScroll, 1000);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
+      window.removeEventListener('resize', handleScroll);
+      cartObserver.disconnect();
     };
   }, []);
 
-  if (!visible) return null;
+  if (!presence.shouldRender) return null;
 
   return (
     <a
       href={getWhatsAppUrl(hostCta.waText, 'sticky_button')}
       className="sticky-wa"
+      data-state={presence.state}
+      aria-hidden={!visible}
+      inert={!visible}
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       aria-label={hostCta.stickyAriaLabel}
       data-wa-source="sticky_button"
       data-wa-location="floating"
@@ -61,16 +75,19 @@ export function StickyWhatsApp() {
           justify-content: center;
           box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
           z-index: 90;
-          transition: transform 0.2s, box-shadow 0.2s;
-          animation: fadeInUp 0.3s ease;
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          transition: opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
         }
-        .sticky-wa:hover {
+        .sticky-wa[data-state='entering'],
+        .sticky-wa[data-state='exiting'] {
+          opacity: 0;
+          transform: translateY(16px) scale(0.92);
+          pointer-events: none;
+        }
+        .sticky-wa[data-state='entered']:hover {
           transform: scale(1.1);
           box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </a>

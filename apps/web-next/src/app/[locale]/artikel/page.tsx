@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getNotionPosts } from '@/lib/notion';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 import { localeHref } from '@/utils/localeHref';
+import { PageHero } from '@/components/layout/PageHero';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -56,46 +57,31 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
   };
 
   return (
-    <main style={{ paddingTop: '70px' }}>
-      <section style={{
-        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-        padding: 'var(--space-8) 0',
-        textAlign: 'center',
-        color: 'white',
-      }}>
-        <div className="container">
-          <h1 style={{ color: 'white', marginBottom: 'var(--space-2)' }}>{blogDict.page_title}</h1>
-          <p style={{ opacity: 0.9 }}>{blogDict.page_desc}</p>
-        </div>
-      </section>
+    <main className="pt-[80px]">
+      <PageHero title={blogDict.page_title} subtitle={blogDict.page_desc} />
 
-      <section style={{ padding: 'var(--space-10) 0' }}>
-        <div className="container" style={{ maxWidth: '720px' }}>
-          {posts.length === 0 ? (
-            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>{blogDict.empty}</p>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-              {posts.map((post) => (
+      <section className="bg-slate-50 py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            {posts.length === 0 ? (
+            <p className="text-center text-slate-400" data-reveal="fade">{blogDict.empty}</p>
+            ) : (
+              <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+              {posts.map((post, index) => (
                 <Link
                   key={post.slug}
                   href={localeHref(`/artikel/${post.slug}`, locale)}
-                  style={{
-                    display: 'block',
-                    padding: 'var(--space-5)',
-                    background: 'white',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: 'var(--radius-lg)',
-                    textDecoration: 'none',
-                    transition: 'box-shadow 0.2s, transform 0.2s',
-                  }}
+                  className="group block border-b border-slate-200 p-5 last:border-b-0 hover:bg-slate-50 motion-interactive md:p-6"
+                  data-reveal="up"
+                  data-reveal-delay={String((index % 4) * 40)}
                 >
-                  <h2 style={{ fontSize: 'var(--font-size-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text)' }}>
+                  <h2 className="mb-2 text-lg font-bold text-slate-900 motion-interactive group-hover:text-blue-700">
                     {post.title}
                   </h2>
-                  <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-2)' }}>
+                  <p className="mb-3 text-sm leading-relaxed text-slate-600">
                     {post.description}
                   </p>
-                  <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
+                  <div className="flex items-center justify-between gap-3 text-xs text-slate-400">
                     <span>
                       {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', {
                         year: 'numeric',
@@ -103,11 +89,15 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
                         day: 'numeric'
                       })}
                     </span>
+                    <span className="text-blue-600 opacity-0 -translate-x-1 motion-interactive group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true">
+                      {locale === 'en' ? 'Read' : 'Baca'} →
+                    </span>
                   </div>
                 </Link>
               ))}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </main>

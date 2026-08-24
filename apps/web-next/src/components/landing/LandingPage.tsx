@@ -96,7 +96,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
     <main className="pt-[80px]">
       {/* Hero */}
       <section
-        className={`${gradientClass} py-12 md:py-16 pb-14 text-center text-white relative overflow-hidden`}
+        className={`${gradientClass} relative overflow-hidden py-14 text-center text-white md:py-20`}
       >
         {cfg.hero.bgImage && (
           <div className="absolute inset-0 z-0">
@@ -108,17 +108,16 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               sizes="100vw"
               className="w-full h-full object-cover opacity-35"
             />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(59,130,246,0.12), rgba(99,102,241,0.12))' }} />
+            <div className="absolute inset-0 bg-slate-950/30" />
           </div>
         )}
-        <div className="absolute top-[10%] left-[5%] w-[150px] h-[150px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.055),transparent_45%)] pointer-events-none" />
         
         <div className="container relative z-10 text-center">
           {(en?.hero?.badges || cfg.hero.badges) && (en?.hero?.badges || cfg.hero.badges)!.length > 0 && (
-            <div className="flex items-center justify-center gap-2 mb-3">
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2" data-reveal="up">
               {(en?.hero?.badges || cfg.hero.badges)!.map((b, bi) => (
-                <div key={bi} className="inline-block bg-white/10 text-white text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wide">
+                <div key={bi} className="text-xs font-bold uppercase tracking-[0.13em] text-white/75">
                   {b}
                 </div>
               ))}
@@ -126,9 +125,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           )}
 
           {(en?.hero?.features || cfg.hero.features) && (en?.hero?.features || cfg.hero.features)!.length > 0 && (
-            <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2" data-reveal="up">
               {(en?.hero?.features || cfg.hero.features)!.map((f, fi) => (
-                <div key={fi} className="inline-flex items-center gap-2 bg-white/10 text-white text-sm px-3 py-1 rounded-full font-medium shadow-sm">
+                <div key={fi} className="inline-flex items-center gap-2 text-sm font-medium text-white/80">
                   {f.icon && <span className="text-base">{f.icon}</span>}
                   <span>{f.text}</span>
                 </div>
@@ -136,26 +135,26 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
             </div>
           )}
 
-          <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md text-center">
+          <h1 className="mx-auto mb-4 max-w-3xl text-center text-3xl font-extrabold tracking-[-0.035em] text-white md:text-5xl" data-reveal="up" data-reveal-delay="45">
             {le(cfg.hero.title, hero?.title, locale)}
           </h1>
-          <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium mb-4 text-center">
+          <p className="mx-auto m-0 mb-4 max-w-2xl text-center text-base font-medium leading-relaxed text-white/80 md:text-lg" data-reveal="up" data-reveal-delay="90">
             {le(cfg.hero.subtitle, hero?.subtitle, locale)}
           </p>
           {badge && (
-            <div className="mx-auto inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-white border border-white/20 backdrop-blur-sm shadow-sm">
+            <div className="mx-auto inline-block text-sm font-bold uppercase tracking-[0.12em] text-blue-100" data-reveal="fade" data-reveal-delay="120">
               {badge}
             </div>
           )}
           {(actions && actions.length > 0) ? (
-            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row" data-reveal="up" data-reveal-delay="150">
               {actions.map((a, i) => {
                 if (a.type === 'link') {
                   return (
                     <Link
                       href={a.href || '/#calculator'}
                       key={i}
-                      className="btn btn-lg bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14 shadow"
+                      className="btn btn-lg motion-interactive motion-lift h-14 w-full justify-center rounded-lg bg-white px-8 py-3.5 text-center font-bold text-slate-900 shadow sm:w-auto"
                     >
                       {a.label}
                     </Link>
@@ -165,7 +164,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                   <a
                     key={i}
                     href={getWhatsAppUrl(a.waText || cfg.cta.waText, a.waSource || cfg.cta.waSource)}
-                    className="btn btn-lg btn-whatsapp shadow-md border-0 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-emerald-600 transition-colors text-center inline-flex justify-center items-center h-14"
+                    className="btn btn-lg btn-whatsapp motion-interactive motion-lift h-14 w-full justify-center rounded-lg border-0 px-8 py-3.5 text-center font-bold text-white shadow-sm sm:w-auto"
                     target="_blank"
                     rel="noopener"
                     data-wa-source={a.waSource || cfg.cta.waSource}
@@ -182,7 +181,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           ) : null}
 
           {(en?.hero?.phone || cfg.hero.phone) && (
-            <div className="mt-3 text-white/80 text-sm">
+            <div className="mt-4 text-sm text-white/65" data-reveal="fade" data-reveal-delay="190">
               {t('landing.call_directly')} <span className="font-semibold">{le(cfg.hero.phone, hero?.phone, locale)}</span>
             </div>
           )}
@@ -193,7 +192,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
 
       {/* Benefits */}
       {benefits && benefits.length > 0 && (
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16" data-reveal="up">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
               {t('landing.why_choose_prefix')} {le(cfg.hero.title, hero?.title, locale).replace(/Jogja|Yogyakarta/g, '').trim()}
@@ -209,7 +208,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
 
       {/* Price Cards */}
       {priceCards && priceCards.length > 0 && (
-        <section className="py-12 md:py-16 bg-slate-50">
+        <section className="py-12 md:py-16 bg-slate-50" data-reveal="up">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
               {priceSectionTitle}
@@ -218,7 +217,9 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
               {priceCards.map((card, i) => (
                 <div 
                   key={i} 
-                  className={`bg-white rounded-xl p-6 text-center shadow-sm relative border ${card.popular ? `border-2 ${borderClass} shadow-md scale-105 z-10` : 'border-slate-200'}`}
+                  className={`relative rounded-xl border bg-white p-6 text-center shadow-sm motion-interactive motion-lift ${card.popular ? `border-2 ${borderClass} shadow-md` : 'border-slate-200'}`}
+                  data-reveal="up"
+                  data-reveal-delay={String((i % 3) * 45)}
                 >
                   {card.popular && (
                     <div className={`absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-3 py-1 rounded-full ${bgClass}`}>
@@ -246,12 +247,12 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
 
       {/* Audience */}
       {audience && audience.length > 0 && (
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16" data-reveal="up">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{t('landing.who_rents')}</h2>
             <div className="flex flex-col gap-6 max-w-xl mx-auto">
               {audience.map((item, i) => (
-                <div key={i} className="flex gap-4 items-start bg-slate-50 p-4 rounded-lg border border-slate-200">
+                <div key={i} className="flex gap-4 items-start bg-slate-50 p-4 rounded-lg border border-slate-200 motion-interactive" data-reveal="up" data-reveal-delay={String(i * 40)}>
                   <div className="text-3xl flex-shrink-0 mt-1">{item.icon}</div>
                   <div>
                     <h3 className="font-bold text-slate-900 mb-1 text-base">{item.title}</h3>
@@ -266,7 +267,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
 
       {/* Extra HTML sections */}
       {sections?.map((section, i) => (
-        <section key={i} className={`py-12 md:py-16 ${i % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`}>
+        <section key={i} className={`py-12 md:py-16 ${i % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`} data-reveal="up">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{section.title}</h2>
             <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: section.content! }} />
@@ -275,7 +276,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       ))}
 
       {/* FAQ */}
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white" data-reveal="up">
         <div className="container">
           <div className="max-w-2xl mx-auto">
             <FAQAccordion items={faqs} title={t('landing.faq_title')} />
@@ -284,7 +285,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
       </section>
 
       {/* CTA */}
-      <section className={`${gradientClass} py-12 md:py-16 text-center text-white`}>
+      <section className={`${gradientClass} py-12 md:py-16 text-center text-white`} data-reveal="fade">
         <div className="container text-center">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3 text-white text-center">{le(cfg.cta.title, en?.cta?.title, locale)}</h2>
           <p className="text-white/85 mb-8 max-w-xl mx-auto leading-relaxed text-center">{le(cfg.cta.description, en?.cta?.description, locale)}</p>
@@ -292,13 +293,13 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Link 
               href={cfg.cta.secondaryHref || '/#calculator'} 
-              className="bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 transition-colors text-center inline-flex justify-center items-center h-14"
+              className="motion-interactive motion-lift bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 text-center inline-flex justify-center items-center h-14"
             >
               {le(cfg.cta.secondaryLabel, en?.cta?.secondaryLabel, locale) || t('landing.calculate_cost')}
             </Link>
             <a
               href={getWhatsAppUrl(cfg.cta.waText, cfg.cta.waSource)}
-              className="bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white transition-colors text-center inline-flex justify-center items-center h-14"
+              className="motion-interactive motion-lift bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white text-center inline-flex justify-center items-center h-14"
               target="_blank"
               rel="noopener"
               data-wa-source={cfg.cta.waSource}

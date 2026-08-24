@@ -24,17 +24,18 @@ export function HeroBackground() {
         {slides.map((slide, index) => (
           <div
             key={slide.src}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+            aria-hidden={index !== currentSlide}
+            className={`absolute inset-0 w-full h-full transition-[opacity,transform] duration-[1400ms] ease-out ${
               index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            } ${index === currentSlide ? 'scale-100' : 'scale-[1.025]'}`}
           >
             <Image
               src={slide.src}
               alt={slide.alt}
               fill
-              priority={index === 0}
+              loading="eager"
               unoptimized={index === 0}
-              quality={index === 0 ? 75 : 60}
+              quality={75}
               className="object-cover"
               sizes={index === 0 ? '(max-width: 768px) 100vw, 700px' : '100vw'}
               fetchPriority={index === 0 ? 'high' : 'auto'}
@@ -42,11 +43,10 @@ export function HeroBackground() {
           </div>
         ))}
       </div>
-      {/* Gradient Overlay mirroring Astro */}
       <div 
         className="absolute inset-0 w-full h-full z-1" 
         style={{
-          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(30, 64, 175, 0.9) 100%)'
+          background: 'linear-gradient(90deg, rgba(8, 24, 57, 0.94) 0%, rgba(13, 46, 103, 0.82) 54%, rgba(20, 65, 131, 0.62) 100%)'
         }}
       />
     </>

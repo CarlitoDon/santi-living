@@ -1,9 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useLocale } from '@/contexts/locale';
+import { usePresence } from '@/hooks/usePresence';
 
 type CarpetProduct = {
   id: string;
@@ -384,20 +385,37 @@ export function KarpetCartBar() {
     [actions.state.items],
   );
   const totalQuantity = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  if (totalQuantity === 0) return null;
-
-  const summary = selectedItems
+  const currentSummary = selectedItems
     .map((item) => `${item.name} x${item.quantity}`)
     .join(', ');
+  const isVisible = totalQuantity > 0;
+  const presence = usePresence(isVisible, 280);
+  const [displayedSummary, setDisplayedSummary] = useState(() => ({
+    quantity: totalQuantity,
+    summary: currentSummary,
+  }));
+
+  if (
+    isVisible &&
+    (displayedSummary.quantity !== totalQuantity ||
+      displayedSummary.summary !== currentSummary)
+  ) {
+    setDisplayedSummary({ quantity: totalQuantity, summary: currentSummary });
+  }
+
+  const summary = isVisible
+    ? { quantity: totalQuantity, summary: currentSummary }
+    : displayedSummary;
+
+  if (!presence.shouldRender) return null;
 
   return (
-    <div className="cart-bar">
+    <div className="cart-bar" data-state={presence.state} aria-hidden={!isVisible} inert={!isVisible}>
       <div className="cart-bar-inner">
         <div className="cart-bar-info">
-          <span className="cart-bar-count">{totalQuantity} {locale === 'en' ? 'carpet options' : 'opsi karpet'}</span>
+          <span className="cart-bar-count">{summary.quantity} {locale === 'en' ? 'carpet options' : 'opsi karpet'}</span>
           <span className="cart-bar-price text-sm leading-tight">
-            {summary}
+            {summary.summary}
           </span>
         </div>
         <a

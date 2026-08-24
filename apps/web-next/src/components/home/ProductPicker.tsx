@@ -103,22 +103,31 @@ export function ProductPicker() {
   return (
     <>
       <div className="product-picker">
-        {allCategories.map((cat) => (
-          <div key={cat.label} className="product-picker-category">
-            <h3 className="product-picker-category-title">{cat.label}</h3>
+        {allCategories.map((cat, categoryIndex) => (
+          <section key={cat.label} className="product-picker-category" aria-labelledby={`product-category-${categoryIndex}`}>
+            <h3 id={`product-category-${categoryIndex}`} className="product-picker-category-title" data-reveal="fade">
+              {cat.label}
+              <span>{cat.products.length} pilihan</span>
+            </h3>
             <div className="product-picker-grid">
-              {cat.products.map((product) => (
-                <ProductCard
+              {cat.products.map((product, productIndex) => (
+                <div
+                  className="product-picker-card-wrap"
+                  data-reveal="up"
+                  data-reveal-delay={String((productIndex % 2) * 45)}
                   key={product.id}
-                  product={product}
-                  quantity={actions.getItemQuantity(product.id)}
-                  onIncrement={() => handleAdd(product)}
-                  onDecrement={() => actions.removeItem(product.id)}
-                  onDetail={() => setModalProduct(product)}
-                />
+                >
+                  <ProductCard
+                    product={product}
+                    quantity={actions.getItemQuantity(product.id)}
+                    onIncrement={() => handleAdd(product)}
+                    onDecrement={() => actions.removeItem(product.id)}
+                    onDetail={() => setModalProduct(product)}
+                  />
+                </div>
               ))}
             </div>
-          </div>
+          </section>
         ))}
       </div>
 
