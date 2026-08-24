@@ -1,13 +1,40 @@
 @import "tailwindcss";
 @source "../";
 @theme {
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-light: #dbeafe;
+  /* Warm-luxury palette: cream 60%, brown 30%, muted blue 10% */
+  --color-primary: #315a72;
+  --color-primary-hover: #24485f;
+  --color-primary-light: #dfeaf0;
   --color-secondary: #25d366;
   --color-secondary-hover: #1fb855;
   --color-secondary-light: #dcfce7;
-  --color-surface-elevated: #ffffff;
+  --color-surface-elevated: #fff9f0;
+
+  --color-white: #fff9f0;
+
+  --color-slate-50: #f7f0e6;
+  --color-slate-100: #efe4d7;
+  --color-slate-200: #dfcebc;
+  --color-slate-300: #c8b29b;
+  --color-slate-400: #9a7f69;
+  --color-slate-500: #765f4e;
+  --color-slate-600: #5b4436;
+  --color-slate-700: #473227;
+  --color-slate-800: #34241c;
+  --color-slate-900: #261a14;
+  --color-slate-950: #17100c;
+
+  --color-blue-50: #edf3f6;
+  --color-blue-100: #dfeaf0;
+  --color-blue-200: #bfd3dd;
+  --color-blue-300: #9ab8c7;
+  --color-blue-400: #6f96aa;
+  --color-blue-500: #4b7388;
+  --color-blue-600: #315a72;
+  --color-blue-700: #27485d;
+  --color-blue-800: #203b4b;
+  --color-blue-900: #192f3d;
+  --color-blue-950: #10202a;
 }
 
 @layer components {
@@ -24,9 +51,9 @@
 
 :root {
   /* Colors - Primary */
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-light: #dbeafe;
+  --color-primary: #315a72;
+  --color-primary-hover: #24485f;
+  --color-primary-light: #dfeaf0;
 
   /* Colors - Secondary (WhatsApp Green) */
   --color-secondary: #25d366;
@@ -34,17 +61,24 @@
   --color-secondary-light: #dcfce7;
 
   /* Colors - Neutral */
-  --color-background: #ffffff;
-  --color-surface: #f8fafc;
-  --color-surface-elevated: #ffffff;
-  --color-border: #e2e8f0;
-  --color-border-light: #f1f5f9;
+  --color-background: #f4ebdd;
+  --color-surface: #f7f0e6;
+  --color-surface-elevated: #fff9f0;
+  --color-border: #ddcbb8;
+  --color-border-light: #eaded0;
+
+  /* Colors - Brand composition */
+  --color-cream: #f4ebdd;
+  --color-cream-soft: #fff9f0;
+  --color-brown: #473227;
+  --color-brown-deep: #261a14;
+  --color-blue-muted: #315a72;
 
   /* Colors - Text */
-  --color-text: #1e293b;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
-  --color-text-inverse: #ffffff;
+  --color-text: #2f2119;
+  --color-text-secondary: #5d4638;
+  --color-text-muted: #806955;
+  --color-text-inverse: #fff9f0;
 
   /* Colors - Feedback */
   --color-success: #22c55e;
@@ -98,12 +132,13 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1),
-    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgb(47 33 25 / 0.07);
+  --shadow-md: 0 4px 6px -1px rgb(47 33 25 / 0.11),
+    0 2px 4px -2px rgb(47 33 25 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(47 33 25 / 0.12),
+    0 4px 6px -4px rgb(47 33 25 / 0.08);
+  --shadow-xl: 0 20px 25px -5px rgb(47 33 25 / 0.13),
+    0 8px 10px -6px rgb(47 33 25 / 0.08);
 
   /* Transitions */
   --transition-fast: 150ms ease;

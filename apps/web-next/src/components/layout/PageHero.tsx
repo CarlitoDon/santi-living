@@ -6,7 +6,7 @@ interface PageHeroProps {
 
 export function PageHero({ title, subtitle, badge }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-[#173b82] py-14 text-center text-white md:py-20">
+    <section className="relative overflow-hidden bg-slate-900 py-14 text-center text-white md:py-20">
       <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.055),transparent_45%)] pointer-events-none" />
       <div className="container relative z-10 text-center">
         {badge && (

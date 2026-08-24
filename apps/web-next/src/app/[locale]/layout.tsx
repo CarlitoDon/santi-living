@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Serif } from 'next/font/google';
 
 export const viewport: Viewport = {
-  themeColor: '#2563eb',
+  themeColor: '#f4ebdd',
   viewportFit: 'cover',
 };
 import { Header } from '@/components/layout/Header';

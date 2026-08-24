@@ -15,39 +15,39 @@ interface LandingPageProps {
 }
 
 const GRADIENT_MAP: Record<ThemeColor, string> = {
-  blue: 'bg-gradient-to-br from-blue-600 to-[#1e3a8a]',
-  purple: 'bg-gradient-to-br from-purple-600 to-[#6d28d9]',
-  green: 'bg-gradient-to-br from-emerald-600 to-[#047857]',
-  cyan: 'bg-gradient-to-br from-cyan-600 to-[#0e7490]',
-  emerald: 'bg-gradient-to-br from-emerald-500 to-[#065f46]',
-  indigo: 'bg-gradient-to-br from-indigo-600 to-[#3730a3]',
+  blue: 'bg-gradient-to-br from-slate-800 to-slate-950',
+  purple: 'bg-gradient-to-br from-slate-800 to-slate-950',
+  green: 'bg-gradient-to-br from-slate-800 to-slate-950',
+  cyan: 'bg-gradient-to-br from-slate-800 to-slate-950',
+  emerald: 'bg-gradient-to-br from-slate-800 to-slate-950',
+  indigo: 'bg-gradient-to-br from-slate-800 to-slate-950',
 };
 
 const TEXT_MAP: Record<ThemeColor, string> = {
   blue: 'text-blue-600',
-  purple: 'text-purple-600',
-  green: 'text-emerald-600',
-  cyan: 'text-cyan-600',
-  emerald: 'text-emerald-600',
-  indigo: 'text-indigo-600',
+  purple: 'text-blue-600',
+  green: 'text-blue-600',
+  cyan: 'text-blue-600',
+  emerald: 'text-blue-600',
+  indigo: 'text-blue-600',
 };
 
 const BORDER_MAP: Record<ThemeColor, string> = {
   blue: 'border-blue-600',
-  purple: 'border-purple-600',
-  green: 'border-emerald-600',
-  cyan: 'border-cyan-600',
-  emerald: 'border-emerald-600',
-  indigo: 'border-indigo-600',
+  purple: 'border-blue-600',
+  green: 'border-blue-600',
+  cyan: 'border-blue-600',
+  emerald: 'border-blue-600',
+  indigo: 'border-blue-600',
 };
 
 const BG_MAP: Record<ThemeColor, string> = {
   blue: 'bg-blue-600',
-  purple: 'bg-purple-600',
-  green: 'bg-emerald-600',
-  cyan: 'bg-cyan-600',
-  emerald: 'bg-emerald-600',
-  indigo: 'bg-indigo-600',
+  purple: 'bg-blue-600',
+  green: 'bg-blue-600',
+  cyan: 'bg-blue-600',
+  emerald: 'bg-blue-600',
+  indigo: 'bg-blue-600',
 };
 
 function le<T>(val: T, enVal: T | undefined, locale: string): T {

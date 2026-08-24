@@ -57,18 +57,18 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
 
 .faq-title {
   margin: 0 0 1.75rem;
-  color: #0f172a;
+  color: var(--color-text);
   font-size: clamp(1.55rem, 3vw, 2.15rem);
   letter-spacing: -0.03em;
   text-align: center;
 }
 
 .faq-list {
-  border-top: 1px solid #dfe5ec;
+  border-top: 1px solid var(--color-border);
 }
 
 .faq-item {
-  border-bottom: 1px solid #dfe5ec;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .faq-question {
@@ -83,7 +83,7 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1rem 0;
-  color: #1e293b;
+  color: var(--color-text);
   background: transparent;
   font-size: 0.95rem;
   font-weight: 650;
@@ -92,7 +92,7 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
 }
 
 .faq-trigger:hover {
-  color: #2563eb;
+  color: var(--color-primary);
 }
 
 .faq-icon {
@@ -100,9 +100,9 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
   width: 22px;
   height: 22px;
   flex: 0 0 auto;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--color-border);
   border-radius: 50%;
-  color: #2563eb;
+  color: var(--color-primary);
   transition:
     border-color var(--motion-duration-fast) ease,
     background-color var(--motion-duration-fast) ease,
@@ -126,12 +126,12 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
 }
 
 .faq-item[data-state='open'] .faq-trigger {
-  color: #1d4ed8;
+  color: var(--color-primary-hover);
 }
 
 .faq-item[data-state='open'] .faq-icon {
-  border-color: #bfdbfe;
-  background: #eff6ff;
+  border-color: #bfd3dd;
+  background: var(--color-primary-light);
 }
 
 .faq-item[data-state='open'] .faq-icon span:last-child {
@@ -157,7 +157,7 @@ html[data-motion-ready='true'] [data-reveal][data-reveal-state='visible'] {
 .faq-panel p {
   margin: 0;
   padding: 0 2.75rem 1.25rem 0;
-  color: #64748b;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
   line-height: 1.72;
 }

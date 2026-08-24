@@ -556,3 +556,125 @@
   font-weight: 800;
   color: #1e293b;
 }
+
+/* Warm-luxury theme overrides */
+.wizard-empty,
+.wizard-header-count,
+.wizard-progress-label,
+.review-item-detail,
+.review-notes {
+  color: var(--color-text-muted);
+}
+
+.wizard-header,
+.review-card {
+  background: var(--color-surface);
+}
+
+.wizard-back-btn,
+.wizard-progress-label.active {
+  color: var(--color-primary);
+}
+
+.wizard-header-price,
+.wizard-step-title,
+.wizard-input,
+.wizard-duration-input,
+.review-item-name,
+.review-item-total,
+.review-row span:last-child,
+.review-total-row {
+  color: var(--color-text);
+}
+
+.wizard-step-subtitle,
+.wizard-label,
+.wizard-duration-unit,
+.wizard-back-btn-bottom,
+.review-row,
+.review-address {
+  color: var(--color-text-secondary);
+}
+
+.wizard-progress-dot,
+.wizard-step,
+.wizard-input,
+.wizard-stepper-btn,
+.wizard-duration-input,
+.wizard-location-btn,
+.wizard-back-btn-bottom,
+.review-totals {
+  background: var(--color-surface-elevated);
+}
+
+.wizard-progress-dot,
+.wizard-progress-line,
+.wizard-step,
+.wizard-input,
+.wizard-stepper-btn,
+.wizard-duration-input,
+.wizard-back-btn-bottom,
+.review-card,
+.review-item,
+.review-total-row {
+  border-color: var(--color-border);
+}
+
+.wizard-progress-dot.active,
+.wizard-next-btn {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+}
+
+.wizard-progress-dot.active {
+  box-shadow: 0 0 0 4px rgb(49 90 114 / 15%);
+}
+
+.wizard-input:focus,
+.wizard-stepper-btn:hover:not(:disabled),
+.wizard-location-btn {
+  border-color: var(--color-primary);
+}
+
+.wizard-input:focus {
+  box-shadow: 0 0 0 3px rgb(49 90 114 / 12%);
+}
+
+.wizard-stepper-btn:hover:not(:disabled),
+.wizard-location-btn,
+.wizard-info-box {
+  color: var(--color-primary);
+}
+
+.wizard-info-box {
+  border-color: #bfd3dd;
+  background: var(--color-primary-light);
+}
+
+.wizard-location-btn:hover,
+.wizard-next-btn:hover:not(:disabled) {
+  color: var(--color-text-inverse);
+  background: var(--color-primary-hover);
+}
+
+.wizard-location-btn.secondary {
+  border-color: var(--color-text-muted);
+  color: var(--color-text-secondary);
+}
+
+.wizard-location-btn.secondary:hover {
+  background: var(--color-text-secondary);
+}
+
+.wizard-next-btn:disabled {
+  background: var(--color-border);
+}
+
+.wizard-back-btn-bottom:hover {
+  border-color: var(--color-text-muted);
+  background: var(--color-surface);
+}
+
+.review-totals {
+  border-color: var(--color-primary);
+}

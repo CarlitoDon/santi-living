@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PesanPage() {
   return (
-    <main style={{ minHeight: '100dvh', background: '#f8fafc' }}>
+    <main style={{ minHeight: '100dvh', background: 'var(--color-surface)' }}>
       <OrderWizard />
     </main>
   );
