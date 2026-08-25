@@ -13,6 +13,7 @@ const StoreLocationSchema = z.object({
   lat: z.number(),
   lng: z.number(),
   name: z.string(),
+  googleMapsUrl: z.string().url(),
 });
 
 const DeliveryZoneSchema = z.object({

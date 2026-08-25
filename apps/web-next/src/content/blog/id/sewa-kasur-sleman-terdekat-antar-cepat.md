@@ -88,7 +88,7 @@ Pesan hanya butuh 5 langkah, bisa dari mana saja:
 
 Jangan biarkan tamu atau penghuni kos tidur beralaskan tikar. Sewa kasur Sleman terdekat dari Santi Living: antar cepat, steril, harga mulai Rp30.000/hari. Chat sekarang untuk cek ketersediaan dan estimasi pengantaran ke lokasi Anda.
 
-📍 **Workshop**: Jl. Godean KM 10, Sidokarto, Godean, Sleman, Yogyakarta
+📍 **Workshop**: Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Godean, Sleman, Yogyakarta 55264
 📱 **WhatsApp**: [0895-1911-9092](https://wa.me/6289519119092)
 
 > Santi Living — divisi persewaan kasur dari Santi Mebel. Sewa kasur Sleman, antar cepat, steril, dan harga jujur. Rating 5/5 dari 51+ pelanggan.

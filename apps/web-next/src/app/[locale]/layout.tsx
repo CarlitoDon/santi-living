@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Serif } from 'next/font/google';
 
 export const viewport: Viewport = {
-  themeColor: '#2563eb',
+  themeColor: '#f4ebdd',
   viewportFit: 'cover',
 };
 import { Header } from '@/components/layout/Header';
@@ -13,12 +13,15 @@ import { GtagScript } from '@/components/tracking/GtagScript';
 import { ClarityScript } from '@/components/tracking/ClarityScript';
 import { AttributionCapture } from '@/components/tracking/AttributionCapture';
 import { AlertModal } from '@/components/ui/AlertModal';
+import { MotionController } from '@/components/ui/MotionController';
 import { Providers } from './providers';
 import { getDictionary } from '@/locales/dictionary';
 import type { Locale } from '@/locales/dictionary';
 import '@/styles/globals.css';
 import '@/styles/utilities.css';
 import '@/styles/product-picker.css';
+import '@/styles/motion.css';
+import '@/styles/home.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -131,7 +134,12 @@ export default async function RootLayout({
 
 
   return (
-    <html lang={locale} className={`${inter.variable} ${notoSerif.variable}`} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${notoSerif.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
         <GtagScript />
         <ClarityScript />
@@ -146,6 +154,7 @@ export default async function RootLayout({
       </head>
       <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Providers locale={locale as Locale} dictionary={dict}>
+          <MotionController />
           <AttributionCapture />
           <ConditionalLayout header={<Header />} footer={<Footer />}>
             {children}

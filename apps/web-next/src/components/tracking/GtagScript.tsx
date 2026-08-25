@@ -185,6 +185,7 @@ export function GtagScript() {
               var address = parsed.address || {};
               return {
                 location_permission: 'cached',
+                location_source: parsed.source === 'manual' ? 'manual' : 'automatic',
                 latitude: parsed.coords.lat,
                 longitude: parsed.coords.lng,
                 address_text: compactAddressParts([
@@ -200,6 +201,11 @@ export function GtagScript() {
             } catch(ex) {
               return null;
             }
+          }
+
+          function readPreferredManualLocation() {
+            var cached = readCachedAutoLocation();
+            return cached && cached.location_source === 'manual' ? cached : null;
           }
 
           function normalizeAddressName(value) {
@@ -280,6 +286,12 @@ export function GtagScript() {
           }
 
           function reverseGeocodeLocation(location, callback) {
+            var preferredManualLocation = readPreferredManualLocation();
+            if (preferredManualLocation) {
+              callback(preferredManualLocation);
+              return;
+            }
+
             if (location && location.address_text) {
               callback(location);
               return;
@@ -294,7 +306,7 @@ export function GtagScript() {
             var timeout = setTimeout(function() {
               if (completed) return;
               completed = true;
-              callback(location);
+              callback(readPreferredManualLocation() || location);
             }, 4500);
 
             fetch('/api/reverse-geocode?lat=' + encodeURIComponent(location.latitude) + '&lng=' + encodeURIComponent(location.longitude))
@@ -307,6 +319,12 @@ export function GtagScript() {
                 completed = true;
                 clearTimeout(timeout);
 
+                var latestManualLocation = readPreferredManualLocation();
+                if (latestManualLocation) {
+                  callback(latestManualLocation);
+                  return;
+                }
+
                 var formatted = formatReverseGeocodePayload(payload);
                 var enrichedLocation = Object.assign({}, location, {
                   address_text: formatted.fullAddress,
@@ -316,6 +334,7 @@ export function GtagScript() {
                 try {
                   var detail = {
                     coords: { lat: location.latitude, lng: location.longitude },
+                    source: 'automatic',
                     address: {
                       street: formatted.street,
                       kelurahan: formatted.kelurahan,
@@ -335,34 +354,13 @@ export function GtagScript() {
                 if (completed) return;
                 completed = true;
                 clearTimeout(timeout);
-                callback(location);
+                callback(readPreferredManualLocation() || location);
               });
           }
 
-          function buildWhatsAppTextWithAddress(text, addressText) {
+          function applyAddressToSearchParams(url, addressText) {
             var address = String(addressText || '').trim();
-            var current = String(text || '').trim();
-            if (!address) return current;
-
-            if (current.indexOf('{alamat lengkap}') !== -1) {
-              return current.replace(/\\{alamat lengkap\\}/g, address);
-            }
-
-            if (/Alamat pengiriman:\\s*$/i.test(current)) {
-              return current + '\\n' + address;
-            }
-
-            if (!current) {
-              current = 'Halo Admin Santi Living by Santi Mebel Jogja,\\nSaya ingin menyewa kasur.';
-            }
-
-            return current + '\\n\\nAlamat pengiriman:\\n' + address;
-          }
-
-          function applyAddressToWhatsappText(url, addressText) {
-            if (!addressText) return;
-            var currentText = url.searchParams.get('text') || '';
-            url.searchParams.set('text', buildWhatsAppTextWithAddress(currentText, addressText));
+            if (address) url.searchParams.set('address_text', address);
           }
 
           function applyLocationToSearchParams(url, location) {
@@ -574,7 +572,7 @@ export function GtagScript() {
                 if (url.pathname === '/api/wa') {
                   applyLocationToSearchParams(url, enrichedLocation);
                 }
-                applyAddressToWhatsappText(url, enrichedLocation.address_text);
+                applyAddressToSearchParams(url, enrichedLocation.address_text);
 
                 // Google Ads conversion
                 trackGtagEvent('event', 'conversion', {

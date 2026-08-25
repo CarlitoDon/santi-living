@@ -14,7 +14,7 @@ export function Footer() {
   const { locale } = useLocale();
 
   return (
-    <footer className="bg-slate-900 text-white pt-12 pb-6">
+    <footer className="bg-slate-900 text-white pt-12 pb-6" data-reveal="fade">
       <div className="container">
         <div className="grid gap-8 mb-8 md:grid-cols-[2fr_1fr_1fr]">
           {/* NAP Section for Local SEO */}
@@ -45,7 +45,7 @@ export function Footer() {
               </p>
               <p className="mb-2">
                 <a 
-                  href="https://maps.google.com/maps?cid=5972418444444444444" 
+                  href={config.storeLocation.googleMapsUrl}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary-light font-medium hover:underline text-sm"
@@ -90,13 +90,13 @@ export function Footer() {
           <div>
             <h4 className="text-base font-semibold mb-4 text-white">{t('footer.ikuti_kami')}</h4>
             <div className="flex gap-3">
-              <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white transition-colors duration-200 hover:bg-blue-600 no-underline">
+              <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               </a>
-              <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white transition-colors duration-200 hover:bg-blue-600 no-underline">
+              <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
               </a>
-              <a href={getWhatsAppUrl(undefined, 'footer_social')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white transition-colors duration-200 hover:bg-green-600 no-underline" data-wa-source="footer_social" data-wa-location="footer">
+              <a href={getWhatsAppUrl(undefined, 'footer_social')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-green-600 no-underline motion-interactive motion-lift" data-wa-source="footer_social" data-wa-location="footer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
               </a>
             </div>

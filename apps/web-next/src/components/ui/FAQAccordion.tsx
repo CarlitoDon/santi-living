@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useId, useState } from 'react';
+
 interface FAQItem {
   q?: string;
   a?: string;
@@ -10,32 +12,89 @@ interface FAQItem {
 interface FAQAccordionProps {
   items: FAQItem[];
   title?: string;
+  titleId?: string;
   className?: string;
 }
 
-export function FAQAccordion({ items, title, className = '' }: FAQAccordionProps) {
-  return (
-    <div className={`space-y-3 ${className}`}>
-      {title && <h2 className="text-center text-xl md:text-2xl mb-6 font-bold text-slate-900">{title}</h2>}
-      {items.map((item, i) => {
-        const question = item.q || item.question;
-        const answer = item.a || item.answer;
+export function FAQAccordion({
+  items,
+  title,
+  titleId,
+  className = '',
+}: FAQAccordionProps) {
+  const generatedId = useId().replace(/:/g, '');
+  const [isEnhanced, setIsEnhanced] = useState(false);
+  const [openItems, setOpenItems] = useState<Set<number>>(() => new Set());
 
-        return (
-          <details
-            key={i}
-            className="group bg-white rounded-lg border border-slate-200 overflow-hidden"
-          >
-            <summary className="px-4 py-3.5 cursor-pointer font-semibold list-none select-none hover:bg-slate-50 transition-colors flex items-center justify-between text-slate-800 group-open:text-blue-600">
-              {question}
-              <span className="text-xl text-blue-600 transition-transform group-open:rotate-45">+</span>
-            </summary>
-            <div className="px-4 pb-4 text-slate-500 leading-relaxed m-0 border-t border-slate-100 pt-3 mt-1">
-              {answer}
+  useEffect(() => {
+    // Keep every answer visible in server-rendered/no-JS HTML. Collapse only after
+    // React can provide a working trigger.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsEnhanced(true);
+  }, []);
+
+  const toggleItem = (index: number) => {
+    setOpenItems((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  };
+
+  return (
+    <div className={`faq-accordion ${className}`}>
+      {title && (
+        <h2 id={titleId} className="faq-title">
+          {title}
+        </h2>
+      )}
+
+      <div className="faq-list">
+        {items.map((item, index) => {
+          const question = item.q || item.question;
+          const answer = item.a || item.answer;
+          const isOpen = openItems.has(index);
+          const buttonId = `${generatedId}-question-${index}`;
+          const panelId = `${generatedId}-answer-${index}`;
+
+          return (
+            <div
+              className="faq-item"
+              data-state={!isEnhanced || isOpen ? 'open' : 'closed'}
+              key={`${question}-${index}`}
+            >
+              <h3 className="faq-question">
+                <button
+                  id={buttonId}
+                  type="button"
+                  className="faq-trigger motion-interactive"
+                  aria-expanded={!isEnhanced || isOpen}
+                  aria-controls={panelId}
+                  onClick={() => toggleItem(index)}
+                >
+                  <span>{question}</span>
+                  <span className="faq-icon" aria-hidden="true">
+                    <span />
+                    <span />
+                  </span>
+                </button>
+              </h3>
+              <div
+                id={panelId}
+                className="faq-panel"
+                role="region"
+                aria-labelledby={buttonId}
+                aria-hidden={isEnhanced ? !isOpen : undefined}
+              >
+                <div className="faq-panel-inner">
+                  <p>{answer}</p>
+                </div>
+              </div>
             </div>
-          </details>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

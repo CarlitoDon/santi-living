@@ -82,11 +82,12 @@ function Accordion({
         type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="calc-accordion-header"
+        aria-expanded={isOpen}
       >
         <span className={`calc-accordion-title ${color}`}>{title}</span>
         <span className="calc-accordion-icon">{isOpen ? "−" : "+"}</span>
       </button>
-      {isOpen && (
+      <div className="calc-accordion-panel" data-state={isOpen ? "open" : "closed"} aria-hidden={!isOpen} inert={!isOpen}>
         <div className="calc-accordion-content">
           {visibleItems.map((product) => (
             <CartItem
@@ -109,7 +110,7 @@ function Accordion({
             </button>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

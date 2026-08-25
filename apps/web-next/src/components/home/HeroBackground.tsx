@@ -4,8 +4,24 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const slides = [
-  { src: '/images/stok-kasur.webp', alt: 'Stok kasur sewa Jogja' },
-  { src: '/images/gudang.webp', alt: 'Gudang kasur Santi Living' },
+  {
+    src: '/images/hero-pengiriman-santi-living.webp',
+    mobileSrc: '/images/hero-pengiriman-santi-living-mobile.webp',
+    alt: 'Pengiriman kasur Santi Living di Yogyakarta',
+    objectPosition: '68% center',
+  },
+  {
+    src: '/images/stok-kasur.webp',
+    mobileSrc: null,
+    alt: 'Stok kasur sewa Jogja',
+    objectPosition: 'center',
+  },
+  {
+    src: '/images/gudang.webp',
+    mobileSrc: null,
+    alt: 'Gudang kasur Santi Living',
+    objectPosition: 'center',
+  },
 ];
 
 export function HeroBackground() {
@@ -24,31 +40,41 @@ export function HeroBackground() {
         {slides.map((slide, index) => (
           <div
             key={slide.src}
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+            aria-hidden={index !== currentSlide}
+            className={`absolute inset-0 w-full h-full transition-[opacity,transform] duration-[1400ms] ease-out ${
               index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            } ${index === currentSlide ? 'scale-100' : 'scale-[1.025]'}`}
           >
-            <Image
-              src={slide.src}
-              alt={slide.alt}
-              fill
-              priority={index === 0}
-              unoptimized={index === 0}
-              quality={index === 0 ? 75 : 60}
-              className="object-cover"
-              sizes={index === 0 ? '(max-width: 768px) 100vw, 700px' : '100vw'}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
-            />
+            {slide.mobileSrc ? (
+              <picture className="absolute inset-0 block h-full w-full">
+                <source media="(max-width: 767px)" srcSet={slide.mobileSrc} />
+                {/* Precompressed responsive hero; picture avoids loading both crops. */}
+                <img
+                  src={slide.src}
+                  alt={slide.alt}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: slide.objectPosition }}
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </picture>
+            ) : (
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                loading="lazy"
+                quality={78}
+                className="object-cover"
+                style={{ objectPosition: slide.objectPosition }}
+                sizes="100vw"
+                fetchPriority="auto"
+              />
+            )}
           </div>
         ))}
       </div>
-      {/* Gradient Overlay mirroring Astro */}
-      <div 
-        className="absolute inset-0 w-full h-full z-1" 
-        style={{
-          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.85) 0%, rgba(30, 64, 175, 0.9) 100%)'
-        }}
-      />
+      <div className="home-hero-overlay absolute inset-0 w-full h-full z-1" />
     </>
   );
 }

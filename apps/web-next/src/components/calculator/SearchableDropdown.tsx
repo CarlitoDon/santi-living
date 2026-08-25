@@ -3,8 +3,9 @@
  * Custom styled dropdown with search/filter capability
  */
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import "./styles.css";
+import { usePresence } from "@/hooks/usePresence";
 
 export interface DropdownOption {
   value: string;
@@ -42,18 +43,29 @@ export function SearchableDropdown({
 }: SearchableDropdownProps) {
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeOptionValue, setActiveOptionValue] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wasOpenRef = useRef(false);
 
   // Support both controlled and uncontrolled modes
   const isOpen =
     controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
-  const setIsOpen = (open: boolean) => {
+  const presence = usePresence(isOpen, 180);
+  const setIsOpen = useCallback((open: boolean) => {
     if (onOpenChange) {
       onOpenChange(open);
     }
     setInternalIsOpen(open);
-  };
+  }, [onOpenChange]);
+
+  const closeDropdown = useCallback(() => {
+    triggerRef.current?.focus({ preventScroll: true });
+    setIsOpen(false);
+    setSearchTerm("");
+    setActiveOptionValue(null);
+  }, [setIsOpen]);
 
   // Find selected option label
   const selectedOption = options.find((opt) => opt.value === value);
@@ -63,6 +75,11 @@ export function SearchableDropdown({
   const filteredOptions = options.filter((opt) =>
     opt.label.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+  const activeOptionIndex = filteredOptions.findIndex(
+    (option) => option.value === activeOptionValue,
+  );
+  const activeOptionId =
+    activeOptionIndex >= 0 ? `${id}-option-${activeOptionIndex}` : undefined;
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -71,15 +88,13 @@ export function SearchableDropdown({
         containerRef.current &&
         !containerRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
-        setSearchTerm("");
+        closeDropdown();
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- setIsOpen is a render-scoped wrapper
-  }, []);
+  }, [closeDropdown]);
 
   // Focus input when opened
   useEffect(() => {
@@ -88,35 +103,83 @@ export function SearchableDropdown({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || !activeOptionId) return;
+    document.getElementById(activeOptionId)?.scrollIntoView({ block: "nearest" });
+  }, [activeOptionId, isOpen]);
+
+  // Controlled parents can close this dropdown without calling closeDropdown. If
+  // focus is still inside the retained exit subtree, move it before that subtree is
+  // inert so keyboard users never lose their focus target.
+  useLayoutEffect(() => {
+    if (
+      wasOpenRef.current &&
+      !isOpen &&
+      document.activeElement instanceof HTMLElement &&
+      containerRef.current?.contains(document.activeElement)
+    ) {
+      triggerRef.current?.focus({ preventScroll: true });
+    }
+    wasOpenRef.current = isOpen;
+  }, [isOpen]);
+
   const handleToggle = useCallback(() => {
     if (!disabled && !loading) {
-      setIsOpen(!isOpen);
-      setSearchTerm("");
+      if (isOpen) closeDropdown();
+      else {
+        setIsOpen(true);
+        setSearchTerm("");
+        setActiveOptionValue(
+          options.find((option) => option.value === value)?.value ??
+            options[0]?.value ??
+            null,
+        );
+      }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- setIsOpen is a render-scoped wrapper
-  }, [disabled, loading, isOpen]);
+  }, [closeDropdown, disabled, isOpen, loading, options, setIsOpen, value]);
 
   const handleSelect = useCallback(
     (optionValue: string) => {
       onChange(optionValue);
-      setIsOpen(false);
-      setSearchTerm("");
+      closeDropdown();
     },
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- setIsOpen is a render-scoped wrapper
-    [onChange],
+    [closeDropdown, onChange],
   );
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Escape") {
-        setIsOpen(false);
-        setSearchTerm("");
-      } else if (e.key === "Enter" && filteredOptions.length === 1) {
-        handleSelect(filteredOptions[0].value);
+        e.preventDefault();
+        closeDropdown();
+        return;
+      }
+
+      if (filteredOptions.length === 0) return;
+
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const direction = e.key === "ArrowDown" ? 1 : -1;
+        const currentIndex =
+          activeOptionIndex >= 0 ? activeOptionIndex : direction === 1 ? -1 : 0;
+        const nextIndex =
+          (currentIndex + direction + filteredOptions.length) %
+          filteredOptions.length;
+        setActiveOptionValue(filteredOptions[nextIndex].value);
+      } else if (e.key === "Home" || e.key === "End") {
+        e.preventDefault();
+        const nextIndex = e.key === "Home" ? 0 : filteredOptions.length - 1;
+        setActiveOptionValue(filteredOptions[nextIndex].value);
+      } else if (e.key === "Enter") {
+        const option =
+          filteredOptions[activeOptionIndex] ??
+          (filteredOptions.length === 1 ? filteredOptions[0] : undefined);
+        if (option) {
+          e.preventDefault();
+          handleSelect(option.value);
+        }
       }
     },
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- setIsOpen is a render-scoped wrapper
-    [filteredOptions, handleSelect],
+    [activeOptionIndex, closeDropdown, filteredOptions, handleSelect],
   );
 
   return (
@@ -126,6 +189,7 @@ export function SearchableDropdown({
     >
       {/* Trigger Button */}
       <button
+        ref={triggerRef}
         type="button"
         id={id}
         className="calc-dropdown-trigger"
@@ -133,6 +197,7 @@ export function SearchableDropdown({
         disabled={disabled || loading}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
+        aria-controls={`${id}-listbox`}
       >
         <span
           className={`calc-dropdown-value ${!displayValue ? "placeholder" : ""}`}
@@ -174,8 +239,13 @@ export function SearchableDropdown({
       </button>
 
       {/* Dropdown Menu */}
-      {isOpen && (
-        <div className="calc-dropdown-menu" role="listbox">
+      {presence.shouldRender && (
+        <div
+          className="calc-dropdown-menu"
+          data-state={presence.state}
+          aria-hidden={!isOpen}
+          inert={!isOpen}
+        >
           {/* Search Input */}
           <div className="calc-dropdown-search">
             <svg
@@ -195,21 +265,41 @@ export function SearchableDropdown({
               className="calc-dropdown-search-input"
               placeholder="Cari..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                const nextTerm = e.target.value;
+                const firstMatch = options.find((option) =>
+                  option.label.toLowerCase().includes(nextTerm.toLowerCase()),
+                );
+                setSearchTerm(nextTerm);
+                setActiveOptionValue(firstMatch?.value ?? null);
+              }}
               onKeyDown={handleKeyDown}
+              role="combobox"
+              aria-label="Cari pilihan"
+              aria-autocomplete="list"
+              aria-expanded={isOpen}
+              aria-controls={`${id}-listbox`}
+              aria-activedescendant={activeOptionId}
               suppressHydrationWarning
             />
           </div>
 
           {/* Options List */}
-          <ul className="calc-dropdown-options">
+          <ul
+            id={`${id}-listbox`}
+            className="calc-dropdown-options"
+            role="listbox"
+            aria-labelledby={id}
+          >
             {filteredOptions.length === 0 ? (
               <li className="calc-dropdown-empty">Tidak ditemukan</li>
             ) : (
-              filteredOptions.map((option) => (
+              filteredOptions.map((option, index) => (
                 <li
                   key={option.value}
-                  className={`calc-dropdown-option ${option.value === value ? "selected" : ""}`}
+                  id={`${id}-option-${index}`}
+                  className={`calc-dropdown-option ${option.value === value ? "selected" : ""} ${option.value === activeOptionValue ? "active" : ""}`}
+                  onMouseEnter={() => setActiveOptionValue(option.value)}
                   onMouseDown={(e) => {
                     e.preventDefault();
                     handleSelect(option.value);

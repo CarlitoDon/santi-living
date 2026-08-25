@@ -1,10 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { usePresence } from '@/hooks/usePresence';
+import { useDialogFocus } from '@/hooks/useDialogFocus';
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
 export function AlertModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState({ title: 'Perhatian', message: '', type: 'error' });
+  const actionButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const presence = usePresence(isOpen, 240);
+  useBodyScrollLock(presence.shouldRender);
 
   useEffect(() => {
     const handleShowAlert = (e: Event) => {
@@ -21,24 +28,28 @@ export function AlertModal() {
     return () => window.removeEventListener('show-alert', handleShowAlert);
   }, []);
 
-  // Handle escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) setIsOpen(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  useDialogFocus({
+    isOpen,
+    onClose: () => setIsOpen(false),
+    containerRef: dialogRef,
+    initialFocusRef: actionButtonRef,
+  });
 
-  if (!isOpen) return null;
+  if (!presence.shouldRender) return null;
 
   const isError = content.type === 'error';
   const isWarning = content.type === 'warning';
 
   return (
     <>
-      <div className="alert-backdrop" onClick={() => setIsOpen(false)}>
-        <div className="alert-container" onClick={e => e.stopPropagation()}>
+      <div
+        className="alert-backdrop"
+        data-state={presence.state}
+        aria-hidden={!isOpen}
+        inert={!isOpen}
+        onClick={() => setIsOpen(false)}
+      >
+        <div ref={dialogRef} className="alert-container" role="alertdialog" aria-modal="true" aria-labelledby="global-alert-title" aria-describedby="global-alert-message" tabIndex={-1} onClick={e => e.stopPropagation()}>
           <div className={`alert-icon ${content.type}`}>
             {content.type === 'error' && (
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -62,10 +73,11 @@ export function AlertModal() {
               </svg>
             )}
           </div>
-          <h3 className="alert-title">{content.title}</h3>
-          <p className="alert-message">{content.message}</p>
+          <h3 id="global-alert-title" className="alert-title">{content.title}</h3>
+          <p id="global-alert-message" className="alert-message">{content.message}</p>
           <div className="alert-actions">
             <button 
+              ref={actionButtonRef}
               className={`alert-btn ${isError ? 'btn-danger' : isWarning ? 'btn-warning' : 'btn-primary'}`} 
               onClick={() => setIsOpen(false)}
             >
@@ -89,7 +101,8 @@ export function AlertModal() {
           align-items: center;
           justify-content: center;
           padding: 1rem;
-          animation: fadeIn 0.2s ease;
+          opacity: 1;
+          transition: opacity 0.2s ease;
         }
 
         .alert-container {
@@ -100,7 +113,9 @@ export function AlertModal() {
           padding: 2rem;
           text-align: center;
           box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-          animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          opacity: 1;
+          transform: scale(1) translateY(0);
+          transition: opacity 0.2s ease, transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .alert-icon {
@@ -179,14 +194,19 @@ export function AlertModal() {
           background: #1d4ed8;
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
+        .alert-backdrop[data-state='entering'],
+        .alert-backdrop[data-state='exiting'] {
+          opacity: 0;
         }
 
-        @keyframes scaleUp {
-          from { opacity: 0; transform: scale(0.95) translateY(10px); }
-          to { opacity: 1; transform: scale(1) translateY(0); }
+        .alert-backdrop[data-state='entering'] .alert-container,
+        .alert-backdrop[data-state='exiting'] .alert-container {
+          opacity: 0;
+          transform: scale(0.96) translateY(10px);
+        }
+
+        .alert-backdrop[data-state='exiting'] {
+          pointer-events: none;
         }
       `}</style>
     </>

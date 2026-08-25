@@ -3,7 +3,7 @@ title: "Nearest Mattress Rental Godean Sleman: Santi Living Workshop Location, E
 description: "Nearest mattress rental in Godean Sleman — Santi Living workshop is on Jl. Godean KM10! Express delivery, free collection, clean HD Foam mattresses from Rp25,000/day. WA 0895-1911-9092!"
 pubDate: 2026-05-26
 author: "Tim Santi Living"
-tags: ["sewa kasur godean", "sewa kasur sleman", "sewa kasur terdekat", "workshop santi living", "jl godean km4", "sewa kasur jogja"]
+tags: ["sewa kasur godean", "sewa kasur sleman", "sewa kasur terdekat", "workshop santi living", "jl godean km10", "geneng sidoagung", "sewa kasur jogja"]
 ---
 
 Do you live in Godean, Sleman, and need an extra mattress? The good news is, the Santi Living workshop is located right on Jl. Godean KM10 — meaning delivery to the entire Godean area can be done faster than to other districts in Jogja. Renting a mattress in Godean is now as easy as a WhatsApp chat, and a clean HD Foam mattress is ready to be delivered to your home.

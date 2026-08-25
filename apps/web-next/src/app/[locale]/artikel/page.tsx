@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getNotionPosts } from '@/lib/notion';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 import { localeHref } from '@/utils/localeHref';
+import { PageHero } from '@/components/layout/PageHero';
+import { ArticleLoadMore, type ArticleListItem } from '@/components/blog/ArticleLoadMore';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -54,60 +55,31 @@ export default async function ArtikelIndexPage({ params }: PageProps) {
     page_desc: 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman',
     empty: 'Belum ada artikel.',
   };
+  const articleList: ArticleListItem[] = posts.map((post) => ({
+    slug: post.slug,
+    title: post.title,
+    description: post.description,
+    dateLabel: new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+    href: localeHref(`/artikel/${post.slug}`, locale),
+  }));
 
   return (
-    <main style={{ paddingTop: '70px' }}>
-      <section style={{
-        background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-        padding: 'var(--space-8) 0',
-        textAlign: 'center',
-        color: 'white',
-      }}>
-        <div className="container">
-          <h1 style={{ color: 'white', marginBottom: 'var(--space-2)' }}>{blogDict.page_title}</h1>
-          <p style={{ opacity: 0.9 }}>{blogDict.page_desc}</p>
-        </div>
-      </section>
+    <main className="site-main-offset">
+      <PageHero title={blogDict.page_title} subtitle={blogDict.page_desc} />
 
-      <section style={{ padding: 'var(--space-10) 0' }}>
-        <div className="container" style={{ maxWidth: '720px' }}>
-          {posts.length === 0 ? (
-            <p style={{ textAlign: 'center', color: 'var(--color-text-muted)' }}>{blogDict.empty}</p>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-              {posts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={localeHref(`/artikel/${post.slug}`, locale)}
-                  style={{
-                    display: 'block',
-                    padding: 'var(--space-5)',
-                    background: 'white',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: 'var(--radius-lg)',
-                    textDecoration: 'none',
-                    transition: 'box-shadow 0.2s, transform 0.2s',
-                  }}
-                >
-                  <h2 style={{ fontSize: 'var(--font-size-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text)' }}>
-                    {post.title}
-                  </h2>
-                  <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', marginBottom: 'var(--space-2)' }}>
-                    {post.description}
-                  </p>
-                  <div style={{ display: 'flex', gap: 'var(--space-3)', fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-                    <span>
-                      {new Date(post.date).toLocaleDateString(locale === 'en' ? 'en-US' : 'id-ID', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          )}
+      <section className="bg-slate-50 py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            {posts.length === 0 ? (
+              <p className="text-center text-slate-400" data-reveal="fade">{blogDict.empty}</p>
+            ) : (
+              <ArticleLoadMore posts={articleList} locale={locale} />
+            )}
+          </div>
         </div>
       </section>
     </main>

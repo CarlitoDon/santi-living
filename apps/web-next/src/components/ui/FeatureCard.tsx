@@ -8,12 +8,12 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, description }: FeatureCardProps) {
   return (
-    <div className="text-center p-6 rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200 h-full flex flex-col items-center" style={{ textAlign: 'center' }}>
-      <div className="text-3xl w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-600 mx-auto mb-4 shrink-0">
+    <article className="group h-full border-t border-slate-200 py-6 text-left motion-interactive hover:border-blue-300">
+      <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-xl text-blue-700 motion-interactive group-hover:bg-blue-100">
         {icon}
       </div>
-      <h3 className="text-lg font-bold text-slate-900 mb-2" style={{ textAlign: 'center' }}>{title}</h3>
-      <p className="text-sm text-slate-500 leading-relaxed m-0 flex-grow" style={{ textAlign: 'center' }}>{description}</p>
-    </div>
+      <h3 className="mb-2 text-base font-bold text-slate-900">{title}</h3>
+      <p className="m-0 text-sm leading-relaxed text-slate-500">{description}</p>
+    </article>
   );
 }

@@ -34,7 +34,7 @@ Avoid ordering just out of fear of running short. It is better to explain the si
 
 For a faster response, prepare some details before contacting us via WhatsApp: dates of use, address in the Jogja or DIY area, type of items, estimated quantity, duration, and notes on location access. If it is for an event, add the event start time and when the items should be ready. If it is for overnight guests, explain when the guests arrive and when the items can likely be collected again.
 
-Santi Living or Santi Mebel can be contacted via WhatsApp on 0895-1911-9092. The workshop is located at Jl. Godean KM4. This information helps prospective renters in Jogja contact the team with clear context, rather than going back and forth explaining from scratch.
+Santi Living or Santi Mebel can be contacted via WhatsApp on 0895-1911-9092. The workshop is located at Jl. Godean KM 10 Geneng, Sidoagung, Godean. This information helps prospective renters in Jogja contact the team with clear context, rather than going back and forth explaining from scratch.
 
 ## Quick checklist before confirmation
 

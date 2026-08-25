@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { config } from '@/data/config';
 import { products } from '@/data/products';
+import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
 import { ProductPicker } from '@/components/home/ProductPicker';
 import { CartBar } from '@/components/home/CartBar';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -10,6 +11,7 @@ import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
 import { generateFAQSchema } from '@/utils/seo';
 import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
+import { getStoreMapEmbedUrl } from '@/lib/store-location';
 
 export const metadata: Metadata = {
   title: 'Sewa Kasur Jogja Mulai 30rb/Hari - Antar Cepat 2 Jam | Santi Living',
@@ -27,11 +29,11 @@ const faqItems = [
 ];
 
 const steps = [
-  { icon: '📱', title: 'Pilih Kasur', desc: 'Pilih ukuran dan jumlah kasur yang dibutuhkan' },
-  { icon: '📝', title: 'Isi Formulir', desc: 'Lengkapi data diri dan alamat pengiriman' },
-  { icon: '💳', title: 'Bayar', desc: 'Bayar via QRIS, Transfer, atau GoPay' },
-  { icon: '🚚', title: 'Kasur Diantar', desc: 'Tim kami antar kasur ke lokasi Anda' },
-  { icon: '📞', title: 'Selesai', desc: 'Hubungi kami saat masa sewa berakhir untuk penjemputan' },
+  { title: 'Pilih kasur', desc: 'Tentukan ukuran dan jumlah yang Anda butuhkan.' },
+  { title: 'Isi data', desc: 'Lengkapi kontak serta alamat pengiriman.' },
+  { title: 'Konfirmasi', desc: 'Periksa rincian biaya dan jadwal sewa.' },
+  { title: 'Kasur diantar', desc: 'Tim kami mengantar kasur bersih ke lokasi.' },
+  { title: 'Kami jemput', desc: 'Hubungi kami saat masa sewa selesai.' },
 ];
 
 const benefits = [
@@ -45,7 +47,29 @@ const benefits = [
 
 const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo'];
 
-import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="m5 10 3.1 3.1L15 6.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+    </svg>
+  );
+}
+
+function ArrowRightIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M4 10h12m-4.5-4.5L16 10l-4.5 4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export default function HomePage() {
   const localBusinessSchema = {
@@ -68,7 +92,7 @@ export default function HomePage() {
       latitude: config.storeLocation.lat,
       longitude: config.storeLocation.lng,
     },
-    areaServed: serviceAreas.map((a) => ({ '@type': 'City' as const, name: a })),
+    areaServed: serviceAreas.map((area) => ({ '@type': 'City' as const, name: area })),
     aggregateRating: {
       '@type': 'AggregateRating' as const,
       ratingValue: 5.0,
@@ -81,13 +105,9 @@ export default function HomePage() {
     '@context': 'https://schema.org' as const,
     '@type': 'Product' as const,
     name: 'Sewa Kasur Busa Jogja Santi Living',
-    description:
-      'Persewaan kasur busa tebal 15cm bersih higienis di Yogyakarta. Antar jemput same day area Sleman, Bantul, Kota Jogja dan Kulonprogo.',
+    description: 'Persewaan kasur busa tebal 15cm bersih higienis di Yogyakarta. Antar jemput same day area Sleman, Bantul, Kota Jogja dan Kulonprogo.',
     image: 'https://santiliving.com/logo.png',
-    brand: {
-      '@type': 'Brand' as const,
-      name: 'Santi Living',
-    },
+    brand: { '@type': 'Brand' as const, name: 'Santi Living' },
     offers: {
       '@type': 'AggregateOffer' as const,
       lowPrice: 30000,
@@ -104,273 +124,193 @@ export default function HomePage() {
     },
   };
 
-  const faqSchema = generateFAQSchema(faqItems);
-
   return (
-    <main className="pt-[80px]">
+    <main className="home-page site-main-offset">
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={productSchema} />
-      <JsonLd data={faqSchema} />
+      <JsonLd data={generateFAQSchema(faqItems)} />
 
-      {/* ===== HERO + CALCULATOR unified block (Bottom Sheet Rising pattern) ===== */}
-      {/* Single container so hero background extends behind the calculator card */}
-      <div className="relative bg-gradient-to-br from-[#3b82f6]/90 to-[#1e40af]/95">
+      <div className="home-hero">
+        <HeroBackground />
+        <section className="home-hero-inner">
+          <div className="container">
+            <div className="home-hero-copy">
+              <p className="home-eyebrow" data-reveal="up">Sewa kasur tepercaya di Yogyakarta</p>
+              <h1 className="home-hero-title" data-reveal="up" data-reveal-delay="55">
+                Sewa Kasur Jogja yang Bersih, Nyaman, dan <span>Siap Antar Hari Ini.</span>
+              </h1>
+              <p className="home-hero-lead" data-reveal="up" data-reveal-delay="110">
+                Kasur higienis mulai Rp25.000/hari, lengkap dengan pilihan paket dan layanan antar jemput yang jelas sejak awal.
+              </p>
 
-        {/* Hero text content */}
-        <section className="relative pt-5 pb-16 md:pt-8 md:pb-20 text-center text-white flex items-center z-[2] overflow-hidden">
-          {/* Photo background — constrained to hero section only */}
-          <HeroBackground />
-          {/* Dot grid overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none z-[1]" />
-          <div className="relative z-[10] max-w-3xl mx-auto px-4 w-full">
-            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-1 rounded-full text-xs tracking-wider uppercase mb-3 text-white/90">
-              🏆 #1 Rental Kasur di Yogyakarta
+              <div className="home-hero-actions" data-reveal="up" data-reveal-delay="165">
+                <a href="#calculator" className="home-primary-button motion-interactive motion-lift">
+                  Pilih Kasur <ArrowRightIcon />
+                </a>
+                <a
+                  href={getWhatsAppUrl(WA_PRESET_ORDER, 'hero_cta')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="home-secondary-button motion-interactive motion-lift"
+                  data-wa-source="hero_cta"
+                  data-wa-location="hero"
+                >
+                  <WhatsAppIcon /> Chat WhatsApp
+                </a>
+              </div>
+
+              <ul className="home-trust-list" data-reveal="fade" data-reveal-delay="220" aria-label="Keunggulan layanan">
+                <li><CheckIcon /> Antar same-day</li>
+                <li><CheckIcon /> Harga transparan</li>
+                <li><CheckIcon /> Gratis penjemputan</li>
+              </ul>
+
+              <p className="home-direct-contact" data-reveal="fade" data-reveal-delay="250">
+                Butuh bantuan cepat?{' '}
+                <a href={getWhatsAppUrl(undefined, 'hero_phone')} data-wa-source="hero_phone" data-wa-location="hero">
+                  {config.whatsappDisplay}
+                </a>
+              </p>
             </div>
-            <h1 className="text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.15] font-extrabold mb-2 text-center">
-              Jasa Sewa Kasur Jogja No. 1<br />Bersih, Nyaman &amp; Siap Antar Same-Day
-            </h1>
-            <p className="inline-block bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-xs border border-white/20 px-6 py-2 rounded-full text-base font-bold mb-4">
-              Mulai Rp25.000/hari
-            </p>
-
-            {/* Feature badges — compact */}
-            <div className="flex justify-center gap-2 flex-wrap mb-5">
-              <span className="inline-flex items-center gap-1 text-xs bg-white/10 px-2.5 py-1 rounded-full">
-                ✅ Antar hari ini
-              </span>
-              <span className="inline-flex items-center gap-1 text-xs bg-white/10 px-2.5 py-1 rounded-full">
-                ✅ Gratis jemput
-              </span>
-              <span className="inline-flex items-center gap-1 text-xs bg-white/10 px-2.5 py-1 rounded-full">
-                ✅ Kasur bersih &amp; wangi
-              </span>
-            </div>
-
-            {/* CTA buttons */}
-            <div className="flex justify-center gap-3 flex-wrap mb-4">
-              <a
-                href="#calculator"
-                className="inline-flex items-center justify-center px-8 py-3 bg-white !text-[#1e3a8a] font-bold rounded-md shadow-lg hover:bg-gray-50 transition-colors"
-              >
-                Sewa Sekarang
-              </a>
-              <a
-                href={getWhatsAppUrl(WA_PRESET_ORDER, 'hero_cta')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#25d366] !text-white font-bold rounded-md shadow-lg hover:bg-[#1da851] transition-colors"
-                data-wa-source="hero_cta"
-                data-wa-location="hero"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                Chat WhatsApp
-              </a>
-            </div>
-
-            {/* Direct contact — ported from Astro Hero */}
-            <p className="text-sm text-white/70">
-              Atau hubungi langsung:{' '}
-              <a href={getWhatsAppUrl(undefined, 'hero_phone')} className="text-white font-semibold hover:underline" data-wa-source="hero_phone" data-wa-location="hero">
-                {config.whatsappDisplay}
-              </a>
-            </p>
           </div>
         </section>
-
-        {/* Product Picker — lightweight grid replaces the old Calculator form */}
-        <div className="relative z-[10] -mt-10 md:-mt-12">
-          <div
-            style={{
-              background: '#f8fafc',
-              paddingTop: '2rem',
-              paddingBottom: '1.5rem',
-              borderRadius: '28px 28px 0 0',
-              boxShadow: '0 -8px 40px rgba(30, 64, 175, 0.18)',
-            }}
-          >
-            <h2 className="font-bold text-center text-slate-800" style={{ fontSize: '1.25rem', marginBottom: '1.5rem', padding: '0 1rem' }}>
-              ⚡️ Pilih Kasur
-            </h2>
-            <ProductPicker />
-          </div>
-        </div>
       </div>
 
-      {/* Sticky Cart Bar */}
+      <section id="calculator" className="home-catalog" aria-labelledby="catalog-title">
+        <div className="container home-catalog-inner">
+          <div className="home-section-heading" data-reveal="up">
+            <p className="section-eyebrow">Pilih sesuai kebutuhan</p>
+            <h2 id="catalog-title">Kasur dan perlengkapan, dalam satu pilihan yang ringkas.</h2>
+            <p>Tekan detail untuk melihat isi paket, atau langsung tambahkan produk ke pesanan Anda.</p>
+          </div>
+          <ProductPicker />
+        </div>
+      </section>
+
       <CartBar />
 
-      {/* ===== WHY CHOOSE US / BENEFITS ===== */}
-      <section className="py-12 md:py-20 bg-slate-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900">Kenapa Sewa Kasur di Santi Living?</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto mb-12">
-            Kami memberikan jaminan kenyamanan, kesehatan, dan kecepatan layanan untuk setiap pelanggan di Yogyakarta.
-          </p>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-4">
-            {benefits.map((b) => (
-              <FeatureCard key={b.title} icon={b.icon} title={b.title} description={b.desc} />
-            ))}
+      <section className="home-section" aria-labelledby="benefits-title">
+        <div className="container">
+          <div className="home-section-heading centered" data-reveal="up">
+            <p className="section-eyebrow">Layanan yang bisa diandalkan</p>
+            <h2 id="benefits-title">Nyaman sejak memilih hingga kasur dijemput.</h2>
+            <p>Kebersihan, kualitas kasur, dan kecepatan layanan kami jaga dalam satu pengalaman yang sederhana.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ===== KARPET INTERNAL LINK ===== */}
-      <section className="py-10 md:py-14 bg-white border-y border-slate-100">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl rounded-3xl border border-indigo-100 bg-indigo-50 p-6 text-center shadow-sm md:p-8">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-indigo-600">
-              Perlengkapan acara tambahan
-            </p>
-            <h2 className="mb-3 text-2xl font-extrabold text-slate-900">
-              Butuh sewa karpet Jogja untuk hajatan, pengajian, atau event?
-            </h2>
-            <p className="mx-auto mb-5 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
-              Selain sewa kasur, Santi Living juga membuka selector konsultasi untuk karpet merah, karpet permadani, dan paket perlengkapan acara. Cek opsi karpet dari subdomain khusus agar kebutuhan venue bisa dihitung admin.
-            </p>
-            <a
-              href="https://karpet.santiliving.com/sewa-karpet-jogja"
-              className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-6 py-3 text-sm font-bold text-white no-underline shadow-sm hover:bg-indigo-700"
-            >
-              Sewa Karpet Jogja →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== HOW TO RENT (Condensed) ===== */}
-      <section className="py-10 md:py-14 bg-surface border-y border-border">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-center text-xl md:text-2xl font-bold mb-6">
-            Cara Sewa Kasur
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {steps.map((s, i) => (
-              <div key={i} className="text-center group">
-                <div className="text-xl w-12 h-12 flex items-center justify-center rounded-xl bg-white shadow-sm border border-border mx-auto mb-2 group-hover:border-primary transition-colors">
-                  {s.icon}
-                </div>
-                <h3 className="text-xs font-bold mb-1">{s.title}</h3>
-                <p className="text-[10px] leading-tight text-text-secondary">{s.desc}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
+            {benefits.map((benefit, index) => (
+              <div key={benefit.title} data-reveal="up" data-reveal-delay={String((index % 3) * 55)}>
+                <FeatureCard icon={benefit.icon} title={benefit.title} description={benefit.desc} />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-
-      {/* ===== FAQ ===== */}
-      <section className="py-12 md:py-16 bg-surface">
-        <div className="max-w-2xl mx-auto px-4">
-          <FAQAccordion items={faqItems} title="Pertanyaan Umum" />
+      <section className="home-cross-sell">
+        <div className="container home-cross-sell-inner">
+          <div data-reveal="left">
+            <p className="section-eyebrow">Perlengkapan acara</p>
+            <h2>Butuh karpet untuk hajatan, pengajian, atau event?</h2>
+            <p>Jelajahi pilihan karpet merah, permadani, dan paket acara dari katalog khusus Santi Living.</p>
+          </div>
+          <a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="home-text-link motion-interactive motion-lift" data-reveal="right">
+            Lihat pilihan karpet <ArrowRightIcon />
+          </a>
         </div>
       </section>
 
-      {/* ===== PROMO REVIEW GOOGLE MAPS (Moved from above) ===== */}
-      <section className="py-10 bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-inner">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <div className="inline-block bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase mb-2">
-                🔥 PROMO TERBATAS
-              </div>
-              <h2 className="text-2xl md:text-3xl font-extrabold mb-2 text-white">Diskon Ongkir up to 70%!</h2>
-              <p className="text-white/90 max-w-xl">
-                Cukup berikan review bintang 5 di Google Maps Santi Living dan dapatkan potongan biaya pengiriman hingga 70% untuk penyewaan hari ini.
-              </p>
+      <section className="home-section home-section-soft" aria-labelledby="steps-title">
+        <div className="container">
+          <div className="home-section-heading" data-reveal="up">
+            <p className="section-eyebrow">Cara sewa</p>
+            <h2 id="steps-title">Lima langkah, tanpa proses yang membingungkan.</h2>
+          </div>
+          <ol className="home-steps">
+            {steps.map((step, index) => (
+              <li className="home-step" key={step.title} data-reveal="up" data-reveal-delay={String(index * 45)}>
+                <span className="home-step-number">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="home-section" aria-labelledby="faq-title">
+        <div className="container">
+          <div className="max-w-2xl mx-auto" data-reveal="up">
+            <FAQAccordion items={faqItems} title="Pertanyaan Umum" titleId="faq-title" />
+          </div>
+        </div>
+      </section>
+
+      <section className="home-promo">
+        <div className="container home-promo-inner">
+          <div data-reveal="left">
+            <p className="home-promo-label">Promo ulasan pelanggan</p>
+            <h2>Hemat ongkir hingga 70%.</h2>
+            <p>Berikan ulasan di Google Maps setelah menggunakan layanan kami dan dapatkan potongan ongkir sesuai ketentuan promo.</p>
+          </div>
+          <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="home-text-link motion-interactive motion-lift" data-reveal="right">
+            Buka Google Maps <ArrowRightIcon />
+          </a>
+        </div>
+      </section>
+
+      <section id="service-area" className="home-section home-section-soft" aria-labelledby="location-title">
+        <div className="container home-location-grid">
+          <div data-reveal="left">
+            <div className="home-section-heading">
+              <p className="section-eyebrow">Lokasi dan jangkauan</p>
+              <h2 id="location-title">Workshop kami berada di Godean, Sleman.</h2>
+              <p>Kunjungi workshop atau pesan pengantaran ke area layanan aktif di Yogyakarta.</p>
             </div>
-            <div className="flex shrink-0">
-              <a 
-                href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-white text-orange-600 px-8 py-3 rounded-full font-bold shadow-xl hover:scale-105 transition-transform"
-              >
-                Tulis Review Sekarang ⭐
+            <address className="home-address">
+              <strong>Workshop Santi Living</strong>
+              <p>Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung,<br />Kec. Godean, Kabupaten Sleman, DI Yogyakarta 55264</p>
+              <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-bold text-sm hover:underline">
+                Lihat arah di Google Maps
               </a>
-            </div>
+            </address>
+            <ul className="home-area-list" aria-label="Area layanan pengiriman">
+              {serviceAreas.map((area) => <li key={area}>{area}</li>)}
+            </ul>
+          </div>
+          <div className="home-map" data-reveal="right">
+            <iframe
+              src={getStoreMapEmbedUrl()}
+              width="100%"
+              height="100%"
+              style={{ border: 0, minHeight: 'inherit' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Maps - Santi Living"
+              suppressHydrationWarning
+            />
           </div>
         </div>
       </section>
 
-      {/* ===== LOCATION / MAPS ===== */}
-      <section id="location" className="py-12 md:py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-xl md:text-2xl font-bold mb-4">Lokasi Kami</h2>
-              <p className="text-text-secondary mb-4 leading-relaxed">
-                Kunjungi workshop kami di Godean untuk melihat langsung unit kasur kami. Kami siap melayani pengantaran ke area layanan aktif Yogyakarta.
-              </p>
-              <address className="not-italic bg-surface p-5 rounded-xl border border-border mb-4">
-                <p className="font-bold text-primary mb-1">Workshop Santi Living</p>
-                <p className="text-sm text-text-secondary mb-3">
-                  Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung,<br />
-                  Kec. Godean, Kabupaten Sleman,<br />
-                  DI Yogyakarta 55264
-                </p>
-                <a 
-                  href="https://maps.app.goo.gl/DiUP3REYVqYBHtuA8" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline"
-                >
-                  📍 Lihat di Google Maps
-                </a>
-              </address>
-
-              <div className="text-left">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Area Layanan (Delivery)</p>
-                <div className="flex flex-wrap gap-2">
-                  {serviceAreas.map((area) => (
-                    <span key={area} className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
-                      {area}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-card h-[300px] md:h-[350px] border border-border">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.072!2d110.334!3d-7.771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7af78e36749823%3A0x52e28f33478a8a99!2zU2V3YSBLYXN1ciBKb2dqYSAtIFNhbnRpIExpdmluZw!5e0!3m2!1sen!2sid!4v1713400000000!5m2!1sen!2sid"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps - Santi Living"
-                suppressHydrationWarning
-              ></iframe>
-            </div>
+      <section className="home-final-cta">
+        <div className="container home-final-cta-inner">
+          <div data-reveal="left">
+            <h2>Siap menyiapkan tempat tidur yang nyaman?</h2>
+            <p>Pilih kasur langsung dari katalog atau hubungi tim kami bila Anda ingin dibantu menentukan paket.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ===== FINAL CTA ===== */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white text-center">
-        <div className="max-w-xl mx-auto px-4">
-          <h2 className="text-2xl font-bold mb-3 text-center">Siap Sewa Kasur Hari Ini?</h2>
-          <p className="opacity-90 mb-8 leading-relaxed text-center">
-            Pesan sekarang dan kasur bisa sampai hari ini! Tim kami siap mengantarkan kasur bersih ke lokasi Anda.
-          </p>
-          <div className="flex justify-center gap-3 flex-wrap">
-            <a
-              href="#calculator"
-              className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#1e3a8a] font-bold rounded-md hover:bg-gray-50 transition-colors"
-            >
-              Pesan Sekarang
-            </a>
+          <div className="home-hero-actions" data-reveal="right">
+            <a href="#calculator" className="home-primary-button motion-interactive motion-lift">Pilih Kasur <ArrowRightIcon /></a>
             <a
               href={getWhatsAppUrl(WA_PRESET_ORDER, 'footer_cta')}
-              className="inline-flex items-center justify-center px-8 py-3 bg-[#25d366] text-white font-bold rounded-md hover:bg-[#1da851] transition-colors"
+              className="home-secondary-button motion-interactive motion-lift"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               data-wa-source="footer_cta"
               data-wa-location="footer_cta"
             >
-              💬 Chat WhatsApp
+              <WhatsAppIcon /> Chat WhatsApp
             </a>
           </div>
         </div>

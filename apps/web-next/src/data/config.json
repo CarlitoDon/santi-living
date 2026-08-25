@@ -23,9 +23,10 @@
     "https://www.tiktok.com/@santi_mebel"
   ],
   "storeLocation": {
-    "lat": -7.76777,
-    "lng": 110.293886,
-    "name": "Santi Mebel Godean"
+    "lat": -7.7673015,
+    "lng": 110.2938902,
+    "name": "Santi Mebel Godean",
+    "googleMapsUrl": "https://maps.app.goo.gl/DiUP3REYVqYBHtuA8"
   },
   "deliveryZones": [
     { "maxDistance": 3, "price": 0 },

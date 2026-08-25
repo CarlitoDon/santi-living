@@ -6,22 +6,19 @@ interface PageHeroProps {
 
 export function PageHero({ title, subtitle, badge }: PageHeroProps) {
   return (
-    <section className="bg-gradient-to-br from-blue-600 to-[#1a4ea0] py-10 pb-12 text-center text-white relative overflow-hidden">
-      {/* Visual background elements to make it premium */}
-      <div className="absolute top-[10%] left-[5%] w-[150px] h-[150px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_70%)] pointer-events-none" />
-      <div className="absolute -bottom-10 -right-10 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none opacity-50" />
-
+    <section className="relative overflow-hidden bg-slate-900 py-14 text-center text-white md:py-20">
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(255,255,255,0.055),transparent_45%)] pointer-events-none" />
       <div className="container relative z-10 text-center">
         {badge && (
-          <div className="mx-auto mb-4 inline-block rounded-full bg-white/10 px-4 py-1 text-xs sm:text-sm font-semibold uppercase tracking-wider text-blue-100 border border-white/20 backdrop-blur-sm shadow-sm">
+          <div className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-200" data-reveal="up">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
             {badge}
           </div>
         )}
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-white drop-shadow-md tracking-tight text-center">
+        <h1 className="mx-auto mb-4 max-w-3xl text-3xl font-extrabold tracking-[-0.035em] text-white md:text-5xl" data-reveal="up" data-reveal-delay="45">
           {title}
         </h1>
-        <p className="text-lg text-white/90 m-0 max-w-2xl mx-auto drop-shadow-sm font-medium text-center">
+        <p className="mx-auto m-0 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg" data-reveal="up" data-reveal-delay="90">
           {subtitle}
         </p>
       </div>

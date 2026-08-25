@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { describe, it, expect } from "vitest";
+import { beforeEach, describe, it, expect } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useCalculatorState } from "./useCalculatorState";
 import type { CartItem } from "./types";
@@ -32,6 +32,10 @@ const accessoryItem: Omit<CartItem, "quantity"> = {
 // ============================================================
 
 describe("useCalculatorState", () => {
+  beforeEach(() => {
+    sessionStorage.clear();
+  });
+
   it("starts with empty cart and zero totals", () => {
     const { result } = renderHook(() => useCalculatorState());
 

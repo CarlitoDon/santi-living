@@ -2,9 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { reverseGeocode } from "@/scripts/geolocation";
+import { publishLocationSelection } from "@/lib/location-selection";
 import { showAlert } from "@/utils/alert";
 import type L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { usePresence } from "@/hooks/usePresence";
+import { useDialogFocus } from "@/hooks/useDialogFocus";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 const DEFAULT_CENTER: [number, number] = [-7.797068, 110.370529];
 const DEFAULT_ZOOM = 13;
@@ -14,10 +18,14 @@ export function MapPicker() {
   const [addressDisplay, setAddressDisplay] = useState("Klik pada peta untuk memilih lokasi...");
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedCoords, setSelectedCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const presence = usePresence(isOpen, 260);
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
+  useBodyScrollLock(presence.shouldRender);
 
   useEffect(() => {
     const handleOpen = () => {
@@ -35,7 +43,7 @@ export function MapPicker() {
 
   // Initialize map when modal opens
   useEffect(() => {
-    if (!isOpen || !mapContainerRef.current) return;
+    if (!presence.shouldRender || !mapContainerRef.current) return;
 
     let isMounted = true;
 
@@ -134,23 +142,26 @@ export function MapPicker() {
 
     initMap();
     
-    // Prevent document scrolling when modal is open
-    document.body.style.overflow = "hidden";
-
     return () => {
       isMounted = false;
-      document.body.style.overflow = "";
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
         markerRef.current = null;
       }
     };
-  }, [isOpen]);
+  }, [presence.shouldRender]);
 
   const handleClose = () => {
     setIsOpen(false);
   };
+
+  useDialogFocus({
+    isOpen,
+    onClose: handleClose,
+    containerRef: dialogRef,
+    initialFocusRef: cancelButtonRef,
+  });
 
   const handleConfirm = async () => {
     if (!selectedCoords) return;
@@ -162,14 +173,10 @@ export function MapPicker() {
         longitude: selectedCoords.lng,
       });
 
-      window.dispatchEvent(
-        new CustomEvent("location-selected", {
-          detail: {
-            coords: selectedCoords,
-            address,
-          },
-        })
-      );
+      publishLocationSelection({
+        coords: selectedCoords,
+        address,
+      }, 'manual');
       
       handleClose();
     } catch {
@@ -179,14 +186,14 @@ export function MapPicker() {
     }
   };
 
-  if (!isOpen) return null;
+  if (!presence.shouldRender) return null;
 
   return (
-    <div className="map-picker-modal active">
+    <div className="map-picker-modal active" data-state={presence.state} aria-hidden={!isOpen} inert={!isOpen}>
       <div className="map-picker-overlay" onClick={handleClose}></div>
-      <div className="map-picker-content">
+      <div ref={dialogRef} className="map-picker-content" role="dialog" aria-modal="true" aria-labelledby="map-picker-title" tabIndex={-1}>
         <div className="map-picker-header">
-          <h3 className="text-lg font-semibold m-0">Pilih Lokasi Pengantaran</h3>
+          <h3 id="map-picker-title" className="text-lg font-semibold m-0">Pilih Lokasi Pengantaran</h3>
           <p className="map-picker-hint">Klik pada peta untuk menentukan lokasi</p>
         </div>
         <div className="map-picker-map" ref={mapContainerRef}></div>
@@ -194,7 +201,7 @@ export function MapPicker() {
           <span className="address-text text-sm text-slate-700">{addressDisplay}</span>
         </div>
         <div className="map-picker-actions">
-          <button type="button" className="btn-map-cancel" onClick={handleClose}>
+          <button ref={cancelButtonRef} type="button" className="btn-map-cancel" onClick={handleClose}>
             Batal
           </button>
           <button

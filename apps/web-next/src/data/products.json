@@ -255,7 +255,7 @@
       "description_en": "32-inch LED TV rental for entertainment in boarding houses, rentals, or events.",
       "pricePerDay": 50000,
       "costPrice": 30000,
-      "image": "/images/kasur-default.jpg",
+      "image": "/images/tv-32.webp",
       "includes": [
         "TV LED 32 inch",
         "Remote control"
@@ -271,7 +271,7 @@
       "description_en": "Standing fan rental for your room comfort.",
       "pricePerDay": 29000,
       "costPrice": 15000,
-      "image": "/images/kasur-default.jpg",
+      "image": "/images/kipas-angin-berdiri.webp",
       "includes": [
         "Kipas angin berdiri"
       ],
@@ -286,7 +286,7 @@
       "description_en": "Air cooler rental for a cooler room. Energy efficient and easy to move.",
       "pricePerDay": 35000,
       "costPrice": 20000,
-      "image": "/images/kasur-default.jpg",
+      "image": "/images/air-cooler.webp",
       "includes": [
         "Air cooler",
         "Remote control"
