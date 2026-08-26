@@ -6,9 +6,12 @@ import { getNotionPost, getNotionPosts, type NotionPost } from '@/lib/notion';
 import { remark } from 'remark';
 import html from 'remark-html';
 import { getTranslatedAuthor } from '@/utils/author';
+import { cache } from 'react';
 
 export const dynamicParams = true;
-export const revalidate = 60;
+export const revalidate = 21600;
+const BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE = 40;
+const BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE = 40;
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -51,6 +54,12 @@ function normalizePost(post: NotionPost | MarkdownPost | null | undefined): Arti
   };
 }
 
+const getRawArticlePost = cache(async (slug: string, locale: string) => {
+  // Most of the catalog lives in the repository. Resolve it synchronously so
+  // local articles never spend a Notion request or Function duration.
+  return getPostBySlug(slug, locale) || await getNotionPost(slug);
+});
+
 function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string): string {
   return htmlContent.replace(/href="https:\/\/wa\.me\/(\d+)(\?[^"]*)?"/g, (match, phone: string, query = '') => {
     try {
@@ -77,10 +86,14 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string)
 
 export async function generateStaticParams() {
   const locales = ['id', 'en'];
-  const notionPosts = await getNotionPosts();
+  const notionPosts = (await getNotionPosts())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE);
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
-    const posts = getAllPosts(locale);
+    const posts = getAllPosts(locale)
+      .sort((a, b) => b.frontmatter.pubDate.getTime() - a.frontmatter.pubDate.getTime())
+      .slice(0, BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE);
     const allSlugs = new Set<string>();
     posts.forEach(p => allSlugs.add(p.slug));
     notionPosts.forEach(p => allSlugs.add(p.slug));
@@ -94,7 +107,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const rawPost = (await getNotionPost(slug)) || getPostBySlug(slug, locale);
+  const rawPost = await getRawArticlePost(slug, locale);
   const post = normalizePost(rawPost);
   if (!post) return { title: locale === 'en' ? 'Article Not Found' : 'Artikel Tidak Ditemukan' };
 
@@ -138,7 +151,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ArtikelSlugPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const rawPost = (await getNotionPost(slug)) || getPostBySlug(slug, locale);
+  const rawPost = await getRawArticlePost(slug, locale);
   const post = normalizePost(rawPost);
   if (!post) notFound();
 

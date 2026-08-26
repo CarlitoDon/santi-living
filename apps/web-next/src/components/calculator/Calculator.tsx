@@ -10,13 +10,10 @@ import type { Product, CustomerData } from "./types";
 import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
-import { config } from "@/data/config";
-import { haversineDistance, calculateDeliveryFee } from "@/lib/calculator-logic";
-import dynamic from "next/dynamic";
 import { showAlert } from "@/utils/alert";
 import { ProductModal } from "@/components/produk/ProductCard";
-
-const MapPicker = dynamic(() => import("./MapPicker").then(mod => mod.MapPicker), { ssr: false });
+import { useDeliveryQuote } from "@/hooks/useDeliveryQuote";
+import { isDiyProvince, requestLocationPicker } from "@/lib/location-selection";
 
 declare global {
   interface Window {
@@ -86,6 +83,11 @@ export function Calculator({
   const [originalOrderId, setOriginalOrderId] = useState<string | null>(null);
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const searchParams = useSearchParams();
+  const deliveryQuoteStatus = useDeliveryQuote({
+    latitude: customer.address.lat,
+    longitude: customer.address.lng,
+    onQuote: actions.setDeliveryFee,
+  });
 
   // Ref to track if we've already pre-filled (prevents infinite loop)
   const hasPrefilledRef = useRef(false);
@@ -186,23 +188,6 @@ export function Calculator({
           );
         }
 
-        // Pre-fill delivery fee if we have coordinates
-        if (order.addressFields?.lat && order.addressFields?.lng) {
-          const lat = parseFloat(order.addressFields.lat);
-          const lng = parseFloat(order.addressFields.lng);
-          if (!isNaN(lat) && !isNaN(lng)) {
-            const storeLocation = config.storeLocation;
-            const distance = haversineDistance(
-              lat,
-              lng,
-              storeLocation.lat,
-              storeLocation.lng,
-            );
-
-            const fee = calculateDeliveryFee(distance);
-            actions.setDeliveryFee(fee, distance);
-          }
-        }
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only effect for edit mode prefill
@@ -244,28 +229,6 @@ export function Calculator({
     }
   }, [customer, editMode]);
 
-  // Recalculate delivery fee when lat/lng changes (from dropdown or GPS)
-  useEffect(() => {
-    const { lat, lng } = customer.address;
-    if (!lat || !lng) return;
-
-    const latNum = parseFloat(lat);
-    const lngNum = parseFloat(lng);
-    if (isNaN(latNum) || isNaN(lngNum)) return;
-
-    const storeLocation = config.storeLocation;
-    const distance = haversineDistance(
-      latNum,
-      lngNum,
-      storeLocation.lat,
-      storeLocation.lng,
-    );
-
-    const fee = calculateDeliveryFee(distance);
-    actions.setDeliveryFee(fee, distance);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- only recalculate when coordinates change
-  }, [customer.address.lat, customer.address.lng]);
-
   const clearError = useCallback((field: string) => {
     setErrors((prev) => {
       const { [field]: _removed, ...rest } = prev;
@@ -292,6 +255,11 @@ export function Calculator({
     try {
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
+
+      if (!isDiyProvince(address.provinsi)) {
+        requestLocationPicker("outside-diy");
+        return;
+      }
 
       // Match address names to Nusantarakita kode values
       const { matchAddressToKode } = await import("@/services/address-matcher");
@@ -328,18 +296,6 @@ export function Calculator({
         },
       }));
 
-      // Calculate delivery fee based on distance
-      const storeLocation = config.storeLocation;
-      const distance = haversineDistance(
-        coords.latitude,
-        coords.longitude,
-        storeLocation.lat,
-        storeLocation.lng
-      );
-
-      const fee = calculateDeliveryFee(distance);
-      actions.setDeliveryFee(fee, distance);
-
       // Clear location error since we now have coordinates
       clearError("addressLocation");
     } catch (error) {
@@ -351,7 +307,7 @@ export function Calculator({
         "error"
       );
     }
-  }, [actions, clearError]);
+  }, [clearError]);
 
   const handleMapPickerClick = useCallback(() => {
     console.log("Map Picker Request Dispatched");
@@ -398,18 +354,6 @@ export function Calculator({
         },
       }));
 
-      // Calculate delivery fee
-      const storeLocation = config.storeLocation;
-      const distance = haversineDistance(
-        coords.lat,
-        coords.lng,
-        storeLocation.lat,
-        storeLocation.lng,
-      );
-
-      const fee = calculateDeliveryFee(distance);
-      actions.setDeliveryFee(fee, distance);
-
       // Clear location error since we now have coordinates
       clearError("addressLocation");
     };
@@ -423,7 +367,7 @@ export function Calculator({
     return () => {
       window.removeEventListener("location-selected", eventHandler);
     };
-  }, [actions, clearError]);
+  }, [clearError]);
 
   // Handle deep links from product page (e.g., /?id=paket-single#calculator)
   useEffect(() => {
@@ -760,6 +704,7 @@ export function Calculator({
               onClearError={clearError}
               onLocationClick={handleLocationClick}
               onMapPickerClick={handleMapPickerClick}
+              deliveryQuoteStatus={deliveryQuoteStatus}
             />
           </div>
 
@@ -774,7 +719,6 @@ export function Calculator({
           />
         </div>
       </div>
-      <MapPicker />
       <ProductModal
         product={modalProduct}
         isOpen={!!modalProduct}

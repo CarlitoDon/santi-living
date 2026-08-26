@@ -12,13 +12,6 @@ function formatRupiah(value: number): string {
   return `Rp${new Intl.NumberFormat('id-ID').format(value)}`;
 }
 
-function formatDistance(value: number): string {
-  return new Intl.NumberFormat('id-ID', {
-    minimumFractionDigits: 3,
-    maximumFractionDigits: 3,
-  }).format(value);
-}
-
 function applyAddress(text: string, addressText?: string | null): string {
   const address = String(addressText || '').trim();
   if (!address) return text;
@@ -51,11 +44,8 @@ export function buildWhatsAppLocationText(
   ];
 
   if (location.quote) {
-    const rawFee = (location.quote.distanceKm * 4 / 10) * 10_000;
     lines.push(
-      `Jarak berkendara dari workshop: ${formatDistance(location.quote.distanceKm)} km`,
-      `Rumus ongkir: ${formatDistance(location.quote.distanceKm)} × 4 ÷ 10 × Rp10.000 = ${formatRupiah(rawFee)}`,
-      `Estimasi ongkir antar-jemput (dibulatkan ke atas Rp1.000): ${formatRupiah(location.quote.deliveryFee)}`,
+      `Estimasi ongkir antar-jemput: ${formatRupiah(location.quote.deliveryFee)}`,
     );
   } else {
     lines.push('Estimasi ongkir: belum dapat dihitung otomatis');

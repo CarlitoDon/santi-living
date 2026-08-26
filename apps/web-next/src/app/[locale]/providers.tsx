@@ -5,6 +5,12 @@ import { LocaleProvider } from '@/contexts/locale';
 import { HashScrollHandler } from '@/components/ui/HashScrollHandler';
 import type { ReactNode } from 'react';
 import type { Locale } from '@/contexts/locale';
+import dynamic from 'next/dynamic';
+
+const GlobalMapPicker = dynamic(
+  () => import('@/components/calculator/MapPicker').then((mod) => mod.MapPicker),
+  { ssr: false },
+);
 
 export function Providers({
   children,
@@ -20,6 +26,7 @@ export function Providers({
       <CalculatorProvider>
         <HashScrollHandler />
         {children}
+        <GlobalMapPicker />
       </CalculatorProvider>
     </LocaleProvider>
   );

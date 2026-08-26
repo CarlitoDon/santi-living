@@ -537,6 +537,16 @@ input[type="number"]::-webkit-outer-spin-button {
   border-bottom: 1px solid var(--color-border);
 }
 
+.map-picker-eyebrow {
+  display: inline-block;
+  margin-bottom: var(--space-1);
+  color: var(--color-primary);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .map-picker-header h3 {
   margin: 0;
   font-size: var(--font-size-lg);
@@ -548,6 +558,101 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
+
+.map-picker-search {
+  position: relative;
+  z-index: 1001;
+  padding: var(--space-3) var(--space-6);
+  background: var(--color-surface-elevated);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.map-picker-search > label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.map-picker-search-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 46px;
+  padding: 0 var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+}
+
+.map-picker-search-field:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 16%, transparent);
+}
+
+.map-picker-search-field input {
+  min-width: 0;
+  flex: 1;
+  padding: var(--space-2) 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--color-text);
+  font: inherit;
+}
+
+.map-picker-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: map-picker-spin 700ms linear infinite;
+}
+
+@keyframes map-picker-spin { to { transform: rotate(360deg); } }
+
+.map-picker-search-feedback {
+  min-height: 1.2rem;
+  padding-top: var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.map-picker-results {
+  position: absolute;
+  top: calc(100% - var(--space-2));
+  right: var(--space-6);
+  left: var(--space-6);
+  max-height: 230px;
+  overflow-y: auto;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.map-picker-results button {
+  display: block;
+  width: 100%;
+  padding: var(--space-3);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.map-picker-results button:last-child { border-bottom: 0; }
+.map-picker-results button:hover,
+.map-picker-results button:focus-visible { background: var(--color-surface); outline: none; }
+.map-picker-results strong,
+.map-picker-results span { display: block; }
+.map-picker-results strong { margin-bottom: 2px; font-size: var(--font-size-sm); }
+.map-picker-results span { color: var(--color-text-muted); font-size: 0.75rem; line-height: 1.4; }
 
 .map-picker-map {
   height: 350px;
@@ -620,6 +725,31 @@ input[type="number"]::-webkit-outer-spin-button {
 .btn-map-confirm:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .map-picker-content {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    max-height: 92dvh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform: none;
+  }
+  .map-picker-modal[data-state="entering"] .map-picker-content,
+  .map-picker-modal[data-state="exiting"] .map-picker-content { transform: translateY(18px); }
+  .map-picker-header,
+  .map-picker-search,
+  .map-picker-actions { padding-right: var(--space-4); padding-left: var(--space-4); }
+  .map-picker-results { right: var(--space-4); left: var(--space-4); }
+  .map-picker-map { min-height: 220px; height: 32vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-picker-spinner { animation-duration: 1.4s; }
 }
 
 /* Button for opening map */

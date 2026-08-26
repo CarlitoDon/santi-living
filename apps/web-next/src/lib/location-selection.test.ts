@@ -3,14 +3,44 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  consumeLocationPickerReason,
+  isDiyProvince,
   LOCATION_SELECTION_CACHE_KEY,
+  LOCATION_PICKER_PROMPT_KEY,
   publishLocationSelection,
+  requestLocationPicker,
   type LocationSelection,
 } from './location-selection';
 
 describe('publishLocationSelection', () => {
   beforeEach(() => {
     sessionStorage.clear();
+  });
+
+  it.each([
+    'Daerah Istimewa Yogyakarta',
+    'DI Yogyakarta',
+    'D.I. Yogyakarta',
+    'DIY',
+    'Yogyakarta',
+  ])('recognizes %s as the DIY province', (province) => {
+    expect(isDiyProvince(province)).toBe(true);
+  });
+
+  it.each(['Jawa Tengah', 'DKI Jakarta', '', undefined])(
+    'does not classify %s as DIY',
+    (province) => expect(isDiyProvince(province)).toBe(false),
+  );
+
+  it('persists and emits an outside-DIY prompt until consumed', () => {
+    const listener = vi.fn();
+    window.addEventListener('open-map-picker', listener);
+    requestLocationPicker('outside-diy');
+    expect(sessionStorage.getItem(LOCATION_PICKER_PROMPT_KEY)).toBe('outside-diy');
+    expect(listener).toHaveBeenCalledOnce();
+    expect(consumeLocationPickerReason()).toBe('outside-diy');
+    expect(sessionStorage.getItem(LOCATION_PICKER_PROMPT_KEY)).toBeNull();
+    window.removeEventListener('open-map-picker', listener);
   });
 
   it('replaces stale GPS coordinates before publishing a manual map selection', () => {

@@ -8,7 +8,7 @@ const location = {
 };
 
 describe('buildWhatsAppLocationText', () => {
-  it('adds the precise address, coordinate link, driving distance, and delivery fee', () => {
+  it('adds the precise address, coordinate link, and only the final delivery fee', () => {
     const message = buildWhatsAppLocationText(
       'Halo Admin\n\nAlamat pengiriman:\n{alamat lengkap}',
       {
@@ -24,9 +24,10 @@ describe('buildWhatsAppLocationText', () => {
     expect(message).toContain('Alamat pengiriman:\nJl. Contoh No. 7, Sleman');
     expect(message).toContain('Google Maps (lokasi presisi):');
     expect(message).toContain('query=-7.8000123%2C110.3999877');
-    expect(message).toContain('Jarak berkendara dari workshop: 12,345 km');
-    expect(message).toContain('Rumus ongkir: 12,345 × 4 ÷ 10 × Rp10.000 = Rp49.380');
-    expect(message).toContain('Estimasi ongkir antar-jemput (dibulatkan ke atas Rp1.000): Rp50.000');
+    expect(message).toContain('Estimasi ongkir antar-jemput: Rp50.000');
+    expect(message).not.toContain('Jarak berkendara');
+    expect(message).not.toContain('Rumus ongkir');
+    expect(message).not.toContain('dibulatkan');
   });
 
   it('does not invent a fee when Google Routes is unavailable', () => {
@@ -40,7 +41,7 @@ describe('buildWhatsAppLocationText', () => {
     expect(message).not.toContain('Estimasi ongkir antar-jemput:');
   });
 
-  it('keeps three distance decimals so the displayed formula is reproducible', () => {
+  it('does not disclose distance or calculation details', () => {
     const message = buildWhatsAppLocationText('Halo Admin', {
       ...location,
       quote: {
@@ -50,8 +51,9 @@ describe('buildWhatsAppLocationText', () => {
       },
     });
 
-    expect(message).toContain('Jarak berkendara dari workshop: 12,300 km');
-    expect(message).toContain('Rumus ongkir: 12,300 × 4 ÷ 10 × Rp10.000 = Rp49.200');
+    expect(message).toContain('Estimasi ongkir antar-jemput: Rp50.000');
+    expect(message).not.toContain('12,300');
+    expect(message).not.toContain('Rumus');
   });
 
   it('does not append the precise location block twice', () => {

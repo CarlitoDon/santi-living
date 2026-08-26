@@ -3,8 +3,10 @@
 import { useEffect, useRef } from 'react';
 import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import {
+  isDiyProvince,
   LOCATION_SELECTION_CACHE_KEY,
   publishLocationSelection,
+  requestLocationPicker,
   type LocationSelection,
 } from '@/lib/location-selection';
 
@@ -45,6 +47,12 @@ function parseStoredLocation(raw: string): LocationDetail | null {
 }
 
 function dispatchLocation(detail: LocationDetail): void {
+  if (!isDiyProvince(detail.address.provinsi)) {
+    console.debug('[auto-location] Visitor is outside DIY; asking for the delivery destination.');
+    requestLocationPicker('outside-diy');
+    return;
+  }
+
   const published = publishLocationSelection(detail, detail.source ?? 'automatic');
   if (!published) {
     console.debug('[auto-location] Ignored late GPS result after manual selection.');

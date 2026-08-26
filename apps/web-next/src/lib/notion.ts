@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
+import { unstable_cache } from 'next/cache';
+
+const NOTION_CACHE_SECONDS = 6 * 60 * 60;
 
 const notion = new Client({
   auth: process.env.NOTION_API_KEY,
@@ -40,7 +43,7 @@ function getPropertyText(property: any): string {
   return '';
 }
 
-export async function getNotionPosts(): Promise<NotionPost[]> {
+async function queryNotionPosts(): Promise<NotionPost[]> {
   const databaseId = process.env.NOTION_BLOG_DATABASE_ID;
   if (!databaseId) {
     console.warn('No NOTION_BLOG_DATABASE_ID found');
@@ -80,7 +83,7 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload),
-      next: { revalidate: 60 }
+      cache: 'no-store',
     });
 
     if (!response.ok) {
@@ -112,7 +115,17 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
   });
 }
 
-export async function getNotionPost(slug: string): Promise<NotionPost | null> {
+const getCachedNotionPosts = unstable_cache(
+  queryNotionPosts,
+  ['notion-blog-posts-v2'],
+  { revalidate: NOTION_CACHE_SECONDS, tags: ['notion-blog'] },
+);
+
+export async function getNotionPosts(): Promise<NotionPost[]> {
+  return getCachedNotionPosts();
+}
+
+const getCachedNotionPost = unstable_cache(async (slug: string): Promise<NotionPost | null> => {
   const posts = await getNotionPosts();
   const postInfo = posts.find(p => p.slug === slug);
   if (!postInfo) return null;
@@ -129,4 +142,11 @@ export async function getNotionPost(slug: string): Promise<NotionPost | null> {
     console.error('Error fetching Notion markdown for page:', postInfo.id, err);
     return postInfo;
   }
+}, ['notion-blog-post-v2'], {
+  revalidate: NOTION_CACHE_SECONDS,
+  tags: ['notion-blog'],
+});
+
+export async function getNotionPost(slug: string): Promise<NotionPost | null> {
+  return getCachedNotionPost(slug);
 }
