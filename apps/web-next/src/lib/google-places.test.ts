@@ -32,6 +32,9 @@ describe('searchGooglePlaces', () => {
       id: 'jogja-place', name: 'Hotel Jogja', address: 'Jl. Malioboro, Kota Yogyakarta', lat: -7.792, lng: 110.366,
     }]);
     expect(fetchMock.mock.calls[0]?.[1]?.headers).toMatchObject({ 'X-Goog-Api-Key': 'test-key' });
+    expect(JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))).toMatchObject({
+      locationBias: { circle: { radius: 50_000 } },
+    });
   });
 
   it('fails closed when the server key is missing', async () => {

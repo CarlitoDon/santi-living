@@ -3,6 +3,7 @@ import { STORE_LOCATION } from '@/lib/store-location';
 
 const GOOGLE_PLACES_ENDPOINT = 'https://places.googleapis.com/v1/places:searchText';
 const GOOGLE_PLACES_TIMEOUT_MS = 5_000;
+const GOOGLE_PLACES_MAX_BIAS_RADIUS_METERS = 50_000;
 
 const GooglePlacesResponseSchema = z.object({
   places: z.array(z.object({
@@ -76,7 +77,8 @@ export async function searchGooglePlaces(query: string): Promise<GooglePlaceSear
         locationBias: {
           circle: {
             center: { latitude: STORE_LOCATION.lat, longitude: STORE_LOCATION.lng },
-            radius: 70_000,
+            // Places API (New) rejects circle bias radii above 50 km.
+            radius: GOOGLE_PLACES_MAX_BIAS_RADIUS_METERS,
           },
         },
       }),
