@@ -29,6 +29,96 @@
   pointer-events: none;
 }
 
+.home-hero-switcher {
+  position: absolute;
+  z-index: 6;
+  right: max(1.25rem, calc((100vw - 1200px) / 2));
+  bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.3rem;
+  border: 1px solid rgb(255 249 240 / 20%);
+  border-radius: 0.8rem;
+  color: var(--color-text-inverse);
+  background: rgb(35 24 19 / 62%);
+  box-shadow: 0 12px 32px rgb(20 13 10 / 24%);
+  backdrop-filter: blur(12px);
+}
+
+.home-hero-switcher-button,
+.home-hero-switcher-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.home-hero-switcher-button {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.55rem;
+  background: transparent;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.home-hero-switcher-button:hover {
+  color: var(--color-brown-deep);
+  background: var(--color-cream-soft);
+}
+
+.home-hero-switcher-button:active {
+  transform: scale(0.94);
+}
+
+.home-hero-switcher-button:focus-visible,
+.home-hero-switcher-dot:focus-visible {
+  outline: 2px solid var(--color-cream-soft);
+  outline-offset: 2px;
+}
+
+.home-hero-switcher-button svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.home-hero-switcher-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0 0.45rem;
+}
+
+.home-hero-switcher-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  padding: 0;
+  border-radius: 999px;
+  background: rgb(255 249 240 / 38%);
+  transition: width 260ms ease, background-color 260ms ease;
+}
+
+.home-hero-switcher-dot.is-active {
+  width: 1.35rem;
+  background: #e8cda8;
+}
+
+.home-hero-switcher-count {
+  min-width: 3.1rem;
+  color: rgb(255 249 240 / 72%);
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
 .home-hero-inner {
   position: relative;
   z-index: 5;
@@ -454,6 +544,27 @@
   .home-hero {
     min-height: 560px;
     align-items: flex-end;
+  }
+
+  .home-hero-switcher {
+    top: 1rem;
+    right: 1rem;
+    bottom: auto;
+    padding: 0.25rem;
+  }
+
+  .home-hero-switcher-button {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+
+  .home-hero-switcher-dots {
+    display: none;
+  }
+
+  .home-hero-switcher-count {
+    min-width: 2.85rem;
+    font-size: 0.65rem;
   }
 
   .home-hero-inner {

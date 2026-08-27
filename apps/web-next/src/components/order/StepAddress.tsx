@@ -7,13 +7,10 @@ import { useAddressDropdown } from '@/components/calculator/useAddressDropdown';
 import { SearchableDropdown } from '@/components/calculator/SearchableDropdown';
 import { DIY_PROVINCE } from '@/services/nusantarakita-api';
 import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
-import { config } from '@/data/config';
-import { haversineDistance, calculateDeliveryFee } from '@/lib/calculator-logic';
 import { showAlert } from '@/utils/alert';
-import dynamic from 'next/dynamic';
 import '@/components/calculator/styles.css';
-
-const MapPicker = dynamic(() => import('@/components/calculator/MapPicker').then((mod) => mod.MapPicker), { ssr: false });
+import { useDeliveryQuote } from '@/hooks/useDeliveryQuote';
+import { isDiyProvince, requestLocationPicker } from '@/lib/location-selection';
 
 interface LocationSelectedEventDetail {
   coords: { lat: number; lng: number };
@@ -39,6 +36,11 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
   const { customer, setCustomer, actions } = useCalculatorContext();
   const [isLocating, setIsLocating] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<'kota' | 'kecamatan' | 'kelurahan' | null>(null);
+  const deliveryQuoteStatus = useDeliveryQuote({
+    latitude: customer.address.lat,
+    longitude: customer.address.lng,
+    onQuote: actions.setDeliveryFee,
+  });
 
   const handleAddressChange = useCallback((updates: Partial<AddressFields>) => {
     setCustomer({
@@ -66,20 +68,6 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
     handleKelurahanChange,
     error: apiError,
   } = useAddressDropdown(customer.address, handleAddressChange);
-
-  // Recalculate delivery fee when coords change
-  const addressLat = customer.address.lat;
-  const addressLng = customer.address.lng;
-  useEffect(() => {
-    if (!addressLat || !addressLng) return;
-    const latNum = parseFloat(addressLat);
-    const lngNum = parseFloat(addressLng);
-    if (isNaN(latNum) || isNaN(lngNum)) return;
-    const storeLocation = config.storeLocation;
-    const distance = haversineDistance(latNum, lngNum, storeLocation.lat, storeLocation.lng);
-    const fee = calculateDeliveryFee(distance);
-    actions.setDeliveryFee(fee, distance);
-  }, [addressLat, addressLng, actions]);
 
   // Auto-prefill from cached GPS (set by useAutoLocation on homepage)
   const didAutoPrefillRef = useRef(false);
@@ -187,6 +175,11 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
 
+      if (!isDiyProvince(address.provinsi)) {
+        requestLocationPicker('outside-diy');
+        return;
+      }
+
       const { matchAddressToKode } = await import('@/services/address-matcher');
       const matched = await matchAddressToKode({
         kelurahan: address.kelurahan,
@@ -271,11 +264,16 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
       {errors.addressLocation && <p className="wizard-error">{errors.addressLocation}</p>}
 
       {/* Delivery fee badge */}
-      {actions.state.deliveryFee > 0 && (
+      {deliveryQuoteStatus === 'loading' && (
+        <div className="wizard-info-box" role="status">🚚 Menghitung ongkir dari rute perjalanan…</div>
+      )}
+      {deliveryQuoteStatus === 'ready' && (
         <div className="wizard-info-box">
           🚚 Ongkir: <strong>Rp{new Intl.NumberFormat('id-ID').format(actions.state.deliveryFee)}</strong>
-          {actions.state.distance > 0 && <span> ({actions.state.distance.toFixed(1)} km)</span>}
         </div>
+      )}
+      {deliveryQuoteStatus === 'error' && (
+        <p className="wizard-error" role="status">Ongkir belum dapat dihitung otomatis. Coba pilih ulang titik.</p>
       )}
 
       {/* Street */}
@@ -390,7 +388,6 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
         </button>
       </div>
 
-      <MapPicker />
     </div>
   );
 }

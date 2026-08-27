@@ -8,6 +8,7 @@ import type { AddressFields, CustomerData } from "./types";
 import { useAddressDropdown } from "./useAddressDropdown";
 import { SearchableDropdown } from "./SearchableDropdown";
 import { DIY_PROVINCE } from "@/services/nusantarakita-api";
+import type { DeliveryQuoteStatus } from "@/hooks/useDeliveryQuote";
 import "./styles.css";
 
 interface AddressSectionProps {
@@ -17,6 +18,7 @@ interface AddressSectionProps {
   onClearError: (field: string) => void;
   onLocationClick: () => void;
   onMapPickerClick: () => void;
+  deliveryQuoteStatus: DeliveryQuoteStatus;
 }
 
 export function AddressSection({
@@ -26,6 +28,7 @@ export function AddressSection({
   onClearError,
   onLocationClick,
   onMapPickerClick,
+  deliveryQuoteStatus,
 }: AddressSectionProps) {
   const [isLocating, setIsLocating] = useState(false);
   // Track which dropdown is currently open for cascading behavior
@@ -160,6 +163,21 @@ export function AddressSection({
       {errors.addressLocation && (
         <p className="calc-error-message" style={{ marginTop: "0.5rem" }}>
           {errors.addressLocation}
+        </p>
+      )}
+      {deliveryQuoteStatus === "loading" && (
+        <p className="calc-location-status" role="status">
+          Menghitung ongkir dari rute perjalanan…
+        </p>
+      )}
+      {deliveryQuoteStatus === "ready" && (
+        <p className="calc-location-status success" role="status">
+          Ongkir sudah dihitung otomatis.
+        </p>
+      )}
+      {deliveryQuoteStatus === "error" && (
+        <p className="calc-error-message" role="status" style={{ marginTop: "0.5rem" }}>
+          Ongkir belum dapat dihitung otomatis. Coba pilih ulang titik lokasi.
         </p>
       )}
 

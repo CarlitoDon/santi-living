@@ -13,10 +13,12 @@ import { localeHref } from '@/utils/localeHref';
 import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { usePresence } from '@/hooks/usePresence';
+import { useMainSiteHref } from '@/hooks/useMainSiteHref';
 
 type NavLink = {
   href: string;
   label: string;
+  site?: 'main' | 'current';
   children?: Array<{ href: string; label: string }>;
 };
 
@@ -33,6 +35,7 @@ export function Navigation() {
   const t = useT();
   const { locale } = useLocale();
   const presence = usePresence(isOpen, 300);
+  const getMainSiteHref = useMainSiteHref(locale);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -124,10 +127,10 @@ export function Navigation() {
 
   const contextNavLink: NavLink =
     hostCta.context === 'karpet' || hostCta.context === 'permadani'
-      ? { href: '#calculator', label: t('nav.cek_opsi') }
+      ? { href: '#calculator', label: t('nav.cek_opsi'), site: 'current' }
       : hostCta.context === 'acara'
-        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.paket_event') }
-        : { href: '/#calculator', label: t('nav.hitung_biaya') };
+        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.paket_event'), site: 'current' }
+        : { href: '/#calculator', label: t('nav.hitung_biaya'), site: 'current' };
 
   const navLinks: NavLink[] = [
     { href: '/', label: t('nav.beranda') },
@@ -206,6 +209,9 @@ export function Navigation() {
             <ul className="list-none p-0 m-0">
               {navLinks.map((link) => {
                 const linkHref = localeHref(link.href, locale);
+                const navigationHref = link.site === 'current'
+                  ? linkHref
+                  : getMainSiteHref(link.href);
                 
                 let isActive = false;
                 const hasHash = link.href.includes('#');
@@ -223,7 +229,7 @@ export function Navigation() {
                 return (
                   <li key={link.href} className="nav-drawer-item mb-1">
                     <Link 
-                      href={typeof link.href === 'string' ? localeHref(link.href, locale) : link.href} 
+                      href={navigationHref}
                       className={`block px-3 py-2.5 rounded-lg text-[0.95rem] font-medium motion-interactive ${
                         isActive 
                           ? 'text-blue-600 bg-blue-50 font-bold shadow-[inset_0_0_0_1px_#dbeafe]' 
@@ -247,7 +253,7 @@ export function Navigation() {
                     {link.children && (
                       <ul className="pl-4 mt-2">
                         {link.children.map((sub) => {
-                          const subHref = localeHref(sub.href, locale);
+                          const subHref = getMainSiteHref(sub.href);
                           const isSubActive = pathname === subHref || (subHref !== '/' + locale && pathname.startsWith(subHref));
                           return (
                             <li key={sub.href} className="mb-1">
