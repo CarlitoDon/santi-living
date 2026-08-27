@@ -1,14 +1,20 @@
 /**
  * AddressSection Component - matches original Calculator.astro styling
  * Updated with searchable dropdowns for Provinsi → Kab/Kota → Kecamatan → Kelurahan
+ * + Quick delivery estimate dropdown (no GPS required)
  */
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import type { AddressFields, CustomerData } from "./types";
 import { useAddressDropdown } from "./useAddressDropdown";
 import { SearchableDropdown } from "./SearchableDropdown";
 import { DIY_PROVINCE } from "@/services/nusantarakita-api";
 import type { DeliveryQuoteStatus } from "@/hooks/useDeliveryQuote";
+import {
+  DELIVERY_ZONES,
+  getEstimateByKecamatan,
+  type EstimateResult,
+} from "@/lib/delivery-zones";
 import "./styles.css";
 
 interface AddressSectionProps {
@@ -19,7 +25,14 @@ interface AddressSectionProps {
   onLocationClick: () => void;
   onMapPickerClick: () => void;
   deliveryQuoteStatus: DeliveryQuoteStatus;
+  /** Called with the estimated fee and km from the quick-estimate dropdown */
+  onQuickEstimate?: (fee: number, distanceKm: number) => void;
 }
+
+/** Sorted, deduplicated kecamatan names for the quick-estimate dropdown */
+const QUICK_KECAMATAN_OPTIONS = DELIVERY_ZONES.map((z) => z.kecamatan)
+  .sort((a, b) => a.localeCompare(b, "id"))
+  .filter((name, i, arr) => arr.indexOf(name) === i);
 
 export function AddressSection({
   customer,
@@ -29,12 +42,33 @@ export function AddressSection({
   onLocationClick,
   onMapPickerClick,
   deliveryQuoteStatus,
+  onQuickEstimate,
 }: AddressSectionProps) {
   const [isLocating, setIsLocating] = useState(false);
   // Track which dropdown is currently open for cascading behavior
   const [openDropdown, setOpenDropdown] = useState<
     "kota" | "kecamatan" | "kelurahan" | null
   >(null);
+
+  // Quick-estimate state
+  const [quickEstimate, setQuickEstimate] = useState<EstimateResult | null>(
+    null,
+  );
+
+  const handleQuickKecamatanChange = useCallback(
+    (kecamatanName: string) => {
+      if (!kecamatanName) {
+        setQuickEstimate(null);
+        return;
+      }
+      const estimate = getEstimateByKecamatan(kecamatanName);
+      setQuickEstimate(estimate);
+      if (estimate && onQuickEstimate) {
+        onQuickEstimate(estimate.fee, estimate.distanceKm);
+      }
+    },
+    [onQuickEstimate],
+  );
 
   const handleAddressChange = (updates: Partial<AddressFields>) => {
     onChange({
@@ -121,6 +155,57 @@ export function AddressSection({
       <div className="calc-section-header">
         <span className="calc-section-number">4</span>
         <span className="calc-section-title">Alamat Pengantaran</span>
+      </div>
+
+      {/* ── Quick Delivery Estimate Dropdown ───────────────────────── */}
+      <div
+        className="calc-form-group"
+        style={{
+          marginBottom: "1rem",
+          padding: "0.75rem",
+          background: "#f0fdf4",
+          borderRadius: "8px",
+          border: "1px solid #bbf7d0",
+        }}
+      >
+        <label
+          htmlFor="quickEstimateKecamatan"
+          className="calc-form-label"
+          style={{ marginBottom: "0.25rem" }}
+        >
+          ⚡ Estimasi Ongkir Cepat
+          <span
+            style={{
+              display: "block",
+              fontSize: "0.75rem",
+              fontWeight: "400",
+              color: "#64748b",
+              marginTop: "2px",
+            }}
+          >
+            Pilih kecamatan untuk estimasi ongkir instan tanpa GPS
+          </span>
+        </label>
+        <SearchableDropdown
+          id="quickEstimateKecamatan"
+          options={QUICK_KECAMATAN_OPTIONS.map((k) => ({
+            value: k,
+            label: k,
+          }))}
+          value=""
+          onChange={handleQuickKecamatanChange}
+          placeholder="Pilih Kecamatan (estimasi cepat)"
+        />
+        {quickEstimate && (
+          <p
+            className="calc-location-status success"
+            style={{ marginTop: "0.5rem", marginBottom: 0 }}
+            role="status"
+          >
+            📦 Estimasi: <strong>{quickEstimate.feeLabel}</strong> &nbsp;|&nbsp;
+            ≈ {quickEstimate.distanceKm} km dari toko
+          </p>
+        )}
       </div>
 
       {/* Street Address */}
