@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useCallback, useEffect, useState } from 'react';
 
 const slides = [
   {
@@ -11,28 +10,61 @@ const slides = [
     objectPosition: '68% center',
   },
   {
-    src: '/images/stok-kasur.webp',
-    mobileSrc: null,
-    alt: 'Stok kasur sewa Jogja',
+    src: '/images/hero-kamar-siap.webp',
+    mobileSrc: '/images/hero-kamar-siap-mobile.webp',
+    alt: 'Kasur sewa yang sudah rapi dan siap digunakan',
     objectPosition: 'center',
   },
   {
-    src: '/images/gudang.webp',
-    mobileSrc: null,
-    alt: 'Gudang kasur Santi Living',
+    src: '/images/hero-siap-antar.webp',
+    mobileSrc: '/images/hero-siap-antar-mobile.webp',
+    alt: 'Kasur dan perlengkapan bersih yang siap diantar',
+    objectPosition: 'center',
+  },
+  {
+    src: '/images/hero-stok-premium.webp',
+    mobileSrc: '/images/hero-stok-premium-mobile.webp',
+    alt: 'Stok kasur Santi Living yang bersih dan tertata',
     objectPosition: 'center',
   },
 ];
 
+const SLIDE_DURATION = 8500;
+
 export function HeroBackground() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [canAutoRotate, setCanAutoRotate] = useState(false);
+
+  const goToSlide = useCallback((index: number) => {
+    setCurrentSlide((index + slides.length) % slides.length);
+  }, []);
 
   useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateAutoRotate = () => {
+      setCanAutoRotate(!reducedMotion.matches && document.visibilityState === 'visible');
+    };
+
+    updateAutoRotate();
+    reducedMotion.addEventListener('change', updateAutoRotate);
+    document.addEventListener('visibilitychange', updateAutoRotate);
+
+    return () => {
+      reducedMotion.removeEventListener('change', updateAutoRotate);
+      document.removeEventListener('visibilitychange', updateAutoRotate);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || !canAutoRotate) return;
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
+    }, SLIDE_DURATION);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [canAutoRotate, currentSlide, isPaused]);
 
   return (
     <>
@@ -45,36 +77,101 @@ export function HeroBackground() {
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             } ${index === currentSlide ? 'scale-100' : 'scale-[1.025]'}`}
           >
-            {slide.mobileSrc ? (
-              <picture className="absolute inset-0 block h-full w-full">
-                <source media="(max-width: 767px)" srcSet={slide.mobileSrc} />
-                {/* Precompressed responsive hero; picture avoids loading both crops. */}
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: slide.objectPosition }}
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </picture>
-            ) : (
-              <Image
+            <picture className="absolute inset-0 block h-full w-full">
+              <source media="(max-width: 767px)" srcSet={slide.mobileSrc} />
+              {/* Precompressed responsive heroes avoid loading both crops. */}
+              <img
                 src={slide.src}
-                alt={slide.alt}
-                fill
-                loading="lazy"
-                quality={78}
-                className="object-cover"
+                alt={index === currentSlide ? slide.alt : ''}
+                className="h-full w-full object-cover"
                 style={{ objectPosition: slide.objectPosition }}
-                sizes="100vw"
-                fetchPriority="auto"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'low'}
               />
-            )}
+            </picture>
           </div>
         ))}
       </div>
       <div className="home-hero-overlay absolute inset-0 w-full h-full z-1" />
+
+      <div className="home-hero-switcher" aria-label="Pilihan gambar utama">
+        <button
+          type="button"
+          className="home-hero-switcher-button"
+          onClick={() => goToSlide(currentSlide - 1)}
+          aria-label="Gambar sebelumnya"
+        >
+          <ChevronLeftIcon />
+        </button>
+
+        <div className="home-hero-switcher-dots" role="group" aria-label="Pilih gambar">
+          {slides.map((slide, index) => (
+            <button
+              type="button"
+              key={slide.src}
+              className={`home-hero-switcher-dot${index === currentSlide ? ' is-active' : ''}`}
+              onClick={() => goToSlide(index)}
+              aria-label={`Tampilkan gambar ${index + 1} dari ${slides.length}`}
+              aria-current={index === currentSlide ? 'true' : undefined}
+            />
+          ))}
+        </div>
+
+        <span className="home-hero-switcher-count" aria-live="polite">
+          {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+        </span>
+
+        <button
+          type="button"
+          className="home-hero-switcher-button"
+          onClick={() => setIsPaused((paused) => !paused)}
+          aria-label={isPaused ? 'Putar slideshow' : 'Jeda slideshow'}
+          aria-pressed={isPaused}
+        >
+          {isPaused ? <PlayIcon /> : <PauseIcon />}
+        </button>
+
+        <button
+          type="button"
+          className="home-hero-switcher-button"
+          onClick={() => goToSlide(currentSlide + 1)}
+          aria-label="Gambar berikutnya"
+        >
+          <ChevronRightIcon />
+        </button>
+      </div>
     </>
+  );
+}
+
+function ChevronLeftIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m14.5 6-6 6 6 6" />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m9.5 6 6 6-6 6" />
+    </svg>
+  );
+}
+
+function PauseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 7v10M15 7v10" />
+    </svg>
+  );
+}
+
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m9 7 8 5-8 5Z" />
+    </svg>
   );
 }
