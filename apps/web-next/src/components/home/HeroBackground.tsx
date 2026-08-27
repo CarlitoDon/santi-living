@@ -35,9 +35,16 @@ export function HeroBackground() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [canAutoRotate, setCanAutoRotate] = useState(false);
+  const [announcement, setAnnouncement] = useState({ message: '', sequence: 0 });
+  const isAutoPlaying = canAutoRotate && !isPaused;
 
   const goToSlide = useCallback((index: number) => {
-    setCurrentSlide((index + slides.length) % slides.length);
+    const nextSlide = (index + slides.length) % slides.length;
+    setCurrentSlide(nextSlide);
+    setAnnouncement((current) => ({
+      message: `Gambar ${nextSlide + 1} dari ${slides.length}`,
+      sequence: current.sequence + 1,
+    }));
   }, []);
 
   useEffect(() => {
@@ -57,14 +64,14 @@ export function HeroBackground() {
   }, []);
 
   useEffect(() => {
-    if (isPaused || !canAutoRotate) return;
+    if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, SLIDE_DURATION);
 
     return () => clearInterval(interval);
-  }, [canAutoRotate, currentSlide, isPaused]);
+  }, [currentSlide, isAutoPlaying]);
 
   return (
     <>
@@ -117,18 +124,27 @@ export function HeroBackground() {
           ))}
         </div>
 
-        <span className="home-hero-switcher-count" aria-live="polite">
+        <span className="home-hero-switcher-count">
           {String(currentSlide + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
+        </span>
+
+        <span className="sr-only" aria-live="polite" aria-atomic="true">
+          {announcement.message ? (
+            <span key={announcement.sequence} data-announcement-sequence={announcement.sequence}>
+              {announcement.message}
+            </span>
+          ) : null}
         </span>
 
         <button
           type="button"
           className="home-hero-switcher-button"
           onClick={() => setIsPaused((paused) => !paused)}
-          aria-label={isPaused ? 'Putar slideshow' : 'Jeda slideshow'}
-          aria-pressed={isPaused}
+          aria-label={canAutoRotate ? (isAutoPlaying ? 'Jeda slideshow' : 'Putar slideshow') : 'Putar otomatis dinonaktifkan'}
+          title={canAutoRotate ? (isAutoPlaying ? 'Jeda slideshow' : 'Putar slideshow') : 'Putar otomatis dinonaktifkan'}
+          disabled={!canAutoRotate}
         >
-          {isPaused ? <PlayIcon /> : <PauseIcon />}
+          {isAutoPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
 
         <button
