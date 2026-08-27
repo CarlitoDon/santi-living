@@ -11,6 +11,7 @@ import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import { showAlert } from "@/utils/alert";
+import { buildCalculatorWhatsAppMessage, getWhatsAppUrl } from "@/utils/whatsapp";
 import { ProductModal } from "@/components/produk/ProductCard";
 import { useDeliveryQuote } from "@/hooks/useDeliveryQuote";
 import { isDiyProvince, requestLocationPicker } from "@/lib/location-selection";
@@ -609,6 +610,19 @@ export function Calculator({
       // Save to session (update existing order data)
       saveOrder(bookingData);
 
+      // Build pre-filled WhatsApp message for downstream pages
+      const waMessage = buildCalculatorWhatsAppMessage({
+        items: state.items.map((i: { name: string; category: string; quantity: number }) => ({
+          name: i.name,
+          category: i.category,
+          quantity: i.quantity,
+        })),
+        duration: state.duration,
+        startDate: state.startDate,
+        address: customer.address,
+      });
+      sessionStorage.setItem("santi-living-wa-message", waMessage);
+
       // Only create new order in ERP if not in edit mode
       // In edit mode, call update API to sync changes to sync-erp
       if (!isEditMode) {
@@ -717,6 +731,39 @@ export function Calculator({
               isEditMode ? "Update Pesanan" : "Pesan via WhatsApp"
             }
           />
+
+          {/* Direct WhatsApp consult link */}
+          {!isEditMode && (
+            <a
+              href={getWhatsAppUrl(
+                buildCalculatorWhatsAppMessage({
+                  items: state.items.map((i: { name: string; category: string; quantity: number }) => ({
+                    name: i.name,
+                    category: i.category,
+                    quantity: i.quantity,
+                  })),
+                  duration: state.duration,
+                  startDate: state.startDate,
+                  address: customer.address,
+                }),
+                "calculator",
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-whatsapp"
+              style={{
+                display: "block",
+                textAlign: "center",
+                padding: "0.75rem 1rem",
+                borderRadius: "0.5rem",
+                marginTop: "0.75rem",
+                fontSize: "0.875rem",
+                textDecoration: "none",
+              }}
+            >
+              Konsultasi via WhatsApp
+            </a>
+          )}
         </div>
       </div>
       <ProductModal
