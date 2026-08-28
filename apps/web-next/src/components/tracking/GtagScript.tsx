@@ -1,4 +1,5 @@
 import Script from 'next/script';
+import { LOCATION_SELECTION_CLASSIFICATION_VERSION } from '@/lib/location-selection';
 
 const GA_MEASUREMENT_ID = 'G-MLNE098NSZ';
 const ADS_ID = 'AW-17865321955';
@@ -61,6 +62,8 @@ export function GtagScript() {
       </Script>
       <Script id="wa-conversion-tracker" strategy="afterInteractive">
         {`
+          var locationClassificationVersion = ${LOCATION_SELECTION_CLASSIFICATION_VERSION};
+
           function getWaAttributionCode(attr) {
             try {
               var src = (attr.utm_source || '').toLowerCase();
@@ -205,6 +208,12 @@ export function GtagScript() {
             return Boolean(province) && isDiyProvinceName(province) && withinBounds;
           }
 
+          function isLegacyAutomaticLocationDetail(detail) {
+            return Boolean(detail) &&
+              detail.source !== 'manual' &&
+              detail.classificationVersion !== locationClassificationVersion;
+          }
+
           function requestOutsideDiyLocation() {
             try {
               sessionStorage.setItem('sl_location_picker_prompt', 'outside-diy');
@@ -223,10 +232,11 @@ export function GtagScript() {
               if (typeof parsed.coords.lat !== 'number' || typeof parsed.coords.lng !== 'number') return null;
 
               var address = parsed.address || {};
+              var isManual = parsed.source === 'manual';
               return {
                 location_permission: 'cached',
-                location_source: parsed.source === 'manual' ? 'manual' : 'automatic',
-                outside_diy: !isDiyLocationDetail(parsed),
+                location_source: isManual ? 'manual' : 'automatic',
+                outside_diy: isLegacyAutomaticLocationDetail(parsed) || !isDiyLocationDetail(parsed),
                 latitude: parsed.coords.lat,
                 longitude: parsed.coords.lng,
                 address_text: compactAddressParts([
@@ -390,6 +400,7 @@ export function GtagScript() {
                 var detail = {
                   coords: { lat: location.latitude, lng: location.longitude },
                   source: 'automatic',
+                  classificationVersion: locationClassificationVersion,
                   address: {
                     street: formatted.street,
                     kelurahan: formatted.kelurahan,

@@ -3,7 +3,10 @@
  */
 import { act, cleanup, renderHook, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { LOCATION_SELECTION_CACHE_KEY } from '@/lib/location-selection';
+import {
+  LOCATION_SELECTION_CACHE_KEY,
+  LOCATION_SELECTION_CLASSIFICATION_VERSION,
+} from '@/lib/location-selection';
 import { useAutoLocation } from './useAutoLocation';
 
 const geolocationMocks = vi.hoisted(() => ({
@@ -55,7 +58,10 @@ describe('useAutoLocation manual selection arbitration', () => {
     });
 
     expect(locationSelected).toHaveBeenCalledOnce();
-    expect((locationSelected.mock.calls[0]?.[0] as CustomEvent).detail).toEqual(manualSelection);
+    expect((locationSelected.mock.calls[0]?.[0] as CustomEvent).detail).toEqual({
+      ...manualSelection,
+      classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+    });
     expect(geolocationMocks.getCurrentLocation).not.toHaveBeenCalled();
 
     window.removeEventListener('location-selected', locationSelected);
@@ -85,12 +91,48 @@ describe('useAutoLocation manual selection arbitration', () => {
 
     expect(locationSelected).toHaveBeenCalledOnce();
     expect((locationSelected.mock.calls[0]?.[0] as CustomEvent).detail).toEqual(
-      newerManualSelection,
+      {
+        ...newerManualSelection,
+        classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+      },
     );
     expect(JSON.parse(sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY) ?? 'null')).toEqual(
-      newerManualSelection,
+      {
+        ...newerManualSelection,
+        classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+      },
     );
 
+    window.removeEventListener('location-selected', locationSelected);
+  });
+
+  it('fails closed for an unversioned automatic cache that could be Central Java', async () => {
+    vi.useFakeTimers();
+    sessionStorage.setItem(LOCATION_SELECTION_CACHE_KEY, JSON.stringify({
+      coords: { lat: -7.7, lng: 110.6 },
+      source: 'automatic',
+      address: {
+        street: 'Cache lama',
+        kota: 'Klaten',
+        // This was written by the earlier fallback when state was unavailable.
+        provinsi: 'DI Yogyakarta',
+      },
+    }));
+    const openPicker = vi.fn();
+    const locationSelected = vi.fn();
+    window.addEventListener('open-map-picker', openPicker);
+    window.addEventListener('location-selected', locationSelected);
+
+    renderHook(() => useAutoLocation());
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(600);
+    });
+
+    expect(openPicker).toHaveBeenCalledOnce();
+    expect(locationSelected).not.toHaveBeenCalled();
+    expect(geolocationMocks.getCurrentLocation).not.toHaveBeenCalled();
+
+    window.removeEventListener('open-map-picker', openPicker);
     window.removeEventListener('location-selected', locationSelected);
   });
 

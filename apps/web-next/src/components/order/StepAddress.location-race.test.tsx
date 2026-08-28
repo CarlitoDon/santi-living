@@ -3,7 +3,10 @@
  */
 import { act, cleanup, render, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { LOCATION_SELECTION_CACHE_KEY } from '@/lib/location-selection';
+import {
+  LOCATION_SELECTION_CACHE_KEY,
+  LOCATION_SELECTION_CLASSIFICATION_VERSION,
+} from '@/lib/location-selection';
 import { StepAddress } from './StepAddress';
 
 const matcherMocks = vi.hoisted(() => ({
@@ -47,6 +50,7 @@ const matchedAddress = {
 const automaticSelection = {
   coords: { lat: -7.79, lng: 110.37 },
   source: 'automatic' as const,
+  classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
   address: {
     street: 'GPS lama',
     kelurahan: 'Otomatis',
@@ -150,6 +154,27 @@ describe('StepAddress location selection arbitration', () => {
       address: {
         street: 'Jalan Tebet Timur Dalam III M',
         kota: 'Jakarta Selatan',
+        provinsi: 'DI Yogyakarta',
+      },
+    }));
+
+    renderStep();
+
+    await waitFor(() => expect(openPicker).toHaveBeenCalledOnce());
+    expect(matcherMocks.matchAddressToKode).not.toHaveBeenCalled();
+    expect(setCustomer).not.toHaveBeenCalled();
+    window.removeEventListener('open-map-picker', openPicker);
+  });
+
+  it('rejects an unversioned automatic Central Java cache that was mislabeled as DIY', async () => {
+    const openPicker = vi.fn();
+    window.addEventListener('open-map-picker', openPicker);
+    sessionStorage.setItem(LOCATION_SELECTION_CACHE_KEY, JSON.stringify({
+      coords: { lat: -7.7, lng: 110.6 },
+      source: 'automatic',
+      address: {
+        street: 'Cache lama',
+        kota: 'Klaten',
         provinsi: 'DI Yogyakarta',
       },
     }));

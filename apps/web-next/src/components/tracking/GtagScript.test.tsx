@@ -192,6 +192,36 @@ describe('GtagScript WhatsApp location flow', () => {
     window.removeEventListener('open-map-picker', openPicker);
   });
 
+  it('does not trust an unversioned automatic Central Java cache mislabeled as DIY', () => {
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.7, lng: 110.6 },
+      source: 'automatic',
+      address: {
+        street: 'Cache lama',
+        kota: 'Klaten',
+        provinsi: 'DI Yogyakarta',
+      },
+    }));
+    Object.defineProperty(navigator, 'sendBeacon', {
+      configurable: true,
+      value: vi.fn(() => true),
+    });
+    const openPicker = vi.fn();
+    window.addEventListener('open-map-picker', openPicker);
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    link.textContent = 'Chat WhatsApp';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    expect(openPicker).toHaveBeenCalledOnce();
+    expect(navigator.sendBeacon).not.toHaveBeenCalled();
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+
+    window.removeEventListener('open-map-picker', openPicker);
+  });
+
   it('keeps a manual DIY point when late GPS resolves in Jakarta', () => {
     let geolocationSuccess: PositionCallback | undefined;
     Object.defineProperty(navigator, 'geolocation', {

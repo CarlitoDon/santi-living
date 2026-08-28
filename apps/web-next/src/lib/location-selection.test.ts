@@ -6,9 +6,11 @@ import {
   consumeLocationPickerReason,
   hasManualLocationSelection,
   isDiyLocation,
+  isLegacyAutomaticLocationSelection,
   isDiyProvince,
   isWithinDiyCoordinateBounds,
   LOCATION_SELECTION_CACHE_KEY,
+  LOCATION_SELECTION_CLASSIFICATION_VERSION,
   LOCATION_PICKER_PROMPT_KEY,
   publishLocationSelection,
   requestLocationPicker,
@@ -68,6 +70,26 @@ describe('publishLocationSelection', () => {
     })).toBe(false);
   });
 
+  it('does not trust an unversioned automatic cache that could have the old province fallback', () => {
+    const legacyCentralJavaCache: LocationSelection = {
+      coords: { lat: -7.7, lng: 110.6 },
+      source: 'automatic',
+      address: { provinsi: 'DI Yogyakarta' },
+    };
+
+    // The old label and broad bounds alone are insufficient to establish DIY.
+    expect(isDiyLocation(legacyCentralJavaCache)).toBe(true);
+    expect(isLegacyAutomaticLocationSelection(legacyCentralJavaCache)).toBe(true);
+    expect(isLegacyAutomaticLocationSelection({
+      ...legacyCentralJavaCache,
+      classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+    })).toBe(false);
+    expect(isLegacyAutomaticLocationSelection({
+      ...legacyCentralJavaCache,
+      source: 'manual',
+    })).toBe(false);
+  });
+
   it('persists and emits an outside-DIY prompt until consumed', () => {
     const listener = vi.fn();
     window.addEventListener('open-map-picker', listener);
@@ -114,11 +136,13 @@ describe('publishLocationSelection', () => {
     expect(JSON.parse(sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY) ?? 'null')).toEqual({
       ...manualSelection,
       source: 'manual',
+      classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
     });
     expect(listener).toHaveBeenCalledOnce();
     expect((listener.mock.calls[0]?.[0] as CustomEvent<LocationSelection>).detail).toEqual({
       ...manualSelection,
       source: 'manual',
+      classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
     });
 
     window.removeEventListener('location-selected', listener);
@@ -142,6 +166,7 @@ describe('publishLocationSelection', () => {
     expect(JSON.parse(sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY) ?? 'null')).toEqual({
       ...manualSelection,
       source: 'manual',
+      classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
     });
     expect(listener).toHaveBeenCalledOnce();
 

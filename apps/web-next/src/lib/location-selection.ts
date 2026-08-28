@@ -9,6 +9,7 @@ export interface LocationSelection {
     postcode?: string;
   };
   source?: LocationSelectionSource;
+  classificationVersion?: number;
 }
 
 export type LocationSelectionSource = 'automatic' | 'manual';
@@ -17,6 +18,12 @@ export type LocationPickerReason = 'manual' | 'outside-diy';
 
 export const LOCATION_SELECTION_CACHE_KEY = 'sl_auto_location_result';
 export const LOCATION_PICKER_PROMPT_KEY = 'sl_location_picker_prompt';
+/**
+ * Bump this when location classification rules change. Automatic selections
+ * written by older releases are not reliable enough to reuse without asking
+ * the customer for their delivery point again.
+ */
+export const LOCATION_SELECTION_CLASSIFICATION_VERSION = 2;
 let latestSelectionSource: LocationSelectionSource | undefined;
 
 const DIY_COORDINATE_BOUNDS = {
@@ -62,6 +69,18 @@ export function isDiyLocation(location: LocationSelection): boolean {
     isWithinDiyCoordinateBounds(location.coords);
 }
 
+/**
+ * A customer-selected map point remains valid across releases. An automatic
+ * result without the current classification version may have been produced by
+ * an older province fallback, so it must not silently choose a delivery area.
+ */
+export function isLegacyAutomaticLocationSelection(location: LocationSelection): boolean {
+  return (
+    location.source !== 'manual' &&
+    location.classificationVersion !== LOCATION_SELECTION_CLASSIFICATION_VERSION
+  );
+}
+
 export function hasManualLocationSelection(): boolean {
   if (latestSelectionSource === 'manual') return true;
   try {
@@ -102,6 +121,11 @@ export function publishLocationSelection(
   source: LocationSelectionSource,
 ): boolean {
   let existingSource: LocationSelectionSource | undefined;
+  const publishedSelection: LocationSelection = {
+    ...detail,
+    source,
+    classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+  };
 
   try {
     const cached = window.sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
@@ -121,7 +145,7 @@ export function publishLocationSelection(
 
     window.sessionStorage.setItem(
       LOCATION_SELECTION_CACHE_KEY,
-      JSON.stringify({ ...detail, source }),
+      JSON.stringify(publishedSelection),
     );
   } catch {
     // Storage can be unavailable in private/restricted browsing. The calculator
@@ -135,7 +159,7 @@ export function publishLocationSelection(
     // Storage is optional; publishing the in-page event is still sufficient.
   }
   window.dispatchEvent(
-    new CustomEvent('location-selected', { detail: { ...detail, source } }),
+    new CustomEvent('location-selected', { detail: publishedSelection }),
   );
   return true;
 }

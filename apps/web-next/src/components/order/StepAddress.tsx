@@ -10,7 +10,13 @@ import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import { showAlert } from '@/utils/alert';
 import '@/components/calculator/styles.css';
 import { useDeliveryQuote } from '@/hooks/useDeliveryQuote';
-import { hasManualLocationSelection, isDiyLocation, requestLocationPicker } from '@/lib/location-selection';
+import {
+  hasManualLocationSelection,
+  isDiyLocation,
+  isLegacyAutomaticLocationSelection,
+  LOCATION_SELECTION_CACHE_KEY,
+  requestLocationPicker,
+} from '@/lib/location-selection';
 
 interface LocationSelectedEventDetail {
   coords: { lat: number; lng: number };
@@ -23,6 +29,7 @@ interface LocationSelectedEventDetail {
     postcode?: string;
   };
   source?: 'automatic' | 'manual';
+  classificationVersion?: number;
 }
 
 interface StepAddressProps {
@@ -76,7 +83,7 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
   useEffect(() => {
     if (didAutoPrefillRef.current) return;
     if (customer.address.lat && customer.address.lng) return; // already has location
-    const cached = sessionStorage.getItem('sl_auto_location_result');
+    const cached = sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
     if (!cached) return;
 
     didAutoPrefillRef.current = true;
@@ -90,7 +97,13 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
           coords: { lat: number; lng: number };
           address: Record<string, string | undefined>;
           source?: 'automatic' | 'manual';
+          classificationVersion?: number;
         };
+
+        if (isLegacyAutomaticLocationSelection(data)) {
+          requestLocationPicker('outside-diy');
+          return;
+        }
 
         if (!isDiyLocation({
           coords: data.coords,

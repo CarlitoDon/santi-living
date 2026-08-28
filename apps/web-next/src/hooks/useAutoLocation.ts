@@ -5,6 +5,7 @@ import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import {
   hasManualLocationSelection,
   isDiyLocation,
+  isLegacyAutomaticLocationSelection,
   LOCATION_SELECTION_CACHE_KEY,
   publishLocationSelection,
   requestLocationPicker,
@@ -69,6 +70,16 @@ function dispatchLocation(detail: LocationDetail): void {
   console.debug('[auto-location] ✅ Dispatched location to Calculator.');
 }
 
+function replayStoredLocation(detail: LocationDetail): void {
+  if (isLegacyAutomaticLocationSelection(detail)) {
+    console.debug('[auto-location] Ignoring legacy automatic cache; asking for delivery location.');
+    requestLocationPicker('outside-diy');
+    return;
+  }
+
+  dispatchLocation(detail);
+}
+
 /**
  * Auto-requests high-precision geolocation on the user's first scroll.
  *
@@ -88,6 +99,10 @@ export function useAutoLocation({ enabled = true }: { enabled?: boolean } = {}) 
     if (cached) {
       const detail = parseStoredLocation(cached);
       if (detail) {
+        if (isLegacyAutomaticLocationSelection(detail)) {
+          replayStoredLocation(detail);
+          return;
+        }
         console.debug('[auto-location] Replaying cached location (no GPS prompt).');
         // Delay to allow Calculator (Suspense) to finish mounting
         const timer = setTimeout(() => {
@@ -95,7 +110,7 @@ export function useAutoLocation({ enabled = true }: { enabled?: boolean } = {}) 
           // Calculator's listener mounted, so the cache is the durable source.
           const latestRaw = sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
           const latestDetail = latestRaw ? parseStoredLocation(latestRaw) : null;
-          if (latestDetail) dispatchLocation(latestDetail);
+          if (latestDetail) replayStoredLocation(latestDetail);
         }, 600);
         return () => clearTimeout(timer);
       }
