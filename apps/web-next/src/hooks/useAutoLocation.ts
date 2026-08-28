@@ -3,7 +3,8 @@
 import { useEffect, useRef } from 'react';
 import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import {
-  isDiyProvince,
+  hasManualLocationSelection,
+  isDiyLocation,
   LOCATION_SELECTION_CACHE_KEY,
   publishLocationSelection,
   requestLocationPicker,
@@ -47,13 +48,20 @@ function parseStoredLocation(raw: string): LocationDetail | null {
 }
 
 function dispatchLocation(detail: LocationDetail): void {
-  if (!isDiyProvince(detail.address.provinsi)) {
+  const source = detail.source ?? 'automatic';
+
+  if (source !== 'manual' && hasManualLocationSelection()) {
+    console.debug('[auto-location] Ignored late GPS result after manual selection.');
+    return;
+  }
+
+  if (!isDiyLocation(detail)) {
     console.debug('[auto-location] Visitor is outside DIY; asking for the delivery destination.');
     requestLocationPicker('outside-diy');
     return;
   }
 
-  const published = publishLocationSelection(detail, detail.source ?? 'automatic');
+  const published = publishLocationSelection(detail, source);
   if (!published) {
     console.debug('[auto-location] Ignored late GPS result after manual selection.');
     return;
@@ -82,7 +90,13 @@ export function useAutoLocation({ enabled = true }: { enabled?: boolean } = {}) 
       if (detail) {
         console.debug('[auto-location] Replaying cached location (no GPS prompt).');
         // Delay to allow Calculator (Suspense) to finish mounting
-        const timer = setTimeout(() => dispatchLocation(detail), 600);
+        const timer = setTimeout(() => {
+          // Re-read at delivery time: a newer map choice may have emitted before
+          // Calculator's listener mounted, so the cache is the durable source.
+          const latestRaw = sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
+          const latestDetail = latestRaw ? parseStoredLocation(latestRaw) : null;
+          if (latestDetail) dispatchLocation(latestDetail);
+        }, 600);
         return () => clearTimeout(timer);
       }
     }

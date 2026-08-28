@@ -255,8 +255,9 @@ export function formatAddress(
   // NOTE: In rural areas, "city" field is NOT kabupaten - it's a village area!
   const kota = address.county || address.city || address.town || "";
 
-  // Provinsi: state
-  const provinsi = address.state || "DI Yogyakarta";
+  // Provinsi: never assume DIY when Nominatim omits `state`.
+  // DKI Jakarta is one known response shape that only exposes an ISO code.
+  const provinsi = resolveProvinceName(address, displayName);
 
   // Kode Pos
   const postcode = address.postcode || "";
@@ -288,6 +289,29 @@ export function formatAddress(
     postcode,
     fullAddress,
   };
+}
+
+/** @internal Exported for testing */
+export function resolveProvinceName(
+  address: Record<string, string>,
+  displayName?: string,
+): string {
+  const explicitProvince = address.state || address.province || address.region;
+  if (explicitProvince) return explicitProvince;
+
+  const isoCode = address["ISO3166-2-lvl4"] || address["ISO3166-2-lvl3"] || "";
+  if (isoCode === "ID-JK") return "Daerah Khusus Ibukota Jakarta";
+  if (isoCode === "ID-YO") return "Daerah Istimewa Yogyakarta";
+  if (isoCode) return isoCode;
+
+  const displayParts = String(displayName || "")
+    .split(",")
+    .map((part) => part.trim());
+  return (
+    displayParts.find((part) =>
+      /^(Daerah Khusus Ibukota Jakarta|Daerah Istimewa Yogyakarta)$/i.test(part),
+    ) || ""
+  );
 }
 
 /**

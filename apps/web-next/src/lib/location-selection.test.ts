@@ -4,7 +4,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   consumeLocationPickerReason,
+  hasManualLocationSelection,
+  isDiyLocation,
   isDiyProvince,
+  isWithinDiyCoordinateBounds,
   LOCATION_SELECTION_CACHE_KEY,
   LOCATION_PICKER_PROMPT_KEY,
   publishLocationSelection,
@@ -32,6 +35,39 @@ describe('publishLocationSelection', () => {
     (province) => expect(isDiyProvince(province)).toBe(false),
   );
 
+  it('rejects a stale Jakarta cache even when its province was mislabeled as DIY', () => {
+    expect(isDiyLocation({
+      coords: { lat: -6.2272373, lng: 106.8584421 },
+      address: { provinsi: 'DI Yogyakarta' },
+      source: 'automatic',
+    })).toBe(false);
+  });
+
+  it('fails closed when the geocoder omits province, even inside the broad bounds', () => {
+    expect(isWithinDiyCoordinateBounds({ lat: -7.7956, lng: 110.3695 })).toBe(true);
+    expect(isDiyLocation({
+      coords: { lat: -7.7956, lng: 110.3695 },
+      address: {},
+      source: 'automatic',
+    })).toBe(false);
+  });
+
+  it('rejects an unknown-province Central Java point inside the broad bounds', () => {
+    expect(isDiyLocation({
+      coords: { lat: -7.7, lng: 110.6 },
+      address: {},
+      source: 'automatic',
+    })).toBe(false);
+  });
+
+  it('keeps a known non-DIY province outside even near the DIY boundary', () => {
+    expect(isDiyLocation({
+      coords: { lat: -7.7, lng: 110.6 },
+      address: { provinsi: 'Jawa Tengah' },
+      source: 'automatic',
+    })).toBe(false);
+  });
+
   it('persists and emits an outside-DIY prompt until consumed', () => {
     const listener = vi.fn();
     window.addEventListener('open-map-picker', listener);
@@ -41,6 +77,15 @@ describe('publishLocationSelection', () => {
     expect(consumeLocationPickerReason()).toBe('outside-diy');
     expect(sessionStorage.getItem(LOCATION_PICKER_PROMPT_KEY)).toBeNull();
     window.removeEventListener('open-map-picker', listener);
+  });
+
+  it('reports a cached manual selection as authoritative', () => {
+    sessionStorage.setItem(LOCATION_SELECTION_CACHE_KEY, JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: { provinsi: 'Daerah Istimewa Yogyakarta' },
+    }));
+    expect(hasManualLocationSelection()).toBe(true);
   });
 
   it('replaces stale GPS coordinates before publishing a manual map selection', () => {

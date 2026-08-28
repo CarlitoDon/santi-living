@@ -174,6 +174,46 @@ export function GtagScript() {
             return output.join(', ');
           }
 
+          function isWithinDiyCoordinateBounds(lat, lng) {
+            return (
+              typeof lat === 'number' && isFinite(lat) &&
+              typeof lng === 'number' && isFinite(lng) &&
+              lat >= -8.25 && lat <= -7.45 &&
+              lng >= 109.95 && lng <= 110.9
+            );
+          }
+
+          function isDiyProvinceName(value) {
+            var normalized = String(value || '')
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, ' ')
+              .trim();
+            return [
+              'daerah istimewa yogyakarta',
+              'di yogyakarta',
+              'd i yogyakarta',
+              'diy',
+              'yogyakarta'
+            ].indexOf(normalized) !== -1;
+          }
+
+          function isDiyLocationDetail(detail) {
+            var coords = detail && detail.coords ? detail.coords : {};
+            var address = detail && detail.address ? detail.address : {};
+            var province = String(address.provinsi || '').trim();
+            var withinBounds = isWithinDiyCoordinateBounds(coords.lat, coords.lng);
+            return Boolean(province) && isDiyProvinceName(province) && withinBounds;
+          }
+
+          function requestOutsideDiyLocation() {
+            try {
+              sessionStorage.setItem('sl_location_picker_prompt', 'outside-diy');
+            } catch(ex) {}
+            window.dispatchEvent(new CustomEvent('open-map-picker', {
+              detail: { reason: 'outside-diy' }
+            }));
+          }
+
           function readCachedAutoLocation() {
             try {
               var raw = sessionStorage.getItem('sl_auto_location_result');
@@ -186,6 +226,7 @@ export function GtagScript() {
               return {
                 location_permission: 'cached',
                 location_source: parsed.source === 'manual' ? 'manual' : 'automatic',
+                outside_diy: !isDiyLocationDetail(parsed),
                 latitude: parsed.coords.lat,
                 longitude: parsed.coords.lng,
                 address_text: compactAddressParts([
@@ -260,7 +301,7 @@ export function GtagScript() {
               '';
             var kecamatan = address.city_district || address.municipality || '';
             var kota = address.county || address.city || address.town || '';
-            var provinsi = address.state || 'DI Yogyakarta';
+            var provinsi = resolveProvinceName(address, displayName);
             var postcode = address.postcode || '';
             var street = road || address.neighbourhood || kelurahan || 'Area tidak diketahui';
 
@@ -285,6 +326,26 @@ export function GtagScript() {
             };
           }
 
+          function resolveProvinceName(address, displayName) {
+            var explicitProvince = address.state || address.province || address.region || '';
+            if (explicitProvince) return explicitProvince;
+
+            var isoCode = address['ISO3166-2-lvl4'] || address['ISO3166-2-lvl3'] || '';
+            if (isoCode === 'ID-JK') return 'Daerah Khusus Ibukota Jakarta';
+            if (isoCode === 'ID-YO') return 'Daerah Istimewa Yogyakarta';
+            if (isoCode) return isoCode;
+
+            var parts = String(displayName || '').split(',').map(function(part) {
+              return part.trim();
+            });
+            for (var i = 0; i < parts.length; i++) {
+              if (/^(Daerah Khusus Ibukota Jakarta|Daerah Istimewa Yogyakarta)$/i.test(parts[i])) {
+                return parts[i];
+              }
+            }
+            return '';
+          }
+
           function reverseGeocodeLocation(location, callback) {
             var preferredManualLocation = readPreferredManualLocation();
             if (preferredManualLocation) {
@@ -306,7 +367,7 @@ export function GtagScript() {
             var timeout = setTimeout(function() {
               if (completed) return;
               completed = true;
-              callback(readPreferredManualLocation() || location);
+              callback(readPreferredManualLocation() || Object.assign({}, location, { outside_diy: true }));
             }, 4500);
 
             fetch('/api/reverse-geocode?lat=' + encodeURIComponent(location.latitude) + '&lng=' + encodeURIComponent(location.longitude))
@@ -326,26 +387,30 @@ export function GtagScript() {
                 }
 
                 var formatted = formatReverseGeocodePayload(payload);
+                var detail = {
+                  coords: { lat: location.latitude, lng: location.longitude },
+                  source: 'automatic',
+                  address: {
+                    street: formatted.street,
+                    kelurahan: formatted.kelurahan,
+                    kecamatan: formatted.kecamatan,
+                    kota: formatted.kota,
+                    provinsi: formatted.provinsi,
+                    postcode: formatted.postcode
+                  }
+                };
+                var outsideDiy = !isDiyLocationDetail(detail);
                 var enrichedLocation = Object.assign({}, location, {
                   address_text: formatted.fullAddress,
-                  city: formatted.kota || ''
+                  city: formatted.kota || '',
+                  outside_diy: outsideDiy
                 });
 
                 try {
-                  var detail = {
-                    coords: { lat: location.latitude, lng: location.longitude },
-                    source: 'automatic',
-                    address: {
-                      street: formatted.street,
-                      kelurahan: formatted.kelurahan,
-                      kecamatan: formatted.kecamatan,
-                      kota: formatted.kota,
-                      provinsi: formatted.provinsi,
-                      postcode: formatted.postcode
-                    }
-                  };
                   sessionStorage.setItem('sl_auto_location_result', JSON.stringify(detail));
-                  window.dispatchEvent(new CustomEvent('location-selected', { detail: detail }));
+                  if (!outsideDiy) {
+                    window.dispatchEvent(new CustomEvent('location-selected', { detail: detail }));
+                  }
                 } catch(ex) {}
 
                 callback(enrichedLocation);
@@ -354,7 +419,7 @@ export function GtagScript() {
                 if (completed) return;
                 completed = true;
                 clearTimeout(timeout);
-                callback(readPreferredManualLocation() || location);
+                callback(readPreferredManualLocation() || Object.assign({}, location, { outside_diy: true }));
               });
           }
 
@@ -535,7 +600,25 @@ export function GtagScript() {
               } catch(ex) {}
 
               function finishWhatsAppClick(location) {
+                var preferredManualLocation = readPreferredManualLocation();
+                if (preferredManualLocation) {
+                  location = preferredManualLocation;
+                }
+                if (
+                  location &&
+                  (location.outside_diy === true ||
+                    (typeof location.latitude === 'number' &&
+                      typeof location.longitude === 'number' &&
+                      !isWithinDiyCoordinateBounds(location.latitude, location.longitude)))
+                ) {
+                  requestOutsideDiyLocation();
+                  return;
+                }
                 reverseGeocodeLocation(location, function(enrichedLocation) {
+                if (enrichedLocation && enrichedLocation.outside_diy === true) {
+                  requestOutsideDiyLocation();
+                  return;
+                }
                 var leadPayload = {
                   event_id: leadEventId,
                   event_type: 'whatsapp_click',

@@ -14,7 +14,7 @@ import { showAlert } from "@/utils/alert";
 import { buildCalculatorWhatsAppMessage, getWhatsAppUrl } from "@/utils/whatsapp";
 import { ProductModal } from "@/components/produk/ProductCard";
 import { useDeliveryQuote } from "@/hooks/useDeliveryQuote";
-import { isDiyProvince, requestLocationPicker } from "@/lib/location-selection";
+import { hasManualLocationSelection, isDiyLocation, requestLocationPicker } from "@/lib/location-selection";
 
 declare global {
   interface Window {
@@ -44,6 +44,7 @@ interface LocationSelectedEventDetail {
     provinsi?: string;
     postcode?: string;
   };
+  source?: "automatic" | "manual";
 }
 
 type LocationSelectedEvent = CustomEvent<LocationSelectedEventDetail>;
@@ -93,6 +94,7 @@ export function Calculator({
   // Ref to track if we've already pre-filled (prevents infinite loop)
   const hasPrefilledRef = useRef(false);
   const hasAutoAddedRef = useRef(false);
+  const locationUpdateSequenceRef = useRef(0);
 
   // Detect edit mode and pre-fill from session (runs only once)
   useEffect(() => {
@@ -253,11 +255,22 @@ export function Calculator({
       return;
     }
 
+    const requestId = ++locationUpdateSequenceRef.current;
+
     try {
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
 
-      if (!isDiyProvince(address.provinsi)) {
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        hasManualLocationSelection()
+      ) return;
+
+      if (!isDiyLocation({
+        coords: { lat: coords.latitude, lng: coords.longitude },
+        address,
+        source: "automatic",
+      })) {
         requestLocationPicker("outside-diy");
         return;
       }
@@ -271,6 +284,11 @@ export function Calculator({
         provinsi: address.provinsi,
         postcode: address.postcode,
       });
+
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        hasManualLocationSelection()
+      ) return;
 
       if (!matched.kotaKode) {
         throw new Error(
@@ -319,7 +337,8 @@ export function Calculator({
   // Listen for location-selected event from map picker
   useEffect(() => {
     const handleLocationSelected = async (event: LocationSelectedEvent) => {
-      const { coords, address } = event.detail;
+      const { coords, address, source = "automatic" } = event.detail;
+      const requestId = ++locationUpdateSequenceRef.current;
 
       // Match address names to Nusantarakita kode values
       const { matchAddressToKode } = await import("@/services/address-matcher");
@@ -330,6 +349,11 @@ export function Calculator({
         provinsi: address.provinsi,
         postcode: address.postcode,
       });
+
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        (source !== "manual" && hasManualLocationSelection())
+      ) return;
 
       if (!matched.kotaKode) {
         showAlert("Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta. Apabila Anda merasa ini adalah sebuah kesalahan, silakan hubungi admin via WhatsApp.", "Lokasi Tidak Mendukung", "warning");

@@ -10,7 +10,7 @@ import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import { showAlert } from '@/utils/alert';
 import '@/components/calculator/styles.css';
 import { useDeliveryQuote } from '@/hooks/useDeliveryQuote';
-import { isDiyProvince, requestLocationPicker } from '@/lib/location-selection';
+import { hasManualLocationSelection, isDiyLocation, requestLocationPicker } from '@/lib/location-selection';
 
 interface LocationSelectedEventDetail {
   coords: { lat: number; lng: number };
@@ -22,6 +22,7 @@ interface LocationSelectedEventDetail {
     provinsi?: string;
     postcode?: string;
   };
+  source?: 'automatic' | 'manual';
 }
 
 interface StepAddressProps {
@@ -36,6 +37,7 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
   const { customer, setCustomer, actions } = useCalculatorContext();
   const [isLocating, setIsLocating] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<'kota' | 'kecamatan' | 'kelurahan' | null>(null);
+  const locationUpdateSequenceRef = useRef(0);
   const deliveryQuoteStatus = useDeliveryQuote({
     latitude: customer.address.lat,
     longitude: customer.address.lng,
@@ -78,12 +80,26 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
     if (!cached) return;
 
     didAutoPrefillRef.current = true;
+    const requestId = ++locationUpdateSequenceRef.current;
 
     void (async () => {
       try {
         const raw: unknown = JSON.parse(cached);
         if (!raw || typeof raw !== 'object' || !('coords' in raw) || !('address' in raw)) return;
-        const data = raw as { coords: { lat: number; lng: number }; address: Record<string, string | undefined> };
+        const data = raw as {
+          coords: { lat: number; lng: number };
+          address: Record<string, string | undefined>;
+          source?: 'automatic' | 'manual';
+        };
+
+        if (!isDiyLocation({
+          coords: data.coords,
+          address: data.address,
+          source: data.source,
+        })) {
+          requestLocationPicker('outside-diy');
+          return;
+        }
 
         const { matchAddressToKode } = await import('@/services/address-matcher');
         const matched = await matchAddressToKode({
@@ -93,6 +109,11 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
           provinsi: data.address.provinsi,
           postcode: data.address.postcode,
         });
+
+        if (
+          requestId !== locationUpdateSequenceRef.current ||
+          (data.source !== 'manual' && hasManualLocationSelection())
+        ) return;
 
         if (!matched.kotaKode) return; // outside service area
 
@@ -125,7 +146,8 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
   useEffect(() => {
     const handleLocationSelected = async (event: Event) => {
       const detail = (event as CustomEvent<LocationSelectedEventDetail>).detail;
-      const { coords, address } = detail;
+      const { coords, address, source = 'automatic' } = detail;
+      const requestId = ++locationUpdateSequenceRef.current;
 
       const { matchAddressToKode } = await import('@/services/address-matcher');
       const matched = await matchAddressToKode({
@@ -135,6 +157,11 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
         provinsi: address.provinsi,
         postcode: address.postcode,
       });
+
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        (source !== 'manual' && hasManualLocationSelection())
+      ) return;
 
       if (!matched.kotaKode) {
         showAlert('Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta.', 'Lokasi Tidak Mendukung', 'warning');
@@ -170,12 +197,22 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
       return;
     }
 
+    const requestId = ++locationUpdateSequenceRef.current;
     setIsLocating(true);
     try {
       const coords = await getCurrentLocation();
       const address = await reverseGeocode(coords);
 
-      if (!isDiyProvince(address.provinsi)) {
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        hasManualLocationSelection()
+      ) return;
+
+      if (!isDiyLocation({
+        coords: { lat: coords.latitude, lng: coords.longitude },
+        address,
+        source: 'automatic',
+      })) {
         requestLocationPicker('outside-diy');
         return;
       }
@@ -188,6 +225,11 @@ export function StepAddress({ errors, setErrors, onClearError, onNext, onBack }:
         provinsi: address.provinsi,
         postcode: address.postcode,
       });
+
+      if (
+        requestId !== locationUpdateSequenceRef.current ||
+        hasManualLocationSelection()
+      ) return;
 
       if (!matched.kotaKode) {
         throw new Error('Maaf, untuk lokasi pengiriman saat ini hanya melayani wilayah DI Yogyakarta.');

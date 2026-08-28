@@ -19,6 +19,13 @@ export const LOCATION_SELECTION_CACHE_KEY = 'sl_auto_location_result';
 export const LOCATION_PICKER_PROMPT_KEY = 'sl_location_picker_prompt';
 let latestSelectionSource: LocationSelectionSource | undefined;
 
+const DIY_COORDINATE_BOUNDS = {
+  minLat: -8.25,
+  maxLat: -7.45,
+  minLng: 109.95,
+  maxLng: 110.9,
+} as const;
+
 export function isDiyProvince(value?: string): boolean {
   const normalized = String(value || '')
     .toLowerCase()
@@ -31,6 +38,40 @@ export function isDiyProvince(value?: string): boolean {
     'diy',
     'yogyakarta',
   ].includes(normalized);
+}
+
+export function isWithinDiyCoordinateBounds(coords: LocationSelection['coords']): boolean {
+  return (
+    Number.isFinite(coords.lat) &&
+    Number.isFinite(coords.lng) &&
+    coords.lat >= DIY_COORDINATE_BOUNDS.minLat &&
+    coords.lat <= DIY_COORDINATE_BOUNDS.maxLat &&
+    coords.lng >= DIY_COORDINATE_BOUNDS.minLng &&
+    coords.lng <= DIY_COORDINATE_BOUNDS.maxLng
+  );
+}
+
+/**
+ * Province is required and coordinates are a second safety check. A broad
+ * coordinate box alone cannot distinguish DIY from nearby Central Java.
+ */
+export function isDiyLocation(location: LocationSelection): boolean {
+  const province = String(location.address.provinsi || '').trim();
+  return Boolean(province) &&
+    isDiyProvince(province) &&
+    isWithinDiyCoordinateBounds(location.coords);
+}
+
+export function hasManualLocationSelection(): boolean {
+  if (latestSelectionSource === 'manual') return true;
+  try {
+    const cached = window.sessionStorage.getItem(LOCATION_SELECTION_CACHE_KEY);
+    if (!cached) return false;
+    const parsed = JSON.parse(cached) as { source?: unknown };
+    return parsed.source === 'manual';
+  } catch {
+    return false;
+  }
 }
 
 export function requestLocationPicker(reason: LocationPickerReason): void {
