@@ -29,6 +29,10 @@ describe('GtagScript WhatsApp location flow', () => {
     localStorage.clear();
     document.body.innerHTML = '';
     window.history.replaceState({}, '', '/id');
+    Object.defineProperty(navigator, 'geolocation', {
+      configurable: true,
+      value: undefined,
+    });
     delete (window as Window & { __waTestUrl?: string }).__waTestUrl;
   });
 
@@ -75,6 +79,60 @@ describe('GtagScript WhatsApp location flow', () => {
     expect((openPicker.mock.calls[0]?.[0] as CustomEvent).detail).toEqual({ reason: 'outside-diy' });
     expect(sessionStorage.getItem('sl_location_picker_prompt')).toBe('outside-diy');
     expect(fetchMock).not.toHaveBeenCalled();
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+
+    window.removeEventListener('open-map-picker', openPicker);
+  });
+
+  it.each([
+    {
+      label: 'unsupported geolocation',
+      geolocation: undefined,
+    },
+    {
+      label: 'denied geolocation',
+      geolocation: {
+        getCurrentPosition: vi.fn((_success: PositionCallback, error: PositionErrorCallback) => {
+          error({ code: 1, message: 'denied', PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 });
+        }),
+      },
+    },
+    {
+      label: 'timed-out geolocation',
+      geolocation: {
+        getCurrentPosition: vi.fn((_success: PositionCallback, error: PositionErrorCallback) => {
+          error({ code: 3, message: 'timeout', PERMISSION_DENIED: 1, POSITION_UNAVAILABLE: 2, TIMEOUT: 3 });
+        }),
+      },
+    },
+    {
+      label: 'geolocation exception',
+      geolocation: {
+        getCurrentPosition: vi.fn(() => {
+          throw new Error('geolocation failed');
+        }),
+      },
+    },
+  ])('fails closed for $label before WhatsApp navigation', ({ geolocation }) => {
+    Object.defineProperty(navigator, 'geolocation', {
+      configurable: true,
+      value: geolocation,
+    });
+    Object.defineProperty(navigator, 'sendBeacon', {
+      configurable: true,
+      value: vi.fn(() => true),
+    });
+    const openPicker = vi.fn();
+    window.addEventListener('open-map-picker', openPicker);
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    link.textContent = 'Chat WhatsApp';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    expect(openPicker).toHaveBeenCalledOnce();
+    expect(navigator.sendBeacon).not.toHaveBeenCalled();
     expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
 
     window.removeEventListener('open-map-picker', openPicker);

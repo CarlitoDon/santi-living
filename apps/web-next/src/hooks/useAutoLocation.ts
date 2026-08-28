@@ -42,6 +42,10 @@ function parseStoredLocation(raw: string): LocationDetail | null {
         postcode: typeof address?.['postcode'] === 'string' ? address['postcode'] : undefined,
       },
       source: p['source'] === 'manual' ? 'manual' : 'automatic',
+      classificationVersion:
+        typeof p['classificationVersion'] === 'number'
+          ? p['classificationVersion']
+          : undefined,
     };
   } catch {
     return null;

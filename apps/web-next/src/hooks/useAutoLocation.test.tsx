@@ -29,6 +29,20 @@ const manualSelection = {
   },
 };
 
+const currentAutomaticSelection = {
+  coords: { lat: -7.7956, lng: 110.3695 },
+  source: 'automatic',
+  classificationVersion: LOCATION_SELECTION_CLASSIFICATION_VERSION,
+  address: {
+    street: 'Jalan Malioboro',
+    kelurahan: 'Sosromenduran',
+    kecamatan: 'Gedongtengen',
+    kota: 'Kota Yogyakarta',
+    provinsi: 'Daerah Istimewa Yogyakarta',
+    postcode: '55271',
+  },
+};
+
 describe('useAutoLocation manual selection arbitration', () => {
   beforeEach(() => {
     sessionStorage.clear();
@@ -40,6 +54,33 @@ describe('useAutoLocation manual selection arbitration', () => {
     vi.useRealTimers();
     cleanup();
     vi.restoreAllMocks();
+  });
+
+  it('replays a current-version automatic DIY cache without opening the picker', async () => {
+    vi.useFakeTimers();
+    sessionStorage.setItem(
+      LOCATION_SELECTION_CACHE_KEY,
+      JSON.stringify(currentAutomaticSelection),
+    );
+    const openPicker = vi.fn();
+    const locationSelected = vi.fn();
+    window.addEventListener('open-map-picker', openPicker);
+    window.addEventListener('location-selected', locationSelected);
+
+    renderHook(() => useAutoLocation());
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(600);
+    });
+
+    expect(openPicker).not.toHaveBeenCalled();
+    expect(locationSelected).toHaveBeenCalledOnce();
+    expect((locationSelected.mock.calls[0]?.[0] as CustomEvent).detail).toEqual(
+      currentAutomaticSelection,
+    );
+    expect(geolocationMocks.getCurrentLocation).not.toHaveBeenCalled();
+
+    window.removeEventListener('open-map-picker', openPicker);
+    window.removeEventListener('location-selected', locationSelected);
   });
 
   it('replays a cached manual selection when the calculator mounts later', async () => {

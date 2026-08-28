@@ -615,6 +615,15 @@ export function GtagScript() {
                 if (preferredManualLocation) {
                   location = preferredManualLocation;
                 }
+                var hasValidatedCoordinates = Boolean(
+                  location &&
+                  typeof location.latitude === 'number' && isFinite(location.latitude) &&
+                  typeof location.longitude === 'number' && isFinite(location.longitude)
+                );
+                if (!hasValidatedCoordinates) {
+                  requestOutsideDiyLocation();
+                  return;
+                }
                 if (
                   location &&
                   (location.outside_diy === true ||
