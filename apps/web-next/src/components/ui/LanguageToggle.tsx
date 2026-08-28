@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLocale } from '@/contexts/locale';
 
@@ -24,12 +23,12 @@ export function LanguageToggle() {
           {lang.code === locale ? (
             <span className="text-blue-600 cursor-default">{lang.label}</span>
           ) : (
-            <Link
+            <a
               href={`/${lang.code}${base === '/' ? '' : base}`}
               className="text-slate-400 hover:text-blue-600 no-underline transition-colors"
             >
               {lang.label}
-            </Link>
+            </a>
           )}
         </span>
       ))}

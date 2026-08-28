@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server';
 
 const locales = ['id', 'en'];
 const defaultLocale = 'id';
-const localeCookieName = 'NEXT_LOCALE';
 
 /** Hostname → pathname rewrite for subdomain routing */
 const HOST_REWRITES = new Map([
@@ -17,12 +16,9 @@ const HOST_REWRITES = new Map([
   ['kipas-angin.localhost', '/sewa-kipas-angin'],
 ]);
 
-function getLocale(request: NextRequest): string {
-  // 1) Cookie from previous visit
-  const cookie = request.cookies.get(localeCookieName)?.value;
-  if (cookie && locales.includes(cookie)) return cookie;
-
-  // 2) Default
+function getLocale(): string {
+  // Bare URLs always start in Indonesian. Explicit /id and /en paths are the
+  // source of truth, so a stale browser cookie can never override navigation.
   return defaultLocale;
 }
 
@@ -45,7 +41,7 @@ export function middleware(request: NextRequest) {
     if (hostname.startsWith(host)) {
       const url = request.nextUrl.clone();
       const localeMatch = pathname.match(/^\/(id|en)/);
-      const locale = localeMatch ? localeMatch[1] : getLocale(request);
+      const locale = localeMatch ? localeMatch[1] : getLocale();
       url.pathname = `/${locale}${target}`;
       return NextResponse.rewrite(url);
     }
@@ -57,30 +53,13 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
-    // Remember this locale in a cookie
-    const detected = pathname.split('/')[1];
-    const res = NextResponse.next();
-    if (detected && locales.includes(detected)) {
-      res.cookies.set(localeCookieName, detected, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 365, // 1 year
-        sameSite: 'lax',
-      });
-    }
-    return res;
+    return NextResponse.next();
   }
 
   // --- Step 4: Redirect to locale-prefixed path ---
-  const locale = getLocale(request);
+  const locale = getLocale();
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  const res = NextResponse.redirect(request.nextUrl);
-  // Also set cookie on redirect (covers first visit with no cookie)
-  res.cookies.set(localeCookieName, locale, {
-    path: '/',
-    maxAge: 60 * 60 * 24 * 365,
-    sameSite: 'lax',
-  });
-  return res;
+  return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {

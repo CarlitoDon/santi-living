@@ -137,22 +137,33 @@ describe('middleware – subdomain rewrites preserve query params', () => {
   });
 });
 
-describe('middleware – NEXT_LOCALE cookie', () => {
-  it('sets locale cookie on root redirect', () => {
+describe('middleware – deterministic Indonesian default', () => {
+  it('redirects root to Indonesian without setting a locale cookie', () => {
     const req = makeRequest('http://localhost:3000/?gclid=abc');
     const res = middleware(req);
     const cookie = res.cookies.get('NEXT_LOCALE');
-    expect(cookie?.value).toBe('id');
+    expect(extractLocation(res)).toContain('/id?');
+    expect(cookie).toBeUndefined();
   });
 
-  it('uses cookie locale for redirect when present', () => {
+  it('ignores a stale English cookie when redirecting the bare domain', () => {
     const req = makeRequest('http://localhost:3000/?gclid=abc', {
       cookie: 'NEXT_LOCALE=en',
     });
     const res = middleware(req);
     const loc = extractLocation(res);
-    expect(loc).toContain('/en?');
+    expect(loc).toContain('/id?');
     expect(loc).toContain('gclid=abc');
+  });
+
+  it('does not refresh the legacy locale cookie on explicit locale paths', () => {
+    const req = makeRequest('http://localhost:3000/en', {
+      cookie: 'NEXT_LOCALE=en',
+    });
+    const res = middleware(req);
+
+    expect(res.headers.get('location')).toBeNull();
+    expect(res.cookies.get('NEXT_LOCALE')).toBeUndefined();
   });
 });
 

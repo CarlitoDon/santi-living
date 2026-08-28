@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-
 import { config } from '@/data/config';
 import { products } from '@/data/products';
 import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
@@ -12,40 +10,7 @@ import { FeatureCard } from '@/components/ui/FeatureCard';
 import { generateFAQSchema } from '@/utils/seo';
 import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
 import { getStoreMapEmbedUrl } from '@/lib/store-location';
-
-export const metadata: Metadata = {
-  title: 'Sewa Kasur Jogja Mulai 30rb/Hari - Antar Cepat 2 Jam | Santi Living',
-  description:
-    'Layanan sewa kasur busa steril & rental extra bed Jogja terdekat. Mulai 30rb/hari gratis antar 2 jam, include sprei bersih & bantal empuk.',
-};
-
-const faqItems = [
-  { q: 'Berapa harga sewa kasur di Jogja?', a: 'Mulai dari Rp25.000/hari untuk kasur busa single. Paket lengkap (kasur + sprei + bantal) mulai Rp35.000/hari.' },
-  { q: 'Apakah bisa antar hari ini?', a: 'Ya! Pesan sebelum jam 15:00 WIB dan kasur bisa sampai di hari yang sama untuk area Jogja, Sleman, dan Bantul.' },
-  { q: 'Bagaimana cara memesan?', a: 'Sangat mudah — pilih kasur, isi formulir pemesanan, dan lakukan pembayaran. Tim kami akan langsung mengantar kasur ke lokasi Anda.' },
-  { q: 'Apakah kasur sewaan bersih?', a: 'Ya, setiap kasur kami cuci dan sterilkan sebelum dikirim. Kami juga menyediakan sprei bersih dan bantal baru untuk setiap pelanggan.' },
-  { q: 'Apa saja area jangkauan pengiriman?', a: 'Area layanan aktif kami: Sleman, Bantul, Kota Jogja, dan Kulonprogo. Area terdekat dari Godean mendapat gratis ongkir!' },
-  { q: 'Berapa lama minimal sewa?', a: 'Minimal sewa 1 hari. Anda bisa sewa harian, mingguan, atau bulanan sesuai kebutuhan.' },
-];
-
-const steps = [
-  { title: 'Pilih kasur', desc: 'Tentukan ukuran dan jumlah yang Anda butuhkan.' },
-  { title: 'Isi data', desc: 'Lengkapi kontak serta alamat pengiriman.' },
-  { title: 'Konfirmasi', desc: 'Periksa rincian biaya dan jadwal sewa.' },
-  { title: 'Kasur diantar', desc: 'Tim kami mengantar kasur bersih ke lokasi.' },
-  { title: 'Kami jemput', desc: 'Hubungi kami saat masa sewa selesai.' },
-];
-
-const benefits = [
-  { icon: '✨', title: '7 Tahap Higienitas', desc: 'Di-vacuum industri, steril UV-C, dan dibungkus plastik kedap udara.' },
-  { icon: '🏅', title: 'Royal Grand Exclusive', desc: 'Kasur busa High Density anti kempes untuk support tulang belakang.' },
-  { icon: '🚀', title: 'Same Day Delivery', desc: 'Layanan antar jemput kilat 2-4 jam untuk area Jogja, Sleman, Bantul.' },
-  { icon: '💰', title: 'Harga Transparan', desc: 'Tanpa biaya tersembunyi, harga sewa paket sudah termasuk sprei bersih & bantal.' },
-  { icon: '📦', title: 'Stok Selalu Ready', desc: 'Ratusan unit kasur selalu siap dikirim kapanpun Anda butuhkan.' },
-  { icon: '📍', title: 'Gratis Jemput', desc: 'Bebas biaya pengambilan unit kasur saat masa sewa Anda berakhir.' },
-];
-
-const serviceAreas = ['Kota Yogyakarta', 'Sleman', 'Bantul', 'Kulonprogo'];
+import { getDictionary, type Locale } from '@/locales/dictionary';
 
 function CheckIcon() {
   return (
@@ -71,12 +36,26 @@ function ArrowRightIcon() {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: localeParam } = await params;
+  const locale: Locale = localeParam === 'en' ? 'en' : 'id';
+  const dict = await getDictionary(locale);
+  const faqItems = dict.faq.items;
+  const steps = dict.steps.items;
+  const benefits = dict.benefits.items;
+  const serviceAreas = dict.location.service_areas;
+  const stripCheck = (value: string) => value.replace(/^✅\s*/, '');
+  const serviceEyebrow = locale === 'en' ? 'Service you can count on' : 'Layanan yang bisa diandalkan';
+
   const localBusinessSchema = {
     '@context': 'https://schema.org' as const,
     '@type': 'LocalBusiness' as const,
     name: 'Santi Living',
-    description: metadata.description,
+    description: dict.seo.home_desc,
     url: 'https://santiliving.com',
     telephone: `+${config.whatsappNumber}`,
     address: {
@@ -104,8 +83,8 @@ export default function HomePage() {
   const productSchema = {
     '@context': 'https://schema.org' as const,
     '@type': 'Product' as const,
-    name: 'Sewa Kasur Busa Jogja Santi Living',
-    description: 'Persewaan kasur busa tebal 15cm bersih higienis di Yogyakarta. Antar jemput same day area Sleman, Bantul, Kota Jogja dan Kulonprogo.',
+    name: locale === 'en' ? 'Santi Living Jogja Mattress Rental' : 'Sewa Kasur Busa Jogja Santi Living',
+    description: dict.seo.home_desc,
     image: 'https://santiliving.com/logo.png',
     brand: { '@type': 'Brand' as const, name: 'Santi Living' },
     offers: {
@@ -136,17 +115,17 @@ export default function HomePage() {
         <section className="home-hero-inner">
           <div className="container">
             <div className="home-hero-copy">
-              <p className="home-eyebrow" data-reveal="up">Sewa kasur tepercaya di Yogyakarta</p>
+              <p className="home-eyebrow" data-reveal="up">{dict.hero.badge}</p>
               <h1 className="home-hero-title" data-reveal="up" data-reveal-delay="55">
-                Sewa Kasur Jogja yang Bersih, Nyaman, dan <span>Siap Antar Hari Ini.</span>
+                {dict.hero.title_part1} <span>{dict.hero.title_part2}</span>
               </h1>
               <p className="home-hero-lead" data-reveal="up" data-reveal-delay="110">
-                Kasur higienis mulai Rp25.000/hari, lengkap dengan pilihan paket dan layanan antar jemput yang jelas sejak awal.
+                {dict.benefits.subtitle}
               </p>
 
               <div className="home-hero-actions" data-reveal="up" data-reveal-delay="165">
                 <a href="#calculator" className="home-primary-button motion-interactive motion-lift">
-                  Pilih Kasur <ArrowRightIcon />
+                  {dict.hero.cta_sewa} <ArrowRightIcon />
                 </a>
                 <a
                   href={getWhatsAppUrl(WA_PRESET_ORDER, 'hero_cta')}
@@ -156,18 +135,23 @@ export default function HomePage() {
                   data-wa-source="hero_cta"
                   data-wa-location="hero"
                 >
-                  <WhatsAppIcon /> Chat WhatsApp
+                  <WhatsAppIcon /> {dict.hero.cta_chat}
                 </a>
               </div>
 
-              <ul className="home-trust-list" data-reveal="fade" data-reveal-delay="220" aria-label="Keunggulan layanan">
-                <li><CheckIcon /> Antar same-day</li>
-                <li><CheckIcon /> Harga transparan</li>
-                <li><CheckIcon /> Gratis penjemputan</li>
+              <ul
+                className="home-trust-list"
+                data-reveal="fade"
+                data-reveal-delay="220"
+                aria-label={locale === 'en' ? 'Service advantages' : 'Keunggulan layanan'}
+              >
+                <li><CheckIcon /> {stripCheck(dict.hero.feature_sameday)}</li>
+                <li><CheckIcon /> {stripCheck(dict.hero.feature_clean)}</li>
+                <li><CheckIcon /> {stripCheck(dict.hero.feature_free_pickup)}</li>
               </ul>
 
               <p className="home-direct-contact" data-reveal="fade" data-reveal-delay="250">
-                Butuh bantuan cepat?{' '}
+                {dict.hero.or_contact}{' '}
                 <a href={getWhatsAppUrl(undefined, 'hero_phone')} data-wa-source="hero_phone" data-wa-location="hero">
                   {config.whatsappDisplay}
                 </a>
@@ -180,9 +164,9 @@ export default function HomePage() {
       <section id="calculator" className="home-catalog" aria-labelledby="catalog-title">
         <div className="container home-catalog-inner">
           <div className="home-section-heading" data-reveal="up">
-            <p className="section-eyebrow">Pilih sesuai kebutuhan</p>
-            <h2 id="catalog-title">Kasur dan perlengkapan, dalam satu pilihan yang ringkas.</h2>
-            <p>Tekan detail untuk melihat isi paket, atau langsung tambahkan produk ke pesanan Anda.</p>
+            <p className="section-eyebrow">{dict.hero.pick_title}</p>
+            <h2 id="catalog-title">{dict.produk.title}</h2>
+            <p>{dict.produk.subtitle}</p>
           </div>
           <ProductPicker />
         </div>
@@ -193,9 +177,9 @@ export default function HomePage() {
       <section className="home-section" aria-labelledby="benefits-title">
         <div className="container">
           <div className="home-section-heading centered" data-reveal="up">
-            <p className="section-eyebrow">Layanan yang bisa diandalkan</p>
-            <h2 id="benefits-title">Nyaman sejak memilih hingga kasur dijemput.</h2>
-            <p>Kebersihan, kualitas kasur, dan kecepatan layanan kami jaga dalam satu pengalaman yang sederhana.</p>
+            <p className="section-eyebrow">{serviceEyebrow}</p>
+            <h2 id="benefits-title">{dict.benefits.title}</h2>
+            <p>{dict.benefits.subtitle}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
             {benefits.map((benefit, index) => (
@@ -210,12 +194,12 @@ export default function HomePage() {
       <section className="home-cross-sell">
         <div className="container home-cross-sell-inner">
           <div data-reveal="left">
-            <p className="section-eyebrow">Perlengkapan acara</p>
-            <h2>Butuh karpet untuk hajatan, pengajian, atau event?</h2>
-            <p>Jelajahi pilihan karpet merah, permadani, dan paket acara dari katalog khusus Santi Living.</p>
+            <p className="section-eyebrow">{dict.karpet_internal.label}</p>
+            <h2>{dict.karpet_internal.title}</h2>
+            <p>{dict.karpet_internal.desc}</p>
           </div>
           <a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="home-text-link motion-interactive motion-lift" data-reveal="right">
-            Lihat pilihan karpet <ArrowRightIcon />
+            {dict.karpet_internal.cta} <ArrowRightIcon />
           </a>
         </div>
       </section>
@@ -223,8 +207,8 @@ export default function HomePage() {
       <section className="home-section home-section-soft" aria-labelledby="steps-title">
         <div className="container">
           <div className="home-section-heading" data-reveal="up">
-            <p className="section-eyebrow">Cara sewa</p>
-            <h2 id="steps-title">Lima langkah, tanpa proses yang membingungkan.</h2>
+            <p className="section-eyebrow">{dict.steps.title}</p>
+            <h2 id="steps-title">{dict.steps.title}</h2>
           </div>
           <ol className="home-steps">
             {steps.map((step, index) => (
@@ -241,7 +225,7 @@ export default function HomePage() {
       <section className="home-section" aria-labelledby="faq-title">
         <div className="container">
           <div className="max-w-2xl mx-auto" data-reveal="up">
-            <FAQAccordion items={faqItems} title="Pertanyaan Umum" titleId="faq-title" />
+            <FAQAccordion items={faqItems} title={dict.faq.title} titleId="faq-title" />
           </div>
         </div>
       </section>
@@ -249,12 +233,12 @@ export default function HomePage() {
       <section className="home-promo">
         <div className="container home-promo-inner">
           <div data-reveal="left">
-            <p className="home-promo-label">Promo ulasan pelanggan</p>
-            <h2>Hemat ongkir hingga 70%.</h2>
-            <p>Berikan ulasan di Google Maps setelah menggunakan layanan kami dan dapatkan potongan ongkir sesuai ketentuan promo.</p>
+            <p className="home-promo-label">{dict.promo.badge}</p>
+            <h2>{dict.promo.title}</h2>
+            <p>{dict.promo.desc}</p>
           </div>
           <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="home-text-link motion-interactive motion-lift" data-reveal="right">
-            Buka Google Maps <ArrowRightIcon />
+            {dict.promo.cta} <ArrowRightIcon />
           </a>
         </div>
       </section>
@@ -263,18 +247,18 @@ export default function HomePage() {
         <div className="container home-location-grid">
           <div data-reveal="left">
             <div className="home-section-heading">
-              <p className="section-eyebrow">Lokasi dan jangkauan</p>
-              <h2 id="location-title">Workshop kami berada di Godean, Sleman.</h2>
-              <p>Kunjungi workshop atau pesan pengantaran ke area layanan aktif di Yogyakarta.</p>
+              <p className="section-eyebrow">{dict.location.title}</p>
+              <h2 id="location-title">{dict.location.workshop_name}</h2>
+              <p>{dict.location.desc}</p>
             </div>
             <address className="home-address">
-              <strong>Workshop Santi Living</strong>
+              <strong>{dict.location.workshop_name}</strong>
               <p>Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung,<br />Kec. Godean, Kabupaten Sleman, DI Yogyakarta 55264</p>
               <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-bold text-sm hover:underline">
-                Lihat arah di Google Maps
+                {dict.location.maps_link}
               </a>
             </address>
-            <ul className="home-area-list" aria-label="Area layanan pengiriman">
+            <ul className="home-area-list" aria-label={dict.location.service_areas_label}>
               {serviceAreas.map((area) => <li key={area}>{area}</li>)}
             </ul>
           </div>
@@ -297,11 +281,11 @@ export default function HomePage() {
       <section className="home-final-cta">
         <div className="container home-final-cta-inner">
           <div data-reveal="left">
-            <h2>Siap menyiapkan tempat tidur yang nyaman?</h2>
-            <p>Pilih kasur langsung dari katalog atau hubungi tim kami bila Anda ingin dibantu menentukan paket.</p>
+            <h2>{dict.cta_final.title}</h2>
+            <p>{dict.cta_final.desc}</p>
           </div>
           <div className="home-hero-actions" data-reveal="right">
-            <a href="#calculator" className="home-primary-button motion-interactive motion-lift">Pilih Kasur <ArrowRightIcon /></a>
+            <a href="#calculator" className="home-primary-button motion-interactive motion-lift">{dict.cta_final.cta_pesan} <ArrowRightIcon /></a>
             <a
               href={getWhatsAppUrl(WA_PRESET_ORDER, 'footer_cta')}
               className="home-secondary-button motion-interactive motion-lift"
@@ -310,7 +294,7 @@ export default function HomePage() {
               data-wa-source="footer_cta"
               data-wa-location="footer_cta"
             >
-              <WhatsAppIcon /> Chat WhatsApp
+              <WhatsAppIcon /> {dict.cta_final.cta_chat}
             </a>
           </div>
         </div>
