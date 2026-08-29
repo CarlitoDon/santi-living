@@ -4,7 +4,9 @@ import type { NextRequest } from 'next/server';
 const locales = ['id', 'en'];
 const defaultLocale = 'id';
 
-/** Hostname → pathname rewrite for subdomain routing */
+const CANONICAL_ORIGIN = 'https://santiliving.com';
+
+/** Exact hostname → canonical landing pathname for specialist subdomains. */
 const HOST_REWRITES = new Map([
   ['acara.santiliving.com', '/sewa-perlengkapan-event'],
   ['acara.localhost', '/sewa-perlengkapan-event'],
@@ -22,9 +24,15 @@ function getLocale(): string {
   return defaultLocale;
 }
 
+function pathnameWithLocale(pathname: string, locale: string): string {
+  if (pathname === '/') return `/${locale}`;
+  if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) return pathname;
+  return `/${locale}${pathname}`;
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const hostname = request.headers.get('host') || '';
+  const hostname = (request.headers.get('host') || '').split(':')[0].toLowerCase();
 
   // --- Step 1: Skip api, static files ---
   if (
@@ -36,15 +44,28 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // --- Step 2: Host-based subdomain rewrite ---
-  for (const [host, target] of HOST_REWRITES) {
-    if (hostname.startsWith(host)) {
+  // --- Step 2: Specialist subdomains only own their landing page. ---
+  // Redirect every other path to the main host so article crawls cannot create
+  // duplicate ISR variants under acara/karpet/permadani/kipas hostnames.
+  const hostTarget = HOST_REWRITES.get(hostname);
+  if (hostTarget) {
+    const localeMatch = pathname.match(/^\/(id|en)(?:\/|$)/);
+    const locale = localeMatch?.[1] || getLocale();
+    const unlocalizedPath = localeMatch
+      ? pathname.slice(`/${locale}`.length) || '/'
+      : pathname;
+    const isLandingPath = unlocalizedPath === '/' || unlocalizedPath === hostTarget;
+
+    if (isLandingPath) {
       const url = request.nextUrl.clone();
-      const localeMatch = pathname.match(/^\/(id|en)/);
-      const locale = localeMatch ? localeMatch[1] : getLocale();
-      url.pathname = `/${locale}${target}`;
+      url.pathname = `/${locale}${hostTarget}`;
       return NextResponse.rewrite(url);
     }
+
+    const canonicalUrl = new URL(CANONICAL_ORIGIN);
+    canonicalUrl.pathname = pathnameWithLocale(pathname, locale);
+    canonicalUrl.search = request.nextUrl.search;
+    return NextResponse.redirect(canonicalUrl, 308);
   }
 
   // --- Step 3: Locale prefix detection ---

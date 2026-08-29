@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getNotionPosts } from '@/lib/notion';
 import { getAllPosts } from '@/lib/blog';
 
-export const revalidate = 86400;
+export const revalidate = false;
 
 const BASE_URL = 'https://santiliving.com';
 const LOCALES = ['id', 'en'] as const;
@@ -29,9 +29,10 @@ const STATIC_PATHS = [
   'pesan',
 ] as const;
 
-function safeDate(value: Date | string | undefined): Date {
-  const date = value instanceof Date ? value : value ? new Date(value) : new Date();
-  return Number.isNaN(date.getTime()) ? new Date() : date;
+function safeDate(value: Date | string | undefined): Date | undefined {
+  if (!value) return undefined;
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
 function localizedAlternates(path: string) {
@@ -47,14 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
       alternates: localizedAlternates(''),
     },
     ...LOCALES.flatMap((locale) => STATIC_PATHS.map((path) => ({
       url: `${BASE_URL}/${locale}${path ? `/${path}` : ''}`,
-      lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: path ? 0.8 : 1,
       alternates: localizedAlternates(path ? `/${path}` : ''),

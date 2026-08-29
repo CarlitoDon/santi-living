@@ -3,7 +3,12 @@ import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import { unstable_cache } from 'next/cache';
 
-const NOTION_CACHE_SECONDS = 6 * 60 * 60;
+export const NOTION_POSTS_TAG = 'notion-blog-posts-v3';
+export const NOTION_POST_DETAILS_TAG = 'notion-blog-post-details-v3';
+
+export function notionPostTag(slug: string): string {
+  return `notion-blog-post-v3:${slug}`;
+}
 
 const notion = new Client({
   auth: process.env.NOTION_API_KEY,
@@ -100,34 +105,65 @@ async function queryNotionPosts(): Promise<NotionPost[]> {
     startCursor = data.next_cursor;
   }
 
-  return allResults.map((page: any) => {
-    const coverUrl = page.cover?.external?.url || page.cover?.file?.url || getPropertyText(page.properties['Featured Image']) || getPropertyText(page.properties['Image']) || undefined;
+  return allResults.map(mapNotionPage);
+}
 
-    return {
-      id: page.id,
-      title: getPropertyText(page.properties.Name),
-      slug: getPropertyText(page.properties.Slug) || page.id,
-      date: getPropertyText(page.properties['Published Date']) || page.created_time,
-      description: getPropertyText(page.properties['Meta Description']),
-      category: getPropertyText(page.properties.Category) || 'Tips',
-      image: coverUrl,
-    };
-  });
+function mapNotionPage(page: any): NotionPost {
+  // Prefer durable external URLs. Notion-hosted file URLs expire after about
+  // one hour and must never be persisted in an indefinite cache entry.
+  const coverUrl = page.cover?.external?.url
+    || getPropertyText(page.properties['Featured Image'])
+    || getPropertyText(page.properties['Image'])
+    || undefined;
+
+  return {
+    id: page.id,
+    title: getPropertyText(page.properties.Name),
+    slug: getPropertyText(page.properties.Slug) || page.id,
+    date: getPropertyText(page.properties['Published Date']) || page.created_time,
+    description: getPropertyText(page.properties['Meta Description']),
+    category: getPropertyText(page.properties.Category) || 'Tips',
+    image: coverUrl,
+  };
 }
 
 const getCachedNotionPosts = unstable_cache(
   queryNotionPosts,
-  ['notion-blog-posts-v2'],
-  { revalidate: NOTION_CACHE_SECONDS, tags: ['notion-blog'] },
+  ['notion-blog-posts-v3'],
+  { tags: [NOTION_POSTS_TAG] },
 );
 
 export async function getNotionPosts(): Promise<NotionPost[]> {
   return getCachedNotionPosts();
 }
 
-const getCachedNotionPost = unstable_cache(async (slug: string): Promise<NotionPost | null> => {
-  const posts = await getNotionPosts();
-  const postInfo = posts.find(p => p.slug === slug);
+async function queryNotionPost(slug: string): Promise<NotionPost | null> {
+  const databaseId = process.env.NOTION_BLOG_DATABASE_ID;
+  if (!databaseId) return null;
+
+  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
+      'Notion-Version': '2022-06-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      filter: {
+        and: [
+          { property: 'Status', status: { equals: 'Published' } },
+          { property: 'Slug', rich_text: { equals: slug } },
+        ],
+      },
+      page_size: 1,
+    }),
+    cache: 'no-store',
+  });
+  if (!response.ok) return null;
+  const data = await response.json() as { results?: any[] };
+  const page = data.results?.[0];
+  if (!page || !('properties' in page)) return null;
+  const postInfo = mapNotionPage(page);
   if (!postInfo) return null;
 
   try {
@@ -142,11 +178,31 @@ const getCachedNotionPost = unstable_cache(async (slug: string): Promise<NotionP
     console.error('Error fetching Notion markdown for page:', postInfo.id, err);
     return postInfo;
   }
-}, ['notion-blog-post-v2'], {
-  revalidate: NOTION_CACHE_SECONDS,
-  tags: ['notion-blog'],
-});
+}
 
 export async function getNotionPost(slug: string): Promise<NotionPost | null> {
-  return getCachedNotionPost(slug);
+  const getCachedNotionPost = unstable_cache(
+    () => queryNotionPost(slug),
+    ['notion-blog-post-v3', slug],
+    { tags: [NOTION_POST_DETAILS_TAG, notionPostTag(slug)] },
+  );
+  return getCachedNotionPost();
+}
+
+export async function getNotionSlugsForPage(pageId: string): Promise<string[]> {
+  const slugs = new Set<string>();
+  const cachedPost = (await getNotionPosts()).find((post) => post.id === pageId);
+  if (cachedPost?.slug) slugs.add(cachedPost.slug);
+
+  try {
+    const page = await notion.pages.retrieve({ page_id: pageId });
+    if ('properties' in page) {
+      const currentSlug = getPropertyText(page.properties.Slug);
+      if (currentSlug) slugs.add(currentSlug);
+    }
+  } catch {
+    // Deleted or moved pages can no longer be retrieved. The cached slug above
+    // still lets the webhook expire the old public route when available.
+  }
+  return [...slugs];
 }

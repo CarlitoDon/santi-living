@@ -8,7 +8,26 @@ Copy the local environment file and configure the services used by the app. Deli
 GOOGLE_MAPS_API_KEY=your_server_only_key
 ```
 
-Do not expose this key through a `NEXT_PUBLIC_` variable. Restrict it to the Routes API and set a Google Cloud quota before production use. The app also limits quotes per client, rejects destinations outside the service radius, and caches nearby coordinate quotes for six hours. If the Routes API is unavailable, the WhatsApp message still includes the customer's precise Google Maps link, but intentionally omits an automatic delivery-fee amount.
+Do not expose that server key through a `NEXT_PUBLIC_` variable. Restrict it to the Routes and Places APIs and set Google Cloud quotas before production use. The app also limits quotes per client, rejects destinations outside the service radius, and caches nearby coordinate quotes for six hours. If the Routes API is unavailable, the WhatsApp message still includes the customer's precise Google Maps link, but intentionally omits an automatic delivery-fee amount.
+
+The interactive location picker uses a separate browser key:
+
+```bash
+NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY=your_referrer_restricted_browser_key
+```
+
+Restrict this key to Maps JavaScript API and to the production/preview website origins. Never reuse the server Routes/Places key in the browser.
+
+Notion article data is cached indefinitely and refreshed by content events rather than a timer. Configure a long random secret and use it in the Notion webhook URL (`/api/notion/revalidate?secret=...`):
+
+```bash
+NOTION_REVALIDATE_SECRET=your_random_webhook_secret
+NOTION_WEBHOOK_VERIFICATION_TOKEN=token_from_notion_subscription_handshake
+```
+
+Subscribe the existing Notion connection to page-created, page-content-updated, page-properties-updated, page-moved, page-deleted, and page-undeleted events. The handler invalidates the old and current article slugs plus the article indexes and sitemap. If Notion cannot reveal a deleted page's slug, it safely expires all article-detail data entries once instead of leaving a permanent stale route.
+
+During subscription setup, read the one-time `verification_token` from the private Vercel function log and paste it into Notion. Then add that value as `NOTION_WEBHOOK_VERIFICATION_TOKEN` and redeploy the already-approved production SHA. Subsequent deliveries are checked with Notion's HMAC signature as well as the private URL secret.
 
 First, run the development server:
 

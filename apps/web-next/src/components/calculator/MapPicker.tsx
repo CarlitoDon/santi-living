@@ -4,14 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import { reverseGeocode } from "@/scripts/geolocation";
 import { consumeLocationPickerReason, publishLocationSelection, type LocationPickerReason } from "@/lib/location-selection";
 import { showAlert } from "@/utils/alert";
-import type L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { loadGoogleMaps } from "@/lib/google-maps-loader";
 import { usePresence } from "@/hooks/usePresence";
 import { useDialogFocus } from "@/hooks/useDialogFocus";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
-const DEFAULT_CENTER: [number, number] = [-7.797068, 110.370529];
+const DEFAULT_CENTER = { lat: -7.797068, lng: 110.370529 };
 const DEFAULT_ZOOM = 13;
+const MAP_STYLES: google.maps.MapTypeStyle[] = [
+  { featureType: "poi", elementType: "labels.icon", stylers: [{ saturation: -35 }] },
+  { featureType: "transit", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+  { featureType: "road", elementType: "geometry", stylers: [{ color: "#f3eadc" }] },
+  { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#dfc9aa" }] },
+  { featureType: "water", elementType: "geometry", stylers: [{ color: "#c8dce6" }] },
+  { featureType: "landscape", elementType: "geometry", stylers: [{ color: "#f8f3e9" }] },
+];
 
 interface PlaceSearchResult {
   id: string;
@@ -30,13 +37,15 @@ export function MapPicker() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<PlaceSearchResult[]>([]);
   const [searchStatus, setSearchStatus] = useState<"idle" | "loading" | "empty" | "error">("idle");
+  const [mapStatus, setMapStatus] = useState<"idle" | "loading" | "ready" | "error">("idle");
   const presence = usePresence(isOpen, 260);
 
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const mapInstanceRef = useRef<L.Map | null>(null);
-  const markerRef = useRef<L.Marker | null>(null);
+  const mapsApiRef = useRef<typeof google.maps | null>(null);
+  const mapInstanceRef = useRef<google.maps.Map | null>(null);
+  const markerRef = useRef<google.maps.Marker | null>(null);
   const selectCoordinatesRef = useRef<((lat: number, lng: number, label?: string) => Promise<void>) | null>(null);
   useBodyScrollLock(presence.shouldRender);
 
@@ -50,6 +59,7 @@ export function MapPicker() {
       setSearchQuery("");
       setSearchResults([]);
       setSearchStatus("idle");
+      setMapStatus("idle");
     };
     const handleOpen = (event: Event) => {
       const detail = (event as CustomEvent<{ reason?: LocationPickerReason }>).detail;
@@ -98,19 +108,26 @@ export function MapPicker() {
     let isMounted = true;
 
     async function initMap() {
-      const leaflet = (await import("leaflet")).default;
+      setMapStatus("loading");
+      let maps: typeof google.maps;
+      try {
+        maps = await loadGoogleMaps();
+      } catch {
+        if (isMounted) setMapStatus("error");
+        return;
+      }
       if (!isMounted || !mapContainerRef.current) return;
-      leaflet.Marker.prototype.options.icon = leaflet.icon({
-        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-        iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
-      });
+      mapsApiRef.current = maps;
       if (!mapInstanceRef.current) {
-        const map = leaflet.map(mapContainerRef.current, { center: DEFAULT_CENTER, zoom: DEFAULT_ZOOM, zoomControl: true });
-        leaflet.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 19,
-        }).addTo(map);
+        const map = new maps.Map(mapContainerRef.current, {
+          center: DEFAULT_CENTER,
+          zoom: DEFAULT_ZOOM,
+          disableDefaultUI: true,
+          zoomControl: true,
+          gestureHandling: "cooperative",
+          clickableIcons: false,
+          styles: MAP_STYLES,
+        });
         mapInstanceRef.current = map;
 
         const updateAddress = async (lat: number, lng: number, label?: string) => {
@@ -126,21 +143,32 @@ export function MapPicker() {
           if (!isMounted) return;
           setSelectedCoords({ lat, lng });
           if (markerRef.current) {
-            markerRef.current.setLatLng([lat, lng]);
+            markerRef.current.setPosition({ lat, lng });
           } else {
-            markerRef.current = leaflet.marker([lat, lng], { draggable: true }).addTo(map);
-            markerRef.current.on("dragend", async () => {
-              const position = markerRef.current?.getLatLng();
+            markerRef.current = new maps.Marker({
+              map,
+              position: { lat, lng },
+              draggable: true,
+              title: "Lokasi sewa",
+            });
+            markerRef.current.addListener("dragend", async () => {
+              const position = markerRef.current?.getPosition();
               if (!position) return;
-              setSelectedCoords({ lat: position.lat, lng: position.lng });
-              await updateAddress(position.lat, position.lng);
+              const nextLat = position.lat();
+              const nextLng = position.lng();
+              setSelectedCoords({ lat: nextLat, lng: nextLng });
+              await updateAddress(nextLat, nextLng);
             });
           }
-          map.setView([lat, lng], 16);
+          map.panTo({ lat, lng });
+          map.setZoom(16);
           await updateAddress(lat, lng, label);
         };
         selectCoordinatesRef.current = selectCoordinates;
-        map.on("click", async (event: L.LeafletMouseEvent) => selectCoordinates(event.latlng.lat, event.latlng.lng));
+        map.addListener("click", (event: google.maps.MapMouseEvent) => {
+          if (!event.latLng) return;
+          void selectCoordinates(event.latLng.lat(), event.latLng.lng());
+        });
 
         if (reason !== "outside-diy" && navigator.geolocation && window.isSecureContext) {
           navigator.geolocation.getCurrentPosition(
@@ -149,13 +177,19 @@ export function MapPicker() {
           );
         }
       }
-      window.setTimeout(() => mapInstanceRef.current?.invalidateSize(), 100);
+      setMapStatus("ready");
     }
     void initMap();
     return () => {
       isMounted = false;
       selectCoordinatesRef.current = null;
-      mapInstanceRef.current?.remove();
+      const maps = mapsApiRef.current;
+      if (markerRef.current) {
+        maps?.event.clearInstanceListeners(markerRef.current);
+        markerRef.current.setMap(null);
+      }
+      if (mapInstanceRef.current) maps?.event.clearInstanceListeners(mapInstanceRef.current);
+      mapsApiRef.current = null;
       mapInstanceRef.current = null;
       markerRef.current = null;
     };
@@ -194,7 +228,7 @@ export function MapPicker() {
       <div ref={dialogRef} className="map-picker-content" role="dialog" aria-modal="true" aria-labelledby="map-picker-title" aria-describedby="map-picker-hint" tabIndex={-1}>
         <div className="map-picker-header">
           {isOutsidePrompt && <span className="map-picker-eyebrow">Lokasi sewa berbeda</span>}
-          <h3 id="map-picker-title">{isOutsidePrompt ? "Kamu lagi di luar kota, ya?" : "Pilih Lokasi Pengantaran"}</h3>
+          <h3 id="map-picker-title">{isOutsidePrompt ? "Kamu lagi di luar Jogja, ya?" : "Pilih Lokasi Pengantaran"}</h3>
           <p id="map-picker-hint" className="map-picker-hint">
             {isOutsidePrompt ? "Mau lokasi sewanya di mana? Cari hotel, gedung, atau alamat tujuan di DIY." : "Cari nama tempat atau tentukan titik langsung di peta."}
           </p>
@@ -239,7 +273,15 @@ export function MapPicker() {
             </div>
           )}
         </div>
-        <div className="map-picker-map" ref={mapContainerRef}></div>
+        <div className="map-picker-map-shell" data-map-provider="google">
+          <div className="map-picker-map" ref={mapContainerRef} aria-label="Peta Google untuk memilih lokasi sewa" />
+          {mapStatus === "loading" && <div className="map-picker-map-state">Memuat Google Maps...</div>}
+          {mapStatus === "error" && (
+            <div className="map-picker-map-state error" role="alert">
+              Google Maps belum dapat dimuat. Coba tutup lalu buka kembali.
+            </div>
+          )}
+        </div>
         <div className="map-picker-address"><span className="address-text">{addressDisplay}</span></div>
         <div className="map-picker-actions">
           <button type="button" className="btn-map-cancel" onClick={handleClose}>Nanti saja</button>

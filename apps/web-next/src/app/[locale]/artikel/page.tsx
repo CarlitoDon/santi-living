@@ -23,12 +23,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${dict.blog?.page_title || 'Artikel & Tips'} | Santi Living`,
     description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman.',
     alternates: {
-      canonical: `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel`,
+      canonical: `https://santiliving.com/${locale}/artikel`,
     },
     openGraph: {
       title: `${dict.blog?.page_title || 'Artikel & Tips'} - Santi Living`,
       description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur.',
-      url: `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel`,
+      url: `https://santiliving.com/${locale}/artikel`,
       type: 'website',
     },
     twitter: {
@@ -40,15 +40,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export const dynamicParams = true;
-export const revalidate = 21600;
+export const revalidate = false;
 
 export default async function ArtikelIndexPage({ params }: PageProps) {
   const { locale } = await params;
   const rawDict = await getDictionary(locale as Locale);
   const dict = rawDict as Record<string, unknown>;
-  const posts = await getNotionPosts();
-
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const posts = [...(await getNotionPosts())]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const blogDict = (dict.blog as BlogDict) || {
     page_title: 'Artikel & Tips',
