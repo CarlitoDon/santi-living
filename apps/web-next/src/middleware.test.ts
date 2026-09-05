@@ -118,22 +118,69 @@ describe('middleware – locale-prefixed paths pass through', () => {
 });
 
 describe('middleware – subdomain rewrites preserve query params', () => {
-  it('rewrites acara subdomain path and retains query params', () => {
+  it('rewrites the acara subdomain root and retains query params', () => {
     const req = makeRequest('http://localhost:3000/?gclid=abc', {
       host: 'acara.localhost',
     });
     const res = middleware(req);
-    // Subdomain rewrites use NextResponse.rewrite (no location header)
     expect(res.headers.get('location')).toBeNull();
-    // Rewrite should work (no error thrown)
+    expect(res.headers.get('x-middleware-rewrite')).toContain(
+      '/id/sewa-perlengkapan-event?gclid=abc',
+    );
   });
 
-  it('rewrites karpet subdomain path', () => {
-    const req = makeRequest('http://localhost:3000/?utm_source=fb', {
+  it('rewrites an explicit English karpet landing path', () => {
+    const req = makeRequest('http://localhost:3000/en/sewa-karpet-jogja?utm_source=fb', {
       host: 'karpet.localhost',
     });
     const res = middleware(req);
     expect(res.headers.get('location')).toBeNull();
+    expect(res.headers.get('x-middleware-rewrite')).toContain(
+      '/en/sewa-karpet-jogja?utm_source=fb',
+    );
+  });
+
+  it('treats a locale-only specialist URL as that subdomain home', () => {
+    const req = makeRequest('https://karpet.santiliving.com/id', {
+      host: 'karpet.santiliving.com',
+    });
+    const res = middleware(req);
+
+    expect(res.headers.get('location')).toBeNull();
+    expect(res.headers.get('x-middleware-rewrite')).toContain('/id/sewa-karpet-jogja');
+  });
+
+  it('redirects article paths on a specialist subdomain to the canonical main host', () => {
+    const req = makeRequest('https://permadani.santiliving.com/en/artikel/tips?ref=sidebar', {
+      host: 'permadani.santiliving.com',
+    });
+    const res = middleware(req);
+
+    expect(extractLocation(res)).toBe(
+      'https://santiliving.com/en/artikel/tips?ref=sidebar',
+    );
+    expect(res.headers.get('x-middleware-rewrite')).toBeNull();
+  });
+
+  it('adds the Indonesian locale when redirecting a bare subdomain path', () => {
+    const req = makeRequest('https://karpet.santiliving.com/artikel/tips?utm_source=google', {
+      host: 'karpet.santiliving.com',
+    });
+    const res = middleware(req);
+
+    expect(extractLocation(res)).toBe(
+      'https://santiliving.com/id/artikel/tips?utm_source=google',
+    );
+  });
+
+  it('does not treat lookalike hostnames as Santi Living subdomains', () => {
+    const req = makeRequest('https://karpet.santiliving.com.evil.test/', {
+      host: 'karpet.santiliving.com.evil.test',
+    });
+    const res = middleware(req);
+
+    expect(extractLocation(res)).toContain('/id');
+    expect(res.headers.get('x-middleware-rewrite')).toBeNull();
   });
 });
 

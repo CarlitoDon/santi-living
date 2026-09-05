@@ -654,9 +654,33 @@ input[type="number"]::-webkit-outer-spin-button {
 .map-picker-results strong { margin-bottom: 2px; font-size: var(--font-size-sm); }
 .map-picker-results span { color: var(--color-text-muted); font-size: 0.75rem; line-height: 1.4; }
 
-.map-picker-map {
+.map-picker-map-shell {
+  position: relative;
   height: 350px;
   width: 100%;
+  overflow: hidden;
+  background: #f3eadc;
+}
+
+.map-picker-map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-picker-map-state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: color-mix(in srgb, var(--color-surface-elevated) 88%, transparent);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+.map-picker-map-state.error {
+  color: var(--color-error);
 }
 
 .map-picker-address {
@@ -745,7 +769,7 @@ input[type="number"]::-webkit-outer-spin-button {
   .map-picker-search,
   .map-picker-actions { padding-right: var(--space-4); padding-left: var(--space-4); }
   .map-picker-results { right: var(--space-4); left: var(--space-4); }
-  .map-picker-map { min-height: 220px; height: 32vh; }
+  .map-picker-map-shell { min-height: 220px; height: 32vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -9,7 +9,7 @@ import { getTranslatedAuthor } from '@/utils/author';
 import { cache } from 'react';
 
 export const dynamicParams = true;
-export const revalidate = 21600;
+export const revalidate = false;
 const BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE = 40;
 const BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE = 40;
 
@@ -86,12 +86,12 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string)
 
 export async function generateStaticParams() {
   const locales = ['id', 'en'];
-  const notionPosts = (await getNotionPosts())
+  const notionPosts = [...(await getNotionPosts())]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE);
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
-    const posts = getAllPosts(locale)
+    const posts = [...getAllPosts(locale)]
       .sort((a, b) => b.frontmatter.pubDate.getTime() - a.frontmatter.pubDate.getTime())
       .slice(0, BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE);
     const allSlugs = new Set<string>();
@@ -111,7 +111,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = normalizePost(rawPost);
   if (!post) return { title: locale === 'en' ? 'Article Not Found' : 'Artikel Tidak Ditemukan' };
 
-  const url = `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel/${slug}`;
+  const url = `https://santiliving.com/${locale}/artikel/${slug}`;
   const image = post.image;
   const title = post.title;
   const description = post.description;
@@ -186,7 +186,7 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://santiliving.com${locale === 'en' ? '/en' : ''}/artikel/${slug}`
+      "@id": `https://santiliving.com/${locale}/artikel/${slug}`
     }
   };
 
