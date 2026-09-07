@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  computeGoogleMultiStopRoute,
   getGoogleDrivingQuote,
   resetGoogleRoutesCacheForTests,
 } from '@/lib/google-routes';
@@ -104,5 +105,66 @@ describe('getGoogleDrivingQuote', () => {
     await getGoogleDrivingQuote(-7.85002, 110.45002);
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('computeGoogleMultiStopRoute', () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.unstubAllGlobals();
+  });
+
+  it('sends the multi-stop optimization payload and returns the optimized order', async () => {
+    vi.stubEnv('GOOGLE_MAPS_API_KEY', 'test-key');
+    const fetchMock = vi.fn().mockResolvedValue(new Response(
+      JSON.stringify({
+        routes: [{
+          distanceMeters: 12_345,
+          duration: '900s',
+          optimizedIntermediateWaypointIndex: [2, 0, 1],
+        }],
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    ));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(computeGoogleMultiStopRoute({
+      stops: [
+        { latitude: -7.81, longitude: 110.41 },
+        { latitude: -7.82, longitude: 110.42 },
+        { latitude: -7.83, longitude: 110.43 },
+      ],
+    })).resolves.toEqual({
+      distanceKm: 12.345,
+      duration: '900s',
+      optimizedIntermediateWaypointIndex: [2, 0, 1],
+      optimizedIntermediateWaypointOrder: [2, 0, 1],
+      source: 'google_routes',
+    });
+
+    const [url, request] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toBe('https://routes.googleapis.com/directions/v2:computeRoutes');
+    expect(request.headers).toMatchObject({
+      'X-Goog-Api-Key': 'test-key',
+      'X-Goog-FieldMask': 'routes.distanceMeters,routes.duration,routes.optimizedIntermediateWaypointIndex',
+    });
+
+    const body = JSON.parse(String(request.body));
+    expect(body.origin.location.latLng).toEqual({
+      latitude: STORE_LOCATION.lat,
+      longitude: STORE_LOCATION.lng,
+    });
+    expect(body.destination.location.latLng).toEqual({
+      latitude: STORE_LOCATION.lat,
+      longitude: STORE_LOCATION.lng,
+    });
+    expect(body.intermediates).toEqual([
+      { location: { latLng: { latitude: -7.81, longitude: 110.41 } } },
+      { location: { latLng: { latitude: -7.82, longitude: 110.42 } } },
+      { location: { latLng: { latitude: -7.83, longitude: 110.43 } } },
+    ]);
+    expect(body.travelMode).toBe('DRIVE');
+    expect(body.routingPreference).toBe('TRAFFIC_UNAWARE');
+    expect(body.optimizeWaypointOrder).toBe(true);
   });
 });
