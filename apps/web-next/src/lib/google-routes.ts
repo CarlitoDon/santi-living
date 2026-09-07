@@ -141,7 +141,7 @@ export async function computeGoogleMultiStopRoute({
         destination: toGoogleWaypoint(destination),
         intermediates: stops.map(toGoogleWaypoint),
         travelMode: 'DRIVE',
-        routingPreference: 'TRAFFIC_UNAWARE',
+        routingPreference: 'TRAFFIC_AWARE',
         optimizeWaypointOrder: true,
       }),
       signal: controller.signal,

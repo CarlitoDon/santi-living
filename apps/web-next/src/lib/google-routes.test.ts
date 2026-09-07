@@ -164,7 +164,7 @@ describe('computeGoogleMultiStopRoute', () => {
       { location: { latLng: { latitude: -7.83, longitude: 110.43 } } },
     ]);
     expect(body.travelMode).toBe('DRIVE');
-    expect(body.routingPreference).toBe('TRAFFIC_UNAWARE');
+    expect(body.routingPreference).toBe('TRAFFIC_AWARE');
     expect(body.optimizeWaypointOrder).toBe(true);
   });
 });
