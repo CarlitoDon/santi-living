@@ -167,4 +167,27 @@ describe('computeGoogleMultiStopRoute', () => {
     expect(body.routingPreference).toBe('TRAFFIC_AWARE');
     expect(body.optimizeWaypointOrder).toBe(true);
   });
+
+  it('defaults the optimized order when Google omits it for one stop', async () => {
+    vi.stubEnv('GOOGLE_MAPS_API_KEY', 'test-key');
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(
+      JSON.stringify({
+        routes: [{
+          distanceMeters: 4_321,
+          duration: '600s',
+        }],
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    )));
+
+    await expect(computeGoogleMultiStopRoute({
+      stops: [{ latitude: -7.81, longitude: 110.41 }],
+    })).resolves.toMatchObject({
+      distanceKm: 4.321,
+      duration: '600s',
+      optimizedIntermediateWaypointIndex: [0],
+      optimizedIntermediateWaypointOrder: [0],
+      source: 'google_routes',
+    });
+  });
 });

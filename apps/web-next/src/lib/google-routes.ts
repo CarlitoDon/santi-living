@@ -17,7 +17,7 @@ const MultiStopRoutesResponseSchema = z.object({
   routes: z.array(z.object({
     distanceMeters: z.number().nonnegative(),
     duration: z.string().min(1),
-    optimizedIntermediateWaypointIndex: z.array(z.number().int().min(0).max(8)),
+    optimizedIntermediateWaypointIndex: z.array(z.number().int().min(0).max(8)).optional(),
   })).min(1),
 });
 
@@ -160,11 +160,13 @@ export async function computeGoogleMultiStopRoute({
     }
 
     const route = parsed.data.routes[0];
+    const optimizedIntermediateWaypointIndex = route.optimizedIntermediateWaypointIndex
+      ?? stops.map((_, index) => index);
     return {
       distanceKm: route.distanceMeters / 1000,
       duration: route.duration,
-      optimizedIntermediateWaypointIndex: route.optimizedIntermediateWaypointIndex,
-      optimizedIntermediateWaypointOrder: route.optimizedIntermediateWaypointIndex,
+      optimizedIntermediateWaypointIndex,
+      optimizedIntermediateWaypointOrder: optimizedIntermediateWaypointIndex,
       source: 'google_routes',
     };
   } catch (error) {
