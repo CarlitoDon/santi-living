@@ -170,7 +170,7 @@ describe('computeGoogleMultiStopRoute', () => {
 
   it('defaults the optimized order when Google omits it for one stop', async () => {
     vi.stubEnv('GOOGLE_MAPS_API_KEY', 'test-key');
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(
+    const fetchMock = vi.fn().mockResolvedValue(new Response(
       JSON.stringify({
         routes: [{
           distanceMeters: 4_321,
@@ -178,7 +178,8 @@ describe('computeGoogleMultiStopRoute', () => {
         }],
       }),
       { status: 200, headers: { 'Content-Type': 'application/json' } },
-    )));
+    ));
+    vi.stubGlobal('fetch', fetchMock);
 
     await expect(computeGoogleMultiStopRoute({
       stops: [{ latitude: -7.81, longitude: 110.41 }],
@@ -189,5 +190,9 @@ describe('computeGoogleMultiStopRoute', () => {
       optimizedIntermediateWaypointOrder: [0],
       source: 'google_routes',
     });
+
+    const [, request] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const body = JSON.parse(String(request.body));
+    expect(body.optimizeWaypointOrder).toBe(false);
   });
 });

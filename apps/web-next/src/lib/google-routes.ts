@@ -142,7 +142,7 @@ export async function computeGoogleMultiStopRoute({
         intermediates: stops.map(toGoogleWaypoint),
         travelMode: 'DRIVE',
         routingPreference: 'TRAFFIC_AWARE',
-        optimizeWaypointOrder: true,
+        optimizeWaypointOrder: stops.length > 1,
       }),
       signal: controller.signal,
     });
