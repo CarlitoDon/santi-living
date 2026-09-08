@@ -15,6 +15,7 @@
     "produk": "Products",
     "semua_produk": "All Products",
     "kasur": "Mattress",
+    "kursi": "Event chairs",
     "karpet": "Carpet",
     "permadani": "Rug",
     "perlengkapan_event": "Event Equipment",
@@ -185,6 +186,7 @@
     "sewa_kasur_terdekat": "Nearest Mattress Rental",
     "sewa_kasur_lipat": "Folding Mattress Rental",
     "sewa_kasur_bulanan": "Monthly Mattress Rental",
+    "sewa_kursi_acara": "Event Chair Rental",
     "sewa_karpet_jogja": "Carpet Rental Jogja",
     "sewa_permadani_jogja": "Rug Rental Jogja",
     "perlengkapan_event": "Event Equipment",
@@ -192,7 +194,7 @@
     "tentang_kami": "About Us",
     "ikuti_kami": "Follow Us",
     "copyright": "All rights reserved.",
-    "tagline": "Mattress, carpet, rug, and event equipment rental services in Yogyakarta"
+    "tagline": "Mattress, event chair, carpet, rug, and event equipment rental services in Yogyakarta"
   },
   "harga_sewa": {
     "hero_title": "Mattress Rental Prices in Jogja — 2026 Update",
