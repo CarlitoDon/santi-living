@@ -13,6 +13,34 @@ const RoutesResponseSchema = z.object({
   })).min(1),
 });
 
+const MultiStopRoutesResponseSchema = z.object({
+  routes: z.array(z.object({
+    distanceMeters: z.number().nonnegative(),
+    duration: z.string().min(1),
+    optimizedIntermediateWaypointIndex: z.array(z.number().int().min(0).max(8)).optional(),
+  })).min(1),
+});
+
+export interface GoogleRouteCoordinate {
+  latitude: number;
+  longitude: number;
+}
+
+export interface GoogleMultiStopRouteInput {
+  stops: GoogleRouteCoordinate[];
+  origin?: GoogleRouteCoordinate;
+  destination?: GoogleRouteCoordinate;
+}
+
+export interface GoogleMultiStopRoute {
+  distanceKm: number;
+  duration: string;
+  optimizedIntermediateWaypointIndex: number[];
+  /** Original stop indexes in the order Google recommends visiting them. */
+  optimizedIntermediateWaypointOrder: number[];
+  source: 'google_routes';
+}
+
 export interface GoogleDrivingQuote {
   distanceKm: number;
   deliveryFee: number;
@@ -81,6 +109,80 @@ export async function getGoogleDrivingQuote(
   } finally {
     inFlightQuotes.delete(cacheKey);
   }
+}
+
+export async function computeGoogleMultiStopRoute({
+  stops,
+  origin = { latitude: STORE_LOCATION.lat, longitude: STORE_LOCATION.lng },
+  destination = { latitude: STORE_LOCATION.lat, longitude: STORE_LOCATION.lng },
+}: GoogleMultiStopRouteInput): Promise<GoogleMultiStopRoute> {
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY?.trim();
+  if (!apiKey) {
+    throw new GoogleRoutesError('NOT_CONFIGURED', 'Google Routes API is not configured');
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), ROUTES_TIMEOUT_MS);
+
+  try {
+    const response = await fetch(GOOGLE_ROUTES_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': apiKey,
+        'X-Goog-FieldMask': [
+          'routes.distanceMeters',
+          'routes.duration',
+          'routes.optimizedIntermediateWaypointIndex',
+        ].join(','),
+      },
+      body: JSON.stringify({
+        origin: toGoogleWaypoint(origin),
+        destination: toGoogleWaypoint(destination),
+        intermediates: stops.map(toGoogleWaypoint),
+        travelMode: 'DRIVE',
+        routingPreference: 'TRAFFIC_AWARE',
+        optimizeWaypointOrder: stops.length > 1,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      throw new GoogleRoutesError(
+        'UPSTREAM_ERROR',
+        `Google Routes API responded with ${response.status}`,
+      );
+    }
+
+    const parsed = MultiStopRoutesResponseSchema.safeParse(await response.json());
+    if (!parsed.success) {
+      throw new GoogleRoutesError('INVALID_RESPONSE', 'Google Routes API response is invalid');
+    }
+
+    const route = parsed.data.routes[0];
+    const optimizedIntermediateWaypointIndex = route.optimizedIntermediateWaypointIndex
+      ?? stops.map((_, index) => index);
+    return {
+      distanceKm: route.distanceMeters / 1000,
+      duration: route.duration,
+      optimizedIntermediateWaypointIndex,
+      optimizedIntermediateWaypointOrder: optimizedIntermediateWaypointIndex,
+      source: 'google_routes',
+    };
+  } catch (error) {
+    if (error instanceof GoogleRoutesError) throw error;
+    throw new GoogleRoutesError('UPSTREAM_ERROR', 'Google Routes API request failed');
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function toGoogleWaypoint(coordinate: GoogleRouteCoordinate) {
+  return {
+    location: {
+      latLng: coordinate,
+    },
+  };
 }
 
 async function requestGoogleDrivingQuote(

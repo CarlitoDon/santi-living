@@ -1,6 +1,6 @@
 import { getProxyBaseUrl } from '@/lib/proxy-config';
 import { OrderSchema, type Order } from '@/types/order';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
@@ -171,17 +171,14 @@ export default async function PesananPage({ params }: PageProps) {
 
           {/* Actions */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', marginTop: 'var(--space-3)' }}>
-            <a
-              href={getWhatsAppUrl(undefined, 'order_page')}
+            <WhatsAppLink
+              source="order_page"
+              location="order"
               className="btn btn-whatsapp"
-              target="_blank"
-              rel="noopener"
               style={{ textDecoration: 'none', padding: 'var(--space-4)', borderRadius: 'var(--radius-lg)', textAlign: 'center' }}
-              data-wa-source="order_page"
-              data-wa-location="order"
             >
               Hubungi Kami
-            </a>
+            </WhatsAppLink>
             <Link href="/" className="btn" style={{ textDecoration: 'none', textAlign: 'center', padding: 'var(--space-3)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)' }}>
               Kembali ke Beranda
             </Link>

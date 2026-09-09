@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import type { LandingPageConfig, ThemeColor } from '@/types/landing';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { useLocale, useT } from '@/contexts/locale';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -161,20 +161,18 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                   );
                 }
                 return (
-                  <a
+                  <WhatsAppLink
                     key={i}
-                    href={getWhatsAppUrl(a.waText || cfg.cta.waText, a.waSource || cfg.cta.waSource)}
+                    message={a.waText || cfg.cta.waText}
+                    source={a.waSource || cfg.cta.waSource}
+                    location="hero"
                     className="btn btn-lg btn-whatsapp motion-interactive motion-lift h-14 w-full justify-center rounded-lg border-0 px-8 py-3.5 text-center font-bold text-white shadow-sm sm:w-auto"
-                    target="_blank"
-                    rel="noopener"
-                    data-wa-source={a.waSource || cfg.cta.waSource}
-                    data-wa-location="hero"
                     data-product-category={cfg.tracking?.productCategory}
                     data-page-type={cfg.tracking?.pageType}
                     data-wa-intent={cfg.tracking?.intent}
                   >
                     {a.label}
-                  </a>
+                  </WhatsAppLink>
                 );
               })}
             </div>
@@ -297,19 +295,17 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
             >
               {le(cfg.cta.secondaryLabel, en?.cta?.secondaryLabel, locale) || t('landing.calculate_cost')}
             </Link>
-            <a
-              href={getWhatsAppUrl(cfg.cta.waText, cfg.cta.waSource)}
+            <WhatsAppLink
+              message={cfg.cta.waText}
+              source={cfg.cta.waSource}
+              location="landing"
               className="motion-interactive motion-lift bg-transparent border-2 border-white/50 text-white w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-white/10 hover:border-white text-center inline-flex justify-center items-center h-14"
-              target="_blank"
-              rel="noopener"
-              data-wa-source={cfg.cta.waSource}
-              data-wa-location="landing"
               data-product-category={cfg.tracking?.productCategory}
               data-page-type={cfg.tracking?.pageType}
               data-wa-intent={cfg.tracking?.intent}
             >
               {t('landing.chat_wa')}
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </section>

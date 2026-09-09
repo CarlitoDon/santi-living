@@ -16,12 +16,16 @@ describe('loadGoogleMaps', () => {
 
   it('loads the official Google Maps JavaScript endpoint asynchronously', async () => {
     process.env.NEXT_PUBLIC_GOOGLE_MAPS_BROWSER_KEY = 'browser-key';
-    const importLibrary = vi.fn().mockResolvedValue({});
+    const importLibrary = vi.fn((library: string) => Promise.resolve(library === 'maps'
+      ? { Map: class {} }
+      : { Marker: class {} }));
     const promise = loadGoogleMaps();
     const script = document.getElementById('santi-google-maps-js') as HTMLScriptElement;
 
     expect(script.src).toContain('https://maps.googleapis.com/maps/api/js?');
+    expect(new URL(script.src).searchParams.get('libraries')).toBe('maps,marker');
     expect(script.src).toContain('loading=async');
+    expect(script.src).toContain('callback=__santiGoogleMapsCallback_');
     expect(script.src).toContain('auth_referrer_policy=origin');
 
     (window as typeof window & { google: typeof google }).google = {
@@ -31,7 +35,8 @@ describe('loadGoogleMaps', () => {
         Marker: class {},
       } as unknown as typeof google.maps,
     } as typeof google;
-    script.dispatchEvent(new Event('load'));
+    const callbackName = new URL(script.src).searchParams.get('callback') as string;
+    (window as typeof window & Record<string, (() => void) | undefined>)[callbackName]!();
 
     await expect(promise).resolves.toBe(window.google.maps);
     expect(importLibrary).toHaveBeenCalledWith('maps');
@@ -55,7 +60,9 @@ describe('loadGoogleMaps', () => {
     const retry = loadGoogleMaps();
     const retryScript = document.getElementById('santi-google-maps-js') as HTMLScriptElement;
     expect(retryScript).not.toBe(pendingScript);
-    const importLibrary = vi.fn().mockResolvedValue({});
+    const importLibrary = vi.fn((library: string) => Promise.resolve(library === 'maps'
+      ? { Map: class {} }
+      : { Marker: class {} }));
     (window as typeof window & { google: typeof google }).google = {
       maps: {
         importLibrary,
@@ -63,7 +70,8 @@ describe('loadGoogleMaps', () => {
         Marker: class {},
       } as unknown as typeof google.maps,
     } as typeof google;
-    retryScript.dispatchEvent(new Event('load'));
+    const callbackName = new URL(retryScript.src).searchParams.get('callback') as string;
+    (window as typeof window & Record<string, (() => void) | undefined>)[callbackName]!();
 
     await expect(retry).resolves.toBe(window.google.maps);
   });

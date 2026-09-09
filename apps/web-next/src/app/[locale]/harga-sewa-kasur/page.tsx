@@ -8,7 +8,7 @@ import { PriceTable } from '@/components/pricing/PriceTable';
 import { PageHero } from '@/components/layout/PageHero';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { generateProductSchemaList, generateFAQSchema } from '@/utils/seo';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { formatPrice } from '@/utils/currency';
 import { useT, useDictionary, useLocale } from '@/contexts/locale';
 import { localeHref } from '@/utils/localeHref';
@@ -135,16 +135,14 @@ export default function HargaSewaKasurPage() {
             <Link href={localeHref("/#calculator", locale)} className="bg-white text-blue-600 max-w-[280px] w-full border-none py-3 px-6 rounded-md font-semibold hover:bg-slate-50 transition-colors text-center no-underline">
               {hs('cta_hitung')}
             </Link>
-            <a
-              href={getWhatsAppUrl('Halo Santi Living, saya mau tanya harga sewa kasur', 'harga_page')}
+            <WhatsAppLink
+              message="Halo Santi Living, saya mau tanya harga sewa kasur"
+              source="harga_page"
+              location="harga_page"
               className="max-w-[280px] w-full bg-transparent text-white border-2 border-white/50 no-underline py-3 px-6 rounded-md font-semibold hover:bg-white/15 hover:border-white transition-colors flex justify-center items-center gap-2"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-wa-source="harga_page"
-              data-wa-location="harga_page"
             >
               {hs('cta_chat')}
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </section>

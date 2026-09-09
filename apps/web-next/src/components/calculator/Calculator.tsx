@@ -11,8 +11,9 @@ import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
 import { saveOrder, getOrder } from "@/scripts/checkout-session";
 import { showAlert } from "@/utils/alert";
-import { buildCalculatorWhatsAppMessage, getWhatsAppUrl } from "@/utils/whatsapp";
+import { buildCalculatorWhatsAppMessage } from "@/utils/whatsapp";
 import { ProductModal } from "@/components/produk/ProductCard";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { useDeliveryQuote } from "@/hooks/useDeliveryQuote";
 import { hasManualLocationSelection, isDiyLocation, requestLocationPicker } from "@/lib/location-selection";
 
@@ -758,22 +759,19 @@ export function Calculator({
 
           {/* Direct WhatsApp consult link */}
           {!isEditMode && (
-            <a
-              href={getWhatsAppUrl(
-                buildCalculatorWhatsAppMessage({
-                  items: state.items.map((i: { name: string; category: string; quantity: number }) => ({
-                    name: i.name,
-                    category: i.category,
-                    quantity: i.quantity,
-                  })),
-                  duration: state.duration,
-                  startDate: state.startDate,
-                  address: customer.address,
-                }),
-                "calculator",
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={buildCalculatorWhatsAppMessage({
+                items: state.items.map((i: { name: string; category: string; quantity: number }) => ({
+                  name: i.name,
+                  category: i.category,
+                  quantity: i.quantity,
+                })),
+                duration: state.duration,
+                startDate: state.startDate,
+                address: customer.address,
+              })}
+              source="calculator"
+              location="calculator"
               className="btn-whatsapp"
               style={{
                 display: "block",
@@ -786,7 +784,7 @@ export function Calculator({
               }}
             >
               Konsultasi via WhatsApp
-            </a>
+            </WhatsAppLink>
           )}
         </div>
       </div>

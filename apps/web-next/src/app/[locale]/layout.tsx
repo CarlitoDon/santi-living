@@ -22,6 +22,8 @@ import '@/styles/utilities.css';
 import '@/styles/product-picker.css';
 import '@/styles/motion.css';
 import '@/styles/home.css';
+import '@/styles/choice-home.css';
+import '@/styles/chair-page.css';
 
 const inter = Inter({
   subsets: ['latin'],

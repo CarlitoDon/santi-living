@@ -15,6 +15,7 @@
     "produk": "Produk",
     "semua_produk": "Semua Produk",
     "kasur": "Kasur",
+    "kursi": "Kursi acara",
     "karpet": "Karpet",
     "permadani": "Permadani",
     "perlengkapan_event": "Perlengkapan Event",
@@ -185,6 +186,7 @@
     "sewa_kasur_terdekat": "Sewa Kasur Terdekat",
     "sewa_kasur_lipat": "Sewa Kasur Lipat",
     "sewa_kasur_bulanan": "Sewa Kasur Bulanan",
+    "sewa_kursi_acara": "Sewa Kursi Acara",
     "sewa_karpet_jogja": "Sewa Karpet Jogja",
     "sewa_permadani_jogja": "Sewa Permadani Jogja",
     "perlengkapan_event": "Perlengkapan Event",
@@ -192,7 +194,7 @@
     "tentang_kami": "Tentang Kami",
     "ikuti_kami": "Ikuti Kami",
     "copyright": "Semua hak dilindungi.",
-    "tagline": "Layanan sewa kasur, karpet, permadani, dan perlengkapan acara di Yogyakarta"
+    "tagline": "Layanan sewa kasur, kursi acara, karpet, permadani, dan perlengkapan acara di Yogyakarta"
   },
   "harga_sewa": {
     "hero_title": "Harga Sewa Kasur di Jogja — Update 2026",

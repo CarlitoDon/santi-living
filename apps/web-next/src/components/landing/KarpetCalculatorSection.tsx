@@ -1,10 +1,10 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useLocale } from '@/contexts/locale';
-import { usePresence } from '@/hooks/usePresence';
+import { SelectionBar } from '@/components/ui/SelectionBar';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 type CarpetProduct = {
   id: string;
@@ -389,49 +389,26 @@ export function KarpetCartBar() {
     .map((item) => `${item.name} x${item.quantity}`)
     .join(', ');
   const isVisible = totalQuantity > 0;
-  const presence = usePresence(isVisible, 280);
-  const [displayedSummary, setDisplayedSummary] = useState(() => ({
-    quantity: totalQuantity,
-    summary: currentSummary,
-  }));
-
-  if (
-    isVisible &&
-    (displayedSummary.quantity !== totalQuantity ||
-      displayedSummary.summary !== currentSummary)
-  ) {
-    setDisplayedSummary({ quantity: totalQuantity, summary: currentSummary });
-  }
-
-  const summary = isVisible
-    ? { quantity: totalQuantity, summary: currentSummary }
-    : displayedSummary;
-
-  if (!presence.shouldRender) return null;
 
   return (
-    <div className="cart-bar" data-state={presence.state} aria-hidden={!isVisible} inert={!isVisible}>
-      <div className="cart-bar-inner">
-        <div className="cart-bar-info">
-          <span className="cart-bar-count">{summary.quantity} {locale === 'en' ? 'carpet options' : 'opsi karpet'}</span>
-          <span className="cart-bar-price text-sm leading-tight">
-            {summary.summary}
-          </span>
-        </div>
-        <a
-          href={getWhatsAppUrl(buildKarpetWaText(selectedItems, locale), 'karpet_cart_bar')}
+    <SelectionBar
+      isVisible={isVisible}
+      summaryKey={`${totalQuantity}:${currentSummary}`}
+      count={`${totalQuantity} ${locale === 'en' ? 'carpet options' : 'opsi karpet'}`}
+      detail={currentSummary}
+      detailClassName="text-sm leading-tight"
+    >
+        <WhatsAppLink
+          message={buildKarpetWaText(selectedItems, locale)}
+          source="karpet_cart_bar"
+          location="karpet_cart_bar"
           className="cart-bar-btn text-center no-underline"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-wa-source="karpet_cart_bar"
-          data-wa-location="karpet_cart_bar"
           data-product-category="karpet"
           data-page-type="calculator"
           data-wa-intent="karpet_cart_checkout"
         >
           {locale === 'en' ? 'Send via WA →' : 'Kirim WA →'}
-        </a>
-      </div>
-    </div>
+        </WhatsAppLink>
+    </SelectionBar>
   );
 }
