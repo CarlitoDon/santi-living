@@ -8,7 +8,7 @@ tags: ["perlengkapan makrab kampus jogja", "makrab jogja", "sewa kasur mahasiswa
 
 Makrab kampus sering terlihat sederhana di rundown, tetapi kebutuhan logistiknya bisa banyak: panitia datang lebih awal, peserta menginap, acara berlangsung sampai malam, dan venue kadang berada di villa, basecamp, kampus, atau rumah warga. Agar panitia tidak mencari barang dadakan, buat checklist **perlengkapan makrab kampus Jogja** sejak awal.
 
-Santi Living membantu kebutuhan rental yang relevan untuk acara kampus, terutama kasur, bantal, guling, selimut, serta item pendukung seperti kipas, air cooler, TV display, atau alas area yang bisa dikonsultasikan by request. Untuk jalur event umum, buka [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living membantu kebutuhan rental yang relevan untuk acara kampus, terutama kasur, bantal, guling, selimut, serta item pendukung seperti kipas, air cooler, TV display, atau alas area yang bisa dikonsultasikan by request. Untuk jalur event umum, buka [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event).
 
 ## Kebutuhan Utama Makrab
 
@@ -18,7 +18,7 @@ Santi Living membantu kebutuhan rental yang relevan untuk acara kampus, terutama
 
 **TV display by request.** TV dapat dipakai untuk briefing, pemutaran materi, games, atau informasi kelompok. Jika butuh layar event, lihat [sewa TV display event Jogja](/artikel/sewa-tv-led-pameran-bazar-jogja).
 
-**Alas area by request.** Untuk ruang berkumpul, lesehan, atau briefing, panitia bisa menanyakan opsi karpet/permadani sesuai ukuran area melalui [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Alas area by request.** Untuk ruang berkumpul, lesehan, atau briefing, panitia bisa menanyakan opsi karpet/permadani sesuai ukuran area melalui [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja).
 
 ## Cara Membagi Kebutuhan Berdasarkan Zona
 

@@ -168,7 +168,7 @@ export const sewaAcara: LandingPageConfig = {
     {
       title: 'Batas Layanan: Item Inti vs By-Request',
       content: `
-        <p><strong>acara.santiliving.com</strong> diposisikan sebagai halaman konsultasi bundle perlengkapan event, bukan klaim semua alat acara selalu tersedia. Tujuannya membantu panitia memilah kebutuhan yang bisa ditangani langsung dan kebutuhan yang perlu dikonfirmasi lebih awal.</p>
+        <p><strong>santiliving.com</strong> diposisikan sebagai halaman konsultasi bundle perlengkapan event, bukan klaim semua alat acara selalu tersedia. Tujuannya membantu panitia memilah kebutuhan yang bisa ditangani langsung dan kebutuhan yang perlu dikonfirmasi lebih awal.</p>
         <div class="overflow-x-auto">
           <table>
             <thead>
@@ -201,8 +201,8 @@ export const sewaAcara: LandingPageConfig = {
       content: `
         <p>Menyelenggarakan pameran, wedding preparation, festival komunitas, makrab mahasiswa, atau gathering kantor membutuhkan persiapan logistik yang matang. Kebutuhan yang sering muncul adalah ruang istirahat crew, pendingin portabel, layar display, alas area, dan perlengkapan operasional ringan.</p>
         <p><strong>Santi Living</strong> membantu panitia dan EO di Jogja dengan model konsultasi satu pintu: item inti ditangani sesuai stok dan rute, sedangkan item tambahan diproses sebagai by-request agar tidak ada klaim berlebihan tentang ketersediaan atau harga final.</p>
-        <p>Untuk kebutuhan alas event yang lebih spesifik, buka halaman khusus <a href="https://karpet.santiliving.com/sewa-karpet-jogja"><strong>sewa karpet Jogja</strong></a> agar panitia bisa memilih karpet merah, permadani, runner, atau paket karpet acara sebelum chat admin.</p>
-        <p>Jika intent-nya sudah jelas, arahkan langsung ke money page yang tepat: <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">sewa karpet merah Jogja</a> untuk jalur tamu/seremoni, atau <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">sewa permadani Jogja</a> untuk pengajian, tahlilan, dan area lesehan keluarga.</p>
+        <p>Untuk kebutuhan alas event yang lebih spesifik, buka halaman khusus <a href="https://santiliving.com/sewa-karpet-jogja"><strong>sewa karpet Jogja</strong></a> agar panitia bisa memilih karpet merah, permadani, runner, atau paket karpet acara sebelum chat admin.</p>
+        <p>Jika intent-nya sudah jelas, arahkan langsung ke money page yang tepat: <a href="https://santiliving.com/sewa-karpet-merah-jogja">sewa karpet merah Jogja</a> untuk jalur tamu/seremoni, atau <a href="https://santiliving.com/sewa-karpet-permadani-jogja">sewa permadani Jogja</a> untuk pengajian, tahlilan, dan area lesehan keluarga.</p>
         <h3>Mengapa EO & Panitia Event Memilih Santi Living?</h3>
         <ul>
           <li><strong>SOP higienitas kasur:</strong> perlengkapan tidur disiapkan bersih, rapi, dan dikirim sesuai standar operasional Santi Living.</li>
@@ -378,7 +378,7 @@ en: {
     {
       title: 'Service Boundaries: Core Items vs By-Request',
       content: `
-        <p><strong>acara.santiliving.com</strong> is positioned as an event equipment bundle consultation page, not a claim that all event tools are always available. Its purpose is to help committees distinguish between needs that can be handled directly and needs that require earlier confirmation.</p>
+        <p><strong>santiliving.com</strong> is positioned as an event equipment bundle consultation page, not a claim that all event tools are always available. Its purpose is to help committees distinguish between needs that can be handled directly and needs that require earlier confirmation.</p>
         <div class="overflow-x-auto">
           <table>
             <thead>
@@ -411,8 +411,8 @@ en: {
       content: `
         <p>Organizing an exhibition, wedding preparation, community festival, student orientation camp, or office gathering requires thorough logistical preparation. Common needs include crew rest areas, portable cooling, display screens, area flooring, and light operational equipment.</p>
         <p><strong>Santi Living</strong> assists committees and EOs in Jogja with a one-stop consultation model: core items are handled according to stock and route, while additional items are processed as by-request to avoid overclaiming availability or final pricing.</p>
-        <p>For more specific event flooring needs, visit the dedicated <a href="https://karpet.santiliving.com/sewa-karpet-jogja"><strong>Jogja carpet rental</strong></a> page so committees can choose red carpet, rug, runner, or event carpet packages before chatting with admin.</p>
-        <p>If the intent is already clear, go directly to the right money page: <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">red carpet rental Jogja</a> for guest walkways/ceremonies, or <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">rug rental Jogja</a> for prayer gatherings, tahlilan, and family floor-seating areas.</p>
+        <p>For more specific event flooring needs, visit the dedicated <a href="https://santiliving.com/sewa-karpet-jogja"><strong>Jogja carpet rental</strong></a> page so committees can choose red carpet, rug, runner, or event carpet packages before chatting with admin.</p>
+        <p>If the intent is already clear, go directly to the right money page: <a href="https://santiliving.com/sewa-karpet-merah-jogja">red carpet rental Jogja</a> for guest walkways/ceremonies, or <a href="https://santiliving.com/sewa-karpet-permadani-jogja">rug rental Jogja</a> for prayer gatherings, tahlilan, and family floor-seating areas.</p>
         <h3>Why Do EOs & Event Committees Choose Santi Living?</h3>
         <ul>
           <li><strong>Mattress hygiene SOP:</strong> bedding is prepared clean, neat, and delivered according to Santi Living's operational standards.</li>

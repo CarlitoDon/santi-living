@@ -8,7 +8,7 @@ tags: ["cara memilih karpet pengajian", "sewa permadani jogja", "karpet pengajia
 
 Choosing a carpet for a pengajian is not just a matter of asking, "How many metres of carpet do you have?". A pengajian gathering usually requires a comfortable floor-seating arrangement that looks neat in photos, is easy to clean, and accommodates the number of guests. Therefore, the **way to choose a carpet for a pengajian** should start with the room layout.
 
-For rug requirements, first visit the [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page. If the event is a pengajian or tahlilan, you can also read the [Jogja pengajian and tahlilan carpet rental guide](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+For rug requirements, first visit the [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) page. If the event is a pengajian or tahlilan, you can also read the [Jogja pengajian and tahlilan carpet rental guide](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 ## 1. Calculate the Seating Area, Not Just the Number of Guests
 
@@ -42,7 +42,7 @@ Organisers often book too close to the event date, fail to measure the room, or 
 
 ## Related Links
 
-> 📖 **[Jogja rug rental →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Jogja rug rental →](https://santiliving.com/en/sewa-karpet-permadani-jogja)**
 
 > 📖 **[Jogja pengajian and tahlilan carpet rental →](/artikel/sewa-karpet-pengajian-tahlilan-jogja)**
 

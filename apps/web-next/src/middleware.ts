@@ -30,6 +30,13 @@ function pathnameWithLocale(pathname: string, locale: string): string {
   return `/${locale}${pathname}`;
 }
 
+function specialistRedirectOrigin(request: NextRequest, hostname: string): string {
+  // Keep local specialist aliases local so development never jumps to prod.
+  if (!hostname.endsWith('.localhost')) return CANONICAL_ORIGIN;
+  const port = request.nextUrl.port ? `:${request.nextUrl.port}` : '';
+  return `${request.nextUrl.protocol}//localhost${port}`;
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const hostname = (request.headers.get('host') || '').split(':')[0].toLowerCase();
@@ -44,9 +51,9 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // --- Step 2: Specialist subdomains only own their landing page. ---
-  // Redirect every other path to the main host so article crawls cannot create
-  // duplicate ISR variants under acara/karpet/permadani/kipas hostnames.
+  // --- Step 2: Specialist subdomains are permanent aliases only. ---
+  // Redirect every request to the main host so crawlers cannot create duplicate
+  // variants under acara/karpet/permadani/kipas hostnames.
   const hostTarget = HOST_REWRITES.get(hostname);
   if (hostTarget) {
     const localeMatch = pathname.match(/^\/(id|en)(?:\/|$)/);
@@ -56,14 +63,10 @@ export function middleware(request: NextRequest) {
       : pathname;
     const isLandingPath = unlocalizedPath === '/' || unlocalizedPath === hostTarget;
 
-    if (isLandingPath) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/${locale}${hostTarget}`;
-      return NextResponse.rewrite(url);
-    }
-
-    const canonicalUrl = new URL(CANONICAL_ORIGIN);
-    canonicalUrl.pathname = pathnameWithLocale(pathname, locale);
+    const canonicalUrl = new URL(specialistRedirectOrigin(request, hostname));
+    canonicalUrl.pathname = isLandingPath
+      ? `/${locale}${hostTarget}`
+      : pathnameWithLocale(unlocalizedPath, locale);
     canonicalUrl.search = request.nextUrl.search;
     return NextResponse.redirect(canonicalUrl, 308);
   }

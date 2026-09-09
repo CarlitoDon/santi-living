@@ -178,13 +178,13 @@ export const sewaKarpetJogja: LandingPageConfig = {
         <p><strong>Sewa karpet Jogja</strong> di Santi Living dibuat sebagai hub untuk semua kebutuhan karpet acara: karpet merah, permadani, runner, booth pameran, seminar, hajatan, dan paket perlengkapan event. Karena setiap jenis punya fungsi berbeda, halaman ini memecah pilihan sejak awal supaya panitia tidak salah menyebut kebutuhan.</p>
         <p><strong>Navigasi cepat:</strong> <a href="#karpet-merah-runner">karpet merah runner</a> · <a href="#permadani-lesehan">permadani lesehan</a> · <a href="#runner-booth-pameran">runner booth/pameran</a> · <a href="#paket-karpet-acara">paket karpet acara</a> · <a href="#perbandingan-karpet">tabel perbandingan</a>.</p>
         <h3 id="karpet-merah-runner">Karpet merah untuk jalur tamu dan seremoni</h3>
-        <p>Jika yang dicari adalah jalur merah panjang untuk pintu masuk, panggung, akad, launching, atau booth formal, sebutkan sebagai <strong>karpet merah runner</strong>. Admin perlu panjang jalur, lebar area, indoor/outdoor, dan jam setup. Kalau yang dimaksud karpet merah bermotif untuk duduk, lihat <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">halaman permadani merah Jogja</a>.</p>
+        <p>Jika yang dicari adalah jalur merah panjang untuk pintu masuk, panggung, akad, launching, atau booth formal, sebutkan sebagai <strong>karpet merah runner</strong>. Admin perlu panjang jalur, lebar area, indoor/outdoor, dan jam setup. Kalau yang dimaksud karpet merah bermotif untuk duduk, lihat <a href="https://santiliving.com/sewa-karpet-merah-jogja">halaman permadani merah Jogja</a>.</p>
         <h3 id="permadani-lesehan">Permadani merah/emas untuk duduk lesehan</h3>
-        <p>Jika acara berupa pengajian, tahlilan, arisan, ruang tamu keluarga, atau musala kecil, pilih <strong>karpet permadani</strong>. Permadani adalah karpet motif ukuran relatif persegi panjang, bukan runner acara. Lihat juga <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">halaman khusus sewa permadani Jogja</a>.</p>
+        <p>Jika acara berupa pengajian, tahlilan, arisan, ruang tamu keluarga, atau musala kecil, pilih <strong>karpet permadani</strong>. Permadani adalah karpet motif ukuran relatif persegi panjang, bukan runner acara. Lihat juga <a href="https://santiliving.com/sewa-karpet-permadani-jogja">halaman khusus sewa permadani Jogja</a>.</p>
         <h3 id="runner-booth-pameran">Runner, booth, pameran, seminar, dan bazar</h3>
         <p>Untuk seminar, pameran, stand UMKM, panggung kecil, atau layout custom, kirim denah, foto, atau ukuran panjang x lebar. Admin akan bantu menghitung kebutuhan karpet dan waktu pengiriman yang realistis.</p>
         <h3 id="paket-karpet-acara">Paket karpet acara by request</h3>
-        <p>Jika panitia juga butuh kasur tamu, kipas, air cooler, TV, bantal, atau selimut, cek <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Santi Living</a>. Semua item tambahan tetap divalidasi by request sesuai stok dan jadwal.</p>
+        <p>Jika panitia juga butuh kasur tamu, kipas, air cooler, TV, bantal, atau selimut, cek <a href="https://santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Santi Living</a>. Semua item tambahan tetap divalidasi by request sesuai stok dan jadwal.</p>
       `,
     },
     {
@@ -365,7 +365,7 @@ export const sewaKarpetMerah: LandingPageConfig = {
           <li>Foto area ruang tamu, musala kecil, atau lokasi acara.</li>
           <li>Kebutuhan tambahan: kasur keluarga, kipas, air cooler, TV, atau bantal.</li>
         </ul>
-        <p>Jika yang dibutuhkan justru jalur panjang untuk tamu, panggung, atau booth, sebutkan sebagai runner/alas acara agar admin tidak mengira Anda mencari permadani merah. Untuk navigasi intent, mulai dari <a href="https://karpet.santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a>, bandingkan dengan <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">sewa permadani Jogja</a>, atau buka <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a> bila butuh item tambahan.</p>
+        <p>Jika yang dibutuhkan justru jalur panjang untuk tamu, panggung, atau booth, sebutkan sebagai runner/alas acara agar admin tidak mengira Anda mencari permadani merah. Untuk navigasi intent, mulai dari <a href="https://santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a>, bandingkan dengan <a href="https://santiliving.com/sewa-karpet-permadani-jogja">sewa permadani Jogja</a>, atau buka <a href="https://santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a> bila butuh item tambahan.</p>
       `,
     },
   ],
@@ -546,7 +546,7 @@ export const sewaKarpetPermadani: LandingPageConfig = {
           <li>Kebutuhan tambahan seperti bantal duduk, kipas, air cooler, TV, atau kasur tamu keluarga.</li>
           <li>Jam kirim dan jam penjemputan setelah acara selesai.</li>
         </ul>
-        <p>Untuk konteks pemilihan, baca <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">panduan sewa karpet untuk pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, dan <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja</a>. Jika ternyata kebutuhan Anda adalah runner/jalur tamu, buka <a href="https://karpet.santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a> atau <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">sewa karpet merah Jogja</a>; untuk bundle dengan kasur/pendingin/TV, gunakan <a href="https://acara.santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a>.</p>
+        <p>Untuk konteks pemilihan, baca <a href="https://santiliving.com/artikel/sewa-karpet-pengajian-tahlilan-jogja">panduan sewa karpet untuk pengajian/tahlilan</a>, <a href="https://santiliving.com/artikel/karpet-merah-vs-karpet-permadani-acara">beda permadani dan runner acara</a>, dan <a href="https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026">panduan harga sewa karpet Jogja</a>. Jika ternyata kebutuhan Anda adalah runner/jalur tamu, buka <a href="https://santiliving.com/sewa-karpet-jogja">sewa karpet Jogja</a> atau <a href="https://santiliving.com/sewa-karpet-merah-jogja">sewa karpet merah Jogja</a>; untuk bundle dengan kasur/pendingin/TV, gunakan <a href="https://santiliving.com/sewa-perlengkapan-event">paket perlengkapan event Jogja</a>.</p>
       `,
     },
     {
@@ -734,13 +734,13 @@ en: {
         <p><strong>Carpet rental Jogja</strong> at Santi Living is built as a hub for all event carpet needs: red carpet, decorative rugs, runners, exhibition booths, seminars, celebrations, and event equipment packages. Because each type serves a different purpose, this page breaks down the options from the start so committees don't misstate their needs.</p>
         <p><strong>Quick navigation:</strong> <a href="#karpet-merah-runner">red carpet runner</a> · <a href="#permadani-lesehan">floor-seating rug</a> · <a href="#runner-booth-pameran">runner booth/exhibition</a> · <a href="#paket-karpet-acara">event carpet package</a> · <a href="#perbandingan-karpet">comparison table</a>.</p>
         <h3 id="karpet-merah-runner">Red carpet for guest walkways and ceremonies</h3>
-        <p>If you're looking for a long red strip for an entrance, stage, wedding ceremony, product launch, or formal booth, refer to it as a <strong>red carpet runner</strong>. Admin needs the walkway length, area width, indoor/outdoor setting, and setup time. If you mean a patterned red rug for seating, see <a href="https://karpet.santiliving.com/sewa-karpet-merah-jogja">the Jogja red decorative rug page</a>.</p>
+        <p>If you're looking for a long red strip for an entrance, stage, wedding ceremony, product launch, or formal booth, refer to it as a <strong>red carpet runner</strong>. Admin needs the walkway length, area width, indoor/outdoor setting, and setup time. If you mean a patterned red rug for seating, see <a href="https://santiliving.com/sewa-karpet-merah-jogja">the Jogja red decorative rug page</a>.</p>
         <h3 id="permadani-lesehan">Red/gold decorative rug for floor seating</h3>
-        <p>If your event is a religious gathering, memorial prayer, family gathering, temporary guest room, or small prayer room, choose a <strong>decorative rug</strong>. A decorative rug is a patterned carpet that is relatively rectangular, not an event runner. See also the <a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja">dedicated Jogja decorative rug rental page</a>.</p>
+        <p>If your event is a religious gathering, memorial prayer, family gathering, temporary guest room, or small prayer room, choose a <strong>decorative rug</strong>. A decorative rug is a patterned carpet that is relatively rectangular, not an event runner. See also the <a href="https://santiliving.com/sewa-karpet-permadani-jogja">dedicated Jogja decorative rug rental page</a>.</p>
         <h3 id="runner-booth-pameran">Runner, booth, exhibition, seminar, and bazaar</h3>
         <p>For seminars, exhibitions, UMKM stands, small stages, or custom layouts, send a floor plan, photos, or length x width dimensions. Admin will help calculate carpet needs and a realistic delivery schedule.</p>
         <h3 id="paket-karpet-acara">Event carpet package by request</h3>
-        <p>If the committee also needs guest mattresses, fans, air coolers, TVs, pillows, or blankets, check the <a href="https://acara.santiliving.com/sewa-perlengkapan-event">Santi Living event equipment package</a>. All additional items are still validated by request based on stock and schedule.</p>
+        <p>If the committee also needs guest mattresses, fans, air coolers, TVs, pillows, or blankets, check the <a href="https://santiliving.com/sewa-perlengkapan-event">Santi Living event equipment package</a>. All additional items are still validated by request based on stock and schedule.</p>
       `,
     },
     {

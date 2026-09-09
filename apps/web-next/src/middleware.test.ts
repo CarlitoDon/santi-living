@@ -117,37 +117,42 @@ describe('middleware – locale-prefixed paths pass through', () => {
   });
 });
 
-describe('middleware – subdomain rewrites preserve query params', () => {
-  it('rewrites the acara subdomain root and retains query params', () => {
+describe('middleware – specialist subdomain redirects preserve query params', () => {
+  it('permanently redirects the local acara subdomain root and retains query params', () => {
     const req = makeRequest('http://localhost:3000/?gclid=abc', {
       host: 'acara.localhost',
     });
     const res = middleware(req);
-    expect(res.headers.get('location')).toBeNull();
-    expect(res.headers.get('x-middleware-rewrite')).toContain(
-      '/id/sewa-perlengkapan-event?gclid=abc',
+    expect(res.status).toBe(308);
+    expect(extractLocation(res)).toBe(
+      'http://localhost:3000/id/sewa-perlengkapan-event?gclid=abc',
     );
+    expect(res.headers.get('x-middleware-rewrite')).toBeNull();
   });
 
-  it('rewrites an explicit English karpet landing path', () => {
+  it('permanently redirects an explicit English karpet landing path', () => {
     const req = makeRequest('http://localhost:3000/en/sewa-karpet-jogja?utm_source=fb', {
       host: 'karpet.localhost',
     });
     const res = middleware(req);
-    expect(res.headers.get('location')).toBeNull();
-    expect(res.headers.get('x-middleware-rewrite')).toContain(
-      '/en/sewa-karpet-jogja?utm_source=fb',
+    expect(res.status).toBe(308);
+    expect(extractLocation(res)).toBe(
+      'http://localhost:3000/en/sewa-karpet-jogja?utm_source=fb',
     );
+    expect(res.headers.get('x-middleware-rewrite')).toBeNull();
   });
 
-  it('treats a locale-only specialist URL as that subdomain home', () => {
+  it('redirects a locale-only specialist URL to the primary host', () => {
     const req = makeRequest('https://karpet.santiliving.com/id', {
       host: 'karpet.santiliving.com',
     });
     const res = middleware(req);
 
-    expect(res.headers.get('location')).toBeNull();
-    expect(res.headers.get('x-middleware-rewrite')).toContain('/id/sewa-karpet-jogja');
+    expect(res.status).toBe(308);
+    expect(extractLocation(res)).toBe(
+      'https://santiliving.com/id/sewa-karpet-jogja',
+    );
+    expect(res.headers.get('x-middleware-rewrite')).toBeNull();
   });
 
   it('redirects article paths on a specialist subdomain to the canonical main host', () => {
@@ -159,6 +164,7 @@ describe('middleware – subdomain rewrites preserve query params', () => {
     expect(extractLocation(res)).toBe(
       'https://santiliving.com/en/artikel/tips?ref=sidebar',
     );
+    expect(res.status).toBe(308);
     expect(res.headers.get('x-middleware-rewrite')).toBeNull();
   });
 
@@ -171,6 +177,7 @@ describe('middleware – subdomain rewrites preserve query params', () => {
     expect(extractLocation(res)).toBe(
       'https://santiliving.com/id/artikel/tips?utm_source=google',
     );
+    expect(res.status).toBe(308);
   });
 
   it('does not treat lookalike hostnames as Santi Living subdomains', () => {

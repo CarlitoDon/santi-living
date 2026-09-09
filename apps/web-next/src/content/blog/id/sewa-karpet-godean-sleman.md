@@ -34,8 +34,8 @@ Jika acara Anda masih berubah-ubah, mulai dari kebutuhan utama dulu: karpet untu
 
 ## Pilihan Karpet dan Perlengkapan
 
-- [Sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
-- [Sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) untuk pengajian, tahlilan, syukuran, dan duduk lesehan.
+- [Sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
+- [Sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) untuk pengajian, tahlilan, syukuran, dan duduk lesehan.
 - Kasur tamu, bantal, selimut, kipas, air cooler, atau TV bisa ditanyakan jika acara berlangsung lama atau ada tamu menginap.
 
 ## Area dan Logistik
@@ -48,9 +48,9 @@ Santi Living tidak menyarankan panitia menebak harga hanya dari jumlah tamu. Est
 
 ## Link yang Bisa Dibuka Sebelum Chat
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
-> 📖 **[Sewa karpet permadani Jogja →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Sewa karpet permadani Jogja →](https://santiliving.com/id/sewa-karpet-permadani-jogja)**
 
 > 📖 **[Sewa kasur Godean Sleman →](/artikel/sewa-kasur-godean-sleman-terdekat-workshop)**
 

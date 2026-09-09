@@ -8,7 +8,7 @@ tags: ["checklist sewa karpet acara", "sewa karpet jogja", "karpet event", "perl
 
 Sebelum menghubungi vendor, gunakan **checklist sewa karpet acara** ini agar admin bisa memberi estimasi lebih cepat. Karpet untuk wedding, pengajian, seminar, pameran, dan booth tidak bisa dihitung akurat hanya dari kalimat “butuh karpet untuk acara”.
 
-Mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja), lalu siapkan data di bawah ini sebelum chat WhatsApp.
+Mulai dari halaman [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja), lalu siapkan data di bawah ini sebelum chat WhatsApp.
 
 ## Checklist Utama
 
@@ -48,9 +48,9 @@ Untuk rumah, gang, atau pendopo, cek:
 
 ## Link Terkait
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
-> 📦 **[Sewa perlengkapan event Jogja →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📦 **[Sewa perlengkapan event Jogja →](https://santiliving.com/id/sewa-perlengkapan-event)**
 
 > 📖 **[Sewa karpet seminar dan pameran Jogja →](/artikel/sewa-karpet-seminar-pameran-jogja)**
 

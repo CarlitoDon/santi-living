@@ -8,7 +8,7 @@ tags: ["pernikahan", "sewa kasur jogja", "acara", "tamu keluarga", "penginapan h
 
 A **wedding** is the most special day of your life. But behind the happiness, there is one logistical issue that is often forgotten: where will the extended family from out of town sleep? Mattress rental for weddings in Jogja is a solution trusted by hundreds of families.
 
-For wedding preparation that requires transit mattresses, coolers, TVs, and floor coverings in one go, check out [event equipment package rental Jogja](https://acara.santiliving.com/sewa-perlengkapan-event); if the focus is on the ceremonial pathway, open [red carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja).
+For wedding preparation that requires transit mattresses, coolers, TVs, and floor coverings in one go, check out [event equipment package rental Jogja](https://santiliving.com/en/sewa-perlengkapan-event); if the focus is on the ceremonial pathway, open [red carpet rental Jogja](https://santiliving.com/en/sewa-karpet-merah-jogja).
 
 ## Logistical Challenges of Wedding Guests
 
@@ -88,7 +88,7 @@ Santi Living understands that weddings require special handling:
 
 ## Additional Carpets for the Wedding Area
 
-If the event also requires a guest pathway, a solemnisation (akad) area, or a tidier living room, see the guide for [carpet rental for weddings in Jogja](/artikel/sewa-karpet-pernikahan-jogja) and the [red carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) page. For general needs, start with [carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+If the event also requires a guest pathway, a solemnisation (akad) area, or a tidier living room, see the guide for [carpet rental for weddings in Jogja](/artikel/sewa-karpet-pernikahan-jogja) and the [red carpet rental Jogja](https://santiliving.com/en/sewa-karpet-merah-jogja) page. For general needs, start with [carpet rental Jogja](https://santiliving.com/en/sewa-karpet-jogja).
 
 > *Santi Living — Mattress rental for weddings in Jogja. Save millions of rupiah, guests stay comfortable.*
 

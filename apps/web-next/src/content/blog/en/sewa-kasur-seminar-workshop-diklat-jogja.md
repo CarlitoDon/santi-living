@@ -8,7 +8,7 @@ tags: ["seminar", "workshop", "diklat", "sewa kasur", "event", "jogja"]
 
 **Organising a multi-day seminar or workshop in Jogja?** Out-of-town participants need comfortable and affordable accommodation. Mattress hire is an efficient logistical solution.
 
-For seminars, workshops, or training courses that require more than just rest area mattresses, the [Jogja event equipment package hire](https://acara.santiliving.com/sewa-perlengkapan-event) page helps map out core items like mattresses and coolers, as well as on-request items like carpets, tables, or display TVs.
+For seminars, workshops, or training courses that require more than just rest area mattresses, the [Jogja event equipment package hire](https://santiliving.com/en/sewa-perlengkapan-event) page helps map out core items like mattresses and coolers, as well as on-request items like carpets, tables, or display TVs.
 
 ## Logistical Challenges of Seminars & Workshops
 
@@ -72,7 +72,7 @@ Include: event name, number of participants, dates, venue location, and hire dur
 
 ## Additional Carpets for Seminars and Workshops
 
-If the venue also requires flooring for booths, a small stage, or registration areas, read the guide [seminar and exhibition carpet hire in Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). For main service consultations, start with [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja).
+If the venue also requires flooring for booths, a small stage, or registration areas, read the guide [seminar and exhibition carpet hire in Jogja](/artikel/sewa-karpet-seminar-pameran-jogja). For main service consultations, start with [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja).
 
 ---
 

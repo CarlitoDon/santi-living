@@ -8,7 +8,7 @@ tags: ["beli vs sewa karpet acara", "sewa karpet jogja", "rental karpet", "karpe
 
 Memilih **beli vs sewa karpet acara** tidak selalu soal harga satu kali. Untuk panitia wedding, pengajian, seminar, atau booth pameran, keputusan yang lebih penting adalah: apakah karpet akan dipakai berulang, siapa yang menyimpan, siapa yang membersihkan, dan apakah ukuran karpet cocok untuk venue berikutnya.
 
-Santi Living menempatkan sewa karpet sebagai solusi fleksibel. Anda bisa mulai dari halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja), lalu kirim detail acara agar admin mengecek opsi yang paling masuk akal.
+Santi Living menempatkan sewa karpet sebagai solusi fleksibel. Anda bisa mulai dari halaman [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja), lalu kirim detail acara agar admin mengecek opsi yang paling masuk akal.
 
 ## Kapan Beli Karpet Masuk Akal?
 
@@ -25,7 +25,7 @@ Jika empat hal itu belum siap, karpet yang dibeli bisa berubah menjadi beban: su
 
 Sewa karpet lebih praktis untuk acara satu kali, event musiman, atau kebutuhan yang ukurannya berubah-ubah. Panitia cukup fokus pada detail venue: ukuran area, jenis acara, tanggal, dan akses loading. Admin kemudian membantu mengecek jenis karpet, durasi, ongkir, dan ketersediaan.
 
-Sewa juga membantu ketika acara membutuhkan kombinasi: karpet jalur tamu, [perlengkapan event](https://acara.santiliving.com/sewa-perlengkapan-event), kasur tamu untuk keluarga luar kota, atau TV display untuk booth.
+Sewa juga membantu ketika acara membutuhkan kombinasi: karpet jalur tamu, [perlengkapan event](https://santiliving.com/id/sewa-perlengkapan-event), kasur tamu untuk keluarga luar kota, atau TV display untuk booth.
 
 ## Faktor yang Perlu Dibandingkan
 
@@ -41,11 +41,11 @@ Jika hanya butuh karpet untuk satu akad, satu pengajian, atau satu bazar, sewa b
 
 ## Link Terkait
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
 > 💰 **[Panduan harga sewa karpet Jogja →](/artikel/harga-sewa-karpet-jogja-2026)**
 
-> 📦 **[Paket sewa perlengkapan event Jogja →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📦 **[Paket sewa perlengkapan event Jogja →](https://santiliving.com/id/sewa-perlengkapan-event)**
 
 ## FAQ
 

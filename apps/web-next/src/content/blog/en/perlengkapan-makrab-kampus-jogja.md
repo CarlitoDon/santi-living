@@ -8,7 +8,7 @@ tags: ["perlengkapan makrab kampus jogja", "makrab jogja", "sewa kasur mahasiswa
 
 Campus gatherings often look simple on the schedule, but the logistical needs can be extensive: the committee arrives early, participants stay overnight, the event runs late into the night, and the venue is sometimes a villa, basecamp, campus, or local resident's house. To prevent the committee from scrambling for items at the last minute, create a **Jogja campus gathering equipment** checklist early on.
 
-Santi Living helps with relevant rental needs for campus events, especially mattresses, pillows, bolsters, blankets, as well as supporting items like fans, air coolers, TV displays, or floor mats which can be discussed on request. For general events, visit [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living helps with relevant rental needs for campus events, especially mattresses, pillows, bolsters, blankets, as well as supporting items like fans, air coolers, TV displays, or floor mats which can be discussed on request. For general events, visit [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event).
 
 ## Main Gathering Needs
 
@@ -18,7 +18,7 @@ Santi Living helps with relevant rental needs for campus events, especially matt
 
 **TV displays on request.** TVs can be used for briefings, playing materials, games, or group information. If you need an event screen, see [Jogja event TV display rental](/artikel/sewa-tv-led-pameran-bazar-jogja).
 
-**Floor mats on request.** For gathering spaces, floor seating, or briefings, the committee can ask about carpet/rug options according to the area size via [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Floor mats on request.** For gathering spaces, floor seating, or briefings, the committee can ask about carpet/rug options according to the area size via [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja).
 
 ## How to Divide Needs by Zone
 

@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next';
 import { getNotionPosts } from '@/lib/notion';
 import { getAllPosts } from '@/lib/blog';
+import { localizedSiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
 export const revalidate = false;
 
-const BASE_URL = 'https://santiliving.com';
+const BASE_URL = PRIMARY_SITE_URL;
 const LOCALES = ['id', 'en'] as const;
 const STATIC_PATHS = [
   '',
@@ -39,8 +40,8 @@ function safeDate(value: Date | string | undefined): Date | undefined {
 function localizedAlternates(path: string) {
   return {
     languages: {
-      id: `${BASE_URL}/id${path}`,
-      en: `${BASE_URL}/en${path}`,
+      id: localizedSiteUrl(path, 'id'),
+      en: localizedSiteUrl(path, 'en'),
     },
   };
 }
@@ -54,7 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: localizedAlternates(''),
     },
     ...LOCALES.flatMap((locale) => STATIC_PATHS.map((path) => ({
-      url: `${BASE_URL}/${locale}${path ? `/${path}` : ''}`,
+      url: localizedSiteUrl(path, locale),
       changeFrequency: 'daily' as const,
       priority: path ? 0.8 : 1,
       alternates: localizedAlternates(path ? `/${path}` : ''),
@@ -76,7 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       seen.add(key);
       const path = `/artikel/${slug}`;
       articleRoutes.push({
-        url: `${BASE_URL}/${locale}${path}`,
+        url: localizedSiteUrl(path, locale),
         lastModified: safeDate(date),
         changeFrequency: 'weekly',
         priority: 0.7,

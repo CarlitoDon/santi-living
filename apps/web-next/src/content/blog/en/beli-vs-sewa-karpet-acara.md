@@ -8,7 +8,7 @@ tags: ["beli vs sewa karpet acara", "sewa karpet jogja", "rental karpet", "karpe
 
 Choosing whether to **buy vs rent event carpets** is not always just about the one-off cost. For wedding, prayer gathering, seminar, or exhibition booth organisers, the more important decision is: will the carpet be used repeatedly, who will store it, who will clean it, and will the carpet size suit the next venue?
 
-Santi Living offers carpet rental as a flexible solution. You can start by visiting the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page, then send your event details so our admin can check the most sensible options.
+Santi Living offers carpet rental as a flexible solution. You can start by visiting the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page, then send your event details so our admin can check the most sensible options.
 
 ## When Does Buying a Carpet Make Sense?
 
@@ -25,7 +25,7 @@ If these four things are not in place, a purchased carpet can become a burden: d
 
 Renting a carpet is more practical for one-off events, seasonal events, or requirements where the size varies. Organisers only need to focus on the venue details: area size, event type, date, and loading access. Our admin will then help check the carpet type, duration, delivery costs, and availability.
 
-Renting also helps when the event requires a combination of items: guest aisle carpets, [event equipment](https://acara.santiliving.com/sewa-perlengkapan-event), guest mattresses for out-of-town family, or display TVs for booths.
+Renting also helps when the event requires a combination of items: guest aisle carpets, [event equipment](https://santiliving.com/en/sewa-perlengkapan-event), guest mattresses for out-of-town family, or display TVs for booths.
 
 ## Factors to Compare
 
@@ -41,11 +41,11 @@ If you only need a carpet for a single wedding ceremony (akad), one prayer gathe
 
 ## Related Links
 
-> 📖 **[Jogja carpet rental →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet rental →](https://santiliving.com/en/sewa-karpet-jogja)**
 
 > 💰 **[Jogja carpet rental price guide →](/artikel/harga-sewa-karpet-jogja-2026)**
 
-> 📦 **[Jogja event equipment rental packages →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📦 **[Jogja event equipment rental packages →](https://santiliving.com/en/sewa-perlengkapan-event)**
 
 ## FAQ
 

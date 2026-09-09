@@ -8,7 +8,7 @@ tags: ["sewa permadani emas jogja", "sewa permadani jogja", "karpet permadani ac
 
 Sebagian acara rumah membutuhkan nuansa yang lebih hangat dan elegan. Karena itu, pencarian **sewa permadani emas Jogja** biasanya muncul ketika panitia ingin alas duduk yang terlihat rapi untuk pengajian, tamu keluarga, syukuran, atau ruang lesehan sementara.
 
-Di Santi Living, warna dan motif seperti emas diperlakukan sebagai request yang perlu dicek, bukan janji pasti. Mulai dari halaman [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), lalu kirim tanggal, ukuran, foto area, dan preferensi warna lewat WhatsApp agar admin bisa mengecek opsi yang paling memungkinkan.
+Di Santi Living, warna dan motif seperti emas diperlakukan sebagai request yang perlu dicek, bukan janji pasti. Mulai dari halaman [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja), lalu kirim tanggal, ukuran, foto area, dan preferensi warna lewat WhatsApp agar admin bisa mengecek opsi yang paling memungkinkan.
 
 ## Kapan Permadani Emas Cocok Dipertimbangkan?
 

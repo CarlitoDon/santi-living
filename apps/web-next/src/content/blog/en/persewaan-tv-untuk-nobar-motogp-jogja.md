@@ -8,7 +8,7 @@ tags: ["sewa tv nobar", "nobar motogp", "nobar timnas", "persewaan tv jogja"]
 
 Yogyakarta is a city with incredibly strong hobby communities, ranging from automotive enthusiasts (*bikers*) to fan clubs of giant football teams. When major events like **MotoGP**, the World Cup final, or crucial **Indonesian National Team** matches take place, the culture of hosting a *Watch Party (Nobar)* is a must-do activity.
 
-For watch parties that also require cooling fans, mattresses for resting, or floor mats, check out [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event) to ensure power requirements, duration, routes, and custom items are all sorted without any mix-ups.
+For watch parties that also require cooling fans, mattresses for resting, or floor mats, check out [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event) to ensure power requirements, duration, routes, and custom items are all sorted without any mix-ups.
 
 However, not every community basecamp or member's house has a TV screen large and adequate enough for a dozen people to watch together. A laptop screen is clearly not an option. In these adrenaline-filled moments, **TV rentals for watch parties in Jogja** become the most highly searched service.
 
@@ -27,7 +27,7 @@ Make your favourite team's victory moment even more memorable with the best visu
 
 ## Additional Carpets for the Watch Party Area
 
-If the watch party is held with floor seating in a basecamp, garage, or community room, you might also want to consider [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) or check out the general options for [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) to make the seating area neater.
+If the watch party is held with floor seating in a basecamp, garage, or community room, you might also want to consider [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) or check out the general options for [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) to make the seating area neater.
 
 ---
 

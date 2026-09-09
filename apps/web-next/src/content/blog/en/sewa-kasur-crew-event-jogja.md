@@ -8,7 +8,7 @@ tags: ["sewa kasur crew event jogja", "kasur panitia", "eo jogja", "rest area ev
 
 Event crews often work before anyone else arrives and are still on duty long after the event has finished. They need a simple yet decent place to rest: mattresses, pillows, blankets, and an area that does not disrupt the flow of guests. Therefore, **Jogja event crew mattress rental** is ideal for EOs, campus committees, wedding vendors, training, workshops, and long-running community events.
 
-If you need more than just mattresses, you can also check out [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event). For a more complete rest area concept, read [Jogja event rest area packages](/artikel/paket-rest-area-event-jogja).
+If you need more than just mattresses, you can also check out [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event). For a more complete rest area concept, read [Jogja event rest area packages](/artikel/paket-rest-area-event-jogja).
 
 ## When Do Event Crews Need Mattresses?
 
@@ -41,7 +41,7 @@ Send the following details to the admin:
 
 **TV displays on request.** Not essential for resting, but they can be used for internal rundowns, standby monitoring, or committee announcements.
 
-**Carpets or floor coverings on request.** If the mattresses are placed in an empty room or on a floor that needs to look tidier, covering options can be discussed via [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Carpets or floor coverings on request.** If the mattresses are placed in an empty room or on a floor that needs to look tidier, covering options can be discussed via [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja).
 
 ## Estimates and Service Areas
 

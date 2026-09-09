@@ -80,9 +80,9 @@ export function Footer() {
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-lipat')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_lipat')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-bulanan')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_bulanan')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kursi-acara')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kursi_acara')}</Link></li>
-              <li className="mb-2"><a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_karpet_jogja')}</a></li>
-              <li className="mb-2"><a href="https://permadani.santiliving.com/sewa-karpet-permadani-jogja" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_permadani_jogja')}</a></li>
-              <li className="mb-2"><a href="https://acara.santiliving.com/sewa-perlengkapan-event" className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.perlengkapan_event')}</a></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-karpet-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_karpet_jogja')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-karpet-permadani-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_permadani_jogja')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-perlengkapan-event')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.perlengkapan_event')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/artikel')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.artikel_tips')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/about')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.tentang_kami')}</Link></li>
             </ul>

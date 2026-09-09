@@ -28,7 +28,7 @@ Anda pesan hari ini, barang akan tiba sebelum tamu pertama Anda datang.
 
 ## Tambahan Karpet untuk Syukuran dan Pengajian
 
-Jika tamu duduk lesehan, kipas sering lebih efektif ketika area duduk sudah tertata. Lihat [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) dan panduan [sewa karpet pengajian Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+Jika tamu duduk lesehan, kipas sering lebih efektif ketika area duduk sudah tertata. Lihat [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) dan panduan [sewa karpet pengajian Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 
 ---

@@ -8,7 +8,7 @@ tags: ["kesalahan pesan karpet event", "sewa karpet jogja", "karpet acara", "eve
 
 Many event carpet issues occur not because the vendor is unwilling to help, but because the initial information provided is too minimal. This article discusses the most common **event carpet ordering mistakes** that lead to changes in estimates, delayed installation, or an untidy final result.
 
-If you haven't prepared the basic details yet, first check the [Jogja event carpet rental checklist](/artikel/checklist-sewa-karpet-acara-jogja) and then proceed to the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page.
+If you haven't prepared the basic details yet, first check the [Jogja event carpet rental checklist](/artikel/checklist-sewa-karpet-acara-jogja) and then proceed to the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page.
 
 ## 1. Booking at the Last Minute
 
@@ -42,7 +42,7 @@ The solution: explain the area conditions and event type honestly so the admin c
 
 ## Related Links
 
-> 📖 **[Jogja carpet rental →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet rental →](https://santiliving.com/en/sewa-karpet-jogja)**
 
 > ✅ **[Jogja event carpet rental checklist →](/artikel/checklist-sewa-karpet-acara-jogja)**
 

@@ -8,7 +8,7 @@ tags: ["sewa tv display event jogja", "rental tv jogja", "tv pameran", "booth ba
 
 TV displays help events look tidier without having to print too much material. At exhibition booths, TVs can play product demos. At bazaars, TVs can display menus or promos. At office events, TVs can be used for registration information, schedules, or sponsor loops. Since requirements vary, **Jogja event TV display rental** should be consulted based on the venue type and event duration.
 
-If the TV display is part of a larger package, start with [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event). For booths that also require floor coverings, see [Jogja seminar and exhibition carpet rental](/artikel/sewa-karpet-seminar-pameran-jogja) or [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja).
+If the TV display is part of a larger package, start with [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event). For booths that also require floor coverings, see [Jogja seminar and exhibition carpet rental](/artikel/sewa-karpet-seminar-pameran-jogja) or [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja).
 
 For more specific screen requirements in the Sleman area or small event venues, the article [cheap LED TV rental for Sleman events](/artikel/rental-tv-led-murah-sleman-event) can serve as companion reading before you send the technical details to the admin.
 
