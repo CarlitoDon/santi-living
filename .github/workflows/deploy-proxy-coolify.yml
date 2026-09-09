@@ -1,0 +1,129 @@
+name: Deploy Proxy to Coolify
+
+# Branch mapping (see docs/deploy/proxy-coolify.md):
+#   Source refs: refs/heads/dev -> staging, refs/heads/main -> production
+#   dev  -> Coolify staging resource
+#   main -> Coolify production resource
+#
+# Deployment is EXPLICIT ONLY. GitHub-hosted runners cannot reach a local
+# Coolify instance unless it is exposed through a public tunnel, so this
+# workflow never auto-runs on push. Operators trigger it manually via
+# workflow_dispatch once the matching webhook secret is configured:
+#   - COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING
+#   - COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Coolify environment to deploy (staging or production)"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+  workflow_call:
+    inputs:
+      environment:
+        description: "Coolify environment to deploy (staging or production)"
+        required: true
+        type: string
+    secrets:
+      COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING:
+        required: false
+      COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION:
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-proxy-coolify-${{ inputs.environment }}
+  cancel-in-progress: false
+
+env:
+  DEPLOY_ENV: ${{ inputs.environment }}
+
+jobs:
+  build:
+    name: Build proxy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Proxy
+        run: npm run build
+        working-directory: apps/proxy
+
+  deploy:
+    name: Trigger Coolify deployment
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call'
+    steps:
+      - name: Resolve and POST deploy webhook
+        env:
+          COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING: ${{ secrets.COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING }}
+          COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION: ${{ secrets.COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION }}
+        run: |
+          set -euo pipefail
+
+          case "$DEPLOY_ENV" in
+            staging)
+              WEBHOOK_URL="$COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING"
+              expected_ref="refs/heads/dev"
+              ;;
+            production)
+              WEBHOOK_URL="$COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION"
+              expected_ref="refs/heads/main"
+              ;;
+            *)
+              echo "::error::Unsupported deployment environment: $DEPLOY_ENV"
+              exit 1
+              ;;
+          esac
+
+          if [[ "$GITHUB_REF" != "$expected_ref" ]]; then
+            echo "::error::Environment '$DEPLOY_ENV' must be dispatched from '$expected_ref' (received '$GITHUB_REF')."
+            exit 1
+          fi
+
+          if [[ -z "$WEBHOOK_URL" ]]; then
+            echo "::error::Webhook secret COOLIFY_DEPLOY_WEBHOOK_PROXY_${DEPLOY_ENV^^} is not configured in GitHub repository secrets."
+            exit 1
+          fi
+
+          echo "Triggering Coolify deployment for environment: $DEPLOY_ENV"
+
+          curl_error_file="$(mktemp)"
+          trap 'rm -f "$curl_error_file"' EXIT
+
+          if ! http_code=$(curl --fail --show-error --silent --max-time 30 \
+            --output /dev/null \
+            --write-out '%{http_code}' \
+            -X POST \
+            --header 'Content-Length: 0' \
+            "$WEBHOOK_URL" 2>"$curl_error_file"); then
+            echo "Coolify deploy trigger failed; inspect Coolify availability and webhook configuration."
+            exit 1
+          fi
+
+          if [[ ! "$http_code" =~ ^2[0-9]{2}$ ]]; then
+            echo "Coolify deploy trigger returned an unexpected HTTP status."
+            exit 1
+          fi
+
+          echo "Coolify deploy trigger accepted (HTTP $http_code)"
