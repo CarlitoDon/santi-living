@@ -5,7 +5,7 @@ import { localizedSiteUrl, primarySiteUrl } from '@/lib/site-url';
 const PAGE_PATH = '/sewa-karpet-jogja';
 
 const PAGE_TITLE =
-  'Sewa Karpet & Permadani Jogja — Harga Mulai Rp25.000/Hari | Santi Living';
+  'Sewa Karpet & Permadani Jogja — Harga Mulai Rp25.000/Hari';
 
 const PAGE_DESCRIPTION =
   'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian, pernikahan, arisan, dan event komunitas. Wilayah Sleman, Kota Jogja, Bantul, Kulon Progo. Anta jemput, free konsultasi.';
