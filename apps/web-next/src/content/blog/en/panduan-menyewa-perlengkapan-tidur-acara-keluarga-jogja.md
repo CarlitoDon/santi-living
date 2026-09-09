@@ -96,7 +96,7 @@ We have experience catering to events of all scales, from small family reunions 
 
 ## Additional Carpets for Event Equipment
 
-If your family event also requires floor coverings for the living room, prayer gatherings, or guest pathways, check out [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and [Jogja event equipment rental packages](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Carpets can be requested alongside mattresses, pillows, blankets, fans, air coolers, and TVs.
+If your family event also requires floor coverings for the living room, prayer gatherings, or guest pathways, check out [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) and [Jogja event equipment rental packages](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv). Carpets can be requested alongside mattresses, pillows, blankets, fans, air coolers, and TVs.
 
 ---
 

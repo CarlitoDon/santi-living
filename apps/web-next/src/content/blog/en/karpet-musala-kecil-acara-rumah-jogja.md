@@ -8,7 +8,7 @@ tags: ["karpet musala kecil acara rumah jogja", "sewa karpet lesehan jogja", "se
 
 Home events such as neighbourhood gatherings (pengajian), thanksgiving events (syukuran), memorial prayers (tahlilan), or communal prayers often require a small, clean, and tidy area. For these needs, **small prayer room carpets for Jogja home events** can help set up a temporary seating or prayer area without the need to purchase large carpets.
 
-Santi Living helps customers check [carpet and rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) based on room size, event date, photos of the area, and cleaning requirements. The availability of specific carpet types still needs to be confirmed via WhatsApp.
+Santi Living helps customers check [carpet and rug rental in Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja) based on room size, event date, photos of the area, and cleaning requirements. The availability of specific carpet types still needs to be confirmed via WhatsApp.
 
 ## When Are Small Prayer Room Carpets Needed?
 

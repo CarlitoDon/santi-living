@@ -8,7 +8,7 @@ tags: ["perlengkapan wedding preparation jogja", "persiapan wedding jogja", "sew
 
 Wedding preparations usually get busy from D-1. Family members arrive from out of town, the committee coordinates back and forth, vendors start loading in, and the house or venue turns into a hub of activity. To keep everyone comfortable, create a **Jogja wedding preparation equipment** checklist that focuses on real needs: rest areas, cooling, event information, and floor coverings that match the layout.
 
-Santi Living helps with rental needs such as mattresses, pillows, bolsters, blankets, fans, air coolers, display TVs, and carpets/rugs by request. For event package options, start with [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living helps with rental needs such as mattresses, pillows, bolsters, blankets, fans, air coolers, display TVs, and carpets/rugs by request. For event package options, start with [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event).
 
 ## Needs That Often Arise During Wedding Preparation
 
@@ -20,7 +20,7 @@ Santi Living helps with rental needs such as mattresses, pillows, bolsters, blan
 
 **Display TV by request.** TVs can be used for family slideshows, internal rundowns, or guest information. If it is for event display, see [Jogja event display TV rental](/artikel/sewa-tv-led-pameran-bazar-jogja).
 
-**Carpets or rugs by request.** For the akad (marriage solemnisation) area, family room, or guest pathways, consult on the size and type of floor covering. Specific references can be found in [Jogja wedding carpet rental](/artikel/sewa-karpet-pernikahan-jogja) and [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
+**Carpets or rugs by request.** For the akad (marriage solemnisation) area, family room, or guest pathways, consult on the size and type of floor covering. Specific references can be found in [Jogja wedding carpet rental](/artikel/sewa-karpet-pernikahan-jogja) and [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja).
 
 ## Categorise Needs by Day
 
@@ -52,7 +52,7 @@ Thirdly, send photos of the area if possible. Photos of the living room, garage,
 
 Santi Living does not need to be positioned as a wedding decoration vendor. The focus of the rental service is practical needs: extra sleeping arrangements, room comfort, portable cooling, information displays, and floor coverings by request. With this positioning, expectations are clearer, and the committee will not mistakenly assume that all wedding needs can be met from a single source.
 
-If floor coverings are a priority, visit [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) to consult on sizes and types.
+If floor coverings are a priority, visit [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) to consult on sizes and types.
 
 ## FAQ Jogja Wedding Preparation Equipment
 

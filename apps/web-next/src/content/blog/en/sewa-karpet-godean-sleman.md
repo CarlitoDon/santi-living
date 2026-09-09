@@ -34,8 +34,8 @@ If your event plans are still changing, start with the main requirements first: 
 
 ## Carpet and Equipment Options
 
-- [Carpet hire Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
-- [Rug hire Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) for religious gatherings, family prayers, thanksgiving events, and floor seating.
+- [Carpet hire Jogja](https://santiliving.com/en/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
+- [Rug hire Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja) for religious gatherings, family prayers, thanksgiving events, and floor seating.
 - Guest mattresses, pillows, blankets, fans, air coolers, or TVs can be requested if the event runs for a long time or if guests are staying overnight.
 
 ## Coverage Area and Logistics
@@ -48,9 +48,9 @@ Santi Living does not recommend that organisers guess the price based solely on 
 
 ## Links to Check Before Chatting
 
-> 📖 **[Carpet hire Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Carpet hire Jogja →](https://santiliving.com/en/sewa-karpet-jogja)**
 
-> 📖 **[Rug hire Jogja →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Rug hire Jogja →](https://santiliving.com/en/sewa-karpet-permadani-jogja)**
 
 > 📖 **[Mattress hire Godean Sleman →](/artikel/sewa-kasur-godean-sleman-terdekat-workshop)**
 

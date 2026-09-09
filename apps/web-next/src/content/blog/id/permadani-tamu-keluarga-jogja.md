@@ -8,7 +8,7 @@ tags: ["permadani untuk tamu keluarga jogja", "sewa permadani jogja", "karpet le
 
 Keluarga besar datang ke Jogja sering membuat ruang tamu, teras, atau garasi berubah fungsi menjadi area duduk bersama. Kalau alas rumah tidak cukup, **permadani untuk tamu keluarga Jogja** bisa membantu membuat suasana lebih rapi tanpa harus membeli karpet besar untuk pemakaian sesekali.
 
-Santi Living membantu pelanggan mengecek kebutuhan [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) berdasarkan ukuran ruang, jumlah tamu, tanggal, dan preferensi motif. Ketersediaan tetap perlu dikonfirmasi via WhatsApp agar estimasi tidak asal.
+Santi Living membantu pelanggan mengecek kebutuhan [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) berdasarkan ukuran ruang, jumlah tamu, tanggal, dan preferensi motif. Ketersediaan tetap perlu dikonfirmasi via WhatsApp agar estimasi tidak asal.
 
 ## Kapan Tamu Keluarga Membutuhkan Permadani Tambahan?
 
@@ -105,7 +105,7 @@ Kirim tanggal acara, alamat, jumlah tamu, foto ruang, ukuran area, preferensi wa
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
-> Untuk kebutuhan **permadani untuk tamu keluarga Jogja**, mulai dari [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), lalu kirim detail rumah dan jumlah tamu agar estimasi lebih tepat.
+> Untuk kebutuhan **permadani untuk tamu keluarga Jogja**, mulai dari [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja), lalu kirim detail rumah dan jumlah tamu agar estimasi lebih tepat.
 
 
 ---

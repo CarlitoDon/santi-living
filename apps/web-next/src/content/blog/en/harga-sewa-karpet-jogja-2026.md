@@ -8,7 +8,7 @@ tags: ["harga sewa karpet jogja", "harga sewa permadani merah jogja", "sewa karp
 
 Looking for **Jogja carpet rental prices 2026** usually starts with one simple question: how much will it cost for my event? The answer is not always one-size-fits-all, as carpet requirements for a wedding guest pathway differ from floor-seating religious gatherings, exhibition booths, family guest rugs, or seminar stages.
 
-At Santi Living, the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page is designed as a consultative service. This means the admin will check the carpet type, size, event date, delivery area, and availability of services or partners before providing an estimate that the organising committee can use.
+At Santi Living, the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page is designed as a consultative service. This means the admin will check the carpet type, size, event date, delivery area, and availability of services or partners before providing an estimate that the organising committee can use.
 
 ## Why Are Carpet Rental Prices Not Always the Same?
 
@@ -28,11 +28,11 @@ Therefore, estimates should be confirmed via WhatsApp once the event details are
 
 ### Red Carpets
 
-[Jogja red carpet rental](https://karpet.santiliving.com/sewa-karpet-merah-jogja) is suitable for weddings, VIP entrances, grand openings, solemnisation ceremonies (akad), small stages, and guest pathways. Estimates usually depend on the pathway length and area width.
+[Jogja red carpet rental](https://santiliving.com/en/sewa-karpet-merah-jogja) is suitable for weddings, VIP entrances, grand openings, solemnisation ceremonies (akad), small stages, and guest pathways. Estimates usually depend on the pathway length and area width.
 
 ### Rugs
 
-[Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) is suitable for religious gatherings, prayer sessions (tahlilan), thanksgiving events, temporary living rooms, and floor-seating family events. Estimates are easier if you send the number of guests or the room size.
+[Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) is suitable for religious gatherings, prayer sessions (tahlilan), thanksgiving events, temporary living rooms, and floor-seating family events. Estimates are easier if you send the number of guests or the room size.
 
 If your event is still in the stage of choosing the carpet type, read [red carpet vs event rug](/artikel/karpet-merah-vs-karpet-permadani-acara) so the committee does not choose the wrong function.
 
@@ -96,13 +96,13 @@ Some people look for a single final figure, even though **carpet rental price fa
 
 For religious gatherings or prayer sessions, the admin usually needs to know whether the carpet will be used for floor seating, the entrance pathway, or the family area. For weddings and formal events, the carpet colour and guest pathway length need to be clearer. For booths and exhibitions, the area floor plan is often more useful than the number of visitors.
 
-> 📖 **[Jogja carpet rental →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet rental →](https://santiliving.com/en/sewa-karpet-jogja)**
 
-> 📖 **[Jogja rug rental →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Jogja rug rental →](https://santiliving.com/en/sewa-karpet-permadani-jogja)**
 
-> 📖 **[Jogja red carpet rental →](https://karpet.santiliving.com/sewa-karpet-merah-jogja)**
+> 📖 **[Jogja red carpet rental →](https://santiliving.com/en/sewa-karpet-merah-jogja)**
 
-> 📦 **[Jogja event equipment rental →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📦 **[Jogja event equipment rental →](https://santiliving.com/en/sewa-perlengkapan-event)**
 
 ## How to Send Area Dimensions to the Admin
 
@@ -145,7 +145,7 @@ For a quick estimate, send the event type, area size, date, location, venue phot
 
 ## Conclusion
 
-Accurate Jogja carpet rental prices can only be calculated once the event type, area size, date, and location are clear. For event, celebration, religious gathering, wedding, or exhibition needs, start from the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) or [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page, then send the event details via [WhatsApp Santi Living](https://wa.me/6289519119092) for a more precise estimate.
+Accurate Jogja carpet rental prices can only be calculated once the event type, area size, date, and location are clear. For event, celebration, religious gathering, wedding, or exhibition needs, start from the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) or [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) page, then send the event details via [WhatsApp Santi Living](https://wa.me/6289519119092) for a more precise estimate.
 
 ---
 

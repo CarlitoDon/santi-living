@@ -8,7 +8,7 @@ tags: ["permadani untuk tamu keluarga jogja", "sewa permadani jogja", "karpet le
 
 When extended family visit Jogja, it often means the living room, terrace, or garage has to double up as a communal seating area. If you don't have enough floor coverings, **rugs for family guests in Jogja** can help make the space look much tidier without the need to buy a large carpet for occasional use.
 
-Santi Living helps customers check their [carpet and rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) requirements based on room size, number of guests, dates, and pattern preferences. Availability still needs to be confirmed via WhatsApp to ensure an accurate estimate.
+Santi Living helps customers check their [carpet and rug rental in Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja) requirements based on room size, number of guests, dates, and pattern preferences. Availability still needs to be confirmed via WhatsApp to ensure an accurate estimate.
 
 ## When Do Family Guests Need Extra Rugs?
 
@@ -105,7 +105,7 @@ Send the event date, address, number of guests, room photos, area size, colour p
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
-> For your **rug needs for family guests in Jogja**, start with [carpet and rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), then send your home details and guest numbers for a more accurate estimate.
+> For your **rug needs for family guests in Jogja**, start with [carpet and rug rental in Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja), then send your home details and guest numbers for a more accurate estimate.
 
 ---
 

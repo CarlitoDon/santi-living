@@ -34,7 +34,7 @@ If your event plans are still changing, start with the main requirements first: 
 
 ## Carpet and Equipment Options
 
-- [Jogja event equipment hire](https://acara.santiliving.com/sewa-perlengkapan-event) to coordinate carpets, display TVs, guest mattresses, portable coolers, and other event needs.
+- [Jogja event equipment hire](https://santiliving.com/en/sewa-perlengkapan-event) to coordinate carpets, display TVs, guest mattresses, portable coolers, and other event needs.
 - Guest pathway carpets, booth carpets, or floor-seating mats can be requested according to the venue layout.
 - Guest mattresses, pillows, blankets, fans, air coolers, or TVs can be requested if the event lasts for a long time or if there are overnight guests.
 
@@ -48,7 +48,7 @@ Santi Living does not recommend that organisers guess the price based solely on 
 
 ## Links to Open Before Chatting
 
-> 📖 **[Jogja event equipment hire →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📖 **[Jogja event equipment hire →](https://santiliving.com/en/sewa-perlengkapan-event)**
 
 > 📖 **[Jogja exhibition and bazaar LED TV hire →](/artikel/sewa-tv-led-pameran-bazar-jogja)**
 

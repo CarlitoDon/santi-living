@@ -8,7 +8,7 @@ tags: ["paket rest area event jogja", "kasur crew event", "perlengkapan panitia"
 
 Rest areas are often seen as a minor requirement, but for long events, the crew rest area can determine the organisers' work rhythm. Crew members who have to stand by from loading, the main event, through to pack-down need a place for a quick lie-down, adequate cooling, and simple equipment to stay fit. Therefore, the **Jogja event rest area package** should be planned from the start, rather than waiting for the organisers to get exhausted on the day.
 
-Santi Living helps with rental-based rest area needs: mattresses, pillows, bolsters, blankets, as well as supporting items like fans, air coolers, or TV displays which can be requested upon consultation. For a wider range of event services, start with [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living helps with rental-based rest area needs: mattresses, pillows, bolsters, blankets, as well as supporting items like fans, air coolers, or TV displays which can be requested upon consultation. For a wider range of event services, start with [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event).
 
 ## Who Needs an Event Rest Area?
 

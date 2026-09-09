@@ -23,9 +23,9 @@ Fakta penting:
 - [ Sewa Kipas Angin ](https://santiliving.com/id/sewa-kipas-angin) : Kipas stand fan 16 inch, mulai Rp 29.000/hari
 - [ Sewa Air Cooler ](https://santiliving.com/id/sewa-cooling) : Air cooler portable hemat listrik, mulai Rp 40.000/hari
 - [ Sewa TV Jogja ](https://santiliving.com/id/sewa-tv) : TV LED 32 inch HD, Rp 50.000/hari
-- [ Sewa Karpet Jogja ](https://karpet.santiliving.com/id/sewa-karpet-jogja) : Karpet merah, runner, booth & paket acara (subdomain karpet)
-- [ Sewa Permadani Jogja ](https://permadani.santiliving.com/id/sewa-karpet-permadani-jogja) : Permadani merah/emas untuk pengajian, tahlilan, lesehan (subdomain permadani)
-- [ Sewa Perlengkapan Event ](https://acara.santiliving.com/id/sewa-perlengkapan-event) : Paket perlengkapan acara satu atap — kasur, karpet, kipas, TV (subdomain acara)
+- [ Sewa Karpet Jogja ](https://santiliving.com/id/sewa-karpet-jogja) : Karpet merah, runner, booth & paket acara (domain utama)
+- [ Sewa Permadani Jogja ](https://santiliving.com/id/sewa-karpet-permadani-jogja) : Permadani merah/emas untuk pengajian, tahlilan, lesehan (domain utama)
+- [ Sewa Perlengkapan Event ](https://santiliving.com/id/sewa-perlengkapan-event) : Paket perlengkapan acara satu atap — kasur, karpet, kipas, TV (domain utama)
 
 ## Artikel (Blog)
 

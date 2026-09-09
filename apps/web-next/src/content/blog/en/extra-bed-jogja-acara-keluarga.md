@@ -8,7 +8,7 @@ tags: ["extra bed jogja", "acara keluarga", "sewa kasur massal"]
 
 Hosting a celebration, reunion, or thanksgiving event at home often means hosting a large number of out-of-town guests. The classic problem that arises is always the same: **a shortage of beds**.
 
-For family events that require extra beds, cooling units, TVs, and seating all at once, use the [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event) so the admin can separate core items, by-request items, and estimate the delivery route.
+For family events that require extra beds, cooling units, TVs, and seating all at once, use the [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event) so the admin can separate core items, by-request items, and estimate the delivery route.
 
 The **Jogja extra bed** service from **Santi Living** is specifically designed to help your special event run smoothly without making your guests sleep on a cold floor.
 
@@ -28,7 +28,7 @@ Don't let your guests go without proper rest. Make your event more memorable wit
 
 ## Additional Carpets for Family Events
 
-For guest areas, family prayer gatherings, or temporary floor-seating spaces, read about [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). These requirements can be discussed alongside the extra beds.
+For guest areas, family prayer gatherings, or temporary floor-seating spaces, read about [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) and [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja). These requirements can be discussed alongside the extra beds.
 
 ---
 

@@ -28,7 +28,7 @@ We will deliver a clean air cooler unit along with a *Blue Ice Pack* free of cha
 
 ## Additional Carpets for Family Guests
 
-If your living room or family area is used for floor seating during the holidays, consider [renting a rug in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) along with your air cooler and guest mattress needs. For cross-equipment packages, read [event equipment rental packages in Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
+If your living room or family area is used for floor seating during the holidays, consider [renting a rug in Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja) along with your air cooler and guest mattress needs. For cross-equipment packages, read [event equipment rental packages in Jogja](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv).
 
 ---
 

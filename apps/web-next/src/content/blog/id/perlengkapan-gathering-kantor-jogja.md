@@ -8,7 +8,7 @@ tags: ["perlengkapan gathering kantor jogja", "company gathering jogja", "traini
 
 Gathering kantor tidak selalu berarti acara besar di hotel. Banyak perusahaan mengadakan training, retreat, outbound, atau company event di villa, homestay, rumah besar, aula, atau venue semi-outdoor. Agar acara berjalan rapi, tim HR/GA perlu menyiapkan **perlengkapan gathering kantor Jogja** yang sesuai durasi, jumlah peserta, dan layout.
 
-Santi Living membantu kebutuhan rental praktis seperti kasur, bedding, kipas, air cooler, TV display, dan alas area by request. Untuk konsultasi paket event yang lebih luas, mulai dari [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living membantu kebutuhan rental praktis seperti kasur, bedding, kipas, air cooler, TV display, dan alas area by request. Untuk konsultasi paket event yang lebih luas, mulai dari [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event).
 
 ## Kebutuhan Gathering Kantor yang Sering Muncul
 
@@ -20,7 +20,7 @@ Jika venue gathering berada di area Sleman atau membutuhkan layar sederhana untu
 
 **Kipas atau air cooler.** Venue semi-outdoor, aula kecil, dan ruang makan bisa terasa panas ketika diisi banyak orang. Pendingin portabel perlu dicek berdasarkan titik listrik dan sirkulasi.
 
-**Karpet atau permadani by request.** Jika gathering memakai konsep lesehan, briefing, atau ruang diskusi, alas area dapat dikonsultasikan melalui [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Karpet atau permadani by request.** Jika gathering memakai konsep lesehan, briefing, atau ruang diskusi, alas area dapat dikonsultasikan melalui [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja).
 
 ## Checklist untuk HR, GA, atau Panitia Internal
 

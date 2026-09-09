@@ -8,7 +8,7 @@ tags: ["sewa perlengkapan event jogja", "paket acara jogja", "sewa kasur crew", 
 
 Event committees often have a mixed list of requirements: mattresses for the crew, cooling for the waiting room, display TVs for information, and floor coverings to keep the space looking tidy. To avoid coordinating with too many vendors, Santi Living provides a consultation channel for **Jogja event equipment hire** that focuses on practical needs and can be easily confirmed via WhatsApp.
 
-Start from the main page for [Jogja event equipment package hire](https://acara.santiliving.com/sewa-perlengkapan-event). From there, our admin can help separate core needs like mattresses and bedding, cooling requirements such as [outdoor event air cooler hire](/artikel/sewa-air-cooler-acara-outdoor-jogja), as well as on-request needs like [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja), [Jogja rug hire](https://permadani.santiliving.com/sewa-karpet-permadani-jogja), or display TVs.
+Start from the main page for [Jogja event equipment package hire](https://santiliving.com/en/sewa-perlengkapan-event). From there, our admin can help separate core needs like mattresses and bedding, cooling requirements such as [outdoor event air cooler hire](/artikel/sewa-air-cooler-acara-outdoor-jogja), as well as on-request needs like [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja), [Jogja rug hire](https://santiliving.com/en/sewa-karpet-permadani-jogja), or display TVs.
 
 ## When Should Event Equipment Be Combined into One Checklist?
 
@@ -24,7 +24,7 @@ A single checklist does not mean all items are guaranteed to be available on the
 
 **Display TVs.** Useful for registration, sponsor loops, bazaar menus, event rundowns, or product demos. For screen requirements, proceed to [Jogja event display TV hire](/artikel/sewa-tv-led-pameran-bazar-jogja).
 
-**Carpets or rugs on request.** Carpets help tidy up booths, guest pathways, or floor-seating areas. Since the size and type of flooring depend heavily on the layout, confirm via [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) or [Jogja rug hire](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
+**Carpets or rugs on request.** Carpets help tidy up booths, guest pathways, or floor-seating areas. Since the size and type of flooring depend heavily on the layout, confirm via [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) or [Jogja rug hire](https://santiliving.com/en/sewa-karpet-permadani-jogja).
 
 ## How to Put Together a Package Without Going Over Budget
 
@@ -67,7 +67,7 @@ Information needed for our admin to check options:
 - Date, delivery time, collection time, and location access.
 - Whether the event is at a home, venue, hotel, or semi-outdoor area.
 
-For carpets, start with [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja). For guest sleeping needs, read [mattress hire for pengajian and tahlilan events](/artikel/sewa-kasur-acara-pengajian-tahlilan-jogja). If it is a floor-seating event, also check [carpet hire for Jogja pengajian and tahlilan](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+For carpets, start with [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja). For guest sleeping needs, read [mattress hire for pengajian and tahlilan events](/artikel/sewa-kasur-acara-pengajian-tahlilan-jogja). If it is a floor-seating event, also check [carpet hire for Jogja pengajian and tahlilan](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 ## FAQ Jogja Event Equipment Hire
 

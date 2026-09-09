@@ -8,7 +8,7 @@ tags: ["sewa karpet seminar jogja", "sewa karpet pameran jogja", "sewa karpet bo
 
 Seminars, workshops, expos, bazaars, and exhibitions have different carpet requirements compared to family events. **Seminar and exhibition carpet rental in Jogja** is usually related to booth layouts, small stages, registration areas, visitor pathways, or photo spots.
 
-If your requirements are still general, start with the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page. For multi-equipment needs, also check out [event equipment rental in Jogja](https://acara.santiliving.com/sewa-perlengkapan-event). If your event features a formal pathway or a ceremonial stage, the [red carpet rental in Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) page can serve as an initial reference.
+If your requirements are still general, start with the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page. For multi-equipment needs, also check out [event equipment rental in Jogja](https://santiliving.com/en/sewa-perlengkapan-event). If your event features a formal pathway or a ceremonial stage, the [red carpet rental in Jogja](https://santiliving.com/en/sewa-karpet-merah-jogja) page can serve as an initial reference.
 
 ## Seminar Areas That Often Require Carpets
 

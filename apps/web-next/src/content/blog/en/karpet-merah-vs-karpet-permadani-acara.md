@@ -8,7 +8,7 @@ tags: ["karpet merah vs permadani", "karpet merah", "karpet permadani", "sewa ka
 
 When looking for **Jogja carpet hire**, many event organisers are confused about choosing between a red carpet and a rug. Both can make an event look tidier, but their functions and the impressions they create are different.
 
-For formal pathway needs, see [Jogja red carpet hire](https://karpet.santiliving.com/sewa-karpet-merah-jogja). For family events or floor seating, see [Jogja rug hire](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). If you are not sure which type you need, start from the general [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) page and send the event details to the admin.
+For formal pathway needs, see [Jogja red carpet hire](https://santiliving.com/en/sewa-karpet-merah-jogja). For family events or floor seating, see [Jogja rug hire](https://santiliving.com/en/sewa-karpet-permadani-jogja). If you are not sure which type you need, start from the general [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) page and send the event details to the admin.
 
 ## The Most Important Differences
 
@@ -51,7 +51,7 @@ Use this guide before messaging the admin:
 - If the main requirement is a **guest entrance pathway**, choose a red carpet or runner.
 - If the main requirement is **floor seating**, choose a rug.
 - If the event is a **wedding with a procession and a large family**, combine a red carpet for the pathway and rugs for the family area.
-- If the event is a **seminar, expo, or exhibition**, start with carpets for the booth/stage area, then check if you need [Jogja event equipment hire](https://acara.santiliving.com/sewa-perlengkapan-event).
+- If the event is a **seminar, expo, or exhibition**, start with carpets for the booth/stage area, then check if you need [Jogja event equipment hire](https://santiliving.com/en/sewa-perlengkapan-event).
 - If you are still considering the cost, read the [Jogja carpet hire prices for 2026](/artikel/harga-sewa-karpet-jogja-2026) to understand the factors that affect the estimate.
 
 ## Information to Send to the Admin
@@ -82,7 +82,7 @@ Priority areas include Sleman, Yogyakarta City, Bantul, and Kulonprogo; remote a
 
 ## Conclusion
 
-A red carpet is more suitable for formal pathways and ceremonial moments. A rug is more suitable for seating areas and family events. If you are still unsure, start from the [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) page and send your event details via [Santi Living WhatsApp](https://wa.me/6289519119092) for a more accurate recommendation.
+A red carpet is more suitable for formal pathways and ceremonial moments. A rug is more suitable for seating areas and family events. If you are still unsure, start from the [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) page and send your event details via [Santi Living WhatsApp](https://wa.me/6289519119092) for a more accurate recommendation.
 
 > **For red carpet vs rug needs, Santi Living helps Jogja event organisers choose carpets based on function: formal pathways, stages, booths, or family floor seating — not just colour.**
 

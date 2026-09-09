@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
+import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
-export const KARPET_SITE_URL = 'https://karpet.santiliving.com';
-export const PERMADANI_SITE_URL = 'https://permadani.santiliving.com';
-const DEFAULT_IMAGE = `${KARPET_SITE_URL}/images/karpet-hero.webp`;
+// Compatibility exports for callers that used the old specialist hosts.
+// New canonical URLs and structured data always use the primary domain.
+export const KARPET_SITE_URL = PRIMARY_SITE_URL;
+export const PERMADANI_SITE_URL = PRIMARY_SITE_URL;
+const DEFAULT_IMAGE = primarySiteUrl('/images/karpet-hero.webp');
 
 const SERVICE_AREAS = [
   'Sleman',
@@ -17,22 +20,27 @@ const SERVICE_AREAS = [
   'Sekitar UGM',
 ];
 
-function getImageUrl(config: LandingPageConfig, siteUrl = KARPET_SITE_URL): string {
+function safeLocale(locale: string | undefined): 'id' | 'en' {
+  return locale === 'en' ? 'en' : 'id';
+}
+
+function getImageUrl(config: LandingPageConfig): string {
   const image = config.hero.bgImage;
 
   if (!image) return DEFAULT_IMAGE;
   if (image.startsWith('http://') || image.startsWith('https://')) return image;
 
-  return `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`;
+  return primarySiteUrl(image);
 }
 
 export function buildKarpetMetadata(
   config: LandingPageConfig,
   path: string,
-  siteUrl = KARPET_SITE_URL,
+  locale = 'id',
 ): Metadata {
-  const url = `${siteUrl}${path}`;
-  const image = getImageUrl(config, siteUrl);
+  const currentLocale = safeLocale(locale);
+  const url = localizedSiteUrl(path, currentLocale);
+  const image = getImageUrl(config);
 
   return {
     title: config.meta.title,
@@ -51,13 +59,17 @@ export function buildKarpetMetadata(
     ],
     alternates: {
       canonical: url,
+      languages: {
+        id: localizedSiteUrl(path, 'id'),
+        en: localizedSiteUrl(path, 'en'),
+      },
     },
     openGraph: {
       title: config.meta.title,
       description: config.meta.description,
       url,
       type: 'website',
-      locale: 'id_ID',
+      locale: currentLocale === 'en' ? 'en_US' : 'id_ID',
       siteName: 'Santi Living',
       images: [
         {
@@ -85,10 +97,11 @@ export function buildKarpetServiceSchema(
   config: LandingPageConfig,
   path: string,
   serviceType: string,
-  siteUrl = KARPET_SITE_URL,
+  locale = 'id',
 ) {
-  const url = `${siteUrl}${path}`;
-  const image = getImageUrl(config, siteUrl);
+  const currentLocale = safeLocale(locale);
+  const url = localizedSiteUrl(path, currentLocale);
+  const image = getImageUrl(config);
 
   return {
     '@context': 'https://schema.org',
@@ -101,7 +114,7 @@ export function buildKarpetServiceSchema(
     provider: {
       '@type': 'LocalBusiness',
       name: 'Santi Living',
-      url: siteUrl,
+      url: primarySiteUrl(),
       telephone: '+6289519119092',
       address: {
         '@type': 'PostalAddress',
@@ -123,7 +136,7 @@ export function buildKarpetServiceSchema(
         '@type': 'ContactPoint',
         telephone: '+6289519119092',
         contactType: 'customer service',
-        availableLanguage: 'Indonesian',
+        availableLanguage: currentLocale === 'en' ? 'English' : 'Indonesian',
       },
     },
     hasOfferCatalog: {
@@ -160,8 +173,9 @@ export function buildKarpetFaqSchema(config: LandingPageConfig) {
 
 export function buildKarpetBreadcrumbSchema(
   items: Array<{ name: string; path: string }>,
-  siteUrl = KARPET_SITE_URL,
+  locale = 'id',
 ) {
+  const currentLocale = safeLocale(locale);
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -169,7 +183,7 @@ export function buildKarpetBreadcrumbSchema(
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: `${siteUrl}${item.path}`,
+      item: localizedSiteUrl(item.path, currentLocale),
     })),
   };
 }

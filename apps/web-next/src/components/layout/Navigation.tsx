@@ -129,7 +129,7 @@ export function Navigation() {
     hostCta.context === 'karpet' || hostCta.context === 'permadani'
       ? { href: '#calculator', label: t('nav.cek_opsi'), site: 'current' }
       : hostCta.context === 'acara'
-        ? { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.paket_event'), site: 'current' }
+        ? { href: '/sewa-perlengkapan-event', label: t('nav.paket_event') }
         : { href: '/#calculator', label: t('nav.hitung_biaya'), site: 'current' };
 
   const navLinks: NavLink[] = [
@@ -141,9 +141,9 @@ export function Navigation() {
         { href: '/produk', label: t('nav.semua_produk') },
         { href: '/sewa-kasur-terdekat', label: t('nav.kasur') },
         { href: '/sewa-kursi-acara', label: t('nav.kursi') },
-        { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: t('nav.karpet') },
-        { href: 'https://permadani.santiliving.com/sewa-karpet-permadani-jogja', label: t('nav.permadani') },
-        { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.perlengkapan_event') },
+        { href: '/sewa-karpet-jogja', label: t('nav.karpet') },
+        { href: '/sewa-karpet-permadani-jogja', label: t('nav.permadani') },
+        { href: '/sewa-perlengkapan-event', label: t('nav.perlengkapan_event') },
       ],
     },
     { href: '/harga-sewa-kasur', label: t('nav.harga_sewa') },

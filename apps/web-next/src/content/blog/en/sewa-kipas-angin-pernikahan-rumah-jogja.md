@@ -8,7 +8,7 @@ tags: ["sewa kipas angin", "acara pernikahan", "hajatan rumah", "jogja"]
 
 Hosting a wedding reception or celebration at your own home (without renting a venue) is a deeply rooted tradition in Yogyakarta. Besides being more budget-friendly, home events feel more intimate and allow you to mingle with neighbours.
 
-If fans for a home wedding are used alongside transit mattresses, red carpets, or display TVs, the [Jogja event equipment package hire](https://acara.santiliving.com/sewa-perlengkapan-event) page helps you plan realistic requirements before getting a price estimate.
+If fans for a home wedding are used alongside transit mattresses, red carpets, or display TVs, the [Jogja event equipment package hire](https://santiliving.com/en/sewa-perlengkapan-event) page helps you plan realistic requirements before getting a price estimate.
 
 However, the biggest challenge of hosting a *hajatan* (celebration) at home is **air circulation**. If your living room and terrace are packed with dozens of invited guests on a hot afternoon, the air will quickly become stuffy and hot. The most practical solution? **Jogja fan hire** in adequate quantities, of course.
 
@@ -30,7 +30,7 @@ Wear your sweetest smile on your happy day, and let your guests enjoy the cool c
 
 ## Additional Carpets for Home Celebrations
 
-In addition to fans, guest pathways and solemnisation areas often require a neater floor covering. See [Jogja red carpet hire](https://karpet.santiliving.com/sewa-karpet-merah-jogja), [carpet hire for weddings](/artikel/sewa-karpet-pernikahan-jogja), or the main [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) page.
+In addition to fans, guest pathways and solemnisation areas often require a neater floor covering. See [Jogja red carpet hire](https://santiliving.com/en/sewa-karpet-merah-jogja), [carpet hire for weddings](/artikel/sewa-karpet-pernikahan-jogja), or the main [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) page.
 
 ---
 

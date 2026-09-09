@@ -25,9 +25,15 @@ describe('mainSiteHref', () => {
     })).toBe('http://localhost:3000/en');
   });
 
-  it('does not alter external links', () => {
+  it('normalises legacy specialist absolute links to the primary host', () => {
     expect(mainSiteHref('https://acara.santiliving.com/sewa-perlengkapan-event', 'id', {
       hostname: 'karpet.santiliving.com',
-    })).toBe('https://acara.santiliving.com/sewa-perlengkapan-event');
+    })).toBe('https://santiliving.com/id/sewa-perlengkapan-event');
+  });
+
+  it('does not alter unrelated external links', () => {
+    expect(mainSiteHref('https://example.com/guide', 'id', {
+      hostname: 'santiliving.com',
+    })).toBe('https://example.com/guide');
   });
 });

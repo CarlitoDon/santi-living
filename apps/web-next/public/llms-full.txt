@@ -15,7 +15,7 @@ Pemesanan utama melalui WhatsApp: 0895-1911-9092 (email/telp: hubungi via WhatsA
 1. **Sewa Kasur Busa Berkualitas** — kasur busa high density (Royal Grand Exclusive) anti kempes, mendukung tulang belakang. Cocok untuk tamu menginap, kos, kontrakan, hotel, homestay, acara.
 2. **Extra Bed Hotel/Apartemen** — solusi kasur tambahan untuk hotel, apartemen, villa, dan penginapan.
 3. **Paket Kasur Lengkap** — kasur + sprei + bantal + selimut, siap pakai langsung.
-4. **Sewa Perlengkapan Acara & Penunjang** — selimut, bantal, guling, kipas angin, air cooler, TV 32", karpet merah, permadani, dan paket perlengkapan event (via subdomain karpet / permadani / acara).
+4. **Sewa Perlengkapan Acara & Penunjang** — selimut, bantal, guling, kipas angin, air cooler, TV 32", karpet merah, permadani, dan paket perlengkapan event (melalui halaman layanan karpet, permadani, dan acara di santiliving.com).
 
 ## Harga Sewa (Update Terbaru)
 
@@ -98,14 +98,14 @@ Kasur lipat tersedia ukuran Single (90x200), Single Super (100x200), dan Double 
 
 - [Sewa Bantal Jogja](https://santiliving.com/id/sewa-bantal-jogja)
 - [Sewa Air Cooler](https://santiliving.com/id/sewa-cooling)
-- [Sewa Karpet Jogja (Subdomain karpet)](https://karpet.santiliving.com/id/sewa-karpet-jogja)
-- [Sewa Karpet Jogja (Subdomain karpet)](https://karpet.santiliving.com/id/sewa-karpet-merah-jogja)
-- [Sewa Permadani Jogja (Subdomain permadani)](https://permadani.santiliving.com/id/sewa-karpet-permadani-jogja)
+- [Sewa Karpet Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-jogja)
+- [Sewa Karpet Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-merah-jogja)
+- [Sewa Permadani Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-permadani-jogja)
 - [Sewa Kasur Bulanan](https://santiliving.com/id/sewa-kasur-bulanan)
 - [Sewa Kasur Lipat](https://santiliving.com/id/sewa-kasur-lipat)
 - [Sewa Kasur Terdekat](https://santiliving.com/id/sewa-kasur-terdekat)
 - [Sewa Kipas Angin](https://santiliving.com/id/sewa-kipas-angin)
-- [Sewa Perlengkapan Event (Subdomain acara)](https://acara.santiliving.com/id/sewa-perlengkapan-event)
+- [Sewa Perlengkapan Event (Domain utama)](https://santiliving.com/id/sewa-perlengkapan-event)
 - [Sewa Selimut Jogja](https://santiliving.com/id/sewa-selimut-jogja)
 - [Sewa TV Jogja](https://santiliving.com/id/sewa-tv)
 
@@ -721,8 +721,8 @@ Struktur URL:
 - `https://santiliving.com/` — Beranda (ID default), `https://santiliving.com/en` — English
 - `https://santiliving.com/id/<route>` / `https://santiliving.com/en/<route>` — landing pages (harga-sewa-kasur, sewa-kasur-bulanan, sewa-kasur-lipat, sewa-kasur-terdekat, sewa-selimut-jogja, sewa-bantal-jogja, sewa-kipas-angin, sewa-cooling, sewa-tv)
 - `https://santiliving.com/id/artikel/<slug>` / `en/artikel/<slug>` — 575 artikel per bahasa
-- `https://karpet.santiliving.com/id/sewa-karpet-jogja` — sewa karpet (subdomain karpet)
-- `https://permadani.santiliving.com/id/sewa-karpet-permadani-jogja` — sewa permadani (subdomain permadani)
-- `https://acara.santiliving.com/id/sewa-perlengkapan-event` — sewa perlengkapan event (subdomain acara)
+- `https://santiliving.com/id/sewa-karpet-jogja` — sewa karpet (domain utama)
+- `https://santiliving.com/id/sewa-karpet-permadani-jogja` — sewa permadani (domain utama)
+- `https://santiliving.com/id/sewa-perlengkapan-event` — sewa perlengkapan event (domain utama)
 
 © 2026 Santi Living · Divisi sewa kasur, karpet, permadani, dan perlengkapan acara Santi Mebel Godean.

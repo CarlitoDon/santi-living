@@ -8,7 +8,7 @@ tags: ["sewa permadani emas jogja", "sewa permadani jogja", "karpet permadani ac
 
 Some home events require a warmer and more elegant feel. Because of this, searches for **gold rug rental Jogja** usually come up when organisers want neat-looking floor seating for prayer gatherings, family guests, thanksgiving events, or temporary floor-seating areas.
 
-At Santi Living, colours and patterns like gold are treated as requests that need to be checked, not a guaranteed promise. Start from the [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page, then send the date, size, area photos, and colour preferences via WhatsApp so the admin can check the most feasible options.
+At Santi Living, colours and patterns like gold are treated as requests that need to be checked, not a guaranteed promise. Start from the [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) page, then send the date, size, area photos, and colour preferences via WhatsApp so the admin can check the most feasible options.
 
 ## When Should You Consider a Gold Rug?
 

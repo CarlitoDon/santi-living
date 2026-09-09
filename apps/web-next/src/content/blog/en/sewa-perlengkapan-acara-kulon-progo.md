@@ -34,8 +34,8 @@ If your event plans are still fluid, start with the main requirements first: car
 
 ## Carpet and Equipment Options
 
-- [Jogja event equipment hire](https://acara.santiliving.com/sewa-perlengkapan-event) to coordinate carpets, guest mattresses, TVs, portable coolers, and other event needs.
-- [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
+- [Jogja event equipment hire](https://santiliving.com/en/sewa-perlengkapan-event) to coordinate carpets, guest mattresses, TVs, portable coolers, and other event needs.
+- [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
 - Guest mattresses, pillows, blankets, fans, air coolers, or TVs can be requested if the event runs for a long duration or if guests are staying overnight.
 
 ## Areas and Logistics
@@ -48,11 +48,11 @@ Santi Living does not recommend that organisers guess the price based solely on 
 
 ## Links to Open Before Chatting
 
-> 📖 **[Jogja event equipment hire →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📖 **[Jogja event equipment hire →](https://santiliving.com/en/sewa-perlengkapan-event)**
 
 > 📖 **[Kulon Progo Wates mattress hire →](/artikel/sewa-kasur-kulonprogo-wates-murah)**
 
-> 📖 **[Jogja carpet hire →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet hire →](https://santiliving.com/en/sewa-karpet-jogja)**
 
 ## FAQ
 

@@ -8,7 +8,7 @@ tags: ["kesalahan pesan karpet event", "sewa karpet jogja", "karpet acara", "eve
 
 Banyak masalah karpet acara bukan terjadi karena vendor tidak mau membantu, tetapi karena data awal terlalu minim. Artikel ini membahas **kesalahan pesan karpet event** yang paling sering membuat estimasi berubah, pemasangan terlambat, atau hasil akhir kurang rapi.
 
-Jika Anda belum menyiapkan data dasar, buka dulu [checklist sewa karpet acara Jogja](/artikel/checklist-sewa-karpet-acara-jogja) lalu lanjutkan ke halaman [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+Jika Anda belum menyiapkan data dasar, buka dulu [checklist sewa karpet acara Jogja](/artikel/checklist-sewa-karpet-acara-jogja) lalu lanjutkan ke halaman [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja).
 
 ## 1. Pesan Terlalu Mepet
 
@@ -42,7 +42,7 @@ Solusinya: jelaskan kondisi area dan jenis acara dengan jujur agar admin bisa me
 
 ## Link Terkait
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
 > ✅ **[Checklist sewa karpet acara Jogja →](/artikel/checklist-sewa-karpet-acara-jogja)**
 

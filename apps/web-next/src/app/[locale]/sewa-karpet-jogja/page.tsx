@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { SewaKarpetContent } from './SewaKarpetContent';
+import { localizedSiteUrl, primarySiteUrl } from '@/lib/site-url';
 
-const PAGE_PATH = 'https://karpet.santiliving.com/sewa-karpet-jogja';
+const PAGE_PATH = '/sewa-karpet-jogja';
 
 const PAGE_TITLE =
   'Sewa Karpet & Permadani Jogja — Harga Mulai Rp25.000/Hari | Santi Living';
@@ -88,105 +89,130 @@ const FAQ_SCHEMA = {
   })),
 };
 
-const SERVICE_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'Sewa Karpet & Permadani Jogja',
-  serviceType: 'Karpet Rental',
-  description: PAGE_DESCRIPTION,
-  url: PAGE_PATH,
-  provider: {
-    '@type': 'LocalBusiness',
-    name: 'Santi Living',
-    url: 'https://karpet.santiliving.com',
-    telephone: '+6289519119092',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Jl. Godean KM 10, Sleman',
-      addressLocality: 'Sleman',
-      addressRegion: 'DI Yogyakarta',
-      addressCountry: 'ID',
-    },
-  },
-  areaServed: [
-    { '@type': 'Place', name: 'Sleman' },
-    { '@type': 'Place', name: 'Kota Yogyakarta' },
-    { '@type': 'Place', name: 'Bantul' },
-    { '@type': 'Place', name: 'Kulon Progo' },
-  ],
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Opsi Sewa Karpet Santi Living',
-    itemListElement: PRICING_ITEMS.map((item) => ({
-      '@type': 'Offer',
-      name: item.name,
-      description: item.description,
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        price: item.price,
-        description: `Mulai ${item.price}${item.unit}`,
+function buildServiceSchema(locale: string) {
+  const pageUrl = localizedSiteUrl(PAGE_PATH, locale);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Sewa Karpet & Permadani Jogja',
+    serviceType: 'Karpet Rental',
+    description: PAGE_DESCRIPTION,
+    url: pageUrl,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'Santi Living',
+      url: primarySiteUrl(),
+      telephone: '+6289519119092',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Jl. Godean KM 10, Sleman',
+        addressLocality: 'Sleman',
+        addressRegion: 'DI Yogyakarta',
+        addressCountry: 'ID',
       },
-    })),
-  },
-};
-
-const BREADCRUMB_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Beranda',
-      item: 'https://karpet.santiliving.com',
     },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Sewa Karpet Jogja',
-      item: PAGE_PATH,
+    areaServed: [
+      { '@type': 'Place', name: 'Sleman' },
+      { '@type': 'Place', name: 'Kota Yogyakarta' },
+      { '@type': 'Place', name: 'Bantul' },
+      { '@type': 'Place', name: 'Kulon Progo' },
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Opsi Sewa Karpet Santi Living',
+      itemListElement: PRICING_ITEMS.map((item) => ({
+        '@type': 'Offer',
+        name: item.name,
+        description: item.description,
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          price: item.price,
+          description: `Mulai ${item.price}${item.unit}`,
+        },
+      })),
     },
-  ],
-};
+  };
+}
 
-export const metadata: Metadata = {
-  title: PAGE_TITLE,
-  description: PAGE_DESCRIPTION,
-  keywords: [
-    'sewa karpet jogja',
-    'rental karpet jogja',
-    'sewa karpet permadani jogja',
-    'sewa karpet tahlilan',
-    'sewa karpet pengajian',
-    'sewa karpet aqiqah',
-    'sewa karpet pernikahan jogja',
-    'karpet merah jogja',
-    'sewa karpet arisan',
-    'sewa karpet event jogja',
-  ],
-  alternates: {
-    canonical: PAGE_PATH,
-  },
-  openGraph: {
+function buildBreadcrumbSchema(locale: string) {
+  const pageUrl = localizedSiteUrl(PAGE_PATH, locale);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Beranda',
+        item: localizedSiteUrl('', locale),
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Sewa Karpet Jogja',
+        item: pageUrl,
+      },
+    ],
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const currentLocale = locale === 'en' ? 'en' : 'id';
+  const pageUrl = localizedSiteUrl(PAGE_PATH, currentLocale);
+
+  return {
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
-    url: PAGE_PATH,
-    type: 'website',
-    locale: 'id_ID',
-    siteName: 'Santi Living',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+    keywords: [
+      'sewa karpet jogja',
+      'rental karpet jogja',
+      'sewa karpet permadani jogja',
+      'sewa karpet tahlilan',
+      'sewa karpet pengajian',
+      'sewa karpet aqiqah',
+      'sewa karpet pernikahan jogja',
+      'karpet merah jogja',
+      'sewa karpet arisan',
+      'sewa karpet event jogja',
+    ],
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        id: localizedSiteUrl(PAGE_PATH, 'id'),
+        en: localizedSiteUrl(PAGE_PATH, 'en'),
+      },
+    },
+    openGraph: {
+      title: PAGE_TITLE,
+      description: PAGE_DESCRIPTION,
+      url: pageUrl,
+      type: 'website',
+      locale: currentLocale === 'en' ? 'en_US' : 'id_ID',
+      siteName: 'Santi Living',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: PAGE_TITLE,
+      description: PAGE_DESCRIPTION,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
-export default function SewaKarpetJogjaPage() {
+export default async function SewaKarpetJogjaPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       <script
@@ -195,11 +221,11 @@ export default function SewaKarpetJogjaPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_SCHEMA) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildServiceSchema(locale)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildBreadcrumbSchema(locale)) }}
       />
       <SewaKarpetContent
         faqs={FAQ_ITEMS}

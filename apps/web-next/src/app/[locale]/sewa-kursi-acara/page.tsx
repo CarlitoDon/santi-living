@@ -2,11 +2,15 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { config } from '@/data/config';
+import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 type Locale = 'id' | 'en';
 
+const CHAIR_PAGE_PATH = '/sewa-kursi-acara';
+const CHAIR_HERO_IMAGE = '/images/kursi-acara-jogja-katalog.png';
+const CHAIR_PICKUP_IMAGE = '/images/kursi-acara-jogja-pickup.png';
 const CHAIR_PROFILE_NAME = 'Sewa Kursi Acara Jogja – Santi Living | by Santi Mebel Jogja';
 const CHAIR_PROFILE_URL = 'https://www.google.com/maps?cid=15162930286234518743';
 const CHAIR_WA_TEXT = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.
@@ -18,6 +22,36 @@ Lokasi pengantaran:
 
 Mohon info ketersediaan, ongkir, dan cara sewa.`;
 
+const chairMetadata = {
+  id: {
+    title: 'Sewa Kursi Acara Jogja',
+    description:
+      'Sewa kursi Jogja untuk acara: kursi lipat, kursi susun besi spons, dan kursi plastik. Kirim tanggal, jumlah, dan lokasi untuk cek ketersediaan serta pengantaran via WhatsApp.',
+    keywords: [
+      'sewa kursi jogja',
+      'sewa kursi acara jogja',
+      'sewa kursi yogyakarta',
+      'kursi lipat',
+      'kursi susun besi spons',
+      'kursi plastik',
+    ],
+    imageAlt: 'Katalog kursi acara untuk sewa kursi Jogja',
+  },
+  en: {
+    title: 'Event Chair Rental Yogyakarta',
+    description:
+      'Rent event chairs in Yogyakarta: folding chairs, stackable padded steel chairs, and plastic chairs. Send your date, quantity, and delivery location so we can check availability and logistics via WhatsApp.',
+    keywords: [
+      'event chair rental yogyakarta',
+      'event chair rental jogja',
+      'folding chair rental yogyakarta',
+      'stackable padded steel chair rental',
+      'plastic chair rental yogyakarta',
+    ],
+    imageAlt: 'Event chair rental options in Yogyakarta',
+  },
+} satisfies Record<Locale, { title: string; description: string; keywords: string[]; imageAlt: string }>;
+
 export async function generateMetadata({
   params,
 }: {
@@ -25,20 +59,40 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale: localeParam } = await params;
   const locale: Locale = localeParam === 'en' ? 'en' : 'id';
+  const pageUrl = localizedSiteUrl(CHAIR_PAGE_PATH, locale);
+  const metadata = chairMetadata[locale];
+  const heroImageUrl = primarySiteUrl(CHAIR_HERO_IMAGE);
 
-  return locale === 'en'
-    ? {
-        title: 'Event Chair Rental Yogyakarta',
-        description:
-          'Rent folding chairs, hotel or stackable padded chairs, and plastic chairs for events in Yogyakarta.',
-        alternates: { canonical: `${config.siteUrl}/${locale}/sewa-kursi-acara` },
-      }
-    : {
-        title: 'Sewa Kursi Acara Jogja',
-        description:
-          'Sewa kursi lipat, kursi hotel atau tumpuk besi spons, dan kursi plastik untuk acara di Jogja. Cek ketersediaan dan pengantaran via WhatsApp.',
-        alternates: { canonical: `${config.siteUrl}/${locale}/sewa-kursi-acara` },
-      };
+  return {
+    metadataBase: new URL(PRIMARY_SITE_URL),
+    title: metadata.title,
+    description: metadata.description,
+    keywords: metadata.keywords,
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        id: localizedSiteUrl(CHAIR_PAGE_PATH, 'id'),
+        en: localizedSiteUrl(CHAIR_PAGE_PATH, 'en'),
+        'x-default': localizedSiteUrl(CHAIR_PAGE_PATH, 'id'),
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: locale === 'en' ? 'en_US' : 'id_ID',
+      url: pageUrl,
+      siteName: config.businessName,
+      title: metadata.title,
+      description: metadata.description,
+      images: [{ url: heroImageUrl, width: 1448, height: 1086, alt: metadata.imageAlt }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metadata.title,
+      description: metadata.description,
+      images: [heroImageUrl],
+    },
+    robots: { index: true, follow: true },
+  };
 }
 
 export default async function SewaKursiAcaraPage({
@@ -56,11 +110,11 @@ export default async function SewaKursiAcaraPage({
         eyebrow: 'Event chair rental / Yogyakarta',
         title: 'Event Chair Rental Yogyakarta',
         intro:
-          'Choose the chair style that fits your event. Send us the date, quantity, and delivery location so we can check availability and logistics.',
+          'Looking for event chair rental in Yogyakarta? Choose the chair style that fits your event. Send us the date, quantity, and delivery location so we can check availability and logistics.',
         primaryCta: 'Check availability on WhatsApp',
         phone: '0895-1911-9092',
         catalogEyebrow: 'Chair options',
-        catalogTitle: 'Three practical choices for an event.',
+        catalogTitle: 'Chair options for events in Yogyakarta.',
         catalogIntro: 'The final recommendation follows your event format, quantity, date, and venue access.',
         detailsEyebrow: 'Before you chat',
         detailsTitle: 'Three details help us answer faster.',
@@ -78,11 +132,11 @@ export default async function SewaKursiAcaraPage({
         eyebrow: 'Sewa kursi acara / Yogyakarta',
         title: 'Sewa Kursi Acara Jogja',
         intro:
-          'Pilih jenis kursi yang paling sesuai. Kirim tanggal, jumlah, dan lokasi pengantaran agar kami bisa cek ketersediaan serta logistiknya.',
+          'Butuh sewa kursi Jogja untuk acara? Pilih jenis kursi yang paling sesuai. Kirim tanggal, jumlah, dan lokasi pengantaran agar kami bisa cek ketersediaan serta logistiknya.',
         primaryCta: 'Cek ketersediaan via WhatsApp',
         phone: '0895-1911-9092',
         catalogEyebrow: 'Pilihan kursi',
-        catalogTitle: 'Tiga pilihan praktis untuk acara.',
+        catalogTitle: 'Pilihan kursi untuk acara di Jogja.',
         catalogIntro: 'Rekomendasi akhirnya mengikuti format acara, jumlah, tanggal, dan akses venue.',
         detailsEyebrow: 'Sebelum chat',
         detailsTitle: 'Tiga informasi membantu kami menjawab lebih cepat.',
@@ -106,8 +160,8 @@ export default async function SewaKursiAcaraPage({
         },
         {
           number: '02',
-          title: 'Hotel / stackable padded chair',
-          description: 'A more formal look for weddings, ceremonies, meetings, and guest seating.',
+          title: 'Stackable padded steel chair',
+          description: 'A stackable chair with a chrome frame and red padded seat and back for guest areas.',
           tone: 'dark',
         },
         {
@@ -126,8 +180,8 @@ export default async function SewaKursiAcaraPage({
         },
         {
           number: '02',
-          title: 'Kursi hotel / tumpuk besi spons',
-          description: 'Tampilan lebih formal untuk pernikahan, seremoni, rapat, dan tempat duduk tamu.',
+          title: 'Kursi susun besi spons',
+          description: 'Kursi susun dengan rangka krom serta dudukan dan sandaran spons merah untuk area tamu.',
           tone: 'dark',
         },
         {
@@ -141,11 +195,13 @@ export default async function SewaKursiAcaraPage({
   const localBusinessSchema = {
     '@context': 'https://schema.org' as const,
     '@type': 'LocalBusiness' as const,
+    '@id': `${PRIMARY_SITE_URL}#santi-living`,
     name: CHAIR_PROFILE_NAME,
     description: isEnglish
-      ? 'Event chair rental in Yogyakarta: folding chairs, hotel or stackable padded chairs, and plastic chairs.'
-      : 'Sewa kursi acara di Jogja: kursi lipat, kursi hotel atau tumpuk besi spons, dan kursi plastik.',
-    url: `${config.siteUrl}/${locale}/sewa-kursi-acara`,
+      ? 'Event chair rental in Yogyakarta: folding chairs, stackable padded steel chairs, and plastic chairs.'
+      : 'Sewa kursi acara di Jogja: kursi lipat, kursi susun besi spons, dan kursi plastik.',
+    url: localizedSiteUrl(CHAIR_PAGE_PATH, locale),
+    image: [primarySiteUrl(CHAIR_HERO_IMAGE), primarySiteUrl(CHAIR_PICKUP_IMAGE)],
     telephone: `+${config.whatsappNumber}`,
     address: {
       '@type': 'PostalAddress' as const,
@@ -169,6 +225,8 @@ export default async function SewaKursiAcaraPage({
         itemOffered: {
           '@type': 'Service' as const,
           name: chair.title,
+          description: chair.description,
+          url: localizedSiteUrl(CHAIR_PAGE_PATH, locale),
         },
       })),
     },
@@ -198,14 +256,14 @@ export default async function SewaKursiAcaraPage({
 
           <div className="chair-hero-media">
             <Image
-              src="/images/kursi-acara-jogja-katalog.png"
-              alt={isEnglish ? 'Folding and hotel chairs prepared for an event' : 'Kursi lipat dan kursi hotel yang disiapkan untuk acara'}
+              src={CHAIR_HERO_IMAGE}
+              alt={isEnglish ? 'Folding and stackable padded steel chairs prepared for an event' : 'Kursi lipat dan kursi susun besi spons yang disiapkan untuk acara'}
               width={1448}
               height={1086}
               priority
               sizes="(max-width: 767px) 92vw, 48vw"
             />
-            <span className="chair-media-tag">Santi Living / event seating</span>
+            <span className="chair-media-tag">{isEnglish ? 'Santi Living / event seating' : 'Santi Living / kursi acara'}</span>
           </div>
         </div>
       </section>
@@ -255,7 +313,7 @@ export default async function SewaKursiAcaraPage({
 
           <figure className="chair-pickup-card">
             <Image
-              src="/images/kursi-acara-jogja-pickup.png"
+              src={CHAIR_PICKUP_IMAGE}
               alt={copy.pickupAlt}
               width={1448}
               height={1086}

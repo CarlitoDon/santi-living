@@ -8,7 +8,7 @@ tags: ["sewa air cooler event jogja", "air cooler acara", "pendingin tenda", "bo
 
 Events in Jogja often use tents, garages, pavilions (pendopo), booths, or semi-outdoor spaces. When guests start crowding in, standard fans are sometimes not enough to make the area feel comfortable. This is where **Jogja event air cooler hire** can be a practical portable cooling option, as long as the organisers understand its limitations: it requires electricity, needs air circulation, and unit availability must be checked according to the date.
 
-If an air cooler is part of a larger event requirement, check out [Jogja event equipment package hire](https://acara.santiliving.com/sewa-perlengkapan-event). For crew rest area needs, see also [Jogja event rest area package](/artikel/paket-rest-area-event-jogja).
+If an air cooler is part of a larger event requirement, check out [Jogja event equipment package hire](https://santiliving.com/en/sewa-perlengkapan-event). For crew rest area needs, see also [Jogja event rest area package](/artikel/paket-rest-area-event-jogja).
 
 If you want to compare air coolers with other event items such as crew mattresses, display TVs, or floor coverings, read [Jogja event equipment hire](/artikel/paket-sewa-perlengkapan-acara-jogja-karpet-kasur-kipas-tv) first to make your priorities clearer.
 
@@ -44,7 +44,7 @@ Santi Living's main service areas are Yogyakarta City, Sleman, Bantul, and Kulon
 
 ## Air Coolers as Part of an Event Package
 
-For events requiring multiple items, air coolers can be included in the checklist. For example, an exhibition booth might use [Jogja event display TV hire](/artikel/sewa-tv-led-pameran-bazar-jogja), floor coverings on request via [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja), and a cooler for the booth staff.
+For events requiring multiple items, air coolers can be included in the checklist. For example, an exhibition booth might use [Jogja event display TV hire](/artikel/sewa-tv-led-pameran-bazar-jogja), floor coverings on request via [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja), and a cooler for the booth staff.
 
 For the needs of large families or holiday guests outside of a formal event context, see also [Jogja Eid guest air cooler rental](/artikel/rental-air-cooler-tamu-lebaran-jogja) for home-use comparison.
 
