@@ -34,4 +34,19 @@ describe('reverse geocode address formatting', () => {
   it('preserves a non-DIY ISO code so classification fails closed', () => {
     expect(resolveProvinceName({ 'ISO3166-2-lvl4': 'ID-JT' })).toBe('ID-JT');
   });
+
+  it('keeps an explicitly typed city when Nominatim also returns a nearby county', () => {
+    const result = formatAddress({
+      road: 'Jalan P. Mangkubumi',
+      suburb: 'Cokrodiningratan',
+      city_district: 'Jetis',
+      city: 'Kota Yogyakarta',
+      county: 'Sleman',
+      state: 'Daerah Istimewa Yogyakarta',
+      postcode: '55241',
+    });
+
+    expect(result.kota).toBe('Kota Yogyakarta');
+    expect(result.fullAddress).toContain('Jetis, Kota Yogyakarta');
+  });
 });
