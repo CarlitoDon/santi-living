@@ -8,7 +8,7 @@ tags: ["checklist sewa karpet acara", "sewa karpet jogja", "karpet event", "perl
 
 Before contacting the vendor, use this **event carpet rental checklist** so the admin team can provide a quicker estimate. Carpets for weddings, prayer gatherings, seminars, exhibitions, and booths cannot be accurately calculated just from the phrase "I need a carpet for an event".
 
-Start with the [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page, then prepare the details below before messaging on WhatsApp.
+Start with the [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page, then prepare the details below before messaging on WhatsApp.
 
 ## Main Checklist
 
@@ -48,9 +48,9 @@ For homes, narrow alleys, or pavilions, check:
 
 ## Related Links
 
-> 📖 **[Jogja carpet rental →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet rental →](https://santiliving.com/en/sewa-karpet-jogja)**
 
-> 📦 **[Jogja event equipment rental →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📦 **[Jogja event equipment rental →](https://santiliving.com/en/sewa-perlengkapan-event)**
 
 > 📖 **[Jogja seminar and exhibition carpet rental →](/artikel/sewa-karpet-seminar-pameran-jogja)**
 

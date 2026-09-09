@@ -8,7 +8,7 @@ tags: ["perlengkapan wedding preparation jogja", "persiapan wedding jogja", "sew
 
 Persiapan wedding biasanya mulai ramai sejak H-1. Keluarga datang dari luar kota, panitia bolak-balik koordinasi, vendor mulai loading, dan rumah atau venue berubah menjadi pusat kegiatan. Agar semua orang tetap nyaman, buat checklist **perlengkapan wedding preparation Jogja** yang fokus pada kebutuhan nyata: tempat istirahat, pendingin, informasi acara, dan alas area yang sesuai layout.
 
-Santi Living membantu kebutuhan rental seperti kasur, bantal, guling, selimut, kipas, air cooler, TV display, serta karpet/permadani by request. Untuk jalur paket event, mulai dari [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living membantu kebutuhan rental seperti kasur, bantal, guling, selimut, kipas, air cooler, TV display, serta karpet/permadani by request. Untuk jalur paket event, mulai dari [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event).
 
 ## Kebutuhan yang Sering Muncul Saat Wedding Preparation
 
@@ -20,7 +20,7 @@ Santi Living membantu kebutuhan rental seperti kasur, bantal, guling, selimut, k
 
 **TV display by request.** TV bisa dipakai untuk slideshow keluarga, rundown internal, atau informasi tamu. Jika fungsinya display acara, lihat [sewa TV display event Jogja](/artikel/sewa-tv-led-pameran-bazar-jogja).
 
-**Karpet atau permadani by request.** Untuk area akad, ruang keluarga, atau jalur tamu, konsultasikan ukuran dan jenis alas. Referensi khusus ada di [sewa karpet pernikahan Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan [sewa permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
+**Karpet atau permadani by request.** Untuk area akad, ruang keluarga, atau jalur tamu, konsultasikan ukuran dan jenis alas. Referensi khusus ada di [sewa karpet pernikahan Jogja](/artikel/sewa-karpet-pernikahan-jogja) dan [sewa permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja).
 
 ## Bagi Kebutuhan Menurut Hari
 
@@ -52,7 +52,7 @@ Ketiga, kirim foto area jika memungkinkan. Foto ruang keluarga, garasi, kamar ko
 
 Santi Living tidak perlu diposisikan sebagai vendor dekorasi wedding. Fokus layanan rental adalah kebutuhan praktis: tidur tambahan, kenyamanan ruang, pendingin portabel, display informasi, dan alas area by request. Dengan posisi ini, ekspektasi lebih jelas dan panitia tidak salah mengira semua kebutuhan wedding dapat dipenuhi dari satu tempat.
 
-Jika kebutuhan alas menjadi prioritas, buka [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) untuk konsultasi ukuran dan jenis.
+Jika kebutuhan alas menjadi prioritas, buka [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) untuk konsultasi ukuran dan jenis.
 
 ## FAQ Perlengkapan Wedding Preparation Jogja
 

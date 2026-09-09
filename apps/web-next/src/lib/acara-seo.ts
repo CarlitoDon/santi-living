@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
+import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
-export const ACARA_SITE_URL = 'https://acara.santiliving.com';
+// Compatibility export for callers that used the old specialist host.
+export const ACARA_SITE_URL = PRIMARY_SITE_URL;
 const ACARA_PATH = '/sewa-perlengkapan-event';
-const DEFAULT_IMAGE = `${ACARA_SITE_URL}/logo.png`;
+const DEFAULT_IMAGE = primarySiteUrl('/logo.png');
 
 const SERVICE_AREAS = ['Sleman', 'Kota Yogyakarta', 'Bantul', 'Kulon Progo'];
 
-export function buildAcaraMetadata(config: LandingPageConfig): Metadata {
-  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
+function safeLocale(locale: string | undefined): 'id' | 'en' {
+  return locale === 'en' ? 'en' : 'id';
+}
+
+export function buildAcaraMetadata(config: LandingPageConfig, locale = 'id'): Metadata {
+  const currentLocale = safeLocale(locale);
+  const url = localizedSiteUrl(ACARA_PATH, currentLocale);
 
   return {
     title: config.meta.title,
@@ -23,13 +30,17 @@ export function buildAcaraMetadata(config: LandingPageConfig): Metadata {
     ],
     alternates: {
       canonical: url,
+      languages: {
+        id: localizedSiteUrl(ACARA_PATH, 'id'),
+        en: localizedSiteUrl(ACARA_PATH, 'en'),
+      },
     },
     openGraph: {
       title: config.meta.title,
       description: config.meta.description,
       url,
       type: 'website',
-      locale: 'id_ID',
+      locale: currentLocale === 'en' ? 'en_US' : 'id_ID',
       siteName: 'Santi Living',
       images: [
         {
@@ -53,8 +64,9 @@ export function buildAcaraMetadata(config: LandingPageConfig): Metadata {
   };
 }
 
-export function buildAcaraServiceSchema(config: LandingPageConfig) {
-  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
+export function buildAcaraServiceSchema(config: LandingPageConfig, locale = 'id') {
+  const currentLocale = safeLocale(locale);
+  const url = localizedSiteUrl(ACARA_PATH, currentLocale);
 
   return {
     '@context': 'https://schema.org',
@@ -67,8 +79,8 @@ export function buildAcaraServiceSchema(config: LandingPageConfig) {
     provider: {
       '@type': 'LocalBusiness',
       name: 'Santi Living',
-      url: ACARA_SITE_URL,
-      telephone: '+628****9092',
+      url: primarySiteUrl(),
+      telephone: '+6289519119092',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Kec. Godean',
@@ -87,9 +99,9 @@ export function buildAcaraServiceSchema(config: LandingPageConfig) {
       serviceUrl: url,
       servicePhone: {
         '@type': 'ContactPoint',
-        telephone: '+628****9092',
+        telephone: '+6289519119092',
         contactType: 'customer service',
-        availableLanguage: 'Indonesian',
+        availableLanguage: currentLocale === 'en' ? 'English' : 'Indonesian',
       },
     },
     hasOfferCatalog: {
@@ -109,8 +121,9 @@ export function buildAcaraServiceSchema(config: LandingPageConfig) {
   };
 }
 
-export function buildAcaraItemListSchema(config: LandingPageConfig) {
-  const url = `${ACARA_SITE_URL}${ACARA_PATH}`;
+export function buildAcaraItemListSchema(config: LandingPageConfig, locale = 'id') {
+  const currentLocale = safeLocale(locale);
+  const url = localizedSiteUrl(ACARA_PATH, currentLocale);
   const items = config.priceCards ?? [];
 
   return {
@@ -133,7 +146,7 @@ export function buildAcaraItemListSchema(config: LandingPageConfig) {
         provider: {
           '@type': 'LocalBusiness',
           name: 'Santi Living',
-          url: ACARA_SITE_URL,
+          url: primarySiteUrl(),
         },
       },
     })),
@@ -155,7 +168,8 @@ export function buildAcaraFaqSchema(config: LandingPageConfig) {
   };
 }
 
-export function buildAcaraBreadcrumbSchema() {
+export function buildAcaraBreadcrumbSchema(locale = 'id') {
+  const currentLocale = safeLocale(locale);
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -164,13 +178,13 @@ export function buildAcaraBreadcrumbSchema() {
         '@type': 'ListItem',
         position: 1,
         name: 'Beranda',
-        item: ACARA_SITE_URL,
+        item: localizedSiteUrl('', currentLocale),
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Sewa Perlengkapan Event Jogja',
-        item: `${ACARA_SITE_URL}${ACARA_PATH}`,
+        item: localizedSiteUrl(ACARA_PATH, currentLocale),
       },
     ],
   };

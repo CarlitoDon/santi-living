@@ -8,7 +8,7 @@ tags: ["sewa kasur gathering", "acara keluarga jogja", "sewa kasur villa", "rent
 
 Apakah Anda sedang merencanakan gathering keluarga, arisan, atau family reunion di Jogja? Salah satu tantangan terbesar saat mengadakan acara di villa atau rumah adalah memastikan semua tamu mendapatkan tempat tidur yang nyaman. **Sewa kasur gathering event Jogja** dari Santi Living hadir sebagai solusi praktis dan terjangkau untuk kebutuhan akomodasi acara Anda.
 
-Jika gathering keluarga membutuhkan kasur tamu, pendingin, TV, dan alas lesehan dalam satu koordinasi, mulai dari [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event); untuk area duduk keluarga, lihat juga [sewa permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
+Jika gathering keluarga membutuhkan kasur tamu, pendingin, TV, dan alas lesehan dalam satu koordinasi, mulai dari [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event); untuk area duduk keluarga, lihat juga [sewa permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja).
 
 Dengan menyewa kasur berkualitas, Anda tidak perlu khawatir tamu tidur di lantai atau kekurangan tempat tidur. Layanan **sewa kasur gathering event Jogja** memungkinkan Anda menyiapkan akomodasi yang nyaman untuk puluhan orang tanpa harus membeli kasur baru.
 
@@ -142,4 +142,4 @@ Jangan tunggu lagi — pesan sekarang dan pastikan acara gathering Anda berkesan
 
 ## Tambahan Karpet untuk Gathering
 
-Untuk gathering keluarga yang memakai ruang tamu, aula kecil, villa, atau area lesehan, karpet bisa membantu membuat area berkumpul lebih rapi. Baca panduan [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) atau [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) jika tamu akan duduk lesehan.
+Untuk gathering keluarga yang memakai ruang tamu, aula kecil, villa, atau area lesehan, karpet bisa membantu membuat area berkumpul lebih rapi. Baca panduan [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) atau [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) jika tamu akan duduk lesehan.

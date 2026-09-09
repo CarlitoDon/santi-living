@@ -34,8 +34,8 @@ Jika acara Anda masih berubah-ubah, mulai dari kebutuhan utama dulu: karpet untu
 
 ## Pilihan Karpet dan Perlengkapan
 
-- [Sewa perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) untuk koordinasi karpet, kasur tamu, TV, pendingin portabel, dan kebutuhan acara lain.
-- [Sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
+- [Sewa perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event) untuk koordinasi karpet, kasur tamu, TV, pendingin portabel, dan kebutuhan acara lain.
+- [Sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
 - Kasur tamu, bantal, selimut, kipas, air cooler, atau TV bisa ditanyakan jika acara berlangsung lama atau ada tamu menginap.
 
 ## Area dan Logistik
@@ -48,11 +48,11 @@ Santi Living tidak menyarankan panitia menebak harga hanya dari jumlah tamu. Est
 
 ## Link yang Bisa Dibuka Sebelum Chat
 
-> 📖 **[Sewa perlengkapan event Jogja →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📖 **[Sewa perlengkapan event Jogja →](https://santiliving.com/id/sewa-perlengkapan-event)**
 
 > 📖 **[Sewa kasur Kulon Progo Wates →](/artikel/sewa-kasur-kulonprogo-wates-murah)**
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
 ## FAQ
 

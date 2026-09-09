@@ -8,7 +8,7 @@ tags: ["karpet musala kecil acara rumah jogja", "sewa karpet lesehan jogja", "se
 
 Acara rumah seperti pengajian RT, syukuran, tahlilan, atau doa bersama sering membutuhkan area kecil yang bersih dan rapi. Untuk kebutuhan seperti ini, **karpet musala kecil acara rumah Jogja** bisa membantu menyiapkan alas duduk atau area ibadah sementara tanpa harus membeli karpet besar.
 
-Santi Living membantu pelanggan mengecek [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) berdasarkan ukuran ruang, tanggal acara, foto area, dan kebutuhan cleaning. Ketersediaan jenis karpet tetap perlu dikonfirmasi via WhatsApp.
+Santi Living membantu pelanggan mengecek [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) berdasarkan ukuran ruang, tanggal acara, foto area, dan kebutuhan cleaning. Ketersediaan jenis karpet tetap perlu dikonfirmasi via WhatsApp.
 
 ## Kapan Karpet Musala Kecil Dibutuhkan?
 

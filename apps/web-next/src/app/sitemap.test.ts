@@ -46,4 +46,23 @@ describe('sitemap cache stability', () => {
     const article = first.find((entry) => entry.url.endsWith('/id/artikel/panduan-notion'));
     expect(article?.lastModified).toEqual(new Date('2026-08-10'));
   });
+
+  it('uses only primary-domain URLs and locale alternates', async () => {
+    const entries = await sitemap();
+    const urls = entries.flatMap((entry) => [
+      entry.url,
+      ...(entry.alternates?.languages
+        ? Object.values(entry.alternates.languages)
+        : []),
+    ]).filter((url): url is string => typeof url === 'string');
+
+    expect(urls.every((url) => url.startsWith('https://santiliving.com'))).toBe(true);
+    expect(urls.some((url) => /(?:karpet|permadani|acara|kipas-angin)\.santiliving\.com/.test(url))).toBe(false);
+
+    const chair = entries.find((entry) => entry.url === 'https://santiliving.com/id/sewa-kursi-acara');
+    expect(chair?.alternates?.languages).toEqual({
+      id: 'https://santiliving.com/id/sewa-kursi-acara',
+      en: 'https://santiliving.com/en/sewa-kursi-acara',
+    });
+  });
 });

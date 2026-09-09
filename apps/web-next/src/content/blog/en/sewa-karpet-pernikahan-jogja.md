@@ -8,7 +8,7 @@ tags: ["sewa karpet pernikahan jogja", "sewa karpet merah jogja", "runner karpet
 
 Weddings in Jogja often involve multiple activity areas: guest entrances, the akad area, family rooms, reception tables, small stages, and family rest areas. Because of this, **wedding carpet rental in Jogja** should start with the layout, not just the choice of colours.
 
-For formal pathways, start with the [red carpet rental Jogja](https://karpet.santiliving.com/sewa-karpet-merah-jogja) page. For overall event needs, also see the main [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) page. If the organisers need more than just carpets, the [Jogja event equipment rental](https://acara.santiliving.com/sewa-perlengkapan-event) page can be a starting point to combine carpets, guest mattresses, fans, air coolers, or TV displays as required.
+For formal pathways, start with the [red carpet rental Jogja](https://santiliving.com/en/sewa-karpet-merah-jogja) page. For overall event needs, also see the main [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) page. If the organisers need more than just carpets, the [Jogja event equipment rental](https://santiliving.com/en/sewa-perlengkapan-event) page can be a starting point to combine carpets, guest mattresses, fans, air coolers, or TV displays as required.
 
 ## Wedding Areas That Usually Require Carpets
 
@@ -38,7 +38,7 @@ Although often sought after as wedding carpets, red carpet runners are also rele
 - Family photo areas after the ceremony.
 - Guest entrances at small venues or homestays.
 
-For needs such as grand openings or office events, please clarify whether the carpet is for an entrance pathway, a small stage, or a photo spot. If the event also requires TV displays, fans, coolers, or crew mattresses, check the package options at [Jogja event equipment rental](https://acara.santiliving.com/sewa-perlengkapan-event) so that logistics coordination is not fragmented.
+For needs such as grand openings or office events, please clarify whether the carpet is for an entrance pathway, a small stage, or a photo spot. If the event also requires TV displays, fans, coolers, or crew mattresses, check the package options at [Jogja event equipment rental](https://santiliving.com/en/sewa-perlengkapan-event) so that logistics coordination is not fragmented.
 
 ## Checklist Before Renting a Wedding Carpet
 

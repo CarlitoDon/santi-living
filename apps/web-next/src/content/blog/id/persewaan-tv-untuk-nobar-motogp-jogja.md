@@ -8,7 +8,7 @@ tags: ["sewa tv nobar", "nobar motogp", "nobar timnas", "persewaan tv jogja"]
 
 Yogyakarta adalah kota dengan komunitas hobi yang sangat kuat, mulai dari komunitas pecinta otomotif (*bikers*) hingga *fans club* klub sepak bola raksasa. Saat perhelatan besar seperti **MotoGP**, final Piala Dunia, atau pertandingan penting **Timnas Indonesia** berlangsung, budaya *Nonton Bareng (Nobar)* adalah kegiatan wajib.
 
-Untuk nobar yang juga memerlukan cooling fan, kasur istirahat, atau alas area, cek [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) agar kebutuhan listrik, durasi, rute, dan item by-request tidak tercampur.
+Untuk nobar yang juga memerlukan cooling fan, kasur istirahat, atau alas area, cek [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event) agar kebutuhan listrik, durasi, rute, dan item by-request tidak tercampur.
 
 Namun, tidak semua *basecamp* komunitas atau rumah anggota memiliki layar TV yang cukup besar dan memadai untuk ditonton bersama oleh belasan orang. Layar laptop jelas bukan pilihan. Di momen-momen penuh adrenalin ini, **persewaan TV untuk nobar di Jogja** menjadi pencarian yang paling sibuk.
 
@@ -27,7 +27,7 @@ Jadikan momen kemenangan jagoan Anda lebih berkesan dengan visual yang maksimal.
 
 ## Tambahan Karpet untuk Area Nobar
 
-Jika nobar dilakukan lesehan di basecamp, garasi, atau ruang komunitas, pertimbangkan juga [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) atau cek opsi umum [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) agar area duduk lebih rapi.
+Jika nobar dilakukan lesehan di basecamp, garasi, atau ruang komunitas, pertimbangkan juga [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja) atau cek opsi umum [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) agar area duduk lebih rapi.
 
 
 ---

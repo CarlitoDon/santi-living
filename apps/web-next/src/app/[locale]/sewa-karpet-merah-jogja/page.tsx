@@ -5,9 +5,17 @@ import { buildKarpetMetadata } from '@/lib/karpet-seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const baseMeta = buildKarpetMetadata(sewaKarpetMerah, '/sewa-karpet-merah-jogja');
+  const baseMeta = buildKarpetMetadata(sewaKarpetMerah, '/sewa-karpet-merah-jogja', locale);
   if (locale === 'en' && sewaKarpetMerah.en?.meta?.title) {
-    return { ...baseMeta, title: sewaKarpetMerah.en.meta.title, description: sewaKarpetMerah.en.meta.description };
+    const title = sewaKarpetMerah.en.meta.title;
+    const description = sewaKarpetMerah.en.meta.description;
+    return {
+      ...baseMeta,
+      title,
+      description,
+      openGraph: { ...baseMeta.openGraph, title, description },
+      twitter: { ...baseMeta.twitter, title, description },
+    };
   }
   return baseMeta;
 }

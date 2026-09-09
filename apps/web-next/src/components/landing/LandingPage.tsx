@@ -8,6 +8,7 @@ import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { useLocale, useT } from '@/contexts/locale';
 import Image from 'next/image';
 import Link from 'next/link';
+import { localeHref } from '@/utils/localeHref';
 
 interface LandingPageProps {
   config: LandingPageConfig;
@@ -54,6 +55,34 @@ function le<T>(val: T, enVal: T | undefined, locale: string): T {
   return locale === 'en' && enVal !== undefined ? enVal : val;
 }
 
+const INTERNAL_HOSTS = new Set([
+  'santiliving.com',
+  'www.santiliving.com',
+  'acara.santiliving.com',
+  'karpet.santiliving.com',
+  'permadani.santiliving.com',
+  'kipas-angin.santiliving.com',
+]);
+
+function localizeInternalHref(href: string, locale: string): string {
+  try {
+    const url = new URL(href);
+    if (INTERNAL_HOSTS.has(url.hostname.toLowerCase())) {
+      return localeHref(`${url.pathname}${url.search}${url.hash}`, locale);
+    }
+  } catch {
+    // Relative paths are handled by localeHref below.
+  }
+
+  return localeHref(href, locale);
+}
+
+function localizeInternalHtmlLinks(html: string, locale: string): string {
+  return html.replace(/href=(['"])(.*?)\1/g, (_match, quote: string, href: string) => (
+    `href=${quote}${localizeInternalHref(href, locale)}${quote}`
+  ));
+}
+
 export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const { locale } = useLocale();
   const t = useT();
@@ -75,11 +104,12 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
     : isEventPage
       ? t('landing.event_estimate')
       : t('landing.prices');
-  const priceGuideHref = cfg.priceSection?.linkHref || (isKarpetPage
+  const rawPriceGuideHref = cfg.priceSection?.linkHref || (isKarpetPage
     ? 'https://santiliving.com/artikel/harga-sewa-karpet-jogja-2026'
     : isEventPage
-      ? (cfg.cta.secondaryHref || 'https://karpet.santiliving.com/sewa-karpet-jogja')
+      ? (cfg.cta.secondaryHref || '/sewa-karpet-jogja')
       : '/harga-sewa-kasur');
+  const priceGuideHref = localizeInternalHref(rawPriceGuideHref, locale);
   const priceGuideLabel = le(cfg.priceSection?.linkLabel, en?.priceSection?.linkLabel, locale) || defaultPriceGuideLabel;
   const priceSectionTitle = le(cfg.priceSection?.title, en?.priceSection?.title, locale) || defaultPriceSectionTitle;
 
@@ -152,7 +182,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
                 if (a.type === 'link') {
                   return (
                     <Link
-                      href={a.href || '/#calculator'}
+                      href={localizeInternalHref(a.href || '/#calculator', locale)}
                       key={i}
                       className="btn btn-lg motion-interactive motion-lift h-14 w-full justify-center rounded-lg bg-white px-8 py-3.5 text-center font-bold text-slate-900 shadow sm:w-auto"
                     >
@@ -268,7 +298,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
         <section key={i} className={`py-12 md:py-16 ${i % 2 === 0 ? 'bg-slate-50' : 'bg-white'}`} data-reveal="up">
           <div className="container">
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">{section.title}</h2>
-            <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: section.content! }} />
+            <div className="prose prose-slate max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: localizeInternalHtmlLinks(section.content!, locale) }} />
           </div>
         </section>
       ))}
@@ -290,7 +320,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
             <Link 
-              href={cfg.cta.secondaryHref || '/#calculator'} 
+              href={localizeInternalHref(cfg.cta.secondaryHref || '/#calculator', locale)}
               className="motion-interactive motion-lift bg-white text-slate-900 w-full sm:w-auto px-8 py-3.5 rounded-lg font-bold hover:bg-slate-50 text-center inline-flex justify-center items-center h-14"
             >
               {le(cfg.cta.secondaryLabel, en?.cta?.secondaryLabel, locale) || t('landing.calculate_cost')}

@@ -8,7 +8,7 @@ tags: ["sewa permadani pengajian jogja", "sewa karpet tahlilan jogja", "sewa kar
 
 Pengajian (prayer gatherings), tahlilan (memorial prayers), thanksgiving events, and family gatherings at home often require a neat floor seating area. If your home carpets are not enough, **renting rugs for pengajian in Jogja** or hiring tahlilan carpets can be a practical solution without having to buy new floor coverings that might not be used regularly.
 
-For needs like this, the [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page is the most relevant starting point. The Santi Living admin will help check the area size, event date, pattern options by request, cleaning, and delivery route before providing an estimate.
+For needs like this, the [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) page is the most relevant starting point. The Santi Living admin will help check the area size, event date, pattern options by request, cleaning, and delivery route before providing an estimate.
 
 ## When Does a Pengajian Require Extra Rugs?
 
@@ -19,7 +19,7 @@ Rugs help make the seating area feel warmer and more organised, especially when 
 - Housewarmings, aqiqah, or neighbourhood (RT) events that need clean floor coverings.
 - Seating areas for the elderly or children so they do not sit directly on the floor.
 
-If you are still unsure about choosing between a red carpet and a rug, read also [red carpet vs rug for events](/artikel/karpet-merah-vs-karpet-permadani-acara). For entrance paths or formal processions, [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) can be combined with floor rugs.
+If you are still unsure about choosing between a red carpet and a rug, read also [red carpet vs rug for events](/artikel/karpet-merah-vs-karpet-permadani-acara). For entrance paths or formal processions, [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) can be combined with floor rugs.
 
 ## Tahlilan Carpet Hire Jogja: Information to Prepare
 
@@ -44,7 +44,7 @@ A safe initial formula is to calculate the requirement based on the number of gu
 
 These figures are just a starting point, not exact measurements. A long room, pillars, buffet tables, or areas used for family foot traffic may require a different layout. Therefore, photos of the room and the length x width measurements still need to be sent via WhatsApp so the admin can give a more sensible recommendation.
 
-To understand the cost factors before chatting, read [Jogja carpet rental prices 2026](/artikel/harga-sewa-karpet-jogja-2026). If your event needs expand to mattresses, fans, or TVs, also see the [Jogja event equipment rental packages](https://acara.santiliving.com/sewa-perlengkapan-event).
+To understand the cost factors before chatting, read [Jogja carpet rental prices 2026](/artikel/harga-sewa-karpet-jogja-2026). If your event needs expand to mattresses, fans, or TVs, also see the [Jogja event equipment rental packages](https://santiliving.com/en/sewa-perlengkapan-event).
 
 ## Jogja Floor Carpet Rental for Home Events
 
@@ -97,7 +97,7 @@ Send your event details via WhatsApp: date, location, number of guests, area siz
 
 📱 **WhatsApp: [0895-1911-9092](https://wa.me/6289519119092)**
 
-> For your **Jogja pengajian rug rental**, tahlilan carpet, or home event floor carpet needs, start from the [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) page and then send your event details for a more accurate estimate.
+> For your **Jogja pengajian rug rental**, tahlilan carpet, or home event floor carpet needs, start from the [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) page and then send your event details for a more accurate estimate.
 
 ---
 

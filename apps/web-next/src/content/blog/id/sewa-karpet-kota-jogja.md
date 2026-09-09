@@ -34,7 +34,7 @@ Jika acara Anda masih berubah-ubah, mulai dari kebutuhan utama dulu: karpet untu
 
 ## Pilihan Karpet dan Perlengkapan
 
-- [Sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
+- [Sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja) untuk jalur tamu, area booth, panggung kecil, dan alas acara umum.
 - Kasur tamu, bantal, selimut, kipas, air cooler, atau TV bisa ditanyakan jika acara berlangsung lama atau ada tamu menginap.
 
 ## Area dan Logistik
@@ -47,9 +47,9 @@ Santi Living tidak menyarankan panitia menebak harga hanya dari jumlah tamu. Est
 
 ## Link yang Bisa Dibuka Sebelum Chat
 
-> 📖 **[Sewa karpet Jogja →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Sewa karpet Jogja →](https://santiliving.com/id/sewa-karpet-jogja)**
 
-> 📖 **[Sewa karpet merah Jogja →](https://karpet.santiliving.com/sewa-karpet-merah-jogja)**
+> 📖 **[Sewa karpet merah Jogja →](https://santiliving.com/id/sewa-karpet-merah-jogja)**
 
 > 📖 **[Sewa kasur Danurejan Jetis Kota Jogja →](/artikel/sewa-kasur-danurejan-jetis-kota-jogja)**
 

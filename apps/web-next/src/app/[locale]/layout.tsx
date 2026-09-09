@@ -17,6 +17,7 @@ import { MotionController } from '@/components/ui/MotionController';
 import { Providers } from './providers';
 import { getDictionary } from '@/locales/dictionary';
 import type { Locale } from '@/locales/dictionary';
+import { localizedSiteUrl, primarySiteUrl } from '@/lib/site-url';
 import '@/styles/globals.css';
 import '@/styles/utilities.css';
 import '@/styles/product-picker.css';
@@ -46,23 +47,23 @@ interface LayoutProps {
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   const { locale } = await params;
   const dict = await getDictionary(locale as Locale);
+  const canonicalUrl = localizedSiteUrl('', locale);
   return {
     metadataBase: new URL('https://santiliving.com'),
     title: {
-      default: dict.seo?.home_title ?? 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day | Santi Living',
+      default: dict.seo?.home_title ?? 'Sewa Kasur, Kursi, dan Karpet Jogja | Santi Living',
       template: '%s | Santi Living',
     },
     description:
       dict.seo?.home_desc ??
-      'Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Gratis ongkir area tertentu ✅ Kasur premium & steril ✅ Order via WhatsApp. Santi Living Yogyakarta.',
+      'Santi Living melayani konsultasi sewa kasur, kursi acara, dan karpet di Jogja. Pilih kebutuhan, kirim tanggal, jumlah atau ukuran, dan lokasi untuk cek ketersediaan serta pengantaran via WhatsApp.',
     keywords: [
       'sewa kasur jogja',
       'rental kasur yogyakarta',
-      'sewa kasur murah',
-      'sewa kasur harian',
-      'sewa kasur bulanan',
-      'sewa kasur lipat',
-      'extra bed jogja',
+      'sewa kursi jogja',
+      'sewa kursi acara jogja',
+      'sewa karpet jogja',
+      'sewa karpet permadani jogja',
     ],
     icons: {
       icon: [
@@ -76,19 +77,23 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     openGraph: {
       type: 'website',
       locale: locale === 'en' ? 'en_US' : 'id_ID',
-      url: 'https://santiliving.com',
+      url: canonicalUrl,
       siteName: dict.seo?.site_name ?? 'Santi Living',
       title: dict.seo?.og_title ?? 'Sewa Kasur Jogja Terbaik - Antar Jemput Same Day',
       description:
         dict.seo?.og_desc ??
-        'Sewa kasur bersih di Jogja mulai Rp25.000/hari. ✅ Antar jemput same day ✅ Kasur premium & steril.',
+        'Santi Living melayani konsultasi sewa kasur, kursi acara, dan karpet di Jogja. Cek ketersediaan serta pengantaran via WhatsApp.',
     },
     robots: {
       index: true,
       follow: true,
     },
     alternates: {
-      canonical: 'https://santiliving.com',
+      canonical: canonicalUrl,
+      languages: {
+        id: localizedSiteUrl('', 'id'),
+        en: localizedSiteUrl('', 'en'),
+      },
     },
   };
 }
@@ -104,12 +109,12 @@ export default async function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: dict.seo?.site_name ?? 'Santi Living',
-    url: 'https://santiliving.com',
+    url: primarySiteUrl(),
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://santiliving.com/artikel?q={search_term_string}',
+        urlTemplate: localizedSiteUrl('/artikel', locale) + '?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -119,8 +124,8 @@ export default async function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Santi Living',
-    url: 'https://santiliving.com',
-    logo: 'https://santiliving.com/logo.png',
+    url: primarySiteUrl(),
+    logo: primarySiteUrl('/logo.png'),
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+62-895-1911-9092',

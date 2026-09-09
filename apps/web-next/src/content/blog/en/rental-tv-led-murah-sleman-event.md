@@ -8,7 +8,7 @@ tags: ["rental tv sleman", "sewa tv murah", "event jogja", "presentasi"]
 
 **Sleman** Regency is a busy educational and business hub in Yogyakarta. Every day, there are hundreds of *events*, ranging from MSME bazaars in shopping centres, education fairs on university campuses (UGM, UNY, UPN), to business meetings in *co-working spaces*.
 
-For events that require a TV display as well as cooling, rest area mattresses, or carpets on request, use the [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event) route so that the rundown, electricity, venue access, and delivery/collection schedule are calculated together.
+For events that require a TV display as well as cooling, rest area mattresses, or carpets on request, use the [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event) route so that the rundown, electricity, venue access, and delivery/collection schedule are calculated together.
 
 Often, event organisers need an adequate *display* screen to show promotional videos or presentation materials. Bringing your own TV from home carries a high risk of damage. This is where the **Sleman LED TV rental** service from Santi Living becomes the most sought-after solution.
 
@@ -29,7 +29,7 @@ Don't let your exhibition *stand* or presentation look unprofessional due to a l
 
 ## Additional Carpets for Sleman Events
 
-For campus events, exhibitions, and presentations in Sleman, carpets can help tidy up booths, small stages, or registration areas. See [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) and the guide to [seminar and exhibition carpet rental](/artikel/sewa-karpet-seminar-pameran-jogja).
+For campus events, exhibitions, and presentations in Sleman, carpets can help tidy up booths, small stages, or registration areas. See [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) and the guide to [seminar and exhibition carpet rental](/artikel/sewa-karpet-seminar-pameran-jogja).
 
 ---
 

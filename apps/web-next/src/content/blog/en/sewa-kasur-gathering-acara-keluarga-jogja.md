@@ -8,7 +8,7 @@ tags: ["sewa kasur gathering", "acara keluarga jogja", "sewa kasur villa", "rent
 
 Are you planning a family gathering, social gathering (arisan), or family reunion in Jogja? One of the biggest challenges when hosting an event in a villa or house is ensuring all guests get a comfortable bed. **Jogja gathering event mattress rental** from Santi Living is here as a practical and affordable solution for your event accommodation needs.
 
-If your family gathering requires guest mattresses, cooling units, TVs, and floor seating mats in one coordinated package, start with [Jogja event equipment package rental](https://acara.santiliving.com/sewa-perlengkapan-event); for family seating areas, see also [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja).
+If your family gathering requires guest mattresses, cooling units, TVs, and floor seating mats in one coordinated package, start with [Jogja event equipment package rental](https://santiliving.com/en/sewa-perlengkapan-event); for family seating areas, see also [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja).
 
 By renting quality mattresses, you don't have to worry about guests sleeping on the floor or running out of beds. The **Jogja gathering event mattress rental** service allows you to set up comfortable accommodation for dozens of people without having to buy new mattresses.
 
@@ -142,6 +142,6 @@ Don't wait any longer — book now and ensure your gathering event is memorable 
 
 ## Additional Carpets for Gatherings
 
-For family gatherings using the living room, a small hall, a villa, or a floor-seating area, carpets can help make the gathering area tidier. Read the guide on [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) or [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) if guests will be sitting on the floor.
+For family gatherings using the living room, a small hall, a villa, or a floor-seating area, carpets can help make the gathering area tidier. Read the guide on [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) or [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) if guests will be sitting on the floor.
 
 ---

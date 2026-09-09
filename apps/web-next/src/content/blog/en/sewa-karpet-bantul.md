@@ -34,8 +34,8 @@ If your event plans are still changing, start with the main requirements first: 
 
 ## Carpet and Equipment Options
 
-- [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
-- [Jogja rug hire](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) for prayer gatherings, tahlilan, thanksgiving events, and floor seating.
+- [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
+- [Jogja rug hire](https://santiliving.com/en/sewa-karpet-permadani-jogja) for prayer gatherings, tahlilan, thanksgiving events, and floor seating.
 - Guest mattresses, pillows, blankets, fans, air coolers, or TVs can be requested if the event lasts for a long time or if guests are staying overnight.
 
 ## Area and Logistics
@@ -48,9 +48,9 @@ Santi Living does not recommend that organisers estimate prices based solely on 
 
 ## Links to View Before Chatting
 
-> 📖 **[Jogja carpet hire →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet hire →](https://santiliving.com/en/sewa-karpet-jogja)**
 
-> 📖 **[Jogja rug hire →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Jogja rug hire →](https://santiliving.com/en/sewa-karpet-permadani-jogja)**
 
 > 📖 **[Nearest Bantul mattress hire →](/artikel/sewa-kasur-bantul-terdekat-antar-jemput)**
 

@@ -8,7 +8,7 @@ tags: ["perlengkapan gathering kantor jogja", "company gathering jogja", "traini
 
 Office gatherings do not always mean large events in hotels. Many companies hold training, retreats, outbound activities, or company events in villas, homestays, large houses, halls, or semi-outdoor venues. To ensure the event runs smoothly, the HR/GA team needs to prepare the right **Jogja office gathering equipment** according to the duration, number of participants, and layout.
 
-Santi Living helps with practical rental needs such as mattresses, bedding, fans, air coolers, TV displays, and floor mats on request. For consultations on broader event packages, start with [Jogja event equipment package hire](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living helps with practical rental needs such as mattresses, bedding, fans, air coolers, TV displays, and floor mats on request. For consultations on broader event packages, start with [Jogja event equipment package hire](https://santiliving.com/en/sewa-perlengkapan-event).
 
 ## Commonly Arising Office Gathering Needs
 
@@ -20,7 +20,7 @@ If the gathering venue is in the Sleman area or requires a simple screen for a s
 
 **Fans or air coolers.** Semi-outdoor venues, small halls, and dining rooms can feel hot when filled with many people. Portable cooling needs to be checked based on power outlets and air circulation.
 
-**Carpets or rugs on request.** If the gathering uses a floor-seating concept, briefings, or discussion rooms, floor coverings can be consulted via [Jogja carpet hire](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Carpets or rugs on request.** If the gathering uses a floor-seating concept, briefings, or discussion rooms, floor coverings can be consulted via [Jogja carpet hire](https://santiliving.com/en/sewa-karpet-jogja).
 
 ## Checklist for HR, GA, or Internal Committees
 

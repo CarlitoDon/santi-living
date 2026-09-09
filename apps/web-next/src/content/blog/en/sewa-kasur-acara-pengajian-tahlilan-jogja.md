@@ -54,7 +54,7 @@ Book 2 days in advance to ensure availability. Please include the number of matt
 
 ## Additional Carpets for Pengajian and Tahlilan
 
-For a neater guest seating area, read our guide on [carpet rental for pengajian and tahlilan in Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) or check out [rug rental in Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) directly.
+For a neater guest seating area, read our guide on [carpet rental for pengajian and tahlilan in Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja) or check out [rug rental in Jogja](https://santiliving.com/en/sewa-karpet-permadani-jogja) directly.
 
 ---
 

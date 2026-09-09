@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { config } from '@/data/config';
-import { products } from '@/data/products';
 import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
 import { ServiceCatalog } from '@/components/home/ServiceCatalog';
 import { CartBar } from '@/components/home/CartBar';
@@ -11,6 +10,7 @@ import { FeatureCard } from '@/components/ui/FeatureCard';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { generateFAQSchema } from '@/utils/seo';
 import { getStoreMapEmbedUrl } from '@/lib/store-location';
+import { localizedSiteUrl, primarySiteUrl } from '@/lib/site-url';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 
 const HOME_SERVICE_INQUIRY = [
@@ -128,7 +128,7 @@ export default async function HomePage({
     '@type': 'LocalBusiness' as const,
     name: 'Santi Living',
     description: dict.seo.home_desc,
-    url: 'https://santiliving.com',
+    url: primarySiteUrl(),
     telephone: `+${config.whatsappNumber}`,
     address: {
       '@type': 'PostalAddress' as const,
@@ -144,42 +144,34 @@ export default async function HomePage({
       longitude: config.storeLocation.lng,
     },
     areaServed: serviceAreas.map((area) => ({ '@type': 'City' as const, name: area })),
-    aggregateRating: {
-      '@type': 'AggregateRating' as const,
-      ratingValue: 5.0,
-      reviewCount: 69,
-      bestRating: 5,
-    },
   };
 
-  const productSchema = {
+  const serviceCatalogSchema = {
     '@context': 'https://schema.org' as const,
-    '@type': 'Product' as const,
-    name: locale === 'en' ? 'Santi Living Jogja Mattress Rental' : 'Sewa Kasur Busa Jogja Santi Living',
-    description: dict.seo.home_desc,
-    image: 'https://santiliving.com/logo.png',
-    brand: { '@type': 'Brand' as const, name: 'Santi Living' },
-    offers: {
-      '@type': 'AggregateOffer' as const,
-      lowPrice: 30000,
-      highPrice: 70000,
-      offerCount: products.mattressPackages.length + products.mattressOnly.length,
-      priceCurrency: 'IDR',
-      availability: 'https://schema.org/InStock' as const,
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating' as const,
-      ratingValue: 5.0,
-      reviewCount: 69,
-      bestRating: 5,
-    },
+    '@type': 'ItemList' as const,
+    name: isEnglish ? 'Santi Living rental services in Jogja' : 'Layanan sewa Santi Living di Jogja',
+    itemListElement: choices.map((choice, index) => ({
+      '@type': 'ListItem' as const,
+      position: index + 1,
+      item: {
+        '@type': 'Service' as const,
+        name: choice.title,
+        description: choice.description,
+        url: localizedSiteUrl(choice.href.replace(`/${locale}`, ''), locale),
+        provider: {
+          '@type': 'LocalBusiness' as const,
+          name: 'Santi Living',
+          url: primarySiteUrl(),
+        },
+      },
+    })),
   };
 
   return (
     <main className="home-page hybrid-home site-main-offset">
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
-      <JsonLd data={productSchema} />
+      <JsonLd data={serviceCatalogSchema} />
       <JsonLd data={generateFAQSchema(faqItems)} />
 
       <div className="home-hero hybrid-home-hero">
@@ -295,9 +287,9 @@ export default async function HomePage({
             <h2>{dict.karpet_internal.title}</h2>
             <p>{dict.karpet_internal.desc}</p>
           </div>
-          <a href="https://karpet.santiliving.com/sewa-karpet-jogja" className="home-text-link motion-interactive motion-lift" data-reveal="right">
+          <Link href={'/' + locale + '/sewa-karpet-jogja'} className="home-text-link motion-interactive motion-lift" data-reveal="right">
             {dict.karpet_internal.cta} <ArrowRightIcon />
-          </a>
+          </Link>
         </div>
       </section>
 

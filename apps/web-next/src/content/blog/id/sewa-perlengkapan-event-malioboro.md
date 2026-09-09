@@ -34,7 +34,7 @@ Jika acara Anda masih berubah-ubah, mulai dari kebutuhan utama dulu: karpet untu
 
 ## Pilihan Karpet dan Perlengkapan
 
-- [Sewa perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event) untuk koordinasi karpet, TV display, kasur tamu, pendingin portabel, dan kebutuhan acara lain.
+- [Sewa perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event) untuk koordinasi karpet, TV display, kasur tamu, pendingin portabel, dan kebutuhan acara lain.
 - Karpet jalur tamu, karpet booth, atau alas lesehan bisa ditanyakan sesuai layout venue.
 - Kasur tamu, bantal, selimut, kipas, air cooler, atau TV bisa ditanyakan jika acara berlangsung lama atau ada tamu menginap.
 
@@ -48,7 +48,7 @@ Santi Living tidak menyarankan panitia menebak harga hanya dari jumlah tamu. Est
 
 ## Link yang Bisa Dibuka Sebelum Chat
 
-> 📖 **[Sewa perlengkapan event Jogja →](https://acara.santiliving.com/sewa-perlengkapan-event)**
+> 📖 **[Sewa perlengkapan event Jogja →](https://santiliving.com/id/sewa-perlengkapan-event)**
 
 > 📖 **[Sewa TV LED pameran bazar Jogja →](/artikel/sewa-tv-led-pameran-bazar-jogja)**
 

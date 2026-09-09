@@ -15,7 +15,7 @@ tags: ["cara memilih karpet pengajian", "sewa permadani jogja", "karpet pengajia
 
 Memilih karpet untuk pengajian dan tahlilan tidak cukup hanya bertanya “ada karpet berapa meter?”. Acara pengajian biasanya membutuhkan alas yang nyaman untuk duduk lesehan, rapi di foto, mudah dibersihkan, dan sesuai dengan jumlah tamu. Karena itu, **cara memilih karpet pengajian dan tahlilan di Jogja** sebaiknya dimulai dari layout ruangan.
 
-Untuk kebutuhan permadani, buka dulu halaman [sewa karpet permadani Jogja](https://permadani.santiliving.com/sewa-karpet-permadani-jogja). Jika acaranya pengajian atau tahlilan, baca juga [panduan sewa karpet pengajian dan tahlilan Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+Untuk kebutuhan permadani, buka dulu halaman [sewa karpet permadani Jogja](https://santiliving.com/id/sewa-karpet-permadani-jogja). Jika acaranya pengajian atau tahlilan, baca juga [panduan sewa karpet pengajian dan tahlilan Jogja](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 ## 1. Hitung Area Duduk, Bukan Hanya Jumlah Tamu
 
@@ -49,7 +49,7 @@ Panitia sering memesan terlalu dekat dengan hari H, tidak mengukur ruangan, atau
 
 ## Link Terkait
 
-> 📖 **[Sewa karpet permadani Jogja →](https://permadani.santiliving.com/sewa-karpet-permadani-jogja)**
+> 📖 **[Sewa karpet permadani Jogja →](https://santiliving.com/id/sewa-karpet-permadani-jogja)**
 
 > 📖 **[Sewa karpet pengajian dan tahlilan Jogja →](/artikel/sewa-karpet-pengajian-tahlilan-jogja)**
 

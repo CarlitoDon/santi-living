@@ -34,7 +34,7 @@ If your event details are still subject to change, start with the main requireme
 
 ## Carpet and Equipment Options
 
-- [Jogja carpet rental](https://karpet.santiliving.com/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
+- [Jogja carpet rental](https://santiliving.com/en/sewa-karpet-jogja) for guest pathways, booth areas, small stages, and general event flooring.
 - Guest mattresses, pillows, blankets, fans, air coolers, or TVs can be requested if the event lasts for a long time or if there are overnight guests.
 
 ## Areas and Logistics
@@ -47,9 +47,9 @@ Santi Living does not recommend that organisers guess the price based solely on 
 
 ## Links to Check Before Chatting
 
-> 📖 **[Jogja carpet rental →](https://karpet.santiliving.com/sewa-karpet-jogja)**
+> 📖 **[Jogja carpet rental →](https://santiliving.com/en/sewa-karpet-jogja)**
 
-> 📖 **[Jogja red carpet rental →](https://karpet.santiliving.com/sewa-karpet-merah-jogja)**
+> 📖 **[Jogja red carpet rental →](https://santiliving.com/en/sewa-karpet-merah-jogja)**
 
 > 📖 **[Mattress rental Danurejan Jetis Jogja City →](/artikel/sewa-kasur-danurejan-jetis-kota-jogja)**
 

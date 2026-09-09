@@ -8,7 +8,7 @@ tags: ["paket rest area event jogja", "kasur crew event", "perlengkapan panitia"
 
 Rest area sering dianggap kebutuhan kecil, padahal untuk event panjang area istirahat crew bisa menentukan ritme kerja panitia. Crew yang harus standby dari loading, acara utama, sampai bongkar butuh tempat rebahan singkat, pendingin yang cukup, dan perlengkapan sederhana agar tetap fit. Karena itu, **paket rest area event Jogja** sebaiknya direncanakan sejak awal, bukan menunggu panitia kelelahan di hari H.
 
-Santi Living membantu kebutuhan rest area berbasis rental: kasur, bantal, guling, selimut, serta item pendukung seperti kipas, air cooler, atau TV display yang bisa dikonsultasikan by request. Untuk jalur event yang lebih luas, mulai dari [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event).
+Santi Living membantu kebutuhan rest area berbasis rental: kasur, bantal, guling, selimut, serta item pendukung seperti kipas, air cooler, atau TV display yang bisa dikonsultasikan by request. Untuk jalur event yang lebih luas, mulai dari [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event).
 
 ## Siapa yang Membutuhkan Rest Area Event?
 

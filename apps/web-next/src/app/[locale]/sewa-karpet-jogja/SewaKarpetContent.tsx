@@ -3,6 +3,8 @@
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
+import { useLocale } from '@/contexts/locale';
+import { localeHref } from '@/utils/localeHref';
 
 interface FAQItem {
   question: string;
@@ -36,6 +38,8 @@ export function SewaKarpetContent({
   pricing,
   events,
 }: SewaKarpetContentProps) {
+  const { locale } = useLocale();
+
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -206,7 +210,7 @@ export function SewaKarpetContent({
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link
-              href="/"
+              href={localeHref('/', locale)}
               className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="mb-1 text-base font-bold text-blue-600 group-hover:underline">
@@ -217,7 +221,7 @@ export function SewaKarpetContent({
               </p>
             </Link>
             <Link
-              href="/harga-sewa-kasur"
+              href={localeHref('/harga-sewa-kasur', locale)}
               className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="mb-1 text-base font-bold text-blue-600 group-hover:underline">
@@ -228,7 +232,7 @@ export function SewaKarpetContent({
               </p>
             </Link>
             <Link
-              href="/sewa-perlengkapan-event"
+              href={localeHref('/sewa-perlengkapan-event', locale)}
               className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="mb-1 text-base font-bold text-blue-600 group-hover:underline">
@@ -239,7 +243,7 @@ export function SewaKarpetContent({
               </p>
             </Link>
             <Link
-              href="/sewa-karpet-merah-jogja"
+              href={localeHref('/sewa-karpet-merah-jogja', locale)}
               className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="mb-1 text-base font-bold text-blue-600 group-hover:underline">
@@ -250,7 +254,7 @@ export function SewaKarpetContent({
               </p>
             </Link>
             <Link
-              href="/sewa-karpet-permadani-jogja"
+              href={localeHref('/sewa-karpet-permadani-jogja', locale)}
               className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
             >
               <h3 className="mb-1 text-base font-bold text-blue-600 group-hover:underline">

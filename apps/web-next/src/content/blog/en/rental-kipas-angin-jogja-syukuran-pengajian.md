@@ -28,7 +28,7 @@ Order today, and the items will arrive before your first guest does.
 
 ## Additional Carpets for Thanksgiving and Prayer Gatherings
 
-If guests are sitting on the floor, fans are often more effective once the seating area is already set up. See [Jogja rug rental](https://permadani.santiliving.com/sewa-karpet-permadani-jogja) and the guide for [Jogja prayer gathering carpet rental](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
+If guests are sitting on the floor, fans are often more effective once the seating area is already set up. See [Jogja rug rental](https://santiliving.com/en/sewa-karpet-permadani-jogja) and the guide for [Jogja prayer gathering carpet rental](/artikel/sewa-karpet-pengajian-tahlilan-jogja).
 
 ---
 

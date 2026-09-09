@@ -8,7 +8,7 @@ tags: ["sewa kasur crew event jogja", "kasur panitia", "eo jogja", "rest area ev
 
 Crew event sering bekerja saat orang lain belum datang dan masih bertugas ketika acara sudah selesai. Mereka perlu tempat istirahat yang sederhana tetapi layak: kasur, bantal, selimut, dan area yang tidak mengganggu alur tamu. Karena itu, **sewa kasur crew event Jogja** cocok untuk EO, panitia kampus, vendor wedding, training, workshop, dan acara komunitas yang berlangsung lama.
 
-Jika kebutuhan Anda tidak hanya kasur, buka juga [sewa paket perlengkapan event Jogja](https://acara.santiliving.com/sewa-perlengkapan-event). Untuk konsep area istirahat yang lebih lengkap, baca [paket rest area event Jogja](/artikel/paket-rest-area-event-jogja).
+Jika kebutuhan Anda tidak hanya kasur, buka juga [sewa paket perlengkapan event Jogja](https://santiliving.com/id/sewa-perlengkapan-event). Untuk konsep area istirahat yang lebih lengkap, baca [paket rest area event Jogja](/artikel/paket-rest-area-event-jogja).
 
 ## Kapan Crew Event Butuh Kasur?
 
@@ -41,7 +41,7 @@ Kirim data berikut ke admin:
 
 **TV display by request.** Tidak wajib untuk istirahat, tetapi bisa dipakai untuk rundown internal, standby monitoring, atau informasi panitia.
 
-**Karpet atau alas area by request.** Jika kasur ditempatkan di ruang kosong atau lantai yang perlu dibuat lebih rapi, opsi alas dapat dikonsultasikan melalui [sewa karpet Jogja](https://karpet.santiliving.com/sewa-karpet-jogja).
+**Karpet atau alas area by request.** Jika kasur ditempatkan di ruang kosong atau lantai yang perlu dibuat lebih rapi, opsi alas dapat dikonsultasikan melalui [sewa karpet Jogja](https://santiliving.com/id/sewa-karpet-jogja).
 
 ## Estimasi dan Area Layanan
 
