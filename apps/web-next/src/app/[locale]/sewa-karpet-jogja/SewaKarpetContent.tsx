@@ -1,6 +1,7 @@
 'use client';
 
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
 
 interface FAQItem {
@@ -26,14 +27,9 @@ interface SewaKarpetContentProps {
   events: EventItem[];
 }
 
-const WA_NUMBER = '6289519119092';
 const WA_DISPLAY = '0895-1911-9092';
 const WA_INQUIRY_TEXT =
   'Halo Santi Living, saya ingin tanya sewa karpet Jogja.\n\nJenis acara: \nTanggal acara: \nLokasi acara: \nUkuran area: \nJenis karpet yang dibutuhkan: \n\nMohon info ketersediaan dan estimasi harga.';
-
-function getWhatsAppUrl(): string {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_INQUIRY_TEXT)}`;
-}
 
 export function SewaKarpetContent({
   faqs,
@@ -61,15 +57,15 @@ export function SewaKarpetContent({
             jemput, free konsultasi via WhatsApp.
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a
-              href={getWhatsAppUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={WA_INQUIRY_TEXT}
+              source="carpet_page_hero"
+              location="carpet_hero"
               className="inline-flex items-center gap-2 rounded-lg bg-green-500 px-8 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-green-600"
             >
               <span>Harga &amp; Konsultasi</span>
               <span className="text-sm opacity-90">{WA_DISPLAY}</span>
-            </a>
+            </WhatsAppLink>
             <a
               href="#harga-sewa-karpet"
               className="inline-flex items-center rounded-lg border border-slate-400 px-8 py-3 text-base font-semibold text-slate-200 transition-colors hover:border-white hover:text-white"
@@ -279,14 +275,14 @@ export function SewaKarpetContent({
             ke WhatsApp kami. Admin akan bantu cek ketersediaan dan estimasi
             harga.
           </p>
-          <a
-            href={getWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            message={WA_INQUIRY_TEXT}
+            source="carpet_page_footer"
+            location="carpet_footer"
             className="inline-flex items-center gap-2 rounded-lg bg-green-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-colors hover:bg-green-600"
           >
             Chat WhatsApp: {WA_DISPLAY}
-          </a>
+          </WhatsAppLink>
         </div>
       </section>
     </main>

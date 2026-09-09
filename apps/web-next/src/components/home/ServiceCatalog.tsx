@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { ProductPicker } from '@/components/home/ProductPicker';
 import { CatalogItemCard } from '@/components/home/CatalogItemCard';
 import { ServiceInquiryModal, type ServiceInquiryItem } from '@/components/home/ServiceInquiryModal';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import type { Locale } from '@/locales/dictionary';
 
 type ServiceKey = 'kasur' | 'kursi' | 'karpet';
@@ -106,14 +106,14 @@ export function ServiceCatalog({ initialService, locale }: { initialService: Ser
                     thumbnailAlt={item.imageAlt}
                     onDetail={() => setModalItem(item)}
                     action={
-                      <a
-                        href={getWhatsAppUrl(active.wa.replace('{jenis}', item.name), 'homepage_' + activeService + '_' + item.name.toLowerCase().replaceAll(' ', '-'))}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <WhatsAppLink
+                        message={active.wa.replace('{jenis}', item.name)}
+                        source={'homepage_' + activeService + '_' + item.name.toLowerCase().replaceAll(' ', '-')}
+                        location="catalog_item"
                         className="stepper-btn-single"
                       >
                         Pilih
-                      </a>
+                      </WhatsAppLink>
                     }
                   />
                 </div>
@@ -124,16 +124,14 @@ export function ServiceCatalog({ initialService, locale }: { initialService: Ser
             <Link href={'/' + locale + active.href} className="home-primary-button">
               Lihat detail {active.label.toLowerCase()}
             </Link>
-            <a
-              href={getWhatsAppUrl(active.wa, 'homepage_' + activeService + '_catalog')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={active.wa}
+              source={'homepage_' + activeService + '_catalog'}
+              location="catalog"
               className="home-secondary-button"
-              data-wa-source={'homepage_' + activeService + '_catalog'}
-              data-wa-location="catalog"
             >
               Cek ketersediaan
-            </a>
+            </WhatsAppLink>
           </div>
           <ServiceInquiryModal
             item={modalItem}

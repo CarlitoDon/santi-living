@@ -8,8 +8,8 @@ import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroBackground } from '@/components/home/HeroBackground';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { generateFAQSchema } from '@/utils/seo';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { getStoreMapEmbedUrl } from '@/lib/store-location';
 import { getDictionary, type Locale } from '@/locales/dictionary';
 
@@ -201,16 +201,14 @@ export default async function HomePage({
                 <a href="#layanan-sewa" className="home-primary-button motion-interactive motion-lift">
                   {isEnglish ? 'Choose a service' : 'Pilih layanan'} <ArrowRightIcon />
                 </a>
-                <a
-                  href={getWhatsAppUrl(serviceInquiryMessage, 'homepage_services')}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <WhatsAppLink
+                  message={serviceInquiryMessage}
+                  source="homepage_services"
+                  location="hero"
                   className="home-secondary-button motion-interactive motion-lift"
-                  data-wa-source="homepage_services"
-                  data-wa-location="hero"
                 >
                   <WhatsAppIcon /> {isEnglish ? 'Ask on WhatsApp' : 'Tanya via WhatsApp'}
-                </a>
+                </WhatsAppLink>
               </div>
 
               <ul
@@ -226,9 +224,9 @@ export default async function HomePage({
 
               <p className="home-direct-contact" data-reveal="fade" data-reveal-delay="250">
                 {isEnglish ? 'Speak with our team:' : 'Atau hubungi langsung:'}{' '}
-                <a href={getWhatsAppUrl(undefined, 'hero_phone')} data-wa-source="hero_phone" data-wa-location="hero">
+                <WhatsAppLink source="hero_phone" location="hero">
                   {config.whatsappDisplay}
-                </a>
+                </WhatsAppLink>
               </p>
             </div>
           </div>
@@ -385,16 +383,14 @@ export default async function HomePage({
           </div>
           <div className="home-hero-actions" data-reveal="right">
             <a href="#layanan-sewa" className="home-primary-button motion-interactive motion-lift">{isEnglish ? 'Choose a service' : 'Pilih layanan'} <ArrowRightIcon /></a>
-            <a
-              href={getWhatsAppUrl(serviceInquiryMessage, 'footer_cta')}
+            <WhatsAppLink
+              message={serviceInquiryMessage}
+              source="footer_cta"
+              location="footer_cta"
               className="home-secondary-button motion-interactive motion-lift"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-wa-source="footer_cta"
-              data-wa-location="footer_cta"
             >
               <WhatsAppIcon /> {dict.cta_final.cta_chat}
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </section>

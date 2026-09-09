@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { config } from '@/data/config';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 type Locale = 'id' | 'en';
 
@@ -185,16 +185,14 @@ export default async function SewaKursiAcaraPage({
             <p className="chair-eyebrow">{copy.eyebrow}</p>
             <h1 id="chair-page-title">{copy.title}</h1>
             <p className="chair-hero-intro">{copy.intro}</p>
-            <a
-              href={getWhatsAppUrl(CHAIR_WA_TEXT, 'chair_page')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={CHAIR_WA_TEXT}
+              source="chair_page"
+              location="chair_hero"
               className="chair-button chair-button-primary"
-              data-wa-source="chair_page"
-              data-wa-location="chair_hero"
             >
               {copy.primaryCta} <span aria-hidden="true">↗</span>
-            </a>
+            </WhatsAppLink>
             <p className="chair-phone">WhatsApp {copy.phone}</p>
           </div>
 
@@ -245,16 +243,14 @@ export default async function SewaKursiAcaraPage({
                 </li>
               ))}
             </ol>
-            <a
-              href={getWhatsAppUrl(CHAIR_WA_TEXT, 'chair_details')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={CHAIR_WA_TEXT}
+              source="chair_details"
+              location="chair_details"
               className="chair-button chair-button-light"
-              data-wa-source="chair_details"
-              data-wa-location="chair_details"
             >
               {copy.detailsCta} <span aria-hidden="true">↗</span>
-            </a>
+            </WhatsAppLink>
           </div>
 
           <figure className="chair-pickup-card">

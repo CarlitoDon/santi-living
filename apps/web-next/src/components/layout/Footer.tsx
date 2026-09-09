@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { config } from '@/data/config';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
 import { useLocale } from '@/contexts/locale';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { useMainSiteHref } from '@/hooks/useMainSiteHref';
 
 export function Footer() {
@@ -98,9 +98,9 @@ export function Footer() {
               <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
               </a>
-              <a href={getWhatsAppUrl(undefined, 'footer_social')} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-green-600 no-underline motion-interactive motion-lift" data-wa-source="footer_social" data-wa-location="footer">
+              <WhatsAppLink source="footer_social" location="footer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-green-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/><path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/></svg>
-              </a>
+              </WhatsAppLink>
             </div>
           </div>
         </div>
