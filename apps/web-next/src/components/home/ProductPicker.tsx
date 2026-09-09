@@ -6,6 +6,7 @@ import { products } from '@/data/products';
 import type { Product } from '@/components/calculator/types';
 import { useState } from 'react';
 import { ProductModal } from '@/components/produk/ProductCard';
+import { CatalogItemCard } from '@/components/home/CatalogItemCard';
 
 const formatCurrency = (amount: number) =>
   new Intl.NumberFormat('id-ID').format(amount);
@@ -26,66 +27,6 @@ const allCategories: { label: string; products: Product[] }[] = [
   },
 ];
 
-function ProductCard({
-  product,
-  quantity,
-  onIncrement,
-  onDecrement,
-  onDetail,
-}: {
-  product: Product;
-  quantity: number;
-  onIncrement: () => void;
-  onDecrement: () => void;
-  onDetail: () => void;
-}) {
-  return (
-    <div
-      className="product-picker-card"
-      data-product-id={product.id}
-    >
-      <button
-        type="button"
-        onClick={onDetail}
-        className="product-picker-thumb"
-        aria-label={`Detail ${product.name}`}
-      >
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={80}
-          height={80}
-          className="object-cover rounded-lg"
-        />
-      </button>
-
-      <div className="product-picker-info" onClick={onDetail} role="button" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onDetail()}>
-        <p className="product-picker-name">{product.shortName || product.name}</p>
-        {product.dimensions && (
-          <p className="product-picker-dim">{product.dimensions}</p>
-        )}
-        <p className="product-picker-price">
-          Rp{formatCurrency(product.pricePerDay)}<span>/hari</span>
-        </p>
-      </div>
-
-      <div className="product-picker-stepper">
-        {quantity > 0 ? (
-          <>
-            <button type="button" onClick={onDecrement} className="stepper-btn" aria-label="Kurangi">−</button>
-            <span className="stepper-qty">{quantity}</span>
-            <button type="button" onClick={onIncrement} className="stepper-btn stepper-btn-add" aria-label="Tambah">+</button>
-          </>
-        ) : (
-          <button type="button" onClick={onIncrement} className="stepper-btn-single" aria-label="Tambahkan">
-            + Tambah
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export function ProductPicker() {
   const { actions } = useCalculatorContext();
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
@@ -105,24 +46,29 @@ export function ProductPicker() {
       <div className="product-picker">
         {allCategories.map((cat, categoryIndex) => (
           <section key={cat.label} className="product-picker-category" aria-labelledby={`product-category-${categoryIndex}`}>
-            <h3 id={`product-category-${categoryIndex}`} className="product-picker-category-title" data-reveal="fade">
+            <h3 id={`product-category-${categoryIndex}`} className="product-picker-category-title">
               {cat.label}
               <span>{cat.products.length} pilihan</span>
             </h3>
             <div className="product-picker-grid">
-              {cat.products.map((product, productIndex) => (
-                <div
-                  className="product-picker-card-wrap"
-                  data-reveal="up"
-                  data-reveal-delay={String((productIndex % 2) * 45)}
-                  key={product.id}
-                >
-                  <ProductCard
-                    product={product}
-                    quantity={actions.getItemQuantity(product.id)}
-                    onIncrement={() => handleAdd(product)}
-                    onDecrement={() => actions.removeItem(product.id)}
+              {cat.products.map((product) => (
+                <div className="product-picker-card-wrap" key={product.id}>
+                  <CatalogItemCard
+                    productId={product.id}
+                    title={product.shortName || product.name}
+                    meta={product.dimensions}
+                    price={<>Rp{formatCurrency(product.pricePerDay)}<span>/hari</span></>}
+                    thumbnail={<Image src={product.image} alt={product.name} width={80} height={80} className="object-cover rounded-lg" />}
                     onDetail={() => setModalProduct(product)}
+                    action={actions.getItemQuantity(product.id) > 0 ? (
+                      <>
+                        <button type="button" onClick={() => actions.removeItem(product.id)} className="stepper-btn" aria-label="Kurangi">−</button>
+                        <span className="stepper-qty">{actions.getItemQuantity(product.id)}</span>
+                        <button type="button" onClick={() => handleAdd(product)} className="stepper-btn stepper-btn-add" aria-label="Tambah">+</button>
+                      </>
+                    ) : (
+                      <button type="button" onClick={() => handleAdd(product)} className="stepper-btn-single" aria-label="Tambahkan">+ Tambah</button>
+                    )}
                   />
                 </div>
               ))}

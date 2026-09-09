@@ -26,7 +26,7 @@ export function Footer() {
                 <span className="text-[10px] font-medium italic text-slate-400">by</span>
                 <div className="relative h-[18px] w-[55px] opacity-90 group-hover:opacity-100 transition-all duration-300">
                   <Image
-                    src="/images/logo-santi-mebel.png"
+                    src="/images/logo-santi-mebel.webp"
                     alt="Santi Mebel Jogja"
                     className="object-contain"
                     fill

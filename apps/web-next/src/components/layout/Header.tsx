@@ -71,7 +71,7 @@ export function Header() {
                 <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
                   <span className="text-[10px] md:text-[11px] font-medium italic text-slate-400">by</span>
                   <Image
-                    src="/images/logo-santi-mebel.png"
+                    src="/images/logo-santi-mebel.webp"
                     alt="Santi Mebel Jogja"
                     width={65}
                     height={22}
