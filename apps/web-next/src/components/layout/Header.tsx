@@ -5,9 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Navigation } from './Navigation';
 import { useHostCta } from '@/hooks/useHostCta';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useLocale } from '@/contexts/locale';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { useMainSiteHref } from '@/hooks/useMainSiteHref';
 
 export function Header() {
@@ -71,7 +71,7 @@ export function Header() {
                 <span className="flex flex-row items-baseline gap-1 md:gap-1.5 pb-[1px] md:pb-[3px]">
                   <span className="text-[10px] md:text-[11px] font-medium italic text-slate-400">by</span>
                   <Image
-                    src="/images/logo-santi-mebel.png"
+                    src="/images/logo-santi-mebel.webp"
                     alt="Santi Mebel Jogja"
                     width={65}
                     height={22}
@@ -95,28 +95,24 @@ export function Header() {
             <div className="hidden sm:flex items-center">
               <LanguageToggle />
             </div>
-            <a
-              href={getWhatsAppUrl(hostCta.waText, 'header_desktop')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              message={hostCta.waText}
+              source="header_desktop"
+              location="header"
               className="hidden sm:flex min-h-11 items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm hover:shadow-md motion-interactive motion-lift"
-              data-wa-source="header_desktop"
-              data-wa-location="header"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg>
               <span>{hostCta.desktopLabel}</span>
-            </a>
-            <a
-              href={getWhatsAppUrl(hostCta.waText, 'header_mobile')}
-              target="_blank"
-              rel="noopener noreferrer"
+            </WhatsAppLink>
+            <WhatsAppLink
+              message={hostCta.waText}
+              source="header_mobile"
+              location="header"
               className="flex sm:hidden items-center justify-center bg-emerald-500 active:bg-emerald-600 text-white w-10 h-10 rounded-lg shadow-sm motion-interactive"
               aria-label={hostCta.mobileAriaLabel}
-              data-wa-source="header_mobile"
-              data-wa-location="header"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg>
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </div>

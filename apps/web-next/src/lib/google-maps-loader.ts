@@ -8,7 +8,14 @@ let googleMapsTimeoutId: number | null = null;
 
 async function initializeMapsLibrary(maps: typeof google.maps): Promise<typeof google.maps> {
   if (typeof maps.importLibrary === 'function') {
-    await Promise.all([maps.importLibrary('maps'), maps.importLibrary('marker')]);
+    const [mapsLibrary, markerLibrary] = await Promise.all([
+      maps.importLibrary('maps') as Promise<google.maps.MapsLibrary>,
+      maps.importLibrary('marker') as Promise<google.maps.MarkerLibrary>,
+    ]);
+    // With the async loader, constructors are returned by importLibrary and
+    // are not guaranteed to be attached to google.maps itself.
+    maps.Map = mapsLibrary.Map;
+    maps.Marker = markerLibrary.Marker;
   }
   if (typeof maps.Map !== 'function' || typeof maps.Marker !== 'function') {
     throw new GoogleMapsLoaderError('LOAD_FAILED', 'Google Maps library did not initialize');
@@ -43,13 +50,20 @@ export function loadGoogleMaps(): Promise<typeof google.maps> {
   googleMapsPromise = new Promise((resolve, reject) => {
     let settled = false;
     let targetScript: HTMLScriptElement | null = null;
+    const callbackName = `__santiGoogleMapsCallback_${Date.now()}`;
+    const callbackTarget = window as unknown as Record<string, (() => void) | undefined>;
+    const handleLoad = () => {
+      // Older API responses may finish without invoking the callback.
+      if (typeof window.google?.maps?.Map === 'function') void finish();
+    };
     const cleanup = (removeScript: boolean) => {
       if (googleMapsTimeoutId !== null) {
         window.clearTimeout(googleMapsTimeoutId);
         googleMapsTimeoutId = null;
       }
-      targetScript?.removeEventListener('load', finish);
+      targetScript?.removeEventListener('load', handleLoad);
       targetScript?.removeEventListener('error', fail);
+      delete callbackTarget[callbackName];
       if (removeScript) targetScript?.remove();
     };
     const finish = async () => {
@@ -77,23 +91,13 @@ export function loadGoogleMaps(): Promise<typeof google.maps> {
         : new GoogleMapsLoaderError('LOAD_FAILED', 'Google Maps failed to load'));
     };
 
-    const existing = document.getElementById(GOOGLE_MAPS_SCRIPT_ID) as HTMLScriptElement | null;
-    if (existing) {
-      targetScript = existing;
-      existing.addEventListener('load', finish, { once: true });
-      existing.addEventListener('error', fail, { once: true });
-      googleMapsTimeoutId = window.setTimeout(() => fail(
-        new GoogleMapsLoaderError('LOAD_FAILED', 'Google Maps load timed out'),
-      ), GOOGLE_MAPS_LOAD_TIMEOUT_MS);
-      return;
-    }
-
     const script = document.createElement('script');
     targetScript = script;
     script.id = GOOGLE_MAPS_SCRIPT_ID;
     script.async = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&loading=async&v=weekly&language=id&region=ID&auth_referrer_policy=origin`;
-    script.addEventListener('load', finish, { once: true });
+    callbackTarget[callbackName] = () => { void finish(); };
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(apiKey)}&libraries=maps,marker&loading=async&callback=${callbackName}&v=weekly&language=id&region=ID&auth_referrer_policy=origin`;
+    script.addEventListener('load', handleLoad, { once: true });
     script.addEventListener('error', fail, { once: true });
     googleMapsTimeoutId = window.setTimeout(() => fail(
       new GoogleMapsLoaderError('LOAD_FAILED', 'Google Maps load timed out'),

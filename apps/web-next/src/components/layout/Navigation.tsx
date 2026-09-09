@@ -5,7 +5,6 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useHostCta } from '@/hooks/useHostCta';
-import { getWhatsAppUrl } from '@/utils/whatsapp';
 import { useT } from '@/contexts/locale';
 import { LanguageToggle } from '@/components/ui/LanguageToggle';
 import { useLocale } from '@/contexts/locale';
@@ -14,6 +13,7 @@ import { useDialogFocus } from '@/hooks/useDialogFocus';
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 import { usePresence } from '@/hooks/usePresence';
 import { useMainSiteHref } from '@/hooks/useMainSiteHref';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 type NavLink = {
   href: string;
@@ -140,6 +140,7 @@ export function Navigation() {
       children: [
         { href: '/produk', label: t('nav.semua_produk') },
         { href: '/sewa-kasur-terdekat', label: t('nav.kasur') },
+        { href: '/sewa-kursi-acara', label: t('nav.kursi') },
         { href: 'https://karpet.santiliving.com/sewa-karpet-jogja', label: t('nav.karpet') },
         { href: 'https://permadani.santiliving.com/sewa-karpet-permadani-jogja', label: t('nav.permadani') },
         { href: 'https://acara.santiliving.com/sewa-perlengkapan-event', label: t('nav.perlengkapan_event') },
@@ -276,16 +277,14 @@ export function Navigation() {
                 );
               })}
               <li>
-                <a
-                  href={getWhatsAppUrl(hostCta.waText, 'nav_sidebar')}
+                <WhatsAppLink
+                  message={hostCta.waText}
+                  source="nav_sidebar"
+                  location="sidebar"
                   className="mt-6 bg-blue-600 text-white text-center block w-full p-3.5 rounded-lg font-bold shadow-sm hover:bg-blue-700 hover:shadow-md motion-interactive motion-lift no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-wa-source="nav_sidebar"
-                  data-wa-location="sidebar"
                 >
                   {hostCta.navLabel}
-                </a>
+                </WhatsAppLink>
               </li>
             </ul>
           </aside>

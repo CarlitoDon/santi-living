@@ -250,10 +250,17 @@ export function formatAddress(
   const kecamatan = address.city_district || address.municipality || "";
 
   // Kabupaten/Kota:
-  // - Rural: county (e.g., "Sleman") - this should take priority!
-  // - Urban: city (e.g., "Kota Yogyakarta") - only when county doesn't exist
-  // NOTE: In rural areas, "city" field is NOT kabupaten - it's a village area!
-  const kota = address.county || address.city || address.town || "";
+  // - Rural: county (e.g., "Sleman") is usually the reliable field.
+  // - Urban: city (e.g., "Kota Yogyakarta") is the reliable field.
+  // Some Nominatim responses include both fields for a city address, with a
+  // nearby county in `county`. Prefer the explicitly typed administrative
+  // value so the district lookup uses the correct parent region.
+  const cityCandidate = address.city || address.town || "";
+  const countyCandidate = address.county || "";
+  const explicitlyTypedCity = [cityCandidate, countyCandidate].find((value) =>
+    /^(kabupaten|kota)\s+/i.test(value),
+  );
+  const kota = explicitlyTypedCity || countyCandidate || cityCandidate;
 
   // Provinsi: never assume DIY when Nominatim omits `state`.
   // DKI Jakarta is one known response shape that only exposes an ISO code.

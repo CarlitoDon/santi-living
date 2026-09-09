@@ -1,16 +1,82 @@
+import Link from 'next/link';
 import { config } from '@/data/config';
 import { products } from '@/data/products';
 import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
-import { ProductPicker } from '@/components/home/ProductPicker';
+import { ServiceCatalog } from '@/components/home/ServiceCatalog';
 import { CartBar } from '@/components/home/CartBar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroBackground } from '@/components/home/HeroBackground';
 import { FAQAccordion } from '@/components/ui/FAQAccordion';
 import { FeatureCard } from '@/components/ui/FeatureCard';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import { generateFAQSchema } from '@/utils/seo';
-import { getWhatsAppUrl, WA_PRESET_ORDER } from '@/utils/whatsapp';
 import { getStoreMapEmbedUrl } from '@/lib/store-location';
 import { getDictionary, type Locale } from '@/locales/dictionary';
+
+const HOME_SERVICE_INQUIRY = [
+  'Halo Santi Living, saya ingin tanya layanan sewa.',
+  '',
+  'Kebutuhan saya: {kasur / kursi / karpet}',
+  'Tanggal kebutuhan: {tanggal}',
+  'Jumlah atau ukuran: {detail}',
+  'Lokasi pengantaran: {alamat}',
+  '',
+  'Mohon bantu cek ketersediaan dan pengantarannya. Terima kasih.',
+].join('\n');
+
+const HOME_SERVICE_INQUIRY_EN = [
+  'Hello Santi Living, I would like to ask about a rental service.',
+  '',
+  'Service needed: {mattress / chairs / carpet}',
+  'Date needed: {date}',
+  'Quantity or size: {details}',
+  'Delivery address: {address}',
+  '',
+  'Please help check availability and delivery. Thank you.',
+].join('\n');
+
+const serviceChoices = (locale: Locale) =>
+  locale === 'en'
+    ? [
+        {
+          title: 'Rent a mattress',
+          description: 'Clean, comfortable mattresses for guests, family, and temporary stays.',
+          href: '/' + locale + '/harga-sewa-kasur',
+          note: 'See mattress options',
+        },
+        {
+          title: 'Rent chairs',
+          description: 'Event chairs for meetings, weddings, gatherings, and family celebrations.',
+          href: '/' + locale + '/sewa-kursi-acara',
+          note: 'See chair options',
+        },
+        {
+          title: 'Rent carpets',
+          description: 'Carpets and rugs to help an event area feel comfortable and ready.',
+          href: '/' + locale + '/sewa-karpet-jogja',
+          note: 'See carpet options',
+        },
+      ]
+    : [
+        {
+          title: 'Sewa kasur',
+          description: 'Kasur bersih dan nyaman untuk tamu, keluarga, atau kebutuhan sementara.',
+          href: '/' + locale + '/harga-sewa-kasur',
+          note: 'Lihat pilihan kasur',
+        },
+        {
+          title: 'Sewa kursi',
+          description: 'Kursi acara untuk rapat, pernikahan, pengajian, dan perayaan keluarga.',
+          href: '/' + locale + '/sewa-kursi-acara',
+          note: 'Lihat pilihan kursi',
+        },
+        {
+          title: 'Sewa karpet',
+          description: 'Karpet dan permadani untuk membuat area acara lebih rapi dan nyaman.',
+          href: '/' + locale + '/sewa-karpet-jogja',
+          note: 'Lihat pilihan karpet',
+        },
+      ];
 
 function CheckIcon() {
   return (
@@ -38,17 +104,23 @@ function ArrowRightIcon() {
 
 export default async function HomePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ layanan?: string }>;
 }) {
   const { locale: localeParam } = await params;
+  const { layanan } = await searchParams;
   const locale: Locale = localeParam === 'en' ? 'en' : 'id';
+  const selectedService = layanan === 'kursi' || layanan === 'karpet' ? layanan : 'kasur';
+  const isEnglish = locale === 'en';
   const dict = await getDictionary(locale);
+  const choices = serviceChoices(locale);
+  const serviceInquiryMessage = locale === 'en' ? HOME_SERVICE_INQUIRY_EN : HOME_SERVICE_INQUIRY;
   const faqItems = dict.faq.items;
   const steps = dict.steps.items;
   const benefits = dict.benefits.items;
   const serviceAreas = dict.location.service_areas;
-  const stripCheck = (value: string) => value.replace(/^✅\s*/, '');
   const serviceEyebrow = locale === 'en' ? 'Service you can count on' : 'Layanan yang bisa diandalkan';
 
   const localBusinessSchema = {
@@ -104,71 +176,96 @@ export default async function HomePage({
   };
 
   return (
-    <main className="home-page site-main-offset">
+    <main className="home-page hybrid-home site-main-offset">
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={productSchema} />
       <JsonLd data={generateFAQSchema(faqItems)} />
 
-      <div className="home-hero">
+      <div className="home-hero hybrid-home-hero">
         <HeroBackground />
-        <section className="home-hero-inner">
+        <section className="home-hero-inner" aria-labelledby="home-title">
           <div className="container">
             <div className="home-hero-copy">
-              <p className="home-eyebrow" data-reveal="up">{dict.hero.badge}</p>
-              <h1 className="home-hero-title" data-reveal="up" data-reveal-delay="55">
-                {dict.hero.title_part1} <span>{dict.hero.title_part2}</span>
+              <p className="home-eyebrow" data-reveal="up">Santi Living / Yogyakarta</p>
+              <h1 id="home-title" className="home-hero-title hybrid-home-title" data-reveal="up" data-reveal-delay="55">
+                {isEnglish ? 'What do you need to rent in Yogyakarta?' : 'Mau sewa kasur, kursi, atau karpet di Jogja?'}
               </h1>
               <p className="home-hero-lead" data-reveal="up" data-reveal-delay="110">
-                {dict.benefits.subtitle}
+                {isEnglish
+                  ? 'Choose the service that fits your needs. Start with the details, then let us help check availability and delivery.'
+                  : 'Pilih kebutuhanmu dulu. Setelah itu, lihat detail layanan dan kami bantu cek ketersediaan serta pengantarannya.'}
               </p>
 
               <div className="home-hero-actions" data-reveal="up" data-reveal-delay="165">
-                <a href="#calculator" className="home-primary-button motion-interactive motion-lift">
-                  {dict.hero.cta_sewa} <ArrowRightIcon />
+                <a href="#layanan-sewa" className="home-primary-button motion-interactive motion-lift">
+                  {isEnglish ? 'Choose a service' : 'Pilih layanan'} <ArrowRightIcon />
                 </a>
-                <a
-                  href={getWhatsAppUrl(WA_PRESET_ORDER, 'hero_cta')}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <WhatsAppLink
+                  message={serviceInquiryMessage}
+                  source="homepage_services"
+                  location="hero"
                   className="home-secondary-button motion-interactive motion-lift"
-                  data-wa-source="hero_cta"
-                  data-wa-location="hero"
                 >
-                  <WhatsAppIcon /> {dict.hero.cta_chat}
-                </a>
+                  <WhatsAppIcon /> {isEnglish ? 'Ask on WhatsApp' : 'Tanya via WhatsApp'}
+                </WhatsAppLink>
               </div>
 
               <ul
                 className="home-trust-list"
                 data-reveal="fade"
                 data-reveal-delay="220"
-                aria-label={locale === 'en' ? 'Service advantages' : 'Keunggulan layanan'}
+                aria-label={locale === 'en' ? 'Service information' : 'Informasi layanan'}
               >
-                <li><CheckIcon /> {stripCheck(dict.hero.feature_sameday)}</li>
-                <li><CheckIcon /> {stripCheck(dict.hero.feature_clean)}</li>
-                <li><CheckIcon /> {stripCheck(dict.hero.feature_free_pickup)}</li>
+                <li><CheckIcon /> {isEnglish ? 'Based in Godean, Yogyakarta' : 'Berbasis di Godean, Yogyakarta'}</li>
+                <li><CheckIcon /> {isEnglish ? 'Choose the service that fits your needs' : 'Pilih layanan sesuai kebutuhanmu'}</li>
+                <li><CheckIcon /> {isEnglish ? 'Ask us to check availability and delivery' : 'Tanyakan ketersediaan dan pengantaran'}</li>
               </ul>
 
               <p className="home-direct-contact" data-reveal="fade" data-reveal-delay="250">
-                {dict.hero.or_contact}{' '}
-                <a href={getWhatsAppUrl(undefined, 'hero_phone')} data-wa-source="hero_phone" data-wa-location="hero">
+                {isEnglish ? 'Speak with our team:' : 'Atau hubungi langsung:'}{' '}
+                <WhatsAppLink source="hero_phone" location="hero">
                   {config.whatsappDisplay}
-                </a>
+                </WhatsAppLink>
               </p>
             </div>
           </div>
         </section>
       </div>
 
+      <section id="layanan-sewa" className="hybrid-services" aria-labelledby="services-title">
+        <div className="container">
+          <div className="hybrid-services-heading" data-reveal="up">
+            <div>
+              <p className="section-eyebrow">{isEnglish ? 'Choose your service' : 'Pilih layanan'}</p>
+              <h2 id="services-title">{isEnglish ? 'One place for home and event needs.' : 'Satu tempat untuk kebutuhan rumah dan acara.'}</h2>
+            </div>
+            <p>{isEnglish ? 'The same Santi Living team helps you start from the service you need.' : 'Mulai dari kebutuhanmu; tim Santi Living tetap membantu langkah berikutnya.'}</p>
+          </div>
+
+          <nav className="hybrid-service-grid" aria-label={isEnglish ? 'Rental services' : 'Layanan sewa'}>
+            {choices.map((choice, index) => (
+              <Link href={'/' + locale + '?layanan=' + (index === 0 ? 'kasur' : index === 1 ? 'kursi' : 'karpet') + '#calculator'} className="hybrid-service-card motion-interactive" key={choice.href} data-service={index + 1}>
+                <span className="hybrid-service-card-index" aria-hidden="true">0{index + 1}</span>
+                <span className="hybrid-service-card-title">{choice.title}</span>
+                <span className="hybrid-service-card-description">{choice.description}</span>
+                <span className="hybrid-service-card-link">{choice.note} <span aria-hidden="true">↗</span></span>
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hybrid-proof-line" data-reveal="fade">
+            <p>{isEnglish ? 'From our workshop in Godean, Yogyakarta.' : 'Dari workshop Santi Living di Godean, Yogyakarta.'}</p>
+            <a href={config.storeLocation.googleMapsUrl} target="_blank" rel="noopener noreferrer">
+              {isEnglish ? 'See location' : 'Lihat lokasi'} <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="calculator" className="home-catalog" aria-labelledby="catalog-title">
         <div className="container home-catalog-inner">
-          <div className="home-section-heading" data-reveal="up">
-            <p className="section-eyebrow">{dict.hero.pick_title}</p>
-            <h2 id="catalog-title">{dict.produk.title}</h2>
-            <p>{dict.produk.subtitle}</p>
-          </div>
-          <ProductPicker />
+          <ServiceCatalog key={selectedService} initialService={selectedService} locale={locale} />
         </div>
       </section>
 
@@ -285,17 +382,15 @@ export default async function HomePage({
             <p>{dict.cta_final.desc}</p>
           </div>
           <div className="home-hero-actions" data-reveal="right">
-            <a href="#calculator" className="home-primary-button motion-interactive motion-lift">{dict.cta_final.cta_pesan} <ArrowRightIcon /></a>
-            <a
-              href={getWhatsAppUrl(WA_PRESET_ORDER, 'footer_cta')}
+            <a href="#layanan-sewa" className="home-primary-button motion-interactive motion-lift">{isEnglish ? 'Choose a service' : 'Pilih layanan'} <ArrowRightIcon /></a>
+            <WhatsAppLink
+              message={serviceInquiryMessage}
+              source="footer_cta"
+              location="footer_cta"
               className="home-secondary-button motion-interactive motion-lift"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-wa-source="footer_cta"
-              data-wa-location="footer_cta"
             >
               <WhatsAppIcon /> {dict.cta_final.cta_chat}
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </section>

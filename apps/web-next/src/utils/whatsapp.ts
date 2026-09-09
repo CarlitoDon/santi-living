@@ -40,6 +40,8 @@ export const WA_SOURCE_CODES: Record<string, string> = {
   product_page: 'pp',
   blog_cta: 'bl',
   calculator: 'cl',
+  chair_page: 'cp',
+  chair_details: 'cd',
 };
 
 /**

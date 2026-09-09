@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import { reverseGeocode } from "@/scripts/geolocation";
 import { consumeLocationPickerReason, publishLocationSelection, type LocationPickerReason } from "@/lib/location-selection";
 import { showAlert } from "@/utils/alert";
@@ -28,6 +28,16 @@ interface PlaceSearchResult {
   lng: number;
 }
 
+async function fetchPlaceSearchResults(
+  query: string,
+  signal: AbortSignal,
+): Promise<PlaceSearchResult[]> {
+  const response = await fetch(`/api/places/search?q=${encodeURIComponent(query)}`, { signal });
+  if (!response.ok) throw new Error("Search unavailable");
+  const data = await response.json() as { results?: PlaceSearchResult[] };
+  return Array.isArray(data.results) ? data.results : [];
+}
+
 export function MapPicker() {
   const [isOpen, setIsOpen] = useState(false);
   const [reason, setReason] = useState<LocationPickerReason>("manual");
@@ -47,6 +57,9 @@ export function MapPicker() {
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
   const markerRef = useRef<google.maps.Marker | null>(null);
   const selectCoordinatesRef = useRef<((lat: number, lng: number, label?: string) => Promise<void>) | null>(null);
+  const searchAbortControllerRef = useRef<AbortController | null>(null);
+  const searchDebounceTimerRef = useRef<number | null>(null);
+  const selectedSearchQueryRef = useRef<string | null>(null);
   useBodyScrollLock(presence.shouldRender);
 
   useEffect(() => {
@@ -60,6 +73,13 @@ export function MapPicker() {
       setSearchResults([]);
       setSearchStatus("idle");
       setMapStatus("idle");
+      selectedSearchQueryRef.current = null;
+      searchAbortControllerRef.current?.abort();
+      searchAbortControllerRef.current = null;
+      if (searchDebounceTimerRef.current !== null) {
+        window.clearTimeout(searchDebounceTimerRef.current);
+        searchDebounceTimerRef.current = null;
+      }
     };
     const handleOpen = (event: Event) => {
       const detail = (event as CustomEvent<{ reason?: LocationPickerReason }>).detail;
@@ -77,31 +97,70 @@ export function MapPicker() {
     return () => window.removeEventListener("open-map-picker", handleOpen);
   }, []);
 
+  const handleSearchResult = useCallback((result: PlaceSearchResult) => {
+    searchAbortControllerRef.current?.abort();
+    searchAbortControllerRef.current = null;
+    if (searchDebounceTimerRef.current !== null) {
+      window.clearTimeout(searchDebounceTimerRef.current);
+      searchDebounceTimerRef.current = null;
+    }
+    selectedSearchQueryRef.current = result.name.trim();
+    setSearchQuery(result.name);
+    setSearchResults([]);
+    setSearchStatus("idle");
+    void selectCoordinatesRef.current?.(result.lat, result.lng, result.address);
+  }, []);
+
+  const executeSearch = useCallback(async (query: string, selectFirstResult = false) => {
+    const normalizedQuery = query.trim();
+    if (normalizedQuery.length < 3) return;
+
+    searchAbortControllerRef.current?.abort();
+    const controller = new AbortController();
+    searchAbortControllerRef.current = controller;
+    setSearchStatus("loading");
+    try {
+      const results = await fetchPlaceSearchResults(normalizedQuery, controller.signal);
+      if (controller.signal.aborted) return;
+      if (selectFirstResult && results.length > 0) {
+        handleSearchResult(results[0]);
+        return;
+      }
+      setSearchResults(results);
+      setSearchStatus(results.length > 0 ? "idle" : "empty");
+    } catch (error) {
+      if ((error as Error).name === "AbortError") return;
+      setSearchResults([]);
+      setSearchStatus("error");
+    } finally {
+      if (searchAbortControllerRef.current === controller) {
+        searchAbortControllerRef.current = null;
+      }
+    }
+  }, [handleSearchResult]);
+
   useEffect(() => {
     if (!isOpen || searchQuery.trim().length < 3) {
       return;
     }
-    const controller = new AbortController();
-    const timer = window.setTimeout(async () => {
-      setSearchStatus("loading");
-      try {
-        const response = await fetch(`/api/places/search?q=${encodeURIComponent(searchQuery.trim())}`, { signal: controller.signal });
-        if (!response.ok) throw new Error("Search unavailable");
-        const data = await response.json() as { results?: PlaceSearchResult[] };
-        const results = Array.isArray(data.results) ? data.results : [];
-        setSearchResults(results);
-        setSearchStatus(results.length > 0 ? "idle" : "empty");
-      } catch (error) {
-        if ((error as Error).name === "AbortError") return;
-        setSearchResults([]);
-        setSearchStatus("error");
-      }
+    const normalizedQuery = searchQuery.trim();
+    if (selectedSearchQueryRef.current === normalizedQuery) {
+      selectedSearchQueryRef.current = null;
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      searchDebounceTimerRef.current = null;
+      void executeSearch(normalizedQuery);
     }, 350);
+    searchDebounceTimerRef.current = timer;
     return () => {
       window.clearTimeout(timer);
-      controller.abort();
+      if (searchDebounceTimerRef.current === timer) {
+        searchDebounceTimerRef.current = null;
+      }
+      searchAbortControllerRef.current?.abort();
     };
-  }, [isOpen, searchQuery]);
+  }, [executeSearch, isOpen, searchQuery]);
 
   useEffect(() => {
     if (!presence.shouldRender || !mapContainerRef.current) return;
@@ -198,11 +257,15 @@ export function MapPicker() {
   const handleClose = () => setIsOpen(false);
   useDialogFocus({ isOpen, onClose: handleClose, containerRef: dialogRef, initialFocusRef: searchInputRef });
 
-  const handleSearchResult = (result: PlaceSearchResult) => {
-    setSearchQuery(result.name);
-    setSearchResults([]);
-    setSearchStatus("idle");
-    void selectCoordinatesRef.current?.(result.lat, result.lng, result.address);
+  const handleSearchKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    const query = searchQuery.trim();
+    if (searchResults[0]) {
+      handleSearchResult(searchResults[0]);
+      return;
+    }
+    void executeSearch(query, true);
   };
 
   const handleConfirm = async () => {
@@ -251,6 +314,7 @@ export function MapPicker() {
                   setSearchStatus("idle");
                 }
               }}
+              onKeyDown={handleSearchKeyDown}
               placeholder="Contoh: Hotel Tentrem, Malioboro"
               autoComplete="off"
               aria-autocomplete="list"
