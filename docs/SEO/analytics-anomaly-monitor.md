@@ -18,6 +18,7 @@ Unavailable providers remain `unavailable`; the monitor never reports unavailabl
 - `phone_click` sends the same attribution fields to GA4 and Neon, including `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent` when available.
 - A successful checkout emits `form_submit` in GA4 with the `event_id` returned by `/api/submit-order`; Neon stores the same ID, so the two sources can be reconciled without relying on timestamps alone.
 - Register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`. Until they are queryable, use the authenticated Neon lead metrics/export endpoints as the attribution source of truth.
+- Qualified WhatsApp parity is deferred until `2026-09-13`, the first complete UTC day after the production rollout at `2026-09-12T17:09Z`; the partial rollout day and earlier history are reported as `not_ready`, not as conversion loss.
 - Reverse geocoding is cached at the CDN/data-fetch layer and returns a retryable `503` for upstream Nominatim rate limits; the frontend can fall back to manual location entry without creating a runtime exception.
 
 ### Google Ads configuration

@@ -94,7 +94,7 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
             self.assertEqual(second, [])
             self.assertEqual(json.loads(state_path.read_text())["alerts"].keys().__len__(), 1)
 
-    def test_cross_source_check_flags_missing_ga4_qualified_event(self) -> None:
+    def test_cross_source_check_defers_missing_ga4_qualified_event_before_rollout(self) -> None:
         sources = {
             "ga4": {"status": "available", "daily": [{"date": "2026-09-11"}]},
             "neon": {
@@ -104,6 +104,21 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
         }
 
         checks = build_cross_source_checks(sources, "2026-09-11")
+
+        qualified = next(check for check in checks if check["metric"] == "qualified_whatsapp_ga4_vs_neon")
+        self.assertEqual(qualified["status"], "not_ready")
+        self.assertEqual(qualified["effective_date"], "2026-09-13")
+
+    def test_cross_source_check_flags_missing_ga4_qualified_event_after_rollout(self) -> None:
+        sources = {
+            "ga4": {"status": "available", "daily": [{"date": "2026-09-13"}]},
+            "neon": {
+                "status": "available",
+                "daily": [{"date": "2026-09-13", "qualified_whatsapp_clicks": 6}],
+            },
+        }
+
+        checks = build_cross_source_checks(sources, "2026-09-13")
 
         qualified = next(check for check in checks if check["metric"] == "qualified_whatsapp_ga4_vs_neon")
         self.assertEqual(qualified["status"], "anomaly")
