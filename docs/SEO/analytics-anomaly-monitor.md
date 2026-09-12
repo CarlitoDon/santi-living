@@ -14,6 +14,7 @@ Unavailable providers remain `unavailable`; the monitor never reports unavailabl
 ## Lead event contract
 
 - `whatsapp_click` is persisted before navigation; `santi_whatsapp_qualified` and the Google Ads conversion are emitted only after Neon confirms a service-area city.
+- Direct `/api/wa` requests without a client-generated `event_id` still redirect, but are intentionally excluded from the lead ledger so crawlers and link prefetchers cannot inflate conversion counts.
 - `phone_click` sends the same attribution fields to GA4 and Neon, including `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent` when available.
 - A successful checkout emits `form_submit` in GA4 with the `event_id` returned by `/api/submit-order`; Neon stores the same ID, so the two sources can be reconciled without relying on timestamps alone.
 - Register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`. Until they are queryable, use the authenticated Neon lead metrics/export endpoints as the attribution source of truth.
