@@ -118,6 +118,43 @@ export function GtagScript() {
             } catch(ex) {}
           }
 
+          function persistLeadEventForQualification(payload) {
+            var body;
+            try {
+              body = JSON.stringify(payload);
+            } catch(ex) {
+              return Promise.resolve({ persisted: false });
+            }
+
+            var request;
+            try {
+              request = fetch('/api/lead/track', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: body,
+                keepalive: true
+              }).then(function(response) {
+                return response.json().catch(function() { return {}; }).then(function(result) {
+                  if (!response.ok || !result || result.ok === false) {
+                    return { persisted: false };
+                  }
+                  return result;
+                });
+              }).catch(function() {
+                return { persisted: false };
+              });
+            } catch(ex) {
+              return Promise.resolve({ persisted: false });
+            }
+
+            return Promise.race([
+              request,
+              new Promise(function(resolve) {
+                setTimeout(function() { resolve({ persisted: false }); }, 1800);
+              })
+            ]);
+          }
+
           function requestLeadLocation(callback) {
             try {
               if (!navigator.geolocation) {
@@ -670,19 +707,31 @@ export function GtagScript() {
 
                 trackGtagEvent('event', 'whatsapp_click', eventParams);
 
-                sendLeadEvent(leadPayload);
+                var persistence = persistLeadEventForQualification(leadPayload);
 
                 if (url.pathname === '/api/wa') {
                   applyLocationToSearchParams(url, enrichedLocation);
                 }
                 applyAddressToSearchParams(url, enrichedLocation.address_text);
 
-                // Google Ads conversion
-                trackGtagEvent('event', 'conversion', {
-                  'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC'
-                });
+                persistence.then(function(result) {
+                  if (!result || result.persisted !== true || result.cityClassification !== 'service_area') {
+                    return;
+                  }
 
-                navigateToWhatsapp(url);
+                  var qualifiedEventParams = Object.assign({}, eventParams, {
+                    event_id: leadEventId,
+                    city_classification: result.cityClassification,
+                    persistence_status: 'confirmed'
+                  });
+                  trackGtagEvent('event', 'santi_whatsapp_qualified', qualifiedEventParams);
+                  trackGtagEvent('event', 'conversion', {
+                    'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
+                    'event_id': leadEventId
+                  });
+                }).finally(function() {
+                  navigateToWhatsapp(url);
+                });
               });
               }
 

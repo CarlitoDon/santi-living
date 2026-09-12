@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import { verifyWebhookSignature } from '@notionhq/client';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import {
@@ -75,22 +75,17 @@ export async function POST(request: NextRequest) {
   }
 
   const slugs = await getNotionSlugsForPage(pageId);
-  revalidateTag(NOTION_POSTS_TAG, { expire: 0 });
-  revalidatePath('/id/artikel');
-  revalidatePath('/en/artikel');
-  revalidatePath('/sitemap.xml');
+  revalidateTag(NOTION_POSTS_TAG, 'max');
 
   if (slugs.length > 0) {
     for (const slug of slugs) {
-      revalidateTag(notionPostTag(slug), { expire: 0 });
-      revalidatePath(`/id/artikel/${slug}`);
-      revalidatePath(`/en/artikel/${slug}`);
+      revalidateTag(notionPostTag(slug), 'max');
     }
   } else {
     // If Notion no longer exposes the page and the old slug is not in the
     // cached index, expire every detail data entry so a deleted article cannot
     // remain permanently available under an unknown route.
-    revalidateTag(NOTION_POST_DETAILS_TAG, { expire: 0 });
+    revalidateTag(NOTION_POST_DETAILS_TAG, 'max');
   }
 
   return NextResponse.json({

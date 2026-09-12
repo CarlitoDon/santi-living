@@ -10,7 +10,6 @@ import { cache } from 'react';
 
 export const dynamicParams = true;
 export const revalidate = false;
-const BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE = 40;
 const BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE = 40;
 
 interface PageProps {
@@ -92,8 +91,7 @@ export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
     const posts = [...getAllPosts(locale)]
-      .sort((a, b) => b.frontmatter.pubDate.getTime() - a.frontmatter.pubDate.getTime())
-      .slice(0, BUILD_PRERENDERED_LOCAL_POSTS_PER_LOCALE);
+      .sort((a, b) => b.frontmatter.pubDate.getTime() - a.frontmatter.pubDate.getTime());
     const allSlugs = new Set<string>();
     posts.forEach(p => allSlugs.add(p.slug));
     notionPosts.forEach(p => allSlugs.add(p.slug));

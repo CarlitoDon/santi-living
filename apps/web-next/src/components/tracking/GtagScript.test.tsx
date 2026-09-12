@@ -12,6 +12,11 @@ vi.mock('next/script', () => ({
 }));
 
 describe('GtagScript WhatsApp location flow', () => {
+  type TestWindow = Window & {
+    __waTestUrl?: string;
+    gtag?: (...args: unknown[]) => void;
+  };
+
   beforeAll(() => {
     const { unmount } = render(<GtagScript />);
     const trackerScript = document.querySelector<HTMLScriptElement>('#wa-conversion-tracker');
@@ -29,6 +34,7 @@ describe('GtagScript WhatsApp location flow', () => {
     localStorage.clear();
     document.body.innerHTML = '';
     window.history.replaceState({}, '', '/id');
+    delete (window as TestWindow).gtag;
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: undefined,
@@ -38,6 +44,7 @@ describe('GtagScript WhatsApp location flow', () => {
 
   afterEach(() => {
     cleanup();
+    delete (window as TestWindow).gtag;
     vi.restoreAllMocks();
     vi.unstubAllGlobals();
   });
@@ -82,6 +89,86 @@ describe('GtagScript WhatsApp location flow', () => {
     expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
 
     window.removeEventListener('open-map-picker', openPicker);
+  });
+
+  it('emits a qualified conversion only after a persisted service-area lead', async () => {
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: true,
+        cityClassification: 'service_area',
+      }),
+    } as Response);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    link.dataset.waSource = 'test';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect(gtag).toHaveBeenCalledWith(
+      'event',
+      'santi_whatsapp_qualified',
+      expect.objectContaining({
+        city_classification: 'service_area',
+        persistence_status: 'confirmed',
+      }),
+    ));
+
+    const qualifiedCall = gtag.mock.calls.find((call) => call[1] === 'santi_whatsapp_qualified');
+    const conversionCall = gtag.mock.calls.find((call) => call[1] === 'conversion');
+    expect(conversionCall?.[2]).toMatchObject({
+      send_to: 'AW-17865321955/y7bwCKTm3J0cEOPb7MZC',
+      event_id: qualifiedCall?.[2]?.event_id,
+    });
+    expect(fetchMock).toHaveBeenCalledWith('/api/lead/track', expect.objectContaining({
+      method: 'POST',
+    }));
+    expect((window as TestWindow).__waTestUrl).toContain('/api/wa');
+  });
+
+  it('navigates without a conversion when lead persistence is not confirmed', async () => {
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: false,
+        cityClassification: 'service_area',
+      }),
+    } as Response));
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+    expect(gtag.mock.calls.some((call) => call[1] === 'santi_whatsapp_qualified')).toBe(false);
+    expect(gtag.mock.calls.some((call) => call[1] === 'conversion')).toBe(false);
   });
 
   it.each([
@@ -280,7 +367,7 @@ describe('GtagScript WhatsApp location flow', () => {
     window.removeEventListener('open-map-picker', openPicker);
   });
 
-  it('keeps a manual DIY point when late GPS resolves in Jakarta', () => {
+  it('keeps a manual DIY point when late GPS resolves in Jakarta', async () => {
     let geolocationSuccess: PositionCallback | undefined;
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
@@ -331,7 +418,9 @@ describe('GtagScript WhatsApp location flow', () => {
     } as GeolocationPosition);
 
     expect(openPicker).not.toHaveBeenCalled();
-    expect(fetchMock).not.toHaveBeenCalled();
+    expect(fetchMock).toHaveBeenCalledOnce();
+    expect(fetchMock.mock.calls[0]?.[0]).toBe('/api/lead/track');
+    await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
     const navigatedUrl = new URL(
       (window as Window & { __waTestUrl?: string }).__waTestUrl ?? 'http://localhost/',
     );
@@ -357,9 +446,18 @@ describe('GtagScript WhatsApp location flow', () => {
     });
 
     let resolveReverseGeocode: ((value: Response) => void) | undefined;
-    const fetchMock = vi.fn(() => new Promise<Response>((resolve) => {
-      resolveReverseGeocode = resolve;
-    }));
+    const fetchMock = vi.fn()
+      .mockImplementationOnce(() => new Promise<Response>((resolve) => {
+        resolveReverseGeocode = resolve;
+      }))
+      .mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          persisted: false,
+          cityClassification: 'service_area',
+        }),
+      } as Response);
     vi.stubGlobal('fetch', fetchMock);
 
     const locationEvent = vi.fn();
@@ -421,6 +519,7 @@ describe('GtagScript WhatsApp location flow', () => {
       manualSelection,
     );
     expect(locationEvent).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa'));
     const navigatedUrl = new URL(
       (window as Window & { __waTestUrl?: string }).__waTestUrl ?? 'http://localhost/',
     );
