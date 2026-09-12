@@ -101,7 +101,16 @@ describe('GtagScript WhatsApp location flow', () => {
         provinsi: 'Daerah Istimewa Yogyakarta',
       },
     }));
-    const gtag = vi.fn();
+    let conversionCallback: (() => void) | undefined;
+    const gtag = vi.fn((...args: unknown[]) => {
+      const params = args[2] as { event_callback?: () => void } | undefined;
+      if (typeof params?.event_callback !== 'function') return;
+      if (args[1] === 'santi_whatsapp_qualified') {
+        params.event_callback();
+        return;
+      }
+      conversionCallback = params.event_callback;
+    });
     (window as TestWindow).gtag = gtag;
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,
@@ -127,13 +136,18 @@ describe('GtagScript WhatsApp location flow', () => {
         persistence_status: 'confirmed',
       }),
     ));
+    expect((window as TestWindow).__waTestUrl).toBeUndefined();
 
     const qualifiedCall = gtag.mock.calls.find((call) => call[1] === 'santi_whatsapp_qualified');
     const conversionCall = gtag.mock.calls.find((call) => call[1] === 'conversion');
+    const qualifiedParams = qualifiedCall?.[2] as { event_id?: string } | undefined;
     expect(conversionCall?.[2]).toMatchObject({
       send_to: 'AW-17865321955/y7bwCKTm3J0cEOPb7MZC',
-      event_id: qualifiedCall?.[2]?.event_id,
+      event_id: qualifiedParams?.event_id,
     });
+    expect(conversionCallback).toBeTypeOf('function');
+    conversionCallback?.();
+    await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
     expect(fetchMock).toHaveBeenCalledWith('/api/lead/track', expect.objectContaining({
       method: 'POST',
     }));

@@ -12,6 +12,7 @@ try:
     from analytics_anomaly_monitor import (
         anomaly_check,
         apply_alert_deduplication,
+        build_cross_source_checks,
         collect_google_ads,
         filled_series,
         safe_error_message,
@@ -21,6 +22,7 @@ except ModuleNotFoundError:
     from scripts.analytics_anomaly_monitor import (
         anomaly_check,
         apply_alert_deduplication,
+        build_cross_source_checks,
         collect_google_ads,
         filled_series,
         safe_error_message,
@@ -91,6 +93,23 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
             self.assertEqual(first, [alert])
             self.assertEqual(second, [])
             self.assertEqual(json.loads(state_path.read_text())["alerts"].keys().__len__(), 1)
+
+    def test_cross_source_check_flags_missing_ga4_qualified_event(self) -> None:
+        sources = {
+            "ga4": {"status": "available", "daily": [{"date": "2026-09-11"}]},
+            "neon": {
+                "status": "available",
+                "daily": [{"date": "2026-09-11", "qualified_whatsapp_clicks": 6}],
+            },
+        }
+
+        checks = build_cross_source_checks(sources, "2026-09-11")
+
+        qualified = next(check for check in checks if check["metric"] == "qualified_whatsapp_ga4_vs_neon")
+        self.assertEqual(qualified["status"], "anomaly")
+        self.assertEqual(qualified["direction"], "drop")
+        self.assertEqual(qualified["ga4_value"], 0)
+        self.assertEqual(qualified["neon_value"], 6)
 
     def test_google_ads_uses_google_ads_service_search_stream_endpoint(self) -> None:
         response = {
