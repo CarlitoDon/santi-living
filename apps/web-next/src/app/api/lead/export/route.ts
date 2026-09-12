@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { isLeadEventsAdminAuthorized } from '@/lib/lead-admin';
 import { isLeadDbConfigured, queryLeadEvents } from '@/lib/lead-db';
 import { leadRowsToCsv } from '@/lib/lead-export';
 
@@ -21,15 +22,8 @@ function parseOffset(value: string | null): number {
   return Math.max(Math.trunc(parsed), 0);
 }
 
-function isAuthorized(request: NextRequest): boolean {
-  const token = process.env.LEAD_EVENTS_ADMIN_TOKEN;
-  if (!token) return false;
-  const header = request.headers.get('authorization') ?? '';
-  return header === `Bearer ${token}`;
-}
-
 export async function GET(request: NextRequest) {
-  if (!isAuthorized(request)) {
+  if (!isLeadEventsAdminAuthorized(request)) {
     return NextResponse.json(
       { ok: false, error: { code: 'UNAUTHORIZED' } },
       { status: 401 },

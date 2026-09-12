@@ -56,10 +56,10 @@ export async function POST(request: NextRequest) {
       attributionGbraid: request.headers.get('x-attribution-gbraid') || undefined,
     });
 
+    const leadEventId = `form-${correlationId}-${randomUUID()}`.slice(0, 80);
     const result = await client.order.create.mutate(parsed);
     try {
       const receivedAt = new Date().toISOString();
-      const leadEventId = `form-${correlationId}-${randomUUID()}`.slice(0, 80);
       const leadEvent = LeadEventSchema.parse({
         event_id: leadEventId,
         event_type: 'form_submit',
@@ -97,7 +97,13 @@ export async function POST(request: NextRequest) {
       console.error('[santi_lead_event] FORM_TRACKING_FAILURE:', { message });
     }
 
-    return NextResponse.json(result, { status: 201 });
+    return NextResponse.json({
+      ...result,
+      leadTracking: {
+        eventId: leadEventId,
+        eventType: 'form_submit',
+      },
+    }, { status: 201 });
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: { code: 'VALIDATION_ERROR', details: error.errors } }, { status: 400 });
