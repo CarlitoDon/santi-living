@@ -37,6 +37,7 @@ DEFAULT_GA4_EVENTS = (
 DEFAULT_LOOKBACK_DAYS = 28
 DEFAULT_SCORE_THRESHOLD = 3.0
 DEFAULT_RELATIVE_THRESHOLD = 0.5
+QUALIFIED_WHATSAPP_EFFECTIVE_DATE = dt.date(2026, 9, 13)
 
 
 def parse_date(value: str | dt.date) -> dt.date:
@@ -494,6 +495,7 @@ def build_cross_source_checks(sources: dict[str, Any], target_date: str) -> list
     if ga4.get("status") != "available" or neon.get("status") != "available":
         return []
 
+    target_day = parse_date(target_date)
     ga4_row = next((row for row in ga4.get("daily", []) if row.get("date") == target_date), {})
     neon_row = next((row for row in neon.get("daily", []) if row.get("date") == target_date), {})
     pairs = (
@@ -503,6 +505,17 @@ def build_cross_source_checks(sources: dict[str, Any], target_date: str) -> list
     )
     checks: list[dict[str, Any]] = []
     for label, ga4_field, neon_field in pairs:
+        if label == "qualified_whatsapp" and target_day < QUALIFIED_WHATSAPP_EFFECTIVE_DATE:
+            checks.append({
+                "source": "parity",
+                "metric": f"{label}_ga4_vs_neon",
+                "status": "not_ready",
+                "target_date": target_date,
+                "reason": "qualified WhatsApp parity is deferred until the first complete UTC day after rollout",
+                "effective_date": QUALIFIED_WHATSAPP_EFFECTIVE_DATE.isoformat(),
+            })
+            continue
+
         ga4_value = number(ga4_row.get(ga4_field))
         neon_value = number(neon_row.get(neon_field))
         delta = ga4_value - neon_value
