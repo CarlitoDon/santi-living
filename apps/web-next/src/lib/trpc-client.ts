@@ -22,6 +22,65 @@ type ProxyClientRequestHeaders = {
   attributionGbraid?: string;
 };
 
+export class ProxyTransportError extends Error {
+  readonly status: number | null;
+
+  constructor(message: string, status: number | null = null, cause?: unknown) {
+    super(message);
+    this.name = "ProxyTransportError";
+    this.status = status;
+    Object.defineProperty(this, "cause", {
+      configurable: true,
+      enumerable: false,
+      value: cause,
+      writable: false,
+    });
+    Object.setPrototypeOf(this, ProxyTransportError.prototype);
+  }
+}
+
+export function isProxyTransportError(
+  error: unknown,
+): error is ProxyTransportError {
+  if (error instanceof ProxyTransportError) {
+    return true;
+  }
+
+  if (!error || typeof error !== "object" || !("cause" in error)) {
+    return false;
+  }
+
+  const cause = (error as { cause?: unknown }).cause;
+  return cause !== error && isProxyTransportError(cause);
+}
+
+export async function fetchProxyResponse(
+  input: RequestInfo | URL,
+  init?: RequestInit,
+): Promise<Response> {
+  let response: Response;
+
+  try {
+    response = await fetch(input, init);
+  } catch (error) {
+    throw new ProxyTransportError(
+      "Proxy request failed before receiving a response",
+      null,
+      error,
+    );
+  }
+
+  const contentType = response.headers.get("content-type")?.toLowerCase() ?? "";
+  if (!contentType.includes("application/json")) {
+    throw new ProxyTransportError(
+      `Proxy returned a non-JSON response (HTTP ${response.status})`,
+      response.status,
+    );
+  }
+
+  return response;
+}
+
 // Get service URL from environment at RUNTIME (not build time)
 const getServiceUrl = () => {
   const trpcUrl = getProxyTrpcUrl();
@@ -58,6 +117,7 @@ export function createProxyClient(
     links: [
       httpBatchLink({
         url: `${serviceUrl}/api/trpc`,
+        fetch: fetchProxyResponse,
         transformer: superjson,
         headers: () => ({
           Authorization: `Bearer ${apiKey}`,

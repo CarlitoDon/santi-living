@@ -17,9 +17,11 @@ Unavailable providers remain `unavailable`; the monitor never reports unavailabl
 - Direct `/api/wa` requests without a client-generated `event_id` still redirect, but are intentionally excluded from the lead ledger so crawlers and link prefetchers cannot inflate conversion counts.
 - `phone_click` sends the same attribution fields to GA4 and Neon, including `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent` when available.
 - A successful checkout emits `form_submit` in GA4 with the `event_id` returned by `/api/submit-order`; Neon stores the same ID, so the two sources can be reconciled without relying on timestamps alone.
-- Register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`. Until they are queryable, use the authenticated Neon lead metrics/export endpoints as the attribution source of truth.
+- Register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`. The weekly dashboard records both the request result and whether event counts are actually populated; HTTP `200` with only `(not set)` is treated as empty, not as successful attribution. Its custom-dimension probe starts at the first complete UTC date after the `2026-09-12` rollout (`2026-09-13`), so earlier windows are reported as `not_ready` rather than empty. Until dimensions are populated, use the authenticated Neon lead metrics/export endpoints as the attribution source of truth.
 - Qualified WhatsApp parity is deferred until `2026-09-13`, the first complete UTC day after the production rollout at `2026-09-12T17:09Z`; the partial rollout day and earlier history are reported as `not_ready`, not as conversion loss.
 - Reverse geocoding is cached at the CDN/data-fetch layer and returns a retryable `503` for upstream Nominatim rate limits; the frontend can fall back to manual location entry without creating a runtime exception.
+- The article route uses a closed static slug set: all repository articles and all published Notion slugs are included in `generateStaticParams`, while unknown slugs return `404` without request-time ISR generation. Publishing a new Notion slug requires a rebuild/deployment; the existing Notion revalidation route refreshes content for slugs that already exist in the built set.
+- Specialist subdomains are permanent aliases to the main domain. The weekly dashboard probes those aliases for redirect health, but compares canonical, Open Graph, sitemap, and indexing evidence against the corresponding `/id/...` URL on `santiliving.com`.
 
 ### Google Ads configuration
 
@@ -54,6 +56,8 @@ Configure these repository secrets for the corresponding source to become availa
 
 The workflow never writes to GA4, Google Ads, Neon, or Vercel. Missing credentials are reported as unavailable rather than interpreted as zero.
 
+The weekly dashboard also reports offline-conversion readiness for qualified WhatsApp rows using aggregate click-ID presence (`gclid`, `gbraid`, and `wbraid`) only. It never stores the identifiers, coordinates, or customer-level rows in the report and never uploads conversions; `candidate_data_present` still requires business mapping and explicit Ads authorization.
+
 ## Vercel report shape
 
 The configured Vercel source must return either a JSON array or an object with a `daily` array. Each row needs `date` plus one or both of:
@@ -68,4 +72,4 @@ The configured Vercel source must return either a JSON array or an object with a
 
 ## Alert logic
 
-The target is yesterday UTC by default. The baseline is the trailing 28 days, preferring matching weekdays when at least three observations exist. A minimum-volume guard, robust median/MAD or IQR scale, and alert-state fingerprint prevent low-volume noise and duplicate notifications.
+The target is yesterday UTC by default. The baseline is the trailing 28 days, preferring matching weekdays when at least three observations exist. Missing provider dates stay `not_ready` rather than being inferred as zero; the report exposes expected/observed coverage. A minimum-volume guard, robust median/MAD or IQR scale, and alert-state fingerprint prevent low-volume noise and duplicate notifications.

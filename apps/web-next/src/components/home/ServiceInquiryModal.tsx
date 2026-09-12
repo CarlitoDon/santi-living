@@ -18,6 +18,9 @@ type ServiceInquiryModalProps = {
   serviceLabel: string;
   inquiryMessage: string;
   source: string;
+  productCategory: string;
+  pageType: string;
+  intent: string;
   onClose: () => void;
 };
 
@@ -26,6 +29,9 @@ export function ServiceInquiryModal({
   serviceLabel,
   inquiryMessage,
   source,
+  productCategory,
+  pageType,
+  intent,
   onClose,
 }: ServiceInquiryModalProps) {
   const isOpen = Boolean(item);
@@ -54,6 +60,9 @@ export function ServiceInquiryModal({
             message={message}
             source={source}
             location="service_inquiry_modal"
+            data-product-category={productCategory}
+            data-page-type={pageType}
+            data-wa-intent={intent}
             className="btn btn-primary flex h-12 w-full items-center justify-center rounded-lg text-lg shadow-[0_10px_15px_-3px_rgba(37,99,235,0.4)]"
           >
             Cek ketersediaan

@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { LeadEventSchema } from '@/lib/lead-attribution';
 import { persistLeadEvent } from '@/lib/lead-db';
 
+const TRACKING_ERROR_MESSAGE = 'Lead tracking is temporarily unavailable';
+
 export async function POST(request: NextRequest) {
   const startedAt = Date.now();
   const requestId = request.headers.get('x-vercel-id') ?? undefined;
@@ -71,7 +73,7 @@ export async function POST(request: NextRequest) {
       error: message.slice(0, 300),
     }));
     return NextResponse.json(
-      { ok: false, error: { code: 'TRACKING_ERROR', message } },
+      { ok: false, error: { code: 'TRACKING_ERROR', message: TRACKING_ERROR_MESSAGE } },
       { status: 500 }
     );
   }

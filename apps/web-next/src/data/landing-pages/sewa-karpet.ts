@@ -45,6 +45,12 @@ export const sewaKarpetJogja: LandingPageConfig = {
   },
   color: 'indigo',
 
+  tracking: {
+    productCategory: 'karpet',
+    pageType: 'money_page',
+    intent: 'sewa_karpet_jogja',
+  },
+
 
   benefits: [
     {
@@ -276,6 +282,12 @@ export const sewaKarpetMerah: LandingPageConfig = {
     bgImageAlt: 'Permadani merah untuk ruang tamu dan acara lesehan Santi Living',
   },
 
+  tracking: {
+    productCategory: 'karpet',
+    pageType: 'subcategory_page',
+    intent: 'sewa_karpet_permadani_merah',
+  },
+
   benefits: [
     {
       icon: '🟥',
@@ -407,6 +419,12 @@ export const sewaKarpetPermadani: LandingPageConfig = {
     badges: ['Permadani pengajian, tahlilan, dan tamu keluarga'],
 
     bgImageAlt: 'Permadani emas untuk pengajian tahlilan dan area duduk keluarga Santi Living',
+  },
+
+  tracking: {
+    productCategory: 'karpet',
+    pageType: 'subcategory_page',
+    intent: 'sewa_karpet_permadani',
   },
 
   benefits: [

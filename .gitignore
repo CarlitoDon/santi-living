@@ -10,8 +10,6 @@ coverage/
 .env
 .env.*
 !.env.example
-!.env.production
-!.env.staging
 
 # Logs
 *.log

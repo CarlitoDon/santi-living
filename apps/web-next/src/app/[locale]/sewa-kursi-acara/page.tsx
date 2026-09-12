@@ -247,6 +247,9 @@ export default async function SewaKursiAcaraPage({
               message={CHAIR_WA_TEXT}
               source="chair_page"
               location="chair_hero"
+              data-product-category="kursi"
+              data-page-type="service_page"
+              data-wa-intent="sewa_kursi_acara"
               className="chair-button chair-button-primary"
             >
               {copy.primaryCta} <span aria-hidden="true">↗</span>
@@ -305,6 +308,9 @@ export default async function SewaKursiAcaraPage({
               message={CHAIR_WA_TEXT}
               source="chair_details"
               location="chair_details"
+              data-product-category="kursi"
+              data-page-type="service_page"
+              data-wa-intent="sewa_kursi_acara"
               className="chair-button chair-button-light"
             >
               {copy.detailsCta} <span aria-hidden="true">↗</span>

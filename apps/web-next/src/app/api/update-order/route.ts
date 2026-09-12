@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
-import { createProxyClient } from '@/lib/trpc-client';
+import { createProxyClient, isProxyTransportError } from '@/lib/trpc-client';
 
 const UpdateOrderSchema = z.object({
   token: z.string().min(10),
@@ -53,8 +53,31 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: { code: 'VALIDATION_ERROR', details: error.errors } }, { status: 400 });
     }
+    if (isProxyTransportError(error)) {
+      console.error('[update-order] PROXY_FAILURE:', {
+        status: error.status,
+        message: error.message,
+      });
+      return NextResponse.json(
+        {
+          error: {
+            code: 'PROXY_UNAVAILABLE',
+            message: 'Sistem pemesanan sedang mengalami gangguan sementara. Silakan hubungi admin via WhatsApp.',
+          },
+        },
+        { status: 503 },
+      );
+    }
     const msg = error instanceof Error ? error.message : String(error);
-    console.error('[update-order] FAILURE:', { msg, raw: error });
-    return NextResponse.json({ error: { code: 'UPSTREAM_ERROR', message: msg } }, { status: 500 });
+    console.error('[update-order] FAILURE:', { msg });
+    return NextResponse.json(
+      {
+        error: {
+          code: 'UPSTREAM_ERROR',
+          message: 'Sistem pemesanan sedang mengalami gangguan sementara. Silakan hubungi admin via WhatsApp.',
+        },
+      },
+      { status: 502 },
+    );
   }
 }

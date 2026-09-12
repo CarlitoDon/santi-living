@@ -136,8 +136,7 @@ export function GtagScript() {
           function sendLeadEvent(payload) {
             try {
               var body = JSON.stringify(payload);
-              if (navigator.sendBeacon) {
-                navigator.sendBeacon('/api/lead/track', new Blob([body], { type: 'application/json' }));
+              if (navigator.sendBeacon && navigator.sendBeacon('/api/lead/track', new Blob([body], { type: 'application/json' }))) {
                 return;
               }
               fetch('/api/lead/track', {
@@ -522,8 +521,58 @@ export function GtagScript() {
             window.location.href = url.toString();
           }
 
-          function inferKarpetIntent(path, ctaSource, text) {
-            var combined = [path, ctaSource, text].join(' ').toLowerCase();
+          function normalizeTrackingPath(path) {
+            var normalizedPath = String(path || '').split('?')[0].split('#')[0];
+            if (normalizedPath.length > 1 && normalizedPath.charAt(normalizedPath.length - 1) === '/') {
+              normalizedPath = normalizedPath.slice(0, -1);
+            }
+            var pathSegments = normalizedPath.split('/');
+            var localeSegment = pathSegments[1] ? pathSegments[1].toLowerCase() : '';
+            if (localeSegment === 'id' || localeSegment === 'en') {
+              normalizedPath = '/' + pathSegments.slice(2).join('/');
+            }
+            return normalizedPath || '/';
+          }
+
+          function inferTrackingPageType(path) {
+            var normalizedPath = normalizeTrackingPath(path);
+            if (normalizedPath.indexOf('/artikel/') === 0) return 'article';
+            if (normalizedPath === '/sewa-karpet-jogja') return 'money_page';
+            if (normalizedPath === '/sewa-karpet-merah-jogja' || normalizedPath === '/sewa-karpet-permadani-jogja') {
+              return 'subcategory_page';
+            }
+            if (normalizedPath === '/sewa-perlengkapan-event') return 'landing';
+            if (normalizedPath === '/') return 'homepage';
+            return 'service_page';
+          }
+
+          function inferTrackingProductCategory(path, ctaSource, text) {
+            var normalizedPath = normalizeTrackingPath(path);
+            var combined = [normalizedPath, ctaSource, text].join(' ').toLowerCase();
+            if (normalizedPath === '/sewa-perlengkapan-event') return 'event';
+            var serviceSignalCount = 0;
+            if (combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1 || combined.indexOf('extra bed') !== -1) serviceSignalCount += 1;
+            if (combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) serviceSignalCount += 1;
+            if (combined.indexOf('karpet') !== -1 || combined.indexOf('carpet') !== -1) serviceSignalCount += 1;
+            if (serviceSignalCount > 1) return 'general';
+            if (normalizedPath.indexOf('/sewa-karpet') === 0 || combined.indexOf('karpet') !== -1) return 'karpet';
+            if (combined.indexOf('extra bed') !== -1 || combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1) return 'kasur';
+            if (normalizedPath === '/sewa-kursi-acara' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'kursi';
+            if (combined.indexOf('perlengkapan event') !== -1 || combined.indexOf('event equipment') !== -1) return 'event';
+            return '';
+          }
+
+          function inferTrackingIntent(path, ctaSource, text) {
+            var normalizedPath = normalizeTrackingPath(path);
+            var combined = [normalizedPath, ctaSource, text].join(' ').toLowerCase();
+            if (normalizedPath === '/sewa-perlengkapan-event') return 'paket_perlengkapan_acara';
+            var serviceSignalCount = 0;
+            if (combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1 || combined.indexOf('extra bed') !== -1) serviceSignalCount += 1;
+            if (combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) serviceSignalCount += 1;
+            if (combined.indexOf('karpet') !== -1 || combined.indexOf('carpet') !== -1) serviceSignalCount += 1;
+            if (serviceSignalCount > 1) return 'general_rental_inquiry';
+            if (normalizedPath === '/sewa-kursi-acara' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'sewa_kursi_acara';
+            if (normalizedPath === '/harga-sewa-kasur' || combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1 || combined.indexOf('extra bed') !== -1) return 'sewa_kasur';
             if (combined.indexOf('permadani emas') !== -1 || combined.indexOf('permadani-emas') !== -1) {
               return 'sewa_karpet_permadani_emas';
             }
@@ -557,22 +606,12 @@ export function GtagScript() {
 
             var combined = [path, ctaSource, text].join(' ').toLowerCase();
             var productCategory = link.getAttribute('data-product-category') || '';
-            if (!productCategory && combined.indexOf('karpet') !== -1) {
-              productCategory = 'karpet';
-            }
+            if (!productCategory) productCategory = inferTrackingProductCategory(path, ctaSource, text);
 
             var pageType = link.getAttribute('data-page-type') || '';
-            if (!pageType) {
-              if (path.indexOf('/artikel/') === 0) {
-                pageType = 'article';
-              } else if (path === '/sewa-karpet-jogja') {
-                pageType = 'money_page';
-              } else if (path.indexOf('/sewa-karpet') === 0) {
-                pageType = 'subcategory_page';
-              }
-            }
+            if (!pageType) pageType = inferTrackingPageType(path);
 
-            var intent = link.getAttribute('data-wa-intent') || inferKarpetIntent(path, ctaSource, text);
+            var intent = link.getAttribute('data-wa-intent') || inferTrackingIntent(path, ctaSource, text);
 
             return {
               product_category: productCategory,
@@ -793,18 +832,10 @@ export function GtagScript() {
               var phoneSource = telLink.getAttribute('data-phone-source') || 'phone_link';
               var phoneLocation = telLink.getAttribute('data-phone-location') || '';
               var phonePath = window.location.pathname || '';
-              var phonePageType = telLink.getAttribute('data-page-type') || '';
-              if (!phonePageType) {
-                if (phonePath.indexOf('/artikel/') === 0) {
-                  phonePageType = 'article';
-                } else if (phonePath === '/' || phonePath === '/id') {
-                  phonePageType = 'homepage';
-                } else {
-                  phonePageType = 'service_page';
-                }
-              }
-              var phoneProductCategory = telLink.getAttribute('data-product-category') || '';
-              var phoneIntent = telLink.getAttribute('data-phone-intent') || 'phone_inquiry';
+              var normalizedPhonePath = normalizeTrackingPath(phonePath);
+              var phonePageType = telLink.getAttribute('data-page-type') || inferTrackingPageType(normalizedPhonePath);
+              var phoneProductCategory = telLink.getAttribute('data-product-category') || inferTrackingProductCategory(normalizedPhonePath, phoneSource, '');
+              var phoneIntent = telLink.getAttribute('data-phone-intent') || inferTrackingIntent(normalizedPhonePath, phoneSource, '') || 'phone_inquiry';
               var phoneAttr = {};
               try {
                 var phoneRaw = localStorage.getItem('sl_attribution_v1');

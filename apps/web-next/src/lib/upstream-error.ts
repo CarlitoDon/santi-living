@@ -1,10 +1,14 @@
 import type { ApiErrorCode } from "./http-error";
+import { isProxyTransportError } from "./trpc-client";
 
 type UpstreamApiError = {
   status: number;
   code: ApiErrorCode;
   message: string;
 };
+
+const PROXY_UNAVAILABLE_MESSAGE =
+  "Sistem pemesanan sedang mengalami gangguan sementara. Silakan hubungi admin via WhatsApp.";
 
 const normalizeMessage = (error: unknown, fallback: string) => {
   if (error instanceof Error && error.message.trim().length > 0) {
@@ -72,6 +76,14 @@ export const mapUpstreamError = (
   error: unknown,
   fallbackMessage: string,
 ): UpstreamApiError => {
+  if (isProxyTransportError(error)) {
+    return {
+      status: 503,
+      code: "PROXY_UNAVAILABLE",
+      message: PROXY_UNAVAILABLE_MESSAGE,
+    };
+  }
+
   const message = normalizeMessage(error, fallbackMessage);
   const status = readHttpStatus(error) || guessStatusFromMessage(message);
 

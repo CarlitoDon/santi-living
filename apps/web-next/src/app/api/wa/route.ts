@@ -12,6 +12,8 @@ import { getGoogleDrivingQuote, GoogleRoutesError } from '@/lib/google-routes';
 import { buildWhatsAppLocationText } from '@/lib/whatsapp-location';
 import { guardDeliveryQuoteRequest } from '@/lib/delivery-quote-guard';
 
+const WA_REDIRECT_ERROR_MESSAGE = 'WhatsApp redirect is temporarily unavailable';
+
 function sanitizedPhone(value: string | null): string {
   const digits = (value || config.whatsappNumber).replace(/\D/g, '');
   return digits || config.whatsappNumber;
@@ -134,7 +136,7 @@ export async function GET(request: NextRequest) {
     const message = error instanceof Error ? error.message : String(error);
     console.error('[santi_lead_event] WA_REDIRECT_FAILURE:', { message });
     return NextResponse.json(
-      { ok: false, error: { code: 'WA_REDIRECT_ERROR', message } },
+      { ok: false, error: { code: 'WA_REDIRECT_ERROR', message: WA_REDIRECT_ERROR_MESSAGE } },
       { status: 500 }
     );
   }
