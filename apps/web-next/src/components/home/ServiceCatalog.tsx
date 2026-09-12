@@ -13,6 +13,18 @@ type ServiceKey = 'kasur' | 'kursi' | 'karpet';
 
 type ServiceCatalogItem = ServiceInquiryItem;
 
+function getServiceIntent(service: ServiceKey, itemName?: string): string {
+  if (service === 'kasur') return 'sewa_kasur';
+  if (service === 'kursi') return 'sewa_kursi_acara';
+
+  const normalizedItemName = itemName?.toLowerCase() ?? '';
+  if (normalizedItemName.includes('merah')) return 'sewa_karpet_permadani_merah';
+  if (normalizedItemName.includes('emas') || normalizedItemName.includes('cream')) {
+    return 'sewa_karpet_permadani_emas';
+  }
+  return 'sewa_karpet_jogja';
+}
+
 const serviceOptions: Record<ServiceKey, {
   label: string;
   title: string;
@@ -110,6 +122,9 @@ export function ServiceCatalog({ initialService, locale }: { initialService: Ser
                         message={active.wa.replace('{jenis}', item.name)}
                         source={'homepage_' + activeService + '_' + item.name.toLowerCase().replaceAll(' ', '-')}
                         location="catalog_item"
+                        data-product-category={activeService}
+                        data-page-type="homepage"
+                        data-wa-intent={getServiceIntent(activeService, item.name)}
                         className="stepper-btn-single"
                       >
                         Pilih
@@ -128,6 +143,9 @@ export function ServiceCatalog({ initialService, locale }: { initialService: Ser
               message={active.wa}
               source={'homepage_' + activeService + '_catalog'}
               location="catalog"
+              data-product-category={activeService}
+              data-page-type="homepage"
+              data-wa-intent={getServiceIntent(activeService)}
               className="home-secondary-button"
             >
               Cek ketersediaan
@@ -138,6 +156,9 @@ export function ServiceCatalog({ initialService, locale }: { initialService: Ser
             serviceLabel={active.label}
             inquiryMessage={active.wa}
             source={'homepage_' + activeService + '_detail'}
+            productCategory={activeService}
+            pageType="homepage"
+            intent={getServiceIntent(activeService, modalItem?.name)}
             onClose={() => setModalItem(null)}
           />
         </div>

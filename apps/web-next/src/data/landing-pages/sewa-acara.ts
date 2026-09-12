@@ -14,6 +14,12 @@ export const sewaAcara: LandingPageConfig = {
   },
   color: 'indigo',
 
+  tracking: {
+    productCategory: 'event',
+    pageType: 'landing',
+    intent: 'paket_perlengkapan_acara',
+  },
+
   benefits: [
     {
       icon: '🛏️',

@@ -5,6 +5,8 @@ import { leadRowsToCsv } from '@/lib/lead-export';
 
 export const dynamic = 'force-dynamic';
 
+const EXPORT_ERROR_MESSAGE = 'Lead export is temporarily unavailable';
+
 function normalizeParam(value: string | null): string | undefined {
   const trimmed = value?.trim();
   return trimmed || undefined;
@@ -77,7 +79,7 @@ export async function GET(request: NextRequest) {
     const message = error instanceof Error ? error.message : String(error);
     console.error('[santi_lead_export] FAILURE:', { message });
     return NextResponse.json(
-      { ok: false, error: { code: 'EXPORT_ERROR', message } },
+      { ok: false, error: { code: 'EXPORT_ERROR', message: EXPORT_ERROR_MESSAGE } },
       { status: 500 },
     );
   }

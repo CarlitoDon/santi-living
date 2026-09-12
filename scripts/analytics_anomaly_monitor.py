@@ -153,6 +153,34 @@ def source_available(name: str, daily: list[dict[str, Any]]) -> dict[str, Any]:
     return {"name": name, "status": "available", "daily": daily}
 
 
+def coverage_summary(daily: list[dict[str, Any]], start: dt.date, end: dt.date) -> dict[str, Any]:
+    expected_dates = date_range(start, end)
+    expected_set = set(expected_dates)
+    date_counts: dict[str, int] = {}
+    for row in daily:
+        if not isinstance(row, dict):
+            continue
+        try:
+            day = parse_date(str(row.get("date") or "")).isoformat()
+        except ValueError:
+            continue
+        date_counts[day] = date_counts.get(day, 0) + 1
+
+    observed_dates = sorted(day for day in date_counts if day in expected_set)
+    missing_dates = [day for day in expected_dates if day not in date_counts]
+    unexpected_dates = sorted(day for day in date_counts if day not in expected_set)
+    duplicate_dates = sorted(day for day, count in date_counts.items() if count > 1)
+    return {
+        "expected_days": len(expected_dates),
+        "observed_days": len(observed_dates),
+        "missing_days": len(missing_dates),
+        "missing_dates": missing_dates,
+        "unexpected_dates": unexpected_dates,
+        "duplicate_dates": duplicate_dates,
+        "complete": not missing_dates,
+    }
+
+
 def parse_ga4_date(value: str) -> str | None:
     try:
         return dt.datetime.strptime(value, "%Y%m%d").date().isoformat()
@@ -336,6 +364,13 @@ def collect_vercel(start: dt.date, end: dt.date, url: str | None, file_path: str
     if error:
         return source_unavailable("vercel", error, status)
 
+    if isinstance(payload, dict) and payload.get("error"):
+        provider_error = payload.get("error")
+        code = provider_error.get("code") if isinstance(provider_error, dict) else None
+        message = safe_error_message({"body": provider_error})
+        reason = f"{code}: {message}" if code and message else str(code or message)
+        return source_unavailable("vercel", reason or "Vercel usage provider returned an error", status)
+
     rows = payload.get("daily") if isinstance(payload, dict) else payload
     if not isinstance(rows, list):
         return source_unavailable("vercel", "Vercel usage source did not return a daily array", status)
@@ -370,7 +405,7 @@ def collect_vercel(start: dt.date, end: dt.date, url: str | None, file_path: str
 
 def filled_series(daily: list[dict[str, Any]], key: str, start: dt.date, end: dt.date) -> list[dict[str, Any]]:
     values = {str(row.get("date"))[:10]: number(row.get(key)) for row in daily}
-    return [{"date": day, "value": values.get(day, 0.0)} for day in date_range(start, end)]
+    return [{"date": day, "value": values[day] if day in values else None} for day in date_range(start, end)]
 
 
 def percentile(values: list[float], fraction: float) -> float:
@@ -397,25 +432,28 @@ def anomaly_check(
 ) -> dict[str, Any]:
     target_day = parse_date(target_date)
     target = next((point for point in series if parse_date(point["date"]) == target_day), None)
-    if target is None:
+    if target is None or target.get("value") is None:
         return {
             "source": source,
             "metric": metric,
-            "status": "unavailable",
-            "reason": f"target date {target_date} is missing",
+            "status": "not_ready",
+            "target_date": target_date,
+            "reason": f"target date {target_date} is missing from the provider response; no zero was inferred",
         }
 
-    baseline_points = [
+    baseline_candidates = [
         point
         for point in series
         if target_day - dt.timedelta(days=28) <= parse_date(point["date"]) < target_day
     ]
-    same_weekday = [point for point in baseline_points if parse_date(point["date"]).weekday() == target_day.weekday()]
+    same_weekday = [point for point in baseline_candidates if parse_date(point["date"]).weekday() == target_day.weekday()]
     if len(same_weekday) >= 3:
-        baseline_points = same_weekday
+        baseline_candidates = same_weekday
         baseline_method = "same_weekday_28d"
     else:
         baseline_method = "trailing_28d"
+    baseline_points = [point for point in baseline_candidates if point.get("value") is not None]
+    missing_baseline_count = len(baseline_candidates) - len(baseline_points)
 
     if len(baseline_points) < 3:
         return {
@@ -425,6 +463,7 @@ def anomaly_check(
             "target_date": target_date,
             "current": number(target["value"]),
             "baseline_count": len(baseline_points),
+            "missing_baseline_count": missing_baseline_count,
             "baseline_method": baseline_method,
         }
 
@@ -516,6 +555,24 @@ def build_cross_source_checks(sources: dict[str, Any], target_date: str) -> list
             })
             continue
 
+        ga4_has_target = any(row.get("date") == target_date for row in ga4.get("daily", []))
+        neon_has_target = any(row.get("date") == target_date for row in neon.get("daily", []))
+        if not ga4_has_target or not neon_has_target:
+            missing_sources = []
+            if not ga4_has_target:
+                missing_sources.append("ga4")
+            if not neon_has_target:
+                missing_sources.append("neon")
+            checks.append({
+                "source": "parity",
+                "metric": f"{label}_ga4_vs_neon",
+                "status": "not_ready",
+                "target_date": target_date,
+                "reason": "same-day parity requires a target-date row from both providers; missing rows are not treated as zero",
+                "missing_sources": missing_sources,
+            })
+            continue
+
         ga4_value = number(ga4_row.get(ga4_field))
         neon_value = number(neon_row.get(neon_field))
         delta = ga4_value - neon_value
@@ -589,6 +646,12 @@ def build_markdown(snapshot: dict[str, Any]) -> str:
     ]
     for name, source in snapshot["sources"].items():
         suffix = "" if source["status"] == "available" else f" — {source.get('reason', 'unavailable')}"
+        coverage = source.get("coverage")
+        if coverage:
+            suffix += (
+                f"; coverage={coverage['observed_days']}/{coverage['expected_days']} days"
+                f" (missing={coverage['missing_days']})"
+            )
         lines.append(f"- `{name}`: {source['status']}{suffix}")
     lines.extend(["", "## Alerts"])
     if snapshot["alerts"]:
@@ -608,7 +671,7 @@ def build_markdown(snapshot: dict[str, Any]) -> str:
         "- No message or campaign changes are performed by this monitor.",
         "",
         "## Limitations",
-        "- Provider failures are reported as unavailable and are never converted to zero.",
+        "- Provider failures and missing provider dates are reported explicitly and are never converted to zero.",
         "- Same-day GA4/Neon parity checks flag missing or materially divergent form, phone, and qualified WhatsApp events.",
         "- Vercel ISR/Fluid metrics require a configured read-only usage report source.",
         "- Google Ads metrics require a developer token, customer ID, and OAuth scope accepted by the API.",
@@ -650,6 +713,9 @@ def main() -> int:
         "google_ads": collect_google_ads(token, start, target),
         "vercel": collect_vercel(start, target, args.vercel_usage_url, args.vercel_usage_file),
     }
+    for source in sources.values():
+        if source["status"] == "available":
+            source["coverage"] = coverage_summary(source["daily"], start, target)
 
     checks: list[dict[str, Any]] = []
     definitions = metric_definitions()

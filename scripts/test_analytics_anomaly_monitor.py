@@ -14,6 +14,8 @@ try:
         apply_alert_deduplication,
         build_cross_source_checks,
         collect_google_ads,
+        collect_vercel,
+        coverage_summary,
         filled_series,
         safe_error_message,
     )
@@ -24,6 +26,8 @@ except ModuleNotFoundError:
         apply_alert_deduplication,
         build_cross_source_checks,
         collect_google_ads,
+        collect_vercel,
+        coverage_summary,
         filled_series,
         safe_error_message,
     )
@@ -64,7 +68,7 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
         self.assertEqual(result["status"], "anomaly")
         self.assertEqual(result["direction"], "spike")
 
-    def test_filled_series_makes_missing_provider_days_explicit_zero(self) -> None:
+    def test_filled_series_preserves_missing_provider_days_as_unavailable(self) -> None:
         start = dt.date(2026, 9, 1)
         end = dt.date(2026, 9, 3)
 
@@ -72,9 +76,42 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
 
         self.assertEqual(result, [
             {"date": "2026-09-01", "value": 4.0},
-            {"date": "2026-09-02", "value": 0.0},
-            {"date": "2026-09-03", "value": 0.0},
+            {"date": "2026-09-02", "value": None},
+            {"date": "2026-09-03", "value": None},
         ])
+
+    def test_missing_target_date_is_not_reported_as_anomaly(self) -> None:
+        start = dt.date(2026, 8, 1)
+        end = dt.date(2026, 8, 29)
+        daily = filled_series(
+            [{"date": (start + dt.timedelta(days=index)).isoformat(), "value": 10} for index in range(28)],
+            "value",
+            start,
+            end,
+        )
+
+        result = anomaly_check("ga4", "event.whatsapp_click", daily, end.isoformat(), min_volume=5)
+
+        self.assertEqual(result["status"], "not_ready")
+        self.assertIn("no zero was inferred", result["reason"])
+
+    def test_coverage_summary_reports_missing_and_duplicate_dates(self) -> None:
+        result = coverage_summary(
+            [
+                {"date": "2026-09-01"},
+                {"date": "2026-09-01"},
+                {"date": "2026-09-03"},
+                {"date": "2026-08-31"},
+            ],
+            dt.date(2026, 9, 1),
+            dt.date(2026, 9, 3),
+        )
+
+        self.assertEqual(result["observed_days"], 2)
+        self.assertEqual(result["missing_dates"], ["2026-09-02"])
+        self.assertEqual(result["duplicate_dates"], ["2026-09-01"])
+        self.assertEqual(result["unexpected_dates"], ["2026-08-31"])
+        self.assertFalse(result["complete"])
 
     def test_alert_deduplication_only_marks_first_observation_new(self) -> None:
         alert = {
@@ -125,6 +162,21 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
         self.assertEqual(qualified["direction"], "drop")
         self.assertEqual(qualified["ga4_value"], 0)
         self.assertEqual(qualified["neon_value"], 6)
+
+    def test_cross_source_check_does_not_treat_missing_target_row_as_zero(self) -> None:
+        sources = {
+            "ga4": {"status": "available", "daily": []},
+            "neon": {
+                "status": "available",
+                "daily": [{"date": "2026-09-13", "qualified_whatsapp_clicks": 6}],
+            },
+        }
+
+        checks = build_cross_source_checks(sources, "2026-09-13")
+
+        qualified = next(check for check in checks if check["metric"] == "qualified_whatsapp_ga4_vs_neon")
+        self.assertEqual(qualified["status"], "not_ready")
+        self.assertEqual(qualified["missing_sources"], ["ga4"])
 
     def test_google_ads_uses_google_ads_service_search_stream_endpoint(self) -> None:
         response = {
@@ -188,6 +240,20 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
         }
 
         self.assertEqual(safe_error_message(response), "Customer is not linked to the manager")
+
+    def test_vercel_provider_error_preserves_error_code(self) -> None:
+        with patch(
+            f"{MONITOR_MODULE}.load_vercel_usage_payload",
+            return_value=(
+                {"error": {"code": "payment_required", "message": "Observability Plus is required"}},
+                None,
+                200,
+            ),
+        ):
+            result = collect_vercel(dt.date(2026, 9, 11), dt.date(2026, 9, 11), "https://example.test", None)
+
+        self.assertEqual(result["status"], "unavailable")
+        self.assertEqual(result["reason"], "payment_required: Observability Plus is required")
 
 
 if __name__ == "__main__":

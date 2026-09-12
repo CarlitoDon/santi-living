@@ -4,6 +4,8 @@ import { isLeadDbConfigured, queryLeadEventMetrics } from '@/lib/lead-db';
 
 export const dynamic = 'force-dynamic';
 
+const METRICS_ERROR_MESSAGE = 'Lead metrics are temporarily unavailable';
+
 function normalizeParam(value: string | null): string | undefined {
   const trimmed = value?.trim();
   return trimmed || undefined;
@@ -39,7 +41,7 @@ export async function GET(request: NextRequest) {
     const message = error instanceof Error ? error.message : String(error);
     console.error('[santi_lead_metrics] FAILURE:', { message });
     return NextResponse.json(
-      { ok: false, error: { code: 'METRICS_ERROR', message } },
+      { ok: false, error: { code: 'METRICS_ERROR', message: METRICS_ERROR_MESSAGE } },
       { status: 500 },
     );
   }

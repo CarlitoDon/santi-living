@@ -65,6 +65,9 @@ export function SewaKarpetContent({
               message={WA_INQUIRY_TEXT}
               source="carpet_page_hero"
               location="carpet_hero"
+              data-product-category="karpet"
+              data-page-type="money_page"
+              data-wa-intent="sewa_karpet_jogja"
               className="inline-flex items-center gap-2 rounded-lg bg-green-500 px-8 py-3 text-base font-semibold text-white shadow-lg transition-colors hover:bg-green-600"
             >
               <span>Harga &amp; Konsultasi</span>
@@ -283,6 +286,9 @@ export function SewaKarpetContent({
             message={WA_INQUIRY_TEXT}
             source="carpet_page_footer"
             location="carpet_footer"
+            data-product-category="karpet"
+            data-page-type="money_page"
+            data-wa-intent="sewa_karpet_jogja"
             className="inline-flex items-center gap-2 rounded-lg bg-green-500 px-8 py-3 text-lg font-semibold text-white shadow-lg transition-colors hover:bg-green-600"
           >
             Chat WhatsApp: {WA_DISPLAY}

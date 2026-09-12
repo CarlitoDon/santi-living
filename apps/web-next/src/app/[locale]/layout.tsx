@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Serif } from 'next/font/google';
+import { notFound } from 'next/navigation';
 
 export const viewport: Viewport = {
   themeColor: '#f4ebdd',
@@ -44,9 +45,14 @@ interface LayoutProps {
   params: Promise<{ locale: string }>;
 }
 
+function isSupportedLocale(locale: string): locale is Locale {
+  return locale === 'id' || locale === 'en';
+}
+
 export async function generateMetadata({ params }: LayoutProps): Promise<Metadata> {
   const { locale } = await params;
-  const dict = await getDictionary(locale as Locale);
+  if (!isSupportedLocale(locale)) notFound();
+  const dict = await getDictionary(locale);
   const canonicalUrl = localizedSiteUrl('', locale);
   return {
     metadataBase: new URL('https://santiliving.com'),
@@ -103,7 +109,8 @@ export default async function RootLayout({
   params,
 }: LayoutProps) {
   const { locale } = await params;
-  const dict = await getDictionary(locale as Locale);
+  if (!isSupportedLocale(locale)) notFound();
+  const dict = await getDictionary(locale);
   
   const websiteSchema = {
     '@context': 'https://schema.org',
