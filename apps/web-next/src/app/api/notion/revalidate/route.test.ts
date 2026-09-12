@@ -4,12 +4,10 @@ import { signWebhookPayload } from '@notionhq/client';
 
 const mocks = vi.hoisted(() => ({
   getNotionSlugsForPage: vi.fn(),
-  revalidatePath: vi.fn(),
   revalidateTag: vi.fn(),
 }));
 
 vi.mock('next/cache', () => ({
-  revalidatePath: mocks.revalidatePath,
   revalidateTag: mocks.revalidateTag,
 }));
 
@@ -39,14 +37,13 @@ describe('POST /api/notion/revalidate', () => {
     process.env.NOTION_REVALIDATE_SECRET = 'test-secret';
     delete process.env.NOTION_WEBHOOK_VERIFICATION_TOKEN;
     mocks.getNotionSlugsForPage.mockReset();
-    mocks.revalidatePath.mockReset();
     mocks.revalidateTag.mockReset();
   });
 
   it('rejects a request without the private subscription secret', async () => {
     const response = await POST(request({ type: 'page.content_updated' }, 'wrong'));
     expect(response.status).toBe(401);
-    expect(mocks.revalidatePath).not.toHaveBeenCalled();
+    expect(mocks.revalidateTag).not.toHaveBeenCalled();
   });
 
   it('captures the one-time Notion verification token in private runtime logs', async () => {
@@ -98,19 +95,12 @@ describe('POST /api/notion/revalidate', () => {
     expect(response.status).toBe(200);
     expect(mocks.revalidateTag).toHaveBeenCalledWith(
       'notion-blog-posts-v3',
-      { expire: 0 },
+      'max',
     );
     expect(mocks.revalidateTag).toHaveBeenCalledWith(
       'notion-blog-post-v3:tips-sewa-kasur',
-      { expire: 0 },
+      'max',
     );
-    expect(mocks.revalidatePath.mock.calls.map(([path]) => path)).toEqual([
-      '/id/artikel',
-      '/en/artikel',
-      '/sitemap.xml',
-      '/id/artikel/tips-sewa-kasur',
-      '/en/artikel/tips-sewa-kasur',
-    ]);
   });
 
   it.each(['page.moved', 'page.deleted'])('invalidates old and current slugs for %s', async (type) => {
@@ -123,14 +113,12 @@ describe('POST /api/notion/revalidate', () => {
     expect(response.status).toBe(200);
     expect(mocks.revalidateTag).toHaveBeenCalledWith(
       'notion-blog-post-v3:slug-lama',
-      { expire: 0 },
+      'max',
     );
     expect(mocks.revalidateTag).toHaveBeenCalledWith(
       'notion-blog-post-v3:slug-baru',
-      { expire: 0 },
+      'max',
     );
-    expect(mocks.revalidatePath).toHaveBeenCalledWith('/id/artikel/slug-lama');
-    expect(mocks.revalidatePath).toHaveBeenCalledWith('/id/artikel/slug-baru');
   });
 
   it('expires all article details when a deleted page has no recoverable slug', async () => {
@@ -143,7 +131,7 @@ describe('POST /api/notion/revalidate', () => {
     expect(response.status).toBe(200);
     expect(mocks.revalidateTag).toHaveBeenCalledWith(
       'notion-blog-post-details-v3',
-      { expire: 0 },
+      'max',
     );
   });
 });
