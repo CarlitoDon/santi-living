@@ -26,6 +26,7 @@ describe('GET /api/wa', () => {
   beforeEach(() => {
     resetDeliveryQuoteGuardForTests();
     getGoogleDrivingQuoteMock.mockReset();
+    getGoogleDrivingQuoteMock.mockResolvedValue(null);
     persistLeadEventMock.mockReset();
     persistLeadEventMock.mockResolvedValue({
       configured: false,
@@ -34,13 +35,14 @@ describe('GET /api/wa', () => {
     });
   });
 
-  function buildRequest(ip = '203.0.113.20'): NextRequest {
+  function buildRequest(ip = '203.0.113.20', eventId?: string): NextRequest {
     const url = new URL('http://localhost/api/wa');
     url.searchParams.set('to', '6289519119092');
     url.searchParams.set('text', 'Halo Admin\n\nAlamat pengiriman:\n{alamat lengkap}');
     url.searchParams.set('address_text', 'Jl. Contoh No. 7, Sleman');
     url.searchParams.set('latitude', '-7.8000123');
     url.searchParams.set('longitude', '110.3999877');
+    if (eventId) url.searchParams.set('event_id', eventId);
     return new NextRequest(url, { headers: { 'x-forwarded-for': ip } });
   }
 
@@ -64,6 +66,26 @@ describe('GET /api/wa', () => {
     expect(message).not.toContain('Rumus ongkir');
     expect(message).not.toContain('dibulatkan');
     expect(getGoogleDrivingQuoteMock).toHaveBeenCalledWith(-7.8000123, 110.3999877);
+  });
+
+  it('does not persist direct redirects without a client-generated event id', async () => {
+    const response = await GET(buildRequest());
+
+    expect(response.status).toBe(307);
+    expect(persistLeadEventMock).not.toHaveBeenCalled();
+  });
+
+  it('persists redirects carrying a client-generated event id', async () => {
+    const request = buildRequest('203.0.113.20', 'lead-client-event-123');
+
+    await GET(request);
+
+    expect(persistLeadEventMock).toHaveBeenCalledWith(
+      'lead-client-event-123',
+      expect.objectContaining({ event_id: 'lead-client-event-123', event_type: 'whatsapp_click' }),
+      expect.any(String),
+      { geocode: false },
+    );
   });
 
   it.each([
