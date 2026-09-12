@@ -102,6 +102,37 @@ export function GtagScript() {
             } catch(ex) {}
           }
 
+          function flushGtagEvents(events, callback) {
+            var remaining = events.length;
+            var settled = false;
+            var timeout = setTimeout(settle, 1200);
+
+            function settle() {
+              if (settled) return;
+              settled = true;
+              clearTimeout(timeout);
+              callback();
+            }
+
+            if (!remaining) {
+              settle();
+              return;
+            }
+
+            function markSent() {
+              remaining -= 1;
+              if (remaining <= 0) settle();
+            }
+
+            events.forEach(function(event) {
+              var params = Object.assign({}, event.params, {
+                event_callback: markSent,
+                event_timeout: 1000
+              });
+              trackGtagEvent('event', event.name, params);
+            });
+          }
+
           function sendLeadEvent(payload) {
             try {
               var body = JSON.stringify(payload);
@@ -150,7 +181,7 @@ export function GtagScript() {
             return Promise.race([
               request,
               new Promise(function(resolve) {
-                setTimeout(function() { resolve({ persisted: false }); }, 1800);
+                setTimeout(function() { resolve({ persisted: false }); }, 5000);
               })
             ]);
           }
@@ -716,6 +747,7 @@ export function GtagScript() {
 
                 persistence.then(function(result) {
                   if (!result || result.persisted !== true || result.cityClassification !== 'service_area') {
+                    navigateToWhatsapp(url);
                     return;
                   }
 
@@ -724,12 +756,23 @@ export function GtagScript() {
                     city_classification: result.cityClassification,
                     persistence_status: 'confirmed'
                   });
-                  trackGtagEvent('event', 'santi_whatsapp_qualified', qualifiedEventParams);
-                  trackGtagEvent('event', 'conversion', {
-                    'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
-                    'event_id': leadEventId
+                  flushGtagEvents([
+                    {
+                      name: 'santi_whatsapp_qualified',
+                      params: qualifiedEventParams
+                    },
+                    {
+                      name: 'conversion',
+                      params: {
+                        'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
+                        'event_id': leadEventId,
+                        'transport_type': 'beacon'
+                      }
+                    }
+                  ], function() {
+                    navigateToWhatsapp(url);
                   });
-                }).finally(function() {
+                }).catch(function() {
                   navigateToWhatsapp(url);
                 });
               });

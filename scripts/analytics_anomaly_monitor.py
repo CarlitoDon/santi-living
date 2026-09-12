@@ -488,6 +488,50 @@ def metric_definitions() -> dict[str, dict[str, Any]]:
     }
 
 
+def build_cross_source_checks(sources: dict[str, Any], target_date: str) -> list[dict[str, Any]]:
+    ga4 = sources.get("ga4", {})
+    neon = sources.get("neon", {})
+    if ga4.get("status") != "available" or neon.get("status") != "available":
+        return []
+
+    ga4_row = next((row for row in ga4.get("daily", []) if row.get("date") == target_date), {})
+    neon_row = next((row for row in neon.get("daily", []) if row.get("date") == target_date), {})
+    pairs = (
+        ("qualified_whatsapp", "santi_whatsapp_qualified", "qualified_whatsapp_clicks"),
+        ("phone_click", "phone_click", "phone_clicks"),
+        ("form_submit", "form_submit", "form_submits"),
+    )
+    checks: list[dict[str, Any]] = []
+    for label, ga4_field, neon_field in pairs:
+        ga4_value = number(ga4_row.get(ga4_field))
+        neon_value = number(neon_row.get(neon_field))
+        delta = ga4_value - neon_value
+        relative_delta = abs(delta) / max(abs(neon_value), 1.0)
+        is_anomaly = (
+            (neon_value > 0 and ga4_value == 0)
+            or (ga4_value > 0 and neon_value == 0)
+            or (max(ga4_value, neon_value) >= 2 and relative_delta >= DEFAULT_RELATIVE_THRESHOLD)
+        )
+        checks.append({
+            "source": "parity",
+            "metric": f"{label}_ga4_vs_neon",
+            "status": "anomaly" if is_anomaly else "ok",
+            "target_date": target_date,
+            "current": ga4_value,
+            "baseline_median": neon_value,
+            "baseline_count": 1,
+            "baseline_method": "same-day cross-source",
+            "score": None,
+            "relative_delta": round(relative_delta, 3),
+            "direction": "spike" if delta > 0 else "drop" if delta < 0 else "flat",
+            "min_volume": 1,
+            "ga4_value": ga4_value,
+            "neon_value": neon_value,
+            "detail": f"GA4={ga4_value:g}; Neon={neon_value:g}",
+        })
+    return checks
+
+
 def build_alert_fingerprint(alert: dict[str, Any]) -> str:
     return "|".join([
         str(alert.get("source")),
@@ -552,6 +596,7 @@ def build_markdown(snapshot: dict[str, Any]) -> str:
         "",
         "## Limitations",
         "- Provider failures are reported as unavailable and are never converted to zero.",
+        "- Same-day GA4/Neon parity checks flag missing or materially divergent form, phone, and qualified WhatsApp events.",
         "- Vercel ISR/Fluid metrics require a configured read-only usage report source.",
         "- Google Ads metrics require a developer token, customer ID, and OAuth scope accepted by the API.",
     ])
@@ -609,6 +654,8 @@ def main() -> int:
                     min_volume=min_volume,
                 )
             )
+
+    checks.extend(build_cross_source_checks(sources, target.isoformat()))
 
     alerts = [check for check in checks if check.get("status") == "anomaly"]
     output_dir = Path(args.output_dir).expanduser()
