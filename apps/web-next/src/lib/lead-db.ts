@@ -67,6 +67,51 @@ export interface LeadExportRow {
   raw_payload: unknown;
 }
 
+export interface LeadMetricCount {
+  key: string;
+  count: number;
+}
+
+export interface LeadSourceCampaignMetric {
+  source: string;
+  campaign: string;
+  count: number;
+}
+
+export interface LeadDailyMetric {
+  date: string;
+  total_events: number;
+  whatsapp_clicks: number;
+  qualified_whatsapp_clicks: number;
+  phone_clicks: number;
+  form_submits: number;
+  gbp_calls: number;
+  gbp_website_clicks: number;
+  manual_leads: number;
+  service_area_events: number;
+  out_of_service_events: number;
+  unknown_city_events: number;
+  geocode_successes: number;
+  geocode_failures: number;
+  geocode_missing: number;
+}
+
+export interface LeadEventMetrics {
+  from: string | null;
+  to: string | null;
+  total_events: number;
+  distinct_event_ids: number;
+  qualified_whatsapp_clicks: number;
+  geocode_successes: number;
+  geocode_failures: number;
+  geocode_missing: number;
+  by_event_type: LeadMetricCount[];
+  by_city_classification: LeadMetricCount[];
+  by_geocode_status: LeadMetricCount[];
+  by_source_campaign: LeadSourceCampaignMetric[];
+  daily: LeadDailyMetric[];
+}
+
 let sqlClient: LeadSql | null = null;
 
 function getLeadSql(): LeadSql | null {
@@ -90,6 +135,11 @@ function nullableNumber(value: number | undefined): number | null {
 
 function nullableInteger(value: number | undefined): number | null {
   return typeof value === 'number' && Number.isFinite(value) ? Math.round(value) : null;
+}
+
+function metricNumber(value: unknown): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 async function enrichLeadEvent(input: LeadEventInput, shouldGeocode: boolean): Promise<LeadEventInput> {
@@ -322,4 +372,134 @@ export async function queryLeadEvents(filters: LeadExportFilters): Promise<LeadE
   `;
 
   return rows as LeadExportRow[];
+}
+
+export async function queryLeadEventMetrics(
+  filters: Pick<LeadExportFilters, 'from' | 'to'> = {},
+): Promise<LeadEventMetrics> {
+  const sql = getLeadSql();
+  if (!sql) {
+    throw new Error('DATABASE_URL is not configured');
+  }
+
+  const from = filters.from ?? null;
+  const to = filters.to ?? null;
+  const params = [from, to];
+  const whereClause = `
+    FROM lead_events
+    WHERE ($1::timestamptz IS NULL OR received_at >= $1::timestamptz)
+      AND ($2::timestamptz IS NULL OR received_at < $2::timestamptz)
+  `;
+
+  const [totals, eventTypes, cityClassifications, geocodeStatuses, sourceCampaigns, daily] = await Promise.all([
+    sql.query(`
+      SELECT
+        COUNT(*)::int AS total_events,
+        COUNT(DISTINCT event_id)::int AS distinct_event_ids,
+        COUNT(*) FILTER (
+          WHERE event_type = 'whatsapp_click' AND city_classification = 'service_area'
+        )::int AS qualified_whatsapp_clicks,
+        COUNT(*) FILTER (WHERE geocode_status = 'success')::int AS geocode_successes,
+        COUNT(*) FILTER (WHERE geocode_status IN ('failed', 'timeout', 'unavailable'))::int AS geocode_failures,
+        COUNT(*) FILTER (WHERE geocode_status IS NULL OR geocode_status = 'not_requested')::int AS geocode_missing
+      ${whereClause}
+    `, params),
+    sql.query(`
+      SELECT event_type AS key, COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY event_type
+      ORDER BY count DESC, key ASC
+    `, params),
+    sql.query(`
+      SELECT city_classification AS key, COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY city_classification
+      ORDER BY count DESC, key ASC
+    `, params),
+    sql.query(`
+      SELECT COALESCE(NULLIF(geocode_status, ''), '(not set)') AS key, COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY COALESCE(NULLIF(geocode_status, ''), '(not set)')
+      ORDER BY count DESC, key ASC
+    `, params),
+    sql.query(`
+      SELECT
+        COALESCE(NULLIF(source, ''), '(not set)') AS source,
+        COALESCE(NULLIF(campaign, ''), '(not set)') AS campaign,
+        COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY COALESCE(NULLIF(source, ''), '(not set)'), COALESCE(NULLIF(campaign, ''), '(not set)')
+      ORDER BY count DESC, source ASC, campaign ASC
+      LIMIT 100
+    `, params),
+    sql.query(`
+      SELECT
+        TO_CHAR((received_at AT TIME ZONE 'UTC')::date, 'YYYY-MM-DD') AS date,
+        COUNT(*)::int AS total_events,
+        COUNT(*) FILTER (WHERE event_type = 'whatsapp_click')::int AS whatsapp_clicks,
+        COUNT(*) FILTER (
+          WHERE event_type = 'whatsapp_click' AND city_classification = 'service_area'
+        )::int AS qualified_whatsapp_clicks,
+        COUNT(*) FILTER (WHERE event_type = 'phone_click')::int AS phone_clicks,
+        COUNT(*) FILTER (WHERE event_type = 'form_submit')::int AS form_submits,
+        COUNT(*) FILTER (WHERE event_type = 'gbp_call')::int AS gbp_calls,
+        COUNT(*) FILTER (WHERE event_type = 'gbp_website_click')::int AS gbp_website_clicks,
+        COUNT(*) FILTER (WHERE event_type = 'manual_lead')::int AS manual_leads,
+        COUNT(*) FILTER (WHERE city_classification = 'service_area')::int AS service_area_events,
+        COUNT(*) FILTER (WHERE city_classification = 'out_of_service')::int AS out_of_service_events,
+        COUNT(*) FILTER (WHERE city_classification = 'unknown')::int AS unknown_city_events,
+        COUNT(*) FILTER (WHERE geocode_status = 'success')::int AS geocode_successes,
+        COUNT(*) FILTER (WHERE geocode_status IN ('failed', 'timeout', 'unavailable'))::int AS geocode_failures,
+        COUNT(*) FILTER (WHERE geocode_status IS NULL OR geocode_status = 'not_requested')::int AS geocode_missing
+      ${whereClause}
+      GROUP BY (received_at AT TIME ZONE 'UTC')::date
+      ORDER BY date ASC
+    `, params),
+  ]);
+
+  const total = (totals as Array<Record<string, unknown>>)[0] ?? {};
+  return {
+    from,
+    to,
+    total_events: metricNumber(total.total_events),
+    distinct_event_ids: metricNumber(total.distinct_event_ids),
+    qualified_whatsapp_clicks: metricNumber(total.qualified_whatsapp_clicks),
+    geocode_successes: metricNumber(total.geocode_successes),
+    geocode_failures: metricNumber(total.geocode_failures),
+    geocode_missing: metricNumber(total.geocode_missing),
+    by_event_type: (eventTypes as Array<{ key: string; count: unknown }>).map((row) => ({
+      key: row.key,
+      count: metricNumber(row.count),
+    })),
+    by_city_classification: (cityClassifications as Array<{ key: string; count: unknown }>).map((row) => ({
+      key: row.key,
+      count: metricNumber(row.count),
+    })),
+    by_geocode_status: (geocodeStatuses as Array<{ key: string; count: unknown }>).map((row) => ({
+      key: row.key,
+      count: metricNumber(row.count),
+    })),
+    by_source_campaign: (sourceCampaigns as Array<{ source: string; campaign: string; count: unknown }>).map((row) => ({
+      source: row.source,
+      campaign: row.campaign,
+      count: metricNumber(row.count),
+    })),
+    daily: (daily as Array<Record<string, unknown>>).map((row) => ({
+      date: String(row.date),
+      total_events: metricNumber(row.total_events),
+      whatsapp_clicks: metricNumber(row.whatsapp_clicks),
+      qualified_whatsapp_clicks: metricNumber(row.qualified_whatsapp_clicks),
+      phone_clicks: metricNumber(row.phone_clicks),
+      form_submits: metricNumber(row.form_submits),
+      gbp_calls: metricNumber(row.gbp_calls),
+      gbp_website_clicks: metricNumber(row.gbp_website_clicks),
+      manual_leads: metricNumber(row.manual_leads),
+      service_area_events: metricNumber(row.service_area_events),
+      out_of_service_events: metricNumber(row.out_of_service_events),
+      unknown_city_events: metricNumber(row.unknown_city_events),
+      geocode_successes: metricNumber(row.geocode_successes),
+      geocode_failures: metricNumber(row.geocode_failures),
+      geocode_missing: metricNumber(row.geocode_missing),
+    })),
+  };
 }

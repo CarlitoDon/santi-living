@@ -747,6 +747,21 @@ export function GtagScript() {
             var telLink = target.closest('a[href^="tel:"]');
             if (telLink) {
               var phoneEventId = createLeadEventId();
+              var phoneSource = telLink.getAttribute('data-phone-source') || 'phone_link';
+              var phoneLocation = telLink.getAttribute('data-phone-location') || '';
+              var phonePath = window.location.pathname || '';
+              var phonePageType = telLink.getAttribute('data-page-type') || '';
+              if (!phonePageType) {
+                if (phonePath.indexOf('/artikel/') === 0) {
+                  phonePageType = 'article';
+                } else if (phonePath === '/' || phonePath === '/id') {
+                  phonePageType = 'homepage';
+                } else {
+                  phonePageType = 'service_page';
+                }
+              }
+              var phoneProductCategory = telLink.getAttribute('data-product-category') || '';
+              var phoneIntent = telLink.getAttribute('data-phone-intent') || 'phone_inquiry';
               var phoneAttr = {};
               try {
                 var phoneRaw = localStorage.getItem('sl_attribution_v1');
@@ -757,6 +772,8 @@ export function GtagScript() {
                     utm_source: phoneTouch.source || '',
                     utm_medium: phoneTouch.medium || '',
                     utm_campaign: phoneTouch.campaign || '',
+                    utm_term: phoneTouch.term || '',
+                    utm_content: phoneTouch.content || '',
                     gclid: phoneTouch.gclid || '',
                     gbraid: phoneTouch.gbraid || '',
                     wbraid: phoneTouch.wbraid || '',
@@ -768,6 +785,23 @@ export function GtagScript() {
               trackGtagEvent('event', 'phone_click', {
                 'event_category': 'engagement',
                 'event_id': phoneEventId,
+                'cta_source': phoneSource,
+                'cta_location': phoneLocation,
+                'product_category': phoneProductCategory,
+                'page_type': phonePageType,
+                'intent': phoneIntent,
+                'page_location': window.location.href,
+                'page_path': phonePath,
+                'page_referrer': document.referrer || '',
+                'utm_source': phoneAttr.utm_source || '',
+                'utm_medium': phoneAttr.utm_medium || '',
+                'utm_campaign': phoneAttr.utm_campaign || '',
+                'utm_term': phoneAttr.utm_term || '',
+                'utm_content': phoneAttr.utm_content || '',
+                'gclid': phoneAttr.gclid || '',
+                'gbraid': phoneAttr.gbraid || '',
+                'wbraid': phoneAttr.wbraid || '',
+                'fbclid': phoneAttr.fbclid || '',
                 'transport_type': 'beacon'
               });
 
@@ -777,8 +811,13 @@ export function GtagScript() {
                 source: phoneAttr.utm_source || '',
                 medium: phoneAttr.utm_medium || '',
                 campaign: phoneAttr.utm_campaign || '',
-                cta_source: telLink.getAttribute('data-phone-source') || 'phone_link',
-                cta_location: telLink.getAttribute('data-phone-location') || '',
+                term: phoneAttr.utm_term || '',
+                content: phoneAttr.utm_content || '',
+                cta_source: phoneSource,
+                cta_location: phoneLocation,
+                product_category: phoneProductCategory,
+                page_type: phonePageType,
+                intent: phoneIntent,
                 landing_page: window.location.pathname + window.location.search,
                 device: '',
                 gclid: phoneAttr.gclid || '',

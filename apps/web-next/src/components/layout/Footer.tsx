@@ -58,6 +58,8 @@ export function Footer() {
                 <span className="shrink-0">📞</span>
                 <a 
                   href={`tel:+${config.whatsappNumber}`} 
+                  data-phone-source="footer_phone"
+                  data-phone-location="footer"
                   className="text-slate-400 no-underline hover:text-white transition-colors"
                 >
                   {config.whatsappDisplay}
