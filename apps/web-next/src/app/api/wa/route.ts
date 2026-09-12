@@ -39,7 +39,8 @@ export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
     const params = url.searchParams;
-    const eventId = normalizeLeadText(params.get('event_id')) ?? randomUUID();
+    const trackedEventId = normalizeLeadText(params.get('event_id'));
+    const eventId = trackedEventId ?? randomUUID();
     const receivedAt = new Date().toISOString();
 
     const parsed = LeadEventSchema.parse({
@@ -88,17 +89,20 @@ export async function GET(request: NextRequest) {
         })
       : Promise.resolve(null);
     const [persistence, quote] = await Promise.all([
-      persistLeadEvent(eventId, parsed, receivedAt, { geocode: false }),
+      trackedEventId
+        ? persistLeadEvent(eventId, parsed, receivedAt, { geocode: false })
+        : Promise.resolve(null),
       quotePromise,
     ]);
-    const record = persistence.record ?? buildLeadLogRecord(eventId, parsed, receivedAt);
+    const record = persistence?.record ?? buildLeadLogRecord(eventId, parsed, receivedAt);
 
     console.info('[santi_lead_event]', JSON.stringify({
       ...record,
-      db_configured: persistence.configured,
-      db_persisted: persistence.persisted,
+      tracking_mode: trackedEventId ? 'client_event' : 'untracked_redirect',
+      db_configured: persistence?.configured ?? false,
+      db_persisted: persistence?.persisted ?? false,
     }));
-    if (persistence.errorMessage) {
+    if (persistence?.errorMessage) {
       console.error('[santi_lead_event] DB_PERSIST_FAILURE:', {
         event_id: eventId,
         message: persistence.errorMessage,
