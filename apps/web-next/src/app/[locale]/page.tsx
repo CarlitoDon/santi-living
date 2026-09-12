@@ -197,6 +197,9 @@ export default async function HomePage({
                   message={serviceInquiryMessage}
                   source="homepage_services"
                   location="hero"
+                  data-product-category="general"
+                  data-page-type="homepage"
+                  data-wa-intent="general_rental_inquiry"
                   className="home-secondary-button motion-interactive motion-lift"
                 >
                   <WhatsAppIcon /> {isEnglish ? 'Ask on WhatsApp' : 'Tanya via WhatsApp'}
@@ -216,7 +219,13 @@ export default async function HomePage({
 
               <p className="home-direct-contact" data-reveal="fade" data-reveal-delay="250">
                 {isEnglish ? 'Speak with our team:' : 'Atau hubungi langsung:'}{' '}
-                <WhatsAppLink source="hero_phone" location="hero">
+                <WhatsAppLink
+                  source="hero_phone"
+                  location="hero"
+                  data-product-category="general"
+                  data-page-type="homepage"
+                  data-wa-intent="general_rental_inquiry"
+                >
                   {config.whatsappDisplay}
                 </WhatsAppLink>
               </p>
@@ -379,6 +388,9 @@ export default async function HomePage({
               message={serviceInquiryMessage}
               source="footer_cta"
               location="footer_cta"
+              data-product-category="general"
+              data-page-type="homepage"
+              data-wa-intent="general_rental_inquiry"
               className="home-secondary-button motion-interactive motion-lift"
             >
               <WhatsAppIcon /> {dict.cta_final.cta_chat}

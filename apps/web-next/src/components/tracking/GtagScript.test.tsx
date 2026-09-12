@@ -185,6 +185,142 @@ describe('GtagScript WhatsApp location flow', () => {
     expect(gtag.mock.calls.some((call) => call[1] === 'conversion')).toBe(false);
   });
 
+  it('infers carpet metadata from a locale-prefixed WhatsApp path', async () => {
+    window.history.replaceState({}, '', '/id/sewa-karpet-merah-jogja');
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: false,
+        cityClassification: 'service_area',
+      }),
+    } as Response));
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect(gtag).toHaveBeenCalledWith(
+      'event',
+      'whatsapp_click',
+      expect.objectContaining({
+        product_category: 'karpet',
+        page_type: 'subcategory_page',
+        intent: 'sewa_karpet_permadani_merah',
+      }),
+    ));
+  });
+
+  it('keeps a generic multi-service homepage inquiry unclassified', async () => {
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: false,
+        cityClassification: 'service_area',
+      }),
+    } as Response));
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=' + encodeURIComponent('Kebutuhan saya: {kasur / kursi / karpet}');
+    link.dataset.waSource = 'homepage_services';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect(gtag).toHaveBeenCalledWith(
+      'event',
+      'whatsapp_click',
+      expect.objectContaining({
+        product_category: 'general',
+        page_type: 'homepage',
+        intent: 'general_rental_inquiry',
+      }),
+    ));
+  });
+
+  it('infers chair metadata from a locale-prefixed WhatsApp path', async () => {
+    window.history.replaceState({}, '', '/id/sewa-kursi-acara');
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: false,
+        cityClassification: 'service_area',
+      }),
+    } as Response));
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect(gtag).toHaveBeenCalledWith(
+      'event',
+      'whatsapp_click',
+      expect.objectContaining({
+        product_category: 'kursi',
+        page_type: 'service_page',
+        intent: 'sewa_kursi_acara',
+      }),
+    ));
+  });
+
+  it('infers event metadata from a locale-prefixed phone path', () => {
+    window.history.replaceState({}, '', '/id/sewa-perlengkapan-event');
+    const gtag = vi.fn();
+    (window as TestWindow).gtag = gtag;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true } as Response));
+
+    const link = document.createElement('a');
+    link.href = 'tel:+6289519119092';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    expect(gtag).toHaveBeenCalledWith(
+      'event',
+      'phone_click',
+      expect.objectContaining({
+        product_category: 'event',
+        page_type: 'landing',
+        intent: 'paket_perlengkapan_acara',
+      }),
+    );
+  });
+
   it.each([
     {
       label: 'unsupported geolocation',
@@ -379,6 +515,28 @@ describe('GtagScript WhatsApp location flow', () => {
     expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
 
     window.removeEventListener('open-map-picker', openPicker);
+  });
+
+  it('falls back to keepalive fetch when the beacon queue rejects a lead event', async () => {
+    const sendBeacon = vi.fn(() => false);
+    Object.defineProperty(navigator, 'sendBeacon', {
+      configurable: true,
+      value: sendBeacon,
+    });
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true } as Response);
+    vi.stubGlobal('fetch', fetchMock);
+
+    const link = document.createElement('a');
+    link.href = 'tel:+6289519119092';
+    link.dataset.phoneSource = 'test';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    expect(sendBeacon).toHaveBeenCalledOnce();
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledWith(
+      '/api/lead/track',
+      expect.objectContaining({ method: 'POST', keepalive: true }),
+    ));
   });
 
   it('keeps a manual DIY point when late GPS resolves in Jakarta', async () => {

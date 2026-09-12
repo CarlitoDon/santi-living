@@ -8,9 +8,8 @@ import html from 'remark-html';
 import { getTranslatedAuthor } from '@/utils/author';
 import { cache } from 'react';
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 export const revalidate = false;
-const BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE = 40;
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -86,8 +85,7 @@ function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string)
 export async function generateStaticParams() {
   const locales = ['id', 'en'];
   const notionPosts = [...(await getNotionPosts())]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, BUILD_PRERENDERED_NOTION_POSTS_PER_LOCALE);
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
     const posts = [...getAllPosts(locale)]

@@ -73,21 +73,30 @@ The workflow also enforces the branch mapping at execution time: staging must
 be dispatched/called from `dev`, and production must be dispatched/called from
 `main`. A mismatched branch fails before any webhook request.
 
-## Coolify application configuration (Nixpacks)
+## Coolify application configuration (Dockerfile)
 
-No Dockerfile is required. Configure the Coolify application for the
-`apps/proxy` package with Nixpacks:
+Configure both Coolify applications to build from the repository-root Docker
+context using `apps/proxy/Dockerfile`. Do not use Nixpacks for this service:
+the Dockerfile packages the workspace output and its runtime command together.
 
-| Setting | Value |
-| ------- | ----- |
-| Repository | `CarlitoDon/santi-living` |
-| Branch | `dev` for the staging app, `main` for the production app |
-| Base directory / Root directory | `/` (repository root; the workspace package is `apps/proxy`) |
-| Install command | `npm ci` (uses the root `package-lock.json`) |
-| Build command | `npm run build --workspace=@santi-living/proxy` (the package script compiles TypeScript to `apps/proxy/dist/`) |
-| Start command | `npm run start --workspace=@santi-living/proxy` (the package script runs `node dist/index.js`) |
-| Port | Coolify exposes the app on its configured port; the proxy listens on `PORT` (default `3002`) |
-| Health check path | `/health` (returns `{"status":"ok","service":"proxy"}`) |
+| Setting | Staging | Production |
+| ------- | ------- | ---------- |
+| Repository | `CarlitoDon/santi-living` | `CarlitoDon/santi-living` |
+| Branch | `dev` | `main` |
+| Build method | Dockerfile | Dockerfile |
+| Dockerfile path | `apps/proxy/Dockerfile` | `apps/proxy/Dockerfile` |
+| Build context / Root directory | `/` (repository root) | `/` (repository root) |
+| Container port | `3002` | `3002` |
+| Health check port | `3002` | `3002` |
+| Health check path | `/health` | `/health` |
+| Runtime command | Dockerfile `CMD` (`node dist/index.js`) | Dockerfile `CMD` (`node dist/index.js`) |
+
+Both environments use the same container and health-check port (`3002`). Do
+not configure `3005`: the proxy defaults to `PORT=3002`, exposes `3002`, and
+the image health check probes `127.0.0.1:3002/health`. A port mismatch leaves
+the Coolify application unhealthy even when the Node process starts.
+
+The health endpoint returns `{"status":"ok","service":"proxy"}`.
 
 Runtime environment variables must be configured in Coolify (not in the repo):
 `NODE_ENV`, `PORT`, `CORS_ALLOWED_ORIGINS`, `SYNC_ERP_API_URL`, `SYNC_ERP_API_SECRET`,

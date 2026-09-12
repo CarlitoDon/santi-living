@@ -74,4 +74,24 @@ describe('GET /api/lead/metrics', () => {
       to: '2026-09-12T00:00:00Z',
     });
   });
+
+  it('does not expose storage error details', async () => {
+    isLeadDbConfiguredMock.mockReturnValue(true);
+    queryLeadEventMetricsMock.mockRejectedValue(
+      new Error('connection string contains a secret token'),
+    );
+
+    const response = await GET(new NextRequest('http://localhost/api/lead/metrics', {
+      headers: { authorization: 'Bearer test-admin-token' },
+    }));
+
+    expect(response.status).toBe(500);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      error: {
+        code: 'METRICS_ERROR',
+        message: 'Lead metrics are temporarily unavailable',
+      },
+    });
+  });
 });

@@ -15,6 +15,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const workflowPath = path.join(root, ".github/workflows/deploy-proxy-coolify.yml");
 const docsPath = path.join(root, "docs/deploy/proxy-coolify.md");
+const dockerfilePath = path.join(root, "apps/proxy/Dockerfile");
 const hostingerWorkflowPath = path.join(root, ".github/workflows/deploy-proxy-hostinger.yml");
 
 let failures = 0;
@@ -33,6 +34,7 @@ function readIfExists(p) {
 
 const workflow = readIfExists(workflowPath);
 const docs = readIfExists(docsPath);
+const dockerfile = readIfExists(dockerfilePath);
 const hostingerWorkflow = readIfExists(hostingerWorkflowPath);
 
 // 1. Workflow exists and no longer ships the Hostinger push deploy.
@@ -130,15 +132,16 @@ check(
   "Workflow documents dev→staging and main→production branch mapping",
 );
 
-// 5. Documentation covers the operational contract.
+// 5. Documentation and image configuration cover the operational contract.
 check(docs.length > 0, "Deployment doc exists (docs/deploy/proxy-coolify.md)");
 for (const term of [
   "COOLIFY_DEPLOY_WEBHOOK_PROXY_STAGING",
   "COOLIFY_DEPLOY_WEBHOOK_PROXY_PRODUCTION",
-  "Nixpacks",
+  "Dockerfile",
+  "apps/proxy/Dockerfile",
   "apps/proxy",
-  "npm run build",
-  "npm run start",
+  "3002",
+  "Health check port",
   "/health",
   "PORT",
   "tunnel",
@@ -158,6 +161,30 @@ check(
 check(
   /main`?\s+(?:branch\s+)?(→|->|to)\s*production/i.test(docs),
   "Documentation maps main branch to production",
+);
+check(
+  /both environments use the same container and health-check port \(`3002`\)/i.test(docs),
+  "Documentation locks both environments to the same health-check port",
+);
+check(
+  dockerfile.length > 0,
+  "Proxy Dockerfile exists (apps/proxy/Dockerfile)",
+);
+check(
+  /EXPOSE\s+3002\b/.test(dockerfile),
+  "Proxy Dockerfile exposes port 3002",
+);
+check(
+  /127\.0\.0\.1:\$\{PORT:-3002\}\/health/.test(dockerfile),
+  "Proxy Dockerfile health-checks /health on the PORT default of 3002",
+);
+check(
+  /CMD\s+\["node",\s*"dist\/index\.js"\]/.test(dockerfile),
+  "Proxy Dockerfile starts the packaged dist entrypoint",
+);
+check(
+  !/\b3005\b/.test(dockerfile),
+  "Proxy Dockerfile has no stale port 3005 configuration",
 );
 
 // 6. No generated/deployment artifacts in the diff scope.

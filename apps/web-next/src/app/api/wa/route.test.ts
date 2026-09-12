@@ -125,4 +125,21 @@ describe('GET /api/wa', () => {
     expect(message).toContain('Google Maps (lokasi presisi):');
     expect(message).toContain('Estimasi ongkir: belum dapat dihitung otomatis');
   });
+
+  it('does not expose persistence error details', async () => {
+    persistLeadEventMock.mockRejectedValue(
+      new Error('Neon connection string must never reach the client'),
+    );
+
+    const response = await GET(buildRequest('203.0.113.23', 'lead-client-event-456'));
+
+    expect(response.status).toBe(500);
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      error: {
+        code: 'WA_REDIRECT_ERROR',
+        message: 'WhatsApp redirect is temporarily unavailable',
+      },
+    });
+  });
 });

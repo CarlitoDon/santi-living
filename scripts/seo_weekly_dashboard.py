@@ -28,9 +28,19 @@ from typing import Any
 
 PROPERTY = "sc-domain:santiliving.com"
 GA4_PROPERTY = "properties/519253158"
+GA4_CUSTOM_EVENT_DIMENSIONS = (
+    "cta_source",
+    "cta_location",
+    "product_category",
+    "page_type",
+    "intent",
+)
+GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE = dt.date(2026, 9, 13)
 GBP_ACCOUNT = "accounts/116188520419140679581"
 GBP_LOCATION = "locations/10488080858214395605"
 LEAD_EXPORT_URL = "https://santiliving.com/api/lead/export"
+LEAD_EXPORT_PAGE_SIZE = 1000
+MAX_LEAD_EXPORT_ROWS = 10000
 
 MONEY_PAGES = [
     {
@@ -38,8 +48,9 @@ MONEY_PAGES = [
         "cluster": "karpet",
         "url": "https://karpet.santiliving.com/sewa-karpet-jogja",
         "root_url": "https://karpet.santiliving.com/",
-        "canonical": "https://karpet.santiliving.com/sewa-karpet-jogja",
+        "canonical": "https://santiliving.com/id/sewa-karpet-jogja",
         "cta_source": "sewa_karpet_jogja_page",
+        "cta_sources": ["sewa_karpet_jogja_page", "carpet_page_hero", "carpet_page_footer"],
         "query_terms": [
             "sewa karpet jogja",
             "rental karpet jogja",
@@ -53,7 +64,7 @@ MONEY_PAGES = [
         "cluster": "permadani",
         "url": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja",
         "root_url": "https://permadani.santiliving.com/",
-        "canonical": "https://permadani.santiliving.com/sewa-karpet-permadani-jogja",
+        "canonical": "https://santiliving.com/id/sewa-karpet-permadani-jogja",
         "cta_source": "permadani_page",
         "query_terms": [
             "sewa permadani jogja",
@@ -68,7 +79,7 @@ MONEY_PAGES = [
         "cluster": "acara",
         "url": "https://acara.santiliving.com/sewa-perlengkapan-event",
         "root_url": "https://acara.santiliving.com/",
-        "canonical": "https://acara.santiliving.com/sewa-perlengkapan-event",
+        "canonical": "https://santiliving.com/id/sewa-perlengkapan-event",
         "cta_source": "acara_santiliving_page",
         "query_terms": [
             "sewa perlengkapan event jogja",
@@ -82,10 +93,6 @@ MONEY_PAGES = [
 
 SITEMAPS_TO_SUBMIT = [
     "https://santiliving.com/sitemap.xml",
-    "https://santiliving.com/sitemap-0.xml",
-    "https://karpet.santiliving.com/sitemap-0.xml",
-    "https://permadani.santiliving.com/sitemap-0.xml",
-    "https://acara.santiliving.com/sitemap-0.xml",
 ]
 
 SUPPORTING_CONTENT_PATTERNS = {
@@ -205,17 +212,23 @@ def live_http_snapshot() -> dict[str, Any]:
         fetched = fetch_text(page["url"])
         html = fetched.pop("text", "")
         evidence = extract_html_evidence(html)
+        cta_sources = page.get("cta_sources") or [page["cta_source"]]
+        matched_cta_sources = [
+            source for source in cta_sources if f'data-wa-source="{source}"' in html
+        ]
         snapshot["pages"].append(
             {
                 "host": page["host"],
                 "url": page["url"],
                 "expected_canonical": page["canonical"],
                 "expected_cta_source": page["cta_source"],
+                "expected_cta_sources": cta_sources,
                 **fetched,
                 **evidence,
                 "canonical_matches": evidence.get("canonical") == page["canonical"],
                 "og_url_matches": evidence.get("og_url") == page["canonical"],
-                "cta_source_present": f'data-wa-source="{page["cta_source"]}"' in html,
+                "cta_source_present": bool(matched_cta_sources),
+                "matched_cta_sources": matched_cta_sources,
             }
         )
     for url in SITEMAPS_TO_SUBMIT:
@@ -270,13 +283,13 @@ def submit_indexing(token: str) -> list[dict[str, Any]]:
             "POST",
             "https://indexing.googleapis.com/v3/urlNotifications:publish",
             token,
-            {"url": page["url"], "type": "URL_UPDATED"},
+            {"url": page["canonical"], "type": "URL_UPDATED"},
         )
         body = response.get("body") if isinstance(response.get("body"), dict) else {}
         metadata = (body or {}).get("urlNotificationMetadata", {})
         submissions.append(
             {
-                "url": page["url"],
+                "url": page["canonical"],
                 "type": "URL_UPDATED",
                 "metadata_url": metadata.get("url"),
                 **response,
@@ -289,7 +302,7 @@ def url_inspections(token: str) -> list[dict[str, Any]]:
     inspected = []
     urls = []
     for page in MONEY_PAGES:
-        urls.append((page["cluster"], page["url"], "canonical_money_page"))
+        urls.append((page["cluster"], page["canonical"], "canonical_money_page"))
     for page in MONEY_PAGES:
         urls.append((page["cluster"], page["root_url"], "root_entry_probe"))
     for cluster, url, kind in urls:
@@ -410,11 +423,105 @@ def redact_url_to_path(url: str) -> str:
         return url.split("?", 1)[0]
 
 
-def ga4_snapshot(token: str) -> dict[str, Any]:
+def ga4_custom_dimension_probe_summary(
+    response: dict[str, Any],
+    *,
+    date_range: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    dimensions = list(GA4_CUSTOM_EVENT_DIMENSIONS)
+    summary: dict[str, Any] = {
+        "ok": response.get("ok"),
+        "status": response.get("status"),
+        "requested_dimensions": dimensions,
+        "data_state": "unavailable",
+        "effective_date": GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE.isoformat(),
+        "total_event_count": 0,
+        "populated_event_count": {dimension: 0 for dimension in dimensions},
+        "not_set_event_count": {dimension: 0 for dimension in dimensions},
+    }
+    if date_range:
+        summary["date_range"] = dict(date_range)
+
+    if response.get("ok") is not True:
+        body = response.get("body")
+        if isinstance(body, dict):
+            error = body.get("error")
+            if isinstance(error, dict) and error.get("message"):
+                summary["message"] = str(error["message"])[:300]
+            elif body.get("message"):
+                summary["message"] = str(body["message"])[:300]
+        elif body not in (None, ""):
+            summary["message"] = str(body)[:300]
+        return summary
+
+    body = response.get("body")
+    rows = body.get("rows") if isinstance(body, dict) else None
+    if not isinstance(rows, list):
+        summary["data_state"] = "malformed"
+        summary["message"] = "GA4 response did not contain a rows array"
+        return summary
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        dimension_values = row.get("dimensionValues") or []
+        metric_values = row.get("metricValues") or []
+        try:
+            event_count = float(metric_values[0].get("value", 0)) if metric_values else 0.0
+        except (AttributeError, TypeError, ValueError):
+            event_count = 0.0
+        if event_count < 0:
+            event_count = 0.0
+        summary["total_event_count"] += int(event_count)
+        for index, dimension in enumerate(dimensions):
+            value = dimension_values[index].get("value", "") if index < len(dimension_values) else ""
+            normalized = str(value).strip().lower()
+            if normalized and normalized != "(not set)":
+                summary["populated_event_count"][dimension] += int(event_count)
+            else:
+                summary["not_set_event_count"][dimension] += int(event_count)
+
+    summary["data_state"] = (
+        "available_populated"
+        if any(summary["populated_event_count"].values())
+        else "available_empty"
+    )
+    return summary
+
+
+def ga4_custom_dimension_probe_not_ready(start_date: dt.date, end_date: dt.date) -> dict[str, Any]:
+    dimensions = list(GA4_CUSTOM_EVENT_DIMENSIONS)
+    return {
+        "ok": None,
+        "status": None,
+        "requested_dimensions": dimensions,
+        "data_state": "not_ready",
+        "effective_date": GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE.isoformat(),
+        "date_range": {"start": start_date.isoformat(), "end": end_date.isoformat()},
+        "total_event_count": None,
+        "populated_event_count": {dimension: None for dimension in dimensions},
+        "not_set_event_count": {dimension: None for dimension in dimensions},
+        "message": (
+            "GA4 custom-dimension validation starts on the first complete UTC day, "
+            f"{GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE.isoformat()}; "
+            f"the requested window ends on {end_date.isoformat()}"
+        ),
+    }
+
+
+def ga4_snapshot(
+    token: str,
+    start_date: dt.date | None = None,
+    end_date: dt.date | None = None,
+) -> dict[str, Any]:
+    report_date_range = {
+        "startDate": start_date.isoformat() if start_date else "28daysAgo",
+        "endDate": end_date.isoformat() if end_date else "yesterday",
+    }
     landing_response = ga4_run_report(
         token,
         {
-            "dateRanges": [{"startDate": "28daysAgo", "endDate": "yesterday"}],
+            "dateRanges": [report_date_range],
             "dimensions": [{"name": "landingPagePlusQueryString"}, {"name": "sessionSourceMedium"}],
             "metrics": [{"name": "sessions"}, {"name": "engagedSessions"}],
             "dimensionFilter": {
@@ -429,7 +536,7 @@ def ga4_snapshot(token: str) -> dict[str, Any]:
     event_response = ga4_run_report(
         token,
         {
-            "dateRanges": [{"startDate": "28daysAgo", "endDate": "yesterday"}],
+            "dateRanges": [report_date_range],
             "dimensions": [{"name": "eventName"}, {"name": "pageLocation"}, {"name": "sessionSourceMedium"}],
             "metrics": [{"name": "eventCount"}],
             "dimensionFilter": {
@@ -441,21 +548,36 @@ def ga4_snapshot(token: str) -> dict[str, Any]:
             "limit": 100,
         },
     )
-    cta_dimension_probe = ga4_run_report(
-        token,
-        {
-            "dateRanges": [{"startDate": "28daysAgo", "endDate": "yesterday"}],
-            "dimensions": [{"name": "eventName"}, {"name": "customEvent:cta_source"}],
-            "metrics": [{"name": "eventCount"}],
-            "dimensionFilter": {
-                "filter": {
-                    "fieldName": "eventName",
-                    "stringFilter": {"matchType": "EXACT", "value": "whatsapp_click"},
-                }
+    if start_date and end_date and end_date < GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE:
+        cta_dimension_probe_summary = ga4_custom_dimension_probe_not_ready(start_date, end_date)
+    else:
+        probe_start_date = max(start_date, GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE) if start_date else None
+        probe_date_range = {
+            "startDate": probe_start_date.isoformat() if probe_start_date else "28daysAgo",
+            "endDate": end_date.isoformat() if end_date else "yesterday",
+        }
+        cta_dimension_probe = ga4_run_report(
+            token,
+            {
+                "dateRanges": [probe_date_range],
+                "dimensions": [
+                    {"name": f"customEvent:{dimension}"}
+                    for dimension in GA4_CUSTOM_EVENT_DIMENSIONS
+                ],
+                "metrics": [{"name": "eventCount"}],
+                "dimensionFilter": {
+                    "filter": {
+                        "fieldName": "eventName",
+                        "stringFilter": {"matchType": "EXACT", "value": "whatsapp_click"},
+                    }
+                },
+                "limit": 1000,
             },
-            "limit": 10,
-        },
-    )
+        )
+        cta_dimension_probe_summary = ga4_custom_dimension_probe_summary(
+            cta_dimension_probe,
+            date_range={"start": probe_date_range["startDate"], "end": probe_date_range["endDate"]},
+        )
 
     landing_rows = []
     if landing_response.get("ok"):
@@ -486,13 +608,7 @@ def ga4_snapshot(token: str) -> dict[str, Any]:
     return {
         "landing_sessions_28d": landing_rows,
         "whatsapp_clicks_28d_by_page": event_rows,
-        "cta_source_custom_dimension_probe": {
-            "ok": cta_dimension_probe.get("ok"),
-            "status": cta_dimension_probe.get("status"),
-            "message": ((cta_dimension_probe.get("body") or {}).get("error") or {}).get("message")
-            if isinstance(cta_dimension_probe.get("body"), dict)
-            else cta_dimension_probe.get("body"),
-        },
+        "cta_source_custom_dimension_probe": cta_dimension_probe_summary,
     }
 
 
@@ -523,6 +639,140 @@ def source_medium_counts(rows: list[dict[str, Any]], *, limit: int = 12) -> list
     ]
 
 
+def fetch_lead_export_rows(
+    start_date: str,
+    end_date: str,
+    *,
+    event_type: str,
+    city_classification: str | None = None,
+    max_rows: int = MAX_LEAD_EXPORT_ROWS,
+) -> dict[str, Any]:
+    token = os.environ.get("LEAD_EVENTS_ADMIN_TOKEN")
+    if not token:
+        return {"ok": False, "reason": "missing LEAD_EVENTS_ADMIN_TOKEN"}
+
+    bounded_max_rows = max(1, max_rows)
+    rows: list[dict[str, Any]] = []
+    offset = 0
+    pages = 0
+    while offset < bounded_max_rows:
+        page_size = min(LEAD_EXPORT_PAGE_SIZE, bounded_max_rows - offset)
+        params = {
+            "from": start_date,
+            "to": end_date,
+            "event_type": event_type,
+            "limit": str(page_size),
+            "offset": str(offset),
+            "format": "json",
+        }
+        if city_classification:
+            params["city_classification"] = city_classification
+
+        query = urllib.parse.urlencode(params)
+        response = request_json("GET", f"{LEAD_EXPORT_URL}?{query}", token)
+        if not response.get("ok"):
+            body = response.get("body")
+            message = ((body or {}).get("error") or {}).get("message") if isinstance(body, dict) else body
+            return {"ok": False, "status": response.get("status"), "message": message}
+
+        body_obj = response.get("body")
+        if not isinstance(body_obj, dict) or not isinstance(body_obj.get("rows"), list):
+            return {
+                "ok": False,
+                "status": response.get("status"),
+                "reason": "lead export returned an invalid payload: rows must be an array",
+            }
+        if any(not isinstance(row, dict) for row in body_obj["rows"]):
+            return {
+                "ok": False,
+                "status": response.get("status"),
+                "reason": "lead export returned an invalid payload: every row must be an object",
+            }
+
+        page_rows = body_obj["rows"]
+        rows.extend(page_rows)
+        pages += 1
+        if len(page_rows) < page_size:
+            return {
+                "ok": True,
+                "status": response.get("status"),
+                "rows": rows,
+                "rows_returned": len(rows),
+                "pages": pages,
+                "complete": True,
+                "truncated": False,
+            }
+        offset += len(page_rows)
+
+    return {
+        "ok": True,
+        "status": 200,
+        "rows": rows,
+        "rows_returned": len(rows),
+        "pages": pages,
+        "complete": False,
+        "truncated": True,
+        "max_rows": bounded_max_rows,
+    }
+
+
+def click_id_presence_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    qualified_events = len(rows)
+    gclid_present = sum(1 for row in rows if str(row.get("gclid") or "").strip())
+    gbraid_present = sum(1 for row in rows if str(row.get("gbraid") or "").strip())
+    wbraid_present = sum(1 for row in rows if str(row.get("wbraid") or "").strip())
+    any_google_click_id_present = sum(
+        1
+        for row in rows
+        if any(str(row.get(field) or "").strip() for field in ("gclid", "gbraid", "wbraid"))
+    )
+    return {
+        "qualified_whatsapp_events": qualified_events,
+        "gclid_present": gclid_present,
+        "gbraid_present": gbraid_present,
+        "wbraid_present": wbraid_present,
+        "any_google_click_id_present": any_google_click_id_present,
+        "any_google_click_id_rate": round(any_google_click_id_present / qualified_events, 3) if qualified_events else 0.0,
+    }
+
+
+def inclusive_end_as_export_boundary(value: str) -> str:
+    return (dt.date.fromisoformat(value[:10]) + dt.timedelta(days=1)).isoformat()
+
+
+def build_offline_conversion_readiness(export_result: dict[str, Any]) -> dict[str, Any]:
+    if export_result.get("ok") is not True:
+        return {
+            "status": "unavailable",
+            "reason": export_result.get("reason") or export_result.get("message") or "lead export unavailable",
+            "upload_performed": False,
+        }
+
+    rows = export_result.get("rows") if isinstance(export_result.get("rows"), list) else []
+    summary = click_id_presence_summary([row for row in rows if isinstance(row, dict)])
+    if export_result.get("complete") is not True:
+        status = "incomplete"
+    elif summary["qualified_whatsapp_events"] == 0:
+        status = "no_qualified_events"
+    elif summary["any_google_click_id_present"] == 0:
+        status = "no_google_click_ids"
+    else:
+        status = "candidate_data_present"
+
+    return {
+        "status": status,
+        "scope": {
+            "event_type": "whatsapp_click",
+            "city_classification": "service_area",
+        },
+        **summary,
+        "rows_returned": export_result.get("rows_returned", len(rows)),
+        "pages": export_result.get("pages", 0),
+        "complete": export_result.get("complete") is True,
+        "upload_performed": False,
+    }
+
+
 def lead_export_snapshot(start_date: str, end_date: str) -> dict[str, Any]:
     """Read sanitized lead attribution aggregates from the website export endpoint.
 
@@ -530,42 +780,39 @@ def lead_export_snapshot(start_date: str, end_date: str) -> dict[str, Any]:
     aggregate counts so cron artifacts never contain event IDs, coordinates, raw click
     IDs, user agents, referrers, or other customer-level data.
     """
-    token = os.environ.get("LEAD_EVENTS_ADMIN_TOKEN")
-    if not token:
-        return {"ok": False, "reason": "missing LEAD_EVENTS_ADMIN_TOKEN"}
-
-    query = urllib.parse.urlencode(
-        {
-            "from": start_date,
-            "to": end_date,
-            "event_type": "whatsapp_click",
-            "limit": "1000",
-            "format": "json",
-        }
+    export_end_date = inclusive_end_as_export_boundary(end_date)
+    export_result = fetch_lead_export_rows(
+        start_date,
+        export_end_date,
+        event_type="whatsapp_click",
     )
-    response = request_json("GET", f"{LEAD_EXPORT_URL}?{query}", token)
-    if not response.get("ok"):
-        body = response.get("body")
-        message = ((body or {}).get("error") or {}).get("message") if isinstance(body, dict) else body
-        return {"ok": False, "status": response.get("status"), "message": message}
+    if export_result.get("ok") is not True:
+        return export_result
 
-    body_obj = response.get("body")
-    body: dict[str, Any] = {}
-    if isinstance(body_obj, dict):
-        body = body_obj
-    rows = [row for row in body.get("rows", []) if isinstance(row, dict)]
+    rows = [row for row in export_result.get("rows", []) if isinstance(row, dict)]
+    qualified_result = fetch_lead_export_rows(
+        start_date,
+        export_end_date,
+        event_type="whatsapp_click",
+        city_classification="service_area",
+        max_rows=LEAD_EXPORT_PAGE_SIZE,
+    )
+    offline_readiness = build_offline_conversion_readiness(qualified_result)
     return {
         "ok": True,
-        "status": response.get("status"),
+        "status": export_result.get("status"),
         "event_name": "whatsapp_click",
         "rows_returned": len(rows),
-        "reported_count": body.get("count"),
+        "pages": export_result.get("pages", 0),
+        "complete": export_result.get("complete") is True,
+        "truncated": export_result.get("truncated") is True,
         "by_cta_source": top_counts(rows, "cta_source"),
         "by_landing_page": top_counts(rows, "landing_page"),
         "by_city_classification": top_counts(rows, "city_classification"),
         "by_product_category": top_counts(rows, "product_category"),
         "by_page_type": top_counts(rows, "page_type"),
         "by_source_medium": source_medium_counts(rows),
+        "offline_conversion_readiness": offline_readiness,
     }
 
 
@@ -675,16 +922,45 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lines.append("## GA4 and lead attribution")
     probe = (snapshot.get("ga4") or {}).get("cta_source_custom_dimension_probe", {})
     lead_export = snapshot.get("lead_export") or {}
-    lines.append(f"- GA4 custom dimension probe for `customEvent:cta_source`: ok={probe.get('ok')} status={probe.get('status')}")
+    probe_state = probe.get("data_state") or ("available_unknown" if probe.get("ok") else "unavailable")
+    total_event_count = probe.get("total_event_count")
+    total_event_count_text = "n/a" if total_event_count is None else total_event_count
+    lines.append(
+        f"- GA4 custom dimension probe: request_ok={probe.get('ok')} status={probe.get('status')}; "
+        f"data_state=`{probe_state}`; total events={total_event_count_text}."
+    )
+    if probe.get("date_range"):
+        lines.append(
+            f"- GA4 custom-dimension window: `{probe['date_range'].get('start')}` through "
+            f"`{probe['date_range'].get('end')}`; effective date=`{probe.get('effective_date', 'n/a')}`."
+        )
+    for dimension in probe.get("requested_dimensions") or GA4_CUSTOM_EVENT_DIMENSIONS:
+        populated = (probe.get("populated_event_count") or {}).get(dimension, 0)
+        not_set = (probe.get("not_set_event_count") or {}).get(dimension, 0)
+        populated_text = "n/a" if populated is None else populated
+        not_set_text = "n/a" if not_set is None else not_set
+        lines.append(f"  - `{dimension}`: populated_events={populated_text}; not_set_events={not_set_text}")
     lines.append("- GA4 page URLs in this markdown are redacted to path only; full JSON also avoids raw gclid/gbraid/wbraid values.")
     if lead_export.get("ok"):
         lines.append(
             f"- Lead export fallback `/api/lead/export`: ok=True; "
             f"whatsapp_click rows={lead_export.get('rows_returned', 0)}; "
+            f"complete={lead_export.get('complete', False)}; "
             "used as the `cta_source` source of truth while GA4 custom dimensions are absent."
         )
         for item in (lead_export.get("by_cta_source") or [])[:6]:
             lines.append(f"  - cta_source `{item.get('cta_source')}`: {item.get('event_count')} events")
+        offline = lead_export.get("offline_conversion_readiness") or {}
+        lines.append(
+            f"- Offline conversion readiness: status=`{offline.get('status', 'unavailable')}`; "
+            f"qualified WhatsApp events={offline.get('qualified_whatsapp_events', 0)}; "
+            f"gclid={offline.get('gclid_present', 0)}; gbraid={offline.get('gbraid_present', 0)}; "
+            f"wbraid={offline.get('wbraid_present', 0)}; "
+            f"any Google click ID={offline.get('any_google_click_id_present', 0)}; "
+            f"upload_performed={offline.get('upload_performed', False)}."
+        )
+        if offline.get("status") == "candidate_data_present":
+            lines.append("- Candidate counts are aggregate-only; business mapping and explicit Ads authorization are still required before any upload.")
     else:
         reason = lead_export.get("reason") or lead_export.get("message") or "unavailable"
         lines.append(f"- Lead export fallback `/api/lead/export`: ok=False status={lead_export.get('status')} reason={reason}")
@@ -708,8 +984,8 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lines.append("## BLOCKED")
     blockers = []
     lead_export_ok = (snapshot.get("lead_export") or {}).get("ok") is True
-    if probe.get("ok") is False and not lead_export_ok:
-        blockers.append("GA4 `customEvent:cta_source` is not queryable yet and `/api/lead/export` fallback is unavailable; register event-scoped custom dimensions for cta_source, cta_location, product_category, page_type, and intent, or restore the lead export endpoint/token.")
+    if probe_state != "available_populated" and not lead_export_ok:
+        blockers.append("GA4 custom event dimensions are unavailable or empty and `/api/lead/export` fallback is unavailable; register event-scoped custom dimensions for cta_source, cta_location, product_category, page_type, and intent, or restore the lead export endpoint/token.")
     if blockers:
         lines.extend(f"- {item}" for item in blockers)
     else:
@@ -774,7 +1050,7 @@ def main() -> int:
         }
         if not gsc_rows_response.get("ok"):
             snapshot["gsc"]["search_analytics_error"] = gsc_rows_response.get("body")
-        snapshot["ga4"] = ga4_snapshot(token)
+        snapshot["ga4"] = ga4_snapshot(token, start, end)
         snapshot["gbp"] = gbp_snapshot(token)
 
     snapshot["lead_export"] = lead_export_snapshot(start.isoformat(), end.isoformat())

@@ -55,12 +55,14 @@ export function createServer() {
   app.post(
     "/api/orders/:token/notify-admin",
     authMiddleware,
+    companyScopeMiddleware,
     webhookIdempotencyMiddleware,
     notifyAdminWebhook,
   );
   app.post(
     "/api/orders/:token/notify-payment",
     authMiddleware,
+    companyScopeMiddleware,
     webhookIdempotencyMiddleware,
     notifyPaymentStatusWebhook,
   );
