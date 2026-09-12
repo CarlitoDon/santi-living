@@ -5,10 +5,44 @@ import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { createOrderInERP } from '@/services/erp-api';
 import { saveOrder } from '@/scripts/checkout-session';
 import { showAlert } from '@/utils/alert';
+import { getAttributionEventParams } from '@/lib/attribution';
+import type { ErpOrderResponse, OrderPayload } from '@/types/order';
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
 
 interface StepReviewProps {
   setErrors: (fn: (prev: Record<string, string>) => Record<string, string>) => void;
   onBack: () => void;
+}
+
+function trackFormSubmit(order: OrderPayload, erpResponse: ErpOrderResponse): void {
+  const eventId = erpResponse.leadTracking?.eventId;
+  if (!eventId || typeof window.gtag !== 'function') return;
+
+  window.gtag('event', 'form_submit', {
+    event_id: eventId,
+    event_category: 'conversion',
+    cta_source: 'checkout_form',
+    cta_location: 'submit_order',
+    page_type: 'checkout_form',
+    product_category: Array.from(new Set(order.items.map((item) => item.category))).join(','),
+    intent: 'rental_order',
+    order_number: erpResponse.orderNumber,
+    currency: 'IDR',
+    value: order.totalPrice,
+    items: order.items.map((item) => ({
+      item_id: item.id,
+      item_name: item.name,
+      item_category: item.category,
+      quantity: item.quantity,
+      price: item.pricePerDay,
+    })),
+    ...getAttributionEventParams(),
+  });
 }
 
 const formatCurrency = (amount: number) =>
@@ -92,6 +126,7 @@ export function StepReview({ setErrors, onBack }: StepReviewProps) {
       saveOrder(bookingData);
 
       const erpResponse = await createOrderInERP(bookingData);
+      trackFormSubmit(bookingData, erpResponse);
       if (erpResponse.orderUrl) {
         sessionStorage.setItem('erpOrderUrl', erpResponse.orderUrl);
         sessionStorage.setItem('erpOrderNumber', erpResponse.orderNumber);

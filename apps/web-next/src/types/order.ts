@@ -91,4 +91,8 @@ export interface ErpOrderResponse {
   status: string;
   createdAt: string;
   orderUrl: string;
+  leadTracking?: {
+    eventId: string;
+    eventType: 'form_submit';
+  };
 }
