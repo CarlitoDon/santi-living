@@ -137,35 +137,7 @@ export async function getNotionPosts(): Promise<NotionPost[]> {
   return getCachedNotionPosts();
 }
 
-async function queryNotionPost(slug: string): Promise<NotionPost | null> {
-  const databaseId = process.env.NOTION_BLOG_DATABASE_ID;
-  if (!databaseId) return null;
-
-  const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${process.env.NOTION_API_KEY}`,
-      'Notion-Version': '2022-06-28',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      filter: {
-        and: [
-          { property: 'Status', status: { equals: 'Published' } },
-          { property: 'Slug', rich_text: { equals: slug } },
-        ],
-      },
-      page_size: 1,
-    }),
-    cache: 'no-store',
-  });
-  if (!response.ok) return null;
-  const data = await response.json() as { results?: any[] };
-  const page = data.results?.[0];
-  if (!page || !('properties' in page)) return null;
-  const postInfo = mapNotionPage(page);
-  if (!postInfo) return null;
-
+async function loadNotionPostContent(postInfo: NotionPost): Promise<NotionPost> {
   try {
     const mdblocks = await n2m.pageToMarkdown(postInfo.id);
     const mdString = n2m.toMarkdownString(mdblocks);
@@ -181,8 +153,11 @@ async function queryNotionPost(slug: string): Promise<NotionPost | null> {
 }
 
 export async function getNotionPost(slug: string): Promise<NotionPost | null> {
+  const postInfo = (await getNotionPosts()).find((post) => post.slug === slug);
+  if (!postInfo) return null;
+
   const getCachedNotionPost = unstable_cache(
-    () => queryNotionPost(slug),
+    () => loadNotionPostContent(postInfo),
     ['notion-blog-post-v3', slug],
     { tags: [NOTION_POST_DETAILS_TAG, notionPostTag(slug)] },
   );
