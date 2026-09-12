@@ -18,6 +18,7 @@ Unavailable providers remain `unavailable`; the monitor never reports unavailabl
 - `phone_click` sends the same attribution fields to GA4 and Neon, including `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent` when available.
 - A successful checkout emits `form_submit` in GA4 with the `event_id` returned by `/api/submit-order`; Neon stores the same ID, so the two sources can be reconciled without relying on timestamps alone.
 - Register event-scoped GA4 custom dimensions for `cta_source`, `cta_location`, `product_category`, `page_type`, and `intent`. Until they are queryable, use the authenticated Neon lead metrics/export endpoints as the attribution source of truth.
+- Reverse geocoding is cached at the CDN/data-fetch layer and returns a retryable `503` for upstream Nominatim rate limits; the frontend can fall back to manual location entry without creating a runtime exception.
 
 ### Google Ads configuration
 
@@ -38,6 +39,19 @@ python3 scripts/analytics_anomaly_monitor.py \
 ```
 
 The existing Hermes-friendly wrapper is `scripts/run_analytics_anomaly_monitor.sh`. It does not send notifications, change campaigns, modify budgets, deploy code, or mutate the database.
+
+## Scheduled GitHub Actions run
+
+`.github/workflows/analytics-anomaly-monitor.yml` runs daily at `02:17 UTC` (`09:17` WIB), and can also be started manually. Each run publishes the JSON/Markdown snapshot as a 30-day artifact and keeps the alert fingerprint state in a GitHub Actions cache so repeated observations are not treated as new alerts.
+
+Configure these repository secrets for the corresponding source to become available:
+
+- `GBP_CLIENT_ID`, `GBP_CLIENT_SECRET`, and `GBP_REFRESH_TOKEN` for the Google OAuth refresh flow used by GA4 and Google Ads.
+- `LEAD_EVENTS_ADMIN_TOKEN` for the authenticated production Neon metrics endpoint.
+- `GOOGLE_ADS_DEVELOPER_TOKEN`, `GOOGLE_ADS_CUSTOMER_ID`, and optional `GOOGLE_ADS_LOGIN_CUSTOMER_ID` for Google Ads.
+- Optional `VERCEL_USAGE_REPORT_URL` and `VERCEL_USAGE_TOKEN` for a read-only daily Vercel usage report. The monitor leaves Vercel `unavailable` when no report source is configured.
+
+The workflow never writes to GA4, Google Ads, Neon, or Vercel. Missing credentials are reported as unavailable rather than interpreted as zero.
 
 ## Vercel report shape
 
