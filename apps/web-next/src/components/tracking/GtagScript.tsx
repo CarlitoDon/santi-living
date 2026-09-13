@@ -28,34 +28,13 @@ export function GtagScript() {
             window.disableDevMode = function() { localStorage.removeItem("developer_mode"); console.log("Dev mode disabled. Reloading..."); location.reload(); };
           }
 
-          function getOrCreateGaUserId() {
-            if (typeof window === "undefined") return "";
-            var storageKey = "sl_ga_user_id";
-            var existing = localStorage.getItem(storageKey);
-            if (existing) return existing;
-
-            var generated;
-            if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-              generated = crypto.randomUUID();
-            } else {
-              generated = "sl-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
-            }
-
-            localStorage.setItem(storageKey, generated);
-            return generated;
-          }
-
-          var gaUserId = getOrCreateGaUserId();
-
           gtag('js', new Date());
           gtag('config', '${GA_MEASUREMENT_ID}', {
-            'user_id': gaUserId,
             'allow_google_signals': true,
             'allow_ad_personalization_signals': true,
             'cookie_flags': 'SameSite=None;Secure'
           });
           gtag('config', '${ADS_ID}', {
-            'user_id': gaUserId,
             'cookie_flags': 'SameSite=None;Secure'
           });
         `}
