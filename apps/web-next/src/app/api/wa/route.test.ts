@@ -82,7 +82,7 @@ describe('GET /api/wa', () => {
 
     expect(persistLeadEventMock).toHaveBeenCalledWith(
       'lead-client-event-123',
-      expect.objectContaining({ event_id: 'lead-client-event-123', event_type: 'whatsapp_click' }),
+      expect.objectContaining({ event_id: 'lead-client-event-123', event_type: 'whatsapp_click', city: undefined }),
       expect.any(String),
       { geocode: false },
     );

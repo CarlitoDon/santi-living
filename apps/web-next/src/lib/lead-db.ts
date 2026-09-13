@@ -143,13 +143,24 @@ function metricNumber(value: unknown): number {
 }
 
 async function enrichLeadEvent(input: LeadEventInput, shouldGeocode: boolean): Promise<LeadEventInput> {
-  if (!shouldGeocode || input.city || input.geocode_city) return input;
-  if (typeof input.latitude !== 'number' || typeof input.longitude !== 'number') return input;
+  if (!shouldGeocode) return input;
+  if (typeof input.latitude !== 'number' || typeof input.longitude !== 'number') {
+    return {
+      ...input,
+      city: undefined,
+      geocode_status: 'not_requested',
+      geocode_source: undefined,
+      geocode_city: undefined,
+      geocode_kecamatan: undefined,
+      geocode_kelurahan: undefined,
+      geocode_full_address: undefined,
+    };
+  }
 
   const geocode = await reverseGeocodeLeadLocation(input);
   return {
     ...input,
-    city: input.city ?? geocode.geocode_city,
+    city: geocode.geocode_city,
     geocode_status: geocode.geocode_status,
     geocode_source: geocode.geocode_source,
     geocode_city: geocode.geocode_city,
