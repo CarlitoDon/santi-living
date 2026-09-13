@@ -88,6 +88,34 @@ describe('GET /api/wa', () => {
     );
   });
 
+  it('does not trust client-supplied geocode fields on tracked redirects', async () => {
+    const url = new URL(buildRequest('203.0.113.24', 'lead-client-event-789').url);
+    url.searchParams.set('city', 'Sleman');
+    url.searchParams.set('geocode_status', 'success');
+    url.searchParams.set('geocode_source', 'client');
+    url.searchParams.set('geocode_city', 'Sleman');
+    url.searchParams.set('geocode_kecamatan', 'Depok');
+    url.searchParams.set('geocode_kelurahan', 'Condongcatur');
+    url.searchParams.set('geocode_full_address', 'Alamat palsu');
+
+    await GET(new NextRequest(url, { headers: { 'x-forwarded-for': '203.0.113.24' } }));
+
+    expect(persistLeadEventMock).toHaveBeenCalledWith(
+      'lead-client-event-789',
+      expect.objectContaining({
+        city: undefined,
+        geocode_status: undefined,
+        geocode_source: undefined,
+        geocode_city: undefined,
+        geocode_kecamatan: undefined,
+        geocode_kelurahan: undefined,
+        geocode_full_address: undefined,
+      }),
+      expect.any(String),
+      { geocode: false },
+    );
+  });
+
   it.each([
     ['missing key', new GoogleRoutesError('NOT_CONFIGURED', 'missing key')],
     ['timeout', new GoogleRoutesError('UPSTREAM_ERROR', 'request timed out')],
