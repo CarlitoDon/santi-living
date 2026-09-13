@@ -90,9 +90,12 @@ export async function GET(request: NextRequest) {
           return null;
         })
       : Promise.resolve(null);
+    const persistenceInput = trackedEventId
+      ? { ...parsed, city: undefined }
+      : parsed;
     const [persistence, quote] = await Promise.all([
       trackedEventId
-        ? persistLeadEvent(eventId, parsed, receivedAt, { geocode: false })
+        ? persistLeadEvent(eventId, persistenceInput, receivedAt, { geocode: false })
         : Promise.resolve(null),
       quotePromise,
     ]);
