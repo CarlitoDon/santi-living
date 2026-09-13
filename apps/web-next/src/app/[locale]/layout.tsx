@@ -13,6 +13,7 @@ import { StickyWhatsApp } from '@/components/layout/StickyWhatsApp';
 import { GtagScript } from '@/components/tracking/GtagScript';
 import { ClarityScript } from '@/components/tracking/ClarityScript';
 import { AttributionCapture } from '@/components/tracking/AttributionCapture';
+import { shouldLoadTracking } from '@/lib/tracking-environment';
 import { AlertModal } from '@/components/ui/AlertModal';
 import { MotionController } from '@/components/ui/MotionController';
 import { Providers } from './providers';
@@ -155,8 +156,8 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <GtagScript />
-        <ClarityScript />
+        {shouldLoadTracking() ? <GtagScript /> : null}
+        {shouldLoadTracking() ? <ClarityScript /> : null}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
