@@ -91,7 +91,16 @@ export async function GET(request: NextRequest) {
         })
       : Promise.resolve(null);
     const persistenceInput = trackedEventId
-      ? { ...parsed, city: undefined }
+      ? {
+          ...parsed,
+          city: undefined,
+          geocode_status: undefined,
+          geocode_source: undefined,
+          geocode_city: undefined,
+          geocode_kecamatan: undefined,
+          geocode_kelurahan: undefined,
+          geocode_full_address: undefined,
+        }
       : parsed;
     const [persistence, quote] = await Promise.all([
       trackedEventId
