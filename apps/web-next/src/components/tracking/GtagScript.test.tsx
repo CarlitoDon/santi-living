@@ -15,6 +15,7 @@ describe('GtagScript WhatsApp location flow', () => {
   type TestWindow = Window & {
     __waTestUrl?: string;
     gtag?: (...args: unknown[]) => void;
+    __santiTrackClarityEvent?: (eventName: string) => void;
   };
 
   beforeAll(() => {
@@ -152,6 +153,40 @@ describe('GtagScript WhatsApp location flow', () => {
       method: 'POST',
     }));
     expect((window as TestWindow).__waTestUrl).toContain('/api/wa');
+  });
+
+  it('forwards WhatsApp funnel milestones to Clarity without attribution payloads', async () => {
+    sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+      coords: { lat: -7.812345, lng: 110.412345 },
+      source: 'manual',
+      address: {
+        street: 'Titik manual pelanggan',
+        kota: 'Sleman',
+        provinsi: 'Daerah Istimewa Yogyakarta',
+      },
+    }));
+    const clarityEvent = vi.fn();
+    (window as TestWindow).__santiTrackClarityEvent = clarityEvent;
+    (window as TestWindow).gtag = vi.fn();
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        ok: true,
+        persisted: true,
+        cityClassification: 'service_area',
+      }),
+    } as Response));
+
+    const link = document.createElement('a');
+    link.href = '/api/wa?to=6289519119092&text=Halo';
+    document.body.appendChild(link);
+    fireEvent.click(link);
+
+    await waitFor(() => expect(clarityEvent).toHaveBeenCalledWith('santi_whatsapp_qualified'));
+    expect(clarityEvent).toHaveBeenCalledWith('whatsapp_click');
+    expect(clarityEvent.mock.calls.flat()).toEqual(
+      expect.arrayContaining(['whatsapp_click', 'santi_whatsapp_qualified']),
+    );
   });
 
   it('navigates without a conversion when lead persistence is not confirmed', async () => {
