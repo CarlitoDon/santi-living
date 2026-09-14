@@ -38,6 +38,7 @@ DEFAULT_LOOKBACK_DAYS = 28
 DEFAULT_SCORE_THRESHOLD = 3.0
 DEFAULT_RELATIVE_THRESHOLD = 0.5
 QUALIFIED_WHATSAPP_EFFECTIVE_DATE = dt.date(2026, 9, 13)
+ANOMALY_BASELINE_EFFECTIVE_DATE = dt.date(2026, 9, 13)
 
 
 def parse_date(value: str | dt.date) -> dt.date:
@@ -446,12 +447,21 @@ def anomaly_check(
         for point in series
         if target_day - dt.timedelta(days=28) <= parse_date(point["date"]) < target_day
     ]
+    baseline_is_post_rollout = target_day >= ANOMALY_BASELINE_EFFECTIVE_DATE
+    if baseline_is_post_rollout:
+        baseline_candidates = [
+            point
+            for point in baseline_candidates
+            if parse_date(point["date"]) >= ANOMALY_BASELINE_EFFECTIVE_DATE
+        ]
     same_weekday = [point for point in baseline_candidates if parse_date(point["date"]).weekday() == target_day.weekday()]
     if len(same_weekday) >= 3:
         baseline_candidates = same_weekday
         baseline_method = "same_weekday_28d"
     else:
         baseline_method = "trailing_28d"
+    if baseline_is_post_rollout:
+        baseline_method += "_post_rollout"
     baseline_points = [point for point in baseline_candidates if point.get("value") is not None]
     missing_baseline_count = len(baseline_candidates) - len(baseline_points)
 
