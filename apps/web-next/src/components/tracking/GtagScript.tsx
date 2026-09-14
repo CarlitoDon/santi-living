@@ -530,7 +530,6 @@ export function GtagScript() {
             if (normalizedPath === '/sewa-karpet-merah-jogja' || normalizedPath === '/sewa-karpet-permadani-jogja') {
               return 'subcategory_page';
             }
-            if (normalizedPath === '/sewa-kursi-acara') return 'landing';
             if (normalizedPath === '/sewa-perlengkapan-event') return 'landing';
             if (normalizedPath === '/') return 'homepage';
             return 'service_page';
