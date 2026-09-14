@@ -12,6 +12,27 @@ vi.mock('@/lib/lead-db', () => ({
 import { POST } from './route';
 
 describe('POST /api/lead/track', () => {
+  it('filters automated user agents before writing to Neon', async () => {
+    const response = await POST(new NextRequest('http://localhost/api/lead/track', {
+      method: 'POST',
+      body: JSON.stringify({
+        event_id: 'lead-crawler-123',
+        event_type: 'whatsapp_click',
+        user_agent: 'ExampleCrawler/1.0',
+      }),
+      headers: { 'content-type': 'application/json' },
+    }));
+
+    expect(response.status).toBe(202);
+    await expect(response.json()).resolves.toMatchObject({
+      ok: true,
+      persisted: false,
+      cityClassification: 'unknown',
+      filtered: true,
+    });
+    expect(persistLeadEventMock).not.toHaveBeenCalled();
+  });
+
   it('does not expose persistence error details', async () => {
     persistLeadEventMock.mockRejectedValue(
       new Error('Neon connection failed with a private endpoint'),
