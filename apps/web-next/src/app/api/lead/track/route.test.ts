@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const { persistLeadEventMock } = vi.hoisted(() => ({
@@ -12,6 +12,10 @@ vi.mock('@/lib/lead-db', () => ({
 import { POST } from './route';
 
 describe('POST /api/lead/track', () => {
+  beforeEach(() => {
+    persistLeadEventMock.mockReset();
+  });
+
   it('filters automated user agents before writing to Neon', async () => {
     const response = await POST(new NextRequest('http://localhost/api/lead/track', {
       method: 'POST',
@@ -20,7 +24,10 @@ describe('POST /api/lead/track', () => {
         event_type: 'whatsapp_click',
         user_agent: 'ExampleCrawler/1.0',
       }),
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'user-agent': 'ExampleCrawler/1.0',
+      },
     }));
 
     expect(response.status).toBe(202);
@@ -28,6 +35,29 @@ describe('POST /api/lead/track', () => {
       ok: true,
       persisted: false,
       cityClassification: 'unknown',
+      filtered: true,
+    });
+    expect(persistLeadEventMock).not.toHaveBeenCalled();
+  });
+
+  it('uses the server user-agent header when the body tries to spoof it', async () => {
+    const response = await POST(new NextRequest('http://localhost/api/lead/track', {
+      method: 'POST',
+      body: JSON.stringify({
+        event_id: 'lead-spoofed-agent-123',
+        event_type: 'whatsapp_click',
+        user_agent: 'Mozilla/5.0 (human browser)',
+      }),
+      headers: {
+        'content-type': 'application/json',
+        'user-agent': 'ExampleCrawler/1.0',
+      },
+    }));
+
+    expect(response.status).toBe(202);
+    await expect(response.json()).resolves.toMatchObject({
+      ok: true,
+      persisted: false,
       filtered: true,
     });
     expect(persistLeadEventMock).not.toHaveBeenCalled();
