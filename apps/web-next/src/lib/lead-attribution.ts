@@ -30,6 +30,7 @@ const EventIdSchema = z.preprocess((value) => {
   const trimmed = value.trim();
   return trimmed || undefined;
 }, z.string().min(8).max(80).optional());
+const AUTOMATED_USER_AGENT_PATTERN = /(?:bot|crawler|spider|headless|slurp|curl|wget|python(?:-requests)?|httpclient|scrapy)/i;
 const OptionalNumberSchema = z.preprocess((value) => {
   if (value === '' || value === null || value === undefined) return undefined;
   return value;
@@ -114,6 +115,10 @@ export type LeadCityClassification = 'service_area' | 'out_of_service' | 'unknow
 export function normalizeLeadText(value: string | null | undefined): string | undefined {
   const trimmed = value?.trim();
   return trimmed ? trimmed.slice(0, 500) : undefined;
+}
+
+export function isLikelyAutomatedUserAgent(value: string | null | undefined): boolean {
+  return Boolean(value && AUTOMATED_USER_AGENT_PATTERN.test(value));
 }
 
 export function isOutOfServiceCity(city: string | null | undefined): boolean {

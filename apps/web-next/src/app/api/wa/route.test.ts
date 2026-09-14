@@ -88,6 +88,22 @@ describe('GET /api/wa', () => {
     );
   });
 
+  it('keeps automated redirects working without persisting or requesting a quote', async () => {
+    const url = new URL(buildRequest('203.0.113.25', 'lead-crawler-event-123').url);
+    url.searchParams.set('latitude', '-7.8000123');
+    url.searchParams.set('longitude', '110.3999877');
+    const response = await GET(new NextRequest(url, {
+      headers: {
+        'user-agent': 'ExampleCrawler/1.0',
+        'x-forwarded-for': '203.0.113.25',
+      },
+    }));
+
+    expect(response.status).toBe(307);
+    expect(persistLeadEventMock).not.toHaveBeenCalled();
+    expect(getGoogleDrivingQuoteMock).not.toHaveBeenCalled();
+  });
+
   it('does not trust client-supplied geocode fields on tracked redirects', async () => {
     const url = new URL(buildRequest('203.0.113.24', 'lead-client-event-789').url);
     url.searchParams.set('city', 'Sleman');

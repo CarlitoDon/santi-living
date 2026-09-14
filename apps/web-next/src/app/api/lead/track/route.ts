@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { LeadEventSchema } from '@/lib/lead-attribution';
+import { isLikelyAutomatedUserAgent, LeadEventSchema } from '@/lib/lead-attribution';
 import { persistLeadEvent } from '@/lib/lead-db';
 
 const TRACKING_ERROR_MESSAGE = 'Lead tracking is temporarily unavailable';
@@ -15,6 +15,26 @@ export async function POST(request: NextRequest) {
     const parsed = LeadEventSchema.parse(body);
     const eventId = parsed.event_id ?? randomUUID();
     const receivedAt = new Date().toISOString();
+    if (isLikelyAutomatedUserAgent(parsed.user_agent ?? request.headers.get('user-agent'))) {
+      console.info(JSON.stringify({
+        level: 'info',
+        message: 'lead_event_filtered',
+        route: '/api/lead/track',
+        request_id: requestId,
+        event_type: parsed.event_type,
+        reason: 'automated_user_agent',
+        duration_ms: Date.now() - startedAt,
+      }));
+      return NextResponse.json({
+        ok: true,
+        eventId,
+        receivedAt,
+        cityClassification: 'unknown',
+        persisted: false,
+        storageConfigured: Boolean(process.env.DATABASE_URL),
+        filtered: true,
+      }, { status: 202 });
+    }
     const persistence = await persistLeadEvent(eventId, parsed, receivedAt, { geocode: true });
 
     console.info(JSON.stringify({
