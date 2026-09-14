@@ -68,6 +68,20 @@ class AnalyticsAnomalyMonitorTest(unittest.TestCase):
         self.assertEqual(result["status"], "anomaly")
         self.assertEqual(result["direction"], "spike")
 
+    def test_post_rollout_baseline_ignores_pre_rollout_history(self) -> None:
+        start = dt.date(2026, 8, 16)
+        end = dt.date(2026, 9, 13)
+        daily = [{"date": day.isoformat(), "value": 100} for day in (
+            start + dt.timedelta(days=index) for index in range(28)
+        )]
+        daily.append({"date": end.isoformat(), "value": 10})
+
+        result = anomaly_check("neon", "persisted_events", daily, end.isoformat(), min_volume=5)
+
+        self.assertEqual(result["status"], "insufficient_history")
+        self.assertEqual(result["baseline_count"], 0)
+        self.assertEqual(result["baseline_method"], "trailing_28d_post_rollout")
+
     def test_filled_series_preserves_missing_provider_days_as_unavailable(self) -> None:
         start = dt.date(2026, 9, 1)
         end = dt.date(2026, 9, 3)
