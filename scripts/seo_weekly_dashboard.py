@@ -457,6 +457,14 @@ def ga4_custom_dimension_probe_summary(
     body = response.get("body")
     rows = body.get("rows") if isinstance(body, dict) else None
     if not isinstance(rows, list):
+        if (
+            isinstance(body, dict)
+            and isinstance(body.get("dimensionHeaders"), list)
+            and isinstance(body.get("metricHeaders"), list)
+        ):
+            summary["data_state"] = "available_empty"
+            summary["message"] = "GA4 returned valid headers but no matching event rows"
+            return summary
         summary["data_state"] = "malformed"
         summary["message"] = "GA4 response did not contain a rows array"
         return summary
