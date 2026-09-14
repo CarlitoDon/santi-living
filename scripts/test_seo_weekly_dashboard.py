@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from scripts.seo_weekly_dashboard import (
     GA4_CUSTOM_EVENT_DIMENSIONS,
+    GBP_EXPECTED_TITLE,
     MONEY_PAGES,
     SITEMAPS_TO_SUBMIT,
     build_offline_conversion_readiness,
@@ -235,6 +236,28 @@ class SeoWeeklyDashboardTest(unittest.TestCase):
         self.assertEqual(location["name"], "locations/10488080858214395605")
         self.assertEqual(location["title"], "Target location")
         self.assertEqual(location["primary_category"], "Target category")
+        self.assertFalse(location["title_matches_expected"])
+
+    def test_gbp_snapshot_marks_the_expected_owner_profile_title(self) -> None:
+        responses = [
+            {
+                "ok": True,
+                "status": 200,
+                "body": {
+                    "locations": [{
+                        "name": "locations/10488080858214395605",
+                        "title": GBP_EXPECTED_TITLE,
+                    }],
+                },
+            },
+            {"ok": True, "status": 200, "body": {"reviews": []}},
+            {"ok": True, "status": 200, "body": {"localPosts": []}},
+        ]
+
+        with patch("scripts.seo_weekly_dashboard.request_json", side_effect=responses):
+            snapshot = gbp_snapshot("test-token")
+
+        self.assertTrue(snapshot["location"]["title_matches_expected"])
 
     def test_gbp_snapshot_fails_closed_when_configured_location_is_missing(self) -> None:
         responses = [

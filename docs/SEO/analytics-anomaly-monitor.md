@@ -24,6 +24,7 @@ Unavailable providers remain `unavailable`; the monitor never reports unavailabl
 - Qualified WhatsApp parity is deferred until `2026-09-13`, the first complete UTC day after the production rollout at `2026-09-12T17:09Z`; the partial rollout day and earlier history are reported as `not_ready`, not as conversion loss.
 - Reverse geocoding is cached at the CDN/data-fetch layer and returns a retryable `503` for upstream Nominatim rate limits; the frontend can fall back to manual location entry without creating a runtime exception.
 - The article route pre-renders a bounded set of the newest repository and Notion articles, while older known articles remain available on demand. Keep this budget bounded to avoid deployment-time ISR churn; unknown slugs are still resolved through the route and should be monitored separately from valid article traffic.
+- The GBP snapshot compares the API location title with the owner-profile title and marks a conflict as a blocker; profile edits remain paused until the account/location identity is reconciled.
 - Specialist subdomains are permanent aliases to the main domain. The weekly dashboard probes those aliases for redirect health, but compares canonical, Open Graph, sitemap, and indexing evidence against the corresponding `/id/...` URL on `santiliving.com`.
 
 ### Google Ads configuration
