@@ -71,6 +71,20 @@ class SeoWeeklyDashboardTest(unittest.TestCase):
         self.assertEqual(result["populated_event_count"]["cta_source"], 0)
         self.assertEqual(result["not_set_event_count"]["page_type"], 7)
 
+    def test_ga4_probe_accepts_valid_zero_row_response_without_rows_array(self) -> None:
+        result = ga4_custom_dimension_probe_summary({
+            "ok": True,
+            "status": 200,
+            "body": {
+                "dimensionHeaders": [{"name": "customEvent:cta_source"}],
+                "metricHeaders": [{"name": "eventCount", "type": "TYPE_INTEGER"}],
+                "rowCount": 0,
+            },
+        })
+
+        self.assertEqual(result["data_state"], "available_empty")
+        self.assertEqual(result["total_event_count"], 0)
+
     def test_ga4_probe_reports_populated_dimensions(self) -> None:
         result = ga4_custom_dimension_probe_summary({
             "ok": True,
