@@ -81,6 +81,16 @@ export function GtagScript() {
             } catch(ex) {}
           }
 
+          function trackClarityEvent(eventName) {
+            try {
+              if (typeof window !== 'undefined' && typeof window.__santiTrackClarityEvent === 'function') {
+                window.__santiTrackClarityEvent(eventName);
+              } else if (typeof window !== 'undefined' && typeof window.clarity === 'function') {
+                window.clarity('event', eventName);
+              }
+            } catch(ex) {}
+          }
+
           function flushGtagEvents(events, callback) {
             var remaining = events.length;
             var settled = false;
@@ -755,6 +765,7 @@ export function GtagScript() {
                 eventParams.location_permission = leadPayload.location_permission;
 
                 trackGtagEvent('event', 'whatsapp_click', eventParams);
+                trackClarityEvent('whatsapp_click');
 
                 var persistence = persistLeadEventForQualification(leadPayload);
 
@@ -774,6 +785,7 @@ export function GtagScript() {
                     city_classification: result.cityClassification,
                     persistence_status: 'confirmed'
                   });
+                  trackClarityEvent('santi_whatsapp_qualified');
                   flushGtagEvents([
                     {
                       name: 'santi_whatsapp_qualified',
@@ -857,6 +869,7 @@ export function GtagScript() {
                 'fbclid': phoneAttr.fbclid || '',
                 'transport_type': 'beacon'
               });
+              trackClarityEvent('phone_click');
 
               sendLeadEvent({
                 event_id: phoneEventId,
