@@ -75,6 +75,17 @@ describe('GET /api/wa', () => {
     expect(persistLeadEventMock).not.toHaveBeenCalled();
   });
 
+  it('only redirects to the configured business WhatsApp number', async () => {
+    const request = buildRequest();
+    const url = new URL(request.url);
+    url.searchParams.set('to', '6281234567890');
+
+    const response = await GET(new NextRequest(url, { headers: { 'x-forwarded-for': '203.0.113.20' } }));
+
+    expect(response.status).toBe(307);
+    expect(new URL(response.headers.get('location') as string).pathname).toBe('/6289519119092');
+  });
+
   it('persists redirects carrying a client-generated event id', async () => {
     const request = buildRequest('203.0.113.20', 'lead-client-event-123');
 

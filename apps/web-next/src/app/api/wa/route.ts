@@ -16,8 +16,9 @@ import { guardDeliveryQuoteRequest } from '@/lib/delivery-quote-guard';
 const WA_REDIRECT_ERROR_MESSAGE = 'WhatsApp redirect is temporarily unavailable';
 
 function sanitizedPhone(value: string | null): string {
-  const digits = (value || config.whatsappNumber).replace(/\D/g, '');
-  return digits || config.whatsappNumber;
+  const configuredDigits = config.whatsappNumber.replace(/\D/g, '');
+  const requestedDigits = (value || '').replace(/\D/g, '');
+  return requestedDigits === configuredDigits ? requestedDigits : configuredDigits;
 }
 
 function sanitizeWhatsAppText(text: string): string {
