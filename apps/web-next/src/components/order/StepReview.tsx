@@ -11,6 +11,7 @@ import type { ErpOrderResponse, OrderPayload } from '@/types/order';
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    __santiTrackClarityEvent?: (eventName: string) => void;
   }
 }
 
@@ -21,28 +22,31 @@ interface StepReviewProps {
 
 function trackFormSubmit(order: OrderPayload, erpResponse: ErpOrderResponse): void {
   const eventId = erpResponse.leadTracking?.eventId;
-  if (!eventId || typeof window.gtag !== 'function') return;
+  if (!eventId) return;
 
-  window.gtag('event', 'form_submit', {
-    event_id: eventId,
-    event_category: 'conversion',
-    cta_source: 'checkout_form',
-    cta_location: 'submit_order',
-    page_type: 'checkout_form',
-    product_category: Array.from(new Set(order.items.map((item) => item.category))).join(','),
-    intent: 'rental_order',
-    order_number: erpResponse.orderNumber,
-    currency: 'IDR',
-    value: order.totalPrice,
-    items: order.items.map((item) => ({
-      item_id: item.id,
-      item_name: item.name,
-      item_category: item.category,
-      quantity: item.quantity,
-      price: item.pricePerDay,
-    })),
-    ...getAttributionEventParams(),
-  });
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'form_submit', {
+      event_id: eventId,
+      event_category: 'conversion',
+      cta_source: 'checkout_form',
+      cta_location: 'submit_order',
+      page_type: 'checkout_form',
+      product_category: Array.from(new Set(order.items.map((item) => item.category))).join(','),
+      intent: 'rental_order',
+      order_number: erpResponse.orderNumber,
+      currency: 'IDR',
+      value: order.totalPrice,
+      items: order.items.map((item) => ({
+        item_id: item.id,
+        item_name: item.name,
+        item_category: item.category,
+        quantity: item.quantity,
+        price: item.pricePerDay,
+      })),
+      ...getAttributionEventParams(),
+    });
+  }
+  window.__santiTrackClarityEvent?.('form_submit');
 }
 
 const formatCurrency = (amount: number) =>
