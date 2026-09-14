@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { config } from '@/data/config';
 import {
   buildLeadLogRecord,
+  isLikelyAutomatedUserAgent,
   LeadEventSchema,
   normalizeLeadText,
 } from '@/lib/lead-attribution';
@@ -73,6 +74,7 @@ export async function GET(request: NextRequest) {
       referrer: request.headers.get('referer') ?? undefined,
       timestamp: receivedAt,
     });
+    const automatedTraffic = isLikelyAutomatedUserAgent(parsed.user_agent);
     const hasCoordinates = typeof parsed.latitude === 'number' && typeof parsed.longitude === 'number';
     const quoteGuard = hasCoordinates
       ? guardDeliveryQuoteRequest(request, parsed.latitude as number, parsed.longitude as number)
@@ -83,7 +85,7 @@ export async function GET(request: NextRequest) {
         code: quoteGuard.code,
       });
     }
-    const quotePromise = hasCoordinates && quoteGuard?.allowed
+    const quotePromise = !automatedTraffic && hasCoordinates && quoteGuard?.allowed
       ? getGoogleDrivingQuote(parsed.latitude as number, parsed.longitude as number).catch((error: unknown) => {
           const code = error instanceof GoogleRoutesError ? error.code : 'UNKNOWN';
           console.warn('[santi_delivery_quote] Quote unavailable:', { event_id: eventId, code });
@@ -103,7 +105,7 @@ export async function GET(request: NextRequest) {
         }
       : parsed;
     const [persistence, quote] = await Promise.all([
-      trackedEventId
+      trackedEventId && !automatedTraffic
         ? persistLeadEvent(eventId, persistenceInput, receivedAt, { geocode: false })
         : Promise.resolve(null),
       quotePromise,
@@ -112,7 +114,7 @@ export async function GET(request: NextRequest) {
 
     console.info('[santi_lead_event]', JSON.stringify({
       ...record,
-      tracking_mode: trackedEventId ? 'client_event' : 'untracked_redirect',
+      tracking_mode: !trackedEventId ? 'untracked_redirect' : automatedTraffic ? 'automated_filtered' : 'client_event',
       db_configured: persistence?.configured ?? false,
       db_persisted: persistence?.persisted ?? false,
     }));
