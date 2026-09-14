@@ -38,6 +38,7 @@ GA4_CUSTOM_EVENT_DIMENSIONS = (
 GA4_CUSTOM_DIMENSION_EFFECTIVE_DATE = dt.date(2026, 9, 13)
 GBP_ACCOUNT = "accounts/116188520419140679581"
 GBP_LOCATION = "locations/10488080858214395605"
+GBP_EXPECTED_TITLE = "Sewa Kursi Acara Jogja – Santi Living | by Santi Mebel Jogja"
 LEAD_EXPORT_URL = "https://santiliving.com/api/lead/export"
 LEAD_EXPORT_PAGE_SIZE = 1000
 MAX_LEAD_EXPORT_ROWS = 10000
@@ -866,6 +867,7 @@ def gbp_snapshot(token: str) -> dict[str, Any]:
         "ok": location.get("ok"),
         "status": location.get("status"),
         "configured_location": GBP_LOCATION,
+        "expected_title": GBP_EXPECTED_TITLE,
         "target_location_found": False,
     }
     if location.get("ok"):
@@ -880,6 +882,7 @@ def gbp_snapshot(token: str) -> dict[str, Any]:
                     "target_location_found": True,
                     "name": target.get("name"),
                     "title": target.get("title"),
+                    "title_matches_expected": target.get("title") == GBP_EXPECTED_TITLE,
                     "primary_phone_present": bool((target.get("phoneNumbers") or {}).get("primaryPhone")),
                     "website_uri": target.get("websiteUri"),
                     "primary_category": ((target.get("categories") or {}).get("primaryCategory") or {}).get("displayName"),
@@ -986,6 +989,11 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lines.append("")
     lines.append("## GBP coverage")
     gbp = snapshot.get("gbp") or {}
+    location = gbp.get("location") or {}
+    lines.append(
+        f"- Configured GBP location: `{location.get('configured_location', 'n/a')}`; "
+        f"title_matches_expected={location.get('title_matches_expected', 'n/a')}."
+    )
     lines.append(f"- Reviews returned: {(gbp.get('reviews') or {}).get('returned', 'n/a')}; without reply: {(gbp.get('reviews') or {}).get('without_reply', 'n/a')}")
     lines.append(f"- Local posts returned: {(gbp.get('posts') or {}).get('returned', 'n/a')}; live: {(gbp.get('posts') or {}).get('live', 'n/a')}")
     lines.append("")
@@ -1005,6 +1013,11 @@ def write_markdown(snapshot: dict[str, Any], output_path: Path) -> None:
     lead_export_ok = (snapshot.get("lead_export") or {}).get("ok") is True
     if probe_state != "available_populated" and not lead_export_ok:
         blockers.append("GA4 custom event dimensions are unavailable or empty and `/api/lead/export` fallback is unavailable; register event-scoped custom dimensions for cta_source, cta_location, product_category, page_type, and intent, or restore the lead export endpoint/token.")
+    gbp_location = (snapshot.get("gbp") or {}).get("location") or {}
+    if gbp_location.get("target_location_found") and gbp_location.get("title_matches_expected") is False:
+        blockers.append(
+            "Configured GBP API location title conflicts with the owner-profile title; reconcile the account/location identity before changing public profile data."
+        )
     if blockers:
         lines.extend(f"- {item}" for item in blockers)
     else:
