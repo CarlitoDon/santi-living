@@ -130,6 +130,8 @@ export function Navigation() {
       ? { href: '#calculator', label: t('nav.cek_opsi'), site: 'current' }
       : hostCta.context === 'acara'
         ? { href: '/sewa-perlengkapan-event', label: t('nav.paket_event') }
+        : hostCta.context === 'kursi'
+          ? { href: '#chair-catalog-title', label: t('nav.kursi'), site: 'current' }
         : { href: '/#calculator', label: t('nav.hitung_biaya'), site: 'current' };
 
   const navLinks: NavLink[] = [

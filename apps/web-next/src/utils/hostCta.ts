@@ -1,6 +1,6 @@
 import { WA_PRESET_ORDER } from '@/utils/whatsapp';
 
-export type HostCtaContext = 'default' | 'karpet' | 'permadani' | 'acara';
+export type HostCtaContext = 'default' | 'karpet' | 'permadani' | 'acara' | 'kursi';
 
 export interface HostCtaCopy {
   context: HostCtaContext;
@@ -43,6 +43,17 @@ Kebutuhan inti: {kasur rest area / air cooler / TV display / karpet / lainnya}
 Item by request: {meja / kursi / sound / dekorasi ringan / lainnya}
 
 Mohon info ketersediaan, rekomendasi paket, estimasi harga, dan ongkirnya.`;
+
+export const KURSI_WA_PRESET = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.
+
+Jenis acara: {rapat / pengajian / pernikahan / gathering / lainnya}
+Jenis kursi: {kursi lipat / kursi susun besi spons / kursi plastik}
+Jumlah kursi: {jumlah}
+Tanggal acara: {tanggal}
+Lokasi pengantaran: {alamat lengkap}
+Akses venue (lantai/jam bongkar): {detail}
+
+Mohon info ketersediaan, estimasi harga, dan ongkirnya.`;
 
 export const DEFAULT_HOST_CTA: HostCtaCopy = {
   context: 'default',
@@ -108,6 +119,24 @@ const HOST_CTA_BY_CONTEXT: Record<Exclude<HostCtaContext, 'default'>, { id: Host
       waText: ACARA_WA_PRESET,
     },
   },
+  kursi: {
+    id: {
+      context: 'kursi',
+      desktopLabel: 'Cek kursi acara',
+      mobileAriaLabel: 'Cek kursi acara via WhatsApp',
+      navLabel: 'Cek kursi via WhatsApp',
+      stickyAriaLabel: 'Cek kursi acara via WhatsApp',
+      waText: KURSI_WA_PRESET,
+    },
+    en: {
+      context: 'kursi',
+      desktopLabel: 'Check event chairs',
+      mobileAriaLabel: 'Check event chairs via WhatsApp',
+      navLabel: 'Check chairs via WhatsApp',
+      stickyAriaLabel: 'Check event chairs via WhatsApp',
+      waText: KURSI_WA_PRESET,
+    },
+  },
 };
 
 const DEFAULT_CTA_BY_LOCALE: Record<'id' | 'en', HostCtaCopy> = {
@@ -124,7 +153,7 @@ const DEFAULT_CTA_BY_LOCALE: Record<'id' | 'en', HostCtaCopy> = {
 
 export function getHostCta(hostname = '', pathname = '', locale = 'id'): HostCtaCopy {
   const host = hostname.toLowerCase();
-  const path = pathname.toLowerCase();
+  const path = pathname.toLowerCase().replace(/^\/(?:id|en)(?=\/|$)/, '') || '/';
   const l = (locale === 'en' ? 'en' : 'id') as 'id' | 'en';
 
   if (host.startsWith('permadani.') || path.includes('permadani')) {
@@ -137,6 +166,10 @@ export function getHostCta(hostname = '', pathname = '', locale = 'id'): HostCta
 
   if (host.startsWith('acara.') || path.startsWith('/sewa-perlengkapan-event')) {
     return HOST_CTA_BY_CONTEXT.acara[l];
+  }
+
+  if (path.startsWith('/sewa-kursi-acara')) {
+    return HOST_CTA_BY_CONTEXT.kursi[l];
   }
 
   return DEFAULT_CTA_BY_LOCALE[l];
