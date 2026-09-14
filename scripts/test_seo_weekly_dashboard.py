@@ -11,6 +11,7 @@ from scripts.seo_weekly_dashboard import (
     fetch_lead_export_rows,
     ga4_custom_dimension_probe_summary,
     ga4_snapshot,
+    gbp_snapshot,
     inclusive_end_as_export_boundary,
     live_http_snapshot,
 )
@@ -189,6 +190,52 @@ class SeoWeeklyDashboardTest(unittest.TestCase):
 
         self.assertFalse(result["ok"])
         self.assertIn("rows must be an array", result["reason"])
+
+    def test_gbp_snapshot_selects_configured_location_instead_of_first_result(self) -> None:
+        responses = [
+            {
+                "ok": True,
+                "status": 200,
+                "body": {
+                    "locations": [
+                        {"name": "locations/other", "title": "Wrong location"},
+                        {
+                            "name": "locations/10488080858214395605",
+                            "title": "Target location",
+                            "websiteUri": "https://target.example",
+                            "phoneNumbers": {"primaryPhone": "+62000"},
+                            "categories": {"primaryCategory": {"displayName": "Target category"}},
+                        },
+                    ]
+                },
+            },
+            {"ok": True, "status": 200, "body": {"reviews": []}},
+            {"ok": True, "status": 200, "body": {"localPosts": []}},
+        ]
+
+        with patch("scripts.seo_weekly_dashboard.request_json", side_effect=responses):
+            snapshot = gbp_snapshot("test-token")
+
+        location = snapshot["location"]
+        self.assertTrue(location["target_location_found"])
+        self.assertEqual(location["name"], "locations/10488080858214395605")
+        self.assertEqual(location["title"], "Target location")
+        self.assertEqual(location["primary_category"], "Target category")
+
+    def test_gbp_snapshot_fails_closed_when_configured_location_is_missing(self) -> None:
+        responses = [
+            {"ok": True, "status": 200, "body": {"locations": [{"name": "locations/other"}]}},
+            {"ok": True, "status": 200, "body": {"reviews": []}},
+            {"ok": True, "status": 200, "body": {"localPosts": []}},
+        ]
+
+        with patch("scripts.seo_weekly_dashboard.request_json", side_effect=responses):
+            snapshot = gbp_snapshot("test-token")
+
+        location = snapshot["location"]
+        self.assertFalse(location["target_location_found"])
+        self.assertNotIn("title", location)
+        self.assertIn("not returned", location["reason"])
 
     def test_live_snapshot_checks_aliases_against_main_canonical_urls(self) -> None:
         pages_by_url = {page["url"]: page for page in MONEY_PAGES}

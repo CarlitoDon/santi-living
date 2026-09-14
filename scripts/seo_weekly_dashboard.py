@@ -854,20 +854,31 @@ def gbp_snapshot(token: str) -> dict[str, Any]:
                 "latest_post_ids": [item.get("name", "").rsplit("/", 1)[-1] for item in rows[:5]],
             }
         )
-    location_summary: dict[str, Any] = {"ok": location.get("ok"), "status": location.get("status")}
+    location_summary: dict[str, Any] = {
+        "ok": location.get("ok"),
+        "status": location.get("status"),
+        "configured_location": GBP_LOCATION,
+        "target_location_found": False,
+    }
     if location.get("ok"):
         locs = (location.get("body") or {}).get("locations", [])
-        if locs:
-            first = locs[0]
+        target = next(
+            (item for item in locs if isinstance(item, dict) and item.get("name") == GBP_LOCATION),
+            None,
+        )
+        if target:
             location_summary.update(
                 {
-                    "name": first.get("name"),
-                    "title": first.get("title"),
-                    "primary_phone_present": bool((first.get("phoneNumbers") or {}).get("primaryPhone")),
-                    "website_uri": first.get("websiteUri"),
-                    "primary_category": ((first.get("categories") or {}).get("primaryCategory") or {}).get("displayName"),
+                    "target_location_found": True,
+                    "name": target.get("name"),
+                    "title": target.get("title"),
+                    "primary_phone_present": bool((target.get("phoneNumbers") or {}).get("primaryPhone")),
+                    "website_uri": target.get("websiteUri"),
+                    "primary_category": ((target.get("categories") or {}).get("primaryCategory") or {}).get("displayName"),
                 }
             )
+        else:
+            location_summary["reason"] = "configured GBP_LOCATION was not returned by the locations endpoint"
     return {"location": location_summary, "reviews": review_summary, "posts": post_summary}
 
 
