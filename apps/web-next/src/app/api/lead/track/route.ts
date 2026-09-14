@@ -15,7 +15,8 @@ export async function POST(request: NextRequest) {
     const parsed = LeadEventSchema.parse(body);
     const eventId = parsed.event_id ?? randomUUID();
     const receivedAt = new Date().toISOString();
-    if (isLikelyAutomatedUserAgent(parsed.user_agent ?? request.headers.get('user-agent'))) {
+    const requestUserAgent = request.headers.get('user-agent');
+    if (isLikelyAutomatedUserAgent(requestUserAgent)) {
       console.info(JSON.stringify({
         level: 'info',
         message: 'lead_event_filtered',
