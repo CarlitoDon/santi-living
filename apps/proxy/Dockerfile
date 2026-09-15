@@ -20,11 +20,15 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY --from=builder /repo/apps/proxy/dist ./dist
+COPY --from=builder /repo/node_modules ./node_modules
 COPY --from=builder /repo/apps/proxy/node_modules ./node_modules
 COPY --from=builder /repo/apps/proxy/package.json ./
 
 # PORT env diset via Coolify (default 3002 dari kode)
 EXPOSE 3002
+
+# node:20-alpine ships without full wget; HEALTHCHECK + Coolify probes need it.
+RUN apk add --no-cache wget
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s \
   CMD wget -qO- http://127.0.0.1:${PORT:-3002}/health || exit 1
