@@ -4,10 +4,13 @@
 FROM node:20-alpine AS builder
 WORKDIR /repo
 
+# Force development environment so tsc and @types are installed during build
+ENV NODE_ENV=development
+
 # Install deps scoped ke workspace proxy saja
 COPY package*.json ./
 COPY apps/proxy/package*.json ./apps/proxy/
-RUN npm ci -w apps/proxy
+RUN npm ci -w apps/proxy --include=dev
 
 # Copy source dan build
 COPY apps/proxy/ ./apps/proxy/
