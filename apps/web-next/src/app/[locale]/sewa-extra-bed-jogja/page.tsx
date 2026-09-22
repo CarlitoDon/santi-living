@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { sewaExtraBedJogja } from '@/data/landing-pages/sewa-extra-bed-jogja';
 import { LandingPage } from '@/components/landing/LandingPage';
+import { buildConfigLandingMetadata } from '@/lib/landing-metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const en = sewaExtraBedJogja.en;
-  if (locale === 'en' && en?.meta?.title) {
-    return { title: en.meta.title, description: en.meta.description };
-  }
-  return { title: sewaExtraBedJogja.meta.title, description: sewaExtraBedJogja.meta.description };
+  return buildConfigLandingMetadata(sewaExtraBedJogja, '/sewa-extra-bed-jogja', locale);
 }
 
 export default function SewaExtraBedJogjaPage() {

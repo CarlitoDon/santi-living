@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next';
 import { getNotionPosts } from '@/lib/notion';
 import { getAllPosts } from '@/lib/blog';
-import { localizedSiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
+import { localizedSiteUrl } from '@/lib/site-url';
 
 export const revalidate = false;
 
-const BASE_URL = PRIMARY_SITE_URL;
 const LOCALES = ['id', 'en'] as const;
 const STATIC_PATHS = [
   '',
@@ -15,7 +14,6 @@ const STATIC_PATHS = [
   'sewa-kasur-lipat',
   'sewa-kasur-bulanan',
   'sewa-extra-bed-jogja',
-  'sewa-karpet',
   'sewa-karpet-jogja',
   'sewa-karpet-merah-jogja',
   'sewa-karpet-permadani-jogja',
@@ -28,7 +26,6 @@ const STATIC_PATHS = [
   'sewa-kursi-acara',
   'produk',
   'about',
-  'pesan',
 ] as const;
 
 function safeDate(value: Date | string | undefined): Date | undefined {
@@ -47,20 +44,14 @@ function localizedAlternates(path: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes: MetadataRoute.Sitemap = [
-    {
-      url: BASE_URL,
-      changeFrequency: 'daily',
-      priority: 1,
-      alternates: localizedAlternates(''),
-    },
-    ...LOCALES.flatMap((locale) => STATIC_PATHS.map((path) => ({
+  const staticRoutes: MetadataRoute.Sitemap = LOCALES.flatMap((locale) =>
+    STATIC_PATHS.map((path) => ({
       url: localizedSiteUrl(path, locale),
       changeFrequency: 'daily' as const,
       priority: path ? 0.8 : 1,
       alternates: localizedAlternates(path ? `/${path}` : ''),
-    }))),
-  ];
+    }))
+  );
 
   try {
     const [notionPosts, idPosts, enPosts] = await Promise.all([

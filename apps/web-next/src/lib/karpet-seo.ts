@@ -43,6 +43,7 @@ export function buildKarpetMetadata(
   const image = getImageUrl(config);
 
   return {
+    metadataBase: new URL(PRIMARY_SITE_URL),
     title: config.meta.title,
     description: config.meta.description,
     keywords: [
@@ -62,6 +63,7 @@ export function buildKarpetMetadata(
       languages: {
         id: localizedSiteUrl(path, 'id'),
         en: localizedSiteUrl(path, 'en'),
+        'x-default': localizedSiteUrl(path, 'id'),
       },
     },
     openGraph: {

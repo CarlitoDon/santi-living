@@ -5,6 +5,7 @@ import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 
 export const metadata: Metadata = {
   title: 'Edit Pesanan | Santi Living',
+  robots: { index: false, follow: false },
 };
 
 export default function CartPage() {

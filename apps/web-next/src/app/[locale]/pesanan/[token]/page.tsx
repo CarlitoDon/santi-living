@@ -1,9 +1,15 @@
+import type { Metadata } from 'next';
 import { getProxyBaseUrl } from '@/lib/proxy-config';
 import { OrderSchema, type Order } from '@/types/order';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: 'Detail Pesanan | Santi Living',
+  robots: { index: false, follow: false },
+};
 
 interface PageProps {
   params: Promise<{ token: string }>;

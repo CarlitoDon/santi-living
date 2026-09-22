@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { sewaKipasAngin } from '@/data/landing-pages/sewa-kipas-angin';
 import { LandingPage } from '@/components/landing/LandingPage';
+import { buildConfigLandingMetadata } from '@/lib/landing-metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const en = sewaKipasAngin.en;
-  if (locale === 'en' && en?.meta?.title) {
-    return { title: en.meta.title, description: en.meta.description };
-  }
-  return { title: sewaKipasAngin.meta.title, description: sewaKipasAngin.meta.description };
+  return buildConfigLandingMetadata(sewaKipasAngin, '/sewa-kipas-angin', locale);
 }
 
 export default function SewaKipasAnginPage() {

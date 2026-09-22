@@ -18,6 +18,7 @@ export function buildAcaraMetadata(config: LandingPageConfig, locale = 'id'): Me
   const url = localizedSiteUrl(ACARA_PATH, currentLocale);
 
   return {
+    metadataBase: new URL(PRIMARY_SITE_URL),
     title: config.meta.title,
     description: config.meta.description,
     keywords: [
@@ -33,6 +34,7 @@ export function buildAcaraMetadata(config: LandingPageConfig, locale = 'id'): Me
       languages: {
         id: localizedSiteUrl(ACARA_PATH, 'id'),
         en: localizedSiteUrl(ACARA_PATH, 'en'),
+        'x-default': localizedSiteUrl(ACARA_PATH, 'id'),
       },
     },
     openGraph: {

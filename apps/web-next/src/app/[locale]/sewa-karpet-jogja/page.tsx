@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { SewaKarpetContent } from './SewaKarpetContent';
-import { localizedSiteUrl, primarySiteUrl } from '@/lib/site-url';
+import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
 const PAGE_PATH = '/sewa-karpet-jogja';
 
@@ -166,6 +166,7 @@ export async function generateMetadata({
   const pageUrl = localizedSiteUrl(PAGE_PATH, currentLocale);
 
   return {
+    metadataBase: new URL(PRIMARY_SITE_URL),
     title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     keywords: [
@@ -185,6 +186,7 @@ export async function generateMetadata({
       languages: {
         id: localizedSiteUrl(PAGE_PATH, 'id'),
         en: localizedSiteUrl(PAGE_PATH, 'en'),
+        'x-default': localizedSiteUrl(PAGE_PATH, 'id'),
       },
     },
     openGraph: {
