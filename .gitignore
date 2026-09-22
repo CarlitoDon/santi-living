@@ -38,3 +38,6 @@ apps/bot-service/.wwebjs_cache/
 *.sqlite
 *.sqlite3
 __test_*.db
+
+# Git worktrees
+.worktrees/

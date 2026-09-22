@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
 import { sewaSelimut } from '@/data/landing-pages/sewa-selimut';
 import { LandingPage } from '@/components/landing/LandingPage';
+import { buildConfigLandingMetadata } from '@/lib/landing-metadata';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const en = sewaSelimut.en;
-  if (locale === 'en' && en?.meta?.title) {
-    return { title: en.meta.title, description: en.meta.description };
-  }
-  return { title: sewaSelimut.meta.title, description: sewaSelimut.meta.description };
+  return buildConfigLandingMetadata(sewaSelimut, '/sewa-selimut-jogja', locale);
 }
 
 export default function SewaSelimutPage() {

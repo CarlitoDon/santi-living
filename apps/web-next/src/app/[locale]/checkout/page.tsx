@@ -4,6 +4,7 @@ import { CheckoutFlow } from '@/components/checkout/CheckoutFlow';
 
 export const metadata: Metadata = {
   title: 'Checkout - Sewa Kasur Busa Jogja',
+  robots: { index: false, follow: false },
 };
 
 // SSR — this page uses dynamic rendering

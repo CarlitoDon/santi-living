@@ -5,6 +5,7 @@ import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 export const metadata: Metadata = {
   title: 'Terima Kasih | Santi Living',
   description: 'Pesanan Anda telah kami terima. Tim Santi Living akan segera menghubungi Anda.',
+  robots: { index: false, follow: false },
 };
 
 export default function ThankYouPage() {

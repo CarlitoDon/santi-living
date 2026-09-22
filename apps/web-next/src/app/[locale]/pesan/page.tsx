@@ -4,7 +4,7 @@ import { OrderWizard } from '@/components/order/OrderWizard';
 export const metadata: Metadata = {
   title: 'Pesan Kasur - Santi Living',
   description: 'Isi data pemesanan sewa kasur Anda dalam beberapa langkah mudah.',
-  robots: { index: false },
+  robots: { index: false, follow: false },
 };
 
 export default function PesanPage() {

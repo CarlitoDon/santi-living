@@ -57,6 +57,9 @@ describe('sitemap cache stability', () => {
     ]).filter((url): url is string => typeof url === 'string');
 
     expect(urls.every((url) => url.startsWith('https://santiliving.com'))).toBe(true);
+    expect(entries.some((entry) => entry.url === 'https://santiliving.com')).toBe(false);
+    expect(entries.some((entry) => entry.url.endsWith('/pesan'))).toBe(false);
+    expect(entries.some((entry) => entry.url.endsWith('/sewa-karpet'))).toBe(false);
     expect(urls.some((url) => /(?:karpet|permadani|acara|kipas-angin)\.santiliving\.com/.test(url))).toBe(false);
 
     const chair = entries.find((entry) => entry.url === 'https://santiliving.com/id/sewa-kursi-acara');
