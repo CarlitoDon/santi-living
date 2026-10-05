@@ -41,6 +41,10 @@ const notoSerif = Noto_Serif({
   display: 'swap',
 });
 
+export function generateStaticParams() {
+  return [{ locale: 'id' }, { locale: 'en' }];
+}
+
 interface LayoutProps {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
