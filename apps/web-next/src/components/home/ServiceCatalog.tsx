@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ProductPicker } from '@/components/home/ProductPicker';
 import { CatalogItemCard } from '@/components/home/CatalogItemCard';
@@ -73,14 +73,11 @@ export function ServiceCatalog({ initialService, locale }: { initialService?: Se
   const layananParam = searchParams.get('layanan');
   const serviceFromQuery = layananParam === 'kursi' || layananParam === 'karpet' ? layananParam : (layananParam === 'kasur' ? 'kasur' : null);
 
-  const [activeService, setActiveService] = useState<ServiceKey>(serviceFromQuery || initialService || 'kasur');
+  const [selectedService, setSelectedService] = useState<ServiceKey | null>(null);
   const [modalItem, setModalItem] = useState<ServiceCatalogItem | null>(null);
 
-  useEffect(() => {
-    if (serviceFromQuery && serviceFromQuery !== activeService) {
-      setActiveService(serviceFromQuery);
-    }
-  }, [serviceFromQuery]);
+  const activeService: ServiceKey = selectedService ?? serviceFromQuery ?? initialService ?? 'kasur';
+  const setActiveService = (service: ServiceKey) => setSelectedService(service);
 
   const active = serviceOptions[activeService];
 
