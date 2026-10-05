@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ProductPicker } from '@/components/home/ProductPicker';
 import { CatalogItemCard } from '@/components/home/CatalogItemCard';
 import { ServiceInquiryModal, type ServiceInquiryItem } from '@/components/home/ServiceInquiryModal';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import type { Locale } from '@/locales/dictionary';
 
-type ServiceKey = 'kasur' | 'kursi' | 'karpet';
+export type ServiceKey = 'kasur' | 'kursi' | 'karpet';
 
 type ServiceCatalogItem = ServiceInquiryItem;
 
@@ -67,9 +68,17 @@ const serviceOptions: Record<ServiceKey, {
   },
 };
 
-export function ServiceCatalog({ initialService, locale }: { initialService: ServiceKey; locale: Locale }) {
-  const [activeService, setActiveService] = useState<ServiceKey>(initialService);
+export function ServiceCatalog({ initialService, locale }: { initialService?: ServiceKey; locale: Locale }) {
+  const searchParams = useSearchParams();
+  const layananParam = searchParams.get('layanan');
+  const serviceFromQuery = layananParam === 'kursi' || layananParam === 'karpet' ? layananParam : (layananParam === 'kasur' ? 'kasur' : null);
+
+  const [selectedService, setSelectedService] = useState<ServiceKey | null>(null);
   const [modalItem, setModalItem] = useState<ServiceCatalogItem | null>(null);
+
+  const activeService: ServiceKey = selectedService ?? serviceFromQuery ?? initialService ?? 'kasur';
+  const setActiveService = (service: ServiceKey) => setSelectedService(service);
+
   const active = serviceOptions[activeService];
 
   return (

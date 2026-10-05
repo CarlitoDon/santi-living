@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { config } from '@/data/config';
 import { AutoLocationTrigger } from '@/components/home/AutoLocationTrigger';
 import { ServiceCatalog } from '@/components/home/ServiceCatalog';
@@ -104,15 +105,11 @@ function ArrowRightIcon() {
 
 export default async function HomePage({
   params,
-  searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ layanan?: string }>;
 }) {
   const { locale: localeParam } = await params;
-  const { layanan } = await searchParams;
   const locale: Locale = localeParam === 'en' ? 'en' : 'id';
-  const selectedService = layanan === 'kursi' || layanan === 'karpet' ? layanan : 'kasur';
   const isEnglish = locale === 'en';
   const dict = await getDictionary(locale);
   const choices = serviceChoices(locale);
@@ -266,7 +263,9 @@ export default async function HomePage({
 
       <section id="calculator" className="home-catalog" aria-labelledby="catalog-title">
         <div className="container home-catalog-inner">
-          <ServiceCatalog key={selectedService} initialService={selectedService} locale={locale} />
+          <Suspense fallback={<div className="min-h-[400px] flex items-center justify-center text-muted">Memuat katalog layanan...</div>}>
+            <ServiceCatalog locale={locale} />
+          </Suspense>
         </div>
       </section>
 
