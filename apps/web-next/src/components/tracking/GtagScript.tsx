@@ -716,23 +716,79 @@ export function GtagScript() {
                   typeof location.latitude === 'number' && isFinite(location.latitude) &&
                   typeof location.longitude === 'number' && isFinite(location.longitude)
                 );
-                if (!hasValidatedCoordinates) {
-                  requestOutsideDiyLocation();
-                  return;
-                }
-                if (
+                var isOutsideDiy = Boolean(
                   location &&
                   (location.outside_diy === true ||
                     (typeof location.latitude === 'number' &&
                       typeof location.longitude === 'number' &&
                       !isWithinDiyCoordinateBounds(location.latitude, location.longitude)))
-                ) {
-                  requestOutsideDiyLocation();
+                );
+
+                function proceedWithUnlocatedOrOutsideDiy(loc) {
+                  var leadPayload = {
+                    event_id: leadEventId,
+                    event_type: 'whatsapp_click',
+                    source: attr.utm_source || '',
+                    medium: attr.utm_medium || '',
+                    campaign: attr.utm_campaign || '',
+                    cta_source: ctaSource,
+                    cta_location: ctaLocation,
+                    product_category: waTracking.product_category,
+                    page_type: waTracking.page_type,
+                    intent: waTracking.intent,
+                    landing_page: window.location.pathname + window.location.search,
+                    device: '',
+                    gclid: attr.gclid || '',
+                    gbraid: attr.gbraid || '',
+                    wbraid: attr.wbraid || '',
+                    fbclid: attr.fbclid || '',
+                    location_permission: (loc && loc.location_permission) || 'error',
+                    latitude: loc ? loc.latitude : undefined,
+                    longitude: loc ? loc.longitude : undefined,
+                    location_accuracy_m: loc ? loc.location_accuracy_m : undefined,
+                    city: (loc && loc.city) || '',
+                    user_agent: navigator.userAgent || '',
+                    referrer: document.referrer || '',
+                    timestamp: new Date().toISOString()
+                  };
+
+                  eventParams.location_permission = leadPayload.location_permission;
+
+                  if (url.pathname === '/api/wa' && loc) {
+                    applyLocationToSearchParams(url, loc);
+                  }
+                  if (loc && loc.address_text) {
+                    applyAddressToSearchParams(url, loc.address_text);
+                  }
+
+                  sendLeadEvent(leadPayload);
+                  trackClarityEvent('whatsapp_click');
+                  flushGtagEvents([
+                    {
+                      name: 'whatsapp_click',
+                      params: eventParams
+                    },
+                    {
+                      name: 'conversion',
+                      params: {
+                        'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
+                        'event_id': leadEventId,
+                        'transport_type': 'beacon'
+                      }
+                    }
+                  ], function() {
+                    navigateToWhatsapp(url);
+                  });
+                }
+
+                if (!hasValidatedCoordinates || isOutsideDiy) {
+                  proceedWithUnlocatedOrOutsideDiy(location);
                   return;
                 }
+
                 reverseGeocodeLocation(location, function(enrichedLocation) {
                 if (enrichedLocation && enrichedLocation.outside_diy === true) {
-                  requestOutsideDiyLocation();
+                  proceedWithUnlocatedOrOutsideDiy(enrichedLocation);
                   return;
                 }
                 var leadPayload = {

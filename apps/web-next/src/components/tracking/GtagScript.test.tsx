@@ -35,7 +35,10 @@ describe('GtagScript WhatsApp location flow', () => {
     localStorage.clear();
     document.body.innerHTML = '';
     window.history.replaceState({}, '', '/id');
-    delete (window as TestWindow).gtag;
+    (window as TestWindow).gtag = vi.fn((...args: unknown[]) => {
+      const params = args[2] as { event_callback?: () => void } | undefined;
+      params?.event_callback?.();
+    });
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: undefined,
@@ -50,7 +53,7 @@ describe('GtagScript WhatsApp location flow', () => {
     vi.unstubAllGlobals();
   });
 
-  it('opens the outside-DIY picker instead of WhatsApp for current Jakarta GPS', () => {
+  it('proceeds to WhatsApp for current Jakarta GPS without blocking', async () => {
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: {
@@ -83,11 +86,9 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    expect(openPicker).toHaveBeenCalledOnce();
-    expect((openPicker.mock.calls[0]?.[0] as CustomEvent).detail).toEqual({ reason: 'outside-diy' });
-    expect(sessionStorage.getItem('sl_location_picker_prompt')).toBe('outside-diy');
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
@@ -385,7 +386,7 @@ describe('GtagScript WhatsApp location flow', () => {
         }),
       },
     },
-  ])('fails closed for $label before WhatsApp navigation', ({ geolocation }) => {
+  ])('proceeds to WhatsApp for $label without blocking', async ({ geolocation }) => {
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: geolocation,
@@ -403,14 +404,14 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    expect(openPicker).toHaveBeenCalledOnce();
-    expect(navigator.sendBeacon).not.toHaveBeenCalled();
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
 
-  it('fails closed for a Central Java point inside the broad DIY coordinate box', async () => {
+  it('proceeds to WhatsApp for a Central Java point inside the broad DIY coordinate box', async () => {
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: {
@@ -452,13 +453,14 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    await waitFor(() => expect(openPicker).toHaveBeenCalledOnce());
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
 
-  it('opens the picker when a point inside the broad bounds cannot be verified', async () => {
+  it('proceeds to WhatsApp when a point inside the broad bounds cannot be verified', async () => {
     Object.defineProperty(navigator, 'geolocation', {
       configurable: true,
       value: {
@@ -490,13 +492,14 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    await waitFor(() => expect(openPicker).toHaveBeenCalledOnce());
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
 
-  it('rejects an existing Jakarta cache that was previously mislabeled as DIY', () => {
+  it('proceeds to WhatsApp for an existing Jakarta cache previously mislabeled as DIY', async () => {
     sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
       coords: { lat: -6.2272373, lng: 106.8584421 },
       source: 'automatic',
@@ -516,13 +519,14 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    expect(openPicker).toHaveBeenCalledOnce();
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
 
-  it('does not trust an unversioned automatic Central Java cache mislabeled as DIY', () => {
+  it('proceeds to WhatsApp for an unversioned automatic Central Java cache mislabeled as DIY', async () => {
     sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
       coords: { lat: -7.7, lng: 110.6 },
       source: 'automatic',
@@ -545,9 +549,9 @@ describe('GtagScript WhatsApp location flow', () => {
     document.body.appendChild(link);
     fireEvent.click(link);
 
-    expect(openPicker).toHaveBeenCalledOnce();
-    expect(navigator.sendBeacon).not.toHaveBeenCalled();
-    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeUndefined();
+    expect(openPicker).not.toHaveBeenCalled();
+    await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+    expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toContain('/api/wa');
 
     window.removeEventListener('open-map-picker', openPicker);
   });
