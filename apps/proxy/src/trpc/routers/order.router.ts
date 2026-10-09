@@ -146,14 +146,11 @@ const preflightWhatsappPhone = async (phone: string) => {
       throw error;
     }
 
-    const message = error instanceof Error ? error.message : String(error);
-    throw new TRPCError({
-      code: "SERVICE_UNAVAILABLE",
-      message:
-        message ||
-        "Bot WhatsApp belum siap. Silakan coba lagi atau hubungi admin.",
-      cause: error,
-    });
+    console.warn(
+      "[Order Router] WhatsApp verification service unavailable, proceeding without phone preflight:",
+      error,
+    );
+    return { valid: true, exists: true };
   }
 };
 

@@ -4,11 +4,12 @@ import { NextRequest } from 'next/server';
 const fetchMock = vi.fn();
 vi.stubGlobal('fetch', fetchMock);
 
-import { GET } from './route';
+import { GET, resetReverseGeocodeRateLimitForTests } from './route';
 
 describe('GET /api/reverse-geocode', () => {
   beforeEach(() => {
     fetchMock.mockReset();
+    resetReverseGeocodeRateLimitForTests();
   });
 
   it('returns a cached upstream address response', async () => {
@@ -57,6 +58,29 @@ describe('GET /api/reverse-geocode', () => {
     expect(response.status).toBe(503);
     await expect(response.json()).resolves.toEqual({
       error: { code: 'RATE_LIMITED', message: 'Reverse geocoding is temporarily unavailable' },
+    });
+    expect(response.headers.get('Retry-After')).toBe('60');
+  });
+
+  it('returns 429 when rate limit is exceeded', async () => {
+    fetchMock.mockResolvedValue(new Response(JSON.stringify({
+      address: { city: 'Yogyakarta' },
+      display_name: 'Yogyakarta, Indonesia',
+    }), { status: 200 }));
+
+    for (let i = 0; i < 12; i += 1) {
+      await GET(new NextRequest(
+        'http://localhost/api/reverse-geocode?lat=-7.7956&lng=110.3695',
+      ));
+    }
+
+    const response = await GET(new NextRequest(
+      'http://localhost/api/reverse-geocode?lat=-7.7956&lng=110.3695',
+    ));
+
+    expect(response.status).toBe(429);
+    await expect(response.json()).resolves.toEqual({
+      error: { code: 'RATE_LIMITED', message: 'Rate limit exceeded' },
     });
     expect(response.headers.get('Retry-After')).toBe('60');
   });
