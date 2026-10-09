@@ -7,10 +7,9 @@ import {
 
 describe('store location URLs', () => {
   it('builds a precise Google Maps link for customer coordinates', () => {
-    const url = new URL(getGoogleMapsCoordinateUrl(-7.8000123, 110.3999877));
-
-    expect(url.hostname).toBe('www.google.com');
-    expect(url.searchParams.get('query')).toBe('-7.8000123,110.3999877');
+    expect(getGoogleMapsCoordinateUrl(-7.8000123, 110.3999877)).toBe(
+      'https://maps.google.com/?q=-7.8000123,110.3999877',
+    );
   });
 
   it('uses the canonical workshop point in the map embed', () => {

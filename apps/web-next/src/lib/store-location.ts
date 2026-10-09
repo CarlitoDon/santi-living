@@ -3,8 +3,7 @@ import { config } from '@/data/config';
 export const STORE_LOCATION = config.storeLocation;
 
 export function getGoogleMapsCoordinateUrl(latitude: number, longitude: number): string {
-  const query = `${latitude.toFixed(7)},${longitude.toFixed(7)}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  return `https://maps.google.com/?q=${latitude.toFixed(7)},${longitude.toFixed(7)}`;
 }
 
 export function getStoreMapEmbedUrl(): string {

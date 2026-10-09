@@ -22,8 +22,8 @@ describe('buildWhatsAppLocationText', () => {
     );
 
     expect(message).toContain('Alamat pengiriman:\nJl. Contoh No. 7, Sleman');
-    expect(message).toContain('Google Maps (lokasi presisi):');
-    expect(message).toContain('query=-7.8000123%2C110.3999877');
+    expect(message).toContain('Titik Lokasi (Google Maps):');
+    expect(message).toContain('https://maps.google.com/?q=-7.8000123,110.3999877');
     expect(message).toContain('Estimasi ongkir antar-jemput: Rp50.000');
     expect(message).not.toContain('Jarak berkendara');
     expect(message).not.toContain('Rumus ongkir');
@@ -36,7 +36,7 @@ describe('buildWhatsAppLocationText', () => {
       quote: null,
     });
 
-    expect(message).toContain('Google Maps (lokasi presisi):');
+    expect(message).toContain('Titik Lokasi (Google Maps):');
     expect(message).toContain('Estimasi ongkir: belum dapat dihitung otomatis');
     expect(message).not.toContain('Estimasi ongkir antar-jemput:');
   });
@@ -57,7 +57,7 @@ describe('buildWhatsAppLocationText', () => {
   });
 
   it('does not append the precise location block twice', () => {
-    const initial = 'Google Maps (lokasi presisi):\nhttps://example.com';
+    const initial = 'Titik Lokasi (Google Maps):\nhttps://example.com';
     const message = buildWhatsAppLocationText(initial, location);
 
     expect(message).toBe(`${initial}\n\nAlamat pengiriman:\nJl. Contoh No. 7, Sleman`);
