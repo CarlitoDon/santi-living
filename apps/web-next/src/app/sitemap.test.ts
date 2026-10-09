@@ -68,4 +68,20 @@ describe('sitemap cache stability', () => {
       en: 'https://santiliving.com/en/sewa-kursi-acara',
     });
   });
+
+  it('includes Notion posts and Indonesian local posts, but excludes English local posts', async () => {
+    const entries = await sitemap();
+
+    // Notion posts included for both id and en
+    expect(entries.some((entry) => entry.url === 'https://santiliving.com/id/artikel/panduan-notion')).toBe(true);
+    expect(entries.some((entry) => entry.url === 'https://santiliving.com/en/artikel/panduan-notion')).toBe(true);
+
+    // Indonesian local posts included
+    expect(entries.some((entry) => entry.url === 'https://santiliving.com/id/artikel/panduan-id')).toBe(true);
+
+    // English local posts excluded to save crawl budget
+    expect(entries.some((entry) => entry.url === 'https://santiliving.com/en/artikel/panduan-en')).toBe(false);
+    expect(mocks.getAllPosts).toHaveBeenCalledWith('id');
+    expect(mocks.getAllPosts).not.toHaveBeenCalledWith('en');
+  });
 });

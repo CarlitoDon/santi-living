@@ -122,8 +122,69 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
   const faqs = en?.faqs || cfg.faqs;
   const badge = le(cfg.hero.badge, hero?.badge, locale);
 
+  const serviceSchema =
+    cfg.priceCards && cfg.priceCards.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          name: cfg.hero.title,
+          description: cfg.hero.subtitle || cfg.meta.description,
+          provider: {
+            '@type': 'LocalBusiness',
+            name: 'Santi Living',
+            telephone: '+6289519119092',
+            url: 'https://santiliving.com',
+          },
+          areaServed: [
+            { '@type': 'Place', name: 'Sleman' },
+            { '@type': 'Place', name: 'Kota Yogyakarta' },
+            { '@type': 'Place', name: 'Bantul' },
+            { '@type': 'Place', name: 'Kulon Progo' },
+          ],
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: cfg.hero.title,
+            itemListElement: cfg.priceCards.map((item) => ({
+              '@type': 'Offer',
+              name: item.name,
+              price: item.price.replace(/[^0-9]/g, ''),
+              priceCurrency: 'IDR',
+              description: `${item.name} (${item.size}) - ${item.price} ${item.daily}`,
+            })),
+          },
+        }
+      : null;
+
+  const faqSchema =
+    cfg.faqs && cfg.faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: cfg.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: f.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <main className="site-main-offset">
+      {serviceSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+        />
+      )}
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       {/* Hero */}
       <section
         className={`${gradientClass} relative overflow-hidden py-14 text-center text-white md:py-20`}

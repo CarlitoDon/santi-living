@@ -7,6 +7,8 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import { getTranslatedAuthor } from '@/utils/author';
 import { cache } from 'react';
+import { localizedSiteUrl } from '@/lib/site-url';
+import { config } from '@/data/config';
 
 export const dynamicParams = true;
 export const revalidate = false;
@@ -142,10 +144,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: description,
       images: [image],
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    // ponytail: noindex english programmatic posts to protect domain from scaled content penalties.
+    robots:
+      locale === 'en' && Boolean(rawPost && 'frontmatter' in rawPost)
+        ? {
+            index: false,
+            follow: true,
+          }
+        : {
+            index: true,
+            follow: true,
+          },
   };
 }
 
@@ -313,6 +322,90 @@ export default async function ArtikelSlugPage({ params }: PageProps) {
               color: 'var(--color-text-secondary)',
             }}
           />
+
+          <section
+            aria-label={locale === 'en' ? 'Rental Consultation & Pricing' : 'Konsultasi & Harga Sewa'}
+            style={{
+              marginTop: 'var(--space-10)',
+              padding: 'var(--space-6)',
+              backgroundColor: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+              borderRadius: 'var(--radius-lg)',
+              boxShadow: 'var(--shadow-sm)',
+              textAlign: 'center',
+            }}
+          >
+            <h2
+              style={{
+                fontSize: 'var(--font-size-xl)',
+                fontWeight: 'var(--font-weight-bold)',
+                marginBottom: 'var(--space-2)',
+                color: 'var(--color-text)',
+              }}
+            >
+              {locale === 'en' ? 'Need Mattress Rental in Jogja?' : 'Butuh Sewa Kasur di Jogja?'}
+            </h2>
+            <p
+              style={{
+                fontSize: 'var(--font-size-sm)',
+                color: 'var(--color-text-secondary)',
+                marginBottom: 'var(--space-6)',
+                maxWidth: '520px',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                lineHeight: 'var(--line-height-relaxed)',
+              }}
+            >
+              {locale === 'en'
+                ? 'Get clean, comfortable mattresses delivered to your door in Yogyakarta. Calculate your cost or chat directly with our team.'
+                : 'Santi Living menyediakan kasur bersih, wangi, dan steril siap antar jemput di Sleman, Kota Jogja, dan Bantul.'}
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 'var(--space-3)',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <a
+                href={localizedSiteUrl('/#calculator', locale)}
+                className="btn btn-primary"
+                style={{ textDecoration: 'none' }}
+              >
+                {locale === 'en' ? 'Mattress Rental Calculator' : 'Kalkulator Sewa Kasur'}
+              </a>
+              <a
+                href={localizedSiteUrl('/harga-sewa-kasur', locale)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '42px',
+                  padding: 'var(--space-2) var(--space-4)',
+                  fontSize: 'var(--font-size-sm)',
+                  fontWeight: 'var(--font-weight-semibold)',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--color-border)',
+                  backgroundColor: 'var(--color-surface)',
+                  color: 'var(--color-text)',
+                  textDecoration: 'none',
+                }}
+              >
+                {locale === 'en' ? 'Full Price Catalog' : 'Katalog Harga Lengkap'}
+              </a>
+              <a
+                href={config.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-whatsapp"
+                style={{ textDecoration: 'none' }}
+              >
+                {locale === 'en' ? 'WhatsApp Consultation' : 'Konsultasi WhatsApp'}
+              </a>
+            </div>
+          </section>
         </div>
       </article>
 

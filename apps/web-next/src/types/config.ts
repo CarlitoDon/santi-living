@@ -43,6 +43,7 @@ export const ConfigSchema = z.object({
   tagline: z.string(),
   whatsappNumber: z.string(),
   whatsappDisplay: z.string(),
+  whatsappUrl: z.string().default('https://wa.me/6289519119092'),
   city: z.string(),
   minDuration: z.number(),
   maxDuration: z.number(),

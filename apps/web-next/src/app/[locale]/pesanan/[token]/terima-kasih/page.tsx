@@ -5,7 +5,7 @@ import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Terima Kasih - Pesanan Dikonfirmasi | Santi Living',
+  title: 'Terima Kasih - Pesanan Dikonfirmasi',
   robots: { index: false, follow: false },
 };
 

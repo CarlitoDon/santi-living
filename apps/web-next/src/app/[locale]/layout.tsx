@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
     },
     description:
       dict.seo?.home_desc ??
-      'Santi Living melayani konsultasi sewa kasur, kursi acara, dan karpet di Jogja. Pilih kebutuhan, kirim tanggal, jumlah atau ukuran, dan lokasi untuk cek ketersediaan serta pengantaran via WhatsApp.',
+      'Sewa kasur, kursi acara, dan karpet di Jogja. Praktis, bersih, steril, dan siap antar jemput cepat ke Sleman, Kota Jogja, Bantul via WhatsApp Santi Living.',
     keywords: [
       'sewa kasur jogja',
       'rental kasur yogyakarta',
