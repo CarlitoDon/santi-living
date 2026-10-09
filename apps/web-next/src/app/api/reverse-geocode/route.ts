@@ -1,6 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const RATE_LIMIT_MAX_REQUESTS = 12;
+const RATE_LIMIT_WINDOW_MS = 60_000;
+// ponytail: in-memory rate limit per instance; upgrade to Redis/Upstash if horizontally scaled
+const rateLimitBuckets = new Map<string, { count: number; startedAt: number }>();
+
+function isRateLimited(request: NextRequest, now = Date.now()): boolean {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    || request.headers.get('x-real-ip')?.trim()
+    || 'unknown-client';
+  const current = rateLimitBuckets.get(ip);
+  const bucket = current && now - current.startedAt < RATE_LIMIT_WINDOW_MS
+    ? current
+    : { count: 0, startedAt: now };
+
+  if (bucket.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return true;
+  }
+
+  bucket.count += 1;
+  rateLimitBuckets.set(ip, bucket);
+
+  if (rateLimitBuckets.size > 1_000) {
+    for (const [key, value] of rateLimitBuckets) {
+      if (now - value.startedAt >= RATE_LIMIT_WINDOW_MS) {
+        rateLimitBuckets.delete(key);
+      }
+    }
+  }
+
+  return false;
+}
+
+export function resetReverseGeocodeRateLimitForTests(): void {
+  rateLimitBuckets.clear();
+}
+
 export async function GET(request: NextRequest) {
+  if (isRateLimited(request)) {
+    return NextResponse.json(
+      { error: { code: 'RATE_LIMITED', message: 'Rate limit exceeded' } },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': '60',
+        },
+      },
+    );
+  }
+
   const { searchParams } = request.nextUrl;
   const latValue = searchParams.get('lat');
   const lngValue = searchParams.get('lng');

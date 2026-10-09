@@ -28,7 +28,13 @@ export const midtransWebhook = async (req: Request, res: Response) => {
       .update(inputString)
       .digest("hex");
 
-    if (signatureKey !== notification.signature_key) {
+    const expectedBuf = Buffer.from(signatureKey);
+    const actualBuf = Buffer.from(String(notification.signature_key || ""));
+    const signatureValid =
+      expectedBuf.length === actualBuf.length &&
+      crypto.timingSafeEqual(expectedBuf, actualBuf);
+
+    if (!signatureValid) {
       console.warn(`[Midtrans Webhook] Invalid signature for order ${orderId}`);
       sendHttpError(res, 403, "FORBIDDEN", "Invalid signature");
       return;
