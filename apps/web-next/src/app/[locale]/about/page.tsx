@@ -13,9 +13,10 @@ export async function generateMetadata({
   const locale = localeParam === 'en' ? 'en' : 'id';
   const isEn = locale === 'en';
 
+  // ponytail: distinguish about page intent from homepage transactional queries to prevent keyword cannibalization.
   const title = isEn
-    ? 'About Us — Santi Living | Mattress & Event Rentals Yogyakarta'
-    : 'Tentang Kami — Cerita di Balik Santi Living Jogja';
+    ? 'About Us — Santi Living Profile & Workshop'
+    : 'Tentang Kami — Profil & Workshop Santi Living Jogja';
   const description = isEn
     ? 'Learn more about Santi Living, a trusted mattress and event equipment rental service in Yogyakarta born from Santi Mebel Godean.'
     : 'Kenali lebih dekat Santi Living, layanan sewa kasur dan perlengkapan event di Yogyakarta yang lahir dari pengalaman puluhan tahun Santi Mebel Godean.';
@@ -28,8 +29,8 @@ export async function generateMetadata({
     keywords: [
       'tentang santi living',
       'profil santi living jogja',
-      'santi mebel godean sewa kasur',
-      'sewa kasur jogja terpercaya',
+      'workshop santi living godean',
+      'sejarah santi living jogja',
     ],
     image: '/images/stok-kasur.png',
     imageAlt: title,

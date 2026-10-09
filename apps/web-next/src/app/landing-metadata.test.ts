@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { describe, expect, it, vi } from 'vitest';
 import sitemap from './sitemap';
+import { generateMetadata as generateAboutMetadata } from './[locale]/about/page';
 
 vi.mock('@/lib/notion', () => ({ getNotionPosts: vi.fn().mockResolvedValue([]) }));
 vi.mock('@/lib/blog', () => ({ getAllPosts: vi.fn().mockReturnValue([]) }));
@@ -92,4 +93,20 @@ describe('non-indexed pages have robots noindex nofollow', () => {
       expect(metadata?.robots).toEqual({ index: false, follow: false });
     });
   }
+});
+
+describe('about page metadata non-cannibalization', () => {
+  it('has brand/profile intent title and keywords to prevent keyword cannibalization', async () => {
+    const metaId = await generateAboutMetadata({ params: Promise.resolve({ locale: 'id' }) });
+    expect(metaId.title).toBe('Tentang Kami — Profil & Workshop Santi Living Jogja');
+    expect(metaId.keywords).toEqual([
+      'tentang santi living',
+      'profil santi living jogja',
+      'workshop santi living godean',
+      'sejarah santi living jogja',
+    ]);
+
+    const metaEn = await generateAboutMetadata({ params: Promise.resolve({ locale: 'en' }) });
+    expect(metaEn.title).toBe('About Us — Santi Living Profile & Workshop');
+  });
 });

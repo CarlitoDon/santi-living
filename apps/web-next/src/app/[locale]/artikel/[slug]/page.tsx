@@ -144,10 +144,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: description,
       images: [image],
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    // ponytail: noindex english programmatic posts to protect domain from scaled content penalties.
+    robots:
+      locale === 'en' && Boolean(rawPost && 'frontmatter' in rawPost)
+        ? {
+            index: false,
+            follow: true,
+          }
+        : {
+            index: true,
+            follow: true,
+          },
   };
 }
 

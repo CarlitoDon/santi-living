@@ -54,10 +54,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   try {
-    const [notionPosts, idPosts, enPosts] = await Promise.all([
+    // ponytail: exclude programmatic en posts from sitemap to optimize crawl budget.
+    const enPosts: ReturnType<typeof getAllPosts> = [];
+    const [notionPosts, idPosts] = await Promise.all([
       getNotionPosts().catch(() => []),
       Promise.resolve(getAllPosts('id')),
-      Promise.resolve(getAllPosts('en')),
     ]);
     const seen = new Set<string>();
     const articleRoutes: MetadataRoute.Sitemap = [];

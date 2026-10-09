@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mocks = vi.hoisted(() => ({
   getAllPosts: vi.fn(),
+  getNotionPost: vi.fn(),
   getNotionPosts: vi.fn(),
   getPostBySlug: vi.fn(),
 }));
@@ -11,12 +12,12 @@ vi.mock('@/lib/blog', () => ({
   getPostBySlug: mocks.getPostBySlug,
 }));
 vi.mock('@/lib/notion', () => ({
-  getNotionPost: vi.fn(),
+  getNotionPost: mocks.getNotionPost,
   getNotionPosts: mocks.getNotionPosts,
 }));
 vi.mock('next/navigation', () => ({ notFound: vi.fn() }));
 
-import ArtikelSlugPage, { dynamicParams, generateStaticParams, revalidate } from './page';
+import ArtikelSlugPage, { dynamicParams, generateMetadata, generateStaticParams, revalidate } from './page';
 
 describe('article prerender budget', () => {
   beforeEach(() => {
@@ -67,5 +68,61 @@ describe('article prerender budget', () => {
     expect(stringified).toContain('https://santiliving.com/id/#calculator');
     expect(stringified).toContain('https://santiliving.com/id/harga-sewa-kasur');
     expect(stringified).toContain('https://wa.me/6289519119092');
+  });
+
+  it('sets robots noindex follow for English local markdown posts and index follow for others', async () => {
+    mocks.getPostBySlug.mockImplementation((slug: string, locale: string) => {
+      if (slug === 'en-local-article' && locale === 'en') {
+        return {
+          slug: 'en-local-article',
+          frontmatter: {
+            title: 'EN Local Article',
+            description: 'Local EN description',
+            pubDate: new Date(2026, 0, 1),
+          },
+          content: 'Content',
+        };
+      }
+      if (slug === 'id-local-article' && locale === 'id') {
+        return {
+          slug: 'id-local-article',
+          frontmatter: {
+            title: 'ID Local Article',
+            description: 'Local ID description',
+            pubDate: new Date(2026, 0, 1),
+          },
+          content: 'Content',
+        };
+      }
+      return undefined;
+    });
+    mocks.getNotionPost.mockImplementation((slug: string) => {
+      if (slug === 'en-notion-article') {
+        return Promise.resolve({
+          id: 'notion-en',
+          slug: 'en-notion-article',
+          title: 'EN Notion Article',
+          date: '2026-01-01',
+          description: 'Notion description',
+          category: 'Tips',
+        });
+      }
+      return Promise.resolve(null);
+    });
+
+    const enLocalMeta = await generateMetadata({
+      params: Promise.resolve({ locale: 'en', slug: 'en-local-article' }),
+    });
+    expect(enLocalMeta.robots).toEqual({ index: false, follow: true });
+
+    const idLocalMeta = await generateMetadata({
+      params: Promise.resolve({ locale: 'id', slug: 'id-local-article' }),
+    });
+    expect(idLocalMeta.robots).toEqual({ index: true, follow: true });
+
+    const enNotionMeta = await generateMetadata({
+      params: Promise.resolve({ locale: 'en', slug: 'en-notion-article' }),
+    });
+    expect(enNotionMeta.robots).toEqual({ index: true, follow: true });
   });
 });
