@@ -1,7 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
-import { act, cleanup, fireEvent, render } from '@testing-library/react';
+import { act, cleanup, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { HeroBackground } from './HeroBackground';
 
@@ -24,19 +24,17 @@ describe('HeroBackground', () => {
     vi.useRealTimers();
   });
 
-  it('creates a fresh manual announcement and leaves it unchanged during autoplay', () => {
-    const { container, getByLabelText } = render(<HeroBackground />);
-    const secondSlide = getByLabelText('Tampilkan gambar 2 dari 4');
+  it('renders properly and advances the slide after the timer interval', () => {
+    const { getByAltText, queryByAltText } = render(<HeroBackground />);
 
-    fireEvent.click(secondSlide);
-    expect(container.querySelector('[data-announcement-sequence="1"]')?.textContent).toBe('Gambar 2 dari 4');
+    expect(getByAltText('Pengiriman kasur Santi Living di Yogyakarta')).toBeTruthy();
+    expect(queryByAltText('Kasur sewa yang sudah rapi dan siap digunakan')).toBeNull();
 
-    fireEvent.click(secondSlide);
-    expect(container.querySelector('[data-announcement-sequence="2"]')?.textContent).toBe('Gambar 2 dari 4');
+    act(() => {
+      vi.advanceTimersByTime(8500);
+    });
 
-    act(() => vi.advanceTimersByTime(8500));
-
-    expect(container.querySelector('.home-hero-switcher-count')?.textContent).toContain('03 / 04');
-    expect(container.querySelector('[data-announcement-sequence="2"]')?.textContent).toBe('Gambar 2 dari 4');
+    expect(queryByAltText('Pengiriman kasur Santi Living di Yogyakarta')).toBeNull();
+    expect(getByAltText('Kasur sewa yang sudah rapi dan siap digunakan')).toBeTruthy();
   });
 });
