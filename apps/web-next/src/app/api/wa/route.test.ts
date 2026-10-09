@@ -59,8 +59,8 @@ describe('GET /api/wa', () => {
     expect(response.status).toBe(307);
     expect(redirect.origin).toBe('https://wa.me');
     expect(message).toContain('Alamat pengiriman:\nJl. Contoh No. 7, Sleman');
-    expect(message).toContain('Google Maps (lokasi presisi):');
-    expect(message).toContain('query=-7.8000123%2C110.3999877');
+    expect(message).toContain('Titik Lokasi (Google Maps):');
+    expect(message).toContain('https://maps.google.com/?q=-7.8000123,110.3999877');
     expect(message).toContain('Estimasi ongkir antar-jemput: Rp50.000');
     expect(message).not.toContain('Jarak berkendara');
     expect(message).not.toContain('Rumus ongkir');
@@ -157,8 +157,8 @@ describe('GET /api/wa', () => {
 
     expect(response.status).toBe(307);
     expect(message).toContain('Alamat pengiriman:\nJl. Contoh No. 7, Sleman');
-    expect(message).toContain('Google Maps (lokasi presisi):');
-    expect(message).toContain('query=-7.8000123%2C110.3999877');
+    expect(message).toContain('Titik Lokasi (Google Maps):');
+    expect(message).toContain('https://maps.google.com/?q=-7.8000123,110.3999877');
     expect(message).toContain('Estimasi ongkir: belum dapat dihitung otomatis');
     expect(message).not.toContain('Estimasi ongkir antar-jemput');
   });
@@ -177,7 +177,7 @@ describe('GET /api/wa', () => {
 
     expect(response.status).toBe(307);
     expect(getGoogleDrivingQuoteMock).not.toHaveBeenCalled();
-    expect(message).toContain('Google Maps (lokasi presisi):');
+    expect(message).toContain('Titik Lokasi (Google Maps):');
     expect(message).toContain('Estimasi ongkir: belum dapat dihitung otomatis');
   });
 

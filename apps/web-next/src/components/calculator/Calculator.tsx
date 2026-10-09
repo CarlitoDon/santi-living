@@ -645,6 +645,7 @@ export function Calculator({
         duration: state.duration,
         startDate: state.startDate,
         address: customer.address,
+        deliveryFee: state.deliveryFee || 0,
       });
       sessionStorage.setItem("santi-living-wa-message", waMessage);
 
@@ -769,6 +770,7 @@ export function Calculator({
                 duration: state.duration,
                 startDate: state.startDate,
                 address: customer.address,
+                deliveryFee: state.deliveryFee || 0,
               })}
               source="calculator"
               location="calculator"

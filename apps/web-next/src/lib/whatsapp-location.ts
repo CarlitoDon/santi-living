@@ -34,12 +34,12 @@ export function buildWhatsAppLocationText(
 ): string {
   let text = applyAddress(String(initialText || '').trim(), location.addressText);
   const hasCoordinates = Number.isFinite(location.latitude) && Number.isFinite(location.longitude);
-  if (!hasCoordinates || text.includes('Google Maps (lokasi presisi):')) return text;
+  if (!hasCoordinates || text.includes('Google Maps')) return text;
 
   const latitude = location.latitude as number;
   const longitude = location.longitude as number;
   const lines = [
-    'Google Maps (lokasi presisi):',
+    'Titik Lokasi (Google Maps):',
     getGoogleMapsCoordinateUrl(latitude, longitude),
   ];
 

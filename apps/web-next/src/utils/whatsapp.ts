@@ -1,4 +1,5 @@
 import { config } from '@/data/config';
+import { getGoogleMapsCoordinateUrl } from '@/lib/store-location';
 
 /**
  * Preset chat template ported from Astro version (StickyWhatsApp.astro).
@@ -122,9 +123,10 @@ interface CalculatorWhatsAppInput {
     kota?: string;
     provinsi?: string;
     zip?: string;
-    lat?: string;
-    lng?: string;
+    lat?: string | number;
+    lng?: string | number;
   };
+  deliveryFee?: number;
 }
 
 /** Maps item category to a human-friendly Indonesian label */
@@ -214,6 +216,20 @@ export function buildCalculatorWhatsAppMessage(input: CalculatorWhatsAppInput): 
     lines.push(addrParts.join(', '));
   }
 
+  const rawLat = address.lat;
+  const rawLng = address.lng;
+  const lat = rawLat !== undefined && rawLat !== null && rawLat !== '' ? Number(rawLat) : NaN;
+  const lng = rawLng !== undefined && rawLng !== null && rawLng !== '' ? Number(rawLng) : NaN;
+  if (Number.isFinite(lat) && Number.isFinite(lng)) {
+    lines.push('');
+    lines.push('Titik Lokasi (Google Maps):');
+    lines.push(getGoogleMapsCoordinateUrl(lat, lng));
+  }
+
+  if (typeof input.deliveryFee === 'number' && input.deliveryFee > 0) {
+    lines.push('');
+    lines.push(`Estimasi ongkir antar-jemput: Rp${new Intl.NumberFormat('id-ID').format(input.deliveryFee)}`);
+  }
   // --- CTA -----------------------------------------------------------------
   lines.push('');
   lines.push('Mohon info ketersediaan, harga sewa, dan ongkirnya.');
