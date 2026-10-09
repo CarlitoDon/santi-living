@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { CalculatorSection } from '@/components/calculator/CalculatorSection';
 
 export const metadata: Metadata = {
-  title: 'Edit Pesanan | Santi Living',
+  title: 'Edit Pesanan',
   robots: { index: false, follow: false },
 };
 

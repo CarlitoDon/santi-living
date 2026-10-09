@@ -25,16 +25,19 @@ describe('HeroBackground', () => {
   });
 
   it('renders properly and advances the slide after the timer interval', () => {
-    const { getByAltText, queryByAltText } = render(<HeroBackground />);
+    const { getByAltText } = render(<HeroBackground />);
 
-    expect(getByAltText('Pengiriman kasur Santi Living di Yogyakarta')).toBeTruthy();
-    expect(queryByAltText('Kasur sewa yang sudah rapi dan siap digunakan')).toBeNull();
+    const firstSlide = getByAltText('Pengiriman kasur Santi Living di Yogyakarta');
+    const secondSlide = getByAltText('Kasur sewa yang sudah rapi dan siap digunakan');
+
+    expect(firstSlide.closest('[aria-hidden]')?.getAttribute('aria-hidden')).toBe('false');
+    expect(secondSlide.closest('[aria-hidden]')?.getAttribute('aria-hidden')).toBe('true');
 
     act(() => {
       vi.advanceTimersByTime(8500);
     });
 
-    expect(queryByAltText('Pengiriman kasur Santi Living di Yogyakarta')).toBeNull();
-    expect(getByAltText('Kasur sewa yang sudah rapi dan siap digunakan')).toBeTruthy();
+    expect(firstSlide.closest('[aria-hidden]')?.getAttribute('aria-hidden')).toBe('true');
+    expect(secondSlide.closest('[aria-hidden]')?.getAttribute('aria-hidden')).toBe('false');
   });
 });

@@ -13,9 +13,9 @@ export async function generateMetadata({
   const locale = localeParam === 'en' ? 'en' : 'id';
   const isEn = locale === 'en';
 
-  const title = isEn
-    ? 'Mattress Rental Prices in Jogja — 2026 | Santi Living'
-    : 'Harga Sewa Kasur di Jogja — Update 2026 | Santi Living';
+  const title = locale === 'en'
+    ? 'Mattress Rental Prices in Jogja — 2026'
+    : 'Harga Sewa Kasur di Jogja — Update 2026';
   const description = isEn
     ? 'Transparent and affordable mattress rental prices in Yogyakarta. Complete with bedsheets, pillows, and free delivery options.'
     : 'Daftar harga sewa kasur busa harian dan bulanan di Jogja. Kasur bersih, sprei, bantal, dan opsi gratis ongkir antar jemput.';

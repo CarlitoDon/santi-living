@@ -3,11 +3,12 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 const mocks = vi.hoisted(() => ({
   getAllPosts: vi.fn(),
   getNotionPosts: vi.fn(),
+  getPostBySlug: vi.fn(),
 }));
 
 vi.mock('@/lib/blog', () => ({
   getAllPosts: mocks.getAllPosts,
-  getPostBySlug: vi.fn(),
+  getPostBySlug: mocks.getPostBySlug,
 }));
 vi.mock('@/lib/notion', () => ({
   getNotionPost: vi.fn(),
@@ -15,7 +16,7 @@ vi.mock('@/lib/notion', () => ({
 }));
 vi.mock('next/navigation', () => ({ notFound: vi.fn() }));
 
-import { dynamicParams, generateStaticParams, revalidate } from './page';
+import ArtikelSlugPage, { dynamicParams, generateStaticParams, revalidate } from './page';
 
 describe('article prerender budget', () => {
   beforeEach(() => {
@@ -45,5 +46,26 @@ describe('article prerender budget', () => {
     expect(params).not.toContainEqual({ locale: 'id', slug: 'id-local-0' });
     expect(params).toContainEqual({ locale: 'en', slug: 'notion-49' });
     expect(params).not.toContainEqual({ locale: 'en', slug: 'notion-0' });
+  });
+
+  it('renders conversion CTA with internal links at the end of the article', async () => {
+    mocks.getPostBySlug.mockReturnValue({
+      slug: 'test-article',
+      frontmatter: {
+        title: 'Test Article',
+        description: 'Test description',
+        pubDate: new Date(2026, 0, 1),
+      },
+      content: '<p>Content</p>',
+    });
+
+    const page = await ArtikelSlugPage({
+      params: Promise.resolve({ locale: 'id', slug: 'test-article' }),
+    });
+
+    const stringified = JSON.stringify(page);
+    expect(stringified).toContain('https://santiliving.com/id/#calculator');
+    expect(stringified).toContain('https://santiliving.com/id/harga-sewa-kasur');
+    expect(stringified).toContain('https://wa.me/6289519119092');
   });
 });

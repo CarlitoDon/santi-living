@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 export const metadata: Metadata = {
-  title: 'Terima Kasih | Santi Living',
+  title: 'Terima Kasih',
   description: 'Pesanan Anda telah kami terima. Tim Santi Living akan segera menghubungi Anda.',
   robots: { index: false, follow: false },
 };

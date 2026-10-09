@@ -13,9 +13,9 @@ export async function generateMetadata({
   const locale = localeParam === 'en' ? 'en' : 'id';
   const isEn = locale === 'en';
 
-  const title = isEn
-    ? 'Product Catalog — Santi Living Mattress & Accessories Rental'
-    : 'Katalog Produk Sewa Kasur & Perlengkapan Tidur | Santi Living';
+  const title = locale === 'en'
+    ? 'Mattress & Sleep Gear Rental Catalog'
+    : 'Katalog Produk Sewa Kasur & Perlengkapan Tidur';
   const description = isEn
     ? 'Browse our complete catalog of rental mattresses, complete packages, single mattresses, and bedding accessories in Yogyakarta.'
     : 'Katalog lengkap pilihan sewa kasur busa harian Jogja: paket lengkap, kasur saja, dan aksesoris sprei bantal selimut.';

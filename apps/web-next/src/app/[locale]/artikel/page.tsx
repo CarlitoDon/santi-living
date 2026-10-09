@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const dict = await getDictionary(locale as Locale);
   
   return {
-    title: `${dict.blog?.page_title || 'Artikel & Tips'} | Santi Living`,
+    title: dict.blog?.page_title || 'Artikel & Tips',
     description: dict.blog?.page_desc || 'Panduan lengkap seputar sewa kasur dan tips tidur nyaman.',
     alternates: {
       canonical: `https://santiliving.com/${locale}/artikel`,

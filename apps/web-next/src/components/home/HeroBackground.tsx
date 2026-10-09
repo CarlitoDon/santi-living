@@ -77,7 +77,7 @@ export function HeroBackground() {
               {/* Precompressed responsive heroes avoid loading both crops. */}
               <img
                 src={slide.src}
-                alt={index === currentSlide ? slide.alt : ''}
+                alt={slide.alt}
                 className="h-full w-full object-cover"
                 style={{ objectPosition: slide.objectPosition }}
                 loading={index === 0 ? 'eager' : 'lazy'}
