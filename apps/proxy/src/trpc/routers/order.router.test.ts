@@ -48,7 +48,6 @@ vi.mock("../../services/erp-client", () => ({
 
 vi.mock("../../services/midtrans-client", () => ({
   createSnapToken: vi.fn(),
-  createQrisCharge: vi.fn(),
 }));
 
 vi.mock("../../services/bot-client", () => ({
