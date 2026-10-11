@@ -10,7 +10,7 @@
 
 import { calculateDeliveryFee } from "./calculator-logic";
 
-export interface DeliveryZone {
+interface DeliveryZone {
   /** Kecamatan name as displayed in the dropdown */
   kecamatan: string;
   /** Kabupaten / Kota the kecamatan belongs to */
