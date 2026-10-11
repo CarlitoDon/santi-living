@@ -3,14 +3,10 @@
  * Shared types for the Calculator React components
  */
 
-export interface CartItem {
-  id: string;
-  name: string;
-  category: "package" | "mattress" | "accessory";
-  quantity: number;
-  pricePerDay: number;
-  includes?: string[];
-}
+import type { CartItem } from '@/types';
+import type { Product } from '@/types/product';
+
+export type { CartItem, Product };
 
 export interface AddressFields {
   street: string;
@@ -57,19 +53,3 @@ export interface CustomerData {
   notes: string;
 }
 
-export interface Product {
-  id: string;
-  name: string;
-  name_en?: string;
-  shortName: string;
-  description: string;
-  description_en?: string;
-  dimensions?: string;
-  capacity?: string;
-  capacity_en?: string;
-  pricePerDay: number;
-  costPrice: number;
-  category: "package" | "mattress" | "accessory";
-  image: string;
-  includes: string[];
-}

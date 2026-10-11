@@ -16,7 +16,7 @@ const ProductSchema = z.object({
   capacity_en: z.string().optional(),
   image: z.string(),
   includes: z.array(z.string()),
-  category: z.enum(['package', 'mattress', 'accessory']).optional(),
+  category: z.enum(['package', 'mattress', 'accessory']),
 });
 
 export type Product = z.infer<typeof ProductSchema>;
