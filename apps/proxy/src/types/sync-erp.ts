@@ -1,4 +1,4 @@
-export const RentalPaymentStatusConst = {
+const RentalPaymentStatusConst = {
   PENDING: "PENDING",
   AWAITING_CONFIRM: "AWAITING_CONFIRM",
   CONFIRMED: "CONFIRMED",
@@ -8,7 +8,7 @@ export const RentalPaymentStatusConst = {
 export type RentalPaymentStatus =
   (typeof RentalPaymentStatusConst)[keyof typeof RentalPaymentStatusConst];
 
-export const OrderStatusConst = {
+const OrderStatusConst = {
   DRAFT: "DRAFT",
   CONFIRMED: "CONFIRMED",
   ACTIVE: "ACTIVE",

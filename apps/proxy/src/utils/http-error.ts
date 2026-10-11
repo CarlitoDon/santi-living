@@ -1,6 +1,6 @@
 import type { Response } from "express";
 
-export type HttpErrorCode =
+type HttpErrorCode =
   | "UNAUTHORIZED"
   | "FORBIDDEN"
   | "BAD_REQUEST"

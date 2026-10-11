@@ -26,19 +26,6 @@ const {
 }));
 
 vi.mock("../../services/erp-client", () => ({
-  RentalPaymentStatusConst: {
-    PENDING: "PENDING",
-    AWAITING_CONFIRM: "AWAITING_CONFIRM",
-    CONFIRMED: "CONFIRMED",
-    FAILED: "FAILED",
-  },
-  OrderStatusConst: {
-    DRAFT: "DRAFT",
-    CONFIRMED: "CONFIRMED",
-    ACTIVE: "ACTIVE",
-    COMPLETED: "COMPLETED",
-    CANCELLED: "CANCELLED",
-  },
   findOrCreatePartner: mockFindOrCreatePartner,
   createRentalOrder: mockCreateRentalOrder,
   getOrderByToken: mockGetOrderByToken,
