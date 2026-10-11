@@ -1,16 +1,5 @@
 import { z } from "zod";
-import {
-  RentalPaymentStatusConst,
-  OrderStatusConst,
-} from "./sync-erp";
-import type {
-  RentalPaymentStatus,
-  OrderStatusType,
-} from "./sync-erp";
-
-// Re-export for convenience
-export { RentalPaymentStatusConst, OrderStatusConst };
-export type { RentalPaymentStatus, OrderStatusType };
+import type { OrderStatusType } from "./sync-erp";
 
 // Order payload from santi-living frontend
 export const CreateOrderSchema = z.object({
