@@ -24,6 +24,31 @@ describe('StickyWhatsApp', () => {
     cleanup();
   });
 
+  it('is immediately visible at the top of the page when scrollY is 0', async () => {
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 0 });
+
+    const { getByLabelText } = render(<StickyWhatsApp />);
+    const link = getByLabelText('Chat WhatsApp');
+
+    await waitFor(() => {
+      expect(link.getAttribute('aria-hidden')).toBe('false');
+      expect(link.getAttribute('data-state')).toBe('entered');
+      expect(link.style.getPropertyValue('--sticky-wa-bottom')).toBe('20px');
+    });
+  });
+
+  it('remains hidden on /pesan route', async () => {
+    window.history.replaceState({}, '', '/pesan');
+
+    const { getByLabelText } = render(<StickyWhatsApp />);
+    const link = getByLabelText('Chat WhatsApp');
+
+    await waitFor(() => {
+      expect(link.getAttribute('aria-hidden')).toBe('true');
+      expect(link.getAttribute('data-state')).toBe('exiting');
+    });
+  });
+
   it('stays visible and moves above an active cart bar', async () => {
     const cartBar = document.createElement('div');
     cartBar.className = 'cart-bar';

@@ -16,13 +16,13 @@ export function StickyWhatsApp() {
         setVisible(false);
         return;
       }
-      const isAtTop = window.scrollY <= 30;
       const activeCartBar = document.querySelector<HTMLElement>(
         '.cart-bar:not([aria-hidden="true"])',
       );
       const cartBarHeight = activeCartBar?.getBoundingClientRect().height ?? 0;
       setBottomOffset(cartBarHeight > 0 ? Math.ceil(cartBarHeight) + 12 : 20);
-      setVisible(!isAtTop);
+      // ponytail: always visible without requiring scroll to increase conversion
+      setVisible(true);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll);
