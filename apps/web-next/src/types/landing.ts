@@ -5,24 +5,6 @@ import { z } from 'zod';
 export const ThemeColorSchema = z.enum(["blue", "purple", "green", "cyan", "emerald", "indigo"]);
 export type ThemeColor = z.infer<typeof ThemeColorSchema>;
 
-export const GRADIENT_MAP: Record<ThemeColor, string> = {
-  blue: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-  purple: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-  green: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-  cyan: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-  emerald: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-  indigo: 'linear-gradient(135deg, #473227 0%, #17100c 100%)',
-};
-
-export const ACCENT_COLOR_MAP: Record<ThemeColor, string> = {
-  blue: '#315a72',
-  purple: '#315a72',
-  green: '#315a72',
-  cyan: '#315a72',
-  emerald: '#315a72',
-  indigo: '#315a72',
-};
-
 export const FAQItemSchema = z.object({
   question: z.string(),
   answer: z.string(),

@@ -52,27 +52,3 @@ export function setPaymentMethod(method: "bca" | "gopay" | "qris"): void {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(session));
   }
 }
-
-/**
- * Get selected payment method
- */
-export function getPaymentMethod(): "bca" | "gopay" | "qris" | undefined {
-  const session = getOrder();
-  return session?.selectedPaymentMethod;
-}
-
-/**
- * Clear order data from sessionStorage
- */
-export function clearOrder(): void {
-  if (typeof window === 'undefined') return;
-  sessionStorage.removeItem(STORAGE_KEY);
-}
-
-/**
- * Check if order exists in sessionStorage
- */
-export function hasOrder(): boolean {
-  if (typeof window === 'undefined') return false;
-  return sessionStorage.getItem(STORAGE_KEY) !== null;
-}
