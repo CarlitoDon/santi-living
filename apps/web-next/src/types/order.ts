@@ -30,11 +30,6 @@ export const OrderDisplaySchema = z.object({
 export type OrderDisplay = z.infer<typeof OrderDisplaySchema>;
 export type OrderDisplayItem = z.infer<typeof OrderDisplayItemSchema>;
 
-// Keep backward compat aliases used by pesanan page
-export const OrderSchema = OrderDisplaySchema;
-export const OrderItemSchema = OrderDisplayItemSchema;
-export type Order = OrderDisplay;
-
 // ─── Client-side Order Types (for calculator/checkout flow) ─────────────────
 
 export interface AddressFields {

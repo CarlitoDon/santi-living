@@ -9,7 +9,7 @@ import { ResultPanel } from "./ResultPanel";
 import type { Product, CustomerData } from "./types";
 import { getCurrentLocation, reverseGeocode } from "@/scripts/geolocation";
 import { createOrderInERP, updateOrderInERP } from "@/services/erp-api";
-import { saveOrder, getOrder } from "@/scripts/checkout-session";
+import { saveOrder, getOrder } from "@/lib/checkout-session";
 import { showAlert } from "@/utils/alert";
 import { buildCalculatorWhatsAppMessage } from "@/utils/whatsapp";
 import { ProductModal } from "@/components/produk/ProductCard";

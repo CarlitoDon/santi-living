@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { createOrderInERP } from '@/services/erp-api';
-import { saveOrder } from '@/scripts/checkout-session';
+import { saveOrder } from '@/lib/checkout-session';
 import { showAlert } from '@/utils/alert';
 import { getAttributionEventParams } from '@/lib/attribution';
 import type { ErpOrderResponse, OrderPayload } from '@/types/order';
