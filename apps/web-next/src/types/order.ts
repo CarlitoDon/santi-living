@@ -28,7 +28,6 @@ export const OrderDisplaySchema = z.object({
 });
 
 export type OrderDisplay = z.infer<typeof OrderDisplaySchema>;
-type OrderDisplayItem = z.infer<typeof OrderDisplayItemSchema>;
 
 // ─── Client-side Order Types (for calculator/checkout flow) ─────────────────
 

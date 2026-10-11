@@ -9,7 +9,6 @@ const FAQItemSchema = z.object({
   question: z.string(),
   answer: z.string(),
 });
-type FAQItem = z.infer<typeof FAQItemSchema>;
 
 const PriceCardSchema = z.object({
   name: z.string(),
@@ -19,21 +18,18 @@ const PriceCardSchema = z.object({
   note: z.string(),
   popular: z.boolean().optional(),
 });
-type PriceCard = z.infer<typeof PriceCardSchema>;
 
 const BenefitSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
-type Benefit = z.infer<typeof BenefitSchema>;
 
 const AudienceItemSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
-type AudienceItem = z.infer<typeof AudienceItemSchema>;
 
 const LandingPageConfigSchema = z.object({
   meta: z.object({
