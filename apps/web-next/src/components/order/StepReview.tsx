@@ -6,7 +6,7 @@ import { createOrderInERP } from '@/services/erp-api';
 import { saveOrder } from '@/lib/checkout-session';
 import { showAlert } from '@/utils/alert';
 import { getAttributionEventParams } from '@/lib/attribution';
-import { formatCurrency } from '@/lib/format';
+import { formatCurrency, formatDate } from '@/lib/format';
 import type { ErpOrderResponse, OrderPayload } from '@/types/order';
 
 declare global {
@@ -49,16 +49,6 @@ function trackFormSubmit(order: OrderPayload, erpResponse: ErpOrderResponse): vo
   }
   window.__santiTrackClarityEvent?.('form_submit');
 }
-
-const formatDate = (dateStr: string | null) => {
-  if (!dateStr) return '-';
-  return new Date(dateStr).toLocaleDateString('id-ID', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-};
 
 export function StepReview({ setErrors, onBack }: StepReviewProps) {
   const { actions, customer } = useCalculatorContext();
@@ -178,11 +168,11 @@ export function StepReview({ setErrors, onBack }: StepReviewProps) {
         <h3 className="review-card-title">Jadwal</h3>
         <div className="review-row">
           <span>Tanggal Mulai</span>
-          <span>{formatDate(state.startDate)}</span>
+          <span>{formatDate(state.startDate, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}</span>
         </div>
         <div className="review-row">
           <span>Tanggal Selesai</span>
-          <span>{formatDate(state.endDate)}</span>
+          <span>{formatDate(state.endDate, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}</span>
         </div>
         <div className="review-row">
           <span>Durasi</span>

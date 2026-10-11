@@ -19,13 +19,15 @@ export function formatCurrency(amount: number): string {
  * @returns Formatted date string
  */
 export function formatDate(
-  date: Date | string,
+  date: Date | string | null | undefined,
   options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     day: "numeric",
     month: "short",
-  }
+  },
 ): string {
+  if (!date) return "-";
   const d = typeof date === "string" ? new Date(date) : date;
+  if (Number.isNaN(d.getTime())) return "-";
   return d.toLocaleDateString("id-ID", options);
 }

@@ -2,7 +2,7 @@
  * ResultPanel Component - Receipt/Nota style summary
  */
 
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, formatDate } from "@/lib/format";
 import type { CalculatorState } from "./types";
 import "./styles.css";
 
@@ -12,14 +12,6 @@ interface ResultPanelProps {
   isSubmitting: boolean;
   submitButtonText?: string;
 }
-
-const formatDate = (dateStr: string | null) => {
-  if (!dateStr) return "-";
-  return new Date(dateStr).toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "short",
-  });
-};
 
 export function ResultPanel({
   state,
@@ -36,7 +28,7 @@ export function ResultPanel({
         <h3 className="calc-receipt-title">Ringkasan Pesanan</h3>
         {state.startDate && state.endDate && (
           <span className="calc-receipt-date">
-            {formatDate(state.startDate)} – {formatDate(state.endDate)} &middot;{" "}
+            {formatDate(state.startDate, { day: "numeric", month: "short" })} – {formatDate(state.endDate, { day: "numeric", month: "short" })} &middot;{" "}
             {state.duration} hari
           </span>
         )}
