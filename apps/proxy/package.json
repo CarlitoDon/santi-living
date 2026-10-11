@@ -24,8 +24,7 @@
     "typecheck:watch": "tsc --noEmit --watch",
     "lint": "eslint src/",
     "lint:fix": "eslint src/ --fix",
-    "test": "vitest run",
-    "sync-bundles": "ts-node src/scripts/sync-bundles.ts"
+    "test": "vitest run"
   },
   "dependencies": {
     "@trpc/client": "^11.5.0",
