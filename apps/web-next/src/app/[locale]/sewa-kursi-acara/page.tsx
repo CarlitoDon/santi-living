@@ -26,13 +26,15 @@ Mohon info ketersediaan, ongkir, dan cara sewa.`;
 
 const chairMetadata = {
   id: {
-    title: 'Sewa Kursi Acara Jogja',
+    title: 'Sewa Kursi Plastik & Kursi Acara Jogja | Murah Siap Antar',
     description:
-      'Sewa kursi Jogja untuk acara: kursi lipat, kursi susun besi spons, dan kursi plastik. Kirim tanggal, jumlah, dan lokasi untuk cek ketersediaan serta pengantaran via WhatsApp.',
+      'Sewa kursi plastik Jogja & kursi acara: kursi plastik kokoh, kursi lipat, dan kursi susun spons untuk hajatan, pengajian, dan syukuran. Cek stok dan pengantaran via WhatsApp.',
     keywords: [
-      'sewa kursi jogja',
+      'sewa kursi plastik jogja',
       'sewa kursi acara jogja',
-      'sewa kursi yogyakarta',
+      'sewa kursi hajatan jogja',
+      'rental kursi plastik jogja',
+      'sewa kursi jogja',
       'kursi lipat',
       'kursi susun besi spons',
       'kursi plastik',
@@ -157,10 +159,10 @@ export default async function SewaKursiAcaraPage({
       }
     : {
         back: 'Semua layanan sewa',
-        eyebrow: 'Sewa kursi acara / Yogyakarta',
-        title: 'Sewa Kursi Acara Jogja',
+        eyebrow: 'Sewa kursi plastik & acara / Yogyakarta',
+        title: 'Sewa Kursi Plastik & Kursi Acara Jogja',
         intro:
-          'Butuh sewa kursi Jogja untuk acara? Pilih jenis kursi yang paling sesuai. Kirim tanggal, jumlah, dan lokasi pengantaran agar kami bisa cek ketersediaan serta logistiknya.',
+          'Butuh sewa kursi plastik Jogja atau kursi acara untuk hajatan, syukuran, dan pertemuan? Pilih jenis kursi yang paling sesuai. Kirim tanggal, jumlah, dan lokasi pengantaran agar kami bisa cek ketersediaan serta logistiknya.',
         primaryCta: 'Cek ketersediaan via WhatsApp',
         phone: '0895-1911-9092',
         catalogEyebrow: 'Pilihan kursi',

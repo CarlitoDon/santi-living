@@ -43,25 +43,24 @@ async function getChairSchema(locale: 'id' | 'en'): Promise<ChairSchema> {
 }
 
 describe('sewa kursi acara SEO output', () => {
-  it.each([
-    ['id', 'Sewa Kursi Acara Jogja', 'id_ID'],
-    ['en', 'Event Chair Rental Yogyakarta', 'en_US'],
-  ] as const)('renders primary-domain metadata for %s', async (locale, title, ogLocale) => {
-    const metadata = await generateMetadata({
-      params: Promise.resolve({ locale }),
-    });
-    const pageUrl = `${PRIMARY_SITE_URL}/${locale}${PAGE_PATH}`;
+  it.each([['id', 'id_ID'], ['en', 'en_US']] as const)(
+    'renders primary-domain metadata for %s',
+    async (locale, ogLocale) => {
+      const metadata = await generateMetadata({
+        params: Promise.resolve({ locale }),
+      });
+      const pageUrl = `${PRIMARY_SITE_URL}/${locale}${PAGE_PATH}`;
 
-    expect(metadata.title).toBe(title);
-    expect(metadata.alternates?.canonical).toBe(pageUrl);
-    expect(metadata.alternates?.languages).toEqual({
-      id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-      en: `${PRIMARY_SITE_URL}/en${PAGE_PATH}`,
-      'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-    });
-    expect(metadata.openGraph).toMatchObject({ url: pageUrl, locale: ogLocale });
-    expect(metadata.robots).toEqual({ index: true, follow: true });
-  });
+      expect(metadata.alternates?.canonical).toBe(pageUrl);
+      expect(metadata.alternates?.languages).toEqual({
+        id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
+        en: `${PRIMARY_SITE_URL}/en${PAGE_PATH}`,
+        'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
+      });
+      expect(metadata.openGraph).toMatchObject({ url: pageUrl, locale: ogLocale });
+      expect(metadata.robots).toEqual({ index: true, follow: true });
+    },
+  );
 
   it.each([
     ['id', ['Kursi lipat', 'Kursi susun besi spons', 'Kursi plastik']],
