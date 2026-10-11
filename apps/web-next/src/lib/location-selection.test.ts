@@ -11,7 +11,6 @@ import {
   isWithinDiyCoordinateBounds,
   LOCATION_SELECTION_CACHE_KEY,
   LOCATION_SELECTION_CLASSIFICATION_VERSION,
-  LOCATION_PICKER_PROMPT_KEY,
   publishLocationSelection,
   requestLocationPicker,
   type LocationSelection,
@@ -94,10 +93,10 @@ describe('publishLocationSelection', () => {
     const listener = vi.fn();
     window.addEventListener('open-map-picker', listener);
     requestLocationPicker('outside-diy');
-    expect(sessionStorage.getItem(LOCATION_PICKER_PROMPT_KEY)).toBe('outside-diy');
+    expect(sessionStorage.getItem('sl_location_picker_prompt')).toBe('outside-diy');
     expect(listener).toHaveBeenCalledOnce();
     expect(consumeLocationPickerReason()).toBe('outside-diy');
-    expect(sessionStorage.getItem(LOCATION_PICKER_PROMPT_KEY)).toBeNull();
+    expect(sessionStorage.getItem('sl_location_picker_prompt')).toBeNull();
     window.removeEventListener('open-map-picker', listener);
   });
 

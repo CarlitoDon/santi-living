@@ -17,7 +17,7 @@ export type LocationSelectionSource = 'automatic' | 'manual';
 export type LocationPickerReason = 'manual' | 'outside-diy';
 
 export const LOCATION_SELECTION_CACHE_KEY = 'sl_auto_location_result';
-export const LOCATION_PICKER_PROMPT_KEY = 'sl_location_picker_prompt';
+const LOCATION_PICKER_PROMPT_KEY = 'sl_location_picker_prompt';
 /**
  * Bump this when location classification rules change. Automatic selections
  * written by older releases are not reliable enough to reuse without asking
