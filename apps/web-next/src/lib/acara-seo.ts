@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
 import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
-// Compatibility export for callers that used the old specialist host.
-export const ACARA_SITE_URL = PRIMARY_SITE_URL;
 const ACARA_PATH = '/sewa-perlengkapan-event';
 const DEFAULT_IMAGE = primarySiteUrl('/logo.png');
 
@@ -123,71 +121,3 @@ export function buildAcaraServiceSchema(config: LandingPageConfig, locale = 'id'
   };
 }
 
-export function buildAcaraItemListSchema(config: LandingPageConfig, locale = 'id') {
-  const currentLocale = safeLocale(locale);
-  const url = localizedSiteUrl(ACARA_PATH, currentLocale);
-  const items = config.priceCards ?? [];
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Rekomendasi paket perlengkapan event Santi Living',
-    description:
-      'Daftar opsi konsultasi yang membedakan item inti Santi Living dan item by-request untuk kebutuhan event di Yogyakarta.',
-    url,
-    itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    numberOfItems: items.length,
-    itemListElement: items.map((card, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': 'Service',
-        name: card.name,
-        description: `${card.size}. ${card.note}. ${card.daily}`,
-        serviceType: 'Konsultasi perlengkapan event',
-        provider: {
-          '@type': 'LocalBusiness',
-          name: 'Santi Living',
-          url: primarySiteUrl(),
-        },
-      },
-    })),
-  };
-}
-
-export function buildAcaraFaqSchema(config: LandingPageConfig) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: config.faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-}
-
-export function buildAcaraBreadcrumbSchema(locale = 'id') {
-  const currentLocale = safeLocale(locale);
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Beranda',
-        item: localizedSiteUrl('', currentLocale),
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Sewa Perlengkapan Event Jogja',
-        item: localizedSiteUrl(ACARA_PATH, currentLocale),
-      },
-    ],
-  };
-}

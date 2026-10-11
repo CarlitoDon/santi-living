@@ -6,7 +6,6 @@
  */
 
 import type { OrderPayload, ErpOrderResponse } from "@/types/order";
-import { getProxyBaseUrl } from "@/lib/proxy-config";
 import {
   buildAttributionHeaders,
   captureAttributionOnPageLoad,
@@ -14,9 +13,6 @@ import {
 
 export type { OrderPayload, ErpOrderResponse };
 
-const getErpApiUrl = () => {
-  return getProxyBaseUrl();
-};
 
 const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
   if (!errorBody || typeof errorBody !== "object") {
@@ -151,66 +147,3 @@ export async function updateOrderInERP(
   return response.json();
 }
 
-/**
- * Get order status by token
- * Used by order tracking page
- */
-export async function getOrderStatus(token: string) {
-  const baseUrl = getErpApiUrl();
-
-  const response = await fetch(`${baseUrl}/api/orders/${token}`);
-
-  if (!response.ok) {
-    throw new Error("Order not found");
-  }
-
-  return response.json();
-}
-
-/**
- * Confirm payment
- * Called by checkout page when customer clicks "Saya Sudah Bayar"
- */
-export async function confirmPayment(
-  token: string,
-  paymentMethod: "qris" | "transfer",
-  reference?: string,
-) {
-  // Use local internal proxy
-  const response = await fetch("/api/confirm-payment", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      token,
-      paymentMethod,
-      reference,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(readApiErrorMessage(error, "Gagal konfirmasi pembayaran"));
-  }
-
-  return response.json();
-}
-
-/**
- * Create Payment Token (Midtrans)
- */
-export async function createPaymentToken(token: string) {
-  const response = await fetch("/api/create-payment-token", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token }),
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(readApiErrorMessage(error, "Gagal membuat token pembayaran"));
-  }
-
-  return response.json();
-}

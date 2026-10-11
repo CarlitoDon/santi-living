@@ -157,15 +157,3 @@ export function createProxyClient(
   });
 }
 
-// Create client lazily (at runtime, not module load time)
-let _proxyClient: TRPCClient<AppRouter> | null = null;
-
-export const getProxyClient = (): TRPCClient<AppRouter> => {
-  if (!_proxyClient) {
-    _proxyClient = createProxyClient();
-  }
-  return _proxyClient;
-};
-
-// Backward compatibility export
-// export const proxyClient: TRPCClient<AppRouter> = createProxyClient();

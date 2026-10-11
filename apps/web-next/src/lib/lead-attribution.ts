@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const SERVICE_AREA_CITIES = [
+const SERVICE_AREA_CITIES = [
   'sleman',
   'kota yogyakarta',
   'yogyakarta',
@@ -8,7 +8,7 @@ export const SERVICE_AREA_CITIES = [
   'kulon progo',
 ] as const;
 
-export const OUT_OF_SERVICE_CITIES = [
+const OUT_OF_SERVICE_CITIES = [
   'klaten',
   'gunung kidul',
   'gunungkidul',
@@ -121,12 +121,12 @@ export function isLikelyAutomatedUserAgent(value: string | null | undefined): bo
   return Boolean(value && AUTOMATED_USER_AGENT_PATTERN.test(value));
 }
 
-export function isOutOfServiceCity(city: string | null | undefined): boolean {
+function isOutOfServiceCity(city: string | null | undefined): boolean {
   const normalized = city?.toLowerCase().trim() ?? '';
   return OUT_OF_SERVICE_CITIES.some((item) => normalized.includes(item));
 }
 
-export function isServiceAreaCity(city: string | null | undefined): boolean {
+function isServiceAreaCity(city: string | null | undefined): boolean {
   const normalized = city?.toLowerCase().trim() ?? '';
   return SERVICE_AREA_CITIES.some((item) => normalized.includes(item));
 }
@@ -137,7 +137,7 @@ export function classifyLeadCity(city: string | null | undefined): LeadCityClass
   return 'unknown';
 }
 
-export function resolveLeadCity(input: Pick<LeadEventInput, 'city' | 'geocode_city'>): string | undefined {
+function resolveLeadCity(input: Pick<LeadEventInput, 'city' | 'geocode_city'>): string | undefined {
   return input.city ?? input.geocode_city;
 }
 
