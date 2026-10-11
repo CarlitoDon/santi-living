@@ -2,10 +2,6 @@ import type { Metadata } from 'next';
 import type { LandingPageConfig } from '@/types/landing';
 import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
-// Compatibility exports for callers that used the old specialist hosts.
-// New canonical URLs and structured data always use the primary domain.
-export const KARPET_SITE_URL = PRIMARY_SITE_URL;
-export const PERMADANI_SITE_URL = PRIMARY_SITE_URL;
 const DEFAULT_IMAGE = primarySiteUrl('/images/karpet-hero.webp');
 
 const SERVICE_AREAS = [
@@ -158,20 +154,6 @@ export function buildKarpetServiceSchema(
   };
 }
 
-export function buildKarpetFaqSchema(config: LandingPageConfig) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: config.faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  };
-}
 
 export function buildKarpetBreadcrumbSchema(
   items: Array<{ name: string; path: string }>,
