@@ -5,7 +5,7 @@ const RentalPaymentStatusConst = {
   FAILED: "FAILED",
 } as const;
 
-export type RentalPaymentStatus =
+type RentalPaymentStatus =
   (typeof RentalPaymentStatusConst)[keyof typeof RentalPaymentStatusConst];
 
 const OrderStatusConst = {
@@ -16,7 +16,7 @@ const OrderStatusConst = {
   CANCELLED: "CANCELLED",
 } as const;
 
-export type OrderStatusType =
+type OrderStatusType =
   (typeof OrderStatusConst)[keyof typeof OrderStatusConst];
 
 export interface CreatePartnerInput {
