@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getPostBySlug } from './blog';
+import { getAllPosts, getPostBySlug } from './blog';
 
 describe('getPostBySlug', () => {
   it('loads one known local article directly', () => {
@@ -11,5 +11,12 @@ describe('getPostBySlug', () => {
   it('rejects path-like slugs', () => {
     expect(getPostBySlug('../secrets', 'id')).toBeUndefined();
     expect(getPostBySlug('folder/article', 'id')).toBeUndefined();
+  });
+});
+
+describe('getAllPosts', () => {
+  it('returns an empty array when locale is en and directory has no markdown articles', () => {
+    const posts = getAllPosts('en');
+    expect(posts).toEqual([]);
   });
 });

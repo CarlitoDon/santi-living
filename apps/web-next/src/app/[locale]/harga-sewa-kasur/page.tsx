@@ -32,7 +32,7 @@ export async function generateMetadata({
       'sewa kasur murah jogja',
       'ongkir sewa kasur jogja',
     ],
-    image: '/images/stok-kasur.png',
+    image: '/images/stok-kasur.webp',
     imageAlt: title,
   });
 }
