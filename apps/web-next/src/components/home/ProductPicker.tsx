@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { products } from '@/data/products';
-import type { Product } from '@/components/calculator/types';
+import type { Product } from '@/types/product';
 import { useState } from 'react';
 import { ProductModal } from '@/components/produk/ProductCard';
 import { CatalogItemCard } from '@/components/home/CatalogItemCard';

@@ -1,8 +1,8 @@
 'use client';
 
-import { Calculator } from '@/components/calculator';
+import { Calculator } from './Calculator';
 import { products } from '@/data/products';
-import type { Product } from '@/components/calculator/types';
+import type { Product } from '@/types/product';
 
 // Map product catalog to Calculator format
 const productsData: {
