@@ -23,7 +23,7 @@ async function initializeMapsLibrary(maps: typeof google.maps): Promise<typeof g
   return maps;
 }
 
-export class GoogleMapsLoaderError extends Error {
+class GoogleMapsLoaderError extends Error {
   constructor(
     public readonly code: 'NOT_CONFIGURED' | 'LOAD_FAILED',
     message: string,

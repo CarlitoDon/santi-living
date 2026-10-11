@@ -110,7 +110,7 @@ export async function reverseGeocode(
  * Removes common prefixes and standardizes spacing/casing
  */
 /** @internal Exported for testing */
-export function normalizeName(name: string | undefined): string {
+function normalizeName(name: string | undefined): string {
   if (!name) return "";
   return name
     .toLowerCase()
@@ -129,7 +129,7 @@ export function normalizeName(name: string | undefined): string {
  * We look for a part that comes BEFORE the kecamatan and is different from it
  */
 /** @internal Exported for testing */
-export function extractKelurahanFromDisplayName(
+function extractKelurahanFromDisplayName(
   displayName: string,
   kecamatanName: string,
 ): string {

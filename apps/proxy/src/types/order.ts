@@ -1,5 +1,4 @@
 import { z } from "zod";
-import type { OrderStatusType } from "./sync-erp";
 
 // Order payload from santi-living frontend
 export const CreateOrderSchema = z.object({
