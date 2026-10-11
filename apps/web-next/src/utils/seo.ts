@@ -22,7 +22,7 @@ export function generateProductSchemaList(products: Product[], startIndex = 1) {
   }));
 }
 
-export type FAQItemInput = { q: string; a: string } | { question: string; answer: string };
+type FAQItemInput = { q: string; a: string } | { question: string; answer: string };
 
 export function generateFAQSchema(faqs: FAQItemInput[]) {
   return {
