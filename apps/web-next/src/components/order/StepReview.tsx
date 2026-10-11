@@ -6,6 +6,7 @@ import { createOrderInERP } from '@/services/erp-api';
 import { saveOrder } from '@/lib/checkout-session';
 import { showAlert } from '@/utils/alert';
 import { getAttributionEventParams } from '@/lib/attribution';
+import { formatCurrency } from '@/lib/format';
 import type { ErpOrderResponse, OrderPayload } from '@/types/order';
 
 declare global {
@@ -48,9 +49,6 @@ function trackFormSubmit(order: OrderPayload, erpResponse: ErpOrderResponse): vo
   }
   window.__santiTrackClarityEvent?.('form_submit');
 }
-
-const formatCurrency = (amount: number) =>
-  new Intl.NumberFormat('id-ID').format(amount);
 
 const formatDate = (dateStr: string | null) => {
   if (!dateStr) return '-';

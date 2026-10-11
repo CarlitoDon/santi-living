@@ -7,6 +7,7 @@ import { StepSchedule } from './StepSchedule';
 import { StepCustomer } from './StepCustomer';
 import { StepAddress } from './StepAddress';
 import { StepReview } from './StepReview';
+import { formatCurrency } from '@/lib/format';
 import '@/styles/order-wizard.css';
 
 const STEPS = [
@@ -109,7 +110,6 @@ export function OrderWizard() {
     (sum, item) => sum + item.pricePerDay * item.quantity,
     0,
   );
-  const formatCurrency = (n: number) => new Intl.NumberFormat('id-ID').format(n);
 
   if (state.totalQuantity === 0) {
     return (
