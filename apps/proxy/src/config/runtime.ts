@@ -47,7 +47,7 @@ export const parseCompanyScopeHeader = (
   return companyId.length > 0 ? companyId : null;
 };
 
-export const getProxyApiSecret = () => {
+const getProxyApiSecret = () => {
   return readFirstEnv("PROXY_API_SECRET", "PROXY_API_KEY");
 };
 
