@@ -68,5 +68,5 @@ export const ConfigSchema = z.object({
 });
 
 export type Config = z.infer<typeof ConfigSchema>;
-export type VolumeDiscount = z.infer<typeof VolumeDiscountSchema>;
-export type DeliveryZone = z.infer<typeof DeliveryZoneSchema>;
+type VolumeDiscount = z.infer<typeof VolumeDiscountSchema>;
+type DeliveryZone = z.infer<typeof DeliveryZoneSchema>;

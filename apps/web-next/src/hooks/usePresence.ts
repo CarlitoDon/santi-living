@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export type PresenceState = 'entering' | 'entered' | 'exiting' | 'exited';
+type PresenceState = 'entering' | 'entered' | 'exiting' | 'exited';
 
 interface PresenceSnapshot {
   sourceVisible: boolean;

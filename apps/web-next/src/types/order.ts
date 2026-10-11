@@ -28,11 +28,11 @@ export const OrderDisplaySchema = z.object({
 });
 
 export type OrderDisplay = z.infer<typeof OrderDisplaySchema>;
-export type OrderDisplayItem = z.infer<typeof OrderDisplayItemSchema>;
+type OrderDisplayItem = z.infer<typeof OrderDisplayItemSchema>;
 
 // ─── Client-side Order Types (for calculator/checkout flow) ─────────────────
 
-export interface AddressFields {
+interface AddressFields {
   street?: string;
   kelurahan?: string;
   kelurahanKode?: string;

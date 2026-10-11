@@ -4,7 +4,7 @@
 
 import type { CartItem } from "@/types";
 
-export interface VolumeDiscountTier {
+interface VolumeDiscountTier {
   minQty: number;
   maxQty: number;
   discount: number;

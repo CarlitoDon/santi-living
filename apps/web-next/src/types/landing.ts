@@ -9,7 +9,7 @@ const FAQItemSchema = z.object({
   question: z.string(),
   answer: z.string(),
 });
-export type FAQItem = z.infer<typeof FAQItemSchema>;
+type FAQItem = z.infer<typeof FAQItemSchema>;
 
 const PriceCardSchema = z.object({
   name: z.string(),
@@ -19,21 +19,21 @@ const PriceCardSchema = z.object({
   note: z.string(),
   popular: z.boolean().optional(),
 });
-export type PriceCard = z.infer<typeof PriceCardSchema>;
+type PriceCard = z.infer<typeof PriceCardSchema>;
 
 const BenefitSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
-export type Benefit = z.infer<typeof BenefitSchema>;
+type Benefit = z.infer<typeof BenefitSchema>;
 
 const AudienceItemSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
-export type AudienceItem = z.infer<typeof AudienceItemSchema>;
+type AudienceItem = z.infer<typeof AudienceItemSchema>;
 
 const LandingPageConfigSchema = z.object({
   meta: z.object({
