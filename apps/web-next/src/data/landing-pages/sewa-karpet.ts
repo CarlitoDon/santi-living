@@ -11,7 +11,7 @@ Jenis karpet yang dibutuhkan: {karpet merah runner / permadani merah-emas / karp
 
 Mohon info ketersediaan, rekomendasi ukuran, estimasi harga, dan ongkirnya.`;
 
-export const sewaKarpetJogja: LandingPageConfig = {
+const sewaKarpetJogja: LandingPageConfig = {
   meta: {
     title: 'Sewa Karpet Jogja untuk Acara, Hajatan & Event',
     description:

@@ -1,6 +1,6 @@
 import type { LeadExportRow } from './lead-db';
 
-export const LEAD_EXPORT_COLUMNS = [
+const LEAD_EXPORT_COLUMNS = [
   'event_id',
   'event_type',
   'source',

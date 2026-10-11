@@ -157,10 +157,6 @@ export function captureAttributionOnPageLoad(): AttributionStore | null {
   return updated;
 }
 
-export function getAttributionStore(): AttributionStore | null {
-  return safeReadAttribution();
-}
-
 export function getAttributionEventParams(): Record<string, string> {
   const store = safeReadAttribution();
   const touch = store?.last;
@@ -201,22 +197,4 @@ export function buildAttributionHeaders(): Record<string, string> {
   if (touch.gbraid) headers["x-attribution-gbraid"] = touch.gbraid;
 
   return headers;
-}
-
-export function formatAttributionForNotes(): string {
-  const store = safeReadAttribution();
-  const touch = store?.last;
-  if (!touch) return "";
-
-  const pairs = [
-    `source=${touch.source}`,
-    `medium=${touch.medium}`,
-    touch.campaign ? `campaign=${touch.campaign}` : "",
-    touch.gclid ? `gclid=${touch.gclid}` : "",
-    touch.fbclid ? `fbclid=${touch.fbclid}` : "",
-    touch.wbraid ? `wbraid=${touch.wbraid}` : "",
-    touch.gbraid ? `gbraid=${touch.gbraid}` : "",
-  ].filter(Boolean);
-
-  return pairs.length > 0 ? `[attribution ${pairs.join(" ")}]` : "";
 }
