@@ -26,13 +26,13 @@ interface GoogleRouteCoordinate {
   longitude: number;
 }
 
-export interface GoogleMultiStopRouteInput {
+interface GoogleMultiStopRouteInput {
   stops: GoogleRouteCoordinate[];
   origin?: GoogleRouteCoordinate;
   destination?: GoogleRouteCoordinate;
 }
 
-export interface GoogleMultiStopRoute {
+interface GoogleMultiStopRoute {
   distanceKm: number;
   duration: string;
   optimizedIntermediateWaypointIndex: number[];
