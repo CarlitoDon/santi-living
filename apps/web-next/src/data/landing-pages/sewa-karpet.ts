@@ -803,5 +803,3 @@ en: {
     },
   ],
 }};
-
-export const sewaKarpet = sewaKarpetJogja;
