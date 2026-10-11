@@ -233,15 +233,3 @@ export async function updateRentalOrder(
     throw error;
   }
 }
-
-export type {
-  ConfirmPaymentInput,
-  ConfirmPaymentResponse,
-  CreateOrderInput,
-  CreatePartnerInput,
-  OrderByTokenResponse,
-  OrderResponse,
-  PartnerResponse,
-  UpdateOrderInput,
-  UpdateOrderResponse,
-};

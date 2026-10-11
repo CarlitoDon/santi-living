@@ -27,7 +27,7 @@ vi.mock("midtrans-client", () => ({
   },
 }));
 
-import { createSnapToken, createQrisCharge } from "./midtrans-client";
+import { createSnapToken } from "./midtrans-client";
 
 // ============================================================
 // Fixtures
@@ -121,19 +121,6 @@ describe("createSnapToken", () => {
       "MIDTRANS_SERVER_KEY is missing",
     );
     expect(mockCreateTransaction).not.toHaveBeenCalled();
-  });
-});
-
-describe("createQrisCharge", () => {
-  beforeEach(() => {
-    process.env.MIDTRANS_SERVER_KEY = "test-server-key";
-    process.env.MIDTRANS_CLIENT_KEY = "test-client-key";
-  });
-
-  it("throws disabled error", async () => {
-    await expect(
-      createQrisCharge({ order_id: "ORD-001", gross_amount: 100000 }),
-    ).rejects.toThrow("QRIS Core API is currently disabled");
   });
 });
 

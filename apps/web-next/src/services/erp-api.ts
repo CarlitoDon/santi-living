@@ -11,8 +11,6 @@ import {
   captureAttributionOnPageLoad,
 } from "@/lib/attribution";
 
-export type { OrderPayload, ErpOrderResponse };
-
 
 const readApiErrorMessage = (errorBody: unknown, fallback: string) => {
   if (!errorBody || typeof errorBody !== "object") {
