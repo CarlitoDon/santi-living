@@ -5,7 +5,6 @@ import {
   notifyPaymentConfirmed,
   notifyPaymentRejected,
   notifyAdminNewOrder,
-  notifyAdminPaymentClaimed,
 } from "./wa-notifier";
 
 // ============================================================
@@ -209,22 +208,4 @@ describe("wa-notifier", () => {
     });
   });
 
-  // --- notifyAdminPaymentClaimed ---
-
-  describe("notifyAdminPaymentClaimed", () => {
-    it("sends payment verification request to admin", async () => {
-      await notifyAdminPaymentClaimed({
-        adminWhatsapp: "08198765432",
-        orderNumber: "ORD-001",
-        customerName: "Budi",
-        paymentMethod: "transfer",
-        orderUrl: "https://example.com/order",
-      });
-
-      const msg = mockSendMessage.mock.calls[0][0].message;
-      expect(msg).toContain("PEMBAYARAN PERLU VERIFIKASI");
-      expect(msg).toContain("ORD-001");
-      expect(msg).toContain("TRANSFER"); // uppercased
-    });
-  });
 });

@@ -217,26 +217,3 @@ Detail ERP: ${erpOrderUrl}
 
   return sendMessageWithRetry(payload.adminWhatsapp, message);
 }
-
-/**
- * Notify admin when customer claims payment
- */
-export async function notifyAdminPaymentClaimed(payload: {
-  adminWhatsapp: string;
-  orderNumber: string;
-  customerName: string;
-  paymentMethod: string;
-  orderUrl: string;
-}) {
-  const message = `💳 *PEMBAYARAN PERLU VERIFIKASI*
-
-Nomor: *${payload.orderNumber}*
-Customer: ${payload.customerName}
-Metode: ${payload.paymentMethod.toUpperCase()}
-
-🔗 Verifikasi: ${payload.orderUrl}
-
-Silakan cek mutasi rekening dan konfirmasi pembayaran.`;
-
-  return sendMessageWithRetry(payload.adminWhatsapp, message);
-}
