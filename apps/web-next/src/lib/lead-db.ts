@@ -8,7 +8,7 @@ import { reverseGeocodeLeadLocation } from './lead-geocode';
 
 type LeadSql = ReturnType<typeof neon>;
 
-export interface PersistLeadEventResult {
+interface PersistLeadEventResult {
   configured: boolean;
   persisted: boolean;
   eventId: string;
@@ -17,7 +17,7 @@ export interface PersistLeadEventResult {
   errorMessage?: string;
 }
 
-export interface LeadExportFilters {
+interface LeadExportFilters {
   from?: string;
   to?: string;
   eventType?: string;
@@ -96,7 +96,7 @@ interface LeadDailyMetric {
   geocode_missing: number;
 }
 
-export interface LeadEventMetrics {
+interface LeadEventMetrics {
   from: string | null;
   to: string | null;
   total_events: number;
