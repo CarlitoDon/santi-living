@@ -33,7 +33,7 @@ const DIY_COORDINATE_BOUNDS = {
   maxLng: 110.9,
 } as const;
 
-export function isDiyProvince(value?: string): boolean {
+function isDiyProvince(value?: string): boolean {
   const normalized = String(value || '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, ' ')

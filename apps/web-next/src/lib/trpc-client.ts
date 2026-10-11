@@ -81,12 +81,6 @@ export async function fetchProxyResponse(
   return response;
 }
 
-// Get service URL from environment at RUNTIME (not build time)
-const getServiceUrl = () => {
-  const trpcUrl = getProxyTrpcUrl();
-  return trpcUrl.replace(/\/api\/trpc$/, "");
-};
-
 // Get API key from environment at RUNTIME
 const getApiKey = () => {
   if (typeof window === "undefined") {
@@ -110,13 +104,12 @@ const getApiKey = () => {
 export function createProxyClient(
   requestHeaders: ProxyClientRequestHeaders = {},
 ): TRPCClient<AppRouter> {
-  const serviceUrl = getServiceUrl();
   const apiKey = getApiKey();
 
   return createTRPCClient<AppRouter>({
     links: [
       httpBatchLink({
-        url: `${serviceUrl}/api/trpc`,
+        url: getProxyTrpcUrl(),
         fetch: fetchProxyResponse,
         transformer: superjson,
         headers: () => ({
