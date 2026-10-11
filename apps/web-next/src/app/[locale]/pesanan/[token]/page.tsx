@@ -3,6 +3,8 @@ import { getProxyBaseUrl } from '@/lib/proxy-config';
 import { OrderDisplaySchema, type OrderDisplay } from '@/types/order';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
+import { formatDate } from '@/lib/format';
+import { formatPrice } from '@/utils/currency';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,14 +15,6 @@ export const metadata: Metadata = {
 
 interface PageProps {
   params: Promise<{ token: string }>;
-}
-
-function formatCurrency(amount: number) {
-  return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 }
 
 const statusColors: Record<string, { bg: string; text: string; label: string }> = {
@@ -149,7 +143,7 @@ export default async function PesananPage({ params }: PageProps) {
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--space-2) 0', fontSize: 'var(--font-size-sm)', borderBottom: i < order.items.length - 1 ? '1px solid var(--color-border)' : 'none' }}>
                   <span style={{ flex: 1 }}>{item.name}</span>
                   <span style={{ color: 'var(--color-text-muted)', marginRight: 'var(--space-3)' }}>{item.quantity}x</span>
-                  <span style={{ fontWeight: 'var(--font-weight-medium)' }}>{formatCurrency(item.subtotal ?? item.unitPrice * item.quantity)}</span>
+                  <span style={{ fontWeight: 'var(--font-weight-medium)' }}>{formatPrice(item.subtotal ?? item.unitPrice * item.quantity)}</span>
                 </div>
               ))}
             </div>
@@ -157,20 +151,20 @@ export default async function PesananPage({ params }: PageProps) {
             {/* Total */}
             <div style={{ background: 'var(--color-background)', padding: 'var(--space-3)', borderRadius: 'var(--radius-lg)', marginTop: 'var(--space-2)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-sm)', padding: 'var(--space-2) 0' }}>
-                <span>Subtotal</span><span>{formatCurrency(order.subtotal)}</span>
+                <span>Subtotal</span><span>{formatPrice(order.subtotal)}</span>
               </div>
               {order.discountAmount && order.discountAmount > 0 && (
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-sm)', padding: 'var(--space-2) 0', color: 'var(--color-success)' }}>
-                  <span>Diskon {order.discountLabel ?? ''}</span><span>-{formatCurrency(order.discountAmount)}</span>
+                  <span>Diskon {order.discountLabel ?? ''}</span><span>-{formatPrice(order.discountAmount)}</span>
                 </div>
               )}
               {order.deliveryFee && order.deliveryFee > 0 && (
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-sm)', padding: 'var(--space-2) 0' }}>
-                  <span>Biaya Antar</span><span>{formatCurrency(order.deliveryFee)}</span>
+                  <span>Biaya Antar</span><span>{formatPrice(order.deliveryFee)}</span>
                 </div>
               )}
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'var(--font-size-base)', fontWeight: 'var(--font-weight-bold)', color: 'var(--color-primary)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
-                <span>Total</span><span>{formatCurrency(order.totalAmount)}</span>
+                <span>Total</span><span>{formatPrice(order.totalAmount)}</span>
               </div>
             </div>
           </div>
