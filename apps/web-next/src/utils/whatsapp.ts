@@ -21,11 +21,8 @@ Alamat pengiriman:
 Mohon info ketersediaan, harga sewa, dan ongkirnya.
 Terima kasih.`;
 
-/** Short inquiry preset for header/nav buttons */
-export const WA_PRESET_INQUIRY = 'Halo Santi Living, saya mau tanya tentang sewa kasur';
-
 /** Short CTA source codes kept for backward-compatible analytics labels. */
-export const WA_SOURCE_CODES: Record<string, string> = {
+const WA_SOURCE_CODES: Record<string, string> = {
   header_desktop: 'hd',
   header_mobile: 'hm',
   sticky_button: 'st',
@@ -44,45 +41,6 @@ export const WA_SOURCE_CODES: Record<string, string> = {
   chair_page: 'cp',
   chair_details: 'cd',
 };
-
-/**
- * Computes a short attribution code from sl_attribution_v1 localStorage data.
- * CLIENT-SIDE ONLY — call this from click handlers, never during render.
- * Returns a short code like "g/cpc" or "g/organic" or "fb/ig" etc.
- */
-export function getAttributionTag(): string {
-  if (typeof window === 'undefined') return '';
-  try {
-    const raw = localStorage.getItem('sl_attribution_v1');
-    if (!raw) return '';
-    const parsed = JSON.parse(raw);
-    const t = parsed.last || {};
-    const source = (t.source || '').toLowerCase();
-    const medium = (t.medium || '').toLowerCase();
-
-    // Google Ads
-    if (t.gclid || (source === 'google' && medium === 'cpc')) return 'g/cpc';
-    if (t.gbraid) return 'g/cpc-b';
-    if (t.wbraid) return 'g/cpc-w';
-    // Google organic
-    if (source === 'google' && medium === 'organic') return 'g/org';
-    // GBP
-    if (source.includes('google_business_profile')) return 'gbp';
-    if (source.includes('google') && medium === 'organic') return 'gbp';
-    // Social
-    if (source.includes('instagram') || source.includes('ig')) return 'ig';
-    if (source.includes('facebook') || source.includes('fb')) return 'fb';
-    if (source.includes('tiktok')) return 'tt';
-    // Referral
-    if (medium === 'referral') return 'ref';
-    // Direct
-    if (source === '(direct)' || source === '(none)') return 'dir';
-    // Default
-    return source ? source.slice(0, 6) : '';
-  } catch {
-    return '';
-  }
-}
 
 /**
  * Generates a tracked WhatsApp redirect URL using the globally configured phone number.
@@ -238,39 +196,3 @@ export function buildCalculatorWhatsAppMessage(input: CalculatorWhatsAppInput): 
   return lines.join('\n');
 }
 
-// ---------------------------------------------------------------------------
-// Address-section consultation message builder
-// ---------------------------------------------------------------------------
-
-interface AddressConsultInput {
-  kelurahan?: string;
-  kecamatan?: string;
-  kota?: string;
-  provinsi?: string;
-  lat?: string;
-  lng?: string;
-}
-
-/**
- * Builds a short WhatsApp inquiry focused on delivery feasibility for a given
- * address. Useful when the user hasn't finished the full form yet but wants to
- * check if their area is served.
- */
-export function buildAddressConsultMessage(address: AddressConsultInput): string {
-  const parts: string[] = [];
-  if (address.kelurahan) parts.push(address.kelurahan);
-  if (address.kecamatan) parts.push(address.kecamatan);
-  if (address.kota) parts.push(address.kota);
-  if (address.provinsi) parts.push(address.provinsi);
-
-  const locationLine = parts.length > 0 ? ` di ${parts.join(', ')}` : '';
-
-  const lines: string[] = [
-    `Halo Santi Living, saya mau tanya pengiriman kasur${locationLine}.`,
-    '',
-    'Apakah area saya sudah terjangkau untuk pengiriman dan penjemputan?',
-    'Mohon info estimasi ongkirnya ya. Terima kasih.',
-  ];
-
-  return lines.join('\n');
-}

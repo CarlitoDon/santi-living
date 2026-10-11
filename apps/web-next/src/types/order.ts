@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 // ─── SSR Order Schema (for pesanan/[token] page) ────────────────────────────
 
-export const OrderDisplayItemSchema = z.object({
+const OrderDisplayItemSchema = z.object({
   name: z.string(),
   quantity: z.number(),
   unitPrice: z.number(),

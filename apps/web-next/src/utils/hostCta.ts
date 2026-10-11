@@ -11,7 +11,7 @@ export interface HostCtaCopy {
   waText: string;
 }
 
-export const KARPET_WA_PRESET = `Halo Santi Living, saya ingin cek ketersediaan sewa karpet Jogja.
+const KARPET_WA_PRESET = `Halo Santi Living, saya ingin cek ketersediaan sewa karpet Jogja.
 
 Detail acara:
 Jenis acara: {pernikahan / pengajian / seminar / pameran / lainnya}
@@ -22,7 +22,7 @@ Jenis karpet yang dibutuhkan: {permadani merah / permadani emas / runner acara /
 
 Mohon info ketersediaan, rekomendasi ukuran, estimasi harga, dan ongkirnya.`;
 
-export const PERMADANI_WA_PRESET = `Halo Santi Living, saya ingin cek ketersediaan permadani untuk area duduk.
+const PERMADANI_WA_PRESET = `Halo Santi Living, saya ingin cek ketersediaan permadani untuk area duduk.
 
 Detail kebutuhan:
 Acara: {pengajian / tahlilan / tamu keluarga / lainnya}
@@ -33,7 +33,7 @@ Motif: {permadani merah / permadani emas / by request}
 
 Mohon info stok, rekomendasi jumlah, estimasi harga, dan ongkirnya.`;
 
-export const ACARA_WA_PRESET = `Halo Santi Living, saya ingin cek paket perlengkapan event.
+const ACARA_WA_PRESET = `Halo Santi Living, saya ingin cek paket perlengkapan event.
 
 Detail acara:
 Jenis acara: {festival / gathering / wedding prep / kampus / lainnya}
@@ -44,7 +44,7 @@ Item by request: {meja / kursi / sound / dekorasi ringan / lainnya}
 
 Mohon info ketersediaan, rekomendasi paket, estimasi harga, dan ongkirnya.`;
 
-export const KURSI_WA_PRESET = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.
+const KURSI_WA_PRESET = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.
 
 Jenis acara: {rapat / pengajian / pernikahan / gathering / lainnya}
 Jenis kursi: {kursi lipat / kursi susun besi spons / kursi plastik}

@@ -2,16 +2,16 @@ import { z } from 'zod';
 
 // ─── Landing Page Types ──────────────────────────────────────────────────────
 
-export const ThemeColorSchema = z.enum(["blue", "purple", "green", "cyan", "emerald", "indigo"]);
+const ThemeColorSchema = z.enum(["blue", "purple", "green", "cyan", "emerald", "indigo"]);
 export type ThemeColor = z.infer<typeof ThemeColorSchema>;
 
-export const FAQItemSchema = z.object({
+const FAQItemSchema = z.object({
   question: z.string(),
   answer: z.string(),
 });
 export type FAQItem = z.infer<typeof FAQItemSchema>;
 
-export const PriceCardSchema = z.object({
+const PriceCardSchema = z.object({
   name: z.string(),
   size: z.string(),
   price: z.string(),
@@ -21,21 +21,21 @@ export const PriceCardSchema = z.object({
 });
 export type PriceCard = z.infer<typeof PriceCardSchema>;
 
-export const BenefitSchema = z.object({
+const BenefitSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
 export type Benefit = z.infer<typeof BenefitSchema>;
 
-export const AudienceItemSchema = z.object({
+const AudienceItemSchema = z.object({
   icon: z.string(),
   title: z.string(),
   description: z.string(),
 });
 export type AudienceItem = z.infer<typeof AudienceItemSchema>;
 
-export const LandingPageConfigSchema = z.object({
+const LandingPageConfigSchema = z.object({
   meta: z.object({
     title: z.string(),
     description: z.string(),
