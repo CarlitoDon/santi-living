@@ -131,7 +131,7 @@ function isServiceAreaCity(city: string | null | undefined): boolean {
   return SERVICE_AREA_CITIES.some((item) => normalized.includes(item));
 }
 
-export function classifyLeadCity(city: string | null | undefined): LeadCityClassification {
+function classifyLeadCity(city: string | null | undefined): LeadCityClassification {
   if (isOutOfServiceCity(city)) return 'out_of_service';
   if (isServiceAreaCity(city)) return 'service_area';
   return 'unknown';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { classifyLeadCity, LeadEventSchema } from './lead-attribution';
+import { buildLeadLogRecord, LeadEventSchema } from './lead-attribution';
 
 describe('LeadEventSchema', () => {
   it('normalizes empty attribution fields to undefined', () => {
@@ -27,14 +27,22 @@ describe('LeadEventSchema', () => {
   });
 });
 
-describe('classifyLeadCity', () => {
+describe('classifyLeadCity via buildLeadLogRecord', () => {
   it('classifies out-of-service cities', () => {
-    expect(classifyLeadCity('Klaten')).toBe('out_of_service');
-    expect(classifyLeadCity('Semanu, Gunung Kidul')).toBe('out_of_service');
+    expect(
+      buildLeadLogRecord('ev-1', { event_type: 'whatsapp_click', city: 'Klaten' }, '').city_classification,
+    ).toBe('out_of_service');
+    expect(
+      buildLeadLogRecord('ev-2', { event_type: 'whatsapp_click', city: 'Semanu, Gunung Kidul' }, '').city_classification,
+    ).toBe('out_of_service');
   });
 
   it('classifies service-area cities', () => {
-    expect(classifyLeadCity('Sleman')).toBe('service_area');
-    expect(classifyLeadCity('Kota Yogyakarta')).toBe('service_area');
+    expect(
+      buildLeadLogRecord('ev-3', { event_type: 'whatsapp_click', city: 'Sleman' }, '').city_classification,
+    ).toBe('service_area');
+    expect(
+      buildLeadLogRecord('ev-4', { event_type: 'whatsapp_click', city: 'Kota Yogyakarta' }, '').city_classification,
+    ).toBe('service_area');
   });
 });
