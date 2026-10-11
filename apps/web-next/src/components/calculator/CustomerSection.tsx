@@ -3,7 +3,6 @@
  */
 
 import type { CustomerData } from "./types";
-import "./styles.css";
 
 interface CustomerSectionProps {
   customer: CustomerData;

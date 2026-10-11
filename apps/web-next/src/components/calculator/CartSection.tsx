@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import type { Product } from "./types";
 import type { CalculatorActions } from "./useCalculatorState";
 import { CartItem } from "./CartItem";
-import "./styles.css";
 
 interface CartSectionProps {
   products: {
