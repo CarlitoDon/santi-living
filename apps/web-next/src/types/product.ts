@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 // ─── Product Schema ──────────────────────────────────────────────────────────
 
-export const ProductSchema = z.object({
+const ProductSchema = z.object({
   id: z.string(),
   name: z.string(),
   name_en: z.string().optional(),
