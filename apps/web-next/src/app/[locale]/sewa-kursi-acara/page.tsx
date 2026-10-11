@@ -9,8 +9,8 @@ import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 type Locale = 'id' | 'en';
 
 const CHAIR_PAGE_PATH = '/sewa-kursi-acara';
-const CHAIR_HERO_IMAGE = '/images/kursi-acara-jogja-katalog.png';
-const CHAIR_PICKUP_IMAGE = '/images/kursi-acara-jogja-pickup.png';
+const CHAIR_HERO_IMAGE = '/images/kursi-acara-jogja-katalog.webp';
+const CHAIR_PICKUP_IMAGE = '/images/kursi-acara-jogja-pickup.webp';
 const CHAIR_PROFILE_NAME = 'Sewa Kursi Acara Jogja – Santi Living | by Santi Mebel Jogja';
 const CHAIR_PROFILE_URL = 'https://www.google.com/maps?cid=15162930286234518743';
 const CHAIR_WA_TEXT = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.

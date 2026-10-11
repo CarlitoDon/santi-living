@@ -7,7 +7,7 @@ import { useLocale, useT } from '@/contexts/locale';
 import { localeHref } from '@/utils/localeHref';
 
 const slides = [
-  { src: '/images/stok-kasur.png', alt: 'Stok Kasur Busa Santi Mebel Jogja' },
+  { src: '/images/stok-kasur.webp', alt: 'Stok Kasur Busa Santi Mebel Jogja' },
   { src: '/images/gudang.webp', alt: 'Gudang Santi Mebel Jogja' },
 ];
 

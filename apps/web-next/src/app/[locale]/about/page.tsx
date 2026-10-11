@@ -32,7 +32,7 @@ export async function generateMetadata({
       'workshop santi living godean',
       'sejarah santi living jogja',
     ],
-    image: '/images/stok-kasur.png',
+    image: '/images/stok-kasur.webp',
     imageAlt: title,
   });
 }

@@ -34,7 +34,7 @@ export function getAllPosts(locale: string = 'id'): BlogPost[] {
   const targetDir = getBlogDir(normalizedLocale);
   if (!fs.existsSync(targetDir)) return [];
 
-  const files = fs.readdirSync(targetDir).filter((f) => f.endsWith('.md'));
+  const files = fs.readdirSync(targetDir).filter((f) => f.endsWith('.md') && !f.startsWith('README'));
 
   const posts = files
     .map((filename) => {
