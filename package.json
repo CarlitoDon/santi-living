@@ -14,6 +14,9 @@
     "build": "cd apps/web-next && npm run build",
     "build:web": "cd apps/web-next && npm run build",
     "build:proxy": "cd apps/proxy && npm run build",
+    "typecheck": "cd apps/web-next && npm run typecheck",
+    "typecheck:web": "cd apps/web-next && npm run typecheck",
+    "typecheck:proxy": "cd apps/proxy && npm run typecheck",
     "lint": "cd apps/web-next && npm run lint",
     "test": "cd apps/web-next && npm test",
     "clean": "rm -rf node_modules apps/*/node_modules apps/*/.next apps/*/dist"
