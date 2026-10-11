@@ -4,7 +4,6 @@
 
 import { formatCurrency, formatDate } from "@/lib/format";
 import type { CalculatorState } from "./types";
-import "./styles.css";
 
 interface ResultPanelProps {
   state: CalculatorState;

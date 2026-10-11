@@ -4,7 +4,6 @@
  */
 
 import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
-import "./styles.css";
 import { usePresence } from "@/hooks/usePresence";
 
 interface DropdownOption {

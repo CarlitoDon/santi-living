@@ -4,7 +4,6 @@
 
 import { useState, useEffect } from "react";
 import type { CalculatorActions } from "./useCalculatorState";
-import "./styles.css";
 
 interface ScheduleSectionProps {
   actions: CalculatorActions;

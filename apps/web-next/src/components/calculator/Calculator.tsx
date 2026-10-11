@@ -16,6 +16,7 @@ import { ProductModal } from "@/components/produk/ProductCard";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { useDeliveryQuote } from "@/hooks/useDeliveryQuote";
 import { hasManualLocationSelection, isDiyLocation, requestLocationPicker } from "@/lib/location-selection";
+import '@/styles/calculator.css';
 
 declare global {
   interface Window {

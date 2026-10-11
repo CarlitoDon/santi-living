@@ -15,7 +15,6 @@ import {
   getEstimateByKecamatan,
   type EstimateResult,
 } from "@/lib/delivery-zones";
-import "./styles.css";
 
 interface AddressSectionProps {
   customer: CustomerData;

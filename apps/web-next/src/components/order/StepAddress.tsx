@@ -8,7 +8,7 @@ import { SearchableDropdown } from '@/components/calculator/SearchableDropdown';
 import { DIY_PROVINCE } from '@/services/nusantarakita-api';
 import { getCurrentLocation, reverseGeocode } from '@/scripts/geolocation';
 import { showAlert } from '@/utils/alert';
-import '@/components/calculator/styles.css';
+import '@/styles/calculator.css';
 import { useDeliveryQuote } from '@/hooks/useDeliveryQuote';
 import {
   hasManualLocationSelection,

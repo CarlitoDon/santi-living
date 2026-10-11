@@ -4,7 +4,6 @@
 
 import type { Product } from "./types";
 import Image from "next/image";
-import "./styles.css";
 
 interface CartItemProps {
   product: Product;
