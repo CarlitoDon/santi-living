@@ -7,7 +7,6 @@ import {
   hasManualLocationSelection,
   isDiyLocation,
   isLegacyAutomaticLocationSelection,
-  isDiyProvince,
   isWithinDiyCoordinateBounds,
   LOCATION_SELECTION_CACHE_KEY,
   LOCATION_SELECTION_CLASSIFICATION_VERSION,
@@ -28,12 +27,25 @@ describe('publishLocationSelection', () => {
     'DIY',
     'Yogyakarta',
   ])('recognizes %s as the DIY province', (province) => {
-    expect(isDiyProvince(province)).toBe(true);
+    expect(
+      isDiyLocation({
+        coords: { lat: -7.7956, lng: 110.3695 },
+        address: { provinsi: province },
+        source: 'automatic',
+      }),
+    ).toBe(true);
   });
 
   it.each(['Jawa Tengah', 'DKI Jakarta', '', undefined])(
     'does not classify %s as DIY',
-    (province) => expect(isDiyProvince(province)).toBe(false),
+    (province) =>
+      expect(
+        isDiyLocation({
+          coords: { lat: -7.7956, lng: 110.3695 },
+          address: { provinsi: province },
+          source: 'automatic',
+        }),
+      ).toBe(false),
   );
 
   it('rejects a stale Jakarta cache even when its province was mislabeled as DIY', () => {
