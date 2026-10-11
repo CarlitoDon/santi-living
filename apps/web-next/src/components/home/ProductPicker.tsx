@@ -7,9 +7,7 @@ import type { Product } from '@/types/product';
 import { useState } from 'react';
 import { ProductModal } from '@/components/produk/ProductCard';
 import { CatalogItemCard } from '@/components/home/CatalogItemCard';
-
-const formatCurrency = (amount: number) =>
-  new Intl.NumberFormat('id-ID').format(amount);
+import { formatCurrency } from '@/lib/format';
 
 // Map catalog to Calculator Product type
 const allCategories: { label: string; products: Product[] }[] = [

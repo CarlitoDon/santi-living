@@ -3,9 +3,7 @@
 import { useCalculatorContext } from '@/contexts/CalculatorContext';
 import { useRouter } from 'next/navigation';
 import { SelectionBar } from '@/components/ui/SelectionBar';
-
-const formatCurrency = (amount: number) =>
-  new Intl.NumberFormat('id-ID').format(amount);
+import { formatCurrency } from '@/lib/format';
 
 export function CartBar() {
   const { actions } = useCalculatorContext();

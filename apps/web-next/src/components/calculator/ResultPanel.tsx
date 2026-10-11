@@ -2,6 +2,7 @@
  * ResultPanel Component - Receipt/Nota style summary
  */
 
+import { formatCurrency } from "@/lib/format";
 import type { CalculatorState } from "./types";
 import "./styles.css";
 
@@ -11,9 +12,6 @@ interface ResultPanelProps {
   isSubmitting: boolean;
   submitButtonText?: string;
 }
-
-const formatCurrency = (amount: number) =>
-  new Intl.NumberFormat("id-ID").format(amount);
 
 const formatDate = (dateStr: string | null) => {
   if (!dateStr) return "-";
