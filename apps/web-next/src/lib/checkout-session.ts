@@ -3,12 +3,13 @@
  * Manages order data in sessionStorage during checkout flow
  */
 
-import type { OrderData } from "@/types/order";
+import type { OrderData, OrderPayload } from "@/types/order";
+export type { OrderData, OrderPayload };
 
 const STORAGE_KEY = "santi-living-checkout";
 
 export interface CheckoutSession {
-  order: OrderData;
+  order: OrderData | OrderPayload;
   selectedPaymentMethod?: "bca" | "gopay" | "qris";
   createdAt: string;
 }
@@ -16,7 +17,8 @@ export interface CheckoutSession {
 /**
  * Save order data to sessionStorage
  */
-export function saveOrder(order: OrderData): void {
+export function saveOrder(order: OrderData | OrderPayload): void {
+  if (typeof window === 'undefined') return;
   const session: CheckoutSession = {
     order,
     createdAt: new Date().toISOString(),

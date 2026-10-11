@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getProxyBaseUrl } from '@/lib/proxy-config';
-import { OrderSchema, type Order } from '@/types/order';
+import { OrderDisplaySchema, type OrderDisplay } from '@/types/order';
 import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 import Link from 'next/link';
 
@@ -32,7 +32,7 @@ const statusColors: Record<string, { bg: string; text: string; label: string }> 
   CANCELLED: { bg: '#FEE2E2', text: '#991B1B', label: 'Dibatalkan' },
 };
 
-async function fetchOrder(token: string): Promise<Order | null> {
+async function fetchOrder(token: string): Promise<OrderDisplay | null> {
   try {
     const apiUrl = getProxyBaseUrl();
     const input = encodeURIComponent(JSON.stringify({ '0': { json: { token } } }));
@@ -52,8 +52,8 @@ async function fetchOrder(token: string): Promise<Order | null> {
 
     const raw: unknown = await response.json();
 
-    // tRPC batch response: [{ result: { data: { json: Order } } }]
-    const parsed = OrderSchema.safeParse(
+    // tRPC batch response: [{ result: { data: { json: OrderDisplay } } }]
+    const parsed = OrderDisplaySchema.safeParse(
       (raw as Array<{ result: { data: { json: unknown } } }>)?.[0]?.result?.data?.json
     );
 

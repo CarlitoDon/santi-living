@@ -22,7 +22,7 @@ vi.mock('./ResultPanel', () => ({ ResultPanel: () => null }));
 vi.mock('@/components/produk/ProductCard', () => ({ ProductModal: () => null }));
 vi.mock('@/hooks/useDeliveryQuote', () => ({ useDeliveryQuote: () => 'idle' }));
 vi.mock('@/services/erp-api', () => ({ createOrderInERP: vi.fn(), updateOrderInERP: vi.fn() }));
-vi.mock('@/scripts/checkout-session', () => ({ saveOrder: vi.fn(), getOrder: vi.fn() }));
+vi.mock('@/lib/checkout-session', () => ({ saveOrder: vi.fn(), getOrder: vi.fn() }));
 vi.mock('@/utils/alert', () => ({ showAlert: vi.fn() }));
 vi.mock('@/utils/whatsapp', () => ({
   buildCalculatorWhatsAppMessage: () => '',
