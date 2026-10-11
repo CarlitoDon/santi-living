@@ -1,32 +1,3 @@
-
-export interface RentalConfig {
-  maxDuration: number;
-  minDuration: number;
-  maxQuantity: number;
-  cutoffHour: number;
-  volumeDiscounts: {
-    minQty: number;
-    maxQty: number;
-    discount: number;
-    label: string;
-  }[];
-}
-
-export interface PriceResult {
-  subtotal: number;
-  total: number;
-  discountAmount: number;
-  volumeDiscountLabel: string;
-  volumeDiscountPercent: number;
-  mattressSubtotal: number;
-  accessorySubtotal: number;
-  mattressQty: number;
-  nextTier?: {
-    unitsNeeded: number;
-    discountPercent: number;
-  };
-}
-
 /**
  * Calculate end date string (YYYY-MM-DD)
  */
