@@ -28,3 +28,12 @@ export const ProductCatalogSchema = z.object({
 });
 
 export type ProductCatalog = z.infer<typeof ProductCatalogSchema>;
+
+export interface CartItem {
+  id: string;
+  name: string;
+  category: 'package' | 'mattress' | 'accessory';
+  quantity: number;
+  pricePerDay: number;
+  includes?: string[];
+}

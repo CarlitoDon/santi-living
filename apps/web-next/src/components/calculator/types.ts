@@ -3,8 +3,7 @@
  * Shared types for the Calculator React components
  */
 
-import type { CartItem } from '@/types';
-import type { Product } from '@/types/product';
+import type { CartItem, Product } from '@/types/product';
 
 export type { CartItem, Product };
 

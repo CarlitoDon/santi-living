@@ -2,7 +2,7 @@
  * Calculator Business Logic
  */
 
-import type { CartItem } from "@/types";
+import type { CartItem } from "@/types/product";
 
 interface VolumeDiscountTier {
   minQty: number;
