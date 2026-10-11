@@ -13,9 +13,7 @@ import type {
   CreatePartnerInput,
   OrderByTokenResponse,
   OrderResponse,
-  OrderStatusType,
   PartnerResponse,
-  RentalPaymentStatus,
   UpdateOrderInput,
   UpdateOrderResponse,
 } from "../types/sync-erp";
@@ -243,9 +241,7 @@ export type {
   CreatePartnerInput,
   OrderByTokenResponse,
   OrderResponse,
-  OrderStatusType,
   PartnerResponse,
-  RentalPaymentStatus,
   UpdateOrderInput,
   UpdateOrderResponse,
 };
