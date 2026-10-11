@@ -6,10 +6,6 @@
  */
 import { getSyncErpApiBaseUrl } from "../config/runtime";
 import { getOutboundRequestContext } from "./request-context";
-import {
-  OrderStatusConst,
-  RentalPaymentStatusConst,
-} from "../types/sync-erp";
 import type {
   ConfirmPaymentInput,
   ConfirmPaymentResponse,
@@ -240,17 +236,6 @@ export async function updateRentalOrder(
   }
 }
 
-export async function deleteRentalOrder(
-  id: string,
-): Promise<{ success: boolean }> {
-  return requestSyncErp<{ success: boolean }>(
-    "POST",
-    `/rental/orders/${encodeURIComponent(id)}/cancel`,
-    { reason: "Cancelled by Santi Living proxy" },
-  );
-}
-
-export { OrderStatusConst, RentalPaymentStatusConst };
 export type {
   ConfirmPaymentInput,
   ConfirmPaymentResponse,
