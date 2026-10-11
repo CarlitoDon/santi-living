@@ -1,6 +1,6 @@
 import type { LeadEventInput } from './lead-attribution';
 
-export type LeadGeocodeStatus = 'not_requested' | 'success' | 'failed' | 'timeout' | 'unavailable';
+type LeadGeocodeStatus = 'not_requested' | 'success' | 'failed' | 'timeout' | 'unavailable';
 
 export interface LeadGeocodeResult {
   geocode_status: LeadGeocodeStatus;

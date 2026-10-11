@@ -67,18 +67,18 @@ export interface LeadExportRow {
   raw_payload: unknown;
 }
 
-export interface LeadMetricCount {
+interface LeadMetricCount {
   key: string;
   count: number;
 }
 
-export interface LeadSourceCampaignMetric {
+interface LeadSourceCampaignMetric {
   source: string;
   campaign: string;
   count: number;
 }
 
-export interface LeadDailyMetric {
+interface LeadDailyMetric {
   date: string;
   total_events: number;
   whatsapp_clicks: number;

@@ -1,4 +1,4 @@
-export interface AttributionTouch {
+interface AttributionTouch {
   source: string;
   medium: string;
   campaign?: string;

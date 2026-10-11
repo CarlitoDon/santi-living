@@ -1,6 +1,6 @@
 import { WA_PRESET_ORDER } from '@/utils/whatsapp';
 
-export type HostCtaContext = 'default' | 'karpet' | 'permadani' | 'acara' | 'kursi';
+type HostCtaContext = 'default' | 'karpet' | 'permadani' | 'acara' | 'kursi';
 
 export interface HostCtaCopy {
   context: HostCtaContext;

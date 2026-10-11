@@ -9,7 +9,7 @@ export const BlogFrontmatterSchema = z.object({
   tags: z.array(z.string()).default([]),
 });
 
-export type BlogFrontmatter = z.infer<typeof BlogFrontmatterSchema>;
+type BlogFrontmatter = z.infer<typeof BlogFrontmatterSchema>;
 
 export interface BlogPost {
   slug: string;

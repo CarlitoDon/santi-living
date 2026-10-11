@@ -61,17 +61,17 @@ const verifyPhoneInput = z.object({
 });
 
 // Output types
-export interface SendOrderOutput {
+interface SendOrderOutput {
   success: boolean;
   messageId: string;
 }
 
-export interface SendMessageOutput {
+interface SendMessageOutput {
   success: boolean;
   messageId: string;
 }
 
-export interface VerifyPhoneOutput {
+interface VerifyPhoneOutput {
   valid: boolean;
   exists: boolean;
   normalizedPhone?: string;
@@ -82,21 +82,20 @@ export interface VerifyPhoneOutput {
 const botRouter = t.router({
   verifyPhone: t.procedure
     .input(verifyPhoneInput)
-    .mutation((): VerifyPhoneOutput => {
+    .mutation((): { [K in keyof VerifyPhoneOutput]: VerifyPhoneOutput[K] } => {
       throw new Error("Type-only");
     }),
-  sendOrder: t.procedure.input(sendOrderInput).mutation((): SendOrderOutput => {
+  sendOrder: t.procedure.input(sendOrderInput).mutation((): { [K in keyof SendOrderOutput]: SendOrderOutput[K] } => {
     throw new Error("Type-only");
   }),
   sendMessage: t.procedure
     .input(sendMessageInput)
-    .mutation((): SendMessageOutput => {
+    .mutation((): { [K in keyof SendMessageOutput]: SendMessageOutput[K] } => {
       throw new Error("Type-only");
     }),
 });
-
 // App router wrapping bot router
-export const appRouter = t.router({
+const appRouter = t.router({
   bot: botRouter,
 });
 

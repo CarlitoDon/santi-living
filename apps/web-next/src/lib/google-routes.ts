@@ -21,7 +21,7 @@ const MultiStopRoutesResponseSchema = z.object({
   })).min(1),
 });
 
-export interface GoogleRouteCoordinate {
+interface GoogleRouteCoordinate {
   latitude: number;
   longitude: number;
 }
