@@ -10,7 +10,7 @@ import {
   type WilayahItem,
 } from "./nusantarakita-api";
 
-export interface GeocodedAddress {
+interface GeocodedAddress {
   kelurahan?: string;
   kecamatan?: string;
   kota?: string;
@@ -18,7 +18,7 @@ export interface GeocodedAddress {
   postcode?: string;
 }
 
-export interface MatchedAddress {
+interface MatchedAddress {
   kotaKode: string;
   kota: string;
   kecamatanKode: string;
