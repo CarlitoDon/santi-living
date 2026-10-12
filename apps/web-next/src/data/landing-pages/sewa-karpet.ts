@@ -386,13 +386,13 @@ export const sewaKarpetMerah: LandingPageConfig = {
 export const sewaKarpetPermadani: LandingPageConfig = {
   ...sewaKarpetJogja,
   meta: {
-    title: 'Sewa Permadani Jogja untuk Pengajian & Tahlilan',
+    title: 'Sewa Karpet Permadani Jogja untuk Tahlilan & Pengajian',
     description:
-      'Sewa permadani Jogja untuk pengajian, tahlilan, tamu keluarga, dan lesehan. Cek motif, ukuran, delivery, cleaning, deposit via WhatsApp.',
+      'Sewa karpet permadani Jogja untuk tahlilan, pengajian, dan syukuran keluarga. Permadani merah & emas tebal bersih berstandar laundry, siap antar ke Sleman, Kota Jogja & Bantul.',
   },
   hero: {
     ...sewaKarpetJogja.hero,
-    title: 'Sewa Permadani Jogja untuk Pengajian & Tahlilan',
+    title: 'Sewa Karpet Permadani Jogja untuk Tahlilan & Pengajian',
     subtitle:
       'Permadani merah atau emas untuk area duduk lesehan, ruang tamu sementara, musala kecil, tamu keluarga, syukuran, dan acara rumah di Yogyakarta.',
     badge: 'Fokus lesehan dan ruang tamu sementara',

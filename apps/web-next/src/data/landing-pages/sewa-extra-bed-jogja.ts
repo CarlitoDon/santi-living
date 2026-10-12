@@ -2,8 +2,8 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaExtraBedJogja: LandingPageConfig = {
   meta: {
-    title: 'Sewa Extra Bed Jogja Mulai 40rb - Rental Ekstrabed Hotel & Homestay',
-    description: 'Layanan sewa extra bed Jogja & rental ekstrabed terdekat. Kasur busa steril tebal, include sprei, bantal & selimut, siap antar cepat 2 jam ke hotel & homestay.',
+    title: 'Sewa Extra Bed Jogja Mulai 40rb | Rental Busa Hotel & Homestay',
+    description: 'Layanan sewa extra bed Jogja & rental ekstrabed terdekat. Kasur busa steril tebal 15-20cm, include sprei, bantal & selimut, siap antar cepat 2 jam ke hotel & homestay.',
   },
   hero: {
     title: 'Sewa & Rental Extra Bed Jogja Terdekat',
