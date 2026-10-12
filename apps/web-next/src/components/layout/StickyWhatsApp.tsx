@@ -11,8 +11,8 @@ export function StickyWhatsApp() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Hide on /pesan (wizard has its own flow)
-      if (/\/pesan(?:\/|$)/.test(window.location.pathname)) {
+      // Hide on /pesan (wizard has its own flow) and isolated chair LP
+      if (/\/(?:pesan|lp-sewa-kursi-jogja)(?:\/|$)/.test(window.location.pathname)) {
         setVisible(false);
         return;
       }

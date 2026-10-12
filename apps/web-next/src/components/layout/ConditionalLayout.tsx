@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-const MINIMAL_ROUTES = ['/pesan'];
+const MINIMAL_PATTERN = /\/(?:pesan|lp-sewa-kursi-jogja)(?:\/|$)/;
 
 export function ConditionalLayout({
   header,
@@ -15,7 +15,7 @@ export function ConditionalLayout({
   children: ReactNode;
 }) {
   const pathname = usePathname();
-  const isMinimal = MINIMAL_ROUTES.some((r) => pathname.startsWith(r));
+  const isMinimal = MINIMAL_PATTERN.test(pathname ?? '');
 
   if (isMinimal) {
     return <>{children}</>;
