@@ -2,12 +2,12 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaKasurBulanan: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Kasur Bulanan Jogja Terdekat | Hemat Rp750rb',
+    title: 'Sewa Kasur Bulanan Jogja Mulai 900rb/Bulan | Hemat Bebas Repot',
     description:
-      'Pusat sewa dan rental kasur bulanan terdekat di Jogja mulai Rp900.000/bulan. Cocok untuk kos, kontrakan, atau mahasiswa. Kasur bersih, antar jemput gratis, tanpa deposit besar.',
+      'Rental kasur bulanan di Jogja mulai Rp900.000/bulan untuk mahasiswa, kost, dan kontrakan. Busa tebal berkualitas, gratis antar jemput, bebas repot beli baru!',
   },
   hero: {
-    title: 'Sewa & Rental Kasur Bulanan Jogja',
+    title: 'Sewa Kasur Bulanan Jogja Mulai 900rb/Bulan',
     subtitle: 'Solusi hemat untuk kos, kontrakan, atau mahasiswa yang butuh rental kasur terdekat tanpa beli',
     badge: 'Mulai Rp900.000/bulan',
   },
