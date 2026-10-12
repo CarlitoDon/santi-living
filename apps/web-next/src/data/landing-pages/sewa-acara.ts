@@ -2,12 +2,11 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaAcara: LandingPageConfig = {
   meta: {
-    title: 'Sewa Paket Perlengkapan Event Jogja',
-    description:
-      'Sewa paket perlengkapan event Jogja: kasur rest area, air cooler, TV display, karpet by request, meja/kursi/sound konsultatif via WA.',
+    title: 'Sewa Perlengkapan Event & Acara Jogja | Kasur, Kursi, Karpet & Cooler',
+    description: 'Sewa perlengkapan event & acara Jogja satu pintu: kasur panitia, kursi acara, karpet permadani, air cooler, & TV display. Siap antar tepat waktu se-DIY!',
   },
   hero: {
-    title: 'Sewa Paket Perlengkapan Event Jogja',
+    title: 'Sewa Perlengkapan Event & Acara Jogja',
     subtitle:
       'Konsultasi satu pintu untuk item inti Santi Living dan kebutuhan acara by-request, dengan estimasi setelah tanggal, durasi, ukuran area, dan lokasi jelas.',
     badge: 'Item inti + by-request, area jauh konfirmasi dulu',
