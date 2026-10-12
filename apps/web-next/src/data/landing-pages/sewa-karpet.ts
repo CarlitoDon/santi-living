@@ -255,13 +255,13 @@ const sewaKarpetJogja: LandingPageConfig = {
 export const sewaKarpetMerah: LandingPageConfig = {
   ...sewaKarpetJogja,
   meta: {
-    title: 'Sewa Permadani Merah Jogja untuk Pengajian & Tamu',
+    title: 'Sewa Karpet Merah Jogja Mulai 50rb | Permadani Acara, Pengajian & Tamu',
     description:
-      'Cek ketersediaan sewa karpet merah motif permadani di Jogja untuk pengajian, tahlilan, tamu keluarga, ruang tamu sementara, dan acara lesehan.',
+      'Sewa karpet merah Jogja mulai Rp50.000. Karpet merah motif permadani tebal bersih untuk acara, pengajian, tahlilan, & ruang tamu lesehan. Antar jemput se-DIY!',
   },
   hero: {
     ...sewaKarpetJogja.hero,
-    title: 'Sewa Permadani Merah Jogja',
+    title: 'Sewa Karpet Merah Jogja Mulai 50rb',
     subtitle:
       'Karpet merah motif permadani untuk area duduk, ruang tamu, pengajian, tahlilan, dan acara keluarga lesehan di Yogyakarta.',
     badge: 'Permadani merah, bukan runner acara',

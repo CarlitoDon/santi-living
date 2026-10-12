@@ -2,11 +2,11 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaSelimut: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Selimut Jogja Terdekat | Kualitas Hotel',
-    description: 'Layanan sewa dan rental selimut tebal terdekat di Jogja. Selimut bulu halus (fleece), wangi laundry, sangat hangat untuk musim dingin atau camping.',
+    title: 'Sewa Selimut Jogja Mulai 10rb | Fleece Lembut Hangat Wangi Laundry',
+    description: 'Sewa selimut Jogja mulai Rp10.000/hari. Selimut bulu fleece tebal kualitas hotel, wangi laundry higienis, sangat hangat untuk tamu menginap. Siap antar!',
   },
   hero: {
-    title: 'Sewa & Rental Selimut Jogja',
+    title: 'Sewa Selimut Jogja Mulai 10rb',
     subtitle: 'Butuh selimut tambahan terdekat? Sewa selimut tebal kualitas hotel yang lembut, hangat, dan dijamin 100% bersih.',
     badge: 'Mulai Rp10.000/hari',
   },

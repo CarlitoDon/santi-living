@@ -2,11 +2,11 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaBantal: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Bantal Jogja Terdekat | Bersih & Higienis',
-    description: 'Pusat sewa dan rental bantal guling terdekat di Jogja. Bantal empuk, sarung bersih wangi laundry, jaminan steril UV-C. Cocok untuk tamu & asrama.',
+    title: 'Sewa Bantal Jogja Mulai 10rb | Bantal Dacron Empuk Bersih Steril UV-C',
+    description: 'Sewa bantal Jogja mulai Rp10.000/hari. Bantal dacron empuk ekstra sarung wangi laundry, steril UV-C untuk tamu keluarga & asrama. Antar kilat ke lokasi!',
   },
   hero: {
-    title: 'Sewa & Rental Bantal Jogja',
+    title: 'Sewa Bantal Jogja Mulai 10rb',
     subtitle: 'Cari tempat sewa bantal terdekat? Kami sediakan bantal guling ekstra yang dijamin bersih, wangi, dan steril untuk kenyamanan tamu Anda.',
     badge: 'Mulai Rp10.000/hari',
   },
