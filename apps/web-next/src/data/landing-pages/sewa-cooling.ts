@@ -2,13 +2,13 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaCooling: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Air Cooler Jogja Terdekat | Dingin Hemat Listrik',
-    description: 'Pusat sewa dan rental Air Cooler terdekat di Jogja harian/bulanan. Lebih dingin dari kipas, lebih hemat dari AC. Cocok untuk kamar kos atau ruang keluarga.',
+    title: 'Sewa Air Cooler Jogja Mulai 35rb | Portable Hemat Listrik Lebih Dingin',
+    description: 'Sewa air cooler Jogja mulai Rp35.000/hari & Rp450.000/bulan. Portable hemat listrik, lebih dingin dari kipas angin, cocok untuk kamar kos & acara. Siap antar se-DIY!',
   },
   hero: {
-    title: 'Sewa Air Cooler Jogja',
+    title: 'Sewa Air Cooler Jogja Mulai 35rb',
     subtitle: 'Rental air cooler terdekat, dingin maksimal tanpa tagihan listrik jebol. Solusi cerdas!',
-    badge: 'Mulai Rp40.000/hari',
+    badge: 'Mulai Rp35.000/hari',
   },
   color: 'indigo',
 
@@ -19,7 +19,7 @@ export const sewaCooling: LandingPageConfig = {
     { icon: '🔄', title: 'Praktis & Portable', description: 'Dilengkapi roda sehingga mudah dipindahkan dari ruang tamu ke kamar tidur.' },
   ],
   priceCards: [
-    { name: 'Air Cooler (Harian)', size: 'Portable Cooler', price: 'Rp 40.000', daily: 'Per Hari', note: 'Sudah termasuk Ice Pack', popular: true },
+    { name: 'Air Cooler (Harian)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Hari', note: 'Sudah termasuk Ice Pack', popular: true },
     { name: 'Air Cooler (Mingguan)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: false },
     { name: 'Air Cooler (Bulanan)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Bulan', note: 'Solusi jangka panjang anak kos', popular: false },
   ],
@@ -49,7 +49,7 @@ en: {
   hero: {
     title: 'Air Cooler Rental Jogja',
     subtitle: 'Nearest air cooler rental, maximum cooling without skyrocketing electricity bills. The smart solution!',
-    badge: 'Starting from Rp40.000/day',
+    badge: 'From Rp35,000/day',
   },
     benefits: [
     { icon: '❄️', title: 'Cooler Than a Fan', description: 'Uses water cooling technology (Ice Pack) to deliver fresher and cooler airflow.' },
@@ -58,7 +58,7 @@ en: {
     { icon: '🔄', title: 'Practical & Portable', description: 'Equipped with wheels so it can easily be moved from the living room to the bedroom.' },
   ],
   priceCards: [
-    { name: 'Air Cooler (Daily)', size: 'Portable Cooler', price: 'Rp 40.000', daily: 'Per Day', note: 'Ice Pack included', popular: true },
+    { name: 'Air Cooler (Daily)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Day', note: 'Ice Pack included', popular: true },
     { name: 'Air Cooler (Weekly)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Week', note: 'Better value', popular: false },
     { name: 'Air Cooler (Monthly)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Month', note: 'Long-term solution for boarding house residents', popular: false },
   ],

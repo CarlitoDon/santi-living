@@ -2,11 +2,11 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaTv: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental TV Jogja Terdekat | TV LED 32 Inch',
-    description: 'Pusat sewa dan rental TV LED 32 Inch terdekat di Jogja harian/bulanan. Cocok untuk nobar mahasiswa, presentasi, atau homestay. Antar jemput same day.',
+    title: 'Sewa TV LED 32 Inch Jogja Mulai 50rb | HD Nobar & Acara Siap Antar',
+    description: 'Sewa TV Jogja mulai Rp50.000/hari & Rp750.000/bulan. TV LED 32 Inch HD jernih untuk nobar bola, seminar, presentasi, & homestay. Siap antar jemput ke lokasi!',
   },
   hero: {
-    title: 'Sewa & Rental TV Jogja',
+    title: 'Sewa TV LED 32 Inch Jogja Mulai 50rb',
     subtitle: 'Penyewaan TV terdekat, solusi hiburan dan presentasi praktis tanpa harus beli baru',
     badge: 'Mulai Rp50.000/hari',
   },
