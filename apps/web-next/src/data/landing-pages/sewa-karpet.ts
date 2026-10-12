@@ -13,12 +13,12 @@ Mohon info ketersediaan, rekomendasi ukuran, estimasi harga, dan ongkirnya.`;
 
 const sewaKarpetJogja: LandingPageConfig = {
   meta: {
-    title: 'Sewa Karpet Jogja untuk Acara, Hajatan & Event',
+    title: 'Sewa Karpet Jogja Murah Siap Antar | Karpet Merah & Permadani',
     description:
-      'Sewa karpet Jogja untuk karpet merah, permadani, runner, booth, seminar, pameran, dan hajatan. Cek ukuran serta estimasi via WhatsApp.',
+      'Sewa karpet Jogja untuk hajatan, pengajian, dan event. Karpet merah runner & permadani bersih harum berstandar laundry. Siap antar se-DIY, chat WA 0895-1911-9092!',
   },
   hero: {
-    title: 'Sewa Karpet Jogja untuk Acara',
+    title: 'Sewa Karpet Jogja Murah Siap Antar',
     subtitle:
       'Pilih jalur karpet merah, karpet permadani, runner acara, booth pameran, atau paket karpet + perlengkapan event. Admin bantu cek ketersediaan, ukuran area, rute antar-jemput, dan estimasi biaya.',
     badge: 'Pusat pilihan karpet acara: jenis jelas, estimasi setelah ukuran',
