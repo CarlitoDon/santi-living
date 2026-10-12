@@ -15,10 +15,10 @@ export async function generateMetadata({
 
   const title = locale === 'en'
     ? 'Mattress Rental Prices in Jogja — 2026'
-    : 'Harga Sewa Kasur di Jogja — Update 2026';
+    : 'Harga Sewa Kasur Jogja Mulai 30rb | Tarif Harian & Bulanan 2026';
   const description = isEn
     ? 'Transparent and affordable mattress rental prices in Yogyakarta. Complete with bedsheets, pillows, and free delivery options.'
-    : 'Daftar harga sewa kasur busa harian dan bulanan di Jogja. Kasur bersih, sprei, bantal, dan opsi gratis ongkir antar jemput.';
+    : 'Daftar harga sewa kasur Jogja mulai Rp30.000/hari & Rp900.000/bulan. Kasur busa tebal 20 cm steril UV-C, sprei wangi laundry, gratis ongkir 3 km. Cek tarif lengkap!';
 
   return createLandingMetadata({
     path: PAGE_PATH,
