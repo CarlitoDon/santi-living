@@ -53,6 +53,10 @@ export function buildKarpetMetadata(
       'sewa karpet pengajian jogja',
       'sewa karpet seminar jogja',
       'sewa karpet pameran jogja',
+      'karpet tahlilan',
+      'karpet pengajian',
+      'sewa karpet tahlilan jogja',
+      'karpet buat tahlilan',
     ],
     alternates: {
       canonical: url,
