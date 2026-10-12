@@ -2,12 +2,12 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaKasurLipat: LandingPageConfig = {
   meta: {
-    title: 'Sewa & Rental Kasur Lipat Jogja Terdekat | Praktis untuk Tamu',
+    title: 'Sewa Kasur Lipat Jogja Mulai 30rb | Praktis 3 Bagian Bersih Steril',
     description:
-      'Layanan sewa dan rental kasur lipat terdekat di Jogja mulai Rp30.000/hari. Praktis dilipat, mudah disimpan, cocok untuk tamu mendadak atau acara keluarga. Antar jemput same day.',
+      'Sewa kasur lipat di Jogja mulai Rp30.000/hari. Busa lipat 3 tebal & praktis, steril UV-C, include sprei laundry & bantal. Antar cepat 2 jam ke Sleman, Kota Jogja & Bantul!',
   },
   hero: {
-    title: 'Sewa & Rental Kasur Lipat Jogja',
+    title: 'Sewa Kasur Lipat Jogja Mulai 30rb',
     subtitle: 'Penyewaan rental kasur lipat terdekat, solusi praktis untuk tamu mendadak dan event — mudah disimpan!',
     badge: 'Mulai Rp30.000/hari',
   },
