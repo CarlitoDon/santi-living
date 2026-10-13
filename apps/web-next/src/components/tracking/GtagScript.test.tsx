@@ -2,7 +2,7 @@
  * @vitest-environment jsdom
  */
 import { act, cleanup, fireEvent, render, waitFor } from '@testing-library/react';
-import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { GtagScript } from './GtagScript';
 
 vi.mock('next/script', () => ({
@@ -14,7 +14,7 @@ vi.mock('next/script', () => ({
 describe('GtagScript WhatsApp location flow', () => {
   type TestWindow = Window & {
     __waTestUrl?: string;
-    gtag?: (...args: unknown[]) => void;
+    gtag?: Mock;
     __santiTrackClarityEvent?: (eventName: string) => void;
   };
 
@@ -44,6 +44,14 @@ describe('GtagScript WhatsApp location flow', () => {
       value: undefined,
     });
     delete (window as Window & { __waTestUrl?: string }).__waTestUrl;
+    Object.defineProperty(document, 'referrer', {
+      configurable: true,
+      value: '',
+    });
+    Object.defineProperty(navigator, 'sendBeacon', {
+      configurable: true,
+      value: undefined,
+    });
   });
 
   afterEach(() => {
@@ -739,5 +747,201 @@ describe('GtagScript WhatsApp location flow', () => {
     expect(navigatedUrl.searchParams.get('address_text')).toContain('Titik manual pelanggan');
 
     window.removeEventListener('location-selected', locationEvent);
+  });
+
+  describe('attribution fallback', () => {
+    it('falls back to direct/none when attribution is empty and no referrer', async () => {
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+      const navigatedUrl = new URL((window as Window & { __waTestUrl?: string }).__waTestUrl!);
+      expect(navigatedUrl.searchParams.get('source')).toBe('direct');
+      expect(navigatedUrl.searchParams.get('medium')).toBe('none');
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClickCall = gtagCalls.find((call) => call[1] === 'whatsapp_click');
+      expect(waClickCall?.[2]).toMatchObject({
+        utm_source: 'direct',
+        utm_medium: 'none',
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith('/api/lead/track', expect.objectContaining({
+        body: expect.stringContaining('"source":"direct"'),
+      }));
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('direct');
+      expect(leadPayload.medium).toBe('none');
+    });
+
+    it('uses stored utm_source and utm_medium from sl_attribution_v1', async () => {
+      localStorage.setItem('sl_attribution_v1', JSON.stringify({
+        last: {
+          source: 'facebook',
+          medium: 'cpc',
+          campaign: 'kasur_promo',
+        },
+      }));
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+      const navigatedUrl = new URL((window as Window & { __waTestUrl?: string }).__waTestUrl!);
+      expect(navigatedUrl.searchParams.get('source')).toBe('facebook');
+      expect(navigatedUrl.searchParams.get('medium')).toBe('cpc');
+      expect(navigatedUrl.searchParams.get('campaign')).toBe('kasur_promo');
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClickCall = gtagCalls.find((call) => call[1] === 'whatsapp_click');
+      expect(waClickCall?.[2]).toMatchObject({
+        utm_source: 'facebook',
+        utm_medium: 'cpc',
+        utm_campaign: 'kasur_promo',
+      });
+
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('facebook');
+      expect(leadPayload.medium).toBe('cpc');
+      expect(leadPayload.campaign).toBe('kasur_promo');
+    });
+
+    it('falls back to google/cpc when paid click ID is present in URL or attr', async () => {
+      window.history.replaceState({}, '', '/id?gclid=test-gclid-123');
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+      const navigatedUrl = new URL((window as Window & { __waTestUrl?: string }).__waTestUrl!);
+      expect(navigatedUrl.searchParams.get('source')).toBe('google');
+      expect(navigatedUrl.searchParams.get('medium')).toBe('cpc');
+      expect(navigatedUrl.searchParams.get('gclid')).toBe('test-gclid-123');
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClickCall = gtagCalls.find((call) => call[1] === 'whatsapp_click');
+      expect(waClickCall?.[2]).toMatchObject({
+        utm_source: 'google',
+        utm_medium: 'cpc',
+        gclid: 'test-gclid-123',
+      });
+
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('google');
+      expect(leadPayload.medium).toBe('cpc');
+      expect(leadPayload.gclid).toBe('test-gclid-123');
+    });
+
+    it('falls back to google/organic when document.referrer contains google', async () => {
+      Object.defineProperty(document, 'referrer', {
+        configurable: true,
+        value: 'https://www.google.co.id/search?q=santi+living+jogja',
+      });
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+      const navigatedUrl = new URL((window as Window & { __waTestUrl?: string }).__waTestUrl!);
+      expect(navigatedUrl.searchParams.get('source')).toBe('google');
+      expect(navigatedUrl.searchParams.get('medium')).toBe('organic');
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClickCall = gtagCalls.find((call) => call[1] === 'whatsapp_click');
+      expect(waClickCall?.[2]).toMatchObject({
+        utm_source: 'google',
+        utm_medium: 'organic',
+      });
+
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('google');
+      expect(leadPayload.medium).toBe('organic');
+    });
+
+    it('falls back to domain/referral when document.referrer is another domain', async () => {
+      Object.defineProperty(document, 'referrer', {
+        configurable: true,
+        value: 'https://instagram.com/p/abc123xyz',
+      });
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as Window & { __waTestUrl?: string }).__waTestUrl).toBeDefined());
+      const navigatedUrl = new URL((window as Window & { __waTestUrl?: string }).__waTestUrl!);
+      expect(navigatedUrl.searchParams.get('source')).toBe('instagram.com');
+      expect(navigatedUrl.searchParams.get('medium')).toBe('referral');
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClickCall = gtagCalls.find((call) => call[1] === 'whatsapp_click');
+      expect(waClickCall?.[2]).toMatchObject({
+        utm_source: 'instagram.com',
+        utm_medium: 'referral',
+      });
+
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('instagram.com');
+      expect(leadPayload.medium).toBe('referral');
+    });
+
+    it('applies resolved attribution to enriched lead payload in reverse geocode callback', async () => {
+      sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+        coords: { lat: -7.812345, lng: 110.412345 },
+        source: 'manual',
+        address: {
+          street: 'Titik manual pelanggan',
+          kota: 'Sleman',
+          provinsi: 'Daerah Istimewa Yogyakarta',
+        },
+      }));
+      localStorage.setItem('sl_attribution_v1', JSON.stringify({
+        last: {
+          source: 'google',
+          medium: 'cpc',
+          campaign: 'kasur_diy',
+        },
+      }));
+      const fetchMock = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          persisted: true,
+          cityClassification: 'service_area',
+        }),
+      } as Response);
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect(fetchMock).toHaveBeenCalledWith('/api/lead/track', expect.anything()));
+      const leadPayload = JSON.parse(fetchMock.mock.calls[0][1].body);
+      expect(leadPayload.source).toBe('google');
+      expect(leadPayload.medium).toBe('cpc');
+      expect(leadPayload.campaign).toBe('kasur_diy');
+    });
   });
 });
