@@ -1,6 +1,12 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
+import { getAttributionEventParams } from '@/lib/attribution';
+
+interface LeadTrackResponse {
+  eventId?: string;
+  cityClassification?: string;
+}
 
 const WA_NUMBER = '6289519119092';
 
@@ -85,21 +91,55 @@ export function ChairLeadForm() {
     setStatus('submitting');
 
     try {
-      await fetch('/api/lead/track', {
+      const attr = getAttributionEventParams();
+      const leadContent = `Nama: ${cleanNama} | WA: ${cleanWa} | Kursi: ${jenis} | Jml: ${jumlah} | Area: ${cleanArea} | Tgl: ${cleanTanggal}${catatan.trim() ? ` | Catatan: ${catatan.trim()}` : ''}`;
+      const res = await fetch('/api/lead/track', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           event_type: 'form_submit',
-          source: 'isolated_lp_kursi',
-          medium: 'landing_page',
+          source: attr.source || 'isolated_lp_kursi',
+          medium: attr.medium || 'landing_page',
+          campaign: attr.campaign,
+          term: attr.term,
+          content: leadContent,
+          gclid: attr.gclid,
+          wbraid: attr.wbraid,
+          gbraid: attr.gbraid,
+          fbclid: attr.fbclid,
           cta_source: 'chair_order_form',
           product_category: 'sewa-kursi',
           page_type: 'isolated_landing_page',
           intent: 'sewa_kursi_plastik_jogja',
-          landing_page: typeof window !== 'undefined' ? window.location.href : '',
+          landing_page: typeof window !== 'undefined' ? window.location.pathname + window.location.search : '',
           city: cleanArea || undefined,
+          user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
+          referrer: typeof document !== 'undefined' ? document.referrer : undefined,
+          timestamp: new Date().toISOString(),
         }),
       });
+      const resData = (await res.json().catch(() => ({}))) as LeadTrackResponse;
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'form_submit', {
+          event_id: resData.eventId,
+          source: attr.source || 'isolated_lp_kursi',
+          medium: attr.medium || 'landing_page',
+          campaign: attr.campaign,
+          city_classification: resData.cityClassification,
+        });
+        if (resData.cityClassification === 'service_area') {
+          window.gtag('event', 'santi_whatsapp_qualified', {
+            event_id: resData.eventId,
+            city_classification: resData.cityClassification,
+            persistence_status: 'confirmed',
+          });
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-17865321955/y7bwCKTm3J0cEOPb7MZC',
+            event_id: resData.eventId,
+            transport_type: 'beacon',
+          });
+        }
+      }
     } catch {
       // Best-effort tracking: tetap lanjutkan ke WhatsApp walau gagal.
     }

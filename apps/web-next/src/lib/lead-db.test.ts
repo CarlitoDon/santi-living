@@ -114,4 +114,19 @@ describe('persistLeadEvent location trust boundary', () => {
     expect(result.cityClassification).toBe('service_area');
     expect(result.record.city).toBe('Sleman');
   });
+
+  it('preserves form_submit city when geocoding is requested but coordinates are missing', async () => {
+    const input = LeadEventSchema.parse({
+      event_id: 'form-location-missing-coords-123',
+      event_type: 'form_submit',
+      city: 'Sleman',
+    });
+
+    const result = await persistLeadEvent(input.event_id as string, input, receivedAt, { geocode: true });
+
+    expect(reverseGeocodeLeadLocationMock).not.toHaveBeenCalled();
+    expect(result.cityClassification).toBe('service_area');
+    expect(result.record.city).toBe('Sleman');
+    expect(result.record.geocode_status).toBe('not_requested');
+  });
 });
