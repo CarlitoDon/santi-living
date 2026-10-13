@@ -371,23 +371,23 @@ export default async function LpSewaKursiJogjaPage({
               {PACKAGES.map((pkg) => (
                 <div
                   key={pkg.name}
-                  className="flex flex-col justify-between rounded-2xl bg-slate-900 p-6 text-white shadow-md"
+                  className="flex flex-col justify-between rounded-2xl bg-white border border-stone-200/90 p-6 shadow-sm hover:shadow-md transition-all"
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="rounded-full bg-[#D95D24] px-2.5 py-0.5 text-[11px] font-bold text-white">
+                      <span className="rounded-full bg-[#D95D24]/10 border border-[#D95D24]/20 px-2.5 py-0.5 text-[11px] font-bold text-[#D95D24]">
                         {pkg.tag}
                       </span>
-                      <span className="text-xs font-bold text-emerald-400">Armada Ready</span>
+                      <span className="rounded-full bg-emerald-50 border border-emerald-200/60 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-800">Armada Ready</span>
                     </div>
-                    <p className="mt-4 text-lg font-black text-white">{pkg.name}</p>
-                    <p className="mt-1 text-2xl font-black text-emerald-300">{pkg.detail}</p>
-                    <p className="mt-3 text-sm text-slate-300">{pkg.description}</p>
+                    <p className="mt-4 text-lg font-bold text-stone-900">{pkg.name}</p>
+                    <p className="mt-1 text-xl font-black text-[#315a72]">{pkg.detail}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-stone-600">{pkg.description}</p>
                   </div>
                   <div className="pt-5">
                     <a
                       href="#form-pemesanan"
-                      className="block w-full rounded-xl bg-white/10 py-2.5 text-center text-xs font-bold text-white transition hover:bg-white/20"
+                      className="block w-full rounded-xl bg-[#315a72] py-2.5 text-center text-xs font-bold text-white transition hover:bg-[#28495c] shadow-sm"
                     >
                       Pesan Paket Ini
                     </a>
