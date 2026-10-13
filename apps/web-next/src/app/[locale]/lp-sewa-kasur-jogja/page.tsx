@@ -263,8 +263,8 @@ export default async function LpSewaKasurJogjaPage({
               {/* Foto Kamar Tidur Siap Pakai */}
               <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
                 <Image
-                  src="/images/hero-kamar-siap.webp"
-                  alt="Kasur busa steril tebal 20 cm siap pakai Santi Living Jogja"
+                  src="/images/hero-kasur-lantai-mocha.webp"
+                  alt="Kasur busa lantai steril tebal 20 cm sprei cokelat mocha tanpa dipan siap pakai Santi Living Jogja"
                   width={640}
                   height={400}
                   className="w-full h-auto object-cover"
