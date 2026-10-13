@@ -35,7 +35,7 @@ Kami melayani pengiriman ke seluruh Daerah Istimewa Yogyakarta:
 ## Apa yang Membedakan Santi Living dari Persewaan Lain?
 
 ### 1. Proses Sterilisasi 7 Tahap
-Setiap kasur yang dikalau sudah melewati tujuh tahap pembersihan: inspeksi, vacuuming, stain treatment, anti-bacterial spray, UV-C sterilization, sun drying, dan final QC. Hasilnya? Kasur yang sampai di rumah Anda benar-benar **bersih, wangi, dan bebas tungau**.
+Setiap kasur yang dikalau sudah melewati tujuh tahap pembersihan: inspeksi, vacuuming, stain treatment, anti-bacterial spray, sanitasi higienis, sun drying, dan final QC. Hasilnya? Kasur yang sampai di rumah Anda benar-benar **bersih, wangi, dan bebas tungau**.
 
 ### 2. Harga Transparan, Tanpa Biaya Tersembunyi
 - Paket Single (90×200): **Rp35.000/hari**

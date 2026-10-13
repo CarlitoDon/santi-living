@@ -54,7 +54,7 @@ Bagi rombongan mahasiswa KKN atau penyewaan untuk acara massal, kami menawarkan 
 Mengapa memakai jasa Santi Living dibanding penyedia sewa kasur lainnya? Berikut kelebihan mutlak kami:
 
 ### 1. Kebersihan Terjamin Lewat 7 Tahap Sterilisasi
-Kami menjaga setiap unit kasur dalam kondisi higienis maksimal. Setiap kasur yang kami jemput dari penyewa sebelumnya akan diproses secara saksama di gudang kami lewat program 7 tahap sterilisasi. Mulai dari pencucian sprei antiseptik, pembersihan tungau berkekuatan tinggi, semprotan disinfektan aman untuk kulit sensitif, hingga penyinaran sinar Ultraviolet-C (UV-C) untuk membasmi virus dan parasit mikro. Kasur tiba di kos Anda dalam kondisi segar dan wangi.
+Kami menjaga setiap unit kasur dalam kondisi higienis maksimal. Setiap kasur yang kami jemput dari penyewa sebelumnya akan diproses secara saksama di gudang kami lewat program 7 tahap sterilisasi. Mulai dari pencucian sprei antiseptik, pembersihan tungau berkekuatan tinggi, semprotan disinfektan aman untuk kulit sensitif, hingga disinfeksi higienis intensif untuk membasmi kuman dan mikroorganisme. Kasur tiba di kos Anda dalam kondisi segar dan wangi.
 
 ### 2. Tanpa Ribet Tanpa Jaminan KTP Asli
 Mahasiswa sering kali enggan meminjamkan identitas fisik asli seperti KTP karena alasan privasi dan keamanan berkas. Bersama kami, Anda tidak perlu mengorbankan dokumen berharga Anda atau menyetor deposit uang tunai. Proses aktivasi administrasi kami lakukan serbacepat melalui chat WhatsApp.

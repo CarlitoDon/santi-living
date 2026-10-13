@@ -2,8 +2,8 @@ import type { LandingPageConfig } from '@/types/landing';
 
 export const sewaBantal: LandingPageConfig = {
   meta: {
-    title: 'Sewa Bantal Jogja Mulai 10rb | Bantal Dacron Empuk Bersih Steril UV-C',
-    description: 'Sewa bantal Jogja mulai Rp10.000/hari. Bantal dacron empuk ekstra sarung wangi laundry, steril UV-C untuk tamu keluarga & asrama. Antar kilat ke lokasi!',
+    title: 'Sewa Bantal Jogja Mulai 10rb | Bantal Dacron Empuk Bersih Higienis',
+    description: 'Sewa bantal Jogja mulai Rp10.000/hari. Bantal dacron empuk ekstra sarung wangi laundry, bersih higienis untuk tamu keluarga & asrama. Antar kilat ke lokasi!',
   },
   hero: {
     title: 'Sewa Bantal Jogja Mulai 10rb',
@@ -13,7 +13,7 @@ export const sewaBantal: LandingPageConfig = {
   color: 'cyan',
 
   benefits: [
-    { icon: '🧼', title: '100% Higienis', description: 'Bantal disterilkan dengan sinar UV-C dan sarung bantal selalu baru dari laundry.' },
+    { icon: '🧼', title: '100% Higienis', description: 'Bantal dibersihkan higienis dan sarung bantal selalu baru dari laundry.' },
     { icon: '☁️', title: 'Isi Dakron Premium', description: 'Bantal empuk dan padat, mampu menopang kepala dengan nyaman tanpa takut kempes.' },
     { icon: '🚚', title: 'Antar Jemput Kilat', description: 'Pesan pagi, bantal sampai siang. Kami antar langsung ke alamat Anda di Jogja.' },
     { icon: '💰', title: 'Harga Termurah', description: 'Solusi paling hemat daripada beli baru. Sewa harian atau bulanan sesuai kebutuhan.' },
@@ -44,7 +44,7 @@ export const sewaBantal: LandingPageConfig = {
 en: {
   meta: {
     title: 'Nearest Pillow Rental in Jogja | Clean & Hygienic',
-    description: 'The nearest pillow and bolster rental center in Jogja. Soft pillows, fresh laundered pillowcases, UV-C sterilization guaranteed. Perfect for guests & dormitories.',
+    description: 'The nearest pillow and bolster rental center in Jogja. Soft pillows, fresh laundered pillowcases, deep cleaned and sanitized. Perfect for guests & dormitories.',
   },
   hero: {
     title: 'Pillow Rental in Jogja',
@@ -52,7 +52,7 @@ en: {
     badge: 'Starting from Rp10,000/day',
   },
   benefits: [
-    { icon: '🧼', title: '100% Hygienic', description: 'Pillows are sterilized with UV-C light and pillowcases are always freshly laundered.' },
+    { icon: '🧼', title: '100% Hygienic', description: 'Pillows are deep cleaned and sanitized and pillowcases are always freshly laundered.' },
     { icon: '☁️', title: 'Premium Dacron Fill', description: 'Soft and firm pillows that support your head comfortably without going flat.' },
     { icon: '🚚', title: 'Express Delivery & Pickup', description: 'Order in the morning, pillow arrives by noon. We deliver directly to your address in Jogja.' },
     { icon: '💰', title: 'Lowest Price', description: 'The most affordable solution compared to buying new. Daily or monthly rental to suit your needs.' },

@@ -31,7 +31,7 @@ Sebagai pusat aktivitas mahasiswa dan pariwisata di Sleman, Condongcatur memilik
 
 ## Kenyamanan Tidur Maksimal dengan Jaminan Kebersihan Santi Living
 
-Faktor utama kenyamanan saat menyewa kasur adalah jaminan kebersihan dan kualitas busa itu sendiri. Karena itu, Santi Living menerapkan standar higienitas yang ketat. Sebelum diantar ke alamat Anda di Condongcatur, setiap unit kasur kami dijamin bebas dari debu, kuman, tungau, maupun aroma tidak sedap melalui 7 tahap sterilisasi, mulai dari penyedotan debu mikro (vacuum), disinfeksi antiseptic, sterilisasi lampu ultra-violet (UV-C), pengeringan temperatur tinggi, hingga segel plastik pelindung.
+Faktor utama kenyamanan saat menyewa kasur adalah jaminan kebersihan dan kualitas busa itu sendiri. Karena itu, Santi Living menerapkan standar higienitas yang ketat. Sebelum diantar ke alamat Anda di Condongcatur, setiap unit kasur kami dijamin bebas dari debu, kuman, tungau, maupun aroma tidak sedap melalui 7 tahap sterilisasi, mulai dari penyedotan debu mikro (vacuum), disinfeksi antiseptic, sanitasi higienis mendalam, pengeringan temperatur tinggi, hingga segel plastik pelindung.
 
 Material kasur yang kami gunakan adalah **HD Foam (High Density Polyurethane Foam)** dengan density berstandar tinggi (20-24 kg/m³). Busa jenis ini memiliki keseimbangan tingkat kekerasan (hardness) yang optimal, stabil menopang postur tulang belakang dengan baik, dan tidak gampang ambles. Istirahat Anda dan keluarga pun dipastikan berkualitas dan terbebas dari keluhan pegal saat terbangun pada pagi hari.
 > 📖 **[Spesifikasi Kasur Santi Living: HD Foam Berkualitas →](/artikel/spesifikasi-kasur-santi-living-hd-foam-jogja)**

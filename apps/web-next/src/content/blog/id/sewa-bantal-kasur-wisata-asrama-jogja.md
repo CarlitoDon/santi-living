@@ -13,7 +13,7 @@ Untuk menjamin para peserta tetap fit dan nyaman selama berwisata di Jogja, meny
 ## Solusi Tidur Nyenyak untuk Rombongan
 
 1.  **Paket Kasur + Bantal Higienis**: Kami menyediakan paket ekonomis yang terdiri dari Kasur Busa *High Density* (yang tidak keras di punggung) dan bantal empuk yang sudah terbungkus sarung bersih wangi *laundry*.
-2.  **Layanan Sterilisasi UV-C**: Kami tahu kesehatan peserta adalah prioritas. Oleh karena itu, seluruh perlengkapan tidur kami melalui proses sterilisasi sinar UV-C sebelum dikirim untuk membunuh kuman dan virus.
+2.  **Layanan Sanitasi Higienis**: Kami tahu kesehatan peserta adalah prioritas. Oleh karena itu, seluruh perlengkapan tidur kami melalui proses sanitasi higienis sebelum dikirim untuk membunuh kuman dan virus.
 3.  **Sistem Pengiriman Logistik yang Rapi**: Anda tidak perlu pusing memikirkan cara mengangkut 50 kasur dan bantal ke villa atau aula penginapan Anda. Armada truk kami akan mengantarkannya langsung dan membantu menatanya di lokasi.
 4.  **Harga Transparan & Tanpa Biaya Tersembunyi**: Panitia bisa melakukan *budgeting* dengan tenang karena harga yang kami berikan sudah mencakup biaya sewa harian dan pengambilan barang kembali.
 

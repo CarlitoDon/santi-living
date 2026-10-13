@@ -37,7 +37,7 @@ Kebersihan dan higienitas kasur adalah kekhawatiran utama pelanggan ketika menye
 Setiap unit kasur kami diisi material **HD Foam (High Density Polyurethane Foam)** tingkat tinggi ber-density 20-24 kg/m³. Busa dengan spesifikasi ini memiliki tingkat elastisitas yang pas sehingga stabil menyangga tulang belakang dengan baik dan tidak mudah ambles meski ditiduri semalaman penuh.
 > 📖 **[Spesifikasi Kasur Santi Living: HD Foam Berkualitas →](/artikel/spesifikasi-kasur-santi-living-hd-foam-jogja)**
 
-Before dikirim ke alamat Anda di Jalan Kaliurang, setiap kasur wajib menjalani 7 tahap proses sterilisasi, mulai dari vacuuming debu halus, disinfeksi dengan cairan antiseptik ramah lingkungan, sterilisasi lampu UV-C, pengeringan suhu tinggi, hingga pembungkusan dengan plastik steril. Kami menjanjikan kasur tiba di kos atau homestay Anda dalam kondisi wangi, bersih, dan segar siap pakai.
+Before dikirim ke alamat Anda di Jalan Kaliurang, setiap kasur wajib menjalani 7 tahap proses sterilisasi, mulai dari vacuuming debu halus, disinfeksi dengan cairan antiseptik ramah lingkungan, disinfeksi higienis intensif, pengeringan suhu tinggi, hingga pembungkusan dengan plastik steril. Kami menjanjikan kasur tiba di kos atau homestay Anda dalam kondisi wangi, bersih, dan segar siap pakai.
 
 ## Ukuran & Harga Sewa Kasur Sleman Terlengkap
 
@@ -74,7 +74,7 @@ Lokasi workshop operasional utama Santi Living berada di Jl. Godean KM 10, Slema
 Tidak ada minimal durasi sewa kasur UII di tempat kami. Kami melayani persewaan harian (min. 1 hari) untuk wisuda atau acara keluarga singkat, hingga sewa mingguan dan bulanan jangka panjang bagi mahasiswa.
 
 **Apakah kasur yang disewa dipasikan higienis?**
-Tentu saja. Semua kasur busa HD Foam kami wajib melewati 7 tahap sterilisasi intensif (mulai vacuuming, disinfektan kuman, sterilisasi lampu UV-C, hingga pembungkusan rapat) sebelum dikirim.
+Tentu saja. Semua kasur busa HD Foam kami wajib melewati 7 tahap sterilisasi intensif (mulai vacuuming, disinfektan kuman, sanitasi higienis menyeluruh, hingga pembungkusan rapat) sebelum dikirim.
 
 **Bagaimana apabila kasur basah atau terkena noda?**
 Kami mengharapkan pelanggan menjaga kasur seperlunya. Namun jika terjadi kecelakaan tumpahan kosmetik, kopi, atau air minum ringan sewajarnya, segera laporkan ke tim admin kami agar kami bisa memberikan panduan pembersihan pertama atau merencanakan unit pengganti demi kualitas tidur Anda.

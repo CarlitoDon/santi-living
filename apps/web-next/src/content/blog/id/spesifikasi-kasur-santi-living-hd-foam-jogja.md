@@ -86,7 +86,7 @@ Setiap kasur yang dikembalikan menjalani:
 1. **Inspeksi visual** — Cek kerusakan, noda, bau
 2. **Vacuum deep clean** — Debu dan kotoran diangkat total
 3. **Spot treatment** — Noda dihilangkan dengan pembersih khusus
-4. **Sanitasi UV-C** — Bakteri dan virus dimatikan dengan sinar UV
+4. **Sanitasi Higienis** — Pembersihan mendalam untuk membasmi kuman dan bakteri
 5. **Anti-bacterial spray** — Lapisan pelindung tambahan
 6. **Pengeringan** — Kasur dikeringkan sempurna
 7. **Quality check** — Inspeksi akhir sebelum disimpan untuk penyewa berikutnya

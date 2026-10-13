@@ -47,7 +47,7 @@ Rental kasur atau sewa kasur adalah layanan penyewaan kasur busa harian, minggua
 ## Kenapa Pilih Rental Kasur Santi Living?
 
 **1. 7 Tahap Higienitas**
-Setiap kasur melewati proses sterilisasi ketat: inspeksi, vacuum, anti-bakteri, UV-C, pengeringan, parfum, dan quality check. Dijamin bersih, wangi, dan bebas tungau.
+Setiap kasur melewati proses sterilisasi ketat: inspeksi, vacuum, anti-bakteri, sanitasi higienis, pengeringan, parfum, dan quality check. Dijamin bersih, wangi, dan bebas tungau.
 
 **2. Kasur HD Foam Berkualitas**
 Kami menggunakan kasur busa High Density (HD Foam) yang tidak mudah kempes dan nyaman untuk punggung. Bukan kasur tipis atau bekas.

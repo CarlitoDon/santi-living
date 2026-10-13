@@ -17,7 +17,7 @@ Kecepatan pengantaran adalah alasan utama. Dengan lokasi workshop kami yang stra
 Kami memahami bahwa tamu seringkali datang tanpa pemberitahuan jauh hari. Itulah sebabnya layanan **rental kasur Jogja** kami mendukung *Same Day Delivery*. Pesan sebelum jam 3 sore, dan kasur akan sampai di depan pintu Anda sebelum malam tiba.
 
 ## Jaminan Kasur Bersih & Steril
-Walaupun dekat, kualitas tetap nomor satu. Setiap unit kasur **Royal Grand Exclusive** yang kami kirimkan telah melalui proses sterilisasi UV-C untuk memastikan bebas dari bakteri dan kutu busa.
+Walaupun dekat, kualitas tetap nomor satu. Setiap unit kasur **Royal Grand Exclusive** yang kami kirimkan telah melalui proses disinfeksi higienis untuk memastikan bebas dari bakteri dan kutu busa.
 
 [**Lihat Lokasi Kami di Google Maps**](https://maps.app.goo.gl/DiUP3REYVqYBHtuA8) atau langsung klik tombol WhatsApp di pojok kanan bawah website ini untuk pemesanan instan!
 

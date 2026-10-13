@@ -18,7 +18,7 @@ Santi Living menawarkan solusi penyewaan selimut bulanan yang dirancang khusus u
 
 1.  **Bahan Fleece Penghalau Dingin**: Selimut yang kami sewakan terbuat dari bahan *fleece/microfiber* premium. Bahan ini sangat ringan di badan namun memiliki sifat isolator yang luar biasa baik dalam menahan suhu tubuh, membuat Anda tetap hangat sepanjang malam.
 2.  **Sangat Lembut di Kulit**: Tekstur bulu halusnya tidak menyebabkan gatal (hypoallergenic), memberikan sensasi nyaman yang akan mempercepat Anda tertidur pulas.
-3.  **Bebas Biaya & Tenaga Laundry**: Ini adalah *benefit* terbaiknya! Mencuci *bedcover* atau selimut tebal di *laundry* kiloan bisa memakan biaya yang lumayan. Di Santi Living, Anda menyewa selimut yang sudah 100% bersih, steril UV-C, dan wangi *laundry*. Saat masa sewa habis, kembalikan saja dalam keadaan kotor. Biar kami yang cuci!
+3.  **Bebas Biaya & Tenaga Laundry**: Ini adalah *benefit* terbaiknya! Mencuci *bedcover* atau selimut tebal di *laundry* kiloan bisa memakan biaya yang lumayan. Di Santi Living, Anda menyewa selimut yang sudah 100% bersih, disanitasi higienis, dan wangi *laundry*. Saat masa sewa habis, kembalikan saja dalam keadaan kotor. Biar kami yang cuci!
 4.  **Bisa Diantar ke Kosan**: Tidak perlu keluar kos menembus angin malam. Pesan via WA, tim kurir kami akan mengantar kehangatan langsung ke pintu kamar kos Anda.
 
 Jangan korbankan kesehatan dan kualitas kuliah Anda keesokan harinya hanya karena kedinginan semalaman.

@@ -12,7 +12,7 @@ const PAGE_PATH = '/lp-sewa-kasur-jogja';
 const PAGE_TITLE = 'Sewa Kasur Busa Jogja Siap Antar Hari Ini | Tebal 20 cm Mulai 30rb';
 
 const PAGE_DESCRIPTION =
-  'Sewa kasur busa Jogja siap antar hari ini: tebal 20 cm, steril UV-C & wangi laundry mulai Rp30.000/hari untuk tamu, keluarga, homestay, kos & acara di Sleman, Kota Jogja, Bantul, Kulon Progo. Isi form, dapat rekap via WhatsApp.';
+  'Sewa kasur busa Jogja siap antar hari ini: tebal 20 cm, bersih higienis & wangi laundry mulai Rp30.000/hari untuk tamu, keluarga, homestay, kos & acara di Sleman, Kota Jogja, Bantul, Kulon Progo. Isi form, dapat rekap via WhatsApp.';
 
 function buildServiceSchema(locale: string) {
   return {
@@ -93,8 +93,8 @@ const BENEFITS = [
     description: 'Busa density tinggi (Royal/Inoac), tidak mudah gembos dan nyaman untuk istirahat optimal.',
   },
   {
-    title: 'Steril UV-C & Wangi Laundry',
-    description: 'Dibersihkan sinar UV-C dan dilengkapi set sprei fresh wangi laundry hotel.',
+    title: 'Bersih Higienis & Wangi Laundry',
+    description: 'Dibersihkan menyeluruh dan dilengkapi set sprei fresh wangi laundry hotel.',
   },
   {
     title: 'Siap Antar Hari Ini',
@@ -237,7 +237,7 @@ export default async function LpSewaKasurJogjaPage({
               </div>
 
               <h1 className="mt-4 text-3xl font-black tracking-tight text-stone-900 sm:text-4xl md:text-5xl md:leading-[1.15]">
-                Sewa Kasur Busa Jogja Siap Antar Hari Ini - Tebal 20 cm, Steril UV-C &amp; Wangi Laundry Mulai Rp30.000/Hari
+                Sewa Kasur Busa Jogja Siap Antar Hari Ini - Tebal 20 cm, Bersih Higienis &amp; Wangi Laundry Mulai Rp30.000/Hari
               </h1>
 
               <p className="mt-4 text-base leading-relaxed text-stone-600 sm:text-lg">
@@ -430,7 +430,7 @@ export default async function LpSewaKasurJogjaPage({
               Jaminan Higienis &amp; Armada Cepat
             </div>
             <h2 className="mt-3 text-2xl font-black text-stone-900 sm:text-3xl">
-              Steril UV-C &amp; Siap Kirim ke Depan Kamar Anda
+              Bersih Higienis &amp; Siap Kirim ke Depan Kamar Anda
             </h2>
             <p className="mt-2 text-sm text-stone-600">
               Setiap kasur dibersihkan dengan standar higienis tinggi dan diantar armada pickup terlindung langsung dari pangkalan Pelemgurih Gamping &amp; Workshop Godean KM 10.

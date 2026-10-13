@@ -1,6 +1,6 @@
 ---
 title: "Proses Pembersihan Kasur Santi Living: 5 Tahap Menuju Steril"
-description: "Intip proses 5 tahap sterilisasi kasur Santi Living. Dari inspeksi hingga UV-C, semua untuk kenyamanan Anda."
+description: "Intip proses 5 tahap sterilisasi kasur Santi Living. Dari inspeksi hingga sanitasi higienis, semua untuk kenyamanan Anda."
 pubDate: 2026-05-09
 author: "Tim Santi Mebel"
 tags: ["kebersihan", "sterilisasi", "proses", "sewa kasur", "jogja"]
@@ -18,7 +18,7 @@ Pernah bertanya bagaimana kasur sewaan bisa selalu bersih seperti baru? Ini pros
 
 3. **Steam Cleaning** — uap panas 100°C+ membunuh bakteri, jamur, dan kuman tanpa bahan kimia berbahaya.
 
-4. **UV-C Sterilization** — sinar ultraviolet tipe C menghancurkan DNA mikroorganisme yang tersisa. Sterilisasi tingkat rumah sakit.
+4. **Sanitasi Higienis** — proses disinfeksi mendalam untuk membasmi mikroorganisme yang tersisa secara menyeluruh.
 
 5. **Quality Control** — pemeriksaan akhir. Kasur harus bersih, kering, dan bebas bau sebelum dikemas.
 

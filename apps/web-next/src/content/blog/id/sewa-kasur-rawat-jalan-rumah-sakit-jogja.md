@@ -31,7 +31,7 @@ Berikut alasan kenapa **sewa kasur** menjadi solusi terbaik:
 
 ## Keunggulan Santi Living untuk Kebutuhan Medis
 
-1. **Sterilisasi 7 Tahap** — Setiap kasur melalui proses pembersihan menyeluruh termasuk vacuum, disinfektan, dan UV-C
+1. **Sterilisasi 7 Tahap** — Setiap kasur melalui proses pembersihan menyeluruh termasuk vacuum, disinfektan, dan sanitasi higienis
 2. **Kasur Busa High Density** — Tidak mudah kempes, nyaman untuk punggung
 3. **Pengiriman Same Day** — Pesan sekarang, antar 2-4 jam
 4. **Gratis Jemput** — Selesai pakai, kami jemput tanpa biaya tambahan

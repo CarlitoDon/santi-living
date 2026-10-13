@@ -20,7 +20,7 @@ Kami tahu persis apa yang dikhawatirkan orang saat menyewa barang-barang pribadi
 
 Anda tidak akan menemukan bantal yang berbau apek, kempes, atau bernoda kekuningan di tempat kami. Berikut adalah jaminan yang kami berikan untuk setiap penyewaan bantal ekstra:
 
-1.  **Dicuci Berkala**: Isi dalam bantal (dakron/silikon) secara rutin kami jemur dan disterilkan dengan sinar UV-C untuk membunuh tungau debu.
+1.  **Dicuci Berkala**: Isi dalam bantal (dakron/silikon) secara rutin kami jemur dan dibersihkan mendalam untuk membasmi tungau debu.
 2.  **Sarung Baru Dilaundry**: Setiap bantal yang keluar dari workshop kami **wajib** menggunakan sarung (*pillow case*) yang baru saja keluar dari mesin cuci, sudah disetrika, dan diberi pewangi linen yang menenangkan.
 3.  **Terbungkus Rapi**: Kami mengantarkan bantal dalam kondisi terbungkus plastik bersih, memastikan tidak ada debu jalanan yang menempel selama perjalanan kurir ke rumah Anda.
 
