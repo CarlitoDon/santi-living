@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { MattressLeadForm } from '@/components/landing/MattressLeadForm';
 import { localizedSiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
@@ -113,6 +114,7 @@ const MATTRESS_SIZES = [
     priceComplete: 'Rp 40.000 / hari',
     description: 'Pilihan paling populer untuk ekstra bed tamu, mahasiswa baru, atau kos sementara.',
     popular: true,
+    image: '/images/paket-90.webp',
   },
   {
     name: 'Kasur Double (120x200)',
@@ -121,6 +123,7 @@ const MATTRESS_SIZES = [
     priceComplete: 'Rp 50.000 / hari',
     description: 'Ukuran semi ganda ideal untuk saudara, tamu keluarga, atau anak-anak saat liburan.',
     popular: false,
+    image: '/images/paket-120.webp',
   },
   {
     name: 'Kasur Queen (160x200)',
@@ -129,6 +132,7 @@ const MATTRESS_SIZES = [
     priceComplete: 'Rp 60.000 / hari',
     description: 'Solusi homestay, villa, atau keluarga yang membutuhkan ruang tidur lebih leluasa.',
     popular: false,
+    image: '/images/paket-160.webp',
   },
   {
     name: 'Kasur King (180x200)',
@@ -137,6 +141,7 @@ const MATTRESS_SIZES = [
     priceComplete: 'Rp 70.000 / hari',
     description: 'Kasur ukuran master bed untuk kenyamanan maksimal seluruh anggota keluarga.',
     popular: false,
+    image: '/images/paket-180.webp',
   },
 ];
 
@@ -255,6 +260,18 @@ export default async function LpSewaKasurJogjaPage({
                 </span>
               </div>
 
+              {/* Foto Kamar Tidur Siap Pakai */}
+              <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
+                <Image
+                  src="/images/hero-kamar-siap.webp"
+                  alt="Kasur busa steril tebal 20 cm siap pakai Santi Living Jogja"
+                  width={640}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+
               {/* Benefit points with clean SVG checklist */}
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {BENEFITS.map((benefit) => (
@@ -324,6 +341,15 @@ export default async function LpSewaKasurJogjaPage({
                   </span>
                 ) : null}
                 <div>
+                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-stone-100">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover rounded-xl"
+                    />
+                  </div>
                   <div className="inline-block rounded-md bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700">
                     {item.dimension}
                   </div>
@@ -396,8 +422,35 @@ export default async function LpSewaKasurJogjaPage({
         </div>
       </section>
 
-      {/* Social proof / Testimoni */}
+      {/* Section Jaminan Higienis & Armada */}
       <section className="border-t border-stone-200/80 bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+              Jaminan Higienis &amp; Armada Cepat
+            </div>
+            <h2 className="mt-3 text-2xl font-black text-stone-900 sm:text-3xl">
+              Steril UV-C &amp; Siap Kirim ke Depan Kamar Anda
+            </h2>
+            <p className="mt-2 text-sm text-stone-600">
+              Setiap kasur dibersihkan dengan standar higienis tinggi dan diantar armada pickup terlindung langsung dari pangkalan Pelemgurih Gamping &amp; Workshop Godean KM 10.
+            </p>
+          </div>
+
+          <figure className="mt-8 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
+            <Image
+              src="/images/hero-pengiriman-santi-living.webp"
+              alt="Pengantaran kasur busa Santi Living Jogja"
+              width={1200}
+              height={630}
+              className="w-full h-auto object-cover"
+            />
+          </figure>
+        </div>
+      </section>
+
+      {/* Social proof / Testimoni */}
+      <section className="border-t border-stone-200/80 bg-stone-50 py-14 md:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
@@ -416,7 +469,7 @@ export default async function LpSewaKasurJogjaPage({
             {TESTIMONIALS.map((item) => (
               <figure
                 key={item.name}
-                className="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-[#FDFBF7] p-6 shadow-sm"
+                className="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 shadow-sm"
               >
                 <div>
                   <div aria-label="Rating bintang 5" className="flex items-center gap-1 text-amber-500">

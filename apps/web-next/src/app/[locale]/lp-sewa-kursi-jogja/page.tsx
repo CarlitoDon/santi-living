@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { ChairLeadForm } from '@/components/landing/ChairLeadForm';
 import { localizedSiteUrl, PRIMARY_SITE_URL } from '@/lib/site-url';
 
@@ -112,6 +113,7 @@ const CHAIR_TYPES = [
     price: 'Rp 3.000 - Rp 3.500 / unit / hari',
     description: 'Andalan hajatan warga: ringan, kokoh, mudah disusun rapi.',
     popular: true,
+    image: '/images/kursi-plastik-biru.webp',
   },
   {
     name: 'Kursi Lipat Besi (Chitose)',
@@ -119,6 +121,7 @@ const CHAIR_TYPES = [
     price: 'Rp 5.000 / unit / hari',
     description: 'Cocok untuk pengajian, seminar kampus & acara kantor.',
     popular: false,
+    image: '/images/kursi-lipat-merah.webp',
   },
   {
     name: 'Kursi Susun Spons (Futura)',
@@ -126,6 +129,7 @@ const CHAIR_TYPES = [
     price: 'Rp 7.000 / unit / hari',
     description: 'Nyaman untuk akad, resepsi & acara formal berdurasi lama.',
     popular: false,
+    image: '/images/kursi-susun-merah.webp',
   },
 ];
 
@@ -244,6 +248,18 @@ export default async function LpSewaKursiJogjaPage({
                 </span>
               </div>
 
+              {/* Foto Armada Pickup Asli Santi Living */}
+              <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
+                <Image
+                  src="/images/kursi-acara-jogja-pickup.webp"
+                  alt="Armada pickup pengantaran kursi acara Santi Living Jogja"
+                  width={640}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+
               {/* Benefit points with clean SVG checklist */}
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
                 {BENEFITS.map((benefit) => (
@@ -313,6 +329,15 @@ export default async function LpSewaKursiJogjaPage({
                   </span>
                 ) : null}
                 <div>
+                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-stone-100">
+                    <Image
+                      src={chair.image}
+                      alt={chair.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover rounded-xl"
+                    />
+                  </div>
                   <span className="inline-block rounded-md bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700">
                     {chair.detail}
                   </span>
@@ -371,6 +396,38 @@ export default async function LpSewaKursiJogjaPage({
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Section Armada & Workshop */}
+      <section className="border-t border-stone-200/80 bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3 py-1 text-xs font-bold text-stone-700">
+              Armada &amp; Workshop Santi Living
+            </div>
+            <h2 className="mt-3 text-2xl font-black text-stone-900 sm:text-3xl">
+              Pangkalan Pelemgurih Gamping &amp; Workshop Godean KM 10
+            </h2>
+            <p className="mt-2 text-sm text-stone-600">
+              Kapasitas armada siap antar terjadwal ke Sleman, Kota Jogja, Bantul, dan Kulon Progo.
+            </p>
+          </div>
+
+          <figure className="mt-8 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
+            <Image
+              src="/images/kursi-acara-jogja-katalog.webp"
+              alt="Stok kursi acara Santi Living Jogja di workshop"
+              width={1200}
+              height={630}
+              className="w-full h-auto object-cover"
+            />
+            <figcaption className="bg-stone-50 p-4 text-center">
+              <p className="text-sm font-semibold text-stone-700">
+                Stok puluhan hingga ratusan kursi steril siap antar dari workshop Godean KM 10 &amp; Pelemgurih Gamping.
+              </p>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
