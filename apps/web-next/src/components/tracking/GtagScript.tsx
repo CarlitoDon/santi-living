@@ -57,11 +57,79 @@ export function GtagScript() {
               if (src.indexOf('facebook') !== -1 || src.indexOf('fb') !== -1) return 'fb';
               if (src.indexOf('tiktok') !== -1) return 'tt';
               if (med === 'referral') return 'ref';
-              if (src === '(direct)' || src === '(none)') return 'dir';
+              if (src === '(direct)' || src === '(none)' || src === 'direct') return 'dir';
               return src ? src.slice(0, 6) : '';
             } catch(ex) {
               return '';
             }
+          }
+
+          function resolveAttributionFallback(attr) {
+            var raw = attr || {};
+            var src = raw.utm_source || '';
+            var med = raw.utm_medium || '';
+            var camp = raw.utm_campaign || '';
+
+            if (src && med) {
+              return {
+                source: src,
+                medium: med,
+                campaign: camp
+              };
+            }
+
+            var currentSearch = null;
+            try {
+              currentSearch = new URLSearchParams(window.location.search);
+            } catch(ex) {}
+
+            var hasGooglePaid = Boolean(
+              raw.gclid || raw.gbraid || raw.wbraid ||
+              (currentSearch && (currentSearch.get('gclid') || currentSearch.get('gbraid') || currentSearch.get('wbraid')))
+            );
+
+            if (hasGooglePaid) {
+              if (currentSearch) {
+                if (!raw.gclid && currentSearch.get('gclid')) raw.gclid = currentSearch.get('gclid') || '';
+                if (!raw.gbraid && currentSearch.get('gbraid')) raw.gbraid = currentSearch.get('gbraid') || '';
+                if (!raw.wbraid && currentSearch.get('wbraid')) raw.wbraid = currentSearch.get('wbraid') || '';
+              }
+              return {
+                source: 'google',
+                medium: 'cpc',
+                campaign: camp
+              };
+            }
+
+            var ref = '';
+            try {
+              ref = (typeof document !== 'undefined' && document.referrer) || '';
+            } catch(ex) {}
+
+            if (ref) {
+              if (ref.toLowerCase().indexOf('google') !== -1) {
+                return {
+                  source: 'google',
+                  medium: 'organic',
+                  campaign: camp
+                };
+              }
+              var domain = '';
+              try {
+                domain = (new URL(ref).hostname || '').replace(/^www\./, '').toLowerCase();
+              } catch(ex) {}
+              return {
+                source: domain || 'referral',
+                medium: 'referral',
+                campaign: camp
+              };
+            }
+
+            return {
+              source: 'direct',
+              medium: 'none',
+              campaign: camp
+            };
           }
 
           function createLeadEventId() {
@@ -652,7 +720,16 @@ export function GtagScript() {
                 }
               } catch(ex) {}
 
-              var attrCode = getWaAttributionCode(attr);
+              var resolvedAttr = resolveAttributionFallback(attr);
+              var resolvedSource = resolvedAttr.source;
+              var resolvedMedium = resolvedAttr.medium;
+              var resolvedCampaign = resolvedAttr.campaign;
+
+              var attrCode = getWaAttributionCode(Object.assign({}, attr, {
+                utm_source: resolvedSource,
+                utm_medium: resolvedMedium,
+                utm_campaign: resolvedCampaign
+              }));
               var waTracking = inferWaTracking(link, url, ctaSource, ctaLocation);
 
               // Build event params with full attribution
@@ -670,9 +747,8 @@ export function GtagScript() {
                 'page_path': window.location.pathname,
                 'page_referrer': document.referrer || '',
                 'link_url': link.href,
-                'utm_source': attr.utm_source || '',
-                'utm_medium': attr.utm_medium || '',
-                'utm_campaign': attr.utm_campaign || '',
+                'utm_source': resolvedSource,
+                'utm_medium': resolvedMedium,
                 'gclid': attr.gclid || '',
                 'gbraid': attr.gbraid || '',
                 'wbraid': attr.wbraid || '',
@@ -683,6 +759,9 @@ export function GtagScript() {
                 'event_id': leadEventId,
                 'transport_type': 'beacon'
               };
+              if (resolvedCampaign) {
+                eventParams.utm_campaign = resolvedCampaign;
+              }
 
               // --- Client-side attribution enrichment ---
               try {
@@ -694,9 +773,9 @@ export function GtagScript() {
                   if (waTracking.page_type) url.searchParams.set('page_type', waTracking.page_type);
                   if (waTracking.intent) url.searchParams.set('intent', waTracking.intent);
                   url.searchParams.set('landing_page', window.location.pathname + window.location.search);
-                  if (attr.utm_source) url.searchParams.set('source', attr.utm_source);
-                  if (attr.utm_medium) url.searchParams.set('medium', attr.utm_medium);
-                  if (attr.utm_campaign) url.searchParams.set('campaign', attr.utm_campaign);
+                  url.searchParams.set('source', resolvedSource);
+                  url.searchParams.set('medium', resolvedMedium);
+                  if (resolvedCampaign) url.searchParams.set('campaign', resolvedCampaign);
                   if (attr.gclid) url.searchParams.set('gclid', attr.gclid);
                   if (attr.gbraid) url.searchParams.set('gbraid', attr.gbraid);
                   if (attr.wbraid) url.searchParams.set('wbraid', attr.wbraid);
@@ -728,9 +807,9 @@ export function GtagScript() {
                   var leadPayload = {
                     event_id: leadEventId,
                     event_type: 'whatsapp_click',
-                    source: attr.utm_source || '',
-                    medium: attr.utm_medium || '',
-                    campaign: attr.utm_campaign || '',
+                    source: resolvedSource,
+                    medium: resolvedMedium,
+                    campaign: resolvedCampaign || '',
                     cta_source: ctaSource,
                     cta_location: ctaLocation,
                     product_category: waTracking.product_category,
@@ -794,9 +873,9 @@ export function GtagScript() {
                 var leadPayload = {
                   event_id: leadEventId,
                   event_type: 'whatsapp_click',
-                  source: attr.utm_source || '',
-                  medium: attr.utm_medium || '',
-                  campaign: attr.utm_campaign || '',
+                  source: resolvedSource,
+                  medium: resolvedMedium,
+                  campaign: resolvedCampaign || '',
                   cta_source: ctaSource,
                   cta_location: ctaLocation,
                   product_category: waTracking.product_category,
