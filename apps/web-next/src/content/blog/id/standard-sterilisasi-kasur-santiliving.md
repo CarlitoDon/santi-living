@@ -12,7 +12,7 @@ Di **Santi Living**, kami menempatkan **Higienitas** sebagai prioritas nomor sat
 
 1. **Industrial Vacuuming**: Menyedot debu dan tungau hingga ke serat terdalam busa.
 2. **Disinfeksi Cairan Non-Toksik**: Menyemprotkan cairan pembunuh kuman yang aman bagi kulit manusia.
-3. **Sterilisasi UV-C**: Menggunakan sinar ultraviolet tingkat tinggi untuk membunuh mikroorganisme mikroskopis.
+3. **Disinfeksi Higienis**: Menggunakan metode sanitasi higienis mendalam untuk membunuh mikroorganisme mikroskopis.
 4. **Laundry Sprei Suhu Tinggi**: Semua sprei dicuci dengan air panas untuk memastikan bakteri mati total.
 5. **Quality Control Check**: Pemeriksaan fisik untuk memastikan tidak ada noda atau bau tersisa.
 6. **Pembungkusan Plastik Kedap**: Kasur dibungkus plastik tebal segera setelah dibersihkan.

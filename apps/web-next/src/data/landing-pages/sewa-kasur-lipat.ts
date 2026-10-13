@@ -4,7 +4,7 @@ export const sewaKasurLipat: LandingPageConfig = {
   meta: {
     title: 'Sewa Kasur Lipat Jogja Mulai 30rb | Praktis 3 Bagian Bersih Steril',
     description:
-      'Sewa kasur lipat di Jogja mulai Rp30.000/hari. Busa lipat 3 tebal & praktis, steril UV-C, include sprei laundry & bantal. Antar cepat 2 jam ke Sleman, Kota Jogja & Bantul!',
+      'Sewa kasur lipat di Jogja mulai Rp30.000/hari. Busa lipat 3 tebal & praktis, bersih higienis, include sprei laundry & bantal. Antar cepat 2 jam ke Sleman, Kota Jogja & Bantul!',
   },
   hero: {
     title: 'Sewa Kasur Lipat Jogja Mulai 30rb',

@@ -29,7 +29,7 @@ Untuk mendukung produktivitas operasional pengelola properti harian, Santi Livin
 
 ### Mengapa Memilih Santi Living untuk Bisnis Akomodasi Anda?
 
-* **7-Stage Hygiene Process**: Seluruh kasur, sprei, dan bantal melalui proses sterilisasi 7 tahap (termasuk vakum tungau debu, pencucian deterjen antiseptik, penyinaran lampu UV-C, dan penyemprotan sanitizer food-grade) untuk menjamin kehigienisan mutlak bagi tamu Anda.
+* **7-Stage Hygiene Process**: Seluruh kasur, sprei, dan bantal melalui proses sterilisasi 7 tahap (termasuk vakum tungau debu, pencucian deterjen antiseptik, sanitasi higienis mendalam, dan penyemprotan sanitizer food-grade) untuk menjamin kehigienisan mutlak bagi tamu Anda.
 * **Kasur High-Density Foam Premium**: Kasur busa orthopedic padat (HD Foam) yang sangat nyaman untuk mencegah nyeri punggung, dilapisi sprei katun berkualitas tinggi berstempel kebersihan resmi.
 * **Gratis Antar Jemput**: Layanan pengantaran dan penjemputan gratis mencakup seluruh wilayah Kota Yogyakarta, Sleman, Bantul, dan Kulonprogo.
 * **Penyediaan Paket Pendukung Lengkap**: Tidak terbatas pada kasur harian, kami juga menyediakan sewa bantal, selimut tebal, sprei tambahan, kipas angin berdiri, air cooler hemat listrik, hingga LED TV 32 inci.

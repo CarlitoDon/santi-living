@@ -12,7 +12,7 @@ Jika Anda sedang mencari **rekomendasi persewaan perlengkapan tidur terpercaya d
 
 ## 3 Syarat Vendor Sewa Alat Tidur yang Layak Dipilih
 
-1.  **Transparansi Protokol Kebersihan**: Jangan hanya percaya kata "bersih". Pilihlah vendor seperti **Santi Living** yang secara transparan menjalankan 7 tahap sterilisasi (termasuk Vacuum industrial dan sinar UV-C) pada setiap unitnya.
+1.  **Transparansi Protokol Kebersihan**: Jangan hanya percaya kata "bersih". Pilihlah vendor seperti **Santi Living** yang secara transparan menjalankan 7 tahap sterilisasi (termasuk Vacuum industrial dan sanitasi higienis) pada setiap unitnya.
 2.  **Kecepatan dan Ketepatan Pengiriman**: Kebutuhan sewa kasur seringkali bersifat mendadak. Pilihlah vendor yang memiliki armada pengiriman sendiri dan sistem pemesanan yang responsif via WhatsApp.
 3.  **Kualitas Material yang Jelas**: Pastikan vendor menyebutkan jenis busa yang digunakan. Hindari menyewa kasur busa "tanpa merk" yang mudah kempes. Kami hanya menyediakan kasur dari brand **Royal Grand Exclusive** untuk menjamin kesehatan tulang belakang pelanggan.
 

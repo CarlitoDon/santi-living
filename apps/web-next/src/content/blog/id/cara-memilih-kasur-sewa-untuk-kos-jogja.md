@@ -32,10 +32,10 @@ Kasur busa biasa cepat kempes dan tidak nyaman setelah beberapa minggu. Pastikan
 
 Ini paling penting! Jangan sembarang sewa dari vendor yang tidak jelas proses kebersihannya. Tanyakan:
 - Apakah kasur dicuci sebelum dikirim?
-- Apakah ada proses anti-bakteri dan UV sterilisasi?
+- Apakah ada proses anti-bakteri dan sterilisasi higienis?
 - Apakah sprei dan bantal juga dicuci?
 
-**Di Santi Living**, setiap kasur melewati 7 tahap: inspeksi → vacuum → anti-bakteri → UV-C → pengeringan → parfum → quality check.
+**Di Santi Living**, setiap kasur melewati 7 tahap: inspeksi → vacuum → anti-bakteri → sanitasi higienis → pengeringan → parfum → quality check.
 
 ### 3. Sesuaikan Ukuran dengan Kamar Kos
 

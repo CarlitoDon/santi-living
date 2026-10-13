@@ -17,7 +17,7 @@ Jangan panik! **Sewa bantal tambahan di Jogja** dari Santi Living adalah solusi 
 Mengapa Anda harus mempercayakan kebutuhan bantal rombongan Anda kepada kami?
 
 1.  **Kapasitas Besar (Bulk Rent)**: Kami memiliki stok bantal berkualitas dalam jumlah banyak. Butuh 10, 20, atau 50 bantal tambahan mendadak? Kami siap menyediakannya.
-2.  **Higienitas Berlapis**: Kesehatan rombongan adalah yang utama. Seluruh bantal kami disterilkan dengan sinar UV-C dan selalu dibalut dengan sarung bantal yang baru di-*laundry* (bersih dan wangi). Peserta *study tour* Anda tidak akan gatal-gatal atau alergi debu.
+2.  **Higienitas Berlapis**: Kesehatan rombongan adalah yang utama. Seluruh bantal kami disanitasi secara higienis dan selalu dibalut dengan sarung bantal yang baru di-*laundry* (bersih dan wangi). Peserta *study tour* Anda tidak akan gatal-gatal atau alergi debu.
 3.  **Harga Khusus Rombongan**: Kami memberikan penawaran harga spesial (grosir) untuk penyewaan dalam jumlah banyak. Ini akan sangat membantu menghemat anggaran panitia.
 4.  **Pengiriman Tepat Waktu**: Kami tahu Anda memiliki jadwal yang padat. Tim logistik kami akan mengantarkan semua pesanan bantal langsung ke alamat penginapan rombongan Anda di area layanan aktif Jogja dan sekitarnya, tepat waktu sebelum jadwal istirahat malam.
 

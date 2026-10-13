@@ -13,7 +13,7 @@ Berikut adalah 7 keuntungan jika Anda memilih sewa kasur tambahan di **Santi Liv
 1. **Hemat Biaya Hingga 80%**: Harga satu kamar hotel standar di Jogja berkisar Rp400.000 - Rp700.000. Dengan sewa kasur, Anda hanya keluar biaya Rp35.000-an.
 2. **Kumpul Keluarga Lebih Hangat**: Semua anggota keluarga bisa mengobrol dan bercengkerama dalam satu rumah atau kost yang sama.
 3. **Kasur Kualitas Hotel**: Kami menyediakan kasur **Royal Grand Exclusive** yang empuk dan nyaman.
-4. **Higienitas Terjamin**: Setiap kasur dilapisi sprei bersih yang sudah dilaundry dan melalui proses sterilisasi UV-C.
+4. **Higienitas Terjamin**: Setiap kasur dilapisi sprei bersih yang sudah dilaundry dan melalui proses disinfeksi higienis.
 5. **Antar Jemput Tanpa Ribet**: Tim kami yang akan mengantar dan mengambil kembali kasur tersebut. Anda cukup duduk manis.
 6. **Fleksibilitas Lokasi**: Kami mengantar ke area layanan aktif Yogyakarta, baik ke rumah pribadi, apartemen, maupun penginapan.
 7. **Bisa Sewa Satuan atau Banyak**: Tidak ada minimal order untuk area tertentu.

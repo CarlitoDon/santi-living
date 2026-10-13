@@ -26,7 +26,7 @@ export const sewaExtraBedJogja: LandingPageConfig = {
     {
       icon: '🧼',
       title: '100% Steril & Higienis',
-      description: 'Setiap unit extra bed melalui proses sanitasi UV-C dan pembersihan mendalam sebelum dikirimkan.',
+      description: 'Setiap unit extra bed melalui proses sanitasi higienis dan pembersihan mendalam sebelum dikirimkan.',
     },
     {
       icon: '📦',
@@ -100,7 +100,7 @@ export const sewaExtraBedJogja: LandingPageConfig = {
     },
     {
       question: 'Apakah kondisi extra bed dijamin bersih dan wangi?',
-      answer: 'Pasti. Semua kasur dan perlengkapan tidur Santi Living selalu melalui proses pembersihan berstandar, disinfeksi UV-C, dan sprei/sarung bantal selalu baru dicuci laundry higienis.',
+      answer: 'Pasti. Semua kasur dan perlengkapan tidur Santi Living selalu melalui proses pembersihan berstandar, disinfeksi higienis, dan sprei/sarung bantal selalu baru dicuci laundry higienis.',
     },
     {
       question: 'Bagaimana cara pemesanan dan pembayarannya?',
@@ -149,7 +149,7 @@ export const sewaExtraBedJogja: LandingPageConfig = {
       {
         icon: '🧼',
         title: '100% Sterile & Hygienic',
-        description: 'Every extra bed unit undergoes UV-C sanitization and deep cleaning before being dispatched.',
+        description: 'Every extra bed unit undergoes thorough sanitization and deep cleaning before being dispatched.',
       },
       {
         icon: '📦',
@@ -220,7 +220,7 @@ export const sewaExtraBedJogja: LandingPageConfig = {
       },
       {
         question: 'Is the extra bed clean and fresh?',
-        answer: 'Absolutely. All Santi Living bedding undergoes thorough cleaning, UV-C disinfection, and uses freshly laundered linens.',
+        answer: 'Absolutely. All Santi Living bedding undergoes thorough cleaning, hygienic disinfection, and uses freshly laundered linens.',
       },
       {
         question: 'How do I order and pay?',

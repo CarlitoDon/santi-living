@@ -74,7 +74,7 @@ Setiap kasur yang dikembalikan menjalani:
 2. Vacuuming menyeluruh
 3. Stain treatment
 4. Anti-bacterial spray
-5. UV-C sterilization
+5. Sanitasi higienis
 6. Pengeringan matahari
 7. Final quality control
 

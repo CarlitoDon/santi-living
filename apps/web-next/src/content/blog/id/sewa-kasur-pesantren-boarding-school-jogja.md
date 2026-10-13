@@ -102,7 +102,7 @@ A: Bisa! Hubungi kami untuk harga khusus sewa jangka panjang.
 A: Ya, kami menggunakan busa High Density yang tahan lama meski dipakai setiap hari.
 
 **Q: Bagaimana jika ada santri yang alergi?**
-A: Kasur kami melalui proses anti-bacterial dan UV-C sterilization. Aman untuk yang memiliki alergi ringan.
+A: Kasur kami melalui proses anti-bacterial dan sanitasi higienis. Aman untuk yang memiliki alergi ringan.
 
 **Q: Bisa dikirim ke luar Sleman?**
 A: Bisa! Kami melayani seluruh wilayah DIY termasuk Kulonprogo dan Gunung Kidul.
