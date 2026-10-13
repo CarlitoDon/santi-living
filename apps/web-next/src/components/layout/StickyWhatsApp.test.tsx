@@ -61,6 +61,18 @@ describe('StickyWhatsApp', () => {
     });
   });
 
+  it('remains hidden on /id/sewa-kursi-jogja route', async () => {
+    window.history.replaceState({}, '', '/id/sewa-kursi-jogja');
+
+    const { getByLabelText } = render(<StickyWhatsApp />);
+    const link = getByLabelText('Chat WhatsApp');
+
+    await waitFor(() => {
+      expect(link.getAttribute('aria-hidden')).toBe('true');
+      expect(link.getAttribute('data-state')).toBe('exiting');
+    });
+  });
+
   it('stays visible and moves above an active cart bar', async () => {
     const cartBar = document.createElement('div');
     cartBar.className = 'cart-bar';

@@ -230,10 +230,40 @@ export default async function SewaKursiJogjaPage({
   const currentLocale = locale === 'en' ? 'en' : 'id';
 
   return (
-    <main className="min-h-screen bg-[#FDFBF7] text-stone-900 site-main-offset">
+    <main className="min-h-screen bg-[#FDFBF7] text-stone-900">
       <JsonLd data={buildProductSchema(currentLocale)} />
       <JsonLd data={buildFaqSchema()} />
 
+      {/* Minimalist isolated header — no outbound links */}
+      <header className="sticky top-0 z-30 border-b border-stone-200/80 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
+          <div className="flex items-center gap-3" aria-label="Santi Living">
+            <span
+              aria-hidden="true"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#315a72] text-base font-black text-white shadow-sm"
+            >
+              S
+            </span>
+            <div>
+              <span className="block text-lg font-black tracking-tight text-stone-900">
+                Santi Living
+              </span>
+              <span className="block text-[10px] font-semibold uppercase tracking-wider text-stone-500">
+                Persewaan Kursi DIY
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="rounded-full border border-[#315a72]/20 bg-[#315a72]/10 px-3 py-1 text-xs font-bold text-[#315a72]">
+              Layanan Resmi Persewaan DIY
+            </span>
+            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-200/60 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800 sm:inline-flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Fast Response 07.00 - 21.00 WIB
+            </span>
+          </div>
+        </div>
+      </header>
 
       {/* Hero Section: Split desktop / stacked mobile */}
       <section className="border-b border-stone-200/70 py-10 sm:py-14 lg:py-16">
