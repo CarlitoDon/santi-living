@@ -221,35 +221,30 @@ export default async function LpSewaKursiJogjaPage({
             {/* Left Column (col-span-7) */}
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full border border-[#315a72]/20 bg-[#315a72]/10 px-3.5 py-1 text-xs font-bold tracking-wide text-[#315a72]">
-                <span>⭐</span> Persewaan Kursi Acara &amp; Hajatan Yogyakarta
+                <span>⭐</span> Rental Kursi Acara Jogja
               </div>
 
-              <h1 className="mt-4 text-3xl font-black tracking-tight text-stone-900 sm:text-4xl md:text-5xl md:leading-[1.15]">
-                Sewa Kursi Plastik Jogja Siap Antar - Bersih, Kokoh &amp; Murah Mulai Rp3.000/Unit
+              <h1 className="mt-3 text-3xl font-black tracking-tight text-stone-900 sm:text-4xl md:text-5xl">
+                Sewa Kursi Acara Jogja
               </h1>
-
-              <p className="mt-4 text-base leading-relaxed text-stone-600 sm:text-lg">
-                Solusi praktis perlengkapan duduk untuk hajatan warga, pengajian, syukuran, pernikahan,
-                buka bersama, dan acara kampus/kantor di Sleman, Kota Jogja, Bantul, dan Kulon Progo.
-                Armada pickup siap kirim langsung ke lokasi acara Anda.
+              <p className="mt-2 text-lg font-bold text-[#315a72]">
+                Bersih, kokoh &amp; siap antar langsung ke lokasi. Mulai Rp3.000/unit.
               </p>
 
-              {/* Rating badge 5.0 Google Maps */}
-              <div className="mt-5 inline-flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 shadow-sm">
-                <div className="flex items-center gap-1 text-amber-500">
-                  <span aria-hidden="true">★★★★★</span>
-                  <span className="ml-1 text-xs font-black text-stone-800">5.0 / 5.0</span>
-                </div>
+              <p className="mt-2 text-sm leading-relaxed text-stone-600 sm:text-base">
+                Stok ratusan unit siap antar untuk hajatan, pengajian &amp; acara di seluruh DIY.
+              </p>
+
+              <div className="mt-4 inline-flex items-center gap-2 rounded-xl border border-stone-200 bg-white px-3.5 py-2 shadow-sm text-xs">
+                <span className="text-amber-500 font-bold">★★★★★ 5.0</span>
                 <span className="text-stone-300">•</span>
-                <span className="text-xs font-semibold text-stone-600">100+ Ulasan Google Maps</span>
+                <span className="font-semibold text-stone-600">100+ Ulasan Maps</span>
                 <span className="text-stone-300">•</span>
-                <span className="rounded-md bg-[#D95D24]/10 px-2 py-0.5 text-xs font-bold text-[#D95D24]">
-                  Diskon Ongkir s/d 70%
-                </span>
+                <span className="rounded bg-[#D95D24]/10 px-1.5 py-0.5 font-bold text-[#D95D24]">Diskon Ongkir s/d 70%</span>
               </div>
 
               {/* Foto Armada Pickup Asli Santi Living */}
-              <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200 shadow-lg">
+              <div className="mt-5 overflow-hidden rounded-2xl border border-stone-200 shadow-md">
                 <Image
                   src="/images/kursi-acara-jogja-pickup.webp"
                   alt="Armada pickup pengantaran kursi acara Santi Living Jogja"
@@ -260,8 +255,8 @@ export default async function LpSewaKursiJogjaPage({
                 />
               </div>
 
-              {/* Benefit points with clean SVG checklist */}
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {/* Benefit points: visible on lg */}
+              <div className="hidden lg:grid mt-6 grid gap-3 sm:grid-cols-2">
                 {BENEFITS.map((benefit) => (
                   <div
                     key={benefit.title}
@@ -279,20 +274,32 @@ export default async function LpSewaKursiJogjaPage({
                   </div>
                 ))}
               </div>
-
-              {/* Mobile quick scroll button */}
-              <a
-                href="#form-pemesanan"
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#315a72] px-6 py-3.5 text-center text-sm font-bold text-white shadow-md transition hover:bg-[#28495c] lg:hidden"
-              >
-                Langsung Isi Form Pemesanan ↓
-              </a>
             </div>
 
             {/* Right Column (col-span-5): Form Pemesanan directly in hero */}
-            <div id="form-pemesanan" className="mt-8 scroll-mt-20 lg:col-span-5 lg:mt-0">
+            <div id="form-pemesanan" className="mt-6 scroll-mt-20 lg:col-span-5 lg:mt-0">
               <ChairLeadForm />
             </div>
+          </div>
+
+          {/* Benefit points: visible on mobile below form */}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:hidden">
+            {BENEFITS.map((benefit) => (
+              <div
+                key={benefit.title}
+                className="flex items-start gap-3 rounded-xl border border-stone-200/80 bg-white p-3.5 shadow-sm"
+              >
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#315a72]/10 text-[#315a72]">
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-stone-900">{benefit.title}</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-stone-600">{benefit.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
