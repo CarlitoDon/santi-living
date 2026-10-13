@@ -147,7 +147,7 @@ async function enrichLeadEvent(input: LeadEventInput, shouldGeocode: boolean): P
   if (typeof input.latitude !== 'number' || typeof input.longitude !== 'number') {
     return {
       ...input,
-      city: undefined,
+      city: input.event_type === 'form_submit' ? input.city : undefined,
       geocode_status: 'not_requested',
       geocode_source: undefined,
       geocode_city: undefined,
