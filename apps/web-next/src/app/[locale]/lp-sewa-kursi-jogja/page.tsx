@@ -109,20 +109,23 @@ const CHAIR_TYPES = [
   {
     name: 'Kursi Plastik Sandaran',
     detail: 'Napolly Polimer Tebal',
-    price: 'Rp 3.000 – Rp 3.500 / unit / hari',
+    price: 'Rp 3.000 - Rp 3.500 / unit / hari',
     description: 'Andalan hajatan warga: ringan, kokoh, mudah disusun rapi.',
+    popular: true,
   },
   {
     name: 'Kursi Lipat Besi (Chitose)',
     detail: 'Rangka besi lipat praktis',
     price: 'Rp 5.000 / unit / hari',
     description: 'Cocok untuk pengajian, seminar kampus & acara kantor.',
+    popular: false,
   },
   {
     name: 'Kursi Susun Spons (Futura)',
     detail: 'Dudukan spons empuk',
     price: 'Rp 7.000 / unit / hari',
     description: 'Nyaman untuk akad, resepsi & acara formal berdurasi lama.',
+    popular: false,
   },
 ];
 
@@ -130,16 +133,19 @@ const PACKAGES = [
   {
     name: 'Paket Syukuran',
     detail: '50 Kursi',
+    tag: 'Hemat RT/RW',
     description: 'Syukuran rumah, arisan & pengajian rutin.',
   },
   {
     name: 'Paket Hajatan Warga',
     detail: '100 Kursi',
+    tag: 'Paling Laris',
     description: 'Hajatan, tasyakuran & buka bersama skala RT/RW.',
   },
   {
     name: 'Paket Akbar',
     detail: '200+ Kursi',
+    tag: 'Acara Besar',
     description: 'Pernikahan, pengajian akbar & acara kampus/kantor.',
   },
 ];
@@ -148,17 +154,17 @@ const TESTIMONIALS = [
   {
     quote:
       'Kursinya bersih dan kokoh, datang tepat waktu untuk pengajian rutin kami. Admin fast respon.',
-    name: 'Warga pengajian — Sleman',
+    name: 'Warga Pengajian (Sleman)',
   },
   {
     quote:
       'Sewa 100 kursi untuk hajatan pernikahan, diantar pickup sampai depan rumah. Rapi dan tidak ada yang rusak.',
-    name: 'Keluarga hajatan — Bantul',
+    name: 'Keluarga Hajatan (Bantul)',
   },
   {
     quote:
       'Sudah dua kali pesan untuk acara kampus. Stok banyak, harga jelas, ongkir dapat diskon review.',
-    name: 'Panitia acara kampus — Kota Jogja',
+    name: 'Panitia Acara Kampus (Kota Jogja)',
   },
 ];
 
@@ -171,146 +177,261 @@ export default async function LpSewaKursiJogjaPage({
   const currentLocale = locale === 'en' ? 'en' : 'id';
 
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-[#FDFBF7] text-stone-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildServiceSchema(currentLocale)) }}
       />
 
       {/* Minimalist header — no outbound links */}
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-4xl flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
+      <header className="sticky top-0 z-30 border-b border-stone-200/80 bg-white/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 sm:px-6">
           <div className="flex items-center gap-3" aria-label="Santi Living">
             <span
               aria-hidden="true"
-              className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-700 text-lg font-black text-white"
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#315a72] text-base font-black text-white shadow-sm"
             >
               S
             </span>
-            <span className="text-xl font-black tracking-tight">Santi Living</span>
+            <div>
+              <span className="block text-lg font-black tracking-tight text-stone-900">Santi Living</span>
+              <span className="block text-[10px] font-semibold text-stone-500 uppercase tracking-wider">Persewaan DIY</span>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <span className="rounded-full bg-green-50 px-3 py-1.5 text-xs font-bold text-green-800">
-              Layanan Resmi Sewa Kursi Acara &amp; Hajatan Jogja
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-[#315a72]/10 border border-[#315a72]/20 px-3 py-1 text-xs font-bold text-[#315a72]">
+              Layanan Resmi Persewaan DIY
             </span>
-            <span className="rounded-full bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-800">
-              Fast Response 07.00 – 21.00 WIB
+            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200/60 px-3 py-1 text-xs font-semibold text-emerald-800">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Fast Response 07.00 - 21.00 WIB
             </span>
           </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-900 to-green-950 py-14 text-white md:py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h1 className="mb-5 text-3xl font-black leading-tight md:text-5xl">
-            Sewa Kursi Plastik Jogja Siap Antar – Bersih, Kokoh &amp; Murah Mulai Rp3.000/Unit
-          </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-base text-slate-200 md:text-lg">
-            Solusi praktis perlengkapan duduk untuk hajatan warga, pengajian, syukuran, pernikahan,
-            buka bersama, dan acara kampus/kantor di Sleman, Kota Jogja, Bantul, dan Kulon Progo.
-          </p>
-          <div className="mb-10 grid gap-3 text-left sm:grid-cols-2">
-            {BENEFITS.map((benefit) => (
-              <div key={benefit.title} className="rounded-xl bg-white/10 p-4 backdrop-blur">
-                <p className="mb-1 font-bold text-green-300">{benefit.title}</p>
-                <p className="text-sm text-slate-200">{benefit.description}</p>
+      {/* Hero: Asymmetric 2-column layout */}
+      <section className="border-b border-stone-200/70 py-10 sm:py-14 lg:py-18">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-12 lg:items-start">
+            {/* Left Column (col-span-7) */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#315a72]/20 bg-[#315a72]/10 px-3.5 py-1 text-xs font-bold tracking-wide text-[#315a72]">
+                <span>⭐</span> Persewaan Kursi Acara &amp; Hajatan Yogyakarta
               </div>
-            ))}
+
+              <h1 className="mt-4 text-3xl font-black tracking-tight text-stone-900 sm:text-4xl md:text-5xl md:leading-[1.15]">
+                Sewa Kursi Plastik Jogja Siap Antar - Bersih, Kokoh &amp; Murah Mulai Rp3.000/Unit
+              </h1>
+
+              <p className="mt-4 text-base leading-relaxed text-stone-600 sm:text-lg">
+                Solusi praktis perlengkapan duduk untuk hajatan warga, pengajian, syukuran, pernikahan,
+                buka bersama, dan acara kampus/kantor di Sleman, Kota Jogja, Bantul, dan Kulon Progo.
+                Armada pickup siap kirim langsung ke lokasi acara Anda.
+              </p>
+
+              {/* Rating badge 5.0 Google Maps */}
+              <div className="mt-5 inline-flex flex-wrap items-center gap-3 rounded-xl border border-stone-200 bg-white px-4 py-2.5 shadow-sm">
+                <div className="flex items-center gap-1 text-amber-500">
+                  <span aria-hidden="true">★★★★★</span>
+                  <span className="ml-1 text-xs font-black text-stone-800">5.0 / 5.0</span>
+                </div>
+                <span className="text-stone-300">•</span>
+                <span className="text-xs font-semibold text-stone-600">100+ Ulasan Google Maps</span>
+                <span className="text-stone-300">•</span>
+                <span className="rounded-md bg-[#D95D24]/10 px-2 py-0.5 text-xs font-bold text-[#D95D24]">
+                  Diskon Ongkir s/d 70%
+                </span>
+              </div>
+
+              {/* Benefit points with clean SVG checklist */}
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {BENEFITS.map((benefit) => (
+                  <div
+                    key={benefit.title}
+                    className="flex items-start gap-3 rounded-xl border border-stone-200/80 bg-white p-3.5 shadow-sm"
+                  >
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#315a72]/10 text-[#315a72]">
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-stone-900">{benefit.title}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-stone-600">{benefit.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile quick scroll button */}
+              <a
+                href="#form-pemesanan"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#315a72] px-6 py-3.5 text-center text-sm font-bold text-white shadow-md transition hover:bg-[#28495c] lg:hidden"
+              >
+                Langsung Isi Form Pemesanan ↓
+              </a>
+            </div>
+
+            {/* Right Column (col-span-5): Form Pemesanan directly in hero */}
+            <div id="form-pemesanan" className="mt-8 scroll-mt-20 lg:col-span-5 lg:mt-0">
+              <ChairLeadForm />
+            </div>
           </div>
-          <a
-            href="#form-pemesanan"
-            className="inline-block rounded-xl bg-green-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-green-600"
-          >
-            Pesan Sekarang (Isi Form)
-          </a>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-14 md:py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          <h2 className="mb-2 text-center text-2xl font-black md:text-3xl">
-            Pilihan Jenis Kursi &amp; Estimasi Tarif
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-slate-500">
-            Tarif per unit per hari. Total akhir menyesuaikan jumlah, tanggal, dan lokasi antar.
-            Isi form untuk rekap harga pasti via WhatsApp.
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
+      {/* Section Katalog & Paket */}
+      <section className="py-14 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-stone-100 px-3 py-1 text-xs font-bold text-stone-700">
+              Katalog Transparan
+            </div>
+            <h2 className="mt-3 text-2xl font-black text-stone-900 sm:text-3xl">
+              Pilihan Jenis Kursi &amp; Estimasi Tarif
+            </h2>
+            <p className="mt-2 text-sm text-stone-600">
+              Tarif per unit per hari. Total akhir menyesuaikan jumlah, tanggal, dan lokasi antar.
+              Isi formulir untuk rekap harga instan via WhatsApp.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {CHAIR_TYPES.map((chair) => (
               <div
                 key={chair.name}
-                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+                className={`relative flex flex-col justify-between rounded-2xl border bg-white p-6 shadow-sm transition-all hover:shadow-md ${
+                  chair.popular
+                    ? 'border-[#315a72] ring-2 ring-[#315a72]/15'
+                    : 'border-stone-200/90'
+                }`}
               >
-                <h3 className="text-base font-bold">{chair.name}</h3>
-                <p className="mb-2 text-xs font-semibold text-slate-500">{chair.detail}</p>
-                <p className="mb-2 text-lg font-black text-green-700">{chair.price}</p>
-                <p className="text-sm text-slate-600">{chair.description}</p>
+                {chair.popular ? (
+                  <span className="absolute -top-3 right-6 rounded-full bg-[#D95D24] px-3 py-0.5 text-[11px] font-black uppercase tracking-wider text-white shadow-sm">
+                    Paling Diminati
+                  </span>
+                ) : null}
+                <div>
+                  <span className="inline-block rounded-md bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700">
+                    {chair.detail}
+                  </span>
+                  <h3 className="mt-3 text-lg font-bold text-stone-900">{chair.name}</h3>
+                  <p className="mt-2 text-2xl font-black text-[#315a72]">{chair.price}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-stone-600">{chair.description}</p>
+                </div>
+                <div className="pt-6">
+                  <a
+                    href="#form-pemesanan"
+                    className={`block w-full rounded-xl py-2.5 text-center text-sm font-bold transition ${
+                      chair.popular
+                        ? 'bg-[#315a72] text-white hover:bg-[#28495c] shadow-sm'
+                        : 'bg-stone-100 text-stone-800 hover:bg-stone-200'
+                    }`}
+                  >
+                    Pilih Kursi Ini
+                  </a>
+                </div>
               </div>
             ))}
           </div>
 
-          <h3 className="mb-4 mt-10 text-center text-xl font-black">Paket Hemat Hajatan</h3>
-          <div className="grid gap-4 md:grid-cols-3">
-            {PACKAGES.map((pkg) => (
-              <div key={pkg.name} className="rounded-xl bg-slate-900 p-5 text-white">
-                <p className="text-base font-bold">{pkg.name}</p>
-                <p className="mb-2 text-sm font-semibold text-green-300">{pkg.detail}</p>
-                <p className="text-sm text-slate-300">{pkg.description}</p>
-              </div>
-            ))}
+          {/* Paket Hemat Hajatan */}
+          <div className="mt-14">
+            <div className="mx-auto max-w-2xl text-center">
+              <h3 className="text-xl font-black text-stone-900 sm:text-2xl">Paket Hemat Hajatan Warga</h3>
+              <p className="mt-1 text-sm text-stone-600">Solusi paket praktis dengan armada antar jemput langsung ke depan rumah</p>
+            </div>
+            <div className="mt-8 grid gap-5 md:grid-cols-3">
+              {PACKAGES.map((pkg) => (
+                <div
+                  key={pkg.name}
+                  className="flex flex-col justify-between rounded-2xl bg-slate-900 p-6 text-white shadow-md"
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="rounded-full bg-[#D95D24] px-2.5 py-0.5 text-[11px] font-bold text-white">
+                        {pkg.tag}
+                      </span>
+                      <span className="text-xs font-bold text-emerald-400">Armada Ready</span>
+                    </div>
+                    <p className="mt-4 text-lg font-black text-white">{pkg.name}</p>
+                    <p className="mt-1 text-2xl font-black text-emerald-300">{pkg.detail}</p>
+                    <p className="mt-3 text-sm text-slate-300">{pkg.description}</p>
+                  </div>
+                  <div className="pt-5">
+                    <a
+                      href="#form-pemesanan"
+                      className="block w-full rounded-xl bg-white/10 py-2.5 text-center text-xs font-bold text-white transition hover:bg-white/20"
+                    >
+                      Pesan Paket Ini
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Social proof */}
-      <section className="bg-slate-50 py-14">
-        <div className="mx-auto max-w-4xl px-4">
-          <h2 className="mb-2 text-center text-2xl font-black md:text-3xl">
-            Dipercaya Warga &amp; Panitia Acara Jogja
-          </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-center text-sm text-slate-500">
-            Pangkalan armada: Pelemgurih Gamping &amp; Workshop Godean KM 10 — siap antar terjadwal
-            ke Sleman, Kota Jogja, Bantul &amp; Kulon Progo.
-          </p>
-          <div className="grid gap-4 md:grid-cols-3">
+      {/* Social proof / Testimoni */}
+      <section className="border-t border-stone-200/80 bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+              Testimoni Asli Warga Jogja
+            </div>
+            <h2 className="mt-3 text-2xl font-black text-stone-900 sm:text-3xl">
+              Dipercaya Warga &amp; Panitia Acara Jogja
+            </h2>
+            <p className="mt-2 text-sm text-stone-600">
+              Pangkalan armada: Pelemgurih Gamping &amp; Workshop Godean KM 10 - siap antar terjadwal
+              ke Sleman, Kota Jogja, Bantul &amp; Kulon Progo.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
-              <figure key={item.name} className="rounded-xl border border-slate-200 bg-white p-5">
-                <p aria-label="Rating bintang 5" className="mb-2 text-amber-500">
-                  ★★★★★
-                </p>
-                <blockquote className="mb-3 text-sm text-slate-700">“{item.quote}”</blockquote>
-                <figcaption className="text-xs font-bold text-slate-500">{item.name}</figcaption>
+              <figure
+                key={item.name}
+                className="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-[#FDFBF7] p-6 shadow-sm"
+              >
+                <div>
+                  <div aria-label="Rating bintang 5" className="flex items-center gap-1 text-amber-500">
+                    <span>★★★★★</span>
+                    <span className="text-[11px] font-bold text-stone-500 ml-1">Verified Customer</span>
+                  </div>
+                  <blockquote className="mt-3 text-sm leading-relaxed text-stone-700">
+                    &ldquo;{item.quote}&rdquo;
+                  </blockquote>
+                </div>
+                <figcaption className="mt-4 border-t border-stone-200/60 pt-3 text-xs font-bold text-stone-800">
+                  {item.name}
+                </figcaption>
               </figure>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Lead form */}
-      <section id="form-pemesanan" className="scroll-mt-6 py-14">
-        <div className="mx-auto max-w-2xl px-4">
-          <h2 className="mb-2 text-center text-2xl font-black md:text-3xl">
-            Form Pemesanan Sewa Kursi
-          </h2>
-          <p className="mx-auto mb-8 max-w-xl text-center text-sm text-slate-500">
-            Isi data di bawah ini — tim kami mencatat permintaan Anda lalu membuka WhatsApp otomatis
-            dengan rekap pesanan. Tinggal tekan kirim.
-          </p>
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg md:p-8">
-            <ChairLeadForm />
-          </div>
-        </div>
-      </section>
-
       {/* Minimalist footer — no outbound links */}
-      <footer className="border-t border-slate-200 bg-slate-950 py-8 text-center">
-        <div className="mx-auto max-w-4xl px-4">
-          <p className="text-sm font-semibold text-slate-200">
-            © 2026 Santi Living – Layanan Persewaan Kursi Acara &amp; Perlengkapan Hunian
-            Yogyakarta. Workshop Jl. Godean KM 10 &amp; Pangkalan Pelemgurih Gamping.
-          </p>
+      <footer className="border-t border-stone-300 bg-slate-950 py-10 text-center text-slate-300">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#315a72] text-xs font-black text-white">
+                S
+              </span>
+              <span className="text-base font-black text-white">Santi Living</span>
+            </div>
+            <p className="max-w-xl text-xs leading-relaxed text-slate-400">
+              Layanan Resmi Persewaan Kursi Acara &amp; Perlengkapan Hunian Yogyakarta.
+              Workshop Jl. Godean KM 10 &amp; Pangkalan Pelemgurih Gamping.
+            </p>
+            <p className="mt-2 text-[11px] text-slate-500">
+              &copy; 2026 Santi Living. Hak Cipta Dilindungi.
+            </p>
+          </div>
         </div>
       </footer>
     </main>

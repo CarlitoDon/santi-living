@@ -17,13 +17,13 @@ const PACKAGE_OPTIONS = [
 const QUANTITY_OPTIONS = [
   '1 Unit',
   '2 Unit',
-  '3–5 Unit (Diskon 10%)',
+  '3-5 Unit (Diskon 10%)',
   '6+ Unit (Diskon 15%)',
 ] as const;
 
 const DURATION_OPTIONS = [
-  '1–2 Malam',
-  '3–6 Malam',
+  '1-2 Malam',
+  '3-6 Malam',
   '1 Minggu+',
   '1 Bulan',
 ] as const;
@@ -157,12 +157,33 @@ export function MattressLeadForm() {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100';
-  const labelClass = 'mb-1.5 block text-sm font-semibold text-slate-800';
+    'w-full rounded-xl border border-stone-300 bg-white px-4 py-3 text-base text-stone-900 placeholder:text-stone-400 outline-none transition focus:border-[#315a72] focus:ring-2 focus:ring-[#315a72]/20';
+  const labelClass = 'mb-1.5 block text-xs font-bold uppercase tracking-wider text-stone-700';
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="Form pemesanan sewa kasur">
-      <div className="space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-label="Form pemesanan sewa kasur"
+      className="rounded-2xl border border-stone-200/80 bg-white p-6 shadow-xl md:p-8"
+    >
+      <div className="mb-6 border-b border-stone-100 pb-4">
+        <div className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+          </span>
+          Admin Ready • Fast Response
+        </div>
+        <h2 className="mt-2 text-xl font-black text-stone-900 md:text-2xl">
+          Form Pemesanan Cepat
+        </h2>
+        <p className="mt-1 text-xs text-stone-500">
+          Dapatkan konfirmasi ketersediaan kasur &amp; rincian ongkir langsung via WhatsApp.
+        </p>
+      </div>
+
+      <div className="grid gap-4">
         <div>
           <label htmlFor="mattress-nama" className={labelClass}>
             Nama Lengkap
@@ -207,7 +228,7 @@ export function MattressLeadForm() {
             name="paket"
             value={paket}
             onChange={(e) => setPaket(e.target.value)}
-            className={inputClass}
+            className={`${inputClass} bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat pr-10`}
           >
             {PACKAGE_OPTIONS.map((opt) => (
               <option key={opt} value={opt}>
@@ -227,7 +248,7 @@ export function MattressLeadForm() {
               name="jumlah"
               value={jumlah}
               onChange={(e) => setJumlah(e.target.value)}
-              className={inputClass}
+              className={`${inputClass} bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat pr-10`}
             >
               {QUANTITY_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>
@@ -245,7 +266,7 @@ export function MattressLeadForm() {
               name="durasi"
               value={durasi}
               onChange={(e) => setDurasi(e.target.value)}
-              className={inputClass}
+              className={`${inputClass} bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:1.25rem_1.25rem] bg-[right_0.75rem_center] bg-no-repeat pr-10`}
             >
               {DURATION_OPTIONS.map((opt) => (
                 <option key={opt} value={opt}>
@@ -266,7 +287,7 @@ export function MattressLeadForm() {
             type="text"
             autoComplete="street-address"
             required
-            placeholder="cth: Condongcatur Depok Sleman / Umbulharjo Kota Jogja / Banguntapan Bantul"
+            placeholder="cth: Condongcatur Depok Sleman / Umbulharjo Kota Jogja"
             value={area}
             onChange={(e) => setArea(e.target.value)}
             className={inputClass}
@@ -275,7 +296,7 @@ export function MattressLeadForm() {
 
         <div>
           <label htmlFor="mattress-tanggal" className={labelClass}>
-            Tanggal Mulai Pakai
+            Tanggal Mulai Sewa
           </label>
           <input
             id="mattress-tanggal"
@@ -291,12 +312,12 @@ export function MattressLeadForm() {
 
         <div>
           <label htmlFor="mattress-catatan" className={labelClass}>
-            Catatan Tambahan <span className="font-normal text-slate-400">(opsional)</span>
+            Catatan Tambahan <span className="font-normal text-stone-400">(opsional)</span>
           </label>
           <textarea
             id="mattress-catatan"
             name="catatan"
-            rows={3}
+            rows={2}
             placeholder="cth: Butuh antar hari ini sebelum jam 17.00, lokasi kos lt 2…"
             value={catatan}
             onChange={(e) => setCatatan(e.target.value)}
@@ -305,13 +326,13 @@ export function MattressLeadForm() {
         </div>
 
         {error ? (
-          <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-semibold text-red-700">
             {error}
           </p>
         ) : null}
 
         {status === 'success' ? (
-          <p role="status" className="rounded-lg bg-green-50 px-4 py-3 text-sm font-semibold text-green-800">
+          <p role="status" className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-bold text-emerald-800">
             Data Anda berhasil dicatat! Mengalihkan ke WhatsApp...
           </p>
         ) : null}
@@ -319,13 +340,18 @@ export function MattressLeadForm() {
         <button
           type="submit"
           disabled={status !== 'idle'}
-          className="w-full rounded-xl bg-green-600 px-6 py-4 text-lg font-bold text-white shadow-lg transition hover:bg-green-700 disabled:cursor-wait disabled:opacity-70"
+          className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-lg shadow-green-600/20 active:scale-[0.98] transition-all duration-200 font-bold py-4 px-6 rounded-xl text-base flex items-center justify-center gap-2 disabled:cursor-wait disabled:opacity-70"
         >
-          {status === 'submitting'
-            ? 'Mengirim…'
-            : status === 'success'
-              ? 'Terkirim — Membuka WhatsApp…'
-              : 'Kirim Permintaan & Dapatkan Rekap Harga (WhatsApp)'}
+          <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.941-.708-1.792s.448-1.272.607-1.446c.159-.175.346-.219.462-.219s.232.003.332.008c.106.005.249-.04.39.299.144.346.491 1.198.534 1.285.043.087.072.188.014.303-.058.116-.087.188-.173.289l-.26.302c-.087.087-.179.181-.077.356.101.174.45 1.743 1.956 2.083.195.044.348-.035.433-.122.106-.109.458-.535.58-.718.122-.183.243-.153.407-.092.164.061 1.042.492 1.22.58.179.088.298.132.342.208.044.075.044.436-.1 1.841z" />
+          </svg>
+          <span>
+            {status === 'submitting'
+              ? 'Mengirim…'
+              : status === 'success'
+                ? 'Terkirim — Membuka WhatsApp…'
+                : 'Kirim Permintaan (WhatsApp)'}
+          </span>
         </button>
 
         {status === 'success' && waUrl ? (
@@ -333,18 +359,26 @@ export function MattressLeadForm() {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="block rounded-xl border-2 border-green-600 px-6 py-3 text-center text-base font-bold text-green-700 transition hover:bg-green-50"
+            className="block rounded-xl border-2 border-emerald-600 px-6 py-3 text-center text-sm font-bold text-emerald-800 transition hover:bg-emerald-50"
           >
-            Jika WhatsApp tidak terbuka otomatis, klik di sini
+            Klik di sini jika WhatsApp tidak terbuka otomatis
           </a>
         ) : null}
 
-        <div className="flex items-center justify-center gap-2 pt-1 text-center text-xs text-slate-500">
-          <span>🔒 Privasi terlindungi</span>
-          <span>•</span>
-          <span>⚡ Respon admin 5–15 menit</span>
-          <span>•</span>
-          <span>🚚 Siap antar langsung hari ini</span>
+        <div className="flex flex-col items-center justify-center gap-1.5 pt-2 text-center text-xs text-stone-500 sm:flex-row sm:gap-2">
+          <span className="inline-flex items-center gap-1 font-medium">
+            <svg className="h-3.5 w-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            100% Data Aman
+          </span>
+          <span className="hidden text-stone-300 sm:inline">•</span>
+          <span className="inline-flex items-center gap-1 font-medium">
+            <svg className="h-3.5 w-3.5 text-[#315a72]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Fast Response WhatsApp Admin (Hesy)
+          </span>
         </div>
       </div>
     </form>
