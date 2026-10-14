@@ -336,13 +336,13 @@ export default async function LpSewaKursiJogjaPage({
                   </span>
                 ) : null}
                 <div>
-                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-stone-100">
+                  <div className="relative mb-4 aspect-[4/5] sm:aspect-square w-full overflow-hidden rounded-xl bg-stone-50">
                     <Image
                       src={chair.image}
                       alt={chair.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover rounded-xl"
+                      className="object-contain rounded-xl p-2"
                     />
                   </div>
                   <span className="inline-block rounded-md bg-stone-100 px-2.5 py-1 text-xs font-semibold text-stone-700">
