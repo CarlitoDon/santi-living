@@ -351,13 +351,13 @@ export default async function SewaKursiJogjaPage({
                 className="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-5 shadow-sm transition hover:shadow-md"
               >
                 <div>
-                  <div className="relative mb-4 aspect-[4/3] w-full overflow-hidden rounded-xl bg-stone-100">
+                  <div className="relative mb-4 aspect-[4/5] sm:aspect-square w-full overflow-hidden rounded-xl bg-stone-50">
                     <Image
                       src={item.image}
                       alt={item.name}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="rounded-xl object-cover"
+                      className="rounded-xl object-contain p-2"
                     />
                   </div>
                   <span className="inline-block rounded-md bg-[#315a72]/10 px-2.5 py-0.5 text-[11px] font-bold text-[#315a72]">
