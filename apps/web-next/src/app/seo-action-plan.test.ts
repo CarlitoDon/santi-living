@@ -21,7 +21,7 @@ describe('SEO Action Plan fixes', () => {
   describe('1. Title duplication fixes', () => {
     it('harga-sewa-kasur does not duplicate site name in title property', async () => {
       const metaId = await generateHargaSewaKasurMetadata({ params: Promise.resolve({ locale: 'id' }) });
-      expect(metaId.title).toBe('Harga Sewa Kasur Jogja Mulai 30rb | Tarif Harian & Bulanan 2026');
+      expect(metaId.title).toBe('Harga Sewa Kasur Jogja Murah Mulai 30rb/Hari | Santi Living Antar Cepat');
 
       const metaEn = await generateHargaSewaKasurMetadata({ params: Promise.resolve({ locale: 'en' }) });
       expect(metaEn.title).toBe('Mattress Rental Prices in Jogja — 2026');
