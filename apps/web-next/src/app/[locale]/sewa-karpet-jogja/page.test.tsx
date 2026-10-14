@@ -4,7 +4,7 @@ import SewaKarpetJogjaPage, { generateMetadata } from './page';
 
 const PRIMARY_SITE_URL = 'https://santiliving.com';
 const PAGE_PATH = '/sewa-karpet-jogja';
-const PAGE_TITLE = 'Sewa Karpet & Permadani Jogja — Harga Mulai Rp25.000/Hari';
+const PAGE_TITLE = 'Sewa Karpet Jogja & Permadani Mulai 25rb | Bersih, Rapi & Siap Antar';
 
 type JsonLdScript = ReactElement<{
   dangerouslySetInnerHTML?: { __html?: string };

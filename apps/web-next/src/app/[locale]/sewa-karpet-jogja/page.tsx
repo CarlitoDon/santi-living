@@ -5,7 +5,7 @@ import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-u
 const PAGE_PATH = '/sewa-karpet-jogja';
 
 const PAGE_TITLE =
-  'Sewa Karpet & Permadani Jogja — Harga Mulai Rp25.000/Hari';
+  'Sewa Karpet Jogja & Permadani Mulai 25rb | Bersih, Rapi & Siap Antar';
 
 const PAGE_DESCRIPTION =
   'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian, dan pernikahan di Sleman, Kota Jogja, Bantul. Antar jemput & free konsultasi.';
@@ -49,7 +49,7 @@ const PRICING_ITEMS = [
     price: 'Rp25.000 - Rp40.000',
     unit: '/hari',
     description:
-      'Cocok untuk acara sederhana, tahlilan, pengajian rutin, dan kebutuhan alas duduk lesehan.',
+      'Cocok untuk acara sederhana, tahlilan, pengajian rutin, sewa tikar lesehan, dan alas duduk tamu.',
   },
   {
     name: 'Karpet Permadani / Motif',
@@ -180,6 +180,9 @@ export async function generateMetadata({
       'karpet merah jogja',
       'sewa karpet arisan',
       'sewa karpet event jogja',
+      'sewa tikar jogja',
+      'sewa karpet lesehan',
+      'karpet tahlilan',
     ],
     alternates: {
       canonical: pageUrl,

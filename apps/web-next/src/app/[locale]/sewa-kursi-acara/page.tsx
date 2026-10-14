@@ -11,7 +11,7 @@ type Locale = 'id' | 'en';
 const CHAIR_PAGE_PATH = '/sewa-kursi-acara';
 const CHAIR_HERO_IMAGE = '/images/kursi-acara-jogja-katalog.webp';
 const CHAIR_PICKUP_IMAGE = '/images/kursi-acara-jogja-pickup.webp';
-const CHAIR_PROFILE_NAME = 'Sewa Kursi Acara Jogja – Santi Living | by Santi Mebel Jogja';
+const CHAIR_PROFILE_NAME = 'Sewa Kursi Acara Jogja - Santi Living | by Santi Mebel Jogja';
 const CHAIR_PROFILE_URL = 'https://www.google.com/maps?cid=15162930286234518743';
 const CHAIR_WA_TEXT = `Halo Santi Living, saya ingin cek sewa kursi acara Jogja.
 
@@ -26,12 +26,14 @@ Mohon info ketersediaan, ongkir, dan cara sewa.`;
 
 const chairMetadata = {
   id: {
-    title: 'Sewa Kursi Plastik & Kursi Acara Jogja | Murah Siap Antar',
+    title: 'Sewa Kursi Acara Jogja (Plastik, Lipat & Susun) | Mulai 3rb Siap Antar',
     description:
       'Sewa kursi plastik Jogja & kursi acara: kursi plastik kokoh, kursi lipat, dan kursi susun spons untuk hajatan, pengajian, dan syukuran. Cek stok dan pengantaran via WhatsApp.',
     keywords: [
-      'sewa kursi plastik jogja',
       'sewa kursi acara jogja',
+      'sewa kursi acara',
+      'rental kursi acara jogja',
+      'sewa kursi plastik jogja',
       'sewa kursi hajatan jogja',
       'rental kursi plastik jogja',
       'sewa kursi jogja',
