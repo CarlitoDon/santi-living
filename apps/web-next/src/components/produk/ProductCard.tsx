@@ -38,7 +38,8 @@ export function ProductCard({ product, onClick }: { product: Product; onClick: (
           alt={pn(product, locale)} 
           width={800} 
           height={600} 
-          className="w-full h-full object-cover" 
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="w-full h-full object-cover max-w-full" 
         />
       </div>
 
@@ -142,7 +143,7 @@ export function ProductModal({
             height={600}
             priority
             sizes="(max-width: 767px) 100vw, 450px"
-            className="w-full h-full object-cover max-h-[400px] md:max-h-none"
+            className="w-full h-full object-cover max-w-full max-h-[400px] md:max-h-none"
           />
         </div>
 

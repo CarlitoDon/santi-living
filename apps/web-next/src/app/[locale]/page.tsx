@@ -127,6 +127,8 @@ export default async function HomePage({
     description: dict.seo.home_desc,
     url: primarySiteUrl(),
     telephone: `+${config.whatsappNumber}`,
+    priceRange: 'Rp30.000 - Rp900.000',
+    image: 'https://santiliving.com/og-image-santiliving.jpg',
     address: {
       '@type': 'PostalAddress' as const,
       streetAddress: 'Jl. Godean KM 10 Geneng, RT.05/RW.04, Sidoagung, Kec. Godean, Sleman, DI Yogyakarta 55264',
@@ -140,6 +142,22 @@ export default async function HomePage({
       latitude: config.storeLocation.lat,
       longitude: config.storeLocation.lng,
     },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification' as const,
+        dayOfWeek: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        opens: '07:00',
+        closes: '21:00',
+      },
+    ],
     areaServed: serviceAreas.map((area) => ({ '@type': 'City' as const, name: area })),
   };
 
@@ -156,7 +174,7 @@ export default async function HomePage({
         description: choice.description,
         url: localizedSiteUrl(choice.href.replace(`/${locale}`, ''), locale),
         provider: {
-          '@type': 'LocalBusiness' as const,
+          '@type': 'Organization' as const,
           name: 'Santi Living',
           url: primarySiteUrl(),
         },
