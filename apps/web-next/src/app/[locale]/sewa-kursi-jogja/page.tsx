@@ -11,9 +11,9 @@ export function generateStaticParams() {
 const PAGE_PATH = '/sewa-kursi-jogja';
 
 const TITLE_ID =
-  'Sewa Kursi Jogja — Kursi Plastik, Lipat & Susun Mulai Rp3.000/Unit | Santi Living';
+  'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit';
 const TITLE_EN =
-  'Event Chair Rental Yogyakarta — Plastic, Folding & Banquet Chairs | Santi Living';
+  'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs';
 
 const DESCRIPTION_ID =
   'Sewa kursi Jogja murah dan siap antar untuk hajatan, pengajian, rapat & pernikahan di Sleman, Kota Jogja, Bantul, Kulon Progo. Stok ratusan unit siap kirim hari ini.';

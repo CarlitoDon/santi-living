@@ -28,7 +28,7 @@ describe('Sewa Kursi Jogja Page', () => {
       const pageUrl = `${PRIMARY_SITE_URL}/id${PAGE_PATH}`;
 
       expect(metadata.title).toBe(
-        'Sewa Kursi Jogja — Kursi Plastik, Lipat & Susun Mulai Rp3.000/Unit | Santi Living',
+        'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit',
       );
       expect(metadata.description).toBe(
         'Sewa kursi Jogja murah dan siap antar untuk hajatan, pengajian, rapat & pernikahan di Sleman, Kota Jogja, Bantul, Kulon Progo. Stok ratusan unit siap kirim hari ini.',
@@ -48,7 +48,7 @@ describe('Sewa Kursi Jogja Page', () => {
         'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
       });
       expect(metadata.openGraph).toMatchObject({
-        title: 'Sewa Kursi Jogja — Kursi Plastik, Lipat & Susun Mulai Rp3.000/Unit | Santi Living',
+        title: 'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit',
         url: pageUrl,
         locale: 'id_ID',
         siteName: 'Santi Living',
@@ -63,7 +63,7 @@ describe('Sewa Kursi Jogja Page', () => {
       const pageUrl = `${PRIMARY_SITE_URL}/en${PAGE_PATH}`;
 
       expect(metadata.title).toBe(
-        'Event Chair Rental Yogyakarta — Plastic, Folding & Banquet Chairs | Santi Living',
+        'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs',
       );
       expect(metadata.description).toBe(
         'Affordable event chair rental in Yogyakarta for celebrations, gatherings, meetings & weddings in Sleman, Yogyakarta City, Bantul, Kulon Progo. Hundreds of units ready for delivery.',
@@ -75,7 +75,7 @@ describe('Sewa Kursi Jogja Page', () => {
         'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
       });
       expect(metadata.openGraph).toMatchObject({
-        title: 'Event Chair Rental Yogyakarta — Plastic, Folding & Banquet Chairs | Santi Living',
+        title: 'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs',
         url: pageUrl,
         locale: 'en_US',
       });
