@@ -57,9 +57,9 @@ function normalizePost(post: NotionPost | MarkdownPost | null | undefined): Arti
 }
 
 const getRawArticlePost = cache(async (slug: string, locale: string) => {
-  // Most of the catalog lives in the repository. Resolve it synchronously so
-  // local articles never spend a Notion request or Function duration.
-  return getPostBySlug(slug, locale) || await getNotionPost(slug);
+  // Notion CMS is the source of truth for managed articles.
+  // Fall back to local repository markdown when not in Notion.
+  return (await getNotionPost(slug)) || getPostBySlug(slug, locale);
 });
 
 function rewriteWhatsappLinks(htmlContent: string, slug: string, locale: string): string {
