@@ -34,6 +34,7 @@ export const sewaCooling: LandingPageConfig = {
     { question: 'Berapa lama dinginnya bertahan?', answer: 'Tergantung suhu ruangan, biasanya 1 Ice Pack bisa memberikan efek sejuk selama 4-6 jam sebelum perlu dibekukan kembali.' },
     { question: 'Apakah boros listrik?', answer: 'Sama sekali tidak! Konsumsi listriknya hampir sama dengan kipas angin biasa (sekitar 50-70 Watt).' },
     { question: 'Apakah sudah termasuk Ice Pack?', answer: 'Ya, setiap penyewaan Air Cooler sudah dilengkapi dengan Ice Pack (Blue Ice).' },
+    { question: 'Apakah ada halaman khusus sewa air cooler Jogja?', answer: 'Ada. Kunjungi halaman sewa air cooler Jogja di /sewa-air-cooler-jogja untuk tabel perbandingan daya vs AC portable dan panduan MCB kos.' },
   ],
   cta: {
     title: 'Ingin ruangan lebih sejuk tanpa AC?',
@@ -73,6 +74,7 @@ en: {
     { question: 'How long does the cooling last?', answer: 'Depending on the room temperature, typically 1 Ice Pack can provide a cooling effect for 4–6 hours before needing to be refrozen.' },
     { question: 'Does it consume a lot of electricity?', answer: 'Not at all! Its power consumption is almost the same as a regular electric fan (around 50–70 Watts).' },
     { question: 'Is the Ice Pack included?', answer: 'Yes, every Air Cooler rental comes with an Ice Pack (Blue Ice).' },
+    { question: 'Is there a dedicated Jogja air cooler rental page?', answer: 'Yes. Visit our dedicated Jogja air cooler page at /sewa-air-cooler-jogja for power comparison tables vs portable AC and room breaker guidelines.' },
   ],
   cta: {
     title: 'Want a cooler room without AC?',

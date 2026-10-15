@@ -34,6 +34,7 @@ describe('sitemap canonical hygiene', () => {
 describe('landing page metadata canonical & alternates', () => {
   const landingPages = [
     { name: 'sewa-extra-bed-jogja', path: '/sewa-extra-bed-jogja', mod: () => import('./[locale]/sewa-extra-bed-jogja/page') },
+    { name: 'sewa-air-cooler-jogja', path: '/sewa-air-cooler-jogja', mod: () => import('./[locale]/sewa-air-cooler-jogja/page') },
     { name: 'sewa-cooling', path: '/sewa-cooling', mod: () => import('./[locale]/sewa-cooling/page') },
     { name: 'sewa-kasur-terdekat', path: '/sewa-kasur-terdekat', mod: () => import('./[locale]/sewa-kasur-terdekat/page') },
     { name: 'sewa-kipas-angin', path: '/sewa-kipas-angin', mod: () => import('./[locale]/sewa-kipas-angin/page') },
