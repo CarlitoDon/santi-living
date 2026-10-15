@@ -5,10 +5,10 @@ import { localizedSiteUrl, primarySiteUrl, PRIMARY_SITE_URL } from '@/lib/site-u
 const PAGE_PATH = '/sewa-karpet-jogja';
 
 const PAGE_TITLE =
-  'Sewa Karpet Jogja & Permadani Mulai 25rb | Bersih, Rapi & Siap Antar';
+  'Sewa Karpet Jogja & Permadani Mulai 25rb | Siap Antar';
 
 const PAGE_DESCRIPTION =
-  'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian, dan pernikahan di Sleman, Kota Jogja, Bantul. Antar jemput & free konsultasi.';
+  'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian & pernikahan. Antar jemput + konsultasi gratis.';
 
 const FAQ_ITEMS = [
   {

@@ -21,7 +21,7 @@ describe('SEO Action Plan fixes', () => {
   describe('1. Title duplication fixes', () => {
     it('harga-sewa-kasur does not duplicate site name in title property', async () => {
       const metaId = await generateHargaSewaKasurMetadata({ params: Promise.resolve({ locale: 'id' }) });
-      expect(metaId.title).toBe('Harga Sewa Kasur Jogja Murah Mulai 30rb/Hari | Santi Living Antar Cepat');
+      expect(metaId.title).toBe('Harga Sewa Kasur Jogja Mulai 30rb/Hari');
 
       const metaEn = await generateHargaSewaKasurMetadata({ params: Promise.resolve({ locale: 'en' }) });
       expect(metaEn.title).toBe('Mattress Rental Prices in Jogja — 2026');
@@ -64,7 +64,7 @@ describe('SEO Action Plan fixes', () => {
     it('sewa-karpet-jogja has corrected typo Antar jemput and trimmed text', async () => {
       const meta = await generateSewaKarpetMetadata({ params: Promise.resolve({ locale: 'id' }) });
       expect(meta.description).toBe(
-        'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian, dan pernikahan di Sleman, Kota Jogja, Bantul. Antar jemput & free konsultasi.'
+        'Sewa karpet & permadani Jogja mulai Rp25.000/hari untuk tahlilan, aqiqah, pengajian & pernikahan. Antar jemput + konsultasi gratis.'
       );
       expect(meta.description).not.toContain('Anta jemput');
     });
