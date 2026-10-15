@@ -63,8 +63,8 @@ describe('sewa kursi acara SEO output', () => {
   );
 
   it.each([
-    ['id', ['Kursi lipat', 'Kursi susun besi spons', 'Kursi plastik']],
-    ['en', ['Folding chair', 'Stackable padded steel chair', 'Plastic chair']],
+    ['id', ['Kursi lipat (Chitose)', 'Kursi susun besi spons (Futura)', 'Kursi plastik']],
+    ['en', ['Folding chair (Chitose)', 'Stackable padded steel chair (Futura)', 'Plastic chair']],
   ] as const)('keeps the verified chair catalog in %s JSON-LD', async (locale, chairNames) => {
     const schema = await getChairSchema(locale);
     const pageUrl = `${PRIMARY_SITE_URL}/${locale}${PAGE_PATH}`;
@@ -85,6 +85,9 @@ describe('sewa kursi acara SEO output', () => {
 
     expect(rendered).toContain('Tiga langkah untuk mendapat jawaban yang realistis.');
     expect(rendered).toContain('Pertanyaan tentang sewa kursi di Jogja.');
+    expect(rendered).toContain('Berapa harga sewa kursi di Jogja?');
+    expect(rendered).toContain('Mulai Rp 3.000/unit/hari');
+    expect(rendered).toContain('Harga dapat berubah — konfirmasi via WhatsApp.');
     expect(rendered).toContain('chair_lp_hero');
     expect(rendered).toContain('chair_lp_details');
     expect(rendered).toContain('chair_lp_bottom');
