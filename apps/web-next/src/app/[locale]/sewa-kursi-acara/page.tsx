@@ -159,6 +159,13 @@ export default async function SewaKursiAcaraPage({
         locationCta: 'Open Google Maps',
         pickupAlt: 'Pickup from Santi Mebel carrying event chairs',
         pickupCaption: 'Pickup and delivery are checked against the date, quantity, route, and venue access.',
+        readingEyebrow: 'Read next',
+        readingTitle: 'Chair rental guides for your event.',
+        readingLinks: [
+          { label: 'Plastic chair rental guide for events & celebrations', href: `/${locale}/artikel/sewa-kursi-plastik-jogja-acara-hajatan` },
+          { label: 'Chair checklist for tent celebrations & weddings in Sleman', href: `/${locale}/artikel/sewa-kursi-plastik-sleman-tenda-hajatan-pernikahan` },
+          { label: 'Chair tips for community prayers & gatherings in Bantul', href: `/${locale}/artikel/sewa-kursi-plastik-bantul-pengajian-syukuran-warga` },
+        ],
       }
     : {
         back: 'Semua layanan sewa',
@@ -208,6 +215,13 @@ export default async function SewaKursiAcaraPage({
         locationCta: 'Buka Google Maps',
         pickupAlt: 'Pickup Santi Mebel sedang mengangkut banyak kursi acara',
         pickupCaption: 'Pengantaran dan pickup dicek berdasarkan tanggal, jumlah, rute, serta akses venue.',
+        readingEyebrow: 'Baca juga',
+        readingTitle: 'Panduan sewa kursi untuk acara Anda.',
+        readingLinks: [
+          { label: 'Panduan sewa kursi plastik untuk acara & hajatan', href: `/${locale}/artikel/sewa-kursi-plastik-jogja-acara-hajatan` },
+          { label: 'Checklist kursi untuk tenda hajatan & pernikahan di Sleman', href: `/${locale}/artikel/sewa-kursi-plastik-sleman-tenda-hajatan-pernikahan` },
+          { label: 'Tips kursi untuk pengajian & syukuran warga di Bantul', href: `/${locale}/artikel/sewa-kursi-plastik-bantul-pengajian-syukuran-warga` },
+        ],
       };
 
   const chairTypes = isEnglish
@@ -491,6 +505,22 @@ export default async function SewaKursiAcaraPage({
               </details>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="chair-faq" aria-labelledby="chair-reading-title">
+        <div className="container">
+          <div className="chair-section-heading">
+            <p className="chair-eyebrow">{copy.readingEyebrow}</p>
+            <h2 id="chair-reading-title">{copy.readingTitle}</h2>
+          </div>
+          <ul className="chair-reading-list">
+            {copy.readingLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
