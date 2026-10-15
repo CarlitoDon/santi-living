@@ -19,6 +19,7 @@ const STATIC_PATHS = [
   'sewa-karpet-permadani-jogja',
   'sewa-bantal-jogja',
   'sewa-selimut-jogja',
+  'sewa-air-cooler-jogja',
   'sewa-cooling',
   'sewa-kipas-angin',
   'sewa-tv',

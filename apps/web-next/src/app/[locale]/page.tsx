@@ -284,6 +284,14 @@ export default async function HomePage({
               </Link>
             </p>
           </div>
+          <div className="hybrid-proof-line mt-2" data-reveal="fade">
+            <p>
+              {isEnglish ? 'Hosting a tahlilan or family gathering?' : 'Ada tahlilan atau acara keluarga?'}{' '}
+              <Link href={'/' + locale + '/harga-sewa-kasur#paket-acara'} className="font-semibold text-blue-600 hover:underline">
+                {isEnglish ? 'Event Bundle Packages (save 10-15%) →' : 'Paket Bundling Acara (hemat 10-15%) →'}
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
