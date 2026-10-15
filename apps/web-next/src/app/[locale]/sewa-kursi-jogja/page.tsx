@@ -214,8 +214,9 @@ export async function generateMetadata({
       description,
       images: [heroImageUrl],
     },
+    // LP iklan (zero-leakage journey): noindex agar tidak bersaing dengan money page organik /sewa-kursi-acara
     robots: {
-      index: true,
+      index: false,
       follow: true,
     },
   };

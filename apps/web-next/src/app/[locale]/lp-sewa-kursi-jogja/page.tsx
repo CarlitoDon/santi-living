@@ -80,8 +80,9 @@ export async function generateMetadata({
       title: PAGE_TITLE,
       description: PAGE_DESCRIPTION,
     },
+    // LP iklan: noindex agar tidak bersaing dengan money page organik /sewa-kursi-acara
     robots: {
-      index: true,
+      index: false,
       follow: true,
     },
   };
