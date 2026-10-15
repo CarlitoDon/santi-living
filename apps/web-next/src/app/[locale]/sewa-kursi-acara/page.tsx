@@ -145,8 +145,8 @@ export default async function SewaKursiAcaraPage({
         faqEyebrow: 'Before you order',
         faqTitle: 'Questions about renting chairs in Jogja.',
         faqs: [
-          { question: 'What chair types can I ask about?', answer: 'You can ask about folding chairs, stackable padded steel chairs, and plastic chairs. The final option depends on the event date, quantity, and stock.' },
-          { question: 'How much does chair rental cost in Jogja?', answer: 'Starting from Rp 3,000/unit/day for plastic chairs, Rp 5,000/unit/day for folding steel chairs (Chitose), and Rp 7,000/unit/day for stackable padded chairs (Futura). Final prices depend on quantity, date, location, and venue access — confirm via WhatsApp.' },
+          { question: 'What chair types can I ask about?', answer: 'You can ask about plastic chairs, folding chairs, and hotel chairs. The final option depends on the event date, quantity, and stock.' },
+          { question: 'How much does chair rental cost in Jogja?', answer: 'Starting from Rp 3,000/unit/day for plastic chairs, Rp 5,000/unit/day for folding chairs, and Rp 7,000/unit/day for hotel chairs. Final prices depend on quantity, date, location, and venue access — confirm via WhatsApp.' },
           { question: 'Does Santi Living deliver to my venue?', answer: 'Send the complete venue address and access information. The team will check the route, unloading time, and delivery feasibility before confirming.' },
           { question: 'How early should I inquire?', answer: 'Earlier is better for larger quantities or fixed event dates. Same-day or short-notice requests still need a stock and route check first.' },
         ],
@@ -194,8 +194,8 @@ export default async function SewaKursiAcaraPage({
         faqEyebrow: 'Sebelum pesan',
         faqTitle: 'Pertanyaan tentang sewa kursi di Jogja.',
         faqs: [
-          { question: 'Jenis kursi apa yang bisa ditanyakan?', answer: 'Anda bisa menanyakan kursi lipat, kursi susun besi spons, dan kursi plastik. Pilihan akhirnya mengikuti tanggal acara, jumlah, dan stok yang tersedia.' },
-          { question: 'Berapa harga sewa kursi di Jogja?', answer: 'Mulai Rp 3.000/unit/hari untuk kursi plastik, Rp 5.000/unit/hari untuk kursi lipat besi (Chitose), dan Rp 7.000/unit/hari untuk kursi susun spons (Futura). Harga final menyesuaikan jumlah, tanggal, lokasi, dan akses venue — konfirmasi via WhatsApp.' },
+          { question: 'Jenis kursi apa yang bisa ditanyakan?', answer: 'Anda bisa menanyakan kursi plastik, kursi lipat, dan kursi hotel. Pilihan akhirnya mengikuti tanggal acara, jumlah, dan stok yang tersedia.' },
+          { question: 'Berapa harga sewa kursi di Jogja?', answer: 'Mulai Rp 3.000/unit/hari untuk kursi plastik, Rp 5.000/unit/hari untuk kursi lipat, dan Rp 7.000/unit/hari untuk kursi hotel. Harga final menyesuaikan jumlah, tanggal, lokasi, dan akses venue — konfirmasi via WhatsApp.' },
           { question: 'Apakah bisa diantar ke venue saya?', answer: 'Kirim alamat venue lengkap beserta informasi aksesnya. Tim akan mengecek rute, waktu bongkar, dan kelayakan pengantaran sebelum konfirmasi.' },
           { question: 'Sebaiknya pesan berapa lama sebelumnya?', answer: 'Semakin awal semakin baik, terutama untuk jumlah besar atau tanggal acara yang sudah tetap. Permintaan mendadak tetap perlu dicek stok dan rutenya terlebih dahulu.' },
         ],
@@ -214,21 +214,21 @@ export default async function SewaKursiAcaraPage({
     ? [
         {
           number: '01',
-          title: 'Folding chair (Chitose)',
+          title: 'Folding chair',
           price: 'Rp 5,000/unit/day',
           description: 'A practical option for flexible seating, meetings, gatherings, and family events.',
           tone: 'light',
           image: '/images/kursi-lipat-merah.webp',
-          imageAlt: 'Folding red chair available to check for event rental',
+          imageAlt: 'Folding chair available to check for event rental',
         },
         {
           number: '02',
-          title: 'Stackable padded steel chair (Futura)',
+          title: 'Hotel chair',
           price: 'Rp 7,000/unit/day',
-          description: 'A stackable chair with a chrome frame and red padded seat and back for guest areas.',
+          description: 'A chair suited for guest and ceremony areas, tidy and easy to arrange.',
           tone: 'dark',
           image: '/images/kursi-susun-merah.webp',
-          imageAlt: 'Stackable padded steel chair available to check for event rental',
+          imageAlt: 'Hotel chair available to check for event rental',
         },
         {
           number: '03',
@@ -237,27 +237,27 @@ export default async function SewaKursiAcaraPage({
           description: 'A simple, easy-to-arrange option for practical event layouts and larger groups.',
           tone: 'green',
           image: '/images/kursi-plastik-biru.webp',
-          imageAlt: 'Blue plastic chair available to check for event rental',
+          imageAlt: 'Plastic chair available to check for event rental',
         },
       ]
     : [
         {
           number: '01',
-          title: 'Kursi lipat (Chitose)',
+          title: 'Kursi lipat',
           price: 'Rp 5.000/unit/hari',
           description: 'Pilihan praktis untuk susunan fleksibel, rapat, kumpul keluarga, dan acara sederhana.',
           tone: 'light',
           image: '/images/kursi-lipat-merah.webp',
-          imageAlt: 'Kursi lipat merah untuk ditanyakan dalam sewa kursi acara',
+          imageAlt: 'Kursi lipat untuk ditanyakan dalam sewa kursi acara',
         },
         {
           number: '02',
-          title: 'Kursi susun besi spons (Futura)',
+          title: 'Kursi hotel',
           price: 'Rp 7.000/unit/hari',
-          description: 'Kursi susun dengan rangka krom serta dudukan dan sandaran spons merah untuk area tamu.',
+          description: 'Kursi untuk area tamu dan seremoni dengan tampilan rapi dan mudah ditata.',
           tone: 'dark',
           image: '/images/kursi-susun-merah.webp',
-          imageAlt: 'Kursi susun besi spons untuk ditanyakan dalam sewa kursi acara',
+          imageAlt: 'Kursi hotel untuk ditanyakan dalam sewa kursi acara',
         },
         {
           number: '03',
@@ -266,7 +266,7 @@ export default async function SewaKursiAcaraPage({
           description: 'Pilihan sederhana dan mudah ditata untuk layout acara yang praktis dan jumlah besar.',
           tone: 'green',
           image: '/images/kursi-plastik-biru.webp',
-          imageAlt: 'Kursi plastik biru untuk ditanyakan dalam sewa kursi acara',
+          imageAlt: 'Kursi plastik untuk ditanyakan dalam sewa kursi acara',
         },
       ];
 
@@ -276,8 +276,8 @@ export default async function SewaKursiAcaraPage({
     '@id': `${PRIMARY_SITE_URL}#santi-living`,
     name: CHAIR_PROFILE_NAME,
     description: isEnglish
-      ? 'Event chair rental in Yogyakarta: folding chairs, stackable padded steel chairs, and plastic chairs.'
-      : 'Sewa kursi acara di Jogja: kursi lipat, kursi susun besi spons, dan kursi plastik.',
+      ? 'Event chair rental in Yogyakarta: folding chairs, hotel chairs, and plastic chairs.'
+      : 'Sewa kursi acara di Jogja: kursi lipat, kursi hotel, dan kursi plastik.',
     url: localizedSiteUrl(CHAIR_PAGE_PATH, locale),
     image: [primarySiteUrl(CHAIR_HERO_IMAGE), primarySiteUrl(CHAIR_PICKUP_IMAGE)],
     telephone: `+${config.whatsappNumber}`,

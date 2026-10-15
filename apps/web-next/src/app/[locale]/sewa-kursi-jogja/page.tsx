@@ -26,12 +26,12 @@ const KEYWORDS = [
   'sewa kursi plastik jogja',
   'sewa kursi lipat jogja',
   'sewa kursi hajatan jogja',
-  'sewa kursi futura jogja',
+  'sewa kursi hotel jogja',
 ];
 
 const CHAIR_CATALOG = [
   {
-    name: 'Kursi Plastik Napolly Biru/Merah',
+    name: 'Kursi Plastik',
     price: 'Mulai Rp3.000/unit',
     numericPrice: 3000,
     tag: 'Paling Laris',
@@ -40,7 +40,7 @@ const CHAIR_CATALOG = [
       'Plastik polimer tebal berkualitas tinggi, kokoh anti patah, higienis, dan mudah ditata. Solusi paling hemat untuk syukuran, pengajian warga, dan arisan.',
   },
   {
-    name: 'Kursi Lipat Chitose Besi',
+    name: 'Kursi Lipat',
     price: 'Mulai Rp7.000/unit',
     numericPrice: 7000,
     tag: 'Praktis & Rapi',
@@ -49,7 +49,7 @@ const CHAIR_CATALOG = [
       'Rangka pipa besi kokoh dengan bantalan dudukan & sandaran vinyl rapi. Pilihan tepat untuk rapat dinas, pertemuan kampus, seminar, dan akad nikah.',
   },
   {
-    name: 'Kursi Susun Futura Busa Padded',
+    name: 'Kursi Hotel',
     price: 'Mulai Rp10.000/unit',
     numericPrice: 10000,
     tag: 'Elegan & Nyaman',
@@ -97,7 +97,7 @@ const FAQS = [
   {
     question: 'Berapa tarif sewa kursi di Jogja via Santi Living?',
     answer:
-      'Tarif sewa kursi kami mulai dari Rp3.000/unit untuk Kursi Plastik Napolly, Rp7.000/unit untuk Kursi Lipat Chitose Besi, Rp10.000/unit untuk Kursi Susun Futura Padded, dan Rp25.000/unit untuk Meja Acara / Prasmanan.',
+      'Tarif sewa kursi kami mulai dari Rp3.000/unit untuk Kursi Plastik, Rp7.000/unit untuk Kursi Lipat, Rp10.000/unit untuk Kursi Hotel, dan Rp25.000/unit untuk Meja Acara / Prasmanan.',
   },
   {
     question: 'Berapa minimal unit yang bisa disewa dan bagaimana pengirimannya?',

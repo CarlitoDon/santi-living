@@ -48,8 +48,8 @@ const serviceOptions: Record<ServiceKey, {
     description: 'Pilih jenis kursi untuk acara, lalu tim kami cek jumlah, tanggal, dan pengantaran.',
     items: [
       { name: 'Kursi lipat', image: '/images/kursi-lipat-merah.webp', imageAlt: 'Kursi lipat merah dengan rangka besi krom', description: 'Kursi lipat berlapis spons warna merah yang praktis untuk penataan acara yang fleksibel.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
-      { name: 'Kursi susun besi spons', image: '/images/kursi-susun-merah.webp', imageAlt: 'Kursi susun merah berlapis spons dengan rangka krom', description: 'Kursi susun dengan rangka krom serta dudukan dan sandaran spons merah untuk area tamu.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
-      { name: 'Kursi plastik', image: '/images/kursi-plastik-biru.webp', imageAlt: 'Kursi plastik biru model Napolly dengan sandaran berpalang', description: 'Kursi plastik biru model Napolly yang praktis untuk kebutuhan acara.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
+      { name: 'Kursi hotel', image: '/images/kursi-susun-merah.webp', imageAlt: 'Kursi hotel untuk area tamu dan seremoni', description: 'Kursi untuk area tamu dan seremoni dengan tampilan rapi dan mudah ditata.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
+      { name: 'Kursi plastik', image: '/images/kursi-plastik-biru.webp', imageAlt: 'Kursi plastik biru dengan sandaran berpalang', description: 'Kursi plastik biru yang praktis untuk kebutuhan acara.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
     ],
     href: '/sewa-kursi-acara',
     wa: 'Halo Santi Living, saya ingin cek sewa kursi acara.\n\nJenis kursi: {jenis}\nJumlah kursi: {jumlah}\nTanggal acara: {tanggal}\nLokasi: {alamat}\n\nMohon bantu cek ketersediaan dan pengantaran. Terima kasih.',
