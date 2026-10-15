@@ -146,10 +146,11 @@ export default async function SewaKursiAcaraPage({
         faqTitle: 'Questions about renting chairs in Jogja.',
         faqs: [
           { question: 'What chair types can I ask about?', answer: 'You can ask about folding chairs, stackable padded steel chairs, and plastic chairs. The final option depends on the event date, quantity, and stock.' },
-          { question: 'Can I get the rental price directly from the page?', answer: 'The estimate is confirmed via WhatsApp after the date, quantity, location, route, and venue access are known. This avoids promising a price that does not fit the delivery details.' },
+          { question: 'How much does chair rental cost in Jogja?', answer: 'Starting from Rp 3,000/unit/day for plastic chairs, Rp 5,000/unit/day for folding steel chairs (Chitose), and Rp 7,000/unit/day for stackable padded chairs (Futura). Final prices depend on quantity, date, location, and venue access — confirm via WhatsApp.' },
           { question: 'Does Santi Living deliver to my venue?', answer: 'Send the complete venue address and access information. The team will check the route, unloading time, and delivery feasibility before confirming.' },
           { question: 'How early should I inquire?', answer: 'Earlier is better for larger quantities or fixed event dates. Same-day or short-notice requests still need a stock and route check first.' },
         ],
+        priceDisclaimer: 'Prices may change — confirm via WhatsApp.',
         finalCtaTitle: 'Ready to check chairs for your event?',
         finalCtaText: 'Send the date, quantity, chair preference, and venue. We will help check the most realistic option before you confirm.',
         finalCtaLabel: 'Cek kursi via WhatsApp',
@@ -194,10 +195,11 @@ export default async function SewaKursiAcaraPage({
         faqTitle: 'Pertanyaan tentang sewa kursi di Jogja.',
         faqs: [
           { question: 'Jenis kursi apa yang bisa ditanyakan?', answer: 'Anda bisa menanyakan kursi lipat, kursi susun besi spons, dan kursi plastik. Pilihan akhirnya mengikuti tanggal acara, jumlah, dan stok yang tersedia.' },
-          { question: 'Apakah harga sewa langsung tercantum di halaman?', answer: 'Estimasi dikonfirmasi melalui WhatsApp setelah tanggal, jumlah, lokasi, rute, dan akses venue diketahui. Dengan begitu harga tidak dijanjikan secara keliru sebelum detail pengantaran jelas.' },
+          { question: 'Berapa harga sewa kursi di Jogja?', answer: 'Mulai Rp 3.000/unit/hari untuk kursi plastik, Rp 5.000/unit/hari untuk kursi lipat besi (Chitose), dan Rp 7.000/unit/hari untuk kursi susun spons (Futura). Harga final menyesuaikan jumlah, tanggal, lokasi, dan akses venue — konfirmasi via WhatsApp.' },
           { question: 'Apakah bisa diantar ke venue saya?', answer: 'Kirim alamat venue lengkap beserta informasi aksesnya. Tim akan mengecek rute, waktu bongkar, dan kelayakan pengantaran sebelum konfirmasi.' },
           { question: 'Sebaiknya pesan berapa lama sebelumnya?', answer: 'Semakin awal semakin baik, terutama untuk jumlah besar atau tanggal acara yang sudah tetap. Permintaan mendadak tetap perlu dicek stok dan rutenya terlebih dahulu.' },
         ],
+        priceDisclaimer: 'Harga dapat berubah — konfirmasi via WhatsApp.',
         finalCtaTitle: 'Siap cek kursi untuk acara Anda?',
         finalCtaText: 'Kirim tanggal, jumlah, pilihan kursi, dan venue. Kami bantu cek opsi yang paling realistis sebelum Anda konfirmasi.',
         finalCtaLabel: 'Cek kursi via WhatsApp',
@@ -212,7 +214,8 @@ export default async function SewaKursiAcaraPage({
     ? [
         {
           number: '01',
-          title: 'Folding chair',
+          title: 'Folding chair (Chitose)',
+          price: 'Rp 5,000/unit/day',
           description: 'A practical option for flexible seating, meetings, gatherings, and family events.',
           tone: 'light',
           image: '/images/kursi-lipat-merah.webp',
@@ -220,7 +223,8 @@ export default async function SewaKursiAcaraPage({
         },
         {
           number: '02',
-          title: 'Stackable padded steel chair',
+          title: 'Stackable padded steel chair (Futura)',
+          price: 'Rp 7,000/unit/day',
           description: 'A stackable chair with a chrome frame and red padded seat and back for guest areas.',
           tone: 'dark',
           image: '/images/kursi-susun-merah.webp',
@@ -229,6 +233,7 @@ export default async function SewaKursiAcaraPage({
         {
           number: '03',
           title: 'Plastic chair',
+          price: 'From Rp 3,000/unit/day',
           description: 'A simple, easy-to-arrange option for practical event layouts and larger groups.',
           tone: 'green',
           image: '/images/kursi-plastik-biru.webp',
@@ -238,7 +243,8 @@ export default async function SewaKursiAcaraPage({
     : [
         {
           number: '01',
-          title: 'Kursi lipat',
+          title: 'Kursi lipat (Chitose)',
+          price: 'Rp 5.000/unit/hari',
           description: 'Pilihan praktis untuk susunan fleksibel, rapat, kumpul keluarga, dan acara sederhana.',
           tone: 'light',
           image: '/images/kursi-lipat-merah.webp',
@@ -246,7 +252,8 @@ export default async function SewaKursiAcaraPage({
         },
         {
           number: '02',
-          title: 'Kursi susun besi spons',
+          title: 'Kursi susun besi spons (Futura)',
+          price: 'Rp 7.000/unit/hari',
           description: 'Kursi susun dengan rangka krom serta dudukan dan sandaran spons merah untuk area tamu.',
           tone: 'dark',
           image: '/images/kursi-susun-merah.webp',
@@ -255,6 +262,7 @@ export default async function SewaKursiAcaraPage({
         {
           number: '03',
           title: 'Kursi plastik',
+          price: 'Mulai Rp 3.000/unit/hari',
           description: 'Pilihan sederhana dan mudah ditata untuk layout acara yang praktis dan jumlah besar.',
           tone: 'green',
           image: '/images/kursi-plastik-biru.webp',
@@ -382,10 +390,14 @@ export default async function SewaKursiAcaraPage({
                 <Image src={chair.image} alt={chair.imageAlt} width={720} height={900} sizes="(max-width: 800px) 92vw, 30vw" />
                 <span className="chair-type-number">{chair.number}</span>
                 <h3>{chair.title}</h3>
+                <p><strong>{chair.price}</strong></p>
                 <p>{chair.description}</p>
               </article>
             ))}
           </div>
+          <p style={{ marginTop: '1.25rem', fontSize: '0.875rem', color: 'rgb(33 26 21 / 72%)' }}>
+            {copy.priceDisclaimer}
+          </p>
         </div>
       </section>
 
