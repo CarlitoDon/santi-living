@@ -34,10 +34,10 @@ export function AboutContent() {
               <p className="text-lg leading-[1.6] text-slate-600 mb-4">{t('about.desc_2')}</p>
               <div className="flex flex-wrap gap-3 my-6">
                 <Link
-                  href={localeHref('/', locale)}
+                  href={localeHref('/harga-sewa-kasur', locale)}
                   className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 border border-blue-200/80 px-3.5 py-1.5 rounded-full transition-colors"
                 >
-                  Lihat Katalog Layanan Sewa Kasur Jogja Utama
+                  Daftar Harga Sewa Kasur Jogja
                 </Link>
                 <Link
                   href={localeHref('/sewa-extra-bed-jogja', locale)}
