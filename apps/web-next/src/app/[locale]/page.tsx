@@ -276,6 +276,14 @@ export default async function HomePage({
               {isEnglish ? 'See location' : 'Lihat lokasi'} <span aria-hidden="true">↗</span>
             </a>
           </div>
+          <div className="hybrid-proof-line mt-2" data-reveal="fade">
+            <p>
+              {isEnglish ? 'Need fast 2-hour mattress delivery?' : 'Butuh kasur cepat sampai dalam 2 jam?'}{' '}
+              <Link href={'/' + locale + '/sewa-kasur-terdekat'} className="font-semibold text-blue-600 hover:underline">
+                {isEnglish ? 'Sewa Kasur Terdekat Jogja →' : 'Sewa Kasur Terdekat Jogja →'}
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 

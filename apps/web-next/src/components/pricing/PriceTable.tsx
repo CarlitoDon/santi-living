@@ -3,6 +3,7 @@
 import type { Product } from '@/types/product';
 import { formatPrice } from '@/utils/currency';
 import { useLocale } from '@/contexts/locale';
+import { WhatsAppLink } from '@/components/ui/WhatsAppLink';
 
 /** Return locale-appropriate name */
 function pn(item: Product, locale: string): string {
@@ -31,6 +32,7 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_day')}</th>
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_week')}</th>
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_month')}</th>
+                <th className="p-3 px-4 font-semibold text-center whitespace-nowrap border-b border-blue-600">{locale === 'en' ? 'Action' : 'Pesan'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-200">
@@ -42,6 +44,19 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                   <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay, locale)}</td>
                   <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 7, locale)}</td>
                   <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 30, locale)}</td>
+                  <td className="p-3 px-4 text-center whitespace-nowrap">
+                    <WhatsAppLink
+                      message={`Halo Santi Living, saya ingin sewa ${pn(item, locale)} (${type === 'package' ? 'Paket Lengkap' : 'Kasur Busa'}). Mohon info ketersediaan dan pengantaran.`}
+                      source={`pricetable_${type}_${item.id}`}
+                      location="pricetable_desktop"
+                      data-product-category="kasur"
+                      data-page-type="service_page"
+                      data-wa-intent="sewa_kasur"
+                      className="inline-flex items-center justify-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-1.5 px-3 rounded-md transition-colors no-underline"
+                    >
+                      <span>{locale === 'en' ? 'Book' : 'Pesan'}</span>
+                    </WhatsAppLink>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -92,6 +107,21 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                   </dd>
                 </div>
               </dl>
+              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                <span className="text-[11px] text-slate-400">Unit steril & wangi</span>
+                <WhatsAppLink
+                  message={`Halo Santi Living, saya ingin sewa ${pn(item, locale)} (${type === 'package' ? 'Paket Lengkap' : 'Kasur Busa'}). Mohon info ketersediaan dan pengantaran.`}
+                  source={`pricetable_${type}_${item.id}`}
+                  location="pricetable_mobile"
+                  data-product-category="kasur"
+                  data-page-type="service_page"
+                  data-wa-intent="sewa_kasur"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg transition-colors no-underline shadow-sm"
+                >
+                  <span>{locale === 'en' ? 'Book via WA' : 'Pesan via WA'}</span>
+                  <span aria-hidden="true">→</span>
+                </WhatsAppLink>
+              </div>
             </article>
           ))}
         </div>
