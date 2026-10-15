@@ -39,7 +39,7 @@ describe('Sewa Kursi Jogja Page', () => {
         'sewa kursi plastik jogja',
         'sewa kursi lipat jogja',
         'sewa kursi hajatan jogja',
-        'sewa kursi futura jogja',
+        'sewa kursi hotel jogja',
       ]);
       expect(metadata.alternates?.canonical).toBe(pageUrl);
       expect(metadata.alternates?.languages).toEqual({
@@ -114,9 +114,9 @@ describe('Sewa Kursi Jogja Page', () => {
       expect(offers.highPrice).toBe(25000);
       expect(offers.offerCount).toBe(4);
       expect(offers.offers.map((o) => o.name)).toEqual([
-        'Kursi Plastik Napolly Biru/Merah',
-        'Kursi Lipat Chitose Besi',
-        'Kursi Susun Futura Busa Padded',
+        'Kursi Plastik',
+        'Kursi Lipat',
+        'Kursi Hotel',
         'Meja Acara / Prasmanan',
       ]);
 
@@ -153,9 +153,9 @@ describe('Sewa Kursi Jogja Page', () => {
       expect(screen.getByLabelText(/nomor whatsapp/i)).toBeTruthy();
 
       // Catalog assertions
-      expect(screen.getByText('Kursi Plastik Napolly Biru/Merah')).toBeTruthy();
-      expect(screen.getByText('Kursi Lipat Chitose Besi')).toBeTruthy();
-      expect(screen.getByText('Kursi Susun Futura Busa Padded')).toBeTruthy();
+      expect(screen.getByText('Kursi Plastik')).toBeTruthy();
+      expect(screen.getByText('Kursi Lipat')).toBeTruthy();
+      expect(screen.getByText('Kursi Hotel')).toBeTruthy();
       expect(screen.getByText('Meja Acara / Prasmanan')).toBeTruthy();
 
       // Package assertions

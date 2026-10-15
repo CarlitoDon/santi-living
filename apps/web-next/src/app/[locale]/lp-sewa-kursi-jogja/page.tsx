@@ -108,15 +108,15 @@ const BENEFITS = [
 
 const CHAIR_TYPES = [
   {
-    name: 'Kursi Plastik Sandaran',
-    detail: 'Napolly Polimer Tebal',
+    name: 'Kursi Plastik',
+    detail: 'Polimer Tebal',
     price: 'Rp 3.000 - Rp 3.500 / unit / hari',
     description: 'Andalan hajatan warga: ringan, kokoh, mudah disusun rapi.',
     popular: true,
     image: '/images/kursi-plastik-biru.webp',
   },
   {
-    name: 'Kursi Lipat Besi (Chitose)',
+    name: 'Kursi Lipat',
     detail: 'Rangka besi lipat praktis',
     price: 'Rp 5.000 / unit / hari',
     description: 'Cocok untuk pengajian, seminar kampus & acara kantor.',
@@ -124,7 +124,7 @@ const CHAIR_TYPES = [
     image: '/images/kursi-lipat-merah.webp',
   },
   {
-    name: 'Kursi Susun Spons (Futura)',
+    name: 'Kursi Hotel',
     detail: 'Dudukan spons empuk',
     price: 'Rp 7.000 / unit / hari',
     description: 'Nyaman untuk akad, resepsi & acara formal berdurasi lama.',

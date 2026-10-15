@@ -63,8 +63,8 @@ describe('sewa kursi acara SEO output', () => {
   );
 
   it.each([
-    ['id', ['Kursi lipat (Chitose)', 'Kursi susun besi spons (Futura)', 'Kursi plastik']],
-    ['en', ['Folding chair (Chitose)', 'Stackable padded steel chair (Futura)', 'Plastic chair']],
+    ['id', ['Kursi lipat', 'Kursi hotel', 'Kursi plastik']],
+    ['en', ['Folding chair', 'Hotel chair', 'Plastic chair']],
   ] as const)('keeps the verified chair catalog in %s JSON-LD', async (locale, chairNames) => {
     const schema = await getChairSchema(locale);
     const pageUrl = `${PRIMARY_SITE_URL}/${locale}${PAGE_PATH}`;
