@@ -94,6 +94,14 @@ export async function generateMetadata({ params }: LayoutProps): Promise<Metadat
       description:
         dict.seo?.og_desc ??
         'Santi Living melayani konsultasi sewa kasur, kursi acara, dan karpet di Jogja. Cek ketersediaan serta pengantaran via WhatsApp.',
+      images: [
+        {
+          url: '/og-image-santiliving.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'Sewa Kasur, Kursi & Karpet Jogja | Santi Living',
+        },
+      ],
     },
     robots: {
       index: true,
