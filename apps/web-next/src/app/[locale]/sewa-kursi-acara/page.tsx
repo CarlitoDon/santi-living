@@ -26,9 +26,9 @@ Mohon info ketersediaan, ongkir, dan cara sewa.`;
 
 const chairMetadata = {
   id: {
-    title: 'Sewa Kursi Acara Jogja (Plastik, Lipat & Susun) | Mulai 3rb Siap Antar',
+    title: 'Sewa Kursi Acara Jogja (Plastik, Lipat & Hotel) | Mulai 3rb Siap Antar',
     description:
-      'Sewa kursi plastik Jogja & kursi acara: kursi plastik kokoh, kursi lipat, dan kursi susun spons untuk hajatan, pengajian, dan syukuran. Cek stok dan pengantaran via WhatsApp.',
+      'Sewa kursi plastik Jogja & kursi acara: kursi plastik kokoh, kursi lipat, dan kursi hotel untuk hajatan, pengajian, dan syukuran. Cek stok dan pengantaran via WhatsApp.',
     keywords: [
       'sewa kursi acara jogja',
       'sewa kursi acara',
@@ -38,7 +38,7 @@ const chairMetadata = {
       'rental kursi plastik jogja',
       'sewa kursi jogja',
       'kursi lipat',
-      'kursi susun besi spons',
+      'kursi hotel',
       'kursi plastik',
     ],
     imageAlt: 'Katalog kursi acara untuk sewa kursi Jogja',
@@ -46,12 +46,12 @@ const chairMetadata = {
   en: {
     title: 'Event Chair Rental Yogyakarta',
     description:
-      'Rent event chairs in Yogyakarta: folding chairs, stackable padded steel chairs, and plastic chairs. Send your date, quantity, and delivery location so we can check availability and logistics via WhatsApp.',
+      'Rent event chairs in Yogyakarta: folding chairs, hotel chairs, and plastic chairs. Send your date, quantity, and delivery location so we can check availability and logistics via WhatsApp.',
     keywords: [
       'event chair rental yogyakarta',
       'event chair rental jogja',
       'folding chair rental yogyakarta',
-      'stackable padded steel chair rental',
+      'hotel chair rental yogyakarta',
       'plastic chair rental yogyakarta',
     ],
     imageAlt: 'Event chair rental options in Yogyakarta',
@@ -132,7 +132,7 @@ export default async function SewaKursiAcaraPage({
         fitTitle: 'A chair setup that follows the room, not the other way around.',
         fitItems: [
           { title: 'Meetings and gatherings', description: 'Keep seating flexible for meetings, community gatherings, and family events.' },
-          { title: 'Guest and ceremony areas', description: 'Use stackable seating when the layout needs a tidy guest area and efficient storage.' },
+          { title: 'Guest and ceremony areas', description: 'Use hotel chairs when the layout needs a tidy guest area and efficient storage.' },
           { title: 'Larger practical layouts', description: 'Ask about plastic chairs when the event needs a simple setup for a larger group.' },
         ],
         processEyebrow: 'How it works',
@@ -181,7 +181,7 @@ export default async function SewaKursiAcaraPage({
         fitTitle: 'Susunan kursi mengikuti ruang dan kebutuhan acara.',
         fitItems: [
           { title: 'Rapat dan gathering', description: 'Jaga susunan tetap fleksibel untuk rapat, kumpul komunitas, dan acara keluarga.' },
-          { title: 'Area tamu dan seremoni', description: 'Kursi susun membantu area tamu tetap rapi saat layout perlu diubah atau diringkas.' },
+          { title: 'Area tamu dan seremoni', description: 'Kursi hotel membantu area tamu tetap rapi saat layout perlu diubah atau diringkas.' },
           { title: 'Layout praktis jumlah besar', description: 'Kursi plastik bisa dipertimbangkan untuk susunan sederhana dan kelompok yang lebih besar.' },
         ],
         processEyebrow: 'Cara sewa',
@@ -355,7 +355,7 @@ export default async function SewaKursiAcaraPage({
           <div className="chair-hero-media">
             <Image
               src={CHAIR_HERO_IMAGE}
-              alt={isEnglish ? 'Folding and stackable padded steel chairs prepared for an event' : 'Kursi lipat dan kursi susun besi spons yang disiapkan untuk acara'}
+              alt={isEnglish ? 'Folding and hotel chairs prepared for an event' : 'Kursi lipat dan kursi hotel yang disiapkan untuk acara'}
               width={1448}
               height={1086}
               priority
