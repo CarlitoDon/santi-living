@@ -86,7 +86,7 @@ export function middleware(request: NextRequest) {
   // --- Step 4: Redirect to locale-prefixed path ---
   const locale = getLocale();
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  return NextResponse.redirect(request.nextUrl, 308);
 }
 
 export const config = {
