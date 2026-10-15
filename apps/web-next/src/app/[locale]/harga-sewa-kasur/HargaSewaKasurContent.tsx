@@ -51,6 +51,90 @@ export function HargaSewaKasurContent() {
       <PriceTable title={t('produk.paket_lengkap_title')} desc={t('produk.paket_lengkap_desc')} items={products.mattressPackages} type="package" />
       <PriceTable title={t('produk.kasur_only_title')} desc={t('produk.kasur_only_desc')} items={products.mattressOnly} type="mattress" />
 
+      {/* Paket Acara */}
+      <section className="py-10" id="paket-acara">
+        <div className="container">
+          <h2 className="text-center text-xl md:text-2xl mb-2 font-bold text-slate-900">
+            {locale === 'en' ? 'Event Bundle Packages (Save 10-15%)' : 'Paket Bundling Acara (Hemat 10-15%)'}
+          </h2>
+          <p className="text-center text-slate-500 mb-6 max-w-xl mx-auto">
+            {locale === 'en'
+              ? 'Carpet + chairs + cooler in one WA order. Final quote after date, duration, qty & location.'
+              : 'Karpet + kursi + cooler dalam satu order WA. Harga final setelah tanggal, durasi, jumlah & lokasi jelas.'}
+          </p>
+          <div className="grid md:grid-cols-2 gap-4 max-w-[640px] mx-auto">
+            <div className="bg-white border border-slate-200 rounded-md p-4 flex flex-col justify-between">
+              <div>
+                <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">
+                  {locale === 'en' ? '15% bundle off' : 'Diskon paket 15%'}
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  {locale === 'en' ? 'Complete Tahlilan / Recitation Package' : 'Paket Tahlilan / Pengajian Lengkap'}
+                </h3>
+                <ul className="text-xs text-slate-600 space-y-1 mb-4 text-left">
+                  <li>• 2 karpet permadani jumbo</li>
+                  <li>• 20 kursi plastik/lipat</li>
+                  <li>• 1 air cooler + ice pack</li>
+                  <li>• Antar-jemput se-DIY</li>
+                </ul>
+              </div>
+              <div>
+                <div className="pt-3 border-t border-slate-100 text-center">
+                  <div className="text-base font-bold text-blue-600">Estimasi via WA</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Harga final setelah validasi stok & lokasi</div>
+                </div>
+                <WhatsAppLink
+                  message="Halo Santi Living, saya mau order PAKET TAHLILAN (2 karpet permadani + 20 kursi + 1 air cooler). Tanggal acara: ___, Lokasi: ___. Mohon estimasi & ketersediaan."
+                  source="bundle_tahlilan"
+                  location="harga_bundle"
+                  data-product-category="bundle"
+                  data-page-type="service_page"
+                  data-wa-intent="sewa_paket_acara"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg transition-colors no-underline shadow-sm w-full mt-3"
+                >
+                  <span>{locale === 'en' ? 'Order via WA' : 'Pesan via WA'}</span>
+                  <span aria-hidden="true">→</span>
+                </WhatsAppLink>
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-md p-4 flex flex-col justify-between">
+              <div>
+                <span className="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded mb-2">
+                  {locale === 'en' ? '10% bundle off' : 'Diskon paket 10%'}
+                </span>
+                <h3 className="font-bold text-slate-900 text-base mb-2">
+                  {locale === 'en' ? 'Homestay Guest / Mudik Package' : 'Paket Tamu Homestay / Mudik'}
+                </h3>
+                <ul className="text-xs text-slate-600 space-y-1 mb-4 text-left">
+                  <li>• 2 kasur busa 20cm (pilih single/double)</li>
+                  <li>• Sprei + selimut + 2 bantal ekstra</li>
+                  <li>• Steril UV-C & wangi laundry</li>
+                </ul>
+              </div>
+              <div>
+                <div className="pt-3 border-t border-slate-100 text-center">
+                  <div className="text-base font-bold text-blue-600">Estimasi via WA</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">Harga final setelah validasi stok & lokasi</div>
+                </div>
+                <WhatsAppLink
+                  message="Halo Santi Living, saya mau order PAKET HOMESTAY (2 kasur busa + sprei + selimut + 2 bantal). Tanggal: ___, Lokasi: ___. Mohon estimasi & ketersediaan."
+                  source="bundle_homestay"
+                  location="harga_bundle"
+                  data-product-category="bundle"
+                  data-page-type="service_page"
+                  data-wa-intent="sewa_paket_homestay"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg transition-colors no-underline shadow-sm w-full mt-3"
+                >
+                  <span>{locale === 'en' ? 'Order via WA' : 'Pesan via WA'}</span>
+                  <span aria-hidden="true">→</span>
+                </WhatsAppLink>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Ekstra Tambahan */}
       <section className="py-10" id="ekstra">
         <div className="container">
