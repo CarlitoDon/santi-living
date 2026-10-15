@@ -53,7 +53,7 @@ describe('Sewa Kursi Jogja Page', () => {
         locale: 'id_ID',
         siteName: 'Santi Living',
       });
-      expect(metadata.robots).toEqual({ index: true, follow: true });
+      expect(metadata.robots).toEqual({ index: false, follow: true });
     });
 
     it('renders metadata correctly for English (en) locale', async () => {
