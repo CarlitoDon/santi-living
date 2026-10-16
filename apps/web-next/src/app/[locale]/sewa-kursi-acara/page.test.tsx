@@ -88,9 +88,34 @@ describe('sewa kursi acara SEO output', () => {
     expect(rendered).toContain('Berapa harga sewa kursi di Jogja?');
     expect(rendered).toContain('Mulai Rp 3.000/unit/hari');
     expect(rendered).toContain('Harga dapat berubah — konfirmasi via WhatsApp.');
+    expect(rendered).toContain('Sewa Kursi Jogja');
+    expect(rendered).toContain('Harga Sewa Kursi di Jogja');
+    expect(rendered).toContain('Berapa minimal order sewa kursi?');
+    expect(rendered).toContain('Area mana saja yang dicover untuk antar kursi?');
     expect(rendered).toContain('chair_lp_hero');
     expect(rendered).toContain('chair_lp_details');
     expect(rendered).toContain('chair_lp_bottom');
     expect(rendered).toContain('landing');
+  });
+
+  it('renders exact H2 copy and six FAQs in English', async () => {
+    const page = await SewaKursiAcaraPage({
+      params: Promise.resolve({ locale: 'en' }),
+    });
+    const rendered = collectStrings(page);
+
+    expect(rendered).toContain('Event Chair Rental Yogyakarta');
+    expect(rendered).toContain('Event Chair Rental Prices in Yogyakarta');
+    expect(rendered).toContain('What is the minimum chair rental order?');
+    expect(rendered).toContain('Which delivery areas do you cover?');
+    expect(rendered).toContain('Prices may change — confirm via WhatsApp.');
+  });
+
+  it('keeps metadata titles without appended brand suffix', async () => {
+    const idMetadata = await generateMetadata({ params: Promise.resolve({ locale: 'id' }) });
+    const enMetadata = await generateMetadata({ params: Promise.resolve({ locale: 'en' }) });
+
+    expect(String(idMetadata.title)).not.toContain('| Santi Living');
+    expect(String(enMetadata.title)).not.toContain('| Santi Living');
   });
 });
