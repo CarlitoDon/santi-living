@@ -404,8 +404,19 @@ export default async function SewaKursiAcaraPage({
                 <Image src={chair.image} alt={chair.imageAlt} width={720} height={900} sizes="(max-width: 800px) 92vw, 30vw" />
                 <span className="chair-type-number">{chair.number}</span>
                 <h3>{chair.title}</h3>
-                <p><strong>{chair.price}</strong></p>
+                <p><span className="chair-type-price">{chair.price}</span></p>
                 <p>{chair.description}</p>
+                <WhatsAppLink
+                  message={`${CHAIR_WA_TEXT}${isEnglish ? `\n\nChair type: ${chair.title}` : `\n\nJenis kursi yang ditanyakan: ${chair.title}`}`}
+                  source="chair_lp_catalog"
+                  location="chair_catalog"
+                  data-product-category="kursi"
+                  data-page-type="landing"
+                  data-wa-intent="sewa_kursi_acara"
+                  className="chair-button chair-button-primary chair-type-cta"
+                >
+                  {isEnglish ? `Ask about ${chair.title}` : `Tanya ${chair.title} via WhatsApp`}
+                </WhatsAppLink>
               </article>
             ))}
           </div>
