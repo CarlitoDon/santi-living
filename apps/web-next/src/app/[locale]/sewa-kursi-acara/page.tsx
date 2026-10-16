@@ -129,7 +129,7 @@ export default async function SewaKursiAcaraPage({
         detailsCta: 'Send event details',
         trustItems: ['Availability checked by date', 'Delivery logistics confirmed first', 'WhatsApp inquiry without price guesswork'],
         fitEyebrow: 'For your event',
-        fitTitle: 'A chair setup that follows the room, not the other way around.',
+        fitTitle: 'Event Chair Rental Yogyakarta',
         fitItems: [
           { title: 'Meetings and gatherings', description: 'Keep seating flexible for meetings, community gatherings, and family events.' },
           { title: 'Guest and ceremony areas', description: 'Use hotel chairs when the layout needs a tidy guest area and efficient storage.' },
@@ -149,8 +149,42 @@ export default async function SewaKursiAcaraPage({
           { question: 'How much does chair rental cost in Jogja?', answer: 'Starting from Rp 3,000/unit/day for plastic chairs, Rp 5,000/unit/day for folding chairs, and Rp 7,000/unit/day for hotel chairs. Final prices depend on quantity, date, location, and venue access — confirm via WhatsApp.' },
           { question: 'Does Santi Living deliver to my venue?', answer: 'Send the complete venue address and access information. The team will check the route, unloading time, and delivery feasibility before confirming.' },
           { question: 'How early should I inquire?', answer: 'Earlier is better for larger quantities or fixed event dates. Same-day or short-notice requests still need a stock and route check first.' },
+          { question: 'What is the minimum chair rental order?', answer: 'There is no fixed minimum — it depends on stock, date, and delivery route. Send the quantity, event date, and venue address via WhatsApp to 0895-1911-9092 so admin can check the realistic option.' },
+          { question: 'Which delivery areas do you cover?', answer: 'We deliver from our workshop area to Sleman, Bantul, Yogyakarta city, and Kulon Progo. Send your full venue address via WhatsApp to 0895-1911-9092 so we can check the route and unloading access.' },
+        ],
+        priceEyebrow: 'Rental prices',
+        priceTitle: 'Event Chair Rental Prices in Yogyakarta',
+        priceIntro:
+          'The price list below is a starting point so you can estimate the budget before chatting. Plastic chairs start from the lowest rate for large practical layouts, folding chairs sit in the middle for flexible setups, and hotel chairs cost more because the look is tidier for guest areas. The final estimate still follows quantity, event date, delivery location, and venue access, so send those four details for a realistic answer.',
+        priceTable: [
+          { type: 'Plastic chair', price: 'From Rp 3,000/unit/day', desc: 'Simple seating for large groups, easy to arrange and move.' },
+          { type: 'Folding chair', price: 'Rp 5,000/unit/day', desc: 'Practical choice for meetings, gatherings, and flexible layouts.' },
+          { type: 'Hotel chair', price: 'Rp 7,000/unit/day', desc: 'Tidier option for guest and ceremony areas.' },
+        ],
+        priceTips: [
+          'Delivery fees are calculated separately based on quantity, route, and unloading access.',
+          'Weekend and peak-season dates run out faster — earlier inquiries get more options.',
+          'Tell us the floor, stairs, and unloading hours so the delivery plan is realistic.',
         ],
         priceDisclaimer: 'Prices may change — confirm via WhatsApp.',
+        packageEyebrow: 'Packages and coverage',
+        packageTitle: 'Packages for celebrations, prayers, and meetings',
+        packageIntro:
+          'Most orders fall into three patterns. Tell us which one is closest to your event so admin can suggest the chair mix and quantity faster.',
+        packageItems: [
+          { title: 'Family celebrations and syukuran', description: 'For home events with dozens to hundreds of guests. Plastic chairs usually cover the main rows while a few hotel chairs tidy up the guest area.' },
+          { title: 'Community prayers and gatherings', description: 'For pengajian, arisan, and neighborhood events. The layout stays simple so unloading and packing run quickly.' },
+          { title: 'Meetings and office events', description: 'For trainings and office gatherings. Folding chairs keep the room flexible when the layout changes between sessions.' },
+        ],
+        coverageText:
+          'We deliver from our workshop area near Jl. Godean KM 10, Sleman, to Sleman, Bantul, Yogyakarta city, and Kulon Progo. Send the full venue address and unloading access so we can check the route before confirming.',
+        testimonialEyebrow: 'From renters',
+        testimonialTitle: 'Notes from chair renters in Jogja.',
+        testimonials: [
+          { name: 'Bu Ratna — Syukuran, Sleman', text: 'Ordered 100 plastic chairs for a family syukuran. Admin asked for the date and address first, then confirmed the delivery schedule. Unloading was quick.' },
+          { name: 'Mas Dimas — Pengajian, Bantul', text: 'Needed extra chairs two days before the event. Stock was checked by date and the route was confirmed before we agreed. Practical.' },
+          { name: 'Mbak Sari — Meeting, Yogyakarta city', text: 'Used folding chairs for a two-day training. The layout was easy to rearrange between sessions. Communication over WhatsApp was clear.' },
+        ],
         finalCtaTitle: 'Ready to check chairs for your event?',
         finalCtaText: 'Send the date, quantity, chair preference, and venue. We will help check the most realistic option before you confirm.',
         finalCtaLabel: 'Cek kursi via WhatsApp',
@@ -185,7 +219,7 @@ export default async function SewaKursiAcaraPage({
         detailsCta: 'Kirim detail acara',
         trustItems: ['Ketersediaan dicek berdasarkan tanggal', 'Logistik pengantaran dikonfirmasi dulu', 'Konsultasi WhatsApp tanpa tebak harga'],
         fitEyebrow: 'Untuk acara Anda',
-        fitTitle: 'Susunan kursi mengikuti ruang dan kebutuhan acara.',
+        fitTitle: 'Sewa Kursi Jogja',
         fitItems: [
           { title: 'Rapat dan gathering', description: 'Jaga susunan tetap fleksibel untuk rapat, kumpul komunitas, dan acara keluarga.' },
           { title: 'Area tamu dan seremoni', description: 'Kursi hotel membantu area tamu tetap rapi saat layout perlu diubah atau diringkas.' },
@@ -205,8 +239,44 @@ export default async function SewaKursiAcaraPage({
           { question: 'Berapa harga sewa kursi di Jogja?', answer: 'Mulai Rp 3.000/unit/hari untuk kursi plastik, Rp 5.000/unit/hari untuk kursi lipat, dan Rp 7.000/unit/hari untuk kursi hotel. Harga final menyesuaikan jumlah, tanggal, lokasi, dan akses venue — konfirmasi via WhatsApp.' },
           { question: 'Apakah bisa diantar ke venue saya?', answer: 'Kirim alamat venue lengkap beserta informasi aksesnya. Tim akan mengecek rute, waktu bongkar, dan kelayakan pengantaran sebelum konfirmasi.' },
           { question: 'Sebaiknya pesan berapa lama sebelumnya?', answer: 'Semakin awal semakin baik, terutama untuk jumlah besar atau tanggal acara yang sudah tetap. Permintaan mendadak tetap perlu dicek stok dan rutenya terlebih dahulu.' },
+          { question: 'Berapa minimal order sewa kursi?', answer: 'Tidak ada minimal order yang kaku — tergantung stok, tanggal, dan rute pengantaran. Kirim jumlah, tanggal acara, dan alamat venue via WhatsApp ke 0895-1911-9092 agar admin bisa cek opsi yang paling realistis.' },
+          { question: 'Area mana saja yang dicover untuk antar kursi?', answer: 'Kami mengantar dari area workshop ke Sleman, Bantul, Kota Yogyakarta, dan Kulon Progo. Kirim alamat venue lengkap via WhatsApp ke 0895-1911-9092 agar tim bisa cek rute dan akses bongkar.' },
+        ],
+        priceEyebrow: 'Harga sewa',
+        priceTitle: 'Harga Sewa Kursi di Jogja',
+        priceIntro:
+          'Daftar harga di bawah ini jadi patokan awal biar Anda bisa kira-kira budget sebelum chat. Kursi plastik mulai dari Rp 3.000/unit/hari, cocok untuk acara dengan tamu banyak yang butuh susunan kursi sederhana dan cepat ditata. Kursi lipat Rp 5.000/unit/hari, enak untuk rapat, gathering, dan acara keluarga karena gampang dipindah dan dilipat lagi setelah acara. Kursi hotel Rp 7.000/unit/hari, tampilannya lebih rapi untuk area tamu, akad, dan seremoni. Harga final tetap mengikuti jumlah kursi, tanggal acara, lokasi pengantaran, dan akses venue seperti lantai, tangga, atau jam bongkar. Karena itu kirim empat info itu di awal agar jawaban admin realistis dan tidak bolak-balik. Kalau tanggal Anda jatuh di akhir pekan atau musim hajatan, kabari lebih awal karena stok untuk jumlah besar biasanya lebih cepat habis. Untuk kebutuhan mendadak, tetap bisa ditanyakan, tapi admin perlu cek stok dan rute dulu sebelum janji. Ongkir dihitung terpisah mengikuti jumlah, rute, dan kemudahan bongkar di venue, jadi alamat lengkap membantu banget biar estimasinya tidak meleset. Patokan ini juga membantu Anda bandingkan opsi: kalau tamu di atas seratus dan budget mepet, kursi plastik biasanya paling aman; kalau acaranya rapat atau training yang layoutnya berubah-ubah, kursi lipat lebih fleksibel; kalau ada area tamu penting yang difoto, sisihkan beberapa kursi hotel untuk barisan depan.',
+        priceTable: [
+          { type: 'Kursi plastik', price: 'Mulai Rp 3.000/unit/hari', desc: 'Dudukan sederhana untuk tamu banyak, ringan, gampang ditata dan dipindah.' },
+          { type: 'Kursi lipat', price: 'Rp 5.000/unit/hari', desc: 'Praktis untuk rapat, gathering, dan acara keluarga, gampang dilipat setelah acara.' },
+          { type: 'Kursi hotel', price: 'Rp 7.000/unit/hari', desc: 'Tampilan rapi untuk area tamu dan seremoni, mudah diatur jadi barisan.' },
+        ],
+        priceTips: [
+          'Ongkir dihitung terpisah mengikuti jumlah kursi, rute, dan akses bongkar di venue.',
+          'Tanggal akhir pekan dan musim hajatan lebih cepat penuh — kabari lebih awal untuk jumlah besar.',
+          'Sampaikan info lantai, tangga, dan jam bongkar agar rencana pengantaran realistis.',
+          'Kalau layout belum fix, kirim dulu perkiraan jumlah dan tanggal agar stok bisa dicek.',
+          'Untuk acara dua hari atau lebih, sebutkan durasinya di awal agar jadwal ambil ikut diatur.',
         ],
         priceDisclaimer: 'Harga dapat berubah — konfirmasi via WhatsApp.',
+        packageEyebrow: 'Paket dan area antar',
+        packageTitle: 'Paket hajatan, pengajian, dan acara kantor',
+        packageIntro:
+          'Kebanyakan pesanan masuk ke tiga pola ini. Ceritakan acara Anda masuk pola yang mana, biar admin cepat bantu pilihkan jenis dan jumlah kursi. Untuk hajatan di rumah atau tenda, biasanya kursi plastik menutup barisan utama, lalu beberapa kursi hotel merapikan area tamu atau keluarga. Untuk pengajian, arisan, dan syukuran warga, susunan dibuat sederhana supaya bongkar dan beres-beres cepat. Untuk rapat dan training kantor, kursi lipat bikin ruangan fleksibel karena gampang digeser antar sesi. Semua paket dicek dulu stoknya berdasarkan tanggal, lalu rutenya dicocokkan dengan jadwal antar yang ada hari itu. Kalau jumlah tamu masih kira-kira, sebutkan rentangnya, misalnya 80 sampai 100 orang, agar admin bisa siapkan opsi cadangan. Sertakan juga apakah kursi dipakai indoor atau outdoor supaya pilihan jenisnya pas sejak awal.',
+        packageItems: [
+          { title: 'Hajatan dan syukuran keluarga', description: 'Untuk acara di rumah, halaman, atau tenda dengan tamu puluhan sampai ratusan. Kursi plastik menutup barisan utama karena ringan dan cepat ditata, kursi hotel merapikan area tamu. Kirim tanggal, jumlah tamu, dan alamat agar admin bisa hitung kebutuhan dan jadwal antar.' },
+          { title: 'Pengajian dan kumpul warga', description: 'Untuk pengajian rutin, arisan, dan syukuran lingkungan. Susunan kursi dibuat sederhana dan rapat supaya jamaah nyaman dan bongkarnya cepat. Cocok untuk masjid, musala, balai warga, dan halaman rumah. Kabari jam mulai dan jam selesai agar jadwal antar dan ambil bisa diatur.' },
+          { title: 'Rapat dan acara kantor', description: 'Untuk training, workshop, dan gathering kantor yang layout ruangnya bisa berubah. Kursi lipat gampang dipindah dan dilipat lagi setelah sesi selesai. Kirim jumlah peserta, durasi acara, dan akses gedung termasuk lantai serta jam bongkar.' },
+        ],
+        coverageText:
+          'Kami mengantar dari workshop dekat Jl. Godean KM 10, Sleman, ke Sleman, Bantul, Kota Yogyakarta, dan Kulon Progo. Untuk hajatan di Sleman, pengajian di Bantul, acara di Kota Yogyakarta, sampai kebutuhan di Kulon Progo, kirim alamat venue lengkap plus patokan dan akses bongkarnya. Admin akan cek rute, waktu tempuh, dan jadwal armada hari itu sebelum konfirmasi. Kalau aksesnya gang sempit atau harus naik lantai, ceritakan di awal agar tim datang dengan persiapan yang pas. Cantumkan juga nomor kontak yang bisa dihubungi saat armada tiba supaya serah terima berjalan cepat dan kursi langsung tertata di titik yang Anda mau. Selama acara, simpan kursi di tempat teduh bila memungkinkan agar tetap nyaman dipakai sampai acara selesai.',
+        testimonialEyebrow: 'Cerita penyewa',
+        testimonialTitle: 'Cerita penyewa kursi di Jogja.',
+        testimonials: [
+          { name: 'Bu Ratna — syukuran, Sleman', text: 'Sewa 100 kursi plastik untuk syukuran keluarga. Admin tanya tanggal dan alamat dulu, baru kasih jadwal antar yang pasti. Bongkarnya cepat, beresnya juga cepat.' },
+          { name: 'Mas Dimas — pengajian, Bantul', text: 'Butuh tambahan kursi dua hari sebelum acara. Stok dicek berdasarkan tanggal, rute dikonfirmasi dulu sebelum kami sepakat. Praktis, tidak digantung.' },
+          { name: 'Mbak Sari — rapat, Kota Yogyakarta', text: 'Pakai kursi lipat untuk training dua hari. Layout gampang diubah antar sesi, komunikasi via WhatsApp juga jelas dari awal sampai pengambilan.' },
+        ],
         finalCtaTitle: 'Siap cek kursi untuk acara Anda?',
         finalCtaText: 'Kirim tanggal, jumlah, pilihan kursi, dan venue. Kami bantu cek opsi yang paling realistis sebelum Anda konfirmasi.',
         finalCtaLabel: 'Cek kursi via WhatsApp',
@@ -425,6 +495,42 @@ export default async function SewaKursiAcaraPage({
           </p>
         </div>
       </section>
+      <section className="chair-faq" aria-labelledby="chair-price-title">
+        <div className="container chair-faq-inner">
+          <div className="chair-section-heading">
+            <p className="chair-eyebrow">{copy.priceEyebrow}</p>
+            <h2 id="chair-price-title">{copy.priceTitle}</h2>
+            <p>{copy.priceIntro}</p>
+          </div>
+          <table className="chair-price-table">
+            <thead>
+              <tr>
+                <th scope="col">{isEnglish ? 'Chair type' : 'Jenis kursi'}</th>
+                <th scope="col">{isEnglish ? 'Starting price' : 'Harga mulai'}</th>
+                <th scope="col">{isEnglish ? 'Best for' : 'Cocok untuk'}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {copy.priceTable.map((row) => (
+                <tr key={row.type}>
+                  <td><strong>{row.type}</strong></td>
+                  <td>{row.price}</td>
+                  <td>{row.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'rgb(33 26 21 / 72%)' }}>
+            {copy.priceDisclaimer}
+          </p>
+          <ul className="chair-reading-list">
+            {copy.priceTips.map((tip) => (
+              <li key={tip}>{tip}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
 
       <section className="chair-fit" aria-labelledby="chair-fit-title">
         <div className="container">
@@ -459,6 +565,44 @@ export default async function SewaKursiAcaraPage({
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      <section className="chair-fit" aria-labelledby="chair-package-title">
+        <div className="container">
+          <div className="chair-section-heading">
+            <p className="chair-eyebrow">{copy.packageEyebrow}</p>
+            <h2 id="chair-package-title">{copy.packageTitle}</h2>
+            <p>{copy.packageIntro}</p>
+          </div>
+          <div className="chair-fit-grid">
+            {copy.packageItems.map((item, index) => (
+              <article className="chair-fit-card" key={item.title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+          <p style={{ marginTop: '1.5rem', color: 'rgb(33 26 21 / 78%)' }}>{copy.coverageText}</p>
+        </div>
+      </section>
+
+      <section className="chair-fit" aria-labelledby="chair-testimonial-title">
+        <div className="container">
+          <div className="chair-section-heading">
+            <p className="chair-eyebrow">{copy.testimonialEyebrow}</p>
+            <h2 id="chair-testimonial-title">{copy.testimonialTitle}</h2>
+          </div>
+          <div className="chair-fit-grid">
+            {copy.testimonials.map((item, index) => (
+              <article className="chair-fit-card" key={item.name}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{item.name}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
