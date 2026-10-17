@@ -119,7 +119,9 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Legacy path redirects
-      { source: '/sewa-kasur', destination: '/', permanent: true },
+      { source: '/sewa-kasur', destination: '/id/sewa-kasur-terdekat', permanent: true },
+      { source: '/sewa-kasur-jogja', destination: '/id/sewa-kasur-terdekat', permanent: true },
+      { source: '/id/sewa-kasur-jogja', destination: '/id/sewa-kasur-terdekat', permanent: true },
       { source: '/sewa-kasur/:path*', destination: '/:path*', permanent: true },
     ];
   },
