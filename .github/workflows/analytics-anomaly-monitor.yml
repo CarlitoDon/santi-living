@@ -25,7 +25,7 @@ concurrency:
 jobs:
   monitor:
     name: Collect analytics anomaly snapshot
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, instabox]
     timeout-minutes: 15
     env:
       GBP_CLIENT_ID: ${{ secrets.GBP_CLIENT_ID }}

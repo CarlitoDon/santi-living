@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-source-branch:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, instabox]
     steps:
       - name: Check source branch
         if: github.head_ref != 'dev'
