@@ -27,7 +27,8 @@ Fakta penting:
 - [ Sewa Karpet Jogja ](https://santiliving.com/id/sewa-karpet-jogja) : Karpet merah, runner, booth & paket acara (domain utama)
 - [ Sewa Permadani Jogja ](https://santiliving.com/id/sewa-karpet-permadani-jogja) : Permadani merah/emas untuk pengajian, tahlilan, lesehan (domain utama)
 - [ Sewa Perlengkapan Event ](https://santiliving.com/id/sewa-perlengkapan-event) : Paket perlengkapan acara satu atap — kasur, karpet, kipas, TV (domain utama)
-- [ Sewa Kursi Acara Jogja ](https://santiliving.com/id/sewa-kursi-acara) : Sewa kursi acara Jogja — kursi plastik, kursi lipat rangka besi, dan kursi susun besi spons siap antar jemput
+- [ Sewa Kursi Acara Jogja ](https://santiliving.com/id/sewa-kursi-acara) : Sewa kursi acara Jogja — kursi plastik Rp 3.000, kursi lipat seminar Rp 5.000, dan kursi hotel VIP Rp 7.000 per unit/hari, siap antar jemput Sleman, Kota Jogja, dan Bantul
+- [ Rincian Harga Sewa (Markdown) ](https://santiliving.com/pricing.md) : File data terstruktur harga sewa kasur dan kursi acara untuk sistem AI & agent
 - [ Sewa Extra Bed Jogja ](https://santiliving.com/id/sewa-extra-bed-jogja) : Extra bed busa lantai tebal 20 cm steril untuk hotel, homestay, dan penginapan
 - [ Landing Page Isolated Sewa Kursi Plastik Jogja ](https://santiliving.com/id/lp-sewa-kursi-jogja) : Landing page terisolasi khusus sewa kursi plastik Jogja dengan form lead capture instan & WhatsApp redirect
 - [ Landing Page Isolated Sewa Kasur Jogja ](https://santiliving.com/id/lp-sewa-kasur-jogja) : Landing page terisolasi khusus sewa kasur busa lantai Jogja tebal 20 cm dengan form pemesanan instan & tracking konversi
