@@ -292,6 +292,14 @@ export default async function HomePage({
               </Link>
             </p>
           </div>
+          <div className="hybrid-proof-line mt-2" data-reveal="fade">
+            <p>
+              {isEnglish ? 'Planning a hajatan or seminar?' : 'Ada acara hajatan atau seminar?'}{' '}
+              <Link href={'/' + locale + '/sewa-kursi-acara'} className="font-semibold text-blue-600 hover:underline">
+                {isEnglish ? 'Event Chair Rental Jogja (from Rp 3,000) \u2192' : 'Sewa Kursi Acara Jogja (mulai Rp 3.000) \u2192'}
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
