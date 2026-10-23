@@ -168,7 +168,7 @@ export function getHostCta(hostname = '', pathname = '', locale = 'id'): HostCta
     return HOST_CTA_BY_CONTEXT.acara[l];
   }
 
-  if (path.startsWith('/sewa-kursi-acara')) {
+  if (path.startsWith('/sewa-kursi-jogja')) {
     return HOST_CTA_BY_CONTEXT.kursi[l];
   }
 

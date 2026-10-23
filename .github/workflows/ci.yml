@@ -7,7 +7,7 @@ on:
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, instabox]
     steps:
       - uses: actions/checkout@v4
 

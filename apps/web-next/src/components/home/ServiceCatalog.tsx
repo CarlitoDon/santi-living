@@ -51,7 +51,7 @@ const serviceOptions: Record<ServiceKey, {
       { name: 'Kursi hotel', image: '/images/kursi-susun-merah.webp', imageAlt: 'Kursi hotel untuk area tamu dan seremoni', description: 'Kursi untuk area tamu dan seremoni dengan tampilan rapi dan mudah ditata.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
       { name: 'Kursi plastik', image: '/images/kursi-plastik-biru.webp', imageAlt: 'Kursi plastik biru dengan sandaran berpalang', description: 'Kursi plastik biru yang praktis untuk kebutuhan acara.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
     ],
-    href: '/sewa-kursi-acara',
+    href: '/sewa-kursi-jogja',
     wa: 'Halo Santi Living, saya ingin cek sewa kursi acara.\n\nJenis kursi: {jenis}\nJumlah kursi: {jumlah}\nTanggal acara: {tanggal}\nLokasi: {alamat}\n\nMohon bantu cek ketersediaan dan pengantaran. Terima kasih.',
   },
   karpet: {

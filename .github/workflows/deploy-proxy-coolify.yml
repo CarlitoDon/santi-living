@@ -48,7 +48,7 @@ env:
 jobs:
   build:
     name: Build proxy
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, instabox]
     timeout-minutes: 20
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
   deploy:
     name: Trigger Coolify deployment
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, instabox]
     timeout-minutes: 10
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'workflow_call'
     steps:

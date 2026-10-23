@@ -62,10 +62,10 @@ describe('sitemap cache stability', () => {
     expect(entries.some((entry) => entry.url.endsWith('/sewa-karpet'))).toBe(false);
     expect(urls.some((url) => /(?:karpet|permadani|acara|kipas-angin)\.santiliving\.com/.test(url))).toBe(false);
 
-    const chair = entries.find((entry) => entry.url === 'https://santiliving.com/id/sewa-kursi-acara');
+    const chair = entries.find((entry) => entry.url === 'https://santiliving.com/id/sewa-kursi-jogja');
     expect(chair?.alternates?.languages).toEqual({
-      id: 'https://santiliving.com/id/sewa-kursi-acara',
-      en: 'https://santiliving.com/en/sewa-kursi-acara',
+      id: 'https://santiliving.com/id/sewa-kursi-jogja',
+      en: 'https://santiliving.com/en/sewa-kursi-jogja',
     });
   });
 
