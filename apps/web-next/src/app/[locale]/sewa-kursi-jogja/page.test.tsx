@@ -46,7 +46,10 @@ describe('Sewa Kursi Jogja Page', () => {
     const metadata = await generateMetadata({ params: Promise.resolve({ locale: 'id' }) });
     const pageUrl = `${PRIMARY_SITE_URL}/id${PAGE_PATH}`;
 
-    expect(metadata.title).toBe('Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit');
+    expect(metadata.title).toBe('Sewa Kursi Jogja Mulai Rp3.000 | Siap Antar H-1 Sleman, Jogja & Bantul');
+    expect(metadata.description).toBe(
+      'Sewa kursi Jogja mulai Rp3.000/unit untuk hajatan, seminar & pengajian. Siap antar H-1 Sleman, Kota Jogja & Bantul. Pesan cepat WhatsApp 0895-1911-9092!',
+    );
     expect(metadata.alternates?.canonical).toBe(pageUrl);
     expect(metadata.alternates?.languages).toEqual({
       id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
@@ -118,8 +121,13 @@ describe('Sewa Kursi Jogja Page', () => {
     expect(screen.getByLabelText(/nomor whatsapp/i)).toBeTruthy();
 
     expect(screen.getByText('Kursi Plastik')).toBeTruthy();
-    expect(screen.getByText('Kursi Lipat Seminar')).toBeTruthy();
-    expect(screen.getByText('Kursi Hotel VIP')).toBeTruthy();
+    expect(screen.getAllByText('Kursi Lipat Seminar').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Kursi Hotel VIP').length).toBeGreaterThan(0);
+    expect(screen.getByText('Kursi Plastik Hajatan')).toBeTruthy();
+    expect(screen.getByText('Siap Antar Jemput')).toBeTruthy();
+    expect(screen.getByText('Rp 3.000 / unit / hari')).toBeTruthy();
+    expect(screen.getByText('Rp 5.000 / unit / hari')).toBeTruthy();
+    expect(screen.getByText('Rp 7.000 / unit / hari')).toBeTruthy();
     expect(screen.getByText('Meja Acara / Prasmanan')).toBeTruthy();
     expect(screen.getByText('Karpet Permadani')).toBeTruthy();
 
