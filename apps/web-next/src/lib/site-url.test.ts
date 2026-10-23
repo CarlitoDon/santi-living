@@ -8,8 +8,8 @@ describe('site URL policy', () => {
   });
 
   it('adds exactly one supported locale prefix', () => {
-    expect(localizedSiteUrl('/sewa-kursi-acara', 'id')).toBe(
-      'https://santiliving.com/id/sewa-kursi-acara',
+    expect(localizedSiteUrl('/sewa-kursi-jogja', 'id')).toBe(
+      'https://santiliving.com/id/sewa-kursi-jogja',
     );
     expect(localizedSiteUrl('sewa-karpet-jogja/', 'en')).toBe(
       'https://santiliving.com/en/sewa-karpet-jogja',

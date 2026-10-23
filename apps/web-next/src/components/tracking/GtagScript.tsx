@@ -614,7 +614,7 @@ export function GtagScript() {
             if (serviceSignalCount > 1) return 'general';
             if (normalizedPath.indexOf('/sewa-karpet') === 0 || combined.indexOf('karpet') !== -1) return 'karpet';
             if (combined.indexOf('extra bed') !== -1 || combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1) return 'kasur';
-            if (normalizedPath === '/sewa-kursi-acara' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'kursi';
+            if (normalizedPath === '/sewa-kursi-jogja' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'kursi';
             if (combined.indexOf('perlengkapan event') !== -1 || combined.indexOf('event equipment') !== -1) return 'event';
             return '';
           }
@@ -628,7 +628,7 @@ export function GtagScript() {
             if (combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) serviceSignalCount += 1;
             if (combined.indexOf('karpet') !== -1 || combined.indexOf('carpet') !== -1) serviceSignalCount += 1;
             if (serviceSignalCount > 1) return 'general_rental_inquiry';
-            if (normalizedPath === '/sewa-kursi-acara' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'sewa_kursi_acara';
+            if (normalizedPath === '/sewa-kursi-jogja' || combined.indexOf('kursi') !== -1 || combined.indexOf('chair') !== -1) return 'sewa_kursi_acara';
             if (normalizedPath === '/harga-sewa-kasur' || combined.indexOf('kasur') !== -1 || combined.indexOf('mattress') !== -1 || combined.indexOf('extra bed') !== -1) return 'sewa_kasur';
             if (combined.indexOf('permadani emas') !== -1 || combined.indexOf('permadani-emas') !== -1) {
               return 'sewa_karpet_permadani_emas';

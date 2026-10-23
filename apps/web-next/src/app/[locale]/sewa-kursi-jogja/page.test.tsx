@@ -12,173 +12,143 @@ const PAGE_PATH = '/sewa-kursi-jogja';
 
 type JsonLdComponent = ReactElement<{ data: Record<string, unknown> }>;
 
+type ServiceSchema = {
+  '@type': string;
+  '@id': string;
+  url: string;
+  areaServed: Array<{ name: string }>;
+  provider: { address: { streetAddress: string } };
+  hasOfferCatalog: {
+    '@type': string;
+    itemListElement: Array<{
+      price: number;
+      priceSpecification: { unitText: string };
+      itemOffered: { name: string };
+    }>;
+  };
+};
+
+function collectStrings(value: unknown, seen = new Set<object>()): string {
+  if (typeof value === 'string') return value;
+  if (value === null || typeof value !== 'object') return '';
+  if (seen.has(value)) return '';
+  seen.add(value);
+  if (Array.isArray(value)) return value.map((item) => collectStrings(item, seen)).join(' ');
+  return Object.values(value).map((item) => collectStrings(item, seen)).join(' ');
+}
+
 describe('Sewa Kursi Jogja Page', () => {
-  describe('Static params', () => {
-    it('generates static params for id and en locales', () => {
-      const params = generateStaticParams();
-      expect(params).toEqual([{ locale: 'id' }, { locale: 'en' }]);
-    });
+  it('generates static params for id and en locales', () => {
+    expect(generateStaticParams()).toEqual([{ locale: 'id' }, { locale: 'en' }]);
   });
 
-  describe('SEO & Metadata', () => {
-    it('renders metadata correctly for Indonesian (id) locale', async () => {
-      const metadata = await generateMetadata({
-        params: Promise.resolve({ locale: 'id' }),
-      });
-      const pageUrl = `${PRIMARY_SITE_URL}/id${PAGE_PATH}`;
+  it('keeps the exact canonical title and enables indexing for Indonesian', async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ locale: 'id' }) });
+    const pageUrl = `${PRIMARY_SITE_URL}/id${PAGE_PATH}`;
 
-      expect(metadata.title).toBe(
-        'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit',
-      );
-      expect(metadata.description).toBe(
-        'Sewa kursi Jogja murah dan siap antar untuk hajatan, pengajian, rapat & pernikahan di Sleman, Kota Jogja, Bantul, Kulon Progo. Stok ratusan unit siap kirim hari ini.',
-      );
-      expect(metadata.keywords).toEqual([
-        'sewa kursi jogja',
-        'rental kursi jogja',
-        'sewa kursi plastik jogja',
-        'sewa kursi lipat jogja',
-        'sewa kursi hajatan jogja',
-        'sewa kursi hotel jogja',
-      ]);
-      expect(metadata.alternates?.canonical).toBe(pageUrl);
-      expect(metadata.alternates?.languages).toEqual({
-        id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-        en: `${PRIMARY_SITE_URL}/en${PAGE_PATH}`,
-        'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-      });
-      expect(metadata.openGraph).toMatchObject({
-        title: 'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit',
-        url: pageUrl,
-        locale: 'id_ID',
-        siteName: 'Santi Living',
-      });
-      expect(metadata.robots).toEqual({ index: false, follow: true });
+    expect(metadata.title).toBe('Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit');
+    expect(metadata.alternates?.canonical).toBe(pageUrl);
+    expect(metadata.alternates?.languages).toEqual({
+      id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
+      en: `${PRIMARY_SITE_URL}/en${PAGE_PATH}`,
+      'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
     });
-
-    it('renders metadata correctly for English (en) locale', async () => {
-      const metadata = await generateMetadata({
-        params: Promise.resolve({ locale: 'en' }),
-      });
-      const pageUrl = `${PRIMARY_SITE_URL}/en${PAGE_PATH}`;
-
-      expect(metadata.title).toBe(
-        'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs',
-      );
-      expect(metadata.description).toBe(
-        'Affordable event chair rental in Yogyakarta for celebrations, gatherings, meetings & weddings in Sleman, Yogyakarta City, Bantul, Kulon Progo. Hundreds of units ready for delivery.',
-      );
-      expect(metadata.alternates?.canonical).toBe(pageUrl);
-      expect(metadata.alternates?.languages).toEqual({
-        id: `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-        en: `${PRIMARY_SITE_URL}/en${PAGE_PATH}`,
-        'x-default': `${PRIMARY_SITE_URL}/id${PAGE_PATH}`,
-      });
-      expect(metadata.openGraph).toMatchObject({
-        title: 'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs',
-        url: pageUrl,
-        locale: 'en_US',
-      });
-    });
+    expect(metadata.openGraph).toMatchObject({ url: pageUrl, locale: 'id_ID' });
+    expect(metadata.robots).toEqual({ index: true, follow: true });
   });
 
-  describe('JSON-LD Structured Data', () => {
-    it('renders Product and FAQ schemas in JSON-LD', async () => {
-      const page = await SewaKursiJogjaPage({
-        params: Promise.resolve({ locale: 'id' }),
-      });
+  it('keeps English metadata on the same canonical path', async () => {
+    const metadata = await generateMetadata({ params: Promise.resolve({ locale: 'en' }) });
+    const pageUrl = `${PRIMARY_SITE_URL}/en${PAGE_PATH}`;
 
-      const jsonLdElements = Children.toArray(page.props.children).filter(
-        (child): child is JsonLdComponent =>
-          isValidElement(child) && child.type === JsonLd,
-      );
-
-      expect(jsonLdElements).toHaveLength(2);
-
-      const productSchema = jsonLdElements[0].props.data;
-      const faqSchema = jsonLdElements[1].props.data;
-
-      // Product Schema assertions
-      expect(productSchema['@type']).toBe('Product');
-      expect(productSchema.name).toContain('Sewa Kursi Jogja');
-      expect(productSchema.brand).toEqual({ '@type': 'Brand', name: 'Santi Living' });
-      const offers = productSchema.offers as {
-        '@type': string;
-        lowPrice: number;
-        highPrice: number;
-        offerCount: number;
-        offers: Array<{ name: string; price: number }>;
-      };
-      expect(offers['@type']).toBe('AggregateOffer');
-      expect(offers.lowPrice).toBe(3000);
-      expect(offers.highPrice).toBe(25000);
-      expect(offers.offerCount).toBe(4);
-      expect(offers.offers.map((o) => o.name)).toEqual([
-        'Kursi Plastik',
-        'Kursi Lipat',
-        'Kursi Hotel',
-        'Meja Acara / Prasmanan',
-      ]);
-
-      // FAQ Schema assertions
-      expect(faqSchema['@type']).toBe('FAQPage');
-      const mainEntity = faqSchema.mainEntity as Array<{
-        '@type': string;
-        name: string;
-        acceptedAnswer: { text: string };
-      }>;
-      expect(mainEntity).toHaveLength(5);
-      expect(mainEntity[0].name).toContain('tarif sewa kursi');
-      expect(mainEntity[2].name).toContain('Wilayah mana saja');
-      expect(mainEntity[2].acceptedAnswer.text).toContain('tidak melayani pengiriman ke Gunungkidul maupun Solo');
-    });
+    expect(metadata.title).toBe('Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs');
+    expect(metadata.alternates?.canonical).toBe(pageUrl);
+    expect(metadata.openGraph).toMatchObject({ url: pageUrl, locale: 'en_US' });
+    expect(metadata.robots).toEqual({ index: true, follow: true });
   });
 
-  describe('Page Rendering & Content', () => {
-    it('renders hero, form, catalog, packages, delivery zones, and FAQs', async () => {
-      const page = await SewaKursiJogjaPage({
-        params: Promise.resolve({ locale: 'id' }),
-      });
+  it('emits Service, OfferCatalog, and FAQPage schema', async () => {
+    const page = await SewaKursiJogjaPage({ params: Promise.resolve({ locale: 'id' }) });
+    const jsonLdElements = Children.toArray(page.props.children).filter(
+      (child): child is JsonLdComponent => isValidElement(child) && child.type === JsonLd,
+    );
 
-      render(page);
+    expect(jsonLdElements).toHaveLength(2);
 
-      // Hero assertions
-      expect(screen.getByRole('heading', { level: 1, name: /sewa kursi jogja/i })).toBeTruthy();
-      expect(screen.getByText(/100\+ ulasan maps/i)).toBeTruthy();
-      expect(screen.getByText(/siap antar se-diy/i)).toBeTruthy();
-      expect(screen.getAllByText(/mulai rp3\.000\/unit/i)[0]).toBeTruthy();
+    const service = jsonLdElements[0].props.data as unknown as ServiceSchema;
+    const faq = jsonLdElements[1].props.data as { '@type': string; mainEntity: Array<{ name: string }> };
 
-      // Lead capture form assertions
-      expect(screen.getByLabelText(/nama lengkap/i)).toBeTruthy();
-      expect(screen.getByLabelText(/nomor whatsapp/i)).toBeTruthy();
+    expect(service['@type']).toBe('Service');
+    expect(service.url).toBe(`${PRIMARY_SITE_URL}/id${PAGE_PATH}`);
+    expect(service.provider.address.streetAddress).toBe('Jl. Godean KM 10');
+    expect(service.areaServed.map((area) => area.name)).toEqual([
+      'Sleman',
+      'Kota Jogja',
+      'Bantul',
+      'Kulon Progo',
+    ]);
 
-      // Catalog assertions
-      expect(screen.getByText('Kursi Plastik')).toBeTruthy();
-      expect(screen.getByText('Kursi Lipat')).toBeTruthy();
-      expect(screen.getByText('Kursi Hotel')).toBeTruthy();
-      expect(screen.getByText('Meja Acara / Prasmanan')).toBeTruthy();
+    expect(service.hasOfferCatalog['@type']).toBe('OfferCatalog');
+    const offers = service.hasOfferCatalog.itemListElement;
+    expect(offers.map((offer) => offer.itemOffered.name)).toEqual([
+      'Kursi Plastik',
+      'Kursi Lipat Seminar',
+      'Kursi Hotel VIP',
+    ]);
+    expect(offers.map((offer) => offer.price)).toEqual([3000, 5000, 7000]);
+    expect(offers.every((offer) => offer.priceSpecification.unitText === 'per unit per hari')).toBe(true);
 
-      // Package assertions
-      expect(screen.getByText('Paket 50 Unit')).toBeTruthy();
-      expect(screen.getByText('Rp150.000')).toBeTruthy();
-      expect(screen.getByText('Paket 100 Unit')).toBeTruthy();
-      expect(screen.getByText('Rp300.000')).toBeTruthy();
-      expect(screen.getByText('Paket 200 Unit')).toBeTruthy();
-      expect(screen.getByText('Rp600.000')).toBeTruthy();
+    expect(faq['@type']).toBe('FAQPage');
+    expect(faq.mainEntity).toHaveLength(10);
+    expect(faq.mainEntity.map((entry) => entry.name)).toEqual(
+      expect.arrayContaining([
+        'Jenis kursi apa yang bisa ditanyakan?',
+        'Berapa minimal order sewa kursi dan bagaimana pengirimannya?',
+        'Sebaiknya pesan berapa lama sebelumnya?',
+      ]),
+    );
+  });
 
-      // Delivery zones assertions (Sleman, Kota Jogja, Bantul, Kulon Progo - without Gunungkidul/Solo)
-      expect(screen.getByText(/✓ Sleman/i)).toBeTruthy();
-      expect(screen.getByText(/✓ Kota Jogja/i)).toBeTruthy();
-      expect(screen.getByText(/✓ Bantul/i)).toBeTruthy();
-      expect(screen.getByText(/✓ Kulon Progo/i)).toBeTruthy();
-      expect(
-        screen.getByText(/tidak melayani pengiriman ke wilayah gunungkidul maupun solo/i),
-      ).toBeTruthy();
+  it('renders the merged content, prices, delivery scope, and WhatsApp CTA', async () => {
+    const page = await SewaKursiJogjaPage({ params: Promise.resolve({ locale: 'id' }) });
+    render(page);
 
-      // 5 FAQs
-      expect(screen.getByText(/pertanyaan seputar sewa kursi jogja/i)).toBeTruthy();
-      expect(screen.getByText(/berapa tarif sewa kursi di jogja via santi living\?/i)).toBeTruthy();
-      expect(screen.getByText(/wilayah mana saja yang dicakup untuk pengiriman kursi\?/i)).toBeTruthy();
-    });
+    expect(screen.getByRole('heading', { level: 1, name: 'Sewa Kursi Jogja' })).toBeTruthy();
+    expect(screen.getByLabelText(/nama lengkap/i)).toBeTruthy();
+    expect(screen.getByLabelText(/nomor whatsapp/i)).toBeTruthy();
+
+    expect(screen.getByText('Kursi Plastik')).toBeTruthy();
+    expect(screen.getByText('Kursi Lipat Seminar')).toBeTruthy();
+    expect(screen.getByText('Kursi Hotel VIP')).toBeTruthy();
+    expect(screen.getByText('Meja Acara / Prasmanan')).toBeTruthy();
+    expect(screen.getByText('Karpet Permadani')).toBeTruthy();
+
+    expect(screen.getAllByText('Rp3.000/unit/hari').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Rp5.000/unit/hari').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Rp7.000/unit/hari').length).toBeGreaterThan(0);
+
+    expect(screen.getByText(/✓ Sleman/i)).toBeTruthy();
+    expect(screen.getByText(/✓ Kota Jogja/i)).toBeTruthy();
+    expect(screen.getByText(/✓ Bantul/i)).toBeTruthy();
+    expect(screen.getAllByText(/jl\. godean km 10/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/tidak melayani pengiriman ke gunungkidul maupun solo/i).length).toBeGreaterThan(0);
+
+    const waLink = screen.getByRole('link', { name: /cek stok via whatsapp/i });
+    expect(waLink.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/6289519119092\?text=/);
+    expect(screen.getAllByText(/0895-1911-9092/).length).toBeGreaterThan(0);
+  });
+
+  it('keeps price and address invariants across both locales', async () => {
+    for (const locale of ['id', 'en'] as const) {
+      const page = await SewaKursiJogjaPage({ params: Promise.resolve({ locale }) });
+      const rendered = collectStrings(page);
+
+      expect(rendered).not.toMatch(/chitose|futura|napolly|tiffany/i);
+      expect(rendered).not.toMatch(/km\s*4\b/i);
+      expect(rendered).toContain('Jl. Godean KM 10');
+      expect(rendered).toContain(locale === 'en' ? 'Rp3,000/unit/day' : 'Rp3.000/unit/hari');
+      expect(rendered).toContain(locale === 'en' ? 'Rp5,000/unit/day' : 'Rp5.000/unit/hari');
+      expect(rendered).toContain(locale === 'en' ? 'Rp7,000/unit/day' : 'Rp7.000/unit/hari');
+    }
   });
 });

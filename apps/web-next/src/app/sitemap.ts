@@ -24,7 +24,7 @@ const STATIC_PATHS = [
   'sewa-kipas-angin',
   'sewa-tv',
   'sewa-perlengkapan-event',
-  'sewa-kursi-acara',
+  'sewa-kursi-jogja',
   'produk',
   'about',
 ] as const;

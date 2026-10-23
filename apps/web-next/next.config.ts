@@ -123,6 +123,18 @@ const nextConfig: NextConfig = {
       { source: '/sewa-kasur-jogja', destination: '/id/sewa-kasur-terdekat', permanent: true },
       { source: '/id/sewa-kasur-jogja', destination: '/id/sewa-kasur-terdekat', permanent: true },
       { source: '/sewa-kasur/:path*', destination: '/:path*', permanent: true },
+      // Chair cluster consolidation (#198): retired URLs permanently redirect
+      // to the canonical /sewa-kursi-jogja page for both locales.
+      {
+        source: '/:locale(id|en)/sewa-kursi-acara',
+        destination: '/:locale/sewa-kursi-jogja',
+        permanent: true,
+      },
+      {
+        source: '/:locale(id|en)/lp-sewa-kursi-jogja',
+        destination: '/:locale/sewa-kursi-jogja',
+        permanent: true,
+      },
     ];
   },
 };
