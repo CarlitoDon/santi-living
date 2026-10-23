@@ -15,11 +15,11 @@ type Locale = 'id' | 'en';
 const PAGE_PATH = '/sewa-kursi-jogja';
 const WHATSAPP_DISPLAY = '0895-1911-9092';
 
-const TITLE_ID = 'Sewa Kursi Jogja — Kursi Plastik, Lipat & Hotel Mulai Rp3.000/Unit';
+const TITLE_ID = 'Sewa Kursi Jogja Mulai Rp3.000 | Siap Antar H-1 Sleman, Jogja & Bantul';
 const TITLE_EN = 'Event Chair Rental Yogyakarta — Plastic, Folding & Hotel Chairs';
 
 const DESCRIPTION_ID =
-  'Sewa kursi Jogja murah dan siap antar untuk hajatan, pengajian, rapat & pernikahan di Sleman, Kota Jogja, Bantul, Kulon Progo. Stok ratusan unit siap kirim hari ini.';
+  'Sewa kursi Jogja mulai Rp3.000/unit untuk hajatan, seminar & pengajian. Siap antar H-1 Sleman, Kota Jogja & Bantul. Pesan cepat WhatsApp 0895-1911-9092!';
 const DESCRIPTION_EN =
   'Affordable event chair rental in Yogyakarta for celebrations, gatherings, meetings & weddings in Sleman, Yogyakarta City, Bantul, Kulon Progo. Hundreds of units ready for delivery.';
 
@@ -83,6 +83,7 @@ type CatalogItem = {
   description: string;
 };
 
+type HeroPriceItem = { name: string; price: string; note: string };
 type PriceRow = { type: string; price: string; bestFor: string };
 type PackageItem = { name: string; unitCount: string; price: string; basis: string; tag: string; description: string };
 type AreaItem = { name: string; detail: string };
@@ -99,6 +100,9 @@ type PageCopy = {
   heroCta: string;
   phoneLabel: string;
   trust: string[];
+  heroPricesTitle: string;
+  heroPricesBadge: string;
+  heroPrices: HeroPriceItem[];
   catalogEyebrow: string;
   catalogTitle: string;
   catalogIntro: string;
@@ -159,6 +163,25 @@ const CONTENT: Record<Locale, PageCopy> = {
     heroCta: 'Cek stok via WhatsApp',
     phoneLabel: `WhatsApp ${WHATSAPP_DISPLAY}`,
     trust: ['Ketersediaan dicek berdasarkan tanggal', 'Antar jemput terjadwal', 'Harga transparan tanpa biaya tersembunyi'],
+    heroPricesTitle: 'Ringkasan Harga Sewa Kursi',
+    heroPricesBadge: 'Siap Antar Jemput',
+    heroPrices: [
+      {
+        name: 'Kursi Plastik Hajatan',
+        price: 'Rp 3.000 / unit / hari',
+        note: 'Hajatan & syukuran warga',
+      },
+      {
+        name: 'Kursi Lipat Seminar',
+        price: 'Rp 5.000 / unit / hari',
+        note: 'Rapat, seminar & training',
+      },
+      {
+        name: 'Kursi Hotel VIP',
+        price: 'Rp 7.000 / unit / hari',
+        note: 'Resepsi & area tamu formal',
+      },
+    ],
     catalogEyebrow: 'Katalog & harga',
     catalogTitle: 'Pilihan Kursi, Meja & Karpet Permadani',
     catalogIntro:
@@ -321,6 +344,25 @@ const CONTENT: Record<Locale, PageCopy> = {
     heroCta: 'Check stock on WhatsApp',
     phoneLabel: `WhatsApp ${WHATSAPP_DISPLAY}`,
     trust: ['Availability checked by date', 'Scheduled pickup and delivery', 'Transparent pricing without hidden fees'],
+    heroPricesTitle: 'Quick Chair Rental Rates',
+    heroPricesBadge: 'Delivery & Pickup Ready',
+    heroPrices: [
+      {
+        name: 'Plastic Event Chairs',
+        price: 'Rp 3,000 / unit / day',
+        note: 'Celebrations & community gatherings',
+      },
+      {
+        name: 'Seminar Folding Chairs',
+        price: 'Rp 5,000 / unit / day',
+        note: 'Meetings, seminars & training',
+      },
+      {
+        name: 'VIP Hotel Chairs',
+        price: 'Rp 7,000 / unit / day',
+        note: 'Receptions & formal guest areas',
+      },
+    ],
     catalogEyebrow: 'Catalog & prices',
     catalogTitle: 'Chairs, Tables & Carpets',
     catalogIntro:
@@ -676,6 +718,39 @@ export default async function SewaKursiJogjaPage({
                   {copy.heroCta} <span aria-hidden="true">↗</span>
                 </a>
                 <span className="text-sm font-semibold text-stone-700">{copy.phoneLabel}</span>
+              </div>
+
+              <div className="mt-6 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm sm:p-5">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-100 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#D95D24]" aria-hidden="true" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#315a72]">
+                      {copy.heroPricesTitle}
+                    </span>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+                    {copy.heroPricesBadge}
+                  </span>
+                </div>
+                <div className="divide-y divide-stone-100">
+                  {copy.heroPrices.map((item) => (
+                    <div
+                      key={item.name}
+                      className="flex flex-col py-2.5 first:pt-3 last:pb-0 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                    >
+                      <div>
+                        <span className="text-sm font-bold text-stone-900">{item.name}</span>
+                        <span className="block text-xs text-stone-500 sm:inline sm:before:content-['—_']">
+                          ({item.note})
+                        </span>
+                      </div>
+                      <div className="mt-1 text-sm font-black text-[#D95D24] sm:mt-0 sm:text-right sm:text-base">
+                        {item.price}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200 shadow-md">
