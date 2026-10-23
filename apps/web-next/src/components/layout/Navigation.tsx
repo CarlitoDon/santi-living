@@ -142,7 +142,7 @@ export function Navigation() {
       children: [
         { href: '/produk', label: t('nav.semua_produk') },
         { href: '/sewa-kasur-terdekat', label: t('nav.kasur') },
-        { href: '/sewa-kursi-acara', label: t('nav.kursi') },
+        { href: '/sewa-kursi-jogja', label: t('nav.kursi') },
         { href: '/sewa-karpet-jogja', label: t('nav.karpet') },
         { href: '/sewa-karpet-permadani-jogja', label: t('nav.permadani') },
         { href: '/sewa-perlengkapan-event', label: t('nav.perlengkapan_event') },

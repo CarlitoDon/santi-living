@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-const MINIMAL_PATTERN = /\/(?:pesan|lp-sewa-kursi-jogja|lp-sewa-kasur-jogja|sewa-kursi-jogja)(?:\/|$)/;
+const MINIMAL_PATTERN = /\/(?:pesan|lp-sewa-kasur-jogja|sewa-kursi-jogja)(?:\/|$)/;
 
 export function ConditionalLayout({
   header,

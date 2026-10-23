@@ -306,7 +306,7 @@ describe('GtagScript WhatsApp location flow', () => {
   });
 
   it('infers chair metadata from a locale-prefixed WhatsApp path', async () => {
-    window.history.replaceState({}, '', '/id/sewa-kursi-acara');
+    window.history.replaceState({}, '', '/id/sewa-kursi-jogja');
     sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
       coords: { lat: -7.812345, lng: 110.412345 },
       source: 'manual',

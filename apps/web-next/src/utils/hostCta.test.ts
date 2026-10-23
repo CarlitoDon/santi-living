@@ -3,7 +3,7 @@ import { getHostCta } from './hostCta';
 
 describe('host CTA context', () => {
   it('recognizes the chair landing page after a locale prefix', () => {
-    const cta = getHostCta('', '/id/sewa-kursi-acara', 'id');
+    const cta = getHostCta('', '/id/sewa-kursi-jogja', 'id');
 
     expect(cta.context).toBe('kursi');
     expect(cta.desktopLabel).toBe('Cek kursi acara');
