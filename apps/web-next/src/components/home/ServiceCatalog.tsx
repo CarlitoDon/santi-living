@@ -30,6 +30,8 @@ const serviceOptions: Record<ServiceKey, {
   label: string;
   title: string;
   description: string;
+  helperText?: string;
+  anchorText?: string;
   items: ServiceCatalogItem[];
   href: string;
   wa: string;
@@ -46,6 +48,8 @@ const serviceOptions: Record<ServiceKey, {
     label: 'Kursi',
     title: 'Pilihan sewa kursi acara',
     description: 'Pilih jenis kursi untuk acara, lalu tim kami cek jumlah, tanggal, dan pengantaran.',
+    helperText: 'Butuh informasi spesifikasi unit, paket hajatan, dan daftar harga lengkap?',
+    anchorText: 'Lihat katalog sewa kursi Jogja (mulai Rp 3.000) →',
     items: [
       { name: 'Kursi lipat', image: '/images/kursi-lipat-merah.webp', imageAlt: 'Kursi lipat merah dengan rangka besi krom', description: 'Kursi lipat berlapis spons warna merah yang praktis untuk penataan acara yang fleksibel.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
       { name: 'Kursi hotel', image: '/images/kursi-susun-merah.webp', imageAlt: 'Kursi hotel untuk area tamu dan seremoni', description: 'Kursi untuk area tamu dan seremoni dengan tampilan rapi dan mudah ditata.', facts: ['Jumlah kursi yang dibutuhkan', 'Tanggal dan durasi acara', 'Lokasi pengantaran'] },
@@ -104,7 +108,24 @@ export function ServiceCatalog({ initialService, locale }: { initialService?: Se
       <div className="service-catalog-intro">
         <p className="section-eyebrow">Sewa {active.label.toLowerCase()}</p>
         <h2 id="catalog-title">{active.title}</h2>
-        <p>{active.description}</p>
+        <p>
+          {active.description}
+          {active.anchorText && (
+            <>
+              {' '}
+              <span>
+                {locale === 'en'
+                  ? 'Need unit specifications, packages, and full pricing? '
+                  : active.helperText
+                    ? `${active.helperText} `
+                    : ''}
+              </span>
+              <Link href={'/' + locale + active.href} className="font-semibold text-blue-600 hover:underline">
+                {locale === 'en' ? 'Event Chair Rental Jogja (from Rp 3,000) →' : active.anchorText}
+              </Link>
+            </>
+          )}
+        </p>
       </div>
 
       {activeService === 'kasur' ? (
@@ -146,7 +167,9 @@ export function ServiceCatalog({ initialService, locale }: { initialService?: Se
           </section>
           <div className="service-request-actions">
             <Link href={'/' + locale + active.href} className="home-primary-button">
-              Lihat detail {active.label.toLowerCase()}
+              {activeService === 'kursi'
+                ? (locale === 'en' ? 'View chair rental Jogja catalog' : 'Lihat katalog sewa kursi Jogja')
+                : `Lihat detail ${active.label.toLowerCase()}`}
             </Link>
             <WhatsAppLink
               message={active.wa}

@@ -296,7 +296,7 @@ export default async function HomePage({
             <p>
               {isEnglish ? 'Planning a hajatan or seminar?' : 'Ada acara hajatan atau seminar?'}{' '}
               <Link href={'/' + locale + '/sewa-kursi-jogja'} className="font-semibold text-blue-600 hover:underline">
-                {isEnglish ? 'Event Chair Rental Jogja (from Rp 3,000) \u2192' : 'Sewa Kursi Acara Jogja (mulai Rp 3.000) \u2192'}
+                {isEnglish ? 'Event Chair Rental Jogja (from Rp 3,000) →' : 'Sewa Kursi Jogja — Kursi Plastik & Lipat (mulai Rp 3.000) →'}
               </Link>
             </p>
           </div>
