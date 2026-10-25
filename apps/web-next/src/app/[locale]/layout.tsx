@@ -156,6 +156,10 @@ export default async function RootLayout({
     sameAs: [
       'https://www.instagram.com/santiliving',
       'https://www.tiktok.com/@santiliving',
+      'https://maps.google.com/?cid=10488080858214395605',
+      'https://g.page/r/CUU_Y1e48fCPEBM',
+      'https://carlitodon.github.io/santi-living-kursi/',
+      'https://vercel-kursi-ltguv93fk-doncarlo31s-projects.vercel.app',
     ],
   };
 
