@@ -4,7 +4,7 @@ import { LeadEventSchema } from './lead-attribution';
 const { neonMock, reverseGeocodeLeadLocationMock, sqlMock } = vi.hoisted(() => ({
   neonMock: vi.fn(),
   reverseGeocodeLeadLocationMock: vi.fn(),
-  sqlMock: vi.fn(),
+  sqlMock: Object.assign(vi.fn(), { query: vi.fn() }),
 }));
 
 vi.mock('@neondatabase/serverless', () => ({ neon: neonMock }));
@@ -12,7 +12,7 @@ vi.mock('./lead-geocode', () => ({
   reverseGeocodeLeadLocation: reverseGeocodeLeadLocationMock,
 }));
 
-import { persistLeadEvent } from './lead-db';
+import { persistLeadEvent, queryLeadEventMetrics } from './lead-db';
 
 const originalDatabaseUrl = process.env.DATABASE_URL;
 const receivedAt = '2026-09-13T00:00:00.000Z';
@@ -128,5 +128,55 @@ describe('persistLeadEvent location trust boundary', () => {
     expect(result.cityClassification).toBe('service_area');
     expect(result.record.city).toBe('Sleman');
     expect(result.record.geocode_status).toBe('not_requested');
+  });
+});
+
+describe('queryLeadEventMetrics breakdowns', () => {
+  beforeEach(() => {
+    process.env.DATABASE_URL = 'postgres://test';
+    neonMock.mockReturnValue(sqlMock);
+    sqlMock.mockReset();
+    sqlMock.mockResolvedValue([]);
+  });
+
+  afterAll(() => {
+    if (originalDatabaseUrl === undefined) {
+      delete process.env.DATABASE_URL;
+    } else {
+      process.env.DATABASE_URL = originalDatabaseUrl;
+    }
+  });
+
+  it('surfaces medium and location-permission breakdowns for paid vs organic and denied vs timeout', async () => {
+    // Query order: totals, event_type, city, geocode_status, medium, location_permission, source_campaign, daily
+    const query = vi.fn()
+      .mockResolvedValueOnce([{
+        total_events: 4,
+        distinct_event_ids: 4,
+        qualified_whatsapp_clicks: 0,
+        geocode_successes: 0,
+        geocode_failures: 0,
+        geocode_missing: 4,
+      }])
+      .mockResolvedValueOnce([{ key: 'whatsapp_click', count: 4 }])
+      .mockResolvedValueOnce([{ key: 'unknown', count: 4 }])
+      .mockResolvedValueOnce([{ key: 'not_requested', count: 4 }])
+      .mockResolvedValueOnce([{ key: 'cpc', count: 3 }, { key: 'organic', count: 1 }])
+      .mockResolvedValueOnce([{ key: 'denied', count: 3 }, { key: 'timeout', count: 1 }])
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce([]);
+    sqlMock.query = query;
+
+    const metrics = await queryLeadEventMetrics({});
+
+    expect(metrics.by_medium).toEqual([
+      { key: 'cpc', count: 3 },
+      { key: 'organic', count: 1 },
+    ]);
+    expect(metrics.by_location_permission).toEqual([
+      { key: 'denied', count: 3 },
+      { key: 'timeout', count: 1 },
+    ]);
+    expect(query).toHaveBeenCalledTimes(8);
   });
 });
