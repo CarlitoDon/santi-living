@@ -108,6 +108,8 @@ interface LeadEventMetrics {
   by_event_type: LeadMetricCount[];
   by_city_classification: LeadMetricCount[];
   by_geocode_status: LeadMetricCount[];
+  by_medium: LeadMetricCount[];
+  by_location_permission: LeadMetricCount[];
   by_source_campaign: LeadSourceCampaignMetric[];
   daily: LeadDailyMetric[];
 }
@@ -402,7 +404,7 @@ export async function queryLeadEventMetrics(
       AND ($2::timestamptz IS NULL OR received_at < $2::timestamptz)
   `;
 
-  const [totals, eventTypes, cityClassifications, geocodeStatuses, sourceCampaigns, daily] = await Promise.all([
+  const [totals, eventTypes, cityClassifications, geocodeStatuses, mediums, locationPermissions, sourceCampaigns, daily] = await Promise.all([
     sql.query(`
       SELECT
         COUNT(*)::int AS total_events,
@@ -431,6 +433,18 @@ export async function queryLeadEventMetrics(
       SELECT COALESCE(NULLIF(geocode_status, ''), '(not set)') AS key, COUNT(*)::int AS count
       ${whereClause}
       GROUP BY COALESCE(NULLIF(geocode_status, ''), '(not set)')
+      ORDER BY count DESC, key ASC
+    `, params),
+    sql.query(`
+      SELECT COALESCE(NULLIF(medium, ''), '(not set)') AS key, COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY COALESCE(NULLIF(medium, ''), '(not set)')
+      ORDER BY count DESC, key ASC
+    `, params),
+    sql.query(`
+      SELECT COALESCE(NULLIF(location_permission, ''), '(not set)') AS key, COUNT(*)::int AS count
+      ${whereClause}
+      GROUP BY COALESCE(NULLIF(location_permission, ''), '(not set)')
       ORDER BY count DESC, key ASC
     `, params),
     sql.query(`
@@ -487,6 +501,14 @@ export async function queryLeadEventMetrics(
       count: metricNumber(row.count),
     })),
     by_geocode_status: (geocodeStatuses as Array<{ key: string; count: unknown }>).map((row) => ({
+      key: row.key,
+      count: metricNumber(row.count),
+    })),
+    by_medium: (mediums as Array<{ key: string; count: unknown }>).map((row) => ({
+      key: row.key,
+      count: metricNumber(row.count),
+    })),
+    by_location_permission: (locationPermissions as Array<{ key: string; count: unknown }>).map((row) => ({
       key: row.key,
       count: metricNumber(row.count),
     })),
