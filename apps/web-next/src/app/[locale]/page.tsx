@@ -184,6 +184,20 @@ export default async function HomePage({
 
   return (
     <main className="home-page hybrid-home site-main-offset">
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-pengiriman-santi-living-mobile.webp"
+        media="(max-width: 767px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero-pengiriman-santi-living.webp"
+        media="(min-width: 768px)"
+        fetchPriority="high"
+      />
       <AutoLocationTrigger />
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={serviceCatalogSchema} />
