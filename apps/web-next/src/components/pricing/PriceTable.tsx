@@ -67,7 +67,7 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
           {items.map((item, index) => (
             <article
               key={item.id}
-              className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+              className="relative rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-150 hover:border-emerald-300 active:scale-[0.99] active:border-emerald-400 cursor-pointer"
               data-reveal="up"
               data-reveal-delay={String((index % 3) * 35)}
             >
@@ -116,10 +116,10 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                   data-product-category="kasur"
                   data-page-type="service_page"
                   data-wa-intent="sewa_kasur"
-                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg transition-colors no-underline shadow-sm"
+                  className="inline-flex items-center justify-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 px-3.5 rounded-lg transition-colors no-underline shadow-sm before:content-[''] before:absolute before:inset-0 before:z-0"
                 >
-                  <span>{locale === 'en' ? 'Book via WA' : 'Pesan via WA'}</span>
-                  <span aria-hidden="true">→</span>
+                  <span className="relative z-10">{locale === 'en' ? 'Book via WA' : 'Pesan via WA'}</span>
+                  <span className="relative z-10" aria-hidden="true">→</span>
                 </WhatsAppLink>
               </div>
             </article>
