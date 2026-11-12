@@ -81,10 +81,15 @@ export function Footer() {
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-terdekat')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_terdekat')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-lipat')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_lipat')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-bulanan')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_bulanan')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-extra-bed-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_extra_bed')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-bantal-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_bantal')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-selimut-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_selimut')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kursi-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kursi_acara')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-karpet-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_karpet_jogja')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-karpet-permadani-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_permadani_jogja')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-perlengkapan-event')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.perlengkapan_event')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-kipas-angin')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kipas_angin')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-cooling')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_cooling')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/artikel')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.artikel_tips')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/about')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.tentang_kami')}</Link></li>
             </ul>
@@ -94,10 +99,10 @@ export function Footer() {
           <div>
             <h4 className="text-base font-semibold mb-4 text-white">{t('footer.ikuti_kami')}</h4>
             <div className="flex gap-3">
-              <a href="https://www.instagram.com/santi.mebel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
+              <a href={config.socialLinks[0]} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               </a>
-              <a href="https://www.tiktok.com/@santi_mebel" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
+              <a href={config.socialLinks[1]} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-blue-600 no-underline motion-interactive motion-lift">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
               </a>
               <WhatsAppLink source="footer_social" location="footer" aria-label="WhatsApp" className="flex items-center justify-center w-10 h-10 bg-slate-800 rounded-full text-white hover:bg-green-600 no-underline motion-interactive motion-lift">
