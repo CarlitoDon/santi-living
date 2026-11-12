@@ -90,6 +90,7 @@ export function Footer() {
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-perlengkapan-event')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.perlengkapan_event')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kipas-angin')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kipas_angin')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-cooling')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_cooling')}</Link></li>
+              <li className="mb-2"><Link href={getMainSiteHref('/sewa-tv')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_tv')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/artikel')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.artikel_tips')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/about')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.tentang_kami')}</Link></li>
             </ul>
