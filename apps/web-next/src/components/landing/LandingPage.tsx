@@ -302,7 +302,7 @@ export function LandingPage({ config: cfg, children }: LandingPageProps) {
             <h2 className="text-center text-xl md:text-2xl font-bold mb-8 text-slate-900">
               {priceSectionTitle}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className={`grid grid-cols-1 gap-6 mx-auto ${priceCards.length === 1 ? 'max-w-md' : priceCards.length === 2 ? 'sm:grid-cols-2 max-w-2xl' : 'sm:grid-cols-2 lg:grid-cols-3 max-w-4xl'}`}>
               {priceCards.map((card, i) => (
                 <div 
                   key={i} 

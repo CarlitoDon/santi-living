@@ -42,7 +42,6 @@ describe('landing page metadata canonical & alternates', () => {
     { name: 'sewa-kasur-lipat', path: '/sewa-kasur-lipat', mod: () => import('./[locale]/sewa-kasur-lipat/page') },
     { name: 'sewa-selimut-jogja', path: '/sewa-selimut-jogja', mod: () => import('./[locale]/sewa-selimut-jogja/page') },
     { name: 'sewa-bantal-jogja', path: '/sewa-bantal-jogja', mod: () => import('./[locale]/sewa-bantal-jogja/page') },
-    { name: 'sewa-kasur-bulanan', path: '/sewa-kasur-bulanan', mod: () => import('./[locale]/sewa-kasur-bulanan/page') },
     { name: 'sewa-karpet-merah-jogja', path: '/sewa-karpet-merah-jogja', mod: () => import('./[locale]/sewa-karpet-merah-jogja/page') },
     { name: 'sewa-karpet-permadani-jogja', path: '/sewa-karpet-permadani-jogja', mod: () => import('./[locale]/sewa-karpet-permadani-jogja/page') },
     { name: 'sewa-perlengkapan-event', path: '/sewa-perlengkapan-event', mod: () => import('./[locale]/sewa-perlengkapan-event/page') },

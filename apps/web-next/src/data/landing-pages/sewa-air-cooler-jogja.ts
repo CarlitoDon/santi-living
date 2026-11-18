@@ -3,7 +3,7 @@ import type { LandingPageConfig } from '@/types/landing';
 export const sewaAirCoolerJogja: LandingPageConfig = {
   meta: {
     title: 'Sewa Air Cooler Jogja 35rb/Hari | Hemat Listrik 50-70W, MCB Kos Aman',
-    description: 'Sewa air cooler Jogja Rp35rb/hari, 175rb/minggu, 450rb/bulan. Daya 50-70W (vs AC portable 400-800W), MCB kos 450VA aman. Antar 2-4 jam se-DIY!',
+    description: 'Sewa air cooler Jogja mulai Rp35rb/hari. Daya 50-70W (vs AC portable 400-800W), MCB kos 450VA aman. Antar 2-4 jam se-DIY!',
   },
   hero: {
     title: 'Sewa Air Cooler Jogja 35rb/Hari',
@@ -21,8 +21,6 @@ export const sewaAirCoolerJogja: LandingPageConfig = {
 
   priceCards: [
     { name: 'Air Cooler (Harian)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Hari', note: 'Sudah termasuk Ice Pack', popular: true },
-    { name: 'Air Cooler (Mingguan)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: false },
-    { name: 'Air Cooler (Bulanan)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Bulan', note: 'Solusi anak kos', popular: false },
   ],
 
   audience: [
@@ -119,7 +117,7 @@ export const sewaAirCoolerJogja: LandingPageConfig = {
   en: {
     meta: {
       title: 'Rent Air Cooler Jogja Rp35k/Day | Energy Saving 50-70W, Safe for Boarding Rooms',
-      description: 'Rent air cooler in Jogja from Rp35k/day, 175k/week, 450k/month. Low 50-70W power (vs 400-800W portable AC). Safe for 450VA MCB. Fast delivery in 2-4 hours!',
+      description: 'Rent air cooler in Jogja from Rp35k/day. Low 50-70W power (vs 400-800W portable AC). Safe for 450VA MCB. Fast delivery in 2-4 hours!',
     },
     hero: {
       title: 'Rent Air Cooler Jogja from Rp35k/Day',
@@ -134,8 +132,6 @@ export const sewaAirCoolerJogja: LandingPageConfig = {
     ],
     priceCards: [
       { name: 'Air Cooler (Daily)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Day', note: 'Ice Pack included', popular: true },
-      { name: 'Air Cooler (Weekly)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Week', note: 'Better value', popular: false },
-      { name: 'Air Cooler (Monthly)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Month', note: 'Ideal for boarding house residents', popular: false },
     ],
     audience: [
       { icon: '🥵', title: 'Overheated Boarding Residents', description: 'Boarding room feels like an oven? An air cooler is the most economical cooling solution without tripping power.' },

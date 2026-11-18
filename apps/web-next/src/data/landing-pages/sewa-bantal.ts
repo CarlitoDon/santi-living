@@ -16,7 +16,7 @@ export const sewaBantal: LandingPageConfig = {
     { icon: '🧼', title: '100% Higienis', description: 'Bantal dibersihkan higienis dan sarung bantal selalu baru dari laundry.' },
     { icon: '☁️', title: 'Isi Dakron Premium', description: 'Bantal empuk dan padat, mampu menopang kepala dengan nyaman tanpa takut kempes.' },
     { icon: '🚚', title: 'Antar Jemput Kilat', description: 'Pesan pagi, bantal sampai siang. Kami antar langsung ke alamat Anda di Jogja.' },
-    { icon: '💰', title: 'Harga Termurah', description: 'Solusi paling hemat daripada beli baru. Sewa harian atau bulanan sesuai kebutuhan.' },
+    { icon: '💰', title: 'Harga Termurah', description: 'Solusi paling hemat daripada beli baru. Sewa harian praktis sesuai kebutuhan.' },
   ],
   priceCards: [
     { name: 'Bantal Tidur', size: 'Standar Dewasa', price: 'Rp 10.000', daily: 'Per Hari', note: 'Termasuk sarung bersih', popular: true },
@@ -55,7 +55,7 @@ en: {
     { icon: '🧼', title: '100% Hygienic', description: 'Pillows are deep cleaned and sanitized and pillowcases are always freshly laundered.' },
     { icon: '☁️', title: 'Premium Dacron Fill', description: 'Soft and firm pillows that support your head comfortably without going flat.' },
     { icon: '🚚', title: 'Express Delivery & Pickup', description: 'Order in the morning, pillow arrives by noon. We deliver directly to your address in Jogja.' },
-    { icon: '💰', title: 'Lowest Price', description: 'The most affordable solution compared to buying new. Daily or monthly rental to suit your needs.' },
+    { icon: '💰', title: 'Lowest Price', description: 'The most affordable solution compared to buying new. Flexible daily rental to suit your needs.' },
   ],
   priceCards: [
     { name: 'Sleeping Pillow', size: 'Adult Standard', price: 'Rp 10,000', daily: 'Per Day', note: 'Includes clean pillowcase', popular: true },

@@ -135,6 +135,17 @@ const nextConfig: NextConfig = {
         destination: '/:locale/sewa-kursi-jogja',
         permanent: true,
       },
+      // Retired monthly rental page: permanently redirect to daily pricing page
+      {
+        source: '/sewa-kasur-bulanan',
+        destination: '/id/harga-sewa-kasur',
+        permanent: true,
+      },
+      {
+        source: '/:locale(id|en)/sewa-kasur-bulanan',
+        destination: '/:locale/harga-sewa-kasur',
+        permanent: true,
+      },
     ];
   },
 };

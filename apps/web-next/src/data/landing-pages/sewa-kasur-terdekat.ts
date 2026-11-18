@@ -43,7 +43,7 @@ export const sewaKasurTerdekat: LandingPageConfig = {
       content: `
         <div class="prose max-w-none">
           <p>
-            Santi Living menyediakan layanan <strong>sewa kasur terdekat</strong> untuk berbagai wilayah penting di Daerah Istimewa Yogyakarta. Kami memiliki cakupan khusus untuk mengantar pesanan kasur busa harian dan bulanan ke area kos mahasiswa dan pemukiman padat berikut:
+            Santi Living menyediakan layanan <strong>sewa kasur terdekat</strong> untuk berbagai wilayah penting di Daerah Istimewa Yogyakarta. Kami memiliki cakupan khusus untuk mengantar pesanan kasur busa harian ke area kos mahasiswa dan pemukiman padat berikut:
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
             <div class="p-4 border rounded shadow-sm bg-white">
@@ -107,7 +107,7 @@ export const sewaKasurTerdekat: LandingPageConfig = {
         content: `
           <div class="prose max-w-none">
             <p>
-              Santi Living provides the <strong>nearest mattress rental</strong> services for various crucial sub-districts in Yogyakarta. We specialize in fast daily and monthly foam mattress deliveries to dense student boarding areas including:
+              Santi Living provides the <strong>nearest mattress rental</strong> services for various crucial sub-districts in Yogyakarta. We specialize in fast daily foam mattress deliveries to dense student boarding areas including:
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
               <div class="p-4 border rounded shadow-sm bg-white">

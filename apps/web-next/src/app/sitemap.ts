@@ -12,7 +12,6 @@ const STATIC_PATHS = [
   'harga-sewa-kasur',
   'sewa-kasur-terdekat',
   'sewa-kasur-lipat',
-  'sewa-kasur-bulanan',
   'sewa-extra-bed-jogja',
   'sewa-karpet-jogja',
   'sewa-karpet-merah-jogja',

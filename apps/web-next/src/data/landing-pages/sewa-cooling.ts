@@ -3,7 +3,7 @@ import type { LandingPageConfig } from '@/types/landing';
 export const sewaCooling: LandingPageConfig = {
   meta: {
     title: 'Sewa Air Cooler Jogja Mulai 35rb | Portable Hemat Listrik Lebih Dingin',
-    description: 'Sewa air cooler Jogja mulai Rp35.000/hari & Rp450.000/bulan. Portable hemat listrik, lebih dingin dari kipas angin, cocok untuk kamar kos & acara. Siap antar se-DIY!',
+    description: 'Sewa air cooler Jogja mulai Rp35.000/hari. Portable hemat listrik, lebih dingin dari kipas angin, cocok untuk kamar kos & acara. Siap antar se-DIY!',
   },
   hero: {
     title: 'Sewa Air Cooler Jogja Mulai 35rb',
@@ -20,8 +20,6 @@ export const sewaCooling: LandingPageConfig = {
   ],
   priceCards: [
     { name: 'Air Cooler (Harian)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Hari', note: 'Sudah termasuk Ice Pack', popular: true },
-    { name: 'Air Cooler (Mingguan)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: false },
-    { name: 'Air Cooler (Bulanan)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Bulan', note: 'Solusi jangka panjang anak kos', popular: false },
   ],
   audience: [
     { icon: '🥵', title: 'Anak Kos Kepanasan', description: 'Kamar kos terasa seperti oven saat siang hari? Air Cooler adalah pendingin paling efisien.' },
@@ -45,7 +43,7 @@ export const sewaCooling: LandingPageConfig = {
 en: {
   meta: {
     title: 'Nearest Air Cooler Rental in Jogja | Cool & Energy Saving',
-    description: 'The nearest air cooler rental center in Jogja, daily/monthly. Cooler than a fan, cheaper than AC. Perfect for boarding rooms or living rooms.',
+    description: 'The nearest air cooler rental center in Jogja starting from Rp35,000/day. Cooler than a fan, cheaper than AC. Perfect for boarding rooms or living rooms.',
   },
   hero: {
     title: 'Air Cooler Rental Jogja',
@@ -60,8 +58,6 @@ en: {
   ],
   priceCards: [
     { name: 'Air Cooler (Daily)', size: 'Portable Cooler', price: 'Rp 35.000', daily: 'Per Day', note: 'Ice Pack included', popular: true },
-    { name: 'Air Cooler (Weekly)', size: 'Portable Cooler', price: 'Rp 175.000', daily: 'Per Week', note: 'Better value', popular: false },
-    { name: 'Air Cooler (Monthly)', size: 'Portable Cooler', price: 'Rp 450.000', daily: 'Per Month', note: 'Long-term solution for boarding house residents', popular: false },
   ],
   audience: [
     { icon: '🥵', title: 'Overheated Boarding House Residents', description: 'Does your room feel like an oven during the day? An Air Cooler is the most efficient cooling solution.' },

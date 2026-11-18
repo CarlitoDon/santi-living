@@ -3,28 +3,26 @@ import type { LandingPageConfig } from '@/types/landing';
 export const sewaKipasAngin: LandingPageConfig = {
   meta: {
     title: 'Sewa Kipas Angin Jogja Mulai 29rb | Stand Fan 16 Inch Bersih Siap Antar',
-    description: 'Sewa kipas angin Jogja mulai Rp29.000/hari & Rp290.000/bulan. Stand fan 16 inch angin kencang bersih untuk kamar kos & acara. Antar jemput same day se-DIY!',
+    description: 'Sewa kipas angin Jogja mulai Rp29.000/hari. Stand fan 16 inch angin kencang bersih untuk kamar kos & acara. Antar jemput same day se-DIY!',
   },
   hero: {
     title: 'Sewa Kipas Angin Jogja Mulai 29rb',
-    subtitle: 'Cari rental kipas angin terdekat? Sewa harian atau bulanan, langsung adem!',
+    subtitle: 'Cari rental kipas angin terdekat? Sewa harian praktis, langsung adem!',
     badge: 'Mulai Rp29.000/hari',
   },
   color: 'emerald',
 
   benefits: [
     { icon: '💨', title: 'Angin Super Kencang', description: 'Kipas angin berdiri 16 inch dengan motor tangguh, sirkulasi udara maksimal.' },
-    { icon: '🔄', title: 'Fleksibel Harian/Bulanan', description: 'Butuh sehari untuk acara? Atau bulanan untuk kos? Kami siap melayani.' },
+    { icon: '🔄', title: 'Sewa Harian Fleksibel', description: 'Butuh sehari untuk acara atau beberapa hari untuk tamu? Kami siap melayani.' },
     { icon: '🧹', title: 'Kondisi Bersih', description: 'Unit selalu dibersihkan dan bebas debu sebelum diantar ke tempat Anda.' },
     { icon: '🚚', title: 'Layanan Antar Jemput', description: 'Gak perlu repot bawa sendiri. Tim kami antar langsung ke pintu kamar Anda.' },
   ],
   priceCards: [
-    { name: 'Kipas Angin (Harian)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Hari', note: 'Cocok untuk event / tamu', popular: false },
-    { name: 'Kipas Angin (Mingguan)', size: '16 Inch Stand Fan', price: 'Rp 145.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: true },
-    { name: 'Kipas Angin (Bulanan)', size: '16 Inch Stand Fan', price: 'Rp 290.000', daily: 'Per Bulan', note: 'Paling hemat untuk anak kos', popular: false },
+    { name: 'Kipas Angin (Harian)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Hari', note: 'Cocok untuk event / tamu', popular: true },
   ],
   audience: [
-    { icon: '🎓', title: 'Anak Kos', description: 'Kamar kos panas tapi budget terbatas untuk beli AC? Sewa kipas bulanan adalah solusinya.' },
+    { icon: '🎓', title: 'Anak Kos', description: 'Kamar kos panas tapi budget terbatas untuk beli AC? Sewa kipas harian praktis jadi solusinya.' },
     { icon: '🎉', title: 'Hajatan / Acara', description: 'Butuh kipas tambahan untuk arisan keluarga atau kumpul teman di kontrakan?' },
     { icon: '🎒', title: 'Tamu Menginap', description: 'Beri kenyamanan ekstra untuk keluarga atau teman yang menginap di rumah Anda.' },
     { icon: '🏢', title: 'Event Organiser', description: 'Sewa dalam jumlah banyak untuk mendukung sirkulasi udara di acara indoor Anda.' },
@@ -43,27 +41,25 @@ export const sewaKipasAngin: LandingPageConfig = {
   },
 en: {
   meta: {
-    title: 'Fan Rental Jogja Nearest Location | Daily & Monthly',
-    description: 'Nearest stand fan rental service in Jogja. Practical & affordable solution for boarding house students or events. Same day delivery & pickup.',
+    title: 'Fan Rental Jogja Nearest Location | Stand Fan 16 Inch',
+    description: 'Nearest stand fan rental service in Jogja starting from Rp29,000/day. Practical & affordable solution for guests or events. Same day delivery & pickup.',
   },
   hero: {
     title: 'Fan Rental Jogja',
-    subtitle: 'Looking for the nearest fan rental? Rent daily or monthly, stay cool instantly!',
+    subtitle: 'Looking for the nearest fan rental? Practical daily rental, stay cool instantly!',
     badge: 'Starting from Rp29.000/day',
   },
   benefits: [
     { icon: '💨', title: 'Super Strong Airflow', description: '16 inch stand fan with a powerful motor for maximum air circulation.' },
-    { icon: '🔄', title: 'Flexible Daily/Monthly', description: 'Need it for just one day for an event? Or monthly for a boarding room? We\'ve got you covered.' },
+    { icon: '🔄', title: 'Flexible Daily Rental', description: 'Need it for one day for an event or several days for guests? We\'ve got you covered.' },
     { icon: '🧹', title: 'Clean Condition', description: 'Units are always cleaned and dust-free before being delivered to your place.' },
     { icon: '🚚', title: 'Delivery & Pickup Service', description: 'No need to carry it yourself. Our team delivers directly to your door.' },
   ],
   priceCards: [
-    { name: 'Stand Fan (Daily)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Day', note: 'Great for events / guests', popular: false },
-    { name: 'Stand Fan (Weekly)', size: '16 Inch Stand Fan', price: 'Rp 145.000', daily: 'Per Week', note: 'More savings', popular: true },
-    { name: 'Stand Fan (Monthly)', size: '16 Inch Stand Fan', price: 'Rp 290.000', daily: 'Per Month', note: 'Best value for boarding house residents', popular: false },
+    { name: 'Stand Fan (Daily)', size: '16 Inch Stand Fan', price: 'Rp 29.000', daily: 'Per Day', note: 'Great for events / guests', popular: true },
   ],
   audience: [
-    { icon: '🎓', title: 'Boarding House Residents', description: 'Room too hot but budget too tight for an AC? Monthly fan rental is the solution.' },
+    { icon: '🎓', title: 'Boarding House Residents', description: 'Room too hot without AC? Practical daily stand fan rental is an easy cooling solution.' },
     { icon: '🎉', title: 'Gatherings / Events', description: 'Need extra fans for a family get-together or a hangout at your place?' },
     { icon: '🎒', title: 'Overnight Guests', description: 'Give extra comfort to family or friends staying overnight at your home.' },
     { icon: '🏢', title: 'Event Organizers', description: 'Rent in bulk to support air circulation at your indoor events.' },

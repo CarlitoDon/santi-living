@@ -15,8 +15,6 @@ vi.mock('@/contexts/locale', () => ({
         'pricing.table_dimensions': 'Dimensi',
         'pricing.table_capacity': 'Kapasitas',
         'pricing.table_price_day': 'Harga/Hari',
-        'pricing.table_price_week': 'Harga/Minggu',
-        'pricing.table_price_month': 'Harga/Bulan',
         'pricing.per_day': 'per hari',
       };
       return translations[key] ?? key;
@@ -79,5 +77,11 @@ describe('PriceTable', () => {
     expect(mobileLink?.getAttribute('href')).toContain('/api/wa?');
     expect(mobileLink?.getAttribute('data-wa-source')).toBe('pricetable_mattress_single');
     expect(mobileLink?.getAttribute('data-product-category')).toBe('kasur');
+
+    // Verify weekly & monthly prices are NOT rendered
+    expect(container.textContent).not.toContain('Harga/Minggu');
+    expect(container.textContent).not.toContain('Harga/Bulan');
+    expect(container.textContent).not.toContain('280.000');
+    expect(container.textContent).not.toContain('1.200.000');
   });
 });
