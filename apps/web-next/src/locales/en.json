@@ -138,7 +138,7 @@
       },
       {
         "q": "What is the minimum rental period?",
-        "a": "Minimum rental is 1 day. You can rent daily, weekly, or monthly."
+        "a": "Minimum rental is 1 day. You can rent daily based on your needed duration."
       }
     ]
   },
@@ -185,7 +185,6 @@
     "harga_sewa_busa": "Foam Rental Price",
     "sewa_kasur_terdekat": "Nearest Mattress Rental",
     "sewa_kasur_lipat": "Folding Mattress Rental",
-    "sewa_kasur_bulanan": "Monthly Mattress Rental",
     "sewa_extra_bed": "Extra Bed Rental Jogja",
     "sewa_bantal": "Pillow Rental Jogja",
     "sewa_selimut": "Blanket Rental Jogja",
@@ -232,11 +231,7 @@
     "table_dimensions": "Dimensions",
     "table_capacity": "Capacity",
     "table_price_day": "Price/Day",
-    "table_price_week": "Price/Week",
-    "table_price_month": "Price/Month",
     "per_day": "/day",
-    "per_week": "/week",
-    "per_month": "/month",
     "free": "🎉 FREE",
     "per_km": "/km",
     "save": "Save"

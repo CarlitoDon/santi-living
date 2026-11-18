@@ -20,13 +20,11 @@ export const sewaSelimut: LandingPageConfig = {
   ],
   priceCards: [
     { name: 'Selimut Harian', size: 'Single / Double', price: 'Rp 10.000', daily: 'Per Hari', note: 'Bahan fleece lembut', popular: true },
-    { name: 'Selimut Mingguan', size: 'Single / Double', price: 'Rp 60.000', daily: 'Per Minggu', note: 'Lebih hemat', popular: false },
-    { name: 'Selimut Bulanan', size: 'Single / Double', price: 'Rp 150.000', daily: 'Per Bulan', note: 'Cocok untuk musim bediding', popular: false },
   ],
   audience: [
     { icon: '🏔️', title: 'Acara di Kaliurang', description: 'Lengkapi kebutuhan makrab atau retreat di area pegunungan yang dingin.' },
     { icon: '👨‍👩-👧‍👦', title: 'Keluarga Menginap', description: 'Pastikan tamu Anda tidak kedinginan saat menginap di rumah Anda.' },
-    { icon: '🏢', title: 'Asrama & Pesantren', description: 'Solusi selimut bulanan untuk anak asrama tanpa repot mencuci sendiri.' },
+    { icon: '🏢', title: 'Asrama & Pesantren', description: 'Solusi selimut bersih dan siap pakai untuk kegiatan asrama tanpa repot mencuci sendiri.' },
     { icon: '⛺', title: 'Glamping / Camping', description: 'Tidur di alam bebas serasa di hotel dengan selimut tebal dari kami.' },
   ],
   faqs: [
@@ -59,13 +57,11 @@ en: {
   ],
   priceCards: [
     { name: 'Daily Blanket', size: 'Single / Double', price: 'Rp 10,000', daily: 'Per Day', note: 'Soft fleece material', popular: true },
-    { name: 'Weekly Blanket', size: 'Single / Double', price: 'Rp 60,000', daily: 'Per Week', note: 'Better value', popular: false },
-    { name: 'Monthly Blanket', size: 'Single / Double', price: 'Rp 150,000', daily: 'Per Month', note: 'Perfect for the cold season', popular: false },
   ],
   audience: [
     { icon: '🏔️', title: 'Events in Kaliurang', description: 'Complete your retreat or group gathering needs in the cold mountain area.' },
     { icon: '👨‍👩-👧‍👦', title: 'Family Stays', description: 'Make sure your guests stay warm when spending the night at your home.' },
-    { icon: '🏢', title: 'Dormitories & Boarding Schools', description: 'Monthly blanket solution for dormitory students without the hassle of washing themselves.' },
+    { icon: '🏢', title: 'Dormitories & Boarding Schools', description: 'Clean, ready-to-use blanket solution for dormitory events without the hassle of washing.' },
     { icon: '⛺', title: 'Glamping / Camping', description: 'Sleep in the great outdoors feeling like a hotel with our thick blankets.' },
   ],
   faqs: [

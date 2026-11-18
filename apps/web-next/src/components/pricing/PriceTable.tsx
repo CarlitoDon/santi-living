@@ -30,8 +30,6 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_dimensions')}</th>
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_capacity')}</th>
                 <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_day')}</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_week')}</th>
-                <th className="p-3 px-4 font-semibold whitespace-nowrap border-b border-blue-600">{t('pricing.table_price_month')}</th>
                 <th className="p-3 px-4 font-semibold text-center whitespace-nowrap border-b border-blue-600">{locale === 'en' ? 'Action' : 'Pesan'}</th>
               </tr>
             </thead>
@@ -42,8 +40,6 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                   <td className="p-3 px-4 text-slate-700">{item.dimensions}</td>
                   <td className="p-3 px-4 text-slate-700">{pcap(item, locale)}</td>
                   <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay, locale)}</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 7, locale)}</td>
-                  <td className="p-3 px-4 font-bold text-blue-600 whitespace-nowrap">{formatPrice(item.pricePerDay * 30, locale)}</td>
                   <td className="p-3 px-4 text-center whitespace-nowrap">
                     <WhatsAppLink
                       message={`Halo Santi Living, saya ingin sewa ${pn(item, locale)} (${type === 'package' ? 'Paket Lengkap' : 'Kasur Busa'}). Mohon info ketersediaan dan pengantaran.`}
@@ -93,18 +89,6 @@ export function PriceTable({ title, desc, items, type }: { title: string; desc: 
                 <div>
                   <dt className="text-slate-400">{t('pricing.table_capacity')}</dt>
                   <dd className="mt-1 font-semibold text-slate-700">{pcap(item, locale)}</dd>
-                </div>
-                <div>
-                  <dt className="text-slate-400">{t('pricing.table_price_week')}</dt>
-                  <dd className="mt-1 font-bold text-blue-600">
-                    {formatPrice(item.pricePerDay * 7, locale)}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-slate-400">{t('pricing.table_price_month')}</dt>
-                  <dd className="mt-1 font-bold text-blue-600">
-                    {formatPrice(item.pricePerDay * 30, locale)}
-                  </dd>
                 </div>
               </dl>
               <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">

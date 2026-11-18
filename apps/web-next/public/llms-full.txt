@@ -42,8 +42,6 @@ Pemesanan utama melalui WhatsApp: 0895-1911-9092 (email/telp: hubungi via WhatsA
 
 **Ekstra (per hari):** Bantal Rp 10.000, Sprei Rp 10.000, Selimut Rp 10.000, Guling Rp 10.000, TV 32" Rp 50.000, Kipas angin 16" Rp 29.000, Air cooler Rp 35.000.
 
-**Sewa Bulanan:** Kasur single mulai Rp 900.000/bulan (≈Rp 30.000/hari), paket lengkap mulai Rp 1.200.000/bulan (≈Rp 40.000/hari). TV 32" bulanan Rp 750.000. Kipas bulanan Rp 290.000. Air cooler bulanan Rp 450.000. Selimut bulanan Rp 150.000.
-
 Catatan harga: harga dapat berubah tanpa pemberitahuan; konfirmasi terbaru via WhatsApp. Diskon tersedia untuk pemesanan banyak unit (kemitraan kos, event organizer, kantor) sebesar 10–15%. Minimal sewa 1 hari.
 
 ## Ukuran Kasur
@@ -91,7 +89,7 @@ Kasur lipat tersedia ukuran Single (90x200), Single Super (100x200), dan Double 
 - **Bisa antar hari ini?** Ya — pesan sebelum jam 15.00 WIB untuk area Jogja, Sleman, Bantul.
 - **Kasur sewaan bersih?** Ya — setiap kasur dicuci dan disanitasi higienis sebelum dikirim; sprei bersih dan bantal baru disediakan.
 - **Area jangkauan?** Sleman, Bantul, Kota Jogja, Kulonprogo; area dekat Godean gratis ongkir.
-- **Minimal sewa?** 1 hari; tersedia sewa harian, mingguan, dan bulanan.
+- **Minimal sewa?** 1 hari (tarif harian sesuai durasi kebutuhan).
 - **Pembayaran apa saja?** QRIS, transfer bank, GoPay.
 - **Apakah ada diskon jumlah banyak?** Ya, 10–15% untuk pemesanan banyak unit / kemitraan.
 
@@ -102,7 +100,6 @@ Kasur lipat tersedia ukuran Single (90x200), Single Super (100x200), dan Double 
 - [Sewa Karpet Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-jogja)
 - [Sewa Karpet Merah Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-merah-jogja)
 - [Sewa Permadani Jogja (Domain utama)](https://santiliving.com/id/sewa-karpet-permadani-jogja)
-- [Sewa Kasur Bulanan](https://santiliving.com/id/sewa-kasur-bulanan)
 - [Sewa Kasur Lipat](https://santiliving.com/id/sewa-kasur-lipat)
 - [Sewa Kasur Terdekat](https://santiliving.com/id/sewa-kasur-terdekat)
 - [Sewa Kipas Angin](https://santiliving.com/id/sewa-kipas-angin)
@@ -739,7 +736,7 @@ Sitemap resmi memuat **1.174 URL** (24 landing pages + 1.150 artikel dalam 2 bah
 
 Struktur URL:
 - `https://santiliving.com/` — Beranda (ID default), `https://santiliving.com/en` — English
-- `https://santiliving.com/id/<route>` / `https://santiliving.com/en/<route>` — landing pages (harga-sewa-kasur, sewa-kasur-bulanan, sewa-kasur-lipat, sewa-kasur-terdekat, sewa-selimut-jogja, sewa-bantal-jogja, sewa-kipas-angin, sewa-cooling, sewa-tv)
+- `https://santiliving.com/id/<route>` / `https://santiliving.com/en/<route>` — landing pages (harga-sewa-kasur, sewa-kasur-lipat, sewa-kasur-terdekat, sewa-selimut-jogja, sewa-bantal-jogja, sewa-kipas-angin, sewa-cooling, sewa-tv)
 - `https://santiliving.com/id/artikel/<slug>` / `en/artikel/<slug>` — 575 artikel per bahasa
 - `https://santiliving.com/id/sewa-karpet-jogja` — sewa karpet (domain utama)
 - `https://santiliving.com/id/sewa-karpet-permadani-jogja` — sewa permadani (domain utama)

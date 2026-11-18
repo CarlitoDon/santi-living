@@ -3,7 +3,7 @@ import type { LandingPageConfig } from '@/types/landing';
 export const sewaTv: LandingPageConfig = {
   meta: {
     title: 'Sewa TV LED 32 Inch Jogja Mulai 50rb | HD Nobar & Acara Siap Antar',
-    description: 'Sewa TV Jogja mulai Rp50.000/hari & Rp750.000/bulan. TV LED 32 Inch HD jernih untuk nobar bola, seminar, presentasi, & homestay. Siap antar jemput ke lokasi!',
+    description: 'Sewa TV Jogja mulai Rp50.000/hari. TV LED 32 Inch HD jernih untuk nobar bola, seminar, presentasi, & homestay. Siap antar jemput ke lokasi!',
   },
   hero: {
     title: 'Sewa TV LED 32 Inch Jogja Mulai 50rb',
@@ -16,12 +16,10 @@ export const sewaTv: LandingPageConfig = {
     { icon: '📺', title: 'Resolusi HD Jernih', description: 'Nonton film, main game, atau presentasi dengan gambar yang tajam.' },
     { icon: '🎮', title: 'Support HDMI & USB', description: 'Mudah disambungkan ke laptop, console game, atau flashdisk.' },
     { icon: '🚚', title: 'Antar Jemput Gratis*', description: 'Layanan antar jemput gratis untuk area tertentu di Sleman & Jogja.' },
-    { icon: '💸', title: 'Sewa Harian/Bulanan', description: 'Fleksibel! Sewa harian untuk event, atau bulanan untuk kamar kos.' },
+    { icon: '💸', title: 'Sewa Harian Praktis', description: 'Fleksibel! Sewa harian sesuai durasi acara atau kebutuhan Anda.' },
   ],
   priceCards: [
     { name: 'TV LED 32 Inch (Harian)', size: '32 Inch HD', price: 'Rp 50.000', daily: 'Per Hari', note: 'Termasuk remote & kabel', popular: true },
-    { name: 'TV LED 32 Inch (Mingguan)', size: '32 Inch HD', price: 'Rp 250.000', daily: 'Per Minggu', note: 'Lebih hemat untuk staycation', popular: false },
-    { name: 'TV LED 32 Inch (Bulanan)', size: '32 Inch HD', price: 'Rp 750.000', daily: 'Per Bulan', note: 'Cocok untuk kamar kos eksklusif', popular: false },
   ],
   audience: [
     { icon: '⚽', title: 'Event Nobar', description: 'Nonton bareng bola atau film bareng teman kos jadi lebih seru.' },
@@ -44,7 +42,7 @@ export const sewaTv: LandingPageConfig = {
 en: {
   meta: {
     title: 'Nearest TV Rental in Jogja | 32 Inch LED TV',
-    description: 'Nearest 32 Inch LED TV rental center in Jogja, daily/monthly. Perfect for student watch parties, presentations, or homestays. Same day delivery and pickup.',
+    description: 'Nearest 32 Inch LED TV rental center in Jogja starting from Rp50,000/day. Perfect for student watch parties, presentations, or homestays. Same day delivery and pickup.',
   },
   hero: {
     title: 'TV Rental in Jogja',
@@ -55,12 +53,10 @@ en: {
     { icon: '📺', title: 'Clear HD Resolution', description: 'Watch movies, play games, or present with a sharp picture.' },
     { icon: '🎮', title: 'HDMI & USB Support', description: 'Easily connect to a laptop, game console, or flash drive.' },
     { icon: '🚚', title: 'Free Delivery & Pickup*', description: 'Free delivery and pickup service for certain areas in Sleman & Jogja.' },
-    { icon: '💸', title: 'Daily/Monthly Rental', description: 'Flexible! Daily rental for events, or monthly for boarding rooms.' },
+    { icon: '💸', title: 'Flexible Daily Rental', description: 'Practical daily rental tailored to your event or stay duration.' },
   ],
   priceCards: [
     { name: '32 Inch LED TV (Daily)', size: '32 Inch HD', price: 'Rp 50,000', daily: 'Per Day', note: 'Includes remote & cable', popular: true },
-    { name: '32 Inch LED TV (Weekly)', size: '32 Inch HD', price: 'Rp 250,000', daily: 'Per Week', note: 'More savings for a staycation', popular: false },
-    { name: '32 Inch LED TV (Monthly)', size: '32 Inch HD', price: 'Rp 750,000', daily: 'Per Month', note: 'Perfect for an exclusive boarding room', popular: false },
   ],
   audience: [
     { icon: '⚽', title: 'Watch Party Events', description: 'Watching football or movies together with housemates becomes more fun.' },

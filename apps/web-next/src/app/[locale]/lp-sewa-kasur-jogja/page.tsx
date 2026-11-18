@@ -158,12 +158,6 @@ const SPECIAL_PACKAGES = [
     highlight: 'Sewa 3+ Unit Diskon 10-15%',
     description: 'Siap dukung lonjakan tamu rombongan, liburan keluarga & event rombongan.',
   },
-  {
-    name: 'Paket Bulanan Kost',
-    tag: 'Hemat Bulanan',
-    highlight: 'Mulai Rp 900.000 / bulan',
-    description: 'Solusi hemat untuk mahasiswa atau pekerja magang tanpa perlu beli kasur baru.',
-  },
 ];
 
 const TESTIMONIALS = [
@@ -397,7 +391,7 @@ export default async function LpSewaKasurJogjaPage({
               <h3 className="text-xl font-black text-stone-900 sm:text-2xl">Paket Spesial &amp; Sewa Durasi</h3>
               <p className="mt-1 text-sm text-stone-600">Diskon khusus untuk pemesanan rombongan &amp; masa sewa fleksibel</p>
             </div>
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
+            <div className="mt-8 grid gap-5 md:grid-cols-2 max-w-3xl mx-auto">
               {SPECIAL_PACKAGES.map((pkg) => (
                 <div
                   key={pkg.name}

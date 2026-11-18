@@ -80,7 +80,6 @@ export function Footer() {
               <li className="mb-2"><Link href={getMainSiteHref('/harga-sewa-kasur')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.harga_sewa_busa')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-terdekat')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_terdekat')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-lipat')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_lipat')}</Link></li>
-              <li className="mb-2"><Link href={getMainSiteHref('/sewa-kasur-bulanan')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_kasur_bulanan')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-extra-bed-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_extra_bed')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-bantal-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_bantal')}</Link></li>
               <li className="mb-2"><Link href={getMainSiteHref('/sewa-selimut-jogja')} className="text-slate-400 no-underline transition-colors duration-200 hover:text-white">{t('footer.sewa_selimut')}</Link></li>
