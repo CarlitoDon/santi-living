@@ -944,4 +944,102 @@ describe('GtagScript WhatsApp location flow', () => {
       expect(leadPayload.campaign).toBe('kasur_diy');
     });
   });
+
+  describe('Google Ads WhatsApp conversion guardrails', () => {
+    it('never emits Google Ads conversion for outside-DIY GPS coordinates', async () => {
+      Object.defineProperty(navigator, 'geolocation', {
+        configurable: true,
+        value: {
+          getCurrentPosition: vi.fn((success: PositionCallback) => {
+            success({
+              coords: {
+                accuracy: 10,
+                altitude: null,
+                altitudeAccuracy: null,
+                heading: null,
+                latitude: -6.2272373,
+                longitude: 106.8584421,
+                speed: null,
+                toJSON: () => ({}),
+              },
+              timestamp: Date.now(),
+              toJSON: () => ({}),
+            } as GeolocationPosition);
+          }),
+        },
+      });
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+      fireEvent.click(link);
+
+      await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      expect(gtagCalls.some((call) => call[1] === 'whatsapp_click')).toBe(true);
+      expect(gtagCalls.some((call) => call[1] === 'conversion')).toBe(false);
+    });
+
+    it('deduplicates Google Ads conversion to once per session across repeated clicks', async () => {
+      const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+
+      fireEvent.click(link);
+      await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+
+      delete (window as TestWindow).__waTestUrl;
+      fireEvent.click(link);
+      await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const waClicks = gtagCalls.filter((call) => call[1] === 'whatsapp_click');
+      const adsConversions = gtagCalls.filter((call) => call[1] === 'conversion');
+      expect(waClicks).toHaveLength(2);
+      expect(adsConversions).toHaveLength(1);
+    });
+
+    it('deduplicates Google Ads conversion to once per session for validated service-area leads', async () => {
+      sessionStorage.setItem('sl_auto_location_result', JSON.stringify({
+        coords: { lat: -7.812345, lng: 110.412345 },
+        source: 'manual',
+        address: {
+          street: 'Titik manual pelanggan',
+          kota: 'Sleman',
+          provinsi: 'Daerah Istimewa Yogyakarta',
+        },
+      }));
+      const fetchMock = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({
+          ok: true,
+          persisted: true,
+          cityClassification: 'service_area',
+        }),
+      } as Response);
+      vi.stubGlobal('fetch', fetchMock);
+
+      const link = document.createElement('a');
+      link.href = '/api/wa?to=6289519119092&text=Halo';
+      document.body.appendChild(link);
+
+      fireEvent.click(link);
+      await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+
+      delete (window as TestWindow).__waTestUrl;
+      fireEvent.click(link);
+      await waitFor(() => expect((window as TestWindow).__waTestUrl).toContain('/api/wa'));
+
+      const gtagCalls = (window as TestWindow).gtag?.mock.calls ?? [];
+      const qualifiedCalls = gtagCalls.filter((call) => call[1] === 'santi_whatsapp_qualified');
+      const adsConversions = gtagCalls.filter((call) => call[1] === 'conversion');
+      expect(qualifiedCalls).toHaveLength(2);
+      expect(adsConversions).toHaveLength(1);
+    });
+  });
 });

@@ -785,6 +785,20 @@ export function GtagScript() {
                 link.href = url.toString();
               } catch(ex) {}
 
+              function hasFiredSessionAdsConversion() {
+                try {
+                  return sessionStorage.getItem('sl_ads_wa_conv_fired_v1') === '1';
+                } catch(ex) {
+                  return false;
+                }
+              }
+
+              function markSessionAdsConversionFired() {
+                try {
+                  sessionStorage.setItem('sl_ads_wa_conv_fired_v1', '1');
+                } catch(ex) {}
+              }
+
               function finishWhatsAppClick(location) {
                 var preferredManualLocation = readPreferredManualLocation();
                 if (preferredManualLocation) {
@@ -803,7 +817,8 @@ export function GtagScript() {
                       !isWithinDiyCoordinateBounds(location.latitude, location.longitude)))
                 );
 
-                function proceedWithUnlocatedOrOutsideDiy(loc) {
+                function proceedWithUnlocatedOrOutsideDiy(loc, outsideDiy) {
+                  var locOutsideDiy = Boolean(outsideDiy || (loc && loc.outside_diy === true));
                   var leadPayload = {
                     event_id: leadEventId,
                     event_type: 'whatsapp_click',
@@ -842,32 +857,36 @@ export function GtagScript() {
 
                   sendLeadEvent(leadPayload);
                   trackClarityEvent('whatsapp_click');
-                  flushGtagEvents([
+                  var unlocatedEvents = [
                     {
                       name: 'whatsapp_click',
                       params: eventParams
-                    },
-                    {
+                    }
+                  ];
+                  if (!locOutsideDiy && !hasFiredSessionAdsConversion()) {
+                    markSessionAdsConversionFired();
+                    unlocatedEvents.push({
                       name: 'conversion',
                       params: {
                         'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
                         'event_id': leadEventId,
                         'transport_type': 'beacon'
                       }
-                    }
-                  ], function() {
+                    });
+                  }
+                  flushGtagEvents(unlocatedEvents, function() {
                     navigateToWhatsapp(url);
                   });
                 }
 
                 if (!hasValidatedCoordinates || isOutsideDiy) {
-                  proceedWithUnlocatedOrOutsideDiy(location);
+                  proceedWithUnlocatedOrOutsideDiy(location, isOutsideDiy);
                   return;
                 }
 
                 reverseGeocodeLocation(location, function(enrichedLocation) {
                 if (enrichedLocation && enrichedLocation.outside_diy === true) {
-                  proceedWithUnlocatedOrOutsideDiy(enrichedLocation);
+                  proceedWithUnlocatedOrOutsideDiy(enrichedLocation, true);
                   return;
                 }
                 var leadPayload = {
@@ -921,20 +940,24 @@ export function GtagScript() {
                     persistence_status: 'confirmed'
                   });
                   trackClarityEvent('santi_whatsapp_qualified');
-                  flushGtagEvents([
+                  var qualifiedEvents = [
                     {
                       name: 'santi_whatsapp_qualified',
                       params: qualifiedEventParams
-                    },
-                    {
+                    }
+                  ];
+                  if (!hasFiredSessionAdsConversion()) {
+                    markSessionAdsConversionFired();
+                    qualifiedEvents.push({
                       name: 'conversion',
                       params: {
                         'send_to': '${ADS_ID}/y7bwCKTm3J0cEOPb7MZC',
                         'event_id': leadEventId,
                         'transport_type': 'beacon'
                       }
-                    }
-                  ], function() {
+                    });
+                  }
+                  flushGtagEvents(qualifiedEvents, function() {
                     navigateToWhatsapp(url);
                   });
                 }).catch(function() {
